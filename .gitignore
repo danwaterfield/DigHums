@@ -24,3 +24,22 @@ Temporary Items
 
 # Word temporary files
 ~$*.doc*
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.python-version
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data (too large for git)
+burney-attribution/data/bert_data/chunked_datasets/
+burney-attribution/models/*.bin
+burney-attribution/models/*.safetensors
+
+# Outputs
+*.pkl

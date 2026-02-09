@@ -1,0 +1,20 @@
+{
+  "author_to_id": {
+    "austen": 0,
+    "burney": 1,
+    "edgeworth": 2,
+    "fielding": 3,
+    "radcliffe": 4,
+    "richardson": 5,
+    "smollett": 6
+  },
+  "id_to_author": {
+    "0": "austen",
+    "1": "burney",
+    "2": "edgeworth",
+    "3": "fielding",
+    "4": "radcliffe",
+    "5": "richardson",
+    "6": "smollett"
+  }
+}
