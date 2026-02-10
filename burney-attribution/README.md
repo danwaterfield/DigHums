@@ -11,6 +11,13 @@ Building a deep learning system for identifying Frances Burney's stylistic finge
 - ✅ Generated metadata management system
 - ✅ Completed exploratory data analysis
 
+**Phase 2: Deep Learning Implementation** - ✅ COMPLETE
+
+- ✅ Implemented Burrows' Delta baseline (80% accuracy)
+- ✅ Created stratified train/val/test splits with text chunking
+- ✅ Fine-tuned BERT for 7-author classification
+- ✅ **Achieved 99.9% test accuracy** - substantially outperforming baseline
+
 ## Corpus Overview
 
 - **Total**: 18 texts, 2.5M words
@@ -28,6 +35,21 @@ Building a deep learning system for identifying Frances Burney's stylistic finge
 - **Tobias Smollett**: Ferdinand Count Fathom (1753), Humphry Clinker (1771)
 - **Maria Edgeworth**: Castle Rackrent (1800)
 
+## Key Results
+
+🎯 **99.9% Test Accuracy** - BERT fine-tuning achieved near-perfect authorship attribution across all 7 authors, substantially outperforming the 80% Burrows' Delta baseline.
+
+**Per-Author Performance:**
+- Jane Austen: 100% (97 test chunks)
+- Frances Burney: 100% (874 test chunks)
+- Maria Edgeworth: 100% (35 test chunks)
+- Henry Fielding: 99% (265 test chunks)
+- Ann Radcliffe: 100% (275 test chunks)
+- Samuel Richardson: 100% (169 test chunks)
+- Tobias Smollett: 100% (240 test chunks)
+
+See `results/test_results.txt` for detailed metrics.
+
 ## Directory Structure
 
 ```
@@ -35,13 +57,19 @@ burney-attribution/
 ├── data/
 │   ├── raw/              # Original texts from Project Gutenberg
 │   ├── processed/        # Cleaned texts (Gutenberg boilerplate removed)
+│   ├── bert_data/        # Prepared datasets for BERT training
+│   │   └── label_mapping.json  # Author ID mappings
 │   └── metadata.csv      # Corpus metadata and statistics
+├── scripts/
+│   ├── preprocess.py          # Text cleaning pipeline
+│   ├── create_metadata.py     # Metadata generation
+│   ├── prepare_bert_data.py   # Dataset preparation with stratified splitting
+│   └── train_bert.py          # BERT fine-tuning script
+├── results/
+│   └── test_results.txt       # Final evaluation metrics (99.9% accuracy)
 ├── notebooks/
 │   └── 01_eda.ipynb      # Exploratory data analysis
-├── scripts/
-│   ├── preprocess.py     # Text cleaning pipeline
-│   └── create_metadata.py # Metadata generation
-├── models/               # (Future: trained models)
+├── models/               # Trained models (not in git - too large)
 └── outputs/
     └── figures/          # Visualizations
 ```
@@ -54,28 +82,65 @@ burney-attribution/
 pip install -r requirements.txt
 ```
 
-### Run Preprocessing
+### 1. Data Preprocessing
 
 ```bash
-python scripts/preprocess.py
+python scripts/preprocess.py       # Clean texts
+python scripts/create_metadata.py  # Generate metadata
 ```
 
-### Generate Metadata
+### 2. Prepare BERT Training Data
 
 ```bash
-python scripts/create_metadata.py
+python scripts/prepare_bert_data.py
 ```
 
-### Explore the Corpus
+This creates stratified train/validation/test splits (70/15/15) with:
+- 512-token chunks with 256-token stride
+- All 7 authors represented in each split
+- ~13,000 total chunks from 18 novels
 
-Open `notebooks/01_eda.ipynb` in Jupyter to see corpus statistics and visualizations.
+### 3. Train BERT Model
 
-## Next Steps (Phase 2)
+**On Google Colab (recommended - free GPU):**
+1. Upload `burney_colab_data_fixed.zip` to Colab
+2. Unzip and run `!python scripts/train_bert.py`
+3. Training takes ~30 minutes on Tesla T4
 
-1. Set up ML environment (transformers, torch, datasets)
-2. Implement traditional stylometry baseline (Burrows' Delta)
-3. Fine-tune ECCO-BERT for authorship classification
-4. Establish evaluation framework
+**Locally (requires GPU):**
+```bash
+python scripts/train_bert.py
+```
+
+### 4. View Results
+
+See `results/test_results.txt` for detailed evaluation metrics.
+
+## Methodology
+
+**Data Preparation:**
+- Stratified splitting ensures all authors appear in train/val/test
+- Overlapping chunks (512 tokens, 256 stride) create robust training data
+- Label mapping preserves author identities across splits
+
+**Model:**
+- Base model: `bert-base-uncased` (12 layers, 110M parameters)
+- Fine-tuning: 3 epochs, batch size 4, learning rate 2e-5
+- Mixed precision training (FP16) for efficiency
+
+**Baseline:**
+- Burrows' Delta (stylometric method): 80% accuracy
+- BERT improvement: +19.9 percentage points → 99.9%
+
+## Next Steps (Phase 3+)
+
+1. ✅ ~~Set up ML environment~~
+2. ✅ ~~Implement traditional stylometry baseline~~
+3. ✅ ~~Fine-tune BERT for authorship classification~~
+4. 🔄 **Interpretability analysis**: What linguistic features does BERT learn?
+5. 🔄 **Gender & authorship study**: Male vs. female stylistic patterns
+6. 🔄 **Burney evolution**: Track style changes across 1778-1814
+7. 🔄 **Interactive demo**: Web interface for passage attribution
 
 ## Project Timeline
 

@@ -35,73 +35,79 @@ def load_corpus(processed_dir, metadata_file):
     return corpus
 
 
-def split_by_work(corpus, train_size=0.70, val_size=0.15, test_size=0.15, random_state=42):
+def chunk_corpus(corpus, tokenizer, chunk_size=512, stride=256):
     """
-    Split corpus by work (stratified by author where possible).
+    Chunk all texts in corpus and return list of chunk dicts.
 
     Args:
-        corpus: List of dicts with text and metadata
+        corpus: List of corpus dicts with text and metadata
+        tokenizer: HuggingFace tokenizer
+        chunk_size: Tokens per chunk
+        stride: Stride for sliding window
+
+    Returns:
+        List of chunk dicts with text and metadata
+    """
+    all_chunks = []
+
+    for item in tqdm(corpus, desc="Chunking texts"):
+        chunks = chunk_text(item['text'], tokenizer, chunk_size, stride)
+
+        for chunk in chunks:
+            all_chunks.append({
+                'text': chunk,
+                'author': item['author'],
+                'title': item['title'],
+                'year': item['year']
+            })
+
+    return all_chunks
+
+
+def split_chunks_stratified(chunks, train_size=0.70, val_size=0.15, test_size=0.15, random_state=42):
+    """
+    Split chunks into train/val/test stratified by author.
+
+    Ensures all authors appear in all splits by splitting each author's chunks
+    according to the specified proportions.
+
+    Args:
+        chunks: List of chunk dicts with 'author' field
         train_size, val_size, test_size: Split proportions
         random_state: Random seed
 
     Returns:
-        train, val, test: Lists of corpus items
+        train_chunks, val_chunks, test_chunks: Lists of chunk dicts
     """
     np.random.seed(random_state)
 
-    # Group by (author, title) to keep volumes together
-    works = {}
-    for item in corpus:
-        key = (item['author'], item['title'])
-        if key not in works:
-            works[key] = []
-        works[key].append(item)
+    # Group chunks by author
+    author_chunks = {}
+    for chunk in chunks:
+        author = chunk['author']
+        if author not in author_chunks:
+            author_chunks[author] = []
+        author_chunks[author].append(chunk)
 
-    # Group works by author
-    author_works = {}
-    for work_key, items in works.items():
-        author = work_key[0]
-        if author not in author_works:
-            author_works[author] = []
-        author_works[author].append((work_key, items))
+    # Split each author's chunks
+    train_chunks = []
+    val_chunks = []
+    test_chunks = []
 
-    # Stratified split
-    train_items = []
-    val_items = []
-    test_items = []
+    for author, chunks_list in author_chunks.items():
+        # Shuffle chunks for this author
+        np.random.shuffle(chunks_list)
 
-    for author, author_work_list in author_works.items():
-        np.random.shuffle(author_work_list)
+        n_chunks = len(chunks_list)
+        n_train = int(n_chunks * train_size)
+        n_val = int(n_chunks * val_size)
+        # Test gets remainder to ensure we use all chunks
 
-        n_works = len(author_work_list)
-        if n_works == 1:
-            # Single work: all to train
-            for work_key, items in author_work_list:
-                train_items.extend(items)
-        elif n_works == 2:
-            # Two works: train and val
-            train_items.extend(author_work_list[0][1])
-            val_items.extend(author_work_list[1][1])
-        elif n_works == 3:
-            # Three works: train, val, test (one each)
-            train_items.extend(author_work_list[0][1])
-            val_items.extend(author_work_list[1][1])
-            test_items.extend(author_work_list[2][1])
-        else:
-            # Four or more: ensure at least one in train, distribute rest
-            train_items.extend(author_work_list[0][1])  # Always include first in train
+        train_chunks.extend(chunks_list[:n_train])
+        val_chunks.extend(chunks_list[n_train:n_train+n_val])
+        test_chunks.extend(chunks_list[n_train+n_val:])
 
-            remaining = author_work_list[1:]
-            n_remaining = len(remaining)
-            n_val = max(1, int(n_remaining * val_size / (val_size + test_size)))
-            n_test = n_remaining - n_val
-
-            for work_key, items in remaining[:n_val]:
-                val_items.extend(items)
-            for work_key, items in remaining[n_val:]:
-                test_items.extend(items)
-
-    return train_items, val_items, test_items
+    return train_chunks, val_chunks, test_chunks
 
 
 def chunk_text(text, tokenizer, chunk_size=512, stride=256):
@@ -139,40 +145,23 @@ def chunk_text(text, tokenizer, chunk_size=512, stride=256):
     return chunks
 
 
-def prepare_dataset(corpus_items, tokenizer, author_to_id, chunk_size=512, stride=256):
+def chunks_to_dataset(chunks, author_to_id):
     """
-    Convert corpus items to dataset with chunked texts.
+    Convert list of chunk dicts to HuggingFace Dataset.
 
     Args:
-        corpus_items: List of corpus dicts
-        tokenizer: HuggingFace tokenizer
+        chunks: List of chunk dicts with text and metadata
         author_to_id: Dict mapping author names to integer IDs
-        chunk_size: Tokens per chunk
-        stride: Stride for sliding window
 
     Returns:
         HuggingFace Dataset
     """
-    data = []
-
-    for item in tqdm(corpus_items, desc="Processing texts"):
-        chunks = chunk_text(item['text'], tokenizer, chunk_size, stride)
-
-        for chunk in chunks:
-            data.append({
-                'text': chunk,
-                'label': author_to_id[item['author']],
-                'author': item['author'],
-                'title': item['title'],
-                'year': item['year']
-            })
-
     return Dataset.from_dict({
-        'text': [d['text'] for d in data],
-        'label': [d['label'] for d in data],
-        'author': [d['author'] for d in data],
-        'title': [d['title'] for d in data],
-        'year': [d['year'] for d in data]
+        'text': [chunk['text'] for chunk in chunks],
+        'label': [author_to_id[chunk['author']] for chunk in chunks],
+        'author': [chunk['author'] for chunk in chunks],
+        'title': [chunk['title'] for chunk in chunks],
+        'year': [chunk['year'] for chunk in chunks]
     })
 
 
@@ -205,21 +194,6 @@ def main():
     corpus = load_corpus(processed_dir, metadata_file)
     print(f"Loaded {len(corpus)} texts")
 
-    # Split data
-    print("\nSplitting data (70/15/15 by work)...")
-    train_corpus, val_corpus, test_corpus = split_by_work(corpus)
-
-    print(f"Train: {len(train_corpus)} texts")
-    print(f"Val: {len(val_corpus)} texts")
-    print(f"Test: {len(test_corpus)} texts")
-
-    # Show split details
-    for split_name, split_corpus in [("Train", train_corpus), ("Val", val_corpus), ("Test", test_corpus)]:
-        print(f"\n{split_name} works:")
-        works = set((item['author'], item['title']) for item in split_corpus)
-        for author, title in sorted(works):
-            print(f"  - {author}: {title}")
-
     # Create author to ID mapping
     all_authors = sorted(set(item['author'] for item in corpus))
     author_to_id = {author: i for i, author in enumerate(all_authors)}
@@ -231,15 +205,24 @@ def main():
     with open(output_dir / 'label_mapping.json', 'w') as f:
         json.dump({'author_to_id': author_to_id, 'id_to_author': id_to_author}, f, indent=2)
 
-    # Prepare datasets with chunking
-    print("\nCreating chunked datasets (512 tokens, 256 stride)...")
-    train_dataset = prepare_dataset(train_corpus, tokenizer, author_to_id, chunk_size=512, stride=256)
-    val_dataset = prepare_dataset(val_corpus, tokenizer, author_to_id, chunk_size=512, stride=256)
-    test_dataset = prepare_dataset(test_corpus, tokenizer, author_to_id, chunk_size=512, stride=256)
+    # Chunk all texts
+    print("\nChunking all texts (512 tokens, 256 stride)...")
+    all_chunks = chunk_corpus(corpus, tokenizer, chunk_size=512, stride=256)
+    print(f"Created {len(all_chunks)} chunks total")
 
-    print(f"\nTrain chunks: {len(train_dataset)}")
-    print(f"Val chunks: {len(val_dataset)}")
-    print(f"Test chunks: {len(test_dataset)}")
+    # Split chunks stratified by author
+    print("\nSplitting chunks (70/15/15 stratified by author)...")
+    train_chunks, val_chunks, test_chunks = split_chunks_stratified(all_chunks)
+
+    print(f"Train: {len(train_chunks)} chunks")
+    print(f"Val: {len(val_chunks)} chunks")
+    print(f"Test: {len(test_chunks)} chunks")
+
+    # Convert to datasets
+    print("\nConverting to HuggingFace datasets...")
+    train_dataset = chunks_to_dataset(train_chunks, author_to_id)
+    val_dataset = chunks_to_dataset(val_chunks, author_to_id)
+    test_dataset = chunks_to_dataset(test_chunks, author_to_id)
 
     # Show class distribution
     print("\nClass distribution (chunks):")

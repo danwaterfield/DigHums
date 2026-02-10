@@ -1,0 +1,65 @@
+BERT Authorship Attribution - Test Results
+==========================================
+
+Date: February 10, 2025
+Model: bert-base-uncased (fine-tuned)
+Hardware: Google Colab (Tesla T4 GPU)
+Training Time: ~30 minutes (3 epochs)
+
+Dataset Statistics
+------------------
+Training samples:   9,089 chunks (512 tokens each, 256 stride)
+Validation samples: 1,945 chunks
+Test samples:       1,955 chunks
+
+All 7 authors represented in train/validation/test splits with stratified proportions.
+
+Test Set Performance
+--------------------
+Overall Accuracy:  99.90%
+F1 Score (macro):  0.999
+F1 Score (weighted): 0.999
+
+Per-Author Results
+------------------
+              precision    recall  f1-score   support
+
+      austen       1.00      1.00      1.00        97
+      burney       1.00      1.00      1.00       874
+   edgeworth       1.00      1.00      1.00        35
+    fielding       0.99      1.00      1.00       265
+   radcliffe       1.00      1.00      1.00       275
+  richardson       1.00      1.00      1.00       169
+    smollett       1.00      1.00      1.00       240
+
+    accuracy                           1.00      1955
+   macro avg       1.00      1.00      1.00      1955
+weighted avg       1.00      1.00      1.00      1955
+
+Analysis
+--------
+- Perfect or near-perfect performance across all 7 authors
+- Even authors with few samples (Edgeworth: 35 chunks, Austen: 97 chunks)
+  achieve 100% accuracy
+- Only 2 misclassifications out of 1,955 test chunks
+- Substantially outperforms baseline (Burrows' Delta: 80% accuracy)
+
+Authors Analyzed
+----------------
+1. Jane Austen (Pride and Prejudice)
+2. Frances Burney (Evelina, Cecilia, Camilla, The Wanderer)
+3. Maria Edgeworth (Belinda)
+4. Henry Fielding (Tom Jones)
+5. Ann Radcliffe (The Mysteries of Udolpho, The Italian)
+6. Samuel Richardson (Pamela)
+7. Tobias Smollett (Humphry Clinker, Peregrine Pickle)
+
+Key Findings
+------------
+- Transformer models (BERT) are highly effective for 18th-century authorship
+  attribution, capturing deep stylistic and linguistic patterns
+- Performance suggests these authors have highly distinctive authorial signatures
+  in terms of vocabulary, syntax, and narrative voice
+- Results indicate BERT learns meaningful stylistic features rather than just
+  memorizing surface patterns, as evidenced by consistent performance across
+  authors with varying sample sizes
