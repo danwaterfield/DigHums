@@ -1,6 +1,12 @@
 # Burney Authorship Attribution Project
 
-Building a deep learning system for identifying Frances Burney's stylistic fingerprint in 18th-century texts using ECCO-BERT and modern NLP techniques.
+![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Digital Humanities](https://img.shields.io/badge/digital-humanities-purple.svg)
+![BERT](https://img.shields.io/badge/model-BERT-orange.svg)
+![Status](https://img.shields.io/badge/status-active-success.svg)
+
+Building a deep learning system for identifying Frances Burney's stylistic fingerprint in 18th-century texts using BERT and modern NLP techniques.
 
 ## Project Status
 
