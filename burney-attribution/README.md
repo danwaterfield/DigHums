@@ -24,12 +24,25 @@ Building a deep learning system for identifying Frances Burney's stylistic finge
 - ✅ Fine-tuned BERT for 7-author classification
 - ✅ **Achieved 99.9% test accuracy** - substantially outperforming baseline
 
+**Phase 3: Anonymous Attribution Testing** - ✅ COMPLETE
+
+- ✅ Tested model on works published anonymously ("By a Lady", etc.)
+- ✅ **Achieved 99.8% accuracy** identifying Burney, Radcliffe, Edgeworth from anonymous works
+- ✅ Robustness testing reveals genre/author interactions
+- ✅ Corpus expanded to 13 authors (28+ texts) for improved training
+
 ## Corpus Overview
 
+**Current Training Corpus:**
 - **Total**: 18 texts, 2.5M words
 - **Authors**: 7 (Burney, Austen, Radcliffe, Richardson, Fielding, Smollett, Edgeworth)
 - **Date range**: 1740-1814
-- **Burney corpus**: 10 texts (4 novels), 1.1M words (44% of total)
+
+**Expanded Corpus (for next phase):**
+- **Total**: 28+ texts, ~4M words
+- **Authors**: 13 (adding Walpole, Lewis, Beckford, Smith, Haywood, Reeve)
+- **Anonymous test cases**: 8 texts originally published anonymously
+- See `CORPUS_CATALOG.md` for complete details
 
 ### Authors Included
 
@@ -67,12 +80,15 @@ burney-attribution/
 │   │   └── label_mapping.json  # Author ID mappings
 │   └── metadata.csv      # Corpus metadata and statistics
 ├── scripts/
-│   ├── preprocess.py          # Text cleaning pipeline
-│   ├── create_metadata.py     # Metadata generation
-│   ├── prepare_bert_data.py   # Dataset preparation with stratified splitting
-│   └── train_bert.py          # BERT fine-tuning script
+│   ├── preprocess.py                # Text cleaning pipeline
+│   ├── create_metadata.py           # Metadata generation
+│   ├── prepare_bert_data.py         # Dataset preparation with stratified splitting
+│   ├── train_bert.py                # BERT fine-tuning script
+│   ├── test_anonymous_attribution.py # Test model on anonymous works
+│   └── test_robustness.py           # Robustness testing (out-of-sample, etc.)
 ├── results/
-│   └── test_results.txt       # Final evaluation metrics (99.9% accuracy)
+│   ├── test_results.txt                    # Final evaluation metrics (99.9% accuracy)
+│   └── anonymous_attribution_test.json     # Anonymous works test results (99.8%)
 ├── notebooks/
 │   └── 01_eda.ipynb      # Exploratory data analysis
 ├── models/               # Trained models (not in git - too large)

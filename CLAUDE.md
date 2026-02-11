@@ -12,12 +12,20 @@ This is a digital humanities text corpus containing 18th and early 19th-century 
 DigHums/
 ├── JaneAusten/          # 1 novel
 ├── FrancesBurney/       # 4 novels (some multi-volume)
-├── AnnRadcliffe/        # 2 novels
+├── AnnRadcliffe/        # 6 novels (expanded 2025-02-10)
+├── MariaEdgeworth/      # 1 novel
 ├── HenryFielding/       # 1 novel
 ├── SamuelRichardson/    # 1 novel
 ├── TobiasSmollett/      # 2 novels
-└── MariaEdgeworth/      # 1 novel
+├── CharlotteSmith/      # 1 novel (added 2025-02-10)
+├── ElizaHaywood/        # 1 novel (added 2025-02-10)
+├── ClaraReeve/          # 1 novel (added 2025-02-10)
+├── HoraceWalpole/       # 1 novel (added 2025-02-10)
+├── MGLewis/             # 1 novel (added 2025-02-10)
+└── WilliamBeckford/     # 1 novel (added 2025-02-10)
 ```
+
+**Total: 13 authors, 28+ texts, ~19 MB**
 
 ## Text File Format
 
@@ -45,9 +53,24 @@ When analyzing texts:
 
 ## Corpus Focus
 
-The collection emphasizes the development of the English novel during its formative period, with particular attention to women writers (Burney, Radcliffe, Austen, Edgeworth). This corpus is suitable for:
+The collection emphasizes the development of the English novel during its formative period, with particular attention to women writers (Burney, Radcliffe, Austen, Edgeworth, Smith, Haywood, Reeve) and Gothic fiction. This corpus is suitable for:
+- **Authorship attribution** (especially anonymous/"By a Lady" publications)
 - Stylometric analysis
 - Character network analysis
 - Sentiment analysis
 - Comparative studies of 18th-century narrative techniques
 - Gender and authorship studies
+- Gothic vs. domestic novel stylistic comparison
+
+## Anonymous Attribution Testing
+
+Many texts in this corpus were originally published anonymously, making them ideal for testing authorship attribution models:
+- **Frances Burney** - *Evelina* (1778): "By a Lady"
+- **Ann Radcliffe** - *Castles of Athlin and Dunbayne* (1789): Completely anonymous
+- **Ann Radcliffe** - *A Sicilian Romance* (1790): "By the Authoress of..."
+- **Maria Edgeworth** - *Castle Rackrent* (1800): Anonymous
+- **Horace Walpole** - *Castle of Otranto* (1764): "By Onuphrio Muralto"
+- **Eliza Haywood** - *Love in Excess* (1719-20): Initially anonymous
+- **William Beckford** - *Vathek* (1786): Anonymous English edition
+
+See `CORPUS_CATALOG.md` for complete attribution details.

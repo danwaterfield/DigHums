@@ -1,0 +1,48 @@
+{
+  "test_date": "2025-02-10",
+  "model": "/Users/danielwaterfield/Documents/DigHums/burney-attribution/models/bert_authorship/final",
+  "device": "mps",
+  "results": {
+    "Evelina": {
+      "author": "burney",
+      "work": "Evelina",
+      "publication": "1778",
+      "attribution": "Anonymous - \"By a Lady\"",
+      "accuracy": 1.0,
+      "total_chunks": 457,
+      "correct_chunks": 457,
+      "predictions": {
+        "burney": 457
+      },
+      "avg_confidence": 0.9995578567882596
+    },
+    "A Sicilian Romance": {
+      "author": "radcliffe",
+      "work": "A Sicilian Romance",
+      "publication": "1790",
+      "attribution": "Anonymous - \"By the Authoress of The Castles of Athlin and Dunbayne\"",
+      "accuracy": 0.9970059880239521,
+      "total_chunks": 334,
+      "correct_chunks": 333,
+      "predictions": {
+        "radcliffe": 333,
+        "burney": 1
+      },
+      "avg_confidence": 0.9982875722967935
+    },
+    "Castle Rackrent": {
+      "author": "edgeworth",
+      "work": "Castle Rackrent",
+      "publication": "1800",
+      "attribution": "Anonymous",
+      "accuracy": 0.9956140350877193,
+      "total_chunks": 228,
+      "correct_chunks": 227,
+      "predictions": {
+        "edgeworth": 227,
+        "austen": 1
+      },
+      "avg_confidence": 0.991619961565001
+    }
+  }
+}

@@ -109,11 +109,11 @@ def main():
     # Set format for PyTorch
     tokenized_datasets.set_format('torch')
 
-    # Training arguments (optimized for Colab GPU)
+    # Training arguments (optimized for overnight local training)
     training_args = TrainingArguments(
         output_dir=str(output_dir),
         eval_strategy="epoch",
-        save_strategy="no",  # Don't save during training to reduce I/O
+        save_strategy="epoch",  # Save after each epoch (safety for overnight run)
         learning_rate=2e-5,
         per_device_train_batch_size=4,  # Reduced from 8 for memory
         per_device_eval_batch_size=8,
@@ -123,12 +123,12 @@ def main():
         warmup_steps=500,
         logging_dir=str(output_dir / 'logs'),
         logging_steps=100,
-        load_best_model_at_end=False,  # Can't load if we don't save
+        load_best_model_at_end=True,  # Load best checkpoint
         metric_for_best_model='f1_weighted',
-        save_total_limit=1,  # Only keep final model
+        save_total_limit=2,  # Keep best + latest
         report_to='none',  # Disable wandb for now
-        fp16=True,  # Mixed precision training for speed
-        dataloader_pin_memory=False  # Disable for MPS/Colab compatibility
+        fp16=False,  # Disabled for M1/MPS stability
+        dataloader_pin_memory=False  # Disable for MPS compatibility
     )
 
     # Initialize trainer

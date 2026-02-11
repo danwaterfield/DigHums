@@ -43,3 +43,11 @@ burney-attribution/models/*.safetensors
 
 # Outputs
 *.pkl
+
+# Archives (model downloads, data zips)
+*.zip
+*.tar.gz
+*.tar
+
+# Logs
+*.log
