@@ -30,7 +30,7 @@ training_output.log
 
 # Jupyter
 .ipynb_checkpoints/
-*.ipynb
+# *.ipynb  # Allow notebooks in repo
 
 # OS
 .DS_Store
