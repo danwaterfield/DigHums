@@ -435,11 +435,81 @@ def export_json(venues: list[dict], mention_data: dict, out_path: Path) -> None:
     print(f"\nExported {len(output)} venues → {out_path}")
 
 
+def collect_narrative(venues: list[dict], corpus: list[dict]) -> list[dict]:
+    """Return per-text, position-ordered venue events for the narrative path map.
+
+    Each entry is one text with its full event sequence sorted by character
+    offset (i.e. reading order).  Events store a 0–1 narrative position so
+    a slider can filter them without knowing the raw text length.
+    """
+    venue_map = {v["id"]: v for v in venues}
+    results = []
+
+    for entry in corpus:
+        fpath = CORPUS_ROOT / entry["file_path"]
+        if not fpath.exists():
+            continue
+
+        text = fpath.read_text(encoding="utf-8", errors="replace")
+        text_len = max(len(text), 1)
+        pub_year = int(entry["pub_year"]) if entry["pub_year"] else None
+        setting_start = int(entry["setting_period_start"]) if entry["setting_period_start"] else pub_year
+        title = entry["title"]
+        author = entry["author"]
+        primary_cities = entry.get("primary_cities", "")
+        text_year = setting_start or pub_year
+
+        events = []
+        for venue_id, aliases in VENUE_ALIASES.items():
+            venue = venue_map.get(venue_id)
+            if not venue:
+                continue
+            for char_pos, matched in find_mentions(text, aliases, primary_cities):
+                start = max(0, char_pos - 90)
+                end   = min(text_len, char_pos + 90)
+                ctx   = "\u2026" + text[start:end].replace("\n", " ").strip() + "\u2026"
+                events.append({
+                    "pos":        round(char_pos / text_len, 4),
+                    "venue_id":   venue_id,
+                    "venue_name": venue["name"],
+                    "venue_type": venue.get("map_layer", ""),
+                    "lat":        float(venue["lat"]),
+                    "lon":        float(venue["lon"]),
+                    "matched":    matched,
+                    "context":    ctx,
+                })
+
+        if not events:
+            continue
+
+        events.sort(key=lambda e: e["pos"])
+        results.append({
+            "author":         author,
+            "title":          title,
+            "pub_year":       pub_year,
+            "text_year":      text_year,
+            "primary_cities": primary_cities,
+            "event_count":    len(events),
+            "events":         events,
+        })
+
+    return sorted(results, key=lambda t: t["pub_year"] or 0)
+
+
+def export_narrative_json(data: list[dict], out_path: Path) -> None:
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+    total_events = sum(t["event_count"] for t in data)
+    print(f"\nExported {len(data)} texts, {total_events} events → {out_path}")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--export", action="store_true",
                         help="Write mentions.json alongside this script")
+    parser.add_argument("--narrative", action="store_true",
+                        help="Write narrative_mentions.json for the path map")
     args = parser.parse_args()
 
     here = Path(__file__).parent
@@ -451,3 +521,7 @@ if __name__ == "__main__":
 
     if args.export:
         export_json(venues, mention_data, here / "mentions.json")
+
+    if args.narrative:
+        narrative = collect_narrative(venues, corpus)
+        export_narrative_json(narrative, here / "narrative_mentions.json")
