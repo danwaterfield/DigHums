@@ -53,33 +53,58 @@ NLS_HORWOOD = (
 # Venue type → display colour
 # ---------------------------------------------------------------------------
 VENUE_TYPE = {
-    "LON001": "garden",    # Vauxhall
-    "LON002": "garden",    # Ranelagh
-    "LON003": "garden",    # Marylebone Gardens
-    "BAT007": "garden",    # Sydney Gardens
-    "LON006": "theatre",   # Drury Lane
-    "LON007": "theatre",   # Covent Garden
-    "LON008": "theatre",   # King's Theatre
-    "LON004": "assembly",  # The Pantheon
-    "LON005": "assembly",  # Almack's
-    "BAT001": "assembly",  # Lower Assembly Rooms
-    "BAT002": "assembly",  # Upper Assembly Rooms
-    "BAT003": "assembly",  # Pump Room
-    "LON018": "club",      # White's
+    "LON001": "garden",       # Vauxhall
+    "LON002": "garden",       # Ranelagh
+    "LON003": "garden",       # Marylebone Gardens
+    "BAT007": "garden",       # Sydney Gardens
+    "LON006": "theatre",      # Drury Lane
+    "LON007": "theatre",      # Covent Garden
+    "LON008": "theatre",      # King's Theatre
+    "LON004": "assembly",     # The Pantheon
+    "LON005": "assembly",     # Almack's
+    "BAT001": "assembly",     # Lower Assembly Rooms
+    "BAT002": "assembly",     # Upper Assembly Rooms
+    "BAT003": "assembly",     # Pump Room
+    "LON018": "club",         # White's
+    "LON019": "club",         # Boodle's
+    "LON020": "club",         # Brooks's
+    "LON054": "garden",       # Don Saltero's (pleasure/curiosity venue)
+    "LON055": "garden",       # White-Conduit House (pleasure garden)
+    "LON056": "garden",       # Bagnigge Wells (pleasure garden)
+    "LON057": "tavern",       # Mother Red Cap's
+    "LON041": "coffeehouse",  # Will's
+    "LON042": "coffeehouse",  # Button's
+    "LON043": "coffeehouse",  # Tom's
+    "LON044": "coffeehouse",  # Slaughter's
+    "LON045": "coffeehouse",  # Lloyd's
+    "LON046": "coffeehouse",  # Chapter
+    "LON047": "coffeehouse",  # Garraway's
+    "LON048": "district",     # City of London
+    "LON049": "district",     # Bloomsbury
+    "LON050": "district",     # Holborn
+    "LON051": "district",     # Soho
+    "LON052": "district",     # Southwark
+    "LON053": "district",     # Mayfair
 }
 COLOUR = {
-    "garden":   "#27ae60",   # green
-    "theatre":  "#e74c3c",   # red
-    "assembly": "#2980b9",   # blue
-    "club":     "#8e44ad",   # purple
-    "street":   "#d35400",   # burnt orange  (default)
+    "garden":      "#27ae60",   # green
+    "theatre":     "#e74c3c",   # red
+    "assembly":    "#2980b9",   # blue
+    "club":        "#8e44ad",   # purple
+    "coffeehouse": "#16a085",   # teal
+    "tavern":      "#935116",   # dark brown
+    "district":    "#7f8c8d",   # grey
+    "street":      "#d35400",   # burnt orange  (default)
 }
 TYPE_LABEL = {
-    "garden":  "Pleasure garden",
-    "theatre": "Theatre / opera house",
-    "assembly":"Assembly room / social venue",
-    "club":    "Gentlemen's club",
-    "street":  "Street, square or park",
+    "garden":      "Pleasure garden",
+    "theatre":     "Theatre / opera house",
+    "assembly":    "Assembly room / social venue",
+    "club":        "Gentlemen's club",
+    "coffeehouse": "Coffee house",
+    "tavern":      "Tavern / plebeian venue",
+    "district":    "District / neighbourhood",
+    "street":      "Street, square or park",
 }
 
 
@@ -197,6 +222,9 @@ LEGEND_HTML = """
   <div><span style="color:#e74c3c;font-size:16px">●</span> Theatre / opera house</div>
   <div><span style="color:#2980b9;font-size:16px">●</span> Assembly room</div>
   <div><span style="color:#8e44ad;font-size:16px">●</span> Gentlemen's club</div>
+  <div><span style="color:#16a085;font-size:16px">●</span> Coffee house</div>
+  <div><span style="color:#935116;font-size:16px">●</span> Tavern / plebeian venue</div>
+  <div><span style="color:#7f8c8d;font-size:16px">●</span> District / neighbourhood</div>
   <div><span style="color:#d35400;font-size:16px">●</span> Street, square or park</div>
   <hr style="margin:6px 0;border:none;border-top:1px solid #ddd">
   <div style="color:#888;font-size:10px">Radius ∝ √(mention count)</div>
@@ -280,11 +308,14 @@ def build(data_path: Path, out_path: Path) -> None:
 
     # --- Layer groups by venue type ---
     groups = {
-        "garden":   folium.FeatureGroup(name="Pleasure gardens", show=True),
-        "theatre":  folium.FeatureGroup(name="Theatres &amp; opera houses", show=True),
-        "assembly": folium.FeatureGroup(name="Assembly rooms", show=True),
-        "club":     folium.FeatureGroup(name="Gentlemen's clubs", show=True),
-        "street":   folium.FeatureGroup(name="Streets, squares &amp; parks", show=True),
+        "garden":      folium.FeatureGroup(name="Pleasure gardens", show=True),
+        "theatre":     folium.FeatureGroup(name="Theatres &amp; opera houses", show=True),
+        "assembly":    folium.FeatureGroup(name="Assembly rooms", show=True),
+        "club":        folium.FeatureGroup(name="Gentlemen's clubs", show=True),
+        "coffeehouse": folium.FeatureGroup(name="Coffee houses", show=True),
+        "tavern":      folium.FeatureGroup(name="Taverns &amp; plebeian venues", show=True),
+        "district":    folium.FeatureGroup(name="Districts &amp; neighbourhoods", show=True),
+        "street":      folium.FeatureGroup(name="Streets, squares &amp; parks", show=True),
     }
 
     for venue in venues:

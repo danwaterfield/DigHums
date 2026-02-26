@@ -138,6 +138,131 @@
     ]
   },
   {
+    "venue_id": "LON048",
+    "name": "The City of London",
+    "city": "London",
+    "lat": 51.5155,
+    "lon": -0.0922,
+    "opened": null,
+    "closed": null,
+    "map_layer": "rocque_1746;horwood_1799",
+    "total_mentions": 75,
+    "mentions": [
+      {
+        "author": "ElizaHaywood",
+        "title": "Love in Excess",
+        "pub_year": 1719,
+        "text_year": 1715,
+        "count": 1
+      },
+      {
+        "author": "SamuelRichardson",
+        "title": "Pamela",
+        "pub_year": 1740,
+        "text_year": 1739,
+        "count": 2
+      },
+      {
+        "author": "TobiasSmollett",
+        "title": "Roderick Random",
+        "pub_year": 1748,
+        "text_year": 1739,
+        "count": 7
+      },
+      {
+        "author": "HenryFielding",
+        "title": "Joseph Andrews",
+        "pub_year": 1742,
+        "text_year": 1740,
+        "count": 1
+      },
+      {
+        "author": "FrancesSheridan",
+        "title": "Memoirs of Miss Sidney Bidulph",
+        "pub_year": 1761,
+        "text_year": 1740,
+        "count": 4
+      },
+      {
+        "author": "HenryFielding",
+        "title": "Tom Jones",
+        "pub_year": 1749,
+        "text_year": 1745,
+        "count": 3
+      },
+      {
+        "author": "TobiasSmollett",
+        "title": "Peregrine Pickle",
+        "pub_year": 1751,
+        "text_year": 1748,
+        "count": 24
+      },
+      {
+        "author": "HenryFielding",
+        "title": "Amelia",
+        "pub_year": 1751,
+        "text_year": 1749,
+        "count": 4
+      },
+      {
+        "author": "SamuelRichardson",
+        "title": "Sir Charles Grandison Vol 4",
+        "pub_year": 1753,
+        "text_year": 1751,
+        "count": 2
+      },
+      {
+        "author": "TobiasSmollett",
+        "title": "Humphry Clinker",
+        "pub_year": 1771,
+        "text_year": 1766,
+        "count": 12
+      },
+      {
+        "author": "HenryMackenzie",
+        "title": "The Man of Feeling",
+        "pub_year": 1771,
+        "text_year": 1769,
+        "count": 1
+      },
+      {
+        "author": "FrancesBurney",
+        "title": "Evelina",
+        "pub_year": 1778,
+        "text_year": 1770,
+        "count": 4
+      },
+      {
+        "author": "FrancesBurney",
+        "title": "Cecilia",
+        "pub_year": 1782,
+        "text_year": 1780,
+        "count": 3
+      },
+      {
+        "author": "CharlotteSmith",
+        "title": "Emmeline",
+        "pub_year": 1788,
+        "text_year": 1786,
+        "count": 5
+      },
+      {
+        "author": "JaneAusten",
+        "title": "Northanger Abbey",
+        "pub_year": 1817,
+        "text_year": 1798,
+        "count": 1
+      },
+      {
+        "author": "JaneAusten",
+        "title": "Pride and Prejudice",
+        "pub_year": 1813,
+        "text_year": 1811,
+        "count": 1
+      }
+    ]
+  },
+  {
     "venue_id": "LON002",
     "name": "Ranelagh Gardens",
     "city": "London",
@@ -200,6 +325,75 @@
     ]
   },
   {
+    "venue_id": "LON028",
+    "name": "Pall Mall",
+    "city": "London",
+    "lat": 51.5069,
+    "lon": -0.1338,
+    "opened": null,
+    "closed": null,
+    "map_layer": "rocque_1746;horwood_1799",
+    "total_mentions": 28,
+    "mentions": [
+      {
+        "author": "FrancesSheridan",
+        "title": "Memoirs of Miss Sidney Bidulph",
+        "pub_year": 1761,
+        "text_year": 1740,
+        "count": 8
+      },
+      {
+        "author": "HenryFielding",
+        "title": "Tom Jones",
+        "pub_year": 1749,
+        "text_year": 1745,
+        "count": 2
+      },
+      {
+        "author": "TobiasSmollett",
+        "title": "Peregrine Pickle",
+        "pub_year": 1751,
+        "text_year": 1748,
+        "count": 5
+      },
+      {
+        "author": "TobiasSmollett",
+        "title": "Humphry Clinker",
+        "pub_year": 1771,
+        "text_year": 1766,
+        "count": 1
+      },
+      {
+        "author": "FrancesBurney",
+        "title": "Evelina",
+        "pub_year": 1778,
+        "text_year": 1770,
+        "count": 2
+      },
+      {
+        "author": "CharlotteSmith",
+        "title": "Emmeline",
+        "pub_year": 1788,
+        "text_year": 1786,
+        "count": 6
+      },
+      {
+        "author": "FrancesBurney",
+        "title": "Camilla",
+        "pub_year": 1796,
+        "text_year": 1794,
+        "count": 2
+      },
+      {
+        "author": "JaneAusten",
+        "title": "Sense and Sensibility",
+        "pub_year": 1811,
+        "text_year": 1809,
+        "count": 2
+      }
+    ]
+  },
+  {
     "venue_id": "BAT001",
     "name": "Lower Assembly Rooms (Harrison's)",
     "city": "Bath",
@@ -237,6 +431,109 @@
         "pub_year": 1817,
         "text_year": 1814,
         "count": 3
+      }
+    ]
+  },
+  {
+    "venue_id": "LON039",
+    "name": "Harley Street",
+    "city": "London",
+    "lat": 51.5219,
+    "lon": -0.148,
+    "opened": 1757,
+    "closed": null,
+    "map_layer": "rocque_1746;horwood_1799",
+    "total_mentions": 25,
+    "mentions": [
+      {
+        "author": "FrancesBurney",
+        "title": "Cecilia",
+        "pub_year": 1782,
+        "text_year": 1780,
+        "count": 1
+      },
+      {
+        "author": "JaneAusten",
+        "title": "Mansfield Park",
+        "pub_year": 1814,
+        "text_year": 1808,
+        "count": 8
+      },
+      {
+        "author": "JaneAusten",
+        "title": "Sense and Sensibility",
+        "pub_year": 1811,
+        "text_year": 1809,
+        "count": 16
+      }
+    ]
+  },
+  {
+    "venue_id": "LON027",
+    "name": "Bond Street",
+    "city": "London",
+    "lat": 51.5133,
+    "lon": -0.1458,
+    "opened": null,
+    "closed": null,
+    "map_layer": "rocque_1746;horwood_1799",
+    "total_mentions": 22,
+    "mentions": [
+      {
+        "author": "TobiasSmollett",
+        "title": "Roderick Random",
+        "pub_year": 1748,
+        "text_year": 1739,
+        "count": 1
+      },
+      {
+        "author": "HenryFielding",
+        "title": "Tom Jones",
+        "pub_year": 1749,
+        "text_year": 1745,
+        "count": 2
+      },
+      {
+        "author": "TobiasSmollett",
+        "title": "Peregrine Pickle",
+        "pub_year": 1751,
+        "text_year": 1748,
+        "count": 6
+      },
+      {
+        "author": "HenryFielding",
+        "title": "Amelia",
+        "pub_year": 1751,
+        "text_year": 1749,
+        "count": 2
+      },
+      {
+        "author": "CharlotteSmith",
+        "title": "Emmeline",
+        "pub_year": 1788,
+        "text_year": 1786,
+        "count": 1
+      },
+      {
+        "author": "JaneAusten",
+        "title": "Northanger Abbey",
+        "pub_year": 1817,
+        "text_year": 1798,
+        "count": 1
+      },
+      {
+        "author": "JaneAusten",
+        "title": "Sense and Sensibility",
+        "pub_year": 1811,
+        "text_year": 1809,
+        "count": 5
+      },
+      {
+        "author": "JaneAusten",
+        "title": "Emma",
+        "pub_year": 1815,
+        "text_year": 1813,
+        "count": 4
       }
     ]
   },
@@ -433,6 +730,33 @@
     ]
   },
   {
+    "venue_id": "BAT016",
+    "name": "Pulteney Street",
+    "city": "Bath",
+    "lat": 51.3838,
+    "lon": -2.3554,
+    "opened": 1789,
+    "closed": null,
+    "map_layer": "harcourt_1794",
+    "total_mentions": 14,
+    "mentions": [
+      {
+        "author": "JaneAusten",
+        "title": "Northanger Abbey",
+        "pub_year": 1817,
+        "text_year": 1798,
+        "count": 13
+      },
+      {
+        "author": "JaneAusten",
+        "title": "Persuasion",
+        "pub_year": 1817,
+        "text_year": 1814,
+        "count": 1
+      }
+    ]
+  },
+  {
     "venue_id": "LON004",
     "name": "The Pantheon",
     "city": "London",
@@ -456,6 +780,47 @@
         "pub_year": 1782,
         "text_year": 1780,
         "count": 8
+      }
+    ]
+  },
+  {
+    "venue_id": "LON050",
+    "name": "Holborn",
+    "city": "London",
+    "lat": 51.5185,
+    "lon": -0.1197,
+    "opened": null,
+    "closed": null,
+    "map_layer": "rocque_1746;horwood_1799",
+    "total_mentions": 11,
+    "mentions": [
+      {
+        "author": "HenryFielding",
+        "title": "Tom Jones",
+        "pub_year": 1749,
+        "text_year": 1745,
+        "count": 1
+      },
+      {
+        "author": "TobiasSmollett",
+        "title": "Humphry Clinker",
+        "pub_year": 1771,
+        "text_year": 1766,
+        "count": 1
+      },
+      {
+        "author": "FrancesBurney",
+        "title": "Evelina",
+        "pub_year": 1778,
+        "text_year": 1770,
+        "count": 8
+      },
+      {
+        "author": "JaneAusten",
+        "title": "Sense and Sensibility",
+        "pub_year": 1811,
+        "text_year": 1809,
+        "count": 1
       }
     ]
   },
@@ -556,6 +921,102 @@
     ]
   },
   {
+    "venue_id": "LON029",
+    "name": "Piccadilly",
+    "city": "London",
+    "lat": 51.509,
+    "lon": -0.144,
+    "opened": null,
+    "closed": null,
+    "map_layer": "rocque_1746;horwood_1799",
+    "total_mentions": 8,
+    "mentions": [
+      {
+        "author": "HenryFielding",
+        "title": "Tom Jones",
+        "pub_year": 1749,
+        "text_year": 1745,
+        "count": 3
+      },
+      {
+        "author": "TobiasSmollett",
+        "title": "Humphry Clinker",
+        "pub_year": 1771,
+        "text_year": 1766,
+        "count": 1
+      },
+      {
+        "author": "HenryMackenzie",
+        "title": "The Man of Feeling",
+        "pub_year": 1771,
+        "text_year": 1769,
+        "count": 1
+      },
+      {
+        "author": "FrancesBurney",
+        "title": "Evelina",
+        "pub_year": 1778,
+        "text_year": 1770,
+        "count": 1
+      },
+      {
+        "author": "CharlotteSmith",
+        "title": "Emmeline",
+        "pub_year": 1788,
+        "text_year": 1786,
+        "count": 1
+      },
+      {
+        "author": "FrancesBurney",
+        "title": "Camilla",
+        "pub_year": 1796,
+        "text_year": 1794,
+        "count": 1
+      }
+    ]
+  },
+  {
+    "venue_id": "LON036",
+    "name": "Charing Cross",
+    "city": "London",
+    "lat": 51.5074,
+    "lon": -0.1278,
+    "opened": null,
+    "closed": null,
+    "map_layer": "rocque_1746;horwood_1799",
+    "total_mentions": 8,
+    "mentions": [
+      {
+        "author": "TobiasSmollett",
+        "title": "Roderick Random",
+        "pub_year": 1748,
+        "text_year": 1739,
+        "count": 5
+      },
+      {
+        "author": "CharlotteSmith",
+        "title": "Emmeline",
+        "pub_year": 1788,
+        "text_year": 1786,
+        "count": 1
+      },
+      {
+        "author": "FrancesBurney",
+        "title": "Camilla",
+        "pub_year": 1796,
+        "text_year": 1794,
+        "count": 1
+      },
+      {
+        "author": "JaneAusten",
+        "title": "Pride and Prejudice",
+        "pub_year": 1813,
+        "text_year": 1811,
+        "count": 1
+      }
+    ]
+  },
+  {
     "venue_id": "LON010",
     "name": "Hyde Park",
     "city": "London",
@@ -597,6 +1058,33 @@
     ]
   },
   {
+    "venue_id": "LON054",
+    "name": "Don Saltero's Coffee House",
+    "city": "London",
+    "lat": 51.4841,
+    "lon": -0.1683,
+    "opened": 1695,
+    "closed": 1799,
+    "map_layer": "rocque_1746",
+    "total_mentions": 7,
+    "mentions": [
+      {
+        "author": "TobiasSmollett",
+        "title": "Peregrine Pickle",
+        "pub_year": 1751,
+        "text_year": 1748,
+        "count": 1
+      },
+      {
+        "author": "FrancesBurney",
+        "title": "Evelina",
+        "pub_year": 1778,
+        "text_year": 1770,
+        "count": 6
+      }
+    ]
+  },
+  {
     "venue_id": "LON024",
     "name": "Portman Square",
     "city": "London",
@@ -620,6 +1108,40 @@
         "pub_year": 1814,
         "text_year": 1793,
         "count": 1
+      }
+    ]
+  },
+  {
+    "venue_id": "LON033",
+    "name": "Oxford Street",
+    "city": "London",
+    "lat": 51.5154,
+    "lon": -0.1415,
+    "opened": null,
+    "closed": null,
+    "map_layer": "rocque_1746;horwood_1799",
+    "total_mentions": 6,
+    "mentions": [
+      {
+        "author": "FrancesBurney",
+        "title": "Evelina",
+        "pub_year": 1778,
+        "text_year": 1770,
+        "count": 1
+      },
+      {
+        "author": "FrancesBurney",
+        "title": "Cecilia",
+        "pub_year": 1782,
+        "text_year": 1780,
+        "count": 3
+      },
+      {
+        "author": "CharlotteSmith",
+        "title": "Emmeline",
+        "pub_year": 1788,
+        "text_year": 1786,
+        "count": 2
       }
     ]
   },
@@ -712,6 +1234,94 @@
     ]
   },
   {
+    "venue_id": "LON052",
+    "name": "Southwark (the Borough)",
+    "city": "London",
+    "lat": 51.5034,
+    "lon": -0.0909,
+    "opened": null,
+    "closed": null,
+    "map_layer": "rocque_1746;horwood_1799",
+    "total_mentions": 5,
+    "mentions": [
+      {
+        "author": "TobiasSmollett",
+        "title": "Roderick Random",
+        "pub_year": 1748,
+        "text_year": 1739,
+        "count": 1
+      },
+      {
+        "author": "TobiasSmollett",
+        "title": "Peregrine Pickle",
+        "pub_year": 1751,
+        "text_year": 1748,
+        "count": 1
+      },
+      {
+        "author": "TobiasSmollett",
+        "title": "Humphry Clinker",
+        "pub_year": 1771,
+        "text_year": 1766,
+        "count": 3
+      }
+    ]
+  },
+  {
+    "venue_id": "LON055",
+    "name": "White-Conduit House",
+    "city": "London",
+    "lat": 51.53,
+    "lon": -0.1062,
+    "opened": 1745,
+    "closed": 1849,
+    "map_layer": "rocque_1746;horwood_1799",
+    "total_mentions": 4,
+    "mentions": [
+      {
+        "author": "FrancesBurney",
+        "title": "Evelina",
+        "pub_year": 1778,
+        "text_year": 1770,
+        "count": 4
+      }
+    ]
+  },
+  {
+    "venue_id": "LON038",
+    "name": "Cavendish Square",
+    "city": "London",
+    "lat": 51.5165,
+    "lon": -0.1462,
+    "opened": 1717,
+    "closed": null,
+    "map_layer": "rocque_1746;horwood_1799",
+    "total_mentions": 4,
+    "mentions": [
+      {
+        "author": "SamuelRichardson",
+        "title": "Sir Charles Grandison Vol 4",
+        "pub_year": 1753,
+        "text_year": 1751,
+        "count": 1
+      },
+      {
+        "author": "FrancesBurney",
+        "title": "Cecilia",
+        "pub_year": 1782,
+        "text_year": 1780,
+        "count": 2
+      },
+      {
+        "author": "CharlotteSmith",
+        "title": "Emmeline",
+        "pub_year": 1788,
+        "text_year": 1786,
+        "count": 1
+      }
+    ]
+  },
+  {
     "venue_id": "BAT002",
     "name": "Upper Assembly Rooms (New Rooms)",
     "city": "Bath",
@@ -748,6 +1358,128 @@
         "pub_year": 1817,
         "text_year": 1798,
         "count": 4
+      }
+    ]
+  },
+  {
+    "venue_id": "LON053",
+    "name": "Mayfair",
+    "city": "London",
+    "lat": 51.5089,
+    "lon": -0.1467,
+    "opened": null,
+    "closed": null,
+    "map_layer": "rocque_1746;horwood_1799",
+    "total_mentions": 4,
+    "mentions": [
+      {
+        "author": "HenryFielding",
+        "title": "Tom Jones",
+        "pub_year": 1749,
+        "text_year": 1745,
+        "count": 1
+      },
+      {
+        "author": "SamuelRichardson",
+        "title": "Clarissa",
+        "pub_year": 1748,
+        "text_year": 1746,
+        "count": 1
+      },
+      {
+        "author": "JaneAusten",
+        "title": "Mansfield Park",
+        "pub_year": 1814,
+        "text_year": 1808,
+        "count": 1
+      },
+      {
+        "author": "JaneAusten",
+        "title": "Emma",
+        "pub_year": 1815,
+        "text_year": 1813,
+        "count": 1
+      }
+    ]
+  },
+  {
+    "venue_id": "LON030",
+    "name": "St James's Street",
+    "city": "London",
+    "lat": 51.5054,
+    "lon": -0.1363,
+    "opened": null,
+    "closed": null,
+    "map_layer": "rocque_1746;horwood_1799",
+    "total_mentions": 4,
+    "mentions": [
+      {
+        "author": "FrancesSheridan",
+        "title": "Memoirs of Miss Sidney Bidulph",
+        "pub_year": 1761,
+        "text_year": 1740,
+        "count": 2
+      },
+      {
+        "author": "CharlotteSmith",
+        "title": "Emmeline",
+        "pub_year": 1788,
+        "text_year": 1786,
+        "count": 2
+      }
+    ]
+  },
+  {
+    "venue_id": "LON032",
+    "name": "Cheapside",
+    "city": "London",
+    "lat": 51.5147,
+    "lon": -0.094,
+    "opened": null,
+    "closed": null,
+    "map_layer": "rocque_1746;horwood_1799",
+    "total_mentions": 3,
+    "mentions": [
+      {
+        "author": "CharlotteSmith",
+        "title": "Emmeline",
+        "pub_year": 1788,
+        "text_year": 1786,
+        "count": 1
+      },
+      {
+        "author": "JaneAusten",
+        "title": "Pride and Prejudice",
+        "pub_year": 1813,
+        "text_year": 1811,
+        "count": 2
+      }
+    ]
+  },
+  {
+    "venue_id": "BAT013",
+    "name": "Gay Street",
+    "city": "Bath",
+    "lat": 51.3831,
+    "lon": -2.3614,
+    "opened": 1734,
+    "closed": null,
+    "map_layer": "wood_1736;harcourt_1794",
+    "total_mentions": 3,
+    "mentions": [
+      {
+        "author": "TobiasSmollett",
+        "title": "Humphry Clinker",
+        "pub_year": 1771,
+        "text_year": 1766,
+        "count": 1
+      },
+      {
+        "author": "JaneAusten",
+        "title": "Persuasion",
+        "pub_year": 1817,
+        "text_year": 1814,
+        "count": 2
       }
     ]
   },
@@ -799,6 +1531,33 @@
     ]
   },
   {
+    "venue_id": "LON051",
+    "name": "Soho",
+    "city": "London",
+    "lat": 51.5137,
+    "lon": -0.1337,
+    "opened": null,
+    "closed": null,
+    "map_layer": "rocque_1746;horwood_1799",
+    "total_mentions": 2,
+    "mentions": [
+      {
+        "author": "HenryFielding",
+        "title": "Tom Jones",
+        "pub_year": 1749,
+        "text_year": 1745,
+        "count": 1
+      },
+      {
+        "author": "SamuelRichardson",
+        "title": "Sir Charles Grandison Vol 4",
+        "pub_year": 1753,
+        "text_year": 1751,
+        "count": 1
+      }
+    ]
+  },
+  {
     "venue_id": "LON013",
     "name": "Berkeley Square",
     "city": "London",
@@ -834,6 +1593,66 @@
         "title": "Evelina",
         "pub_year": 1778,
         "text_year": 1770,
+        "count": 1
+      }
+    ]
+  },
+  {
+    "venue_id": "LON056",
+    "name": "Bagnigge Wells",
+    "city": "London",
+    "lat": 51.5276,
+    "lon": -0.1134,
+    "opened": 1759,
+    "closed": 1841,
+    "map_layer": "rocque_1746;horwood_1799",
+    "total_mentions": 1,
+    "mentions": [
+      {
+        "author": "FrancesBurney",
+        "title": "Evelina",
+        "pub_year": 1778,
+        "text_year": 1770,
+        "count": 1
+      }
+    ]
+  },
+  {
+    "venue_id": "LON057",
+    "name": "Mother Red Cap's",
+    "city": "London",
+    "lat": 51.5404,
+    "lon": -0.1421,
+    "opened": null,
+    "closed": null,
+    "map_layer": "rocque_1746;horwood_1799",
+    "total_mentions": 1,
+    "mentions": [
+      {
+        "author": "FrancesBurney",
+        "title": "Evelina",
+        "pub_year": 1778,
+        "text_year": 1770,
+        "count": 1
+      }
+    ]
+  },
+  {
+    "venue_id": "BAT015",
+    "name": "Argyle Street",
+    "city": "Bath",
+    "lat": 51.382,
+    "lon": -2.3601,
+    "opened": 1789,
+    "closed": null,
+    "map_layer": "harcourt_1794",
+    "total_mentions": 1,
+    "mentions": [
+      {
+        "author": "JaneAusten",
+        "title": "Northanger Abbey",
+        "pub_year": 1817,
+        "text_year": 1798,
         "count": 1
       }
     ]
@@ -879,6 +1698,66 @@
     ]
   },
   {
+    "venue_id": "LON034",
+    "name": "Ludgate Hill",
+    "city": "London",
+    "lat": 51.5136,
+    "lon": -0.1013,
+    "opened": null,
+    "closed": null,
+    "map_layer": "rocque_1746;horwood_1799",
+    "total_mentions": 1,
+    "mentions": [
+      {
+        "author": "TobiasSmollett",
+        "title": "Roderick Random",
+        "pub_year": 1748,
+        "text_year": 1739,
+        "count": 1
+      }
+    ]
+  },
+  {
+    "venue_id": "LON037",
+    "name": "Leicester Fields (Square)",
+    "city": "London",
+    "lat": 51.5107,
+    "lon": -0.131,
+    "opened": null,
+    "closed": null,
+    "map_layer": "rocque_1746;horwood_1799",
+    "total_mentions": 1,
+    "mentions": [
+      {
+        "author": "TobiasSmollett",
+        "title": "Peregrine Pickle",
+        "pub_year": 1751,
+        "text_year": 1748,
+        "count": 1
+      }
+    ]
+  },
+  {
+    "venue_id": "LON040",
+    "name": "Brook Street",
+    "city": "London",
+    "lat": 51.5124,
+    "lon": -0.1478,
+    "opened": 1720,
+    "closed": null,
+    "map_layer": "rocque_1746;horwood_1799",
+    "total_mentions": 1,
+    "mentions": [
+      {
+        "author": "TobiasSmollett",
+        "title": "Peregrine Pickle",
+        "pub_year": 1751,
+        "text_year": 1748,
+        "count": 1
+      }
+    ]
+  },
+  {
     "venue_id": "BAT011",
     "name": "North Parade",
     "city": "Bath",
@@ -894,6 +1773,26 @@
         "title": "Humphry Clinker",
         "pub_year": 1771,
         "text_year": 1766,
+        "count": 1
+      }
+    ]
+  },
+  {
+    "venue_id": "LON031",
+    "name": "Fleet Street",
+    "city": "London",
+    "lat": 51.5138,
+    "lon": -0.1072,
+    "opened": null,
+    "closed": null,
+    "map_layer": "rocque_1746;horwood_1799",
+    "total_mentions": 1,
+    "mentions": [
+      {
+        "author": "HenryMackenzie",
+        "title": "The Man of Feeling",
+        "pub_year": 1771,
+        "text_year": 1769,
         "count": 1
       }
     ]

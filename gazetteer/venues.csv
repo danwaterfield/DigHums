@@ -37,3 +37,38 @@ BAT009,Milsom Street,Bath,51.3837,-2.3620,1761,,Principal shopping street from 1
 BAT010,Bath Abbey,Bath,51.3814,-2.3591,,,Stable landmark throughout.,wood_1736;harcourt_1794
 BAT011,North Parade,Bath,51.3807,-2.3582,1740,,Promenade. Developed 1740. Smollett's characters walk here.,wood_1736;harcourt_1794
 BAT012,South Parade,Bath,51.3800,-2.3576,1743,,Developed 1743. Cannot appear pre-1743.,wood_1736;harcourt_1794
+LON027,Bond Street,London,51.5133,-0.1458,,,Old and New Bond Street. Principal shopping and fashionable promenade of the West End. Stable throughout.,rocque_1746;horwood_1799
+LON028,Pall Mall,London,51.5069,-0.1338,,,Major street between St James's and Charing Cross. Clubs galleries print shops. Stable throughout.,rocque_1746;horwood_1799
+LON029,Piccadilly,London,51.5090,-0.1440,,,Major thoroughfare from Piccadilly Circus to Hyde Park Corner. Stable throughout.,rocque_1746;horwood_1799
+LON030,St James's Street,London,51.5054,-0.1363,,,Gentlemen's clubs wine merchants. Heart of St James's. Stable throughout.,rocque_1746;horwood_1799
+LON031,Fleet Street,London,51.5138,-0.1072,,,Booksellers printers and lawyers. Legal and literary thoroughfare. Stable throughout.,rocque_1746;horwood_1799
+LON032,Cheapside,London,51.5147,-0.0940,,,Principal City commercial street. Drapers mercers goldsmiths. Stable throughout.,rocque_1746;horwood_1799
+LON033,Oxford Street,London,51.5154,-0.1415,,,Known as Oxford Road pre-c.1740. Shopping street from 1760s. The Pantheon opened here 1772.,rocque_1746;horwood_1799
+LON034,Ludgate Hill,London,51.5136,-0.1013,,,City booksellers and publishers near St Paul's. Stable throughout.,rocque_1746;horwood_1799
+LON035,Cornhill,London,51.5135,-0.0882,,,City banking and insurance district. Royal Exchange nearby. Stable throughout.,rocque_1746;horwood_1799
+LON036,Charing Cross,London,51.5074,-0.1278,,,Junction of Strand/Whitehall/Northumberland Avenue. Stable throughout.,rocque_1746;horwood_1799
+LON037,Leicester Fields (Square),London,51.5107,-0.1310,,,Known as Leicester Fields until c.1670. Fashionable early 18c; declined mid-century.,rocque_1746;horwood_1799
+LON038,Cavendish Square,London,51.5165,-0.1462,1717,,Developed from 1717. Key address for upper-middle professional ranks.,rocque_1746;horwood_1799
+LON039,Harley Street,London,51.5219,-0.1480,1757,,Developed from 1757. Fashionable medical and professional address.,rocque_1746;horwood_1799
+LON040,Brook Street,London,51.5124,-0.1478,1720,,Mayfair. Developed 1720s. Stable thereafter.,rocque_1746;horwood_1799
+LON054,Don Saltero's Coffee House,London,51.4841,-0.1683,1695,1799,Cheyne Walk Chelsea. Curiosity cabinet and coffee house. Frequented by Smollett. Proposed by the Branghtons in Evelina as a vulgar excursion.,rocque_1746
+LON055,White-Conduit House,London,51.5300,-0.1062,1745,1849,Islington. Pleasure garden and cricket ground. Lower-middling social register.,rocque_1746;horwood_1799
+LON056,Bagnigge Wells,London,51.5276,-0.1134,1759,1841,Clerkenwell. Mineral spring gardens. Popular with tradespeople and servants.,rocque_1746;horwood_1799
+LON057,Mother Red Cap's,London,51.5404,-0.1421,,,Camden Town tavern. Lower-class excursion destination. Evelina's vulgar alternatives cluster.,rocque_1746;horwood_1799
+LON041,Will's Coffee House,London,51.5126,-0.1233,1689,1735,Russell Street Covent Garden. Dryden's house. Literary centre 1680s-1720s. Declined after Addison.,rocque_1746
+LON042,Button's Coffee House,London,51.5128,-0.1238,1712,1752,Russell Street Covent Garden. Addison and Steele's house. Whig literary centre.,rocque_1746
+LON043,Tom's Coffee House,London,51.5124,-0.1228,1700,,Russell Street Covent Garden. Subscription house. Active through to 1780s.,rocque_1746;horwood_1799
+LON044,Slaughter's Coffee House,London,51.5110,-0.1267,1692,,St Martin's Lane. Artists and chess players. Active throughout.,rocque_1746;horwood_1799
+LON045,Lloyd's Coffee House,London,51.5135,-0.0876,1688,,Tower Street then Royal Exchange from 1774. Insurance underwriters.,rocque_1746;horwood_1799
+LON046,Chapter Coffee House,London,51.5154,-0.1000,1715,,Paternoster Row near St Paul's. Booksellers and publishers. Active throughout.,rocque_1746;horwood_1799
+LON047,Garraway's Coffee House,London,51.5133,-0.0874,1669,,Exchange Alley. Auctions and financial news. Active throughout.,rocque_1746;horwood_1799
+LON048,The City of London,London,51.5155,-0.0922,,,The square mile. Commercial and financial heart. Contrasted with West End throughout the period.,rocque_1746;horwood_1799
+LON049,Bloomsbury,London,51.5226,-0.1246,,,Inner northern district. Developed progressively through 18c.,rocque_1746;horwood_1799
+LON050,Holborn,London,51.5185,-0.1197,,,Legal district. Inns of Court. Stable throughout.,rocque_1746;horwood_1799
+LON051,Soho,London,51.5137,-0.1337,,,Mixed bohemian district. Huguenot quarter. Stable throughout.,rocque_1746;horwood_1799
+LON052,Southwark (the Borough),London,51.5034,-0.0909,,,South bank. Coaching inns Borough High Street debtors prison.,rocque_1746;horwood_1799
+LON053,Mayfair,London,51.5089,-0.1467,,,Aristocratic West End district. Developed through 18c. Contrasted with City.,rocque_1746;horwood_1799
+BAT013,Gay Street,Bath,51.3831,-2.3614,1734,,Connecting Queen Square to the Circus. Built 1734.,wood_1736;harcourt_1794
+BAT014,Cheap Street,Bath,51.3799,-2.3598,,,Main Bath shopping street. Distinct from London's Cheapside. Stable throughout.,wood_1736;harcourt_1794
+BAT015,Argyle Street,Bath,51.3820,-2.3601,1789,,Connects Pulteney Bridge to Laura Place. Part of Bathwick Estate development.,harcourt_1794
+BAT016,Pulteney Street,Bath,51.3838,-2.3554,1789,,Grand main street of Bathwick Estate. Cannot appear pre-1789.,harcourt_1794

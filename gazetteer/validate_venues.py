@@ -127,6 +127,93 @@ VENUE_ALIASES = {
     "LON025": [("Portland Place", None)],
     "LON026": [("Bedford Square", None)],
 
+    # --- STREETS ---
+    "LON027": [                             # Bond Street
+        ("Bond Street", None),
+        ("Bond-Street", None),
+        ("Bond-street", None),
+        ("New Bond Street", None),
+        ("Old Bond Street", None),
+    ],
+    "LON028": [                             # Pall Mall
+        ("Pall Mall", None),
+        ("Pall-Mall", None),
+        ("Pall-mall", None),
+    ],
+    "LON029": [("Piccadilly", None)],
+    "LON030": [                             # St James's Street
+        ("St James's Street", None),
+        ("St. James's Street", None),
+        ("James's Street", None),           # short form used in context
+    ],
+    "LON031": [                             # Fleet Street
+        ("Fleet Street", None),
+        ("Fleet-Street", None),
+        ("Fleet-street", None),
+    ],
+    "LON032": [                             # Cheapside
+        ("Cheapside", None),
+        ("Cheap-side", None),
+    ],
+    "LON033": [                             # Oxford Street / Oxford Road
+        ("Oxford Street", None),
+        ("Oxford-Street", None),
+        (r"\bOxford Road\b", None),
+        (r"\bOxford-Road\b", None),
+    ],
+    "LON034": [("Ludgate Hill", None), ("Ludgate-Hill", None)],
+    "LON035": [("Cornhill", None), ("Corn-hill", None)],
+    "LON036": [("Charing Cross", None), ("Charing-Cross", None)],
+    "LON037": [                             # Leicester Fields / Square
+        ("Leicester Square", None),
+        ("Leicester-Square", None),
+        ("Leicester Fields", None),
+        ("Leicester-Fields", None),
+    ],
+    "LON038": [("Cavendish Square", None), ("Cavendish-Square", None)],
+    "LON039": [                             # Harley St / Wimpole St medical quarter
+        ("Harley Street", None),
+        ("Harley-Street", None),
+        ("Wimpole Street", None),
+        ("Wimpole-Street", None),
+    ],
+    "LON040": [("Brook Street", None), ("Brook-Street", None)],
+
+    # --- PLEBEIAN LEISURE VENUES ---
+    "LON054": [("Saltero", None), ("Don Saltero", None)],
+    "LON055": [("White-Conduit", None), ("White Conduit", None)],
+    "LON056": [("Bagnigge", None)],
+    "LON057": [("Mother Red Cap", None), ("Mother Redcap", None)],
+
+    # --- COFFEE HOUSES ---
+    # Aliases kept specific to avoid false positives (full name preferred).
+    "LON041": [("Will's Coffee", None), ("Wills Coffee", None)],
+    "LON042": [("Button's Coffee", None), ("Buttons Coffee", None)],
+    "LON043": [("Tom's Coffee", None)],
+    "LON044": [                             # Slaughter's — distinctive enough unqualified
+        ("Slaughter's Coffee", None),
+        ("Slaughter's", None),
+    ],
+    "LON045": [("Lloyd's Coffee", None), ("Lloyds Coffee", None)],
+    "LON046": [("Chapter Coffee", None)],
+    "LON047": [("Garraway's", None), ("Garaway's", None)],
+
+    # --- DISTRICTS ---
+    # Word-boundary regex on "the City" prevents catching "city of Bath" etc.
+    "LON048": [
+        (r"\bthe City\b", "London"),        # city-filtered: "the city" in Gothic texts = Rome/Seville/Samarah
+        ("City of London", None),
+        ("Lombard Street", None),          # emblematic City address
+    ],
+    "LON049": [("Bloomsbury", None)],
+    "LON050": [("Holborn", None)],
+    "LON051": [("Soho", None)],
+    "LON052": [                             # Southwark — "the Borough" city-filtered
+        ("Southwark", None),
+        (r"\bthe Borough\b", None),         # could be generic; watch for false positives
+    ],
+    "LON053": [("Mayfair", None), ("May Fair", None), ("May-Fair", None)],
+
     # BATH  (city-filtered aliases marked with "Bath")
     "BAT001": [
         ("Lower Rooms", "Bath"),
@@ -171,6 +258,16 @@ VENUE_ALIASES = {
     ],
     "BAT011": [("North Parade", "Bath")],
     "BAT012": [("South Parade", "Bath")],
+
+    # BATH STREETS (all city-filtered)
+    "BAT013": [("Gay Street", "Bath"), ("Gay-Street", "Bath")],
+    "BAT014": [("Cheap Street", "Bath"), ("Cheap-Street", "Bath")],
+    "BAT015": [
+        ("Argyle Street", "Bath"),
+        ("Argyle-Street", "Bath"),
+        ("Argyll Street", "Bath"),
+    ],
+    "BAT016": [("Pulteney Street", "Bath"), ("Pulteney-Street", "Bath")],
 }
 
 
