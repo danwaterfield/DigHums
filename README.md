@@ -30,7 +30,18 @@ DigHums/
 │   ├── scripts/               # Training and testing scripts
 │   ├── results/               # Test results (99.9% accuracy)
 │   ├── README.md              # Detailed project documentation
-│   └── ROADMAP.md             # Research phases and timeline
+│   └── ROADMAP.md             # Research phases and future work
+│
+├── gazetteer/                 # Urban geography of 18c fiction
+│   ├── venues.csv             # 74 venues (London + Bath) with coordinates
+│   ├── validate_venues.py     # Corpus scanner and mention extractor
+│   ├── mentions.json          # Aggregate venue data (50 venues, 637 mentions)
+│   ├── narrative_mentions.json # Per-text position-ordered events (24 texts)
+│   ├── build_map.py           # Folium aggregate map builder
+│   ├── map.html               # Interactive aggregate map (open in browser)
+│   ├── build_narrative_map.py # Leaflet narrative path map builder
+│   ├── narrative_map.html     # Interactive narrative path map
+│   └── evelina_narrative.gif  # Animated walkthrough of Evelina's London circuit
 │
 ├── CORPUS_CATALOG.md          # Complete text catalog with attribution details
 ├── CORPUS_EXPANSION_REPORT.md # Corpus expansion documentation
@@ -39,12 +50,31 @@ DigHums/
 
 ## Key Features
 
-### 1. Comprehensive Corpus
+### 1. Urban Gazetteer & Interactive Maps
+
+A hand-curated gazetteer of 74 venues in London and Bath — pleasure gardens, theatres, assembly rooms, coffee houses, clubs, streets, and districts — with mention counts extracted from every text in the corpus.
+
+**Aggregate map** (`gazetteer/map.html`): all venues sized by √(mention count), coloured by type, with historical tile layers (Rocque 1746, Horwood 1792–99). Click any marker for a per-text breakdown.
+
+**Narrative path map** (`gazetteer/narrative_map.html`): trace how any novel moves through urban space in reading order. A timeline slider steps through the text; a colour gradient (blue → orange) encodes narrative position; marker size encodes cumulative mention count.
+
+![Evelina narrative path map](gazetteer/evelina_narrative.gif)
+
+*Frances Burney, Evelina (1778) — 97 location mentions across 16 venues. Vauxhall Gardens dominates the opening movement; the West End polite circuit fills in at the centre; plebeian counter-venues (White-Conduit House, Bagnigge Wells) cluster north and east as the Branghton subplot develops.*
+
+**Selected findings:**
+- Vauxhall Gardens: 53 mentions across 9 texts — the single most-referenced venue in the corpus
+- Harley Street: 25 mentions, Burney and Austen only — same address, same social coding (cold professional ambition) in *Cecilia* and *Sense and Sensibility*
+- Named coffee houses (Will's, Button's, Lloyd's, etc.): zero mentions after 1778 — the coffee house disappears from the novel as a social institution
+- Plebeian venues in *Evelina* cluster as a counter-geography to the polite circuit, encoding class anxiety spatially
+
+### 2. Comprehensive Corpus
+
 - Balanced representation of **women authors** (7 of 13)
 - Multiple genres: Gothic, Domestic, Epistolary, Picaresque, Amatory
 - Spans formative period of English novel (1719-1814)
 
-### 2. Anonymous Attribution Research
+### 3. Anonymous Attribution Research
 Many texts were originally published anonymously:
 - Frances Burney - *Evelina* (1778): "By a Lady"
 - Ann Radcliffe - *Castles of Athlin and Dunbayne* (1789): Anonymous
@@ -53,7 +83,7 @@ Many texts were originally published anonymously:
 
 Our BERT model achieves **99.8% accuracy** identifying these authors from their anonymous works.
 
-### 3. State-of-the-Art ML System
+### 4. State-of-the-Art ML System
 - Fine-tuned BERT (bert-base-uncased)
 - 99.9% test accuracy on 7-author corpus
 - Stratified train/val/test splitting
@@ -109,6 +139,7 @@ This corpus is suitable for:
 - `CORPUS_EXPANSION_REPORT.md` - Details on recent corpus expansion
 - `burney-attribution/README.md` - ML system documentation
 - `burney-attribution/ROADMAP.md` - Research phases and future work
+- `gazetteer/venues.csv` - Hand-curated venue list with coordinates, dates, and notes
 - `CLAUDE.md` - Repository guide and coding conventions
 
 ## Citation
@@ -141,4 +172,4 @@ All literary texts are sourced from Project Gutenberg and are in the public doma
 
 ---
 
-**Status**: Active research project | Phase 3 Complete | 99.8% anonymous attribution accuracy achieved
+**Status**: Active research project | Phase 3 Complete | 99.8% anonymous attribution accuracy | Urban gazetteer: 74 venues, 637 mentions, interactive narrative maps
