@@ -1,0 +1,39 @@
+id,name,city,lat,lon,opened,closed,notes,map_layer
+LON001,Vauxhall Spring Gardens,London,51.4882,-0.1228,1661,,Major renovation under Jonathan Tyers 1728-32. Peak popularity 1730s-1790s.,rocque_1746;horwood_1799
+LON002,Ranelagh Gardens,London,51.4871,-0.1677,1742,1803,Chelsea. Rotunda opened 1742. Closed and demolished 1805. Cannot appear in texts pre-1742.,rocque_1746;horwood_1799
+LON003,Marylebone Gardens,London,51.5209,-0.1491,1650,1778,Closed 1778. Replaced by housing. Cannot appear in texts post-1778.,rocque_1746
+LON004,The Pantheon,London,51.5136,-0.1418,1772,,Oxford Street. Burned 1792; rebuilt as theatre 1795. Cannot appear pre-1772.,rocque_1746;horwood_1799
+LON005,Almack's Assembly Rooms,London,51.5065,-0.1419,1765,,King Street St James's. Later Willis's Rooms. Cannot appear pre-1765.,rocque_1746;horwood_1799
+LON006,Drury Lane Theatre,London,51.5121,-0.1199,1663,,Current building opened 1794 after fire. Pre-1794 texts refer to earlier structure.,rocque_1746;horwood_1799
+LON007,Covent Garden Theatre,London,51.5130,-0.1224,1732,,Burned 1808; rebuilt 1809. Pre-1808 texts refer to earlier structure.,rocque_1746;horwood_1799
+LON008,King's Theatre Haymarket,London,51.5058,-0.1313,1705,,Opera house. Burned 1789; rebuilt 1790.,rocque_1746;horwood_1799
+LON009,St James's Park,London,51.5024,-0.1337,,,Stable throughout the period.,rocque_1746;horwood_1799
+LON010,Hyde Park,London,51.5073,-0.1657,,,Stable throughout. Rotten Row a key social promenade.,rocque_1746;horwood_1799
+LON011,Grosvenor Square,London,51.5120,-0.1519,1725,,Major aristocratic address. Developed 1720s-1730s. Cannot appear pre-1725.,rocque_1746;horwood_1799
+LON012,Hanover Square,London,51.5121,-0.1444,1714,,Developed from 1714. Key early Georgian address.,rocque_1746;horwood_1799
+LON013,Berkeley Square,London,51.5095,-0.1443,1739,,Developed 1730s-1740s. Gardens laid out 1739.,rocque_1746;horwood_1799
+LON014,St James's Square,London,51.5073,-0.1345,1660,,Aristocratic address stable throughout.,rocque_1746;horwood_1799
+LON015,The Strand,London,51.5116,-0.1178,,,Major commercial and social thoroughfare. Stable throughout.,rocque_1746;horwood_1799
+LON016,Covent Garden Piazza,London,51.5129,-0.1228,1630,,Market and social space stable throughout.,rocque_1746;horwood_1799
+LON017,Spring Gardens (Charing Cross),London,51.5071,-0.1282,,,Older pleasure garden near Charing Cross. Distinct from Vauxhall.,rocque_1746
+LON018,White's Club,London,51.5064,-0.1404,1693,,St James's Street. Oldest gentlemen's club. Stable throughout.,rocque_1746;horwood_1799
+LON019,Boodle's Club,London,51.5064,-0.1407,1762,,St James's Street. Cannot appear pre-1762.,rocque_1746;horwood_1799
+LON020,Brooks's Club,London,51.5064,-0.1408,1764,,St James's Street. Cannot appear pre-1764.,rocque_1746;horwood_1799
+LON021,The Tower of London,London,51.5081,-0.0759,,,Stable landmark throughout.,rocque_1746;horwood_1799
+LON022,St Paul's Cathedral,London,51.5138,-0.0984,1710,,Wren's cathedral completed 1710.,rocque_1746;horwood_1799
+LON023,Westminster Abbey,London,51.4993,-0.1273,,,Stable landmark throughout.,rocque_1746;horwood_1799
+LON024,Portman Square,London,51.5192,-0.1588,1764,,Developed from 1764. Home House (notable address) 1775.,rocque_1746;horwood_1799
+LON025,Portland Place,London,51.5216,-0.1436,1778,,Developed from 1778. Cannot appear in earlier texts.,horwood_1799
+LON026,Bedford Square,London,51.5185,-0.1267,1775,,Bloomsbury. Developed 1775. Cannot appear pre-1775.,rocque_1746;horwood_1799
+BAT001,Lower Assembly Rooms (Harrison's),Bath,51.3812,-2.3587,1708,1820,Also known as Lindsey's Rooms. The rooms in pre-1771 Bath fiction. Burned 1820.,wood_1736;harcourt_1794
+BAT002,Upper Assembly Rooms (New Rooms),Bath,51.3851,-2.3637,1771,,Opened October 1771. These are Austen's rooms in Northanger Abbey. Cannot appear pre-1771.,harcourt_1794
+BAT003,The Pump Room,Bath,51.3814,-2.3594,1706,,Current building 1796. Earlier versions from 1706. Major social hub throughout.,wood_1736;harcourt_1794
+BAT004,The Circus,Bath,51.3844,-2.3633,1768,,Designed by John Wood the Elder 1754; completed after his death 1768. Cannot appear pre-1768.,wood_1736;harcourt_1794
+BAT005,Royal Crescent,Bath,51.3848,-2.3664,1774,,Built 1767-1774. Cannot appear in texts set before construction.,harcourt_1794
+BAT006,Pulteney Bridge,Bath,51.3813,-2.3556,1774,,Designed Robert Adam. Cannot appear pre-1774.,harcourt_1794
+BAT007,Sydney Gardens,Bath,51.3841,-2.3503,1795,,Pleasure gardens. Austen's favourite walk. Cannot appear pre-1795.,harcourt_1794
+BAT008,Queen Square,Bath,51.3821,-2.3630,1736,,John Wood the Elder. Completed 1736. Key address in mid-century Bath fiction.,wood_1736;harcourt_1794
+BAT009,Milsom Street,Bath,51.3837,-2.3620,1761,,Principal shopping street from 1761. Cannot appear pre-1761.,wood_1736;harcourt_1794
+BAT010,Bath Abbey,Bath,51.3814,-2.3591,,,Stable landmark throughout.,wood_1736;harcourt_1794
+BAT011,North Parade,Bath,51.3807,-2.3582,1740,,Promenade. Developed 1740. Smollett's characters walk here.,wood_1736;harcourt_1794
+BAT012,South Parade,Bath,51.3800,-2.3576,1743,,Developed 1743. Cannot appear pre-1743.,wood_1736;harcourt_1794

@@ -1,0 +1,6 @@
+{
+  "model": "bert-base-uncased",
+  "split": "work-level holdout",
+  "holdout_accuracy": 0.6143410852713178,
+  "report": "              precision    recall  f1-score   support\n\n      burney       0.97      0.73      0.83       876\n   radcliffe       0.88      1.00      0.94       283\n    smollett       0.97      0.08      0.16       389\n\n   micro avg       0.95      0.61      0.74      1548\n   macro avg       0.94      0.60      0.64      1548\nweighted avg       0.96      0.61      0.68      1548\n"
+}

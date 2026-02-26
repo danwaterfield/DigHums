@@ -1,0 +1,48 @@
+author,title,year,genre,volume,file_path,notes
+austen,Sense and Sensibility,1811,domestic,,austen/SenseAndSensibility.txt,
+austen,Pride and Prejudice,1813,domestic,,austen/PrideAndPrejudice.txt,
+austen,Mansfield Park,1814,domestic,,austen/MansfieldPark.txt,
+austen,Emma,1815,domestic,,austen/Emma.txt,
+austen,Northanger Abbey,1817,gothic,,austen/NorthangerAbbey.txt,posthumous
+austen,Persuasion,1817,domestic,,austen/Persuasion.txt,posthumous
+beckford,Vathek,1786,gothic,,beckford/Vathek.txt,anonymous publication
+burney,Evelina,1778,epistolary,,burney/Evelina.txt,published as "By a Lady"
+burney,Cecilia,1782,domestic,1,burney/CeciliaVol1.txt,
+burney,Cecilia,1782,domestic,2,burney/CeciliaVol2.txt,
+burney,Cecilia,1782,domestic,3,burney/CeciliaVol3.txt,
+burney,Camilla,1796,domestic,,burney/Camilla.txt,
+burney,The Wanderer,1814,domestic,1,burney/TheWandererVol1.txt,
+burney,The Wanderer,1814,domestic,2,burney/TheWandererVol2.txt,
+burney,The Wanderer,1814,domestic,3,burney/TheWandererVol3.txt,
+burney,The Wanderer,1814,domestic,4,burney/TheWandererVol4.txt,
+burney,The Wanderer,1814,domestic,5,burney/TheWandererVol5.txt,
+edgeworth,Castle Rackrent,1800,satirical,,edgeworth/CastleRackrent.txt,anonymous publication
+fielding,Joseph Andrews,1742,picaresque,1,fielding/JosephAndrewsVol1.txt,
+fielding,Joseph Andrews,1742,picaresque,2,fielding/JosephAndrewsVol2.txt,
+fielding,Tom Jones,1749,picaresque,,fielding/TomJones.txt,
+fielding,Amelia,1751,domestic,,fielding/Amelia.txt,
+haywood,Love in Excess,1719,amatory,,haywood/LoveInExcess.txt,initially anonymous
+lewis,The Monk,1796,gothic,,lewis/TheMonk.txt,
+radcliffe,The Castles of Athlin and Dunbayne,1789,gothic,,radcliffe/CastlesOfAthlinAndDunbayne.txt,anonymous publication
+radcliffe,A Sicilian Romance,1790,gothic,,radcliffe/ASicilianRomance.txt,anonymous attribution
+radcliffe,The Romance of the Forest,1791,gothic,,radcliffe/TheRomanceOfTheForest.txt,
+radcliffe,The Mysteries of Udolpho,1794,gothic,,radcliffe/Udolpho.txt,
+radcliffe,The Italian,1797,gothic,1,radcliffe/TheItalianVol1.txt,
+radcliffe,The Italian,1797,gothic,2,radcliffe/TheItalianVol2.txt,
+reeve,The Old English Baron,1778,gothic,,reeve/TheOldEnglishBaron.txt,
+richardson,Pamela,1740,epistolary,,richardson/Pamela.txt,
+richardson,Clarissa,1748,epistolary,1,richardson/ClarissaVol1.txt,
+richardson,Clarissa,1748,epistolary,2,richardson/ClarissaVol2.txt,
+richardson,Clarissa,1748,epistolary,3,richardson/ClarissaVol3.txt,
+richardson,Clarissa,1748,epistolary,4,richardson/ClarissaVol4.txt,
+richardson,Clarissa,1748,epistolary,5,richardson/ClarissaVol5.txt,
+richardson,Clarissa,1748,epistolary,6,richardson/ClarissaVol6.txt,
+richardson,Clarissa,1748,epistolary,7,richardson/ClarissaVol7.txt,
+richardson,Clarissa,1748,epistolary,8,richardson/ClarissaVol8.txt,
+richardson,Clarissa,1748,epistolary,9,richardson/ClarissaVol9.txt,
+smith,Emmeline,1788,domestic,,smith/Emmeline.txt,
+smollett,Roderick Random,1748,picaresque,,smollett/RoderickRandom.txt,
+smollett,Peregrine Pickle,1751,picaresque,,smollett/PeregrinePickle.txt,
+smollett,Ferdinand Count Fathom,1753,picaresque,,smollett/FerdinandFathom.txt,
+smollett,Humphry Clinker,1771,epistolary,,smollett/HumphryClinker.txt,
+walpole,The Castle of Otranto,1764,gothic,,walpole/CastleOfOtranto.txt,pseudonymous publication
