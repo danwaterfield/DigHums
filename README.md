@@ -62,6 +62,21 @@ A hand-curated gazetteer of 74 venues in London and Bath — pleasure gardens, t
 
 *Frances Burney, Evelina (1778) — 97 location mentions across 16 venues. Vauxhall Gardens dominates the opening movement; the West End polite circuit fills in at the centre; plebeian counter-venues (White-Conduit House, Bagnigge Wells) cluster north and east as the Branghton subplot develops.*
 
+### Venue Explorer (`gazetteer/venue_explorer.html`)
+
+Interactive map of the Phase 1 sensory evidence store. Click any venue to browse
+assembled passages filtered by modality (auditory, olfactory, visual, thermal, crowd),
+source type (fiction, diary, topography, poetry, letters), and date range (1660–1820).
+
+Built from `sensory.db` — 8,099 deduplicated passages across 37 sources, 565 geocoded
+to 39 venues. Top venues: City of London (89), King's Theatre (74), Ranelagh (43),
+Vauxhall (34), Bath Pump Room (28).
+
+To regenerate after updating `sensory.db`:
+```bash
+python3 gazetteer/build_venue_explorer.py
+```
+
 **Selected findings:**
 - Vauxhall Gardens: 53 mentions across 9 texts — the single most-referenced venue in the corpus
 - Harley Street: 25 mentions, Burney and Austen only — same address, same social coding (cold professional ambition) in *Cecilia* and *Sense and Sensibility*
