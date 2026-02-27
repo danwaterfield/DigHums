@@ -64,3 +64,20 @@ def test_no_orphaned_venue_ids():
         conn.close()
     orphans = db_ids - csv_ids
     assert not orphans, f"Orphaned venue_ids in DB not in venues.csv: {orphans}"
+
+
+import tempfile
+
+def test_build_generates_valid_html():
+    """Running build() produces an HTML file containing all expected landmarks."""
+    with tempfile.NamedTemporaryFile(suffix=".html", delete=False) as f:
+        out = Path(f.name)
+    from build_venue_explorer import build
+    build(VENUES_PATH, DB_PATH, out)
+    html = out.read_text(encoding="utf-8")
+    assert "const VENUES" in html, "Missing VENUES constant"
+    assert "Vauxhall" in html,     "Missing Vauxhall venue"
+    assert "Ranelagh" in html,     "Missing Ranelagh venue"
+    assert "leaflet" in html.lower(), "Missing Leaflet"
+    assert len(html) > 20_000,    "HTML suspiciously short"
+    out.unlink()
