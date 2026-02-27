@@ -35,6 +35,9 @@ def test_evidence_sorted_by_date_min():
     """Evidence within each venue is sorted by date_min ascending."""
     venues = load_data(VENUES_PATH, DB_PATH)
     for v in venues:
+        # SQLite ORDER BY date_min places NULLs first, so null entries appear before
+        # dated entries rather than interleaved. We filter them out here and only
+        # assert that the non-null dates are in ascending order.
         dates = [e["date_min"] for e in v["evidence"] if e["date_min"]]
         assert dates == sorted(dates), f"Unsorted evidence at {v['id']}"
 

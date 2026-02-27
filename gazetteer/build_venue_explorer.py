@@ -26,13 +26,14 @@ def fmt_author(s: str) -> str:
     if s in overrides:
         return overrides[s]
     spaced = re.sub(r"([a-z])([A-Z])", r"\1 \2", s)
+    # All DB authors are single-word lowercase or CamelCase; no multi-word lowercase names exist.
     return spaced.capitalize() if " " not in spaced else spaced
 
 
 def load_data(venues_path: Path, db_path: Path) -> list[dict]:
     """
     Return list of venue dicts, each with an 'evidence' array.
-    All 74 venues are included; venues with no evidence have evidence=[].
+    All 73 venues are included; venues with no evidence have evidence=[].
     """
     with open(venues_path, newline="", encoding="utf-8") as f:
         venues = {
