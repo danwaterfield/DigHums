@@ -76,6 +76,7 @@ def test_build_generates_valid_html():
     build(VENUES_PATH, DB_PATH, out)
     html = out.read_text(encoding="utf-8")
     assert "const VENUES" in html, "Missing VENUES constant"
+    assert "__VENUES_DATA__" not in html, "Placeholder __VENUES_DATA__ was not replaced"
     assert "Vauxhall" in html,     "Missing Vauxhall venue"
     assert "Ranelagh" in html,     "Missing Ranelagh venue"
     assert "leaflet" in html.lower(), "Missing Leaflet"

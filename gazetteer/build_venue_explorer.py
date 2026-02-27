@@ -376,7 +376,7 @@ function renderPanel() {
 
   document.getElementById('panel-title').textContent = v.name;
   document.getElementById('panel-stats').textContent =
-    filtered.length + ' passage' + (filtered.length !== 1 ? 's' : '') + ' \u00b7 ' + bStr;
+    globalFiltered.length + ' passage' + (globalFiltered.length !== 1 ? 's' : '') + ' \u00b7 ' + bStr;
 
   // local modality pills
   const pillsEl = document.getElementById('panel-pills');
@@ -429,7 +429,11 @@ document.getElementById('panel-pills').addEventListener('click', function(e) {
 document.getElementById('date-from').addEventListener('input', function() {
   const val      = parseInt(this.value);
   const toSlider = document.getElementById('date-to');
-  if (val > parseInt(toSlider.value)) { toSlider.value = val; state.dateTo = val; }
+  if (val > parseInt(toSlider.value)) {
+    toSlider.value = val;
+    state.dateTo = val;
+    document.getElementById('lbl-to').textContent = val;
+  }
   state.dateFrom = val;
   document.getElementById('lbl-from').textContent = val;
   renderMarkers();
@@ -439,7 +443,11 @@ document.getElementById('date-from').addEventListener('input', function() {
 document.getElementById('date-to').addEventListener('input', function() {
   const val        = parseInt(this.value);
   const fromSlider = document.getElementById('date-from');
-  if (val < parseInt(fromSlider.value)) { fromSlider.value = val; state.dateFrom = val; }
+  if (val < parseInt(fromSlider.value)) {
+    fromSlider.value = val;
+    state.dateFrom = val;
+    document.getElementById('lbl-from').textContent = val;
+  }
   state.dateTo = val;
   document.getElementById('lbl-to').textContent = val;
   renderMarkers();
