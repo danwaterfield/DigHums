@@ -3,516 +3,310 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>18c Fiction · Digital Humanities</title>
+<title>Research &amp; Visualisation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-/* ── tokens ── */
 :root {
-  --ink:      #1a1612;
-  --ink-mid:  #2a2420;
-  --ink-lite: #3d3530;
-  --parch:    #f5ecd7;
-  --parch-dim:#c8b99a;
-  --gold:     #c9a84c;
-  --gold-dim: #8b6914;
-  --rule:     rgba(201,168,76,0.18);
-  --ff-head:  'Playfair Display', Georgia, serif;
-  --ff-body:  'Crimson Pro', Georgia, serif;
+  --bg:       #f9f7f4;
+  --surface:  #ffffff;
+  --border:   #e3ddd6;
+  --text:     #1c1917;
+  --mid:      #5c554e;
+  --dim:      #9b948d;
+  --accent:   #3d2e1e;
+  --gold:     #9a6f2a;
+  --gold-bg:  #f5ede0;
+  --ff-disp:  'Playfair Display', Georgia, serif;
+  --ff-body:  'Source Serif 4', Georgia, serif;
+  --ff-ui:    'DM Sans', system-ui, sans-serif;
+  --r:        6px;
 }
 
-/* ── reset + base ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  background: var(--ink);
-  color: var(--parch);
+  background: var(--bg);
+  color: var(--text);
   font-family: var(--ff-body);
-  font-size: 18px;
-  line-height: 1.65;
-  min-height: 100vh;
-  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ── background: faint map-grid ── */
-body::before {
-  content: '';
-  position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background-image:
-    linear-gradient(var(--rule) 1px, transparent 1px),
-    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse 120% 120% at 50% 0%, black 40%, transparent 100%);
+/* ── nav ── */
+nav {
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(249,247,244,0.92);
+  backdrop-filter: blur(8px);
 }
+.nav-inner {
+  max-width: 900px; margin: 0 auto;
+  padding: 0 40px;
+  height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-brand {
+  font-family: var(--ff-ui);
+  font-size: 13px; font-weight: 500;
+  color: var(--text); text-decoration: none;
+}
+.nav-links { display: flex; gap: 24px; list-style: none; }
+.nav-links a {
+  font-family: var(--ff-ui);
+  font-size: 13px; color: var(--mid);
+  text-decoration: none; transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--text); }
 
-/* ── noise grain overlay ── */
-body::after {
-  content: '';
-  position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 200px;
-}
+/* ── page ── */
+.page { max-width: 900px; margin: 0 auto; padding: 0 40px; }
 
-/* ── layout ── */
-.wrap {
-  position: relative; z-index: 1;
-  max-width: 960px; margin: 0 auto;
-  padding: 0 32px;
+/* ── hero ── */
+.hero {
+  padding: 80px 0 64px;
+  border-bottom: 1px solid var(--border);
 }
-
-/* ── header ── */
-header {
-  padding: 88px 0 72px;
-  border-bottom: 1px solid var(--rule);
+.hero-eyebrow {
+  font-family: var(--ff-ui);
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 18px;
 }
-.eyebrow {
-  font-family: var(--ff-body);
-  font-size: 11px; font-weight: 600;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 22px;
-}
-.eyebrow::before {
-  content: '';
-  display: inline-block;
-  width: 28px; height: 1px;
-  background: var(--gold);
-  vertical-align: middle;
-  margin-right: 10px;
-}
-h1 {
-  font-family: var(--ff-head);
-  font-size: clamp(38px, 6vw, 62px);
-  font-weight: 700;
-  line-height: 1.12;
-  color: var(--parch);
+.hero h1 {
+  font-family: var(--ff-disp);
+  font-size: clamp(34px, 5vw, 52px);
+  font-weight: 700; line-height: 1.1;
+  color: var(--accent);
   letter-spacing: -0.01em;
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 }
-h1 em {
-  font-style: italic;
-  color: var(--gold);
-}
-.tagline {
-  font-size: 18px; font-weight: 300;
-  color: var(--parch-dim);
-  max-width: 560px;
-  line-height: 1.7;
-}
-
-/* ── stats bar ── */
-.stats {
-  display: flex; flex-wrap: wrap; gap: 0;
-  margin: 60px 0 0;
-  border: 1px solid var(--rule);
-  border-radius: 2px;
-}
-.stat {
-  flex: 1 1 180px;
-  padding: 20px 24px;
-  border-right: 1px solid var(--rule);
-}
-.stat:last-child { border-right: none; }
-.stat-n {
-  font-family: var(--ff-head);
-  font-size: 30px; font-weight: 600;
-  color: var(--gold);
-  display: block; line-height: 1;
-  margin-bottom: 5px;
-}
-.stat-label {
-  font-size: 11px; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--parch-dim);
-  font-weight: 400;
-}
-
-/* ── section ── */
-section {
-  padding: 80px 0;
-  border-bottom: 1px solid var(--rule);
-}
-section:last-of-type { border-bottom: none; }
-.section-head {
-  display: flex; align-items: baseline; gap: 16px;
-  margin-bottom: 48px;
-}
-.section-label {
-  font-size: 10px; letter-spacing: 0.22em;
-  text-transform: uppercase; color: var(--gold-dim);
-  font-family: var(--ff-body); font-weight: 600;
-  white-space: nowrap;
-}
-.section-rule {
-  flex: 1; height: 1px; background: var(--rule);
-}
-
-/* ── tool cards ── */
-.tools { display: flex; flex-direction: column; gap: 2px; }
-
-.tool-card {
-  display: grid;
-  grid-template-columns: 56px 1fr auto;
-  align-items: start;
-  gap: 0 32px;
-  padding: 32px 32px 32px 0;
-  border-top: 1px solid var(--rule);
-  text-decoration: none;
-  color: inherit;
-  position: relative;
-  transition: background 0.2s;
-  cursor: pointer;
-}
-.tool-card::before {
-  content: '';
-  position: absolute; left: -32px; right: -32px; top: 0; bottom: 0;
-  background: rgba(201,168,76,0.03);
-  opacity: 0;
-  transition: opacity 0.2s;
-  pointer-events: none;
-}
-.tool-card:hover::before { opacity: 1; }
-.tool-card:last-child { border-bottom: 1px solid var(--rule); }
-
-.tool-num {
-  font-family: var(--ff-head);
-  font-size: 13px; font-weight: 400; font-style: italic;
-  color: var(--gold-dim);
-  padding-top: 4px;
-  letter-spacing: 0.05em;
-}
-
-.tool-body { min-width: 0; }
-.tool-type {
-  display: inline-block;
-  font-size: 9px; letter-spacing: 0.2em;
-  text-transform: uppercase; font-weight: 600;
-  color: var(--ink);
-  background: var(--gold);
-  padding: 2px 7px; border-radius: 1px;
-  margin-bottom: 10px;
+.hero h1 em { font-style: italic; font-weight: 400; }
+.hero-sub {
   font-family: var(--ff-body);
-}
-.tool-name {
-  font-family: var(--ff-head);
-  font-size: 22px; font-weight: 600;
-  color: var(--parch);
-  margin-bottom: 8px;
-  line-height: 1.25;
-  transition: color 0.2s;
-}
-.tool-card:hover .tool-name { color: var(--gold); }
-
-.tool-desc {
-  font-size: 15px; font-weight: 300;
-  color: var(--parch-dim);
-  line-height: 1.65;
+  font-size: 17px; font-weight: 300;
+  color: var(--mid); line-height: 1.75;
   max-width: 520px;
 }
 
-.tool-meta {
-  font-size: 12px;
-  color: var(--gold-dim);
-  font-family: var(--ff-body);
-  margin-top: 12px;
-  font-weight: 400;
-}
-.tool-meta span {
-  display: inline-block;
-  padding-right: 14px; margin-right: 10px;
-  border-right: 1px solid var(--ink-lite);
-}
-.tool-meta span:last-child { border-right: none; }
-
-.tool-arrow {
-  font-size: 18px; color: var(--gold-dim);
-  padding-top: 28px;
-  transition: transform 0.2s, color 0.2s;
-  align-self: start;
-}
-.tool-card:hover .tool-arrow {
-  transform: translateX(4px);
-  color: var(--gold);
+/* ── section ── */
+.section { padding: 64px 0; border-bottom: 1px solid var(--border); }
+.section:last-of-type { border-bottom: none; }
+.section-label {
+  font-family: var(--ff-ui);
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--dim); margin-bottom: 32px;
 }
 
-/* ── corpus section ── */
-.corpus-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1px;
-  background: var(--rule);
-  border: 1px solid var(--rule);
-  border-radius: 2px;
+/* ── project cards ── */
+.projects { display: flex; flex-direction: column; gap: 20px; }
+
+.project-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
   overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
-.corpus-item {
-  background: var(--ink);
-  padding: 18px 20px;
-  font-size: 13px;
-}
-.corpus-author {
-  font-family: var(--ff-head);
-  font-size: 13px; font-weight: 600;
-  color: var(--parch);
-  margin-bottom: 3px;
-}
-.corpus-titles {
-  font-size: 12px; font-weight: 300; font-style: italic;
-  color: var(--parch-dim);
-  line-height: 1.5;
+.project-card:hover {
+  border-color: #c9b99a;
+  box-shadow: 0 4px 28px rgba(60,46,30,0.07);
 }
 
-/* ── about section ── */
-.about-text {
-  max-width: 620px;
-  font-size: 17px; font-weight: 300;
-  color: var(--parch-dim);
-  line-height: 1.8;
+.project-head {
+  padding: 28px 32px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: flex-start;
+  justify-content: space-between; gap: 20px;
 }
-.about-text p + p { margin-top: 1em; }
-.about-text a {
-  color: var(--gold);
-  text-decoration: none;
-  border-bottom: 1px solid var(--gold-dim);
-  transition: border-color 0.15s, color 0.15s;
+.project-meta { flex: 1; }
+.project-tag {
+  display: inline-block;
+  font-family: var(--ff-ui);
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--gold-bg); color: var(--gold);
+  padding: 3px 8px; border-radius: 3px;
+  margin-bottom: 10px;
 }
-.about-text a:hover { color: var(--parch); border-color: var(--parch-dim); }
+.project-title {
+  font-family: var(--ff-disp);
+  font-size: 22px; font-weight: 700;
+  color: var(--accent); line-height: 1.2;
+  margin-bottom: 8px;
+}
+.project-desc {
+  font-family: var(--ff-body);
+  font-size: 15px; font-weight: 300;
+  color: var(--mid); line-height: 1.65;
+  max-width: 540px;
+}
+.project-stats {
+  display: flex; gap: 24px; flex-shrink: 0;
+  padding-top: 4px;
+}
+.pstat { text-align: right; }
+.pstat-n {
+  display: block;
+  font-family: var(--ff-disp);
+  font-size: 22px; font-weight: 700;
+  color: var(--accent); line-height: 1;
+  margin-bottom: 2px;
+}
+.pstat-l {
+  font-family: var(--ff-ui);
+  font-size: 10px; font-weight: 400;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  color: var(--dim);
+}
+
+/* ── tool links inside a card ── */
+.project-tools {
+  display: flex;
+}
+.tool-link {
+  flex: 1;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 32px;
+  text-decoration: none; color: inherit;
+  border-right: 1px solid var(--border);
+  transition: background 0.15s;
+  gap: 12px;
+}
+.tool-link:last-child { border-right: none; }
+.tool-link:hover { background: #faf7f3; }
+
+.tl-left {}
+.tl-tag {
+  font-family: var(--ff-ui);
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--dim); margin-bottom: 4px;
+}
+.tl-name {
+  font-family: var(--ff-body);
+  font-size: 14px; font-weight: 400;
+  color: var(--text);
+}
+.tl-arrow {
+  font-size: 16px; color: var(--dim);
+  transition: transform 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+.tool-link:hover .tl-arrow { transform: translateX(3px); color: var(--gold); }
 
 /* ── footer ── */
 footer {
-  position: relative; z-index: 1;
-  padding: 36px 0;
+  border-top: 1px solid var(--border);
+  padding: 28px 0;
+}
+.footer-inner {
+  max-width: 900px; margin: 0 auto; padding: 0 40px;
   display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 12px;
+  flex-wrap: wrap; gap: 8px;
 }
-.footer-copy {
-  font-size: 12px; color: var(--ink-lite);
-  font-family: var(--ff-body); letter-spacing: 0.04em;
-}
+.footer-text { font-family: var(--ff-ui); font-size: 12px; color: var(--dim); }
 .footer-link {
-  font-size: 12px; color: var(--gold-dim);
-  text-decoration: none; letter-spacing: 0.06em;
-  font-family: var(--ff-body);
-  transition: color 0.15s;
+  font-family: var(--ff-ui); font-size: 12px; color: var(--dim);
+  text-decoration: none; transition: color 0.15s;
 }
-.footer-link:hover { color: var(--gold); }
-
-/* ── entry animation ── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.anim {
-  opacity: 0;
-  animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-.anim-1 { animation-delay: 0.05s; }
-.anim-2 { animation-delay: 0.15s; }
-.anim-3 { animation-delay: 0.25s; }
-.anim-4 { animation-delay: 0.35s; }
-.anim-5 { animation-delay: 0.45s; }
+.footer-link:hover { color: var(--mid); }
 
 /* ── responsive ── */
-@media (max-width: 600px) {
-  .wrap { padding: 0 20px; }
-  header { padding: 60px 0 48px; }
-  .tool-card { grid-template-columns: 40px 1fr; }
-  .tool-arrow { display: none; }
-  .stats { flex-direction: column; }
-  .stat { border-right: none; border-bottom: 1px solid var(--rule); }
-  .stat:last-child { border-bottom: none; }
+@media (max-width: 640px) {
+  .page, .nav-inner, .footer-inner { padding-left: 20px; padding-right: 20px; }
+  .hero { padding: 56px 0 44px; }
+  .project-head { flex-direction: column; }
+  .project-stats { display: none; }
+  .project-tools { flex-direction: column; }
+  .tool-link { border-right: none; border-bottom: 1px solid var(--border); }
+  .tool-link:last-child { border-bottom: none; }
+  .project-head, .tool-link { padding-left: 20px; padding-right: 20px; }
 }
 </style>
 </head>
 <body>
 
-<div class="wrap">
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="/">Dan Waterfield</a>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="https://github.com/danwaterfield" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
+  </div>
+</nav>
 
-  <!-- header -->
-  <header>
-    <p class="eyebrow anim anim-1">Digital Humanities · 18th-Century Fiction</p>
-    <h1 class="anim anim-2">
-      The <em>geography</em> of<br>the English novel
-    </h1>
-    <p class="tagline anim anim-3">
-      Corpus tools for mapping place, movement, and sensory experience
-      across 28&nbsp;texts by 13&nbsp;authors, 1719–1817.
+<div class="page">
+
+  <section class="hero">
+    <p class="hero-eyebrow">Research &amp; Visualisation</p>
+    <h1>Data, text,<br><em>and interpretation</em></h1>
+    <p class="hero-sub">
+      Interactive tools for exploring literary and historical corpora.
     </p>
+  </section>
 
-    <div class="stats anim anim-4">
-      <div class="stat">
-        <span class="stat-n">28</span>
-        <span class="stat-label">Novels</span>
-      </div>
-      <div class="stat">
-        <span class="stat-n">13</span>
-        <span class="stat-label">Authors</span>
-      </div>
-      <div class="stat">
-        <span class="stat-n">8,099</span>
-        <span class="stat-label">Sensory passages</span>
-      </div>
-      <div class="stat">
-        <span class="stat-n">73</span>
-        <span class="stat-label">Venues mapped</span>
-      </div>
-      <div class="stat">
-        <span class="stat-n">37</span>
-        <span class="stat-label">Sources</span>
-      </div>
-    </div>
-  </header>
+  <section class="section" id="projects">
+    <p class="section-label">Projects</p>
+    <div class="projects">
 
-  <!-- tools -->
-  <section>
-    <div class="section-head anim anim-4">
-      <span class="section-label">Interactive maps</span>
-      <div class="section-rule"></div>
-    </div>
-
-    <div class="tools anim anim-5">
-
-      <a class="tool-card" href="gazetteer/venue_explorer.html">
-        <span class="tool-num">I</span>
-        <div class="tool-body">
-          <span class="tool-type">Venue Explorer</span>
-          <div class="tool-name">Sensory Map of London &amp; Bath</div>
-          <p class="tool-desc">
-            Click any venue to browse assembled passages from fiction, diary,
-            topography, poetry, and letters — filtered by sensory modality
-            (auditory, olfactory, visual, thermal, crowd), source type, and
-            date range. 565&nbsp;geocoded passages across 39&nbsp;venues.
-          </p>
-          <div class="tool-meta">
-            <span>1660–1820</span>
-            <span>Rocque 1746 · Horwood 1792</span>
-            <span>Phase 1</span>
+      <!-- 18c Fiction -->
+      <div class="project-card">
+        <div class="project-head">
+          <div class="project-meta">
+            <span class="project-tag">Digital Humanities</span>
+            <div class="project-title">18th-Century Fiction &amp; Urban Space</div>
+            <p class="project-desc">
+              Mapping place, movement, and sensory experience across 28&nbsp;novels
+              by 13&nbsp;authors, 1719–1817. Evidence assembled from fiction, diary,
+              topography, poetry, and letters against a gazetteer of 73&nbsp;London
+              and Bath venues.
+            </p>
+          </div>
+          <div class="project-stats">
+            <div class="pstat">
+              <span class="pstat-n">28</span>
+              <span class="pstat-l">Texts</span>
+            </div>
+            <div class="pstat">
+              <span class="pstat-n">8,099</span>
+              <span class="pstat-l">Passages</span>
+            </div>
           </div>
         </div>
-        <span class="tool-arrow">→</span>
-      </a>
-
-      <a class="tool-card" href="gazetteer/narrative_map.html">
-        <span class="tool-num">II</span>
-        <div class="tool-body">
-          <span class="tool-type">Narrative Map</span>
-          <div class="tool-name">Character Paths Through the City</div>
-          <p class="tool-desc">
-            Follow a character's journey venue by venue through the text.
-            Timeline slider and play mode animate the path; HSL gradient
-            encodes narrative position from opening to close. 18&nbsp;texts,
-            623&nbsp;events, London and Bath.
-          </p>
-          <div class="tool-meta">
-            <span>18 texts</span>
-            <span>623 events</span>
-            <span>Austen · Burney · Fielding · Smollett +&nbsp;more</span>
-          </div>
+        <div class="project-tools">
+          <a class="tool-link" href="gazetteer/venue_explorer.html">
+            <div class="tl-left">
+              <div class="tl-tag">Venue Explorer</div>
+              <div class="tl-name">Sensory Map of London &amp; Bath</div>
+            </div>
+            <span class="tl-arrow">→</span>
+          </a>
+          <a class="tool-link" href="gazetteer/narrative_map.html">
+            <div class="tl-left">
+              <div class="tl-tag">Narrative Map</div>
+              <div class="tl-name">Character Paths Through the City</div>
+            </div>
+            <span class="tl-arrow">→</span>
+          </a>
         </div>
-        <span class="tool-arrow">→</span>
-      </a>
+      </div>
+
+      <!-- add future project cards here -->
 
     </div>
   </section>
 
-  <!-- corpus -->
-  <section>
-    <div class="section-head">
-      <span class="section-label">Corpus</span>
-      <div class="section-rule"></div>
-    </div>
-
-    <div class="corpus-grid">
-      <div class="corpus-item">
-        <div class="corpus-author">Jane Austen</div>
-        <div class="corpus-titles">Emma · Northanger Abbey · Persuasion · Pride and Prejudice · Sense and Sensibility</div>
-      </div>
-      <div class="corpus-item">
-        <div class="corpus-author">Frances Burney</div>
-        <div class="corpus-titles">Camilla · Cecilia · Evelina · The Wanderer</div>
-      </div>
-      <div class="corpus-item">
-        <div class="corpus-author">Ann Radcliffe</div>
-        <div class="corpus-titles">Castles of Athlin · A Sicilian Romance · Romance of the Forest · Mysteries of Udolpho · The Italian · Gaston de Blondeville</div>
-      </div>
-      <div class="corpus-item">
-        <div class="corpus-author">Henry Fielding</div>
-        <div class="corpus-titles">Amelia · Joseph Andrews · Tom Jones</div>
-      </div>
-      <div class="corpus-item">
-        <div class="corpus-author">Tobias Smollett</div>
-        <div class="corpus-titles">Humphry Clinker · Roderick Random</div>
-      </div>
-      <div class="corpus-item">
-        <div class="corpus-author">Samuel Richardson</div>
-        <div class="corpus-titles">Clarissa · Pamela</div>
-      </div>
-      <div class="corpus-item">
-        <div class="corpus-author">Maria Edgeworth</div>
-        <div class="corpus-titles">Castle Rackrent</div>
-      </div>
-      <div class="corpus-item">
-        <div class="corpus-author">Charlotte Smith</div>
-        <div class="corpus-titles">Emmeline</div>
-      </div>
-      <div class="corpus-item">
-        <div class="corpus-author">Eliza Haywood</div>
-        <div class="corpus-titles">Love in Excess</div>
-      </div>
-      <div class="corpus-item">
-        <div class="corpus-author">Clara Reeve</div>
-        <div class="corpus-titles">The Old English Baron</div>
-      </div>
-      <div class="corpus-item">
-        <div class="corpus-author">Horace Walpole</div>
-        <div class="corpus-titles">The Castle of Otranto</div>
-      </div>
-      <div class="corpus-item">
-        <div class="corpus-author">M.&thinsp;G. Lewis</div>
-        <div class="corpus-titles">The Monk</div>
-      </div>
-      <div class="corpus-item">
-        <div class="corpus-author">William Beckford</div>
-        <div class="corpus-titles">Vathek</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- about -->
-  <section>
-    <div class="section-head">
-      <span class="section-label">About</span>
-      <div class="section-rule"></div>
-    </div>
-    <div class="about-text">
-      <p>
-        A digital humanities project exploring the spatial and sensory imagination
-        of the 18th-century English novel. The corpus draws on
-        <a href="https://www.gutenberg.org" target="_blank" rel="noopener">Project Gutenberg</a>
-        texts and a purpose-built gazetteer of 73 London and Bath venues active
-        between roughly 1660 and 1820.
-      </p>
-      <p>
-        Evidence is assembled from heterogeneous sources — fiction, personal diary,
-        topographical survey, poetry, letters — without treating any one as
-        foundational. Where the sources diverge, that divergence is the scholarship.
-      </p>
-      <p>
-        Source code on <a href="https://github.com/danwaterfield/DigHums" target="_blank" rel="noopener">GitHub</a>.
-      </p>
-    </div>
-  </section>
-
-</div><!-- /wrap -->
-
-<div class="wrap">
-  <footer>
-    <span class="footer-copy">18c Fiction · Digital Humanities</span>
-    <a class="footer-link" href="https://github.com/danwaterfield/DigHums" target="_blank" rel="noopener">
-      github.com/danwaterfield/DigHums
-    </a>
-  </footer>
 </div>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-text">Dan Waterfield</span>
+    <a class="footer-link" href="https://github.com/danwaterfield/DigHums" target="_blank" rel="noopener">github.com/danwaterfield/DigHums</a>
+  </div>
+</footer>
 
 </body>
 </html>
