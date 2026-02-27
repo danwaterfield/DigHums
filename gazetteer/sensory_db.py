@@ -37,7 +37,8 @@ CREATE TABLE IF NOT EXISTS sensory_evidence (
     char_offset INTEGER,
     pos         REAL,
     confidence  REAL DEFAULT 1.0,
-    notes       TEXT
+    notes       TEXT,
+    UNIQUE(source_id, char_offset, modality)
 );
 
 CREATE INDEX IF NOT EXISTS idx_venue    ON sensory_evidence(venue_id);

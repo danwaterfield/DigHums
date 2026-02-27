@@ -64,6 +64,7 @@ def extract_from_text(
     venues: list[dict],
     conn,
     write: bool = False,
+    primary_cities: str = "",
 ) -> list[dict]:
     """
     Scan text for sensory passages. Return list of evidence dicts.
@@ -86,13 +87,17 @@ def extract_from_text(
                 continue
             last_offset[modality] = pos_start
 
-            ctx_start = max(0, pos_start - WINDOW_CHARS)
-            ctx_end   = min(text_len, pos_start + WINDOW_CHARS)
+            # Find absolute position of term in full text, centred on it
+            term_pos_in_frag = fragment.lower().find(term.lower())
+            abs_term_pos = pos_start + (term_pos_in_frag if term_pos_in_frag >= 0 else 0)
+
+            ctx_start = max(0, abs_term_pos - WINDOW_CHARS // 2)
+            ctx_end   = min(text_len, abs_term_pos + WINDOW_CHARS // 2)
             passage   = text[ctx_start:ctx_end].strip()
 
-            geo = geocode_passage(text, passage, venues)
+            geo = geocode_passage(text, passage, venues, primary_cities=primary_cities)
 
-            pos = round(pos_start / text_len, 4) if text_len > 0 else 0.0
+            pos = round(abs_term_pos / text_len, 4) if text_len > 0 else 0.0
 
             row = {
                 "source_id":   source_id,
@@ -109,7 +114,7 @@ def extract_from_text(
                 "modality":    modality,
                 "text":        passage[:500],
                 "context":     term,
-                "char_offset": pos_start,
+                "char_offset": abs_term_pos,
                 "pos":         pos,
                 "confidence":  1.0,
             }
@@ -125,7 +130,7 @@ def extract_from_text(
                      :pub_year, :date_min, :date_max)
                 """, row)
                 conn.execute("""
-                    INSERT INTO sensory_evidence
+                    INSERT OR IGNORE INTO sensory_evidence
                     (source_id, venue_id, venue_name, lat, lon,
                      source_type, author, title, pub_year, date_min,
                      date_max, modality, text, context, char_offset,

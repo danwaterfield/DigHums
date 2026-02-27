@@ -18,6 +18,8 @@ from validate_venues import VENUE_ALIASES
 
 WINDOW_WORDS = 500
 
+_alias_map_cache: dict = {}
+
 
 def _build_alias_map(
     venues: list[dict],
@@ -61,7 +63,10 @@ def geocode_passage(
     primary_cities: used to apply city_filter on aliases (e.g. "London",
     "Bath"). Pass the text's primary_cities field from corpus_dates.csv.
     """
-    alias_map = _build_alias_map(venues, primary_cities)
+    cache_key = (id(venues), primary_cities)
+    if cache_key not in _alias_map_cache:
+        _alias_map_cache[cache_key] = _build_alias_map(venues, primary_cities)
+    alias_map = _alias_map_cache[cache_key]
 
     idx = full_text.find(passage)
     if idx == -1:

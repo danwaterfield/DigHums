@@ -32,22 +32,39 @@ def run(write: bool = False):
     venues  = load_venues(VENUES_PATH)
     conn    = init_db(DB_PATH_DEFAULT)
 
-    # Load corpus_dates for date_min/date_max (text_year from corpus_dates.csv)
-    dates: dict[tuple[str,str], int] = {}
+    # Load corpus_dates for date_min/date_max and primary_cities.
+    # Key on title alone (all titles are unique across the corpus).
+    # Columns used: setting_period_start, setting_period_end, primary_cities.
+    dates: dict[str, tuple[int, int]] = {}
+    primary_cities_map: dict[str, str] = {}
     dates_path = Path(__file__).parent / "corpus_dates.csv"
     if dates_path.exists():
         with open(dates_path, newline="") as f:
             for row in csv.DictReader(f):
-                key = (row["author"], row["title"])
-                if row.get("text_year"):
-                    dates[key] = int(row["text_year"])
+                title = row["title"]
+                start = row.get("setting_period_start", "").strip()
+                end   = row.get("setting_period_end",   "").strip()
+                if start and end:
+                    dates[title] = (int(start), int(end))
+                primary_cities_map[title] = row.get("primary_cities", "")
 
     total = 0
     for work in works:
-        text = strip_gutenberg(load_work_text(work, paths["processed"]))
-        key  = (work.author, work.title)
-        ty   = dates.get(key, work.year)
+        try:
+            text = strip_gutenberg(load_work_text(work, paths["processed"]))
+        except (FileNotFoundError, OSError) as e:
+            print(f"  [missing] {work.author} / {work.title}: {e}")
+            continue
+
         sid  = f"fiction_{work.author}_{work.title}".replace(" ", "_")[:60]
+
+        if work.title in dates:
+            date_min, date_max = dates[work.title]
+        else:
+            date_min = work.year - 5
+            date_max = work.year + 5
+
+        primary_cities = primary_cities_map.get(work.title, "")
 
         rows = extract_from_text(
             text=text,
@@ -56,11 +73,12 @@ def run(write: bool = False):
             author=work.author,
             title=work.title,
             pub_year=work.year,
-            date_min=ty - 5,
-            date_max=ty + 5,
+            date_min=date_min,
+            date_max=date_max,
             venues=venues,
             conn=conn,
             write=write,
+            primary_cities=primary_cities,
         )
         geocoded = sum(1 for r in rows if r["venue_id"])
         print(f"  {work.author:20s} {work.title:35s}  "
