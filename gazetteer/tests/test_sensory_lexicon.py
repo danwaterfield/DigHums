@@ -29,4 +29,5 @@ def test_multiple_modalities():
     results = tag_modalities(text)
     modalities = {m for _, m in results}
     assert "auditory" in modalities
-    assert "olfactory" in modalities or "visual" in modalities
+    assert "olfactory" in modalities
+    assert "crowd" in modalities

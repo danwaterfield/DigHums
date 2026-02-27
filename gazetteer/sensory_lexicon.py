@@ -86,7 +86,7 @@ MODALITY_PATTERNS: list[tuple[str, str]] = [
     (r"\bmisty\b",        "thermal"),
     (r"\bfrost\b",        "thermal"),
     (r"\bfrosty\b",       "thermal"),
-    (r"\bclose\b",        "thermal"),  # "close air" = stuffy; high false-pos risk
+    (r"\bclose air\b",    "thermal"),  # "close air" = stuffy; phrase-level avoids false positives
     (r"\bstifling\b",     "thermal"),
     (r"\bchilly\b",       "thermal"),
     # ── CROWD / DENSITY ───────────────────────────────────────────────────
