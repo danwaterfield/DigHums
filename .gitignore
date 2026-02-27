@@ -51,3 +51,4 @@ burney-attribution/models/*.safetensors
 
 # Logs
 *.log
+gazetteer/sources/
