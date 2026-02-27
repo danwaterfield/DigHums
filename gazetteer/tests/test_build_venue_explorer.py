@@ -11,7 +11,7 @@ DB_PATH     = Path(__file__).parent.parent / "sensory.db"
 
 
 def test_all_venues_present():
-    """All 74 venues from venues.csv appear in the output."""
+    """All 73 venues from venues.csv appear in the output."""
     with open(VENUES_PATH, newline="") as f:
         expected_ids = {row["id"] for row in csv.DictReader(f)}
     venues = load_data(VENUES_PATH, DB_PATH)
@@ -49,3 +49,18 @@ def test_venues_have_required_fields():
         for field in ("id", "name", "lat", "lon", "evidence"):
             assert field in v, f"Missing field '{field}' in venue {v.get('id')}"
         assert isinstance(v["evidence"], list)
+
+
+def test_no_orphaned_venue_ids():
+    """All venue_ids in sensory_evidence exist in venues.csv."""
+    with open(VENUES_PATH, newline="") as f:
+        csv_ids = {row["id"] for row in csv.DictReader(f)}
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        db_ids = {row[0] for row in conn.execute(
+            "SELECT DISTINCT venue_id FROM sensory_evidence WHERE venue_id IS NOT NULL"
+        )}
+    finally:
+        conn.close()
+    orphans = db_ids - csv_ids
+    assert not orphans, f"Orphaned venue_ids in DB not in venues.csv: {orphans}"

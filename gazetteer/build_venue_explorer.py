@@ -49,27 +49,29 @@ def load_data(venues_path: Path, db_path: Path) -> list[dict]:
 
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
-    for row in conn.execute("""
-        SELECT venue_id, source_type, author, title, pub_year,
-               date_min, date_max, modality, text, context
-        FROM   sensory_evidence
-        WHERE  venue_id IS NOT NULL
-        ORDER  BY date_min
-    """):
-        vid = row["venue_id"]
-        if vid in venues:
-            venues[vid]["evidence"].append({
-                "source_type": row["source_type"],
-                "author":      fmt_author(row["author"] or ""),
-                "title":       row["title"] or "",
-                "pub_year":    row["pub_year"],
-                "date_min":    row["date_min"],
-                "date_max":    row["date_max"],
-                "modality":    row["modality"],
-                "text":        row["text"] or "",
-                "context":     row["context"] or "",
-            })
-    conn.close()
+    try:
+        for row in conn.execute("""
+            SELECT venue_id, source_type, author, title, pub_year,
+                   date_min, date_max, modality, text, context
+            FROM   sensory_evidence
+            WHERE  venue_id IS NOT NULL
+            ORDER  BY date_min
+        """):
+            vid = row["venue_id"]
+            if vid in venues:
+                venues[vid]["evidence"].append({
+                    "source_type": row["source_type"],
+                    "author":      fmt_author(row["author"] or ""),
+                    "title":       row["title"] or "",
+                    "pub_year":    row["pub_year"],
+                    "date_min":    row["date_min"],
+                    "date_max":    row["date_max"],
+                    "modality":    row["modality"],
+                    "text":        row["text"] or "",
+                    "context":     row["context"] or "",
+                })
+    finally:
+        conn.close()
     return list(venues.values())
 
 
@@ -90,7 +92,7 @@ def build(
 
 
 def _render(data_js: str) -> str:
-    return HTML_TEMPLATE.replace("__VENUES_DATA__", data_js)
+    return HTML_TEMPLATE.replace("__VENUES_DATA__", data_js, 1)
 
 
 HTML_TEMPLATE = "<html><body>TODO __VENUES_DATA__</body></html>"
