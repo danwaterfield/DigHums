@@ -238,23 +238,35 @@ const SOURCE_CLASSES = {
   topography: 'src-topography', poetry: 'src-poetry', letters: 'src-letters',
 };
 
+function esc(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 function renderCard(ev) {
   const cls     = SOURCE_CLASSES[ev.source_type] || 'src-letters';
   const text    = ev.text.length > 380 ? ev.text.slice(0, 380) + '…' : ev.text;
   const dateStr = ev.pub_year
     ? (ev.date_min && ev.date_min !== ev.pub_year
-        ? ev.pub_year + ' · set ' + ev.date_min + '–' + ev.date_max
+        ? ev.pub_year + ' · set ' + ev.date_min
+          + (ev.date_max != null ? '–' + ev.date_max : '')
         : String(ev.pub_year))
-    : (ev.date_min ? 'c. ' + ev.date_min + '–' + ev.date_max : '');
+    : (ev.date_min
+        ? 'c. ' + ev.date_min
+          + (ev.date_max != null ? '–' + ev.date_max : '')
+        : '');
   return '<div class="ev-card">'
     + '<div class="ev-card-head">'
     + '<span class="source-badge ' + cls + '">' + ev.source_type + '</span>'
-    + '<span class="ev-author">' + ev.author + '</span>'
-    + '<span class="ev-title">' + ev.title + '</span>'
+    + '<span class="ev-author">' + esc(ev.author) + '</span>'
+    + '<span class="ev-title">' + esc(ev.title) + '</span>'
     + '</div>'
     + '<div class="ev-date">' + dateStr + '</div>'
-    + '<div class="ev-text">“' + text + '”</div>'
-    + '<div class="ev-footer"><span class="context-chip">' + ev.context + '</span></div>'
+    + '<div class="ev-text">“' + esc(text) + '”</div>'
+    + '<div class="ev-footer"><span class="context-chip">' + esc(ev.context) + '</span></div>'
     + '</div>';
 }
 
