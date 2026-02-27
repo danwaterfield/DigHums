@@ -74,27 +74,25 @@ def extract_from_text(
 
     text_len = len(text)
 
-    for m in re.finditer(r"\S+", text):
-        word_start = m.start()
-        fragment = text[max(0, word_start - WINDOW_CHARS):
-                        word_start + WINDOW_CHARS]
+    for pos_start in range(0, text_len, STRIDE_CHARS):
+        fragment = text[pos_start: pos_start + WINDOW_CHARS * 2]
         matches = tag_modalities(fragment)
         if not matches:
             continue
 
         for term, modality in matches:
             prev = last_offset.get(modality, -STRIDE_CHARS * 2)
-            if word_start - prev < STRIDE_CHARS:
+            if pos_start - prev < STRIDE_CHARS:
                 continue
-            last_offset[modality] = word_start
+            last_offset[modality] = pos_start
 
-            ctx_start = max(0, word_start - WINDOW_CHARS)
-            ctx_end   = min(text_len, word_start + WINDOW_CHARS)
+            ctx_start = max(0, pos_start - WINDOW_CHARS)
+            ctx_end   = min(text_len, pos_start + WINDOW_CHARS)
             passage   = text[ctx_start:ctx_end].strip()
 
-            geo = geocode_passage(text, passage[:60], venues)
+            geo = geocode_passage(text, passage, venues)
 
-            pos = round(word_start / text_len, 4) if text_len > 0 else 0.0
+            pos = round(pos_start / text_len, 4) if text_len > 0 else 0.0
 
             row = {
                 "source_id":   source_id,
@@ -111,7 +109,7 @@ def extract_from_text(
                 "modality":    modality,
                 "text":        passage[:500],
                 "context":     term,
-                "char_offset": word_start,
+                "char_offset": pos_start,
                 "pos":         pos,
                 "confidence":  1.0,
             }

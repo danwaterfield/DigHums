@@ -19,15 +19,26 @@ from validate_venues import VENUE_ALIASES
 WINDOW_WORDS = 500
 
 
-def _build_alias_map(venues: list[dict]) -> list[tuple[re.Pattern, dict]]:
-    """Return list of (compiled_pattern, venue_dict) for all aliases."""
+def _build_alias_map(
+    venues: list[dict],
+    primary_cities: str = "",
+) -> list[tuple[re.Pattern, dict]]:
+    """Return list of (compiled_pattern, venue_dict) for all aliases.
+
+    Aliases with a city_filter are only included when primary_cities
+    contains that filter string (case-insensitive), matching the
+    behaviour of validate_venues.find_mentions.
+    """
     result = []
     for venue in venues:
         vid = venue["id"]
         if vid not in VENUE_ALIASES:
             continue
-        for alias, _city_filter in VENUE_ALIASES[vid]:
-            if alias.startswith(r"\b") or alias.startswith("("):
+        for alias, city_filter in VENUE_ALIASES[vid]:
+            if city_filter and city_filter.lower() not in primary_cities.lower():
+                continue
+            # Use same regex-detection logic as validate_venues.find_mentions
+            if r"\b" in alias:
                 pat = re.compile(alias, re.IGNORECASE)
             else:
                 pat = re.compile(re.escape(alias), re.IGNORECASE)
@@ -40,13 +51,17 @@ def geocode_passage(
     passage: str,
     venues: list[dict],
     window_words: int = WINDOW_WORDS,
+    primary_cities: str = "",
 ) -> dict | None:
     """
     Return dict with venue_id, venue_name, lat, lon if a venue alias
     is found within window_words of the passage in full_text.
     Returns None if no venue found or passage not located in text.
+
+    primary_cities: used to apply city_filter on aliases (e.g. "London",
+    "Bath"). Pass the text's primary_cities field from corpus_dates.csv.
     """
-    alias_map = _build_alias_map(venues)
+    alias_map = _build_alias_map(venues, primary_cities)
 
     idx = full_text.find(passage)
     if idx == -1:
