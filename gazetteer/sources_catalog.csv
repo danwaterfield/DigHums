@@ -1,0 +1,11 @@
+source_id,source_type,author,title,pub_year,date_min,date_max,file_path,notes
+fiction_corpus,fiction,various,18c Novel Corpus,,,,,Existing corpus — scanned via corpus.py
+gay_trivia,poetry,JohnGay,Trivia or the Art of Walking the Streets of London,1716,1716,1716,poetry/Gay_Trivia.txt,Sensory poem about London streets
+defoe_tour,topography,DanielDefoe,Tour Through Great Britain Vol 1,1724,1720,1730,topography/Defoe_TourVol1.txt,Urban survey
+evelyn_fumifugium,topography,JohnEvelyn,Fumifugium,1661,1660,1700,topography/Evelyn_Fumifugium.txt,Pre-period; coal smoke baseline
+pennant_london,topography,ThomasPennant,Of London,1790,1785,1800,topography/Pennant_OfLondon.txt,Late-century survey
+anstey_bath,poetry,ChristopherAnstey,New Bath Guide,1766,1760,1775,poetry/Anstey_NewBathGuide.txt,Bath satire
+burney_diary1,diary,FrancesBurney,Early Diary Vol 1,1889,1768,1778,diary/Burney_DiaryVol1.txt,Published posthumously
+burney_diary2,diary,FrancesBurney,Early Diary Vol 2,1889,1778,1800,diary/Burney_DiaryVol2.txt,Published posthumously
+boswell_journal,diary,JamesBoswell,London Journal,1950,1762,1763,diary/Boswell_LondonJournal.txt,First published 1950
+walpole_letters1,letters,HoraceWalpole,Letters Vol 1,1840,1732,1755,letters/Walpole_LettersVol1.txt,
