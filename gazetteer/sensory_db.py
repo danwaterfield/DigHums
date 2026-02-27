@@ -43,12 +43,19 @@ CREATE TABLE IF NOT EXISTS sensory_evidence (
 CREATE INDEX IF NOT EXISTS idx_venue    ON sensory_evidence(venue_id);
 CREATE INDEX IF NOT EXISTS idx_modality ON sensory_evidence(modality);
 CREATE INDEX IF NOT EXISTS idx_year     ON sensory_evidence(pub_year);
-CREATE INDEX IF NOT EXISTS idx_source   ON sensory_evidence(source_type);
+CREATE INDEX IF NOT EXISTS idx_source_type ON sensory_evidence(source_type);
 """
 
 def init_db(path: Path = DB_PATH_DEFAULT) -> sqlite3.Connection:
-    """Create tables if not present; return open connection."""
+    """Create tables if not present; return open connection.
+
+    The default database is created next to this module file
+    (gazetteer/sensory.db). Foreign key enforcement is enabled on every
+    connection — callers that open their own connections must also run
+    PRAGMA foreign_keys = ON.
+    """
     conn = sqlite3.connect(path)
+    conn.execute("PRAGMA foreign_keys = ON")
     conn.executescript(DDL)
     conn.commit()
     return conn
