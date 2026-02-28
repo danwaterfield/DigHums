@@ -278,7 +278,6 @@ VENUE_ALIASES = {
     "LON075": [
         ("Fleet Prison", None),
         ("Fleet Gaol", None),
-        ("the Fleet", None),
     ],
     "LON076": [
         ("Marshalsea", None),
@@ -287,7 +286,7 @@ VENUE_ALIASES = {
     "LON077": [
         ("Bridewell", None),
         ("Bridewell Prison", None),
-        ("House of Correction", None),
+        ("House of Correction", "London"),
     ],
     "LON078": [
         ("King's Bench", None),
@@ -344,22 +343,9 @@ VENUE_ALIASES = {
         ("Wapping", None),
         ("Execution Dock", None),
     ],
-    "LON090": [
-        ("Cheapside", None),
-        ("Cheap-side", None),
-    ],
-    "LON091": [
-        ("Holborn", None),
-        ("Hol-born", None),
-    ],
-    "LON092": [
-        ("Fleet Street", None),
-        ("Fleet-Street", None),
-    ],
     "LON093": [
-        ("Southwark", None),
-        ("Borough", "London"),
         ("Bankside", None),
+        ("Borough", "London"),
     ],
     # EXECUTION SITES
     "LON094": [
