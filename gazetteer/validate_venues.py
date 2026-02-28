@@ -268,6 +268,109 @@ VENUE_ALIASES = {
         ("Argyll Street", "Bath"),
     ],
     "BAT016": [("Pulteney Street", "Bath"), ("Pulteney-Street", "Bath")],
+
+    # PRISONS
+    "LON074": [
+        ("Newgate", None),
+        ("Newgate Prison", None),
+        ("Newgate Gaol", None),
+    ],
+    "LON075": [
+        ("Fleet Prison", None),
+        ("Fleet Gaol", None),
+        ("the Fleet", None),
+    ],
+    "LON076": [
+        ("Marshalsea", None),
+        ("Marshalsea Prison", None),
+    ],
+    "LON077": [
+        ("Bridewell", None),
+        ("Bridewell Prison", None),
+        ("House of Correction", None),
+    ],
+    "LON078": [
+        ("King's Bench", None),
+        ("King's Bench Prison", None),
+        ("Kings Bench", None),
+    ],
+    "LON079": [
+        ("Tothill Fields", None),
+        ("Tothill", None),
+    ],
+    # COURTS
+    "LON080": [
+        ("Old Bailey", None),
+        ("Sessions House", None),
+        ("the Sessions", None),
+    ],
+    "LON081": [
+        ("Bow Street", None),
+        ("Bow-Street", None),
+    ],
+    # MARKETS
+    "LON082": [
+        ("Smithfield", None),
+        ("West Smithfield", None),
+        ("Bartholomew Fair", None),
+    ],
+    "LON083": [
+        ("Billingsgate", None),
+        ("Billings-gate", None),
+    ],
+    "LON084": [
+        ("Leadenhall", None),
+        ("Leaden-hall", None),
+    ],
+    "LON085": [
+        ("Covent Garden Market", None),
+        ("the Market", "London"),
+    ],
+    # ROOKERIES AND STREET AREAS
+    "LON086": [
+        ("St Giles", None),
+        ("Saint Giles", None),
+        ("Seven Dials", None),
+    ],
+    "LON087": [
+        ("Whitechapel", None),
+        ("White-chapel", None),
+    ],
+    "LON088": [
+        ("Spitalfields", None),
+        ("Spital-fields", None),
+    ],
+    "LON089": [
+        ("Wapping", None),
+        ("Execution Dock", None),
+    ],
+    "LON090": [
+        ("Cheapside", None),
+        ("Cheap-side", None),
+    ],
+    "LON091": [
+        ("Holborn", None),
+        ("Hol-born", None),
+    ],
+    "LON092": [
+        ("Fleet Street", None),
+        ("Fleet-Street", None),
+    ],
+    "LON093": [
+        ("Southwark", None),
+        ("Borough", "London"),
+        ("Bankside", None),
+    ],
+    # EXECUTION SITES
+    "LON094": [
+        ("Tyburn", None),
+        ("Tyburn Tree", None),
+        ("Tyburn Gallows", None),
+    ],
+    "LON095": [
+        ("Newgate Gallows", None),
+        ("outside Newgate", None),
+    ],
 }
 
 

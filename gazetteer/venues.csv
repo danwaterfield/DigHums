@@ -72,3 +72,25 @@ BAT013,Gay Street,Bath,51.3831,-2.3614,1734,,Connecting Queen Square to the Circ
 BAT014,Cheap Street,Bath,51.3799,-2.3598,,,Main Bath shopping street. Distinct from London's Cheapside. Stable throughout.,wood_1736;harcourt_1794
 BAT015,Argyle Street,Bath,51.3820,-2.3601,1789,,Connects Pulteney Bridge to Laura Place. Part of Bathwick Estate development.,harcourt_1794
 BAT016,Pulteney Street,Bath,51.3838,-2.3554,1789,,Grand main street of Bathwick Estate. Cannot appear pre-1789.,harcourt_1794
+LON074,Newgate Prison,London,51.5153,-0.1017,1188,,Primary criminal prison of London; adjacent to the Sessions House. Rebuilt 1770-78 (Architects: George Dance the Younger).,horwood_1799
+LON075,Fleet Prison,London,51.5144,-0.1048,1197,1844,Debtors' prison on the east bank of the Fleet River. Demolished 1844.,rocque_1746;horwood_1799
+LON076,Marshalsea Prison,London,51.5006,-0.0948,1373,1842,Debtors' prison in Southwark. Site now marked in Borough High Street. Cannot appear post-1842.,rocque_1746;horwood_1799
+LON077,Bridewell Prison,London,51.5128,-0.1024,1553,1855,House of correction near Blackfriars Bridge. Originally a royal palace.,rocque_1746;horwood_1799
+LON078,King's Bench Prison,London,51.5005,-0.0962,1373,1869,Debtors' and misdemeanour prison in Southwark Borough.,rocque_1746;horwood_1799
+LON079,Tothill Fields Bridewell,London,51.4961,-0.1335,1618,,Westminster house of correction. Site now occupied by HM Prison Belmarsh predecessor.,rocque_1746;horwood_1799
+LON080,Old Bailey Courthouse,London,51.5151,-0.1017,1539,,The Sessions House on Old Bailey street; Central Criminal Court from 1907. Adjacent to Newgate Prison.,rocque_1746;horwood_1799
+LON081,Bow Street Magistrates Court,London,51.5133,-0.1228,1739,,Founded by Henry Fielding 1739; home of the Bow Street Runners.,rocque_1746;horwood_1799
+LON082,Smithfield Market,London,51.5188,-0.1008,,,Livestock and meat market; notorious for smell and noise. West Smithfield area.,rocque_1746;horwood_1799
+LON083,Billingsgate Fish Market,London,51.5072,-0.0843,,,Fish market on Lower Thames Street below London Bridge. Notorious for coarse language and smell.,rocque_1746;horwood_1799
+LON084,Leadenhall Market,London,51.5127,-0.0831,1321,,Poultry and general produce market in the City.,rocque_1746;horwood_1799
+LON085,Covent Garden Market,London,51.5127,-0.1228,1654,,Fruit and vegetable market; distinct from the Theatre and Piazza entries.,rocque_1746;horwood_1799
+LON086,St Giles / Seven Dials,London,51.5162,-0.1276,,,Dense slum district; large Irish population. Centre of Seven Dials rookery.,rocque_1746;horwood_1799
+LON087,Whitechapel,London,51.5163,-0.0647,,,East End district; mixed immigrant population; extensive street trade.,rocque_1746;horwood_1799
+LON088,Spitalfields,London,51.5195,-0.0741,,,Huguenot weaver district; silk industry; became increasingly impoverished late 18c.,rocque_1746;horwood_1799
+LON089,Wapping,London,51.5073,-0.0535,,,Riverside district; sailors and dockhands; Execution Dock for pirates.,rocque_1746;horwood_1799
+LON090,Cheapside,London,51.5144,-0.0943,,,Major commercial thoroughfare through the City of London.,rocque_1746;horwood_1799
+LON091,Holborn,London,51.5183,-0.1197,,,Mixed district merging lawyers' quarter (Inns of Court) with dense residential areas.,rocque_1746;horwood_1799
+LON092,Fleet Street,London,51.5139,-0.1056,,,Print trade and taverns; connects City to Temple Bar.,rocque_1746;horwood_1799
+LON093,Southwark / Borough,London,51.5024,-0.0932,,,South bank district; tanneries; brewing; Bankside entertainment.,rocque_1746;horwood_1799
+LON094,Tyburn Gallows,London,51.5140,-0.1648,,1783,Public execution site at the north-east corner of Hyde Park (near modern Marble Arch). Cannot appear post-1783.,rocque_1746
+LON095,Newgate Gallows,London,51.5151,-0.1017,1783,,Public executions moved outside Newgate Prison after 1783. Cannot appear pre-1783.,horwood_1799
