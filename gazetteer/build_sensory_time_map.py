@@ -71,6 +71,9 @@ body {{ font-family: 'Georgia', serif; background: #f9f6f0; color: #2c2c2c; disp
 #year-display {{ font-size: 1.2em; font-weight: bold; min-width: 3em; text-align: center; }}
 .step-btn {{ background: #2a2a4e; border: 1px solid #555; color: #e8e0d0; padding: 2px 8px; cursor: pointer; border-radius: 3px; }}
 .step-btn:hover {{ background: #3a3a6e; }}
+#play-btn {{ background: #2a2a4e; border: 1px solid #555; color: #e8e0d0; padding: 2px 10px; cursor: pointer; border-radius: 3px; font-size: 0.85em; letter-spacing: 0.05em; }}
+#play-btn:hover {{ background: #3a3a6e; }}
+#play-btn.playing {{ background: #5a2a0a; border-color: #cc7744; color: #ffd0a0; }}
 .nav-link {{ color: #c8b89a; text-decoration: none; font-size: 0.85em; margin-left: auto; }}
 .nav-link:hover {{ text-decoration: underline; }}
 .pill-row {{ display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 4px; align-items: center; }}
@@ -114,6 +117,7 @@ body {{ font-family: 'Georgia', serif; background: #f9f6f0; color: #2c2c2c; disp
     <span class="title">SENSORY TIME MAP</span>
     <div id="year-control">
       <button class="step-btn" onclick="stepYear(-10)">&#8592;</button>
+      <button id="play-btn" onclick="togglePlay()" title="Animate through years">&#9654; Play</button>
       <input type="range" id="year-slider" min="1660" max="1820" value="1750" oninput="updateMap()">
       <span id="year-display">1750</span>
       <button class="step-btn" onclick="stepYear(10)">&#8594;</button>
@@ -193,6 +197,52 @@ const baseLayers = {{
   ),
 }};
 L.control.layers(baseLayers, {{}}, {{ collapsed: false }}).addTo(map);
+
+// ── Procession routes ─────────────────────────────────────────────────────
+// Shown as dashed polylines when the relevant event is temporally active.
+// Coordinates trace the historical street route, not just the endpoint venues.
+const PROCESSION_ROUTES = {{
+  'EVT032': {{
+    // Tyburn Procession: Newgate Prison → Holborn → St Giles → Oxford Street → Tyburn Tree
+    // The condemned rode in a cart; the journey took up to 3 hours. Crowds lined the
+    // whole route. Source: Old Bailey Online; Linebaugh London Hanged 1992.
+    coords: [
+      [51.5153, -0.1017],  // Newgate Prison
+      [51.5188, -0.1049],  // Snow Hill / Holborn Viaduct
+      [51.5184, -0.1130],  // High Holborn
+      [51.5163, -0.1249],  // St Giles Circus (Seven Dials area)
+      [51.5154, -0.1310],  // Oxford St / Tottenham Court Rd
+      [51.5154, -0.1430],  // Oxford Street (mid)
+      [51.5132, -0.1582],  // Tyburn Tree / Marble Arch
+    ],
+    color: '#8b1a1a', dashArray: '7 5', weight: 3,
+    label: 'Tyburn Procession (1660\u20131783): Newgate \u2192 Marble Arch, 3 miles',
+  }},
+  'EVT050': {{
+    // Lord Mayor\u2019s Show: Guildhall \u2192 Cheapside \u2192 Ludgate Hill \u2192 Fleet St \u2192 Temple Bar
+    // Route varied by ward of new Mayor; this traces the core ceremonial spine.
+    // Source: Lord Mayor\u2019s Show official history; Ian Visits.
+    coords: [
+      [51.5155, -0.0919],  // Guildhall
+      [51.5133, -0.0890],  // Bank / Mansion House
+      [51.5135, -0.0958],  // Cheapside
+      [51.5138, -0.0984],  // St Paul\u2019s Cathedral
+      [51.5128, -0.1037],  // Ludgate Hill
+      [51.5134, -0.1071],  // Fleet Street
+      [51.5134, -0.1128],  // Temple Bar / Royal Courts
+    ],
+    color: '#1a3a8b', dashArray: '10 5', weight: 3,
+    label: "Lord Mayor\u2019s Show: Guildhall \u2192 Temple Bar",
+  }},
+}};
+
+const routeLines = {{}};
+Object.entries(PROCESSION_ROUTES).forEach(([evtId, route]) => {{
+    routeLines[evtId] = L.polyline(route.coords, {{
+        color: route.color, weight: route.weight,
+        opacity: 0.85, dashArray: route.dashArray,
+    }}).bindTooltip(route.label, {{ sticky: true, direction: 'top' }});
+}});
 
 const markersByVenueId = {{}};
 VENUES.forEach(v => {{
@@ -332,6 +382,15 @@ function updateMap() {{
         }}
     }});
 
+    // Show/hide procession route polylines
+    Object.entries(routeLines).forEach(([evtId, line]) => {{
+        if (isEventActive(evtId, year, month, dow, band)) {{
+            if (!map.hasLayer(line)) line.addTo(map);
+        }} else {{
+            if (map.hasLayer(line)) map.removeLayer(line);
+        }}
+    }});
+
     if (state.selectedVenue) {{
         renderVenuePanel(state.selectedVenue, year, month, dow, band);
     }} else {{
@@ -428,6 +487,59 @@ function stepYear(delta) {{
     const s = document.getElementById('year-slider');
     s.value = Math.max(1660, Math.min(1820, parseInt(s.value) + delta));
     updateMap();
+}}
+
+// ── Animated playback ────────────────────────────────────────────────────
+let playInterval = null;
+
+function togglePlay() {{
+    const btn = document.getElementById('play-btn');
+    if (playInterval) {{
+        clearInterval(playInterval);
+        playInterval = null;
+        btn.innerHTML = '&#9654; Play';
+        btn.classList.remove('playing');
+        btn.title = 'Animate through years';
+    }} else {{
+        btn.innerHTML = '&#9646;&#9646; Pause';
+        btn.classList.add('playing');
+        btn.title = 'Pause';
+        playInterval = setInterval(() => {{
+            const s = document.getElementById('year-slider');
+            const next = parseInt(s.value) + 1;
+            if (next > 1820) {{
+                clearInterval(playInterval);
+                playInterval = null;
+                btn.innerHTML = '&#9654; Play';
+                btn.classList.remove('playing');
+                return;
+            }}
+            s.value = next;
+            updateMap();
+        }}, 500);
+    }}
+}}
+
+// Check whether an event is temporally active under the current filter state
+function isEventActive(evtId, year, month, dow, band) {{
+    const evt = EVENTS_BY_ID[evtId];
+    if (!evt) return false;
+    const ys = evt.year_start, ye = evt.year_end;
+    if (ys !== null && year < ys) return false;
+    if (ye !== null && year > ye) return false;
+    if (month !== null && evt.month_start !== null) {{
+        let mStart = evt.month_start;
+        if (evt.calendar_break && evt.month_start_ns && year >= evt.calendar_break) mStart = evt.month_start_ns;
+        const mEnd = evt.month_end !== null ? evt.month_end : mStart;
+        if (month < mStart || month > mEnd) return false;
+    }}
+    if (dow !== null && evt.day_of_week) {{
+        if (!evt.day_of_week.split('|').includes(dow)) return false;
+    }}
+    if (band !== null && evt.time_bands) {{
+        if (!evt.time_bands.split('|').includes(band)) return false;
+    }}
+    return true;
 }}
 
 document.querySelectorAll('.pill[data-group]').forEach(btn => {{
