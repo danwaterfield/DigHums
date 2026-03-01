@@ -96,7 +96,8 @@ def test_fetch_page_uses_cache(tmp_path):
 def test_fetch_page_writes_cache(tmp_path):
     """fetch_page() writes response to cache on first fetch."""
     cache_file = tmp_path / "newgate_p0.json"
-    fake_response = json.dumps({"records": [], "total": 0}).encode("utf-8")
+    fake_api_data = {"hits": {"total": 0, "hits": []}}
+    fake_response = json.dumps(fake_api_data).encode("utf-8")
 
     mock_resp = MagicMock()
     mock_resp.read.return_value = fake_response
@@ -108,7 +109,7 @@ def test_fetch_page_writes_cache(tmp_path):
             result = fetch_page("Newgate", 0, cache_file)
 
     assert cache_file.exists()
-    assert result == {"records": [], "total": 0}
+    assert result == fake_api_data
 
 
 def test_ingest_single_trial(tmp_path):
@@ -116,15 +117,18 @@ def test_ingest_single_trial(tmp_path):
     import extract_old_bailey as eob
 
     fake_trial = {
-        "records": [
-            {
-                "reference": "t17650116-99",
-                "date": 17650116,
-                "text": "Near Newgate. The stench of the place was insupportable "
-                        "and the din of the condemned dreadful.",
-            }
-        ],
-        "total": 1,
+        "hits": {
+            "total": 1,
+            "hits": [
+                {
+                    "_source": {
+                        "idkey": "t17650116-99",
+                        "text": "Near Newgate. The stench of the place was insupportable "
+                                "and the din of the condemned dreadful.",
+                    }
+                }
+            ],
+        }
     }
 
     db = init_db(tmp_path / "test.db")

@@ -31,10 +31,11 @@ VENUES_PATH = Path(__file__).parent / "venues.csv"
 CACHE_DIR   = Path(__file__).parent / "sources" / "legal"
 API_BASE    = "https://www.dhi.ac.uk/api/data/oldbailey_record"
 
-DATE_MIN   = 1660
-DATE_MAX   = 1820
-PAGE_SIZE  = 10
-SLEEP_SECS = 0.3
+DATE_MIN        = 1660
+DATE_MAX        = 1820
+PAGE_SIZE       = 10
+SLEEP_SECS      = 0.3
+MAX_PAGES_PER_ALIAS = 50   # cap at 500 records per alias to keep runs tractable
 
 # IDs of the venues added in Phase 2 to query against Old Bailey
 TARGET_IDS = {
@@ -52,6 +53,18 @@ def parse_date(date_int: int) -> int:
     return date_int // 10000
 
 
+def parse_idkey(idkey: str) -> tuple[int, str]:
+    """Extract (year, reference) from an Old Bailey idkey like 't16740429-1'.
+
+    Returns (0, idkey) if the format is unrecognised.
+    """
+    m = re.match(r"[a-z](\d{8})-\d+", idkey)
+    if m:
+        date_int = int(m.group(1))
+        return date_int // 10000, idkey
+    return 0, idkey
+
+
 def alias_slug(alias: str) -> str:
     """Convert alias to a safe filename fragment."""
     return re.sub(r"[^a-z0-9]+", "_", alias.lower()).strip("_")
@@ -63,8 +76,12 @@ def fetch_page(alias: str, offset: int, cache_path: Path) -> dict:
         return json.loads(cache_path.read_text(encoding="utf-8"))
 
     encoded = urllib.parse.quote(alias)
-    url = f"{API_BASE}?text={encoded}&_limit={PAGE_SIZE}&_offset={offset}"
-    with urllib.request.urlopen(url, timeout=20) as resp:
+    url = f"{API_BASE}?text={encoded}&_limit={PAGE_SIZE}&from={offset}"
+    req = urllib.request.Request(
+        url,
+        headers={"User-Agent": "Mozilla/5.0"},
+    )
+    with urllib.request.urlopen(req, timeout=20) as resp:
         data = json.loads(resp.read().decode("utf-8"))
 
     cache_path.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
@@ -143,17 +160,19 @@ def ingest_venue(
             cache_path = CACHE_DIR / f"{vid}_{slug}_p{offset // PAGE_SIZE}.json"
             data       = fetch_page(alias, offset, cache_path)
 
-            records = data.get("records", [])
+            hits      = data.get("hits", {})
+            total_hits = hits.get("total", 0)
+            raw_hits  = hits.get("hits", [])
+            records   = [h["_source"] for h in raw_hits if "_source" in h]
             if not records:
                 break
 
             for record in records:
-                date_int = record.get("date", 0)
-                year     = parse_date(date_int)
+                idkey    = record.get("idkey", "")
+                year, ref = parse_idkey(idkey)
                 if not (DATE_MIN <= year <= DATE_MAX):
                     continue
 
-                ref  = record.get("reference", f"unknown_{date_int}")
                 text = record.get("text", "")
                 if not text:
                     continue
@@ -184,7 +203,9 @@ def ingest_venue(
                              :pos, :confidence, :valence)
                         """, row)
 
-            if len(records) < PAGE_SIZE:
+            if offset + PAGE_SIZE >= total_hits or len(records) < PAGE_SIZE:
+                break
+            if (offset // PAGE_SIZE) + 1 >= MAX_PAGES_PER_ALIAS:
                 break
             offset += PAGE_SIZE
 
