@@ -84,6 +84,12 @@ def test_valence_pip_in_js():
     assert "valence-pip" in html
 
 
+def test_time_map_link_present():
+    """Generated HTML must contain a link to sensory_time_map.html."""
+    html = (Path(__file__).parent.parent / "venue_explorer.html").read_text()
+    assert "sensory_time_map.html" in html
+
+
 import tempfile
 
 def test_build_generates_valid_html():

@@ -90,6 +90,23 @@ python3 gazetteer/build_venue_explorer.py
 - Named coffee houses (Will's, Button's, Lloyd's, etc.): zero mentions after 1778 — the coffee house disappears from the novel as a social institution
 - Plebeian venues in *Evelina* cluster as a counter-geography to the polite circuit, encoding class anxiety spatially
 
+### Sensory Time Map (`gazetteer/sensory_time_map.html`)
+
+Time-parameterised companion to the venue explorer. Set a year (1660–1820),
+month, day-of-week, and time band (Dawn / Morning / Midday / Afternoon /
+Evening / Night); venues respond in real time with intensity overlays drawn
+from a curated dataset of 19+ recurring events — weekly markets, annual fairs,
+execution days, civic processions, and seasonal venue operations.
+
+Toggle the **literary layer** to overlay textual evidence from `sensory.db`
+at the selected venue for comparison: what the institutional record predicts
+vs. what novelists, diarists, and trial transcripts actually say.
+
+To regenerate:
+
+    python3 gazetteer/extract_events.py --write   # load/refresh events
+    python3 gazetteer/build_sensory_time_map.py   # rebuild HTML
+
 ### 2. Comprehensive Corpus
 
 - Balanced representation of **women authors** (7 of 13)
@@ -194,4 +211,4 @@ All literary texts are sourced from Project Gutenberg and are in the public doma
 
 ---
 
-**Status**: Active research project | Phase 3 Complete | 99.8% anonymous attribution accuracy | Urban gazetteer: 95 venues, 637 mentions, 8,515 sensory passages (416 legal), interactive narrative maps
+**Status**: Active research project | Phase 3 Complete | 99.8% anonymous attribution accuracy | Urban gazetteer: 95 venues, 637 mentions, 8,515 sensory passages (416 legal), interactive narrative maps, sensory time map with 19+ recurring events
