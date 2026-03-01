@@ -52,7 +52,7 @@ def load_data(venues_path: Path, db_path: Path) -> list[dict]:
     try:
         for row in conn.execute("""
             SELECT venue_id, source_type, author, title, pub_year,
-                   date_min, date_max, modality, text, context
+                   date_min, date_max, modality, text, context, valence
             FROM   sensory_evidence
             WHERE  venue_id IS NOT NULL
             ORDER  BY date_min
@@ -69,6 +69,7 @@ def load_data(venues_path: Path, db_path: Path) -> list[dict]:
                     "modality":    row["modality"],
                     "text":        row["text"] or "",
                     "context":     row["context"] or "",
+                    "valence":     row["valence"],
                 })
     finally:
         conn.close()
@@ -187,6 +188,7 @@ body { font-family: Georgia, 'Times New Roman', serif; background: #f5f0eb;
 .src-topography { background: #f5e9d5; color: #7d4e1a; }
 .src-poetry     { background: #ecdaf5; color: #5b1a7a; }
 .src-letters    { background: #e8e8e8; color: #444; }
+.src-legal      { background: #f5e0e0; color: #8b1a1a; }
 .ev-author { font-weight: bold; color: #2c3e50; }
 .ev-title  { color: #555; font-style: italic; }
 .ev-date   { font-size: 10px; color: #999; margin-bottom: 5px; }
@@ -196,6 +198,13 @@ body { font-family: Georgia, 'Times New Roman', serif; background: #f5f0eb;
   background: #f0ede8; color: #666; border-radius: 3px;
   padding: 1px 6px; font-size: 10px; font-style: normal;
 }
+.valence-pip {
+  width: 8px; height: 8px; border-radius: 50%;
+  display: inline-block; flex-shrink: 0;
+  margin-left: 4px; align-self: center;
+}
+.valence-pip.unpleasant { background: #c0392b; opacity: 0.55; }
+.valence-pip.pleasant   { background: #9a6f2a; opacity: 0.55; }
 .no-evidence {
   text-align: center; color: #aaa; font-style: italic;
   font-size: 12px; padding: 20px 0;
@@ -224,6 +233,7 @@ body { font-family: Georgia, 'Times New Roman', serif; background: #f5f0eb;
     <button class="pill active" data-f="source" data-v="topography">Topography</button>
     <button class="pill active" data-f="source" data-v="poetry">Poetry</button>
     <button class="pill active" data-f="source" data-v="letters">Letters</button>
+    <button class="pill active" data-f="source" data-v="legal">Legal</button>
   </div>
   <span class="sep">|</span>
   <div class="date-group filter-group">
@@ -279,7 +289,7 @@ L.control.layers(baseLayers, {}, { collapsed: false }).addTo(map);
 // ── state ─────────────────────────────────────────────────────────────────
 const state = {
   modalities:      new Set(['auditory','olfactory','visual','thermal','crowd']),
-  sources:         new Set(['fiction','diary','topography','poetry','letters']),
+  sources:         new Set(['fiction','diary','topography','poetry','letters','legal']),
   dateFrom:        1660,
   dateTo:          1820,
   selectedId:      null,
@@ -332,7 +342,8 @@ function renderMarkers() {
 // ── side panel ────────────────────────────────────────────────────────────
 const SOURCE_CLASSES = {
   fiction: 'src-fiction', diary: 'src-diary',
-  topography: 'src-topography', poetry: 'src-poetry', letters: 'src-letters',
+  topography: 'src-topography', poetry: 'src-poetry',
+  letters: 'src-letters', legal: 'src-legal',
 };
 
 function esc(s) {
@@ -360,6 +371,9 @@ function renderCard(ev) {
     + '<span class="source-badge ' + cls + '">' + ev.source_type + '</span>'
     + '<span class="ev-author">' + esc(ev.author) + '</span>'
     + '<span class="ev-title">' + esc(ev.title) + '</span>'
+    + (ev.valence === 'unpleasant' ? '<span class="valence-pip unpleasant" title="unpleasant"></span>'
+       : ev.valence === 'pleasant'  ? '<span class="valence-pip pleasant" title="pleasant"></span>'
+       : '')
     + '</div>'
     + '<div class="ev-date">' + dateStr + '</div>'
     + '<div class="ev-text">\u201c' + esc(text) + '\u201d</div>'

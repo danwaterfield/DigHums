@@ -66,6 +66,24 @@ def test_no_orphaned_venue_ids():
     assert not orphans, f"Orphaned venue_ids in DB not in venues.csv: {orphans}"
 
 
+def test_legal_pill_present():
+    """Generated HTML must contain a Legal source filter pill."""
+    html = (Path(__file__).parent.parent / "venue_explorer.html").read_text()
+    assert 'data-v="legal"' in html
+
+
+def test_legal_badge_colour_present():
+    """Generated HTML must define the src-legal CSS class."""
+    html = (Path(__file__).parent.parent / "venue_explorer.html").read_text()
+    assert "src-legal" in html
+
+
+def test_valence_pip_in_js():
+    """renderCard must include valence pip logic."""
+    html = (Path(__file__).parent.parent / "venue_explorer.html").read_text()
+    assert "valence-pip" in html
+
+
 import tempfile
 
 def test_build_generates_valid_html():
