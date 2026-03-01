@@ -55,3 +55,54 @@ def test_valence_column_migrated(tmp_path):
     conn2 = init_db(db_path)
     cols = {row[1] for row in conn2.execute("PRAGMA table_info(sensory_evidence)")}
     assert "valence" in cols
+
+
+def test_events_table_exists(tmp_path):
+    conn = init_db(tmp_path / "test.db")
+    tables = {r[0] for r in conn.execute(
+        "SELECT name FROM sqlite_master WHERE type='table'"
+    )}
+    assert "events" in tables
+    assert "event_venues" in tables
+    assert "event_instances" in tables
+
+
+def test_event_id_column_on_sensory_evidence(tmp_path):
+    conn = init_db(tmp_path / "test.db")
+    cols = {r[1] for r in conn.execute("PRAGMA table_info(sensory_evidence)")}
+    assert "event_id" in cols
+
+
+def test_events_table_migrated(tmp_path):
+    """events tables are added even to a pre-existing DB that lacks them."""
+    # Build a DB without the new tables
+    conn = sqlite3.connect(tmp_path / "old.db")
+    conn.execute("PRAGMA foreign_keys = ON")
+    conn.executescript("""
+        CREATE TABLE sources (
+            source_id TEXT PRIMARY KEY, source_type TEXT NOT NULL,
+            author TEXT NOT NULL, title TEXT NOT NULL,
+            pub_year INTEGER, date_min INTEGER, date_max INTEGER,
+            file_path TEXT, notes TEXT
+        );
+        CREATE TABLE sensory_evidence (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            source_id TEXT NOT NULL REFERENCES sources(source_id),
+            modality TEXT NOT NULL, text TEXT NOT NULL,
+            source_type TEXT NOT NULL DEFAULT '',
+            author TEXT NOT NULL DEFAULT '', title TEXT NOT NULL DEFAULT '',
+            UNIQUE(source_id, modality, text)
+        );
+    """)
+    conn.commit()
+    conn.close()
+
+    conn2 = init_db(tmp_path / "old.db")
+    tables = {r[0] for r in conn2.execute(
+        "SELECT name FROM sqlite_master WHERE type='table'"
+    )}
+    assert "events" in tables
+    assert "event_venues" in tables
+    assert "event_instances" in tables
+    cols = {r[1] for r in conn2.execute("PRAGMA table_info(sensory_evidence)")}
+    assert "event_id" in cols

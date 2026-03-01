@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS sensory_evidence (
     confidence  REAL DEFAULT 1.0,
     notes       TEXT,
     valence     TEXT,
+    event_id    TEXT,
     UNIQUE(source_id, char_offset, modality)
 );
 
@@ -46,6 +47,43 @@ CREATE INDEX IF NOT EXISTS idx_venue    ON sensory_evidence(venue_id);
 CREATE INDEX IF NOT EXISTS idx_modality ON sensory_evidence(modality);
 CREATE INDEX IF NOT EXISTS idx_year     ON sensory_evidence(pub_year);
 CREATE INDEX IF NOT EXISTS idx_source_type ON sensory_evidence(source_type);
+
+CREATE TABLE IF NOT EXISTS events (
+    event_id       TEXT PRIMARY KEY,
+    name           TEXT NOT NULL,
+    category       TEXT NOT NULL,
+    month_start    INTEGER,
+    month_end      INTEGER,
+    day_of_week    TEXT,
+    time_bands     TEXT NOT NULL,
+    year_start     INTEGER,
+    year_end       INTEGER,
+    recurrence     TEXT NOT NULL,
+    smell_load     REAL DEFAULT 0,
+    noise_load     REAL DEFAULT 0,
+    crowd_load     REAL DEFAULT 0,
+    visual_load    REAL DEFAULT 0,
+    calendar_break INTEGER,
+    month_start_ns INTEGER,
+    notes          TEXT,
+    sources        TEXT
+);
+
+CREATE TABLE IF NOT EXISTS event_venues (
+    event_id  TEXT REFERENCES events(event_id),
+    venue_id  TEXT,
+    PRIMARY KEY (event_id, venue_id)
+);
+
+CREATE TABLE IF NOT EXISTS event_instances (
+    instance_id TEXT PRIMARY KEY,
+    event_id    TEXT REFERENCES events(event_id),
+    year        INTEGER,
+    month       INTEGER,
+    day         INTEGER,
+    source_id   TEXT,
+    notes       TEXT
+);
 """
 
 def init_db(path: Path = DB_PATH_DEFAULT) -> sqlite3.Connection:
@@ -78,6 +116,7 @@ def init_db(path: Path = DB_PATH_DEFAULT) -> sqlite3.Connection:
             ("confidence",  "REAL DEFAULT 1.0"),
             ("notes",       "TEXT"),
             ("valence",     "TEXT"),
+            ("event_id",    "TEXT"),
         ]:
             if col not in cols:
                 conn.execute(
