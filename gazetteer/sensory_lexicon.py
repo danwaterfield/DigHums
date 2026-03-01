@@ -123,3 +123,42 @@ def tag_modalities(text: str) -> list[tuple[str, str]]:
                 seen.add(key)
                 results.append((m.group(), modality))
     return results
+
+
+# ── VALENCE LEXICON ────────────────────────────────────────────────────────
+# Period-specific terms. Unpleasant is checked first; if any unpleasant term
+# matches, the passage is classified 'unpleasant' regardless of pleasant hits.
+
+_UNPLEASANT_TERMS = [
+    r"\bstench\b", r"\breek\b", r"\breeking\b", r"\bfetid\b",
+    r"\bnoisome\b", r"\bputrid\b", r"\beffluvia\b", r"\bmiasma\b",
+    r"\bsqualor\b", r"\bfilth\b", r"\bfilthy\b", r"\bdirt\b",
+    r"\bdirty\b", r"\bfoul\b", r"\bnoxious\b", r"\bkennel\b",
+    r"\bdin\b", r"\bhubbub\b", r"\buproar\b", r"\btumult\b",
+    r"\bdiscord\b", r"\bshriek\b", r"\bclamour\b", r"\bjostle\b",
+    r"\bjostled\b", r"\bmob\b", r"\bsqualid\b",
+]
+
+_PLEASANT_TERMS = [
+    r"\bfragrant\b", r"\bfragrance\b", r"\bperfume\b", r"\bperfumed\b",
+    r"\bmusic\b", r"\bmelody\b", r"\bharmony\b", r"\bcharming\b",
+    r"\belegant\b", r"\bdelightful\b", r"\bpleasant\b", r"\bsweet\b",
+    r"\bgay\b", r"\bbright\b", r"\billuminated\b", r"\bdazzling\b",
+]
+
+_UNPLEASANT_RE = [re.compile(p, re.IGNORECASE) for p in _UNPLEASANT_TERMS]
+_PLEASANT_RE   = [re.compile(p, re.IGNORECASE) for p in _PLEASANT_TERMS]
+
+
+def tag_valence(text: str) -> str:
+    """Return 'unpleasant', 'pleasant', or 'neutral' for a text passage.
+
+    Unpleasant takes precedence when both occur.
+    """
+    for pat in _UNPLEASANT_RE:
+        if pat.search(text):
+            return "unpleasant"
+    for pat in _PLEASANT_RE:
+        if pat.search(text):
+            return "pleasant"
+    return "neutral"

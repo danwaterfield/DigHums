@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from sensory_lexicon import tag_modalities, MODALITY_PATTERNS
+from sensory_lexicon import tag_modalities, MODALITY_PATTERNS, tag_valence
 
 def test_auditory_match():
     results = tag_modalities("The din of the carriages was insupportable.")
@@ -31,3 +31,21 @@ def test_multiple_modalities():
     assert "auditory" in modalities
     assert "olfactory" in modalities
     assert "crowd" in modalities
+
+
+def test_unpleasant_terms():
+    assert tag_valence("the stench was insupportable") == "unpleasant"
+    assert tag_valence("a most fetid and noisome vapour") == "unpleasant"
+    assert tag_valence("the mob jostled and reeked") == "unpleasant"
+
+def test_pleasant_terms():
+    assert tag_valence("the fragrance of the roses was delightful") == "pleasant"
+    assert tag_valence("soft music floated through the air") == "pleasant"
+    assert tag_valence("a most charming and elegant prospect") == "pleasant"
+
+def test_neutral():
+    assert tag_valence("the crowd moved slowly along the street") == "neutral"
+
+def test_unpleasant_beats_pleasant():
+    """When both occur, unpleasant wins."""
+    assert tag_valence("fragrant smoke and stench mingled together") == "unpleasant"
