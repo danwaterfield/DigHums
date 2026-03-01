@@ -49,3 +49,32 @@ def test_extract_writes_to_db(tmp_path):
         "SELECT COUNT(*) FROM sensory_evidence WHERE source_id='test_src'"
     ).fetchone()[0]
     assert count > 0
+
+def test_extract_includes_valence(tmp_path):
+    db = init_db(tmp_path / "t.db")
+    text = ("We went to Vauxhall last Tuesday. The stench was insupportable "
+            "and the din quite unbearable.")
+    rows = extract_from_text(
+        text=text, source_id="test_valence", source_type="diary",
+        author="Test", title="Test", pub_year=1760,
+        date_min=1758, date_max=1762, venues=VENUES, conn=db
+    )
+    assert len(rows) > 0
+    for r in rows:
+        assert "valence" in r
+        assert r["valence"] in ("pleasant", "neutral", "unpleasant")
+
+def test_extract_writes_valence_to_db(tmp_path):
+    db = init_db(tmp_path / "t.db")
+    text = ("We went to Vauxhall. The stench was insupportable.")
+    extract_from_text(
+        text=text, source_id="test_val_write", source_type="diary",
+        author="Test", title="Test", pub_year=1760,
+        date_min=1758, date_max=1762, venues=VENUES, conn=db,
+        write=True
+    )
+    rows = db.execute(
+        "SELECT valence FROM sensory_evidence WHERE source_id='test_val_write'"
+    ).fetchall()
+    assert len(rows) > 0
+    assert rows[0][0] in ("pleasant", "neutral", "unpleasant")

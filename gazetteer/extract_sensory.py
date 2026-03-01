@@ -18,7 +18,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 from sensory_db import init_db, DB_PATH_DEFAULT
-from sensory_lexicon import tag_modalities
+from sensory_lexicon import tag_modalities, tag_valence
 from venue_geocoder import geocode_passage
 
 SOURCES_DIR  = Path(__file__).parent / "sources"
@@ -117,6 +117,7 @@ def extract_from_text(
                 "char_offset": abs_term_pos,
                 "pos":         pos,
                 "confidence":  1.0,
+                "valence":     tag_valence(passage),
             }
             results.append(row)
 
@@ -134,12 +135,12 @@ def extract_from_text(
                     (source_id, venue_id, venue_name, lat, lon,
                      source_type, author, title, pub_year, date_min,
                      date_max, modality, text, context, char_offset,
-                     pos, confidence)
+                     pos, confidence, valence)
                     VALUES
                     (:source_id, :venue_id, :venue_name, :lat, :lon,
                      :source_type, :author, :title, :pub_year, :date_min,
                      :date_max, :modality, :text, :context, :char_offset,
-                     :pos, :confidence)
+                     :pos, :confidence, :valence)
                 """, row)
 
     if write:
