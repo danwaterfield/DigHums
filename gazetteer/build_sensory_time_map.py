@@ -309,6 +309,9 @@ function computeIntensity(venueId, year, month, dow, band) {{
         const evt = EVENTS_BY_ID[ev.event_id];
         if (!evt) return;
 
+        // Irregular/one_off events only appear via EVENT_INSTANCES (specific years)
+        if (evt.recurrence === 'irregular' || evt.recurrence === 'one_off') return;
+
         // Year range
         const ys = evt.year_start, ye = evt.year_end;
         if (ys !== null && year < ys) return;
@@ -526,6 +529,8 @@ function getActiveEvents(venueId, year, month, dow, band) {{
         if (ev.venue_id !== venueId) return;
         const evt = EVENTS_BY_ID[ev.event_id];
         if (!evt) return;
+        // Irregular/one_off events only appear via EVENT_INSTANCES (specific years)
+        if (evt.recurrence === 'irregular' || evt.recurrence === 'one_off') return;
         const ys = evt.year_start, ye = evt.year_end;
         if (ys !== null && year < ys) return;
         if (ye !== null && year > ye) return;

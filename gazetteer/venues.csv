@@ -94,3 +94,4 @@ LON092,Fleet Street,London,51.5139,-0.1056,,,Print trade and taverns; connects C
 LON093,Southwark / Borough,London,51.5024,-0.0932,,,South bank district; tanneries; brewing; Bankside entertainment.,rocque_1746;horwood_1799
 LON094,Tyburn Gallows,London,51.5140,-0.1590,,1783,Public execution site at the north-east corner of Hyde Park (near modern Marble Arch). Cannot appear post-1783.,rocque_1746
 LON095,Newgate Gallows,London,51.5151,-0.1017,1783,,Public executions moved outside Newgate Prison after 1783. Cannot appear pre-1783.,horwood_1799
+LON096,Greenwich Park,London,51.4769,0.0005,,,Royal park on the south bank; site of Greenwich Fair (Easter and Whitsun).,rocque_1746;horwood_1799
