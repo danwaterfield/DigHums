@@ -65,12 +65,14 @@ def test_events_table_exists(tmp_path):
     assert "events" in tables
     assert "event_venues" in tables
     assert "event_instances" in tables
+    conn.close()
 
 
 def test_event_id_column_on_sensory_evidence(tmp_path):
     conn = init_db(tmp_path / "test.db")
     cols = {r[1] for r in conn.execute("PRAGMA table_info(sensory_evidence)")}
     assert "event_id" in cols
+    conn.close()
 
 
 def test_events_table_migrated(tmp_path):
@@ -106,3 +108,4 @@ def test_events_table_migrated(tmp_path):
     assert "event_instances" in tables
     cols = {r[1] for r in conn2.execute("PRAGMA table_info(sensory_evidence)")}
     assert "event_id" in cols
+    conn2.close()
