@@ -33,7 +33,7 @@ DigHums/
 │   └── ROADMAP.md             # Research phases and future work
 │
 ├── gazetteer/                 # Urban geography of 18c fiction
-│   ├── venues.csv             # 74 venues (London + Bath) with coordinates
+│   ├── venues.csv             # 95 venues (London + Bath) with coordinates
 │   ├── validate_venues.py     # Corpus scanner and mention extractor
 │   ├── mentions.json          # Aggregate venue data (50 venues, 637 mentions)
 │   ├── narrative_mentions.json # Per-text position-ordered events (24 texts)
@@ -52,7 +52,7 @@ DigHums/
 
 ### 1. Urban Gazetteer & Interactive Maps
 
-A hand-curated gazetteer of 74 venues in London and Bath — pleasure gardens, theatres, assembly rooms, coffee houses, clubs, streets, and districts — with mention counts extracted from every text in the corpus.
+A hand-curated gazetteer of 95 venues in London and Bath — pleasure gardens, theatres, assembly rooms, coffee houses, clubs, streets, prisons, markets, rookeries, and execution sites — with mention counts extracted from every text in the corpus.
 
 **Aggregate map** (`gazetteer/map.html`): all venues sized by √(mention count), coloured by type, with historical tile layers (Rocque 1746, Horwood 1792–99). Click any marker for a per-text breakdown.
 
@@ -64,13 +64,20 @@ A hand-curated gazetteer of 74 venues in London and Bath — pleasure gardens, t
 
 ### Venue Explorer (`gazetteer/venue_explorer.html`)
 
-Interactive map of the Phase 1 sensory evidence store. Click any venue to browse
-assembled passages filtered by modality (auditory, olfactory, visual, thermal, crowd),
-source type (fiction, diary, topography, poetry, letters), and date range (1660–1820).
+Interactive map of the sensory evidence store. Click any venue to browse assembled
+passages filtered by modality (auditory, olfactory, visual, thermal, crowd), source
+type (fiction, diary, topography, poetry, letters, **legal**), and date range (1660–1820).
 
-Built from `sensory.db` — 8,099 deduplicated passages across 37 sources, 565 geocoded
-to 39 venues. Top venues: City of London (89), King's Theatre (74), Ranelagh (43),
-Vauxhall (34), Bath Pump Room (28).
+Built from `sensory.db` — 8,515 deduplicated passages across 37+ sources, 981 passages
+geocoded to 57 venues (565 from literary/diary sources via geocoder; 416 from Old Bailey
+Proceedings assigned directly to 19 legal venues). Each passage carries a valence tag
+(`pleasant` / `neutral` / `unpleasant`). Top venues by passage count: City of London (89),
+King's Theatre (74), Ranelagh (43), Vauxhall (34), Bridewell Prison (75), Smithfield (76).
+
+**Phase 2 (Old Bailey)** adds 22 new venue types absent from the literary corpus — prisons,
+courts, markets, rookeries, and execution grounds — sourced from nuisance prosecutions and
+trial transcripts (1660–1820). Legal passages default to `valence=unpleasant` on the
+rationale that prosecution implies a sensory threshold crossed.
 
 To regenerate after updating `sensory.db`:
 ```bash
@@ -187,4 +194,4 @@ All literary texts are sourced from Project Gutenberg and are in the public doma
 
 ---
 
-**Status**: Active research project | Phase 3 Complete | 99.8% anonymous attribution accuracy | Urban gazetteer: 74 venues, 637 mentions, interactive narrative maps
+**Status**: Active research project | Phase 3 Complete | 99.8% anonymous attribution accuracy | Urban gazetteer: 95 venues, 637 mentions, 8,515 sensory passages (416 legal), interactive narrative maps
