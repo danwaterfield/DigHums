@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS sensory_evidence (
     pos         REAL,
     confidence  REAL DEFAULT 1.0,
     notes       TEXT,
+    valence     TEXT,
     UNIQUE(source_id, char_offset, modality)
 );
 
@@ -57,6 +58,32 @@ def init_db(path: Path = DB_PATH_DEFAULT) -> sqlite3.Connection:
     """
     conn = sqlite3.connect(path)
     conn.execute("PRAGMA foreign_keys = ON")
+    # Migrate: add any columns that pre-date the current schema, before the
+    # DDL script runs (which creates indexes that depend on these columns).
+    cols = {row[1] for row in conn.execute("PRAGMA table_info(sensory_evidence)")}
+    if cols:  # table already exists — apply incremental migrations
+        for col, defn in [
+            ("venue_id",    "TEXT"),
+            ("venue_name",  "TEXT"),
+            ("lat",         "REAL"),
+            ("lon",         "REAL"),
+            ("source_type", "TEXT NOT NULL DEFAULT ''"),
+            ("author",      "TEXT NOT NULL DEFAULT ''"),
+            ("title",       "TEXT NOT NULL DEFAULT ''"),
+            ("pub_year",    "INTEGER"),
+            ("date_min",    "INTEGER"),
+            ("date_max",    "INTEGER"),
+            ("context",     "TEXT"),
+            ("pos",         "REAL"),
+            ("confidence",  "REAL DEFAULT 1.0"),
+            ("notes",       "TEXT"),
+            ("valence",     "TEXT"),
+        ]:
+            if col not in cols:
+                conn.execute(
+                    f"ALTER TABLE sensory_evidence ADD COLUMN {col} {defn}"
+                )
+        conn.commit()
     conn.executescript(DDL)
     conn.commit()
     return conn
