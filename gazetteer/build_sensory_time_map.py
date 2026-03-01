@@ -109,6 +109,17 @@ body {{ font-family: 'Georgia', serif; background: #f9f6f0; color: #2c2c2c; disp
 .src-poetry     {{ background: #ede0f5; color: #3a1a5c; }}
 .src-letters    {{ background: #e0f5f0; color: #1a5c4a; }}
 .no-events {{ color: #999; font-style: italic; font-size: 0.85em; padding: 8px 0; }}
+.sense-pill {{ background: #1e3a2a; border: 1px solid #555; color: #a8c8a8; padding: 2px 8px; cursor: pointer; border-radius: 12px; font-size: 0.78em; }}
+.sense-pill:hover {{ background: #2a4a3a; }}
+.sense-pill[data-sense="smell"].active {{ background: #5c4a10; border-color: #c89230; color: #fff; }}
+.sense-pill[data-sense="noise"].active {{ background: #10305c; border-color: #3a7acc; color: #fff; }}
+.sense-pill[data-sense="crowd"].active {{ background: #5c1010; border-color: #cc3030; color: #fff; }}
+.sense-pill[data-sense="visual"].active {{ background: #10401a; border-color: #30cc50; color: #fff; }}
+.prose-summary {{ background: #f5efe4; border-left: 3px solid #8b6914; padding: 8px 12px; margin-bottom: 10px; font-size: 0.83em; line-height: 1.5; color: #3a2a08; border-radius: 0 4px 4px 0; }}
+.season-chart {{ display: flex; gap: 2px; margin: 6px 0 2px; }}
+.season-bar {{ flex: 1; height: 7px; border-radius: 1px; cursor: default; }}
+.season-active {{ background: #8b6914; }}
+.season-inactive {{ background: #e0d8cc; }}
 </style>
 </head>
 <body>
@@ -159,6 +170,13 @@ body {{ font-family: 'Georgia', serif; background: #f9f6f0; color: #2c2c2c; disp
     <button class="pill" data-group="band" data-val="evening">Evening</button>
     <button class="pill" data-group="band" data-val="night">Night</button>
   </div>
+  <div class="pill-row">
+    <span class="pill-label">Sense</span>
+    <button class="sense-pill" data-sense="smell">Smell</button>
+    <button class="sense-pill" data-sense="noise">Noise</button>
+    <button class="sense-pill" data-sense="crowd">Crowd</button>
+    <button class="sense-pill" data-sense="visual">Visual</button>
+  </div>
 </div>
 <div id="main">
   <div id="map"></div>
@@ -176,7 +194,14 @@ const VENUES = {VENUES_JSON};
 const EVIDENCE = {EVIDENCE_JSON};
 
 const EVENTS_BY_ID = Object.fromEntries(EVENTS.map(e => [e.event_id, e]));
-const state = {{ month: null, dow: null, band: null, literary: false, selectedVenue: null }};
+
+// Evidence count per venue (for literary badge)
+const evidenceCountByVenue = {{}};
+EVIDENCE.forEach(p => {{
+    if (p.venue_id) evidenceCountByVenue[p.venue_id] = (evidenceCountByVenue[p.venue_id] || 0) + 1;
+}});
+
+const state = {{ month: null, dow: null, band: null, literary: false, selectedVenue: null, modality: null }};
 
 // Map setup
 const map = L.map('map', {{ zoomControl: true }}).setView([51.508, -0.13], 13);
@@ -207,13 +232,15 @@ const PROCESSION_ROUTES = {{
     // The condemned rode in a cart; the journey took up to 3 hours. Crowds lined the
     // whole route. Source: Old Bailey Online; Linebaugh London Hanged 1992.
     coords: [
-      [51.5153, -0.1017],  // Newgate Prison
-      [51.5188, -0.1049],  // Snow Hill / Holborn Viaduct
-      [51.5184, -0.1130],  // High Holborn
-      [51.5163, -0.1249],  // St Giles Circus (Seven Dials area)
-      [51.5154, -0.1310],  // Oxford St / Tottenham Court Rd
-      [51.5154, -0.1430],  // Oxford Street (mid)
-      [51.5132, -0.1582],  // Tyburn Tree / Marble Arch
+      [51.5152, -0.1016],  // Newgate Prison (Old Bailey)
+      [51.5173, -0.1028],  // Giltspur Street heading north
+      [51.5189, -0.1065],  // Holborn Viaduct east end
+      [51.5184, -0.1148],  // High Holborn
+      [51.5165, -0.1264],  // St Giles Circus (Centrepoint)
+      [51.5163, -0.1304],  // Oxford St / Tottenham Court Rd
+      [51.5154, -0.1416],  // Oxford Circus
+      [51.5136, -0.1497],  // Bond Street
+      [51.5131, -0.1589],  // Marble Arch / Tyburn Tree
     ],
     color: '#8b1a1a', dashArray: '7 5', weight: 3,
     label: 'Tyburn Procession (1660\u20131783): Newgate \u2192 Marble Arch, 3 miles',
@@ -223,13 +250,13 @@ const PROCESSION_ROUTES = {{
     // Route varied by ward of new Mayor; this traces the core ceremonial spine.
     // Source: Lord Mayor\u2019s Show official history; Ian Visits.
     coords: [
-      [51.5155, -0.0919],  // Guildhall
-      [51.5133, -0.0890],  // Bank / Mansion House
-      [51.5135, -0.0958],  // Cheapside
-      [51.5138, -0.0984],  // St Paul\u2019s Cathedral
-      [51.5128, -0.1037],  // Ludgate Hill
-      [51.5134, -0.1071],  // Fleet Street
-      [51.5134, -0.1128],  // Temple Bar / Royal Courts
+      [51.5155, -0.0924],  // Guildhall
+      [51.5131, -0.0890],  // Bank Junction / Mansion House
+      [51.5135, -0.0955],  // Cheapside
+      [51.5138, -0.0984],  // St Paul's Cathedral
+      [51.5125, -0.1040],  // Ludgate Circus
+      [51.5134, -0.1071],  // Fleet Street mid
+      [51.5133, -0.1127],  // Temple Bar / Royal Courts
     ],
     color: '#1a3a8b', dashArray: '10 5', weight: 3,
     label: "Lord Mayor\u2019s Show: Guildhall \u2192 Temple Bar",
@@ -246,13 +273,32 @@ Object.entries(PROCESSION_ROUTES).forEach(([evtId, route]) => {{
 
 const markersByVenueId = {{}};
 VENUES.forEach(v => {{
+    const hasEvidence = (evidenceCountByVenue[v.id] || 0) > 0;
     const m = L.circleMarker([v.lat, v.lon], {{
-        radius: 4, fillColor: '#aaa', color: '#888',
-        fillOpacity: 0.4, weight: 1
+        radius: 4,
+        fillColor: '#aaa',
+        color: hasEvidence ? '#ffffff' : '#888',
+        fillOpacity: 0.35,
+        weight: hasEvidence ? 1.5 : 0.8,
     }}).addTo(map);
-    m.bindTooltip(v.name, {{permanent: false, direction: 'top'}});
+    m.bindTooltip('', {{ permanent: false, direction: 'top' }});
     m.on('click', () => selectVenue(v.id));
     markersByVenueId[v.id] = m;
+}});
+
+// Sensory spread rings: pale fill circles showing approximate reach
+// Smell max ~400m, noise max ~300m (period sources: Howard 1777; Defoe 1724)
+const smellRings = {{}};
+const noiseRings = {{}};
+VENUES.forEach(v => {{
+    smellRings[v.id] = L.circle([v.lat, v.lon], {{
+        radius: 0, weight: 0,
+        fillColor: '#9c8a3e', fillOpacity: 0.08, interactive: false,
+    }}).addTo(map);
+    noiseRings[v.id] = L.circle([v.lat, v.lon], {{
+        radius: 0, weight: 0,
+        fillColor: '#3e6a9c', fillOpacity: 0.07, interactive: false,
+    }}).addTo(map);
 }});
 
 function computeIntensity(venueId, year, month, dow, band) {{
@@ -338,6 +384,7 @@ function renderEventCard(evt, inst) {{
         ${{bar('crowd', evt.crowd_load||0, 'bar-crowd')}}
         ${{bar('visual',evt.visual_load||0,'bar-visual')}}
       </div>
+      ${{seasonChart(evt)}}
       ${{evt.notes ? `<div class="event-notes">${{evt.notes}}</div>` : ''}}
       ${{evt.sources ? `<div class="ev-sources">Sources: ${{evt.sources}}</div>` : ''}}
       ${{instNote}}
@@ -353,6 +400,50 @@ function renderPassageCard(p) {{
     </div>`;
 }}
 
+function seasonChart(evt) {{
+    const abbr = ['J','F','M','A','M','J','J','A','S','O','N','D'];
+    let ms = evt.month_start, me = evt.month_end;
+    if (ms === null) {{
+        // No month constraint — active all year
+        return '<div class="season-chart">' + abbr.map(a =>
+            `<div class="season-bar season-active" title="${{a}}"></div>`
+        ).join('') + '</div>';
+    }}
+    if (me === null) me = ms;
+    return '<div class="season-chart">' + abbr.map((a, i) => {{
+        const active = (i + 1) >= ms && (i + 1) <= me;
+        return `<div class="season-bar ${{active ? 'season-active' : 'season-inactive'}}" title="${{a}}"></div>`;
+    }}).join('') + '</div>';
+}}
+
+function proseSummary(venueId, evts, year) {{
+    if (!evts.length) return '';
+    const venue = VENUES.find(v => v.id === venueId);
+    const place = venue ? venue.name : 'this place';
+    const loads = {{smell: 0, noise: 0, crowd: 0, visual: 0}};
+    evts.forEach(e => {{
+        loads.smell  = Math.min(1, loads.smell  + (e.evt.smell_load  || 0));
+        loads.noise  = Math.min(1, loads.noise  + (e.evt.noise_load  || 0));
+        loads.crowd  = Math.min(1, loads.crowd  + (e.evt.crowd_load  || 0));
+        loads.visual = Math.min(1, loads.visual + (e.evt.visual_load || 0));
+    }});
+    const ranked = Object.entries(loads).sort((a, b) => b[1] - a[1]).filter(x => x[1] > 0.05);
+    if (!ranked.length) return '';
+    const descs = {{
+        smell: ['overwhelmed by powerful odours', 'heavy with the smell of livestock and refuse', 'thick with distinctive smells'],
+        noise: ['filled with clamour and din', 'loud with shouts, bells, and the crush of people', 'alive with noise'],
+        crowd: ['thronged with people', 'dense with crowds pressing through the streets', 'busy with passersby and traders'],
+        visual: ['a striking and disordered spectacle', 'a remarkable sight', 'visually arresting'],
+    }};
+    const intensityWord = ranked[0][1] > 0.8 ? 'overwhelmingly' : ranked[0][1] > 0.5 ? 'markedly' : 'noticeably';
+    let sentence = `In ${{year}}, standing at ${{place}}, you would have found it ${{intensityWord}} ${{descs[ranked[0][0]][0]}}`;
+    if (ranked.length > 1 && ranked[1][1] > 0.3) {{
+        sentence += `, and ${{descs[ranked[1][0]][1]}}`;
+    }}
+    sentence += '.';
+    return `<div class="prose-summary">${{sentence}}</div>`;
+}}
+
 function updateMap() {{
     const year  = parseInt(document.getElementById('year-slider').value);
     const month = state.month;
@@ -366,19 +457,50 @@ function updateMap() {{
         const intensity = computeIntensity(v.id, year, month, dow, band);
         const marker = markersByVenueId[v.id];
         if (!marker) return;
-        const r = intensity.composite < 0.01 ? 4 : 4 + intensity.crowd * 14;
-        const col = intensityColour(intensity.composite);
+
+        // If a sense filter is active, drive display from that modality alone
+        const displayLoad = state.modality ? (intensity[state.modality] || 0) : intensity.composite;
+        const col = intensityColour(displayLoad);
+        const r = displayLoad < 0.01 ? 4 : 4 + displayLoad * 14;
+
         marker.setRadius(r);
-        marker.setStyle({{
-            fillColor: col, color: col,
-            fillOpacity: intensity.composite < 0.01 ? 0.25 : 0.75,
-            weight: 1
-        }});
+        const hasEvidence = (evidenceCountByVenue[v.id] || 0) > 0;
+        if (displayLoad < 0.01) {{
+            marker.setStyle({{
+                fillColor: '#aaa', color: hasEvidence ? '#ffffff' : '#888',
+                fillOpacity: 0.3, weight: hasEvidence ? 1.5 : 0.8,
+            }});
+        }} else {{
+            marker.setStyle({{
+                fillColor: col, color: col, fillOpacity: 0.78, weight: 1,
+            }});
+        }}
         marker._intensity = intensity;
+
+        // Rich tooltip: name + per-modality breakdown + evidence count
+        const evCount = evidenceCountByVenue[v.id] || 0;
+        let tip = `<strong>${{v.name}}</strong>`;
+        if (intensity.composite > 0.01) {{
+            const parts = [];
+            if (intensity.smell  > 0.01) parts.push(`smell ${{Math.round(intensity.smell*100)}}%`);
+            if (intensity.noise  > 0.01) parts.push(`noise ${{Math.round(intensity.noise*100)}}%`);
+            if (intensity.crowd  > 0.01) parts.push(`crowd ${{Math.round(intensity.crowd*100)}}%`);
+            if (intensity.visual > 0.01) parts.push(`visual ${{Math.round(intensity.visual*100)}}%`);
+            if (parts.length) tip += '<br><span style="font-size:0.88em;opacity:0.85">' + parts.join(' &middot; ') + '</span>';
+        }}
+        if (evCount > 0) tip += `<br><span style="font-size:0.82em;opacity:0.7">&#128214; ${{evCount}} passages</span>`;
+        marker.setTooltipContent(tip);
+
+        // Spread rings
+        if (smellRings[v.id]) smellRings[v.id].setRadius(intensity.smell * 400);
+        if (noiseRings[v.id]) noiseRings[v.id].setRadius(intensity.noise * 300);
 
         if (intensity.composite > 0.01) {{
             const evts = getActiveEvents(v.id, year, month, dow, band);
-            evts.forEach(e => {{ if (!activeEvents.find(x => x.evt.event_id === e.evt.event_id && x.venueId === v.id)) activeEvents.push({{...e, venueId: v.id, venueName: v.name}}); }});
+            evts.forEach(e => {{
+                if (!activeEvents.find(x => x.evt.event_id === e.evt.event_id && x.venueId === v.id))
+                    activeEvents.push({{...e, venueId: v.id, venueName: v.name}});
+            }});
         }}
     }});
 
@@ -448,10 +570,15 @@ function renderGlobalPanel(activeEvents) {{
 function renderVenuePanel(venueId, year, month, dow, band) {{
     const venue = VENUES.find(v => v.id === venueId);
     const body = document.getElementById('panel-body');
-    document.getElementById('panel-header').textContent = venue ? venue.name.toUpperCase() : 'VENUE';
+    const evCount = evidenceCountByVenue[venueId] || 0;
+    const evBadge = evCount > 0 ? ` <span style="font-size:0.75em;opacity:0.7">&#128214; ${{evCount}}</span>` : '';
+    document.getElementById('panel-header').textContent = (venue ? venue.name : 'VENUE').toUpperCase();
+    document.getElementById('panel-header').innerHTML =
+        (venue ? venue.name : 'VENUE').toUpperCase() + evBadge;
 
     const evts = getActiveEvents(venueId, year, month, dow, band);
-    let html = evts.length
+    let html = proseSummary(venueId, evts, year);
+    html += evts.length
         ? evts.map(e => renderEventCard(e.evt, e.inst)).join('')
         : '<p class="no-events">No institutional events active at this time.</p>';
 
@@ -554,6 +681,17 @@ document.querySelectorAll('.pill[data-group]').forEach(btn => {{
         }} else {{
             state[group] = null;
         }}
+        updateMap();
+    }});
+}});
+
+document.querySelectorAll('.sense-pill').forEach(btn => {{
+    btn.addEventListener('click', () => {{
+        const sense = btn.dataset.sense;
+        const wasActive = btn.classList.contains('active');
+        document.querySelectorAll('.sense-pill').forEach(b => b.classList.remove('active'));
+        state.modality = wasActive ? null : sense;
+        if (!wasActive) btn.classList.add('active');
         updateMap();
     }});
 }});
