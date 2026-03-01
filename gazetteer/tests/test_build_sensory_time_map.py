@@ -53,8 +53,8 @@ def test_dow_pills_present(html):
 
 def test_events_json_embedded(html):
     assert "EVT001" in html
-    assert "EVT030" in html
     assert "Smithfield" in html
+    assert "Tyburn" in html
 
 
 def test_venues_json_embedded(html):

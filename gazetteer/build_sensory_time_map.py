@@ -29,22 +29,21 @@ def load_data(venues_path: Path, db_path: Path) -> dict:
 
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
-
-    events = [dict(r) for r in conn.execute("SELECT * FROM events")]
-    event_venues = [dict(r) for r in conn.execute("SELECT * FROM event_venues")]
-    event_instances = [dict(r) for r in conn.execute("SELECT * FROM event_instances")]
-
-    evidence = [
-        dict(r) for r in conn.execute("""
-            SELECT venue_id, source_type, author, title, pub_year,
-                   modality, text, valence
-            FROM   sensory_evidence
-            WHERE  venue_id IS NOT NULL AND venue_id != ''
-            ORDER  BY date_min
-        """)
-    ]
-
-    conn.close()
+    try:
+        events          = [dict(r) for r in conn.execute("SELECT * FROM events")]
+        event_venues    = [dict(r) for r in conn.execute("SELECT * FROM event_venues")]
+        event_instances = [dict(r) for r in conn.execute("SELECT * FROM event_instances")]
+        evidence        = [
+            dict(r) for r in conn.execute("""
+                SELECT venue_id, source_type, author, title, pub_year,
+                       modality, text, valence
+                FROM   sensory_evidence
+                WHERE  venue_id IS NOT NULL AND venue_id != ''
+                ORDER  BY date_min
+            """)
+        ]
+    finally:
+        conn.close()
     return {
         "venues": venues,
         "events": events,
