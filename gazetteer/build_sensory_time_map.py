@@ -175,10 +175,24 @@ const EVENTS_BY_ID = Object.fromEntries(EVENTS.map(e => [e.event_id, e]));
 const state = {{ month: null, dow: null, band: null, literary: false, selectedVenue: null }};
 
 // Map setup
-const map = L.map('map').setView([51.508, -0.13], 13);
-L.tileLayer('https://{{s}}.tile.openstreetmap.org/{{z}}/{{x}}/{{y}}.png', {{
-    attribution: '&copy; OpenStreetMap contributors'
-}}).addTo(map);
+const map = L.map('map', {{ zoomControl: true }}).setView([51.508, -0.13], 13);
+const baseLayers = {{
+  'Modern (CartoDB)': L.tileLayer(
+    'https://{{s}}.basemaps.cartocdn.com/light_all/{{z}}/{{x}}/{{y}}{{r}}.png',
+    {{ attribution: '&copy; OpenStreetMap contributors &copy; CARTO', maxZoom: 19 }}
+  ).addTo(map),
+  'Rocque 1746': L.tileLayer(
+    'https://www.dhi.ac.uk/san/llptiles/molarocque/{{z}}/{{x}}/{{y}}.png',
+    {{ attribution: 'Map tiles &copy; Museum of London Archaeology / DHI, based on John Rocque 1746',
+       minZoom: 13, maxZoom: 15, maxNativeZoom: 15, opacity: 0.9 }}
+  ),
+  'Horwood 1792\u201399': L.tileLayer(
+    'https://www.romanticlondon.org/horwoodplan/{{z}}/{{x}}/{{y}}.png',
+    {{ attribution: 'Map tiles &copy; Romantic London project, based on Richard Horwood 1792\u201399',
+       minZoom: 11, maxZoom: 17, maxNativeZoom: 16, opacity: 0.9 }}
+  ),
+}};
+L.control.layers(baseLayers, {{}}, {{ collapsed: false }}).addTo(map);
 
 const markersByVenueId = {{}};
 VENUES.forEach(v => {{
