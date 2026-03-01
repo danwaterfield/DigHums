@@ -86,7 +86,8 @@ body {{ font-family: 'Georgia', serif; background: #f9f6f0; color: #2c2c2c; disp
 #main {{ display: flex; flex: 1; overflow: hidden; }}
 #map {{ flex: 1; }}
 #panel {{ width: 340px; flex-shrink: 0; background: #faf7f2; border-left: 1px solid #ddd; overflow-y: auto; display: flex; flex-direction: column; }}
-#panel-header {{ background: #2c2c2c; color: #e8e0d0; padding: 10px 14px; font-size: 0.85em; letter-spacing: 0.08em; flex-shrink: 0; }}
+#panel-header {{ display: flex; align-items: center; background: #2c2c2c; color: #e8e0d0; padding: 10px 14px; font-size: 0.85em; letter-spacing: 0.08em; flex-shrink: 0; }}
+#panel-title {{ flex: 1; }}
 #panel-body {{ padding: 10px; flex: 1; }}
 .event-card {{ background: #fff; border: 1px solid #e0d8d0; border-radius: 4px; padding: 10px 12px; margin-bottom: 8px; }}
 .event-card h3 {{ font-size: 0.9em; margin-bottom: 4px; }}
@@ -117,9 +118,18 @@ body {{ font-family: 'Georgia', serif; background: #f9f6f0; color: #2c2c2c; disp
 .sense-pill[data-sense="visual"].active {{ background: #10401a; border-color: #30cc50; color: #fff; }}
 .prose-summary {{ background: #f5efe4; border-left: 3px solid #8b6914; padding: 8px 12px; margin-bottom: 10px; font-size: 0.83em; line-height: 1.5; color: #3a2a08; border-radius: 0 4px 4px 0; }}
 .season-chart {{ display: flex; gap: 2px; margin: 6px 0 2px; }}
-.season-bar {{ flex: 1; height: 7px; border-radius: 1px; cursor: default; }}
+.season-bar {{ flex: 1; height: 7px; border-radius: 1px; cursor: pointer; }}
 .season-active {{ background: #8b6914; }}
 .season-inactive {{ background: #e0d8cc; }}
+.season-bar:hover {{ opacity: 0.7; }}
+#milestone-label {{ font-size: 0.7em; color: #c8a060; margin-left: 6px; font-style: italic; white-space: nowrap; }}
+.speed-btn {{ background: #2a2a4e; border: 1px solid #555; color: #c8b89a; padding: 1px 5px; cursor: pointer; border-radius: 3px; font-size: 0.72em; }}
+.speed-btn:hover {{ background: #3a3a6e; }}
+.speed-btn.active {{ background: #1a4a2a; border-color: #44aa55; color: #aaffaa; }}
+#clear-btn {{ background: none; border: 1px solid #666; color: #a08870; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-size: 0.78em; }}
+#clear-btn:hover {{ color: #e8d0b0; border-color: #888; }}
+#back-btn {{ background: none; border: none; color: #c8a870; font-size: 0.8em; cursor: pointer; padding: 0 8px 0 0; flex-shrink: 0; }}
+#back-btn:hover {{ color: #fff; }}
 </style>
 </head>
 <body>
@@ -127,12 +137,25 @@ body {{ font-family: 'Georgia', serif; background: #f9f6f0; color: #2c2c2c; disp
   <div id="header-row">
     <span class="title">SENSORY TIME MAP</span>
     <div id="year-control">
-      <button class="step-btn" onclick="stepYear(-10)">&#8592;</button>
+      <button class="step-btn" onclick="stepYear(-10)" title="-10 years">&#8592;</button>
       <button id="play-btn" onclick="togglePlay()" title="Animate through years">&#9654; Play</button>
-      <input type="range" id="year-slider" min="1660" max="1820" value="1750" oninput="updateMap()">
+      <span style="display:inline-flex;gap:2px;margin-left:2px">
+        <button class="speed-btn" onclick="setSpeed(1000)" title="Slow">&#9664;&#9654;</button>
+        <button class="speed-btn active" onclick="setSpeed(500)" title="Normal">&#9654;</button>
+        <button class="speed-btn" onclick="setSpeed(200)" title="Fast">&#9654;&#9654;</button>
+      </span>
+      <input type="range" id="year-slider" min="1660" max="1820" value="1750" list="year-ticks" oninput="updateMap()">
+      <datalist id="year-ticks">
+        <option value="1688"></option><option value="1707"></option>
+        <option value="1752"></option><option value="1775"></option>
+        <option value="1780"></option><option value="1783"></option>
+        <option value="1789"></option><option value="1803"></option>
+      </datalist>
       <span id="year-display">1750</span>
-      <button class="step-btn" onclick="stepYear(10)">&#8594;</button>
+      <span id="milestone-label"></span>
+      <button class="step-btn" onclick="stepYear(10)" title="+10 years">&#8594;</button>
     </div>
+    <button id="clear-btn" onclick="clearFilters()" title="Clear all filters">&#215; Clear</button>
     <a class="nav-link" href="venue_explorer.html">Browse evidence &#8594;</a>
   </div>
   <div class="pill-row">
@@ -181,7 +204,10 @@ body {{ font-family: 'Georgia', serif; background: #f9f6f0; color: #2c2c2c; disp
 <div id="main">
   <div id="map"></div>
   <div id="panel">
-    <div id="panel-header">ACTIVE EVENTS</div>
+    <div id="panel-header">
+      <button id="back-btn" style="display:none" onclick="backToGlobal()">&#8592; All</button>
+      <span id="panel-title">ACTIVE EVENTS</span>
+    </div>
     <div id="panel-body"></div>
   </div>
 </div>
@@ -194,6 +220,15 @@ const VENUES = {VENUES_JSON};
 const EVIDENCE = {EVIDENCE_JSON};
 
 const EVENTS_BY_ID = Object.fromEntries(EVENTS.map(e => [e.event_id, e]));
+
+const MILESTONES = {{
+    1688: 'Glorious Revolution', 1707: 'Acts of Union',
+    1752: 'Calendar Reform',     1775: 'American War begins',
+    1780: 'Gordon Riots',        1783: 'Tyburn closes',
+    1789: 'French Revolution',   1803: 'Ranelagh closes',
+}};
+
+let playSpeed = 500;
 
 // Evidence count per venue (for literary badge)
 const evidenceCountByVenue = {{}};
@@ -405,17 +440,17 @@ function renderPassageCard(p) {{
 
 function seasonChart(evt) {{
     const abbr = ['J','F','M','A','M','J','J','A','S','O','N','D'];
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     let ms = evt.month_start, me = evt.month_end;
     if (ms === null) {{
-        // No month constraint — active all year
-        return '<div class="season-chart">' + abbr.map(a =>
-            `<div class="season-bar season-active" title="${{a}}"></div>`
+        return '<div class="season-chart">' + abbr.map((a, i) =>
+            `<div class="season-bar season-active" title="Click to filter: ${{months[i]}}" onclick="setMonth(${{i+1}})"></div>`
         ).join('') + '</div>';
     }}
     if (me === null) me = ms;
     return '<div class="season-chart">' + abbr.map((a, i) => {{
         const active = (i + 1) >= ms && (i + 1) <= me;
-        return `<div class="season-bar ${{active ? 'season-active' : 'season-inactive'}}" title="${{a}}"></div>`;
+        return `<div class="season-bar ${{active ? 'season-active' : 'season-inactive'}}" title="Click to filter: ${{months[i]}}" onclick="setMonth(${{i+1}})"></div>`;
     }}).join('') + '</div>';
 }}
 
@@ -453,6 +488,17 @@ function updateMap() {{
     const dow   = state.dow;
     const band  = state.band;
     document.getElementById('year-display').textContent = year;
+
+    // Milestone label
+    const ml = document.getElementById('milestone-label');
+    if (ml) ml.textContent = MILESTONES[year] ? '\u00b7 ' + MILESTONES[year] : '';
+
+    // URL hash state (for sharing/bookmarking)
+    const hashParts = ['y=' + year];
+    if (month) hashParts.push('m=' + month);
+    if (dow)   hashParts.push('dow=' + dow);
+    if (band)  hashParts.push('band=' + band);
+    history.replaceState(null, '', '#' + hashParts.join('&'));
 
     let activeEvents = [];
 
@@ -561,6 +607,9 @@ function getActiveEvents(venueId, year, month, dow, band) {{
 }}
 
 function renderGlobalPanel(activeEvents) {{
+    document.getElementById('back-btn').style.display = 'none';
+    document.getElementById('panel-title').textContent =
+        activeEvents.length ? `ACTIVE EVENTS (${{activeEvents.length}})` : 'ACTIVE EVENTS';
     const body = document.getElementById('panel-body');
     if (!activeEvents.length) {{
         body.innerHTML = '<p class="no-events">No events active at this time. Try selecting a different month, day, or band.</p>';
@@ -577,8 +626,8 @@ function renderVenuePanel(venueId, year, month, dow, band) {{
     const body = document.getElementById('panel-body');
     const evCount = evidenceCountByVenue[venueId] || 0;
     const evBadge = evCount > 0 ? ` <span style="font-size:0.75em;opacity:0.7">&#128214; ${{evCount}}</span>` : '';
-    document.getElementById('panel-header').textContent = (venue ? venue.name : 'VENUE').toUpperCase();
-    document.getElementById('panel-header').innerHTML =
+    document.getElementById('back-btn').style.display = '';
+    document.getElementById('panel-title').innerHTML =
         (venue ? venue.name : 'VENUE').toUpperCase() + evBadge;
 
     const evts = getActiveEvents(venueId, year, month, dow, band);
@@ -648,7 +697,7 @@ function togglePlay() {{
             }}
             s.value = next;
             updateMap();
-        }}, 500);
+        }}, playSpeed);
     }}
 }}
 
@@ -700,6 +749,94 @@ document.querySelectorAll('.sense-pill').forEach(btn => {{
         updateMap();
     }});
 }});
+
+function clearFilters() {{
+    state.month = null; state.dow = null; state.band = null; state.modality = null;
+    document.querySelectorAll('.pill.active, .sense-pill.active').forEach(b => b.classList.remove('active'));
+    updateMap();
+}}
+
+function setSpeed(ms) {{
+    playSpeed = ms;
+    const speeds = [1000, 500, 200];
+    document.querySelectorAll('.speed-btn').forEach((b, i) =>
+        b.classList.toggle('active', speeds[i] === ms));
+    if (playInterval) {{
+        clearInterval(playInterval);
+        const btn = document.getElementById('play-btn');
+        playInterval = setInterval(() => {{
+            const s = document.getElementById('year-slider');
+            const next = parseInt(s.value) + 1;
+            if (next > 1820) {{
+                clearInterval(playInterval); playInterval = null;
+                btn.innerHTML = '&#9654; Play'; btn.classList.remove('playing');
+                return;
+            }}
+            s.value = next; updateMap();
+        }}, playSpeed);
+    }}
+}}
+
+function backToGlobal() {{
+    state.selectedVenue = null;
+    updateMap();
+}}
+
+function setMonth(m) {{
+    const wasActive = state.month === m;
+    document.querySelectorAll('.pill[data-group="month"]').forEach(b => b.classList.remove('active'));
+    if (!wasActive) {{
+        state.month = m;
+        const pill = document.querySelector(`.pill[data-group="month"][data-val="${{m}}"]`);
+        if (pill) pill.classList.add('active');
+    }} else {{
+        state.month = null;
+    }}
+    updateMap();
+}}
+
+// ── Keyboard shortcuts ────────────────────────────────────────────────────
+// ← / → : step year by ±1  |  Space : toggle play  |  1–9, 0 : set month
+document.addEventListener('keydown', (e) => {{
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'ArrowLeft')  {{ e.preventDefault(); stepYear(-1); return; }}
+    if (e.key === 'ArrowRight') {{ e.preventDefault(); stepYear(1);  return; }}
+    if (e.key === ' ' || e.key === 'Spacebar') {{ e.preventDefault(); togglePlay(); return; }}
+    const n = parseInt(e.key);
+    if (!isNaN(n)) setMonth(n === 0 ? 10 : n);
+}});
+
+// ── Restore state from URL hash ───────────────────────────────────────────
+(function() {{
+    const hash = location.hash.replace('#', '');
+    if (!hash) return;
+    const params = Object.fromEntries(hash.split('&').filter(p => p.includes('=')).map(p => p.split('=')));
+    if (params.y) {{
+        const y = parseInt(params.y);
+        if (y >= 1660 && y <= 1820) document.getElementById('year-slider').value = y;
+    }}
+    if (params.m) {{
+        const m = parseInt(params.m);
+        if (m >= 1 && m <= 12) {{
+            state.month = m;
+            document.querySelector(`.pill[data-group="month"][data-val="${{m}}"]`)?.classList.add('active');
+        }}
+    }}
+    if (params.dow) {{
+        const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+        if (days.includes(params.dow)) {{
+            state.dow = params.dow;
+            document.querySelector(`.pill[data-group="dow"][data-val="${{params.dow}}"]`)?.classList.add('active');
+        }}
+    }}
+    if (params.band) {{
+        const bands = ['dawn','morning','midday','afternoon','evening','night'];
+        if (bands.includes(params.band)) {{
+            state.band = params.band;
+            document.querySelector(`.pill[data-group="band"][data-val="${{params.band}}"]`)?.classList.add('active');
+        }}
+    }}
+}})();
 
 updateMap();
 </script>
