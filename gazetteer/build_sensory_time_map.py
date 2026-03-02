@@ -529,6 +529,41 @@ function computeIntensity(venueId, year, month, dow, band) {{
         loads.visual = Math.min(1, loads.visual + (evt.visual_load || 0));
     }});
 
+    // ── D5: Evidence density boost ────────────────────────────────────────
+    // Count passages linked to this venue within ±15 years of current year.
+    const evidenceAtVenue = EVIDENCE.filter(ev =>
+        ev.venue_id === venueId
+        && (ev.pub_year === null
+            || (ev.pub_year >= year - 15 && ev.pub_year <= year + 15))
+    ).length;
+    // Logarithmic boost: +0.06 per passage (capped at +0.25)
+    const densityBoost = Math.min(0.25, Math.log1p(evidenceAtVenue) * 0.05);
+
+    // ── D5: Environmental modifiers ───────────────────────────────────────
+    // Cold winter: monthly temp below 3°C boosts thermal load
+    let thermalBoost = 0;
+    if (month !== null) {{
+        const yearData = CET_DATA[year] || CET_DATA[String(year)];
+        const temp = yearData ? (yearData[month] ?? yearData[String(month)] ?? null) : null;
+        if (temp !== null && temp < 3.0) {{
+            // Scale: 3°C → 0, -3°C → 0.25
+            thermalBoost = Math.min(0.25, Math.max(0, (3.0 - temp) / 24));
+        }}
+    }}
+    // Smoke burden boosts olfactory baseline proportionally
+    let smokeBoost = 0;
+    if (SMOKE_DATA_ENV.length > 0) {{
+        const decade = Math.floor(year / 10) * 10;
+        const smokeRow = SMOKE_DATA_ENV.find(s => s.decade_start === decade)
+                      || SMOKE_DATA_ENV[SMOKE_DATA_ENV.length - 1];
+        smokeBoost = (smokeRow ? smokeRow.so2_index : 0) * 0.12;
+    }}
+
+    loads.smell  = Math.min(1, loads.smell  + densityBoost * 0.6 + smokeBoost);
+    loads.noise  = Math.min(1, loads.noise  + densityBoost * 0.4);
+    loads.crowd  = Math.min(1, loads.crowd  + densityBoost * 0.4);
+    loads.visual = Math.min(1, loads.visual + densityBoost * 0.4 + thermalBoost);
+
     loads.composite = (loads.smell + loads.noise + loads.crowd + loads.visual) / 4;
     return loads;
 }}

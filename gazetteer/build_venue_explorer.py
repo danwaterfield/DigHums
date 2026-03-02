@@ -52,7 +52,7 @@ def load_data(venues_path: Path, db_path: Path) -> list[dict]:
     try:
         for row in conn.execute("""
             SELECT venue_id, source_type, author, title, pub_year,
-                   date_min, date_max, modality, text, context, valence
+                   date_min, date_max, modality, text, context, valence, divergence
             FROM   sensory_evidence
             WHERE  venue_id IS NOT NULL
             ORDER  BY date_min
@@ -70,6 +70,7 @@ def load_data(venues_path: Path, db_path: Path) -> list[dict]:
                     "text":        row["text"] or "",
                     "context":     row["context"] or "",
                     "valence":     row["valence"],
+                    "divergence":  row["divergence"],
                 })
     finally:
         conn.close()
@@ -208,6 +209,15 @@ body { font-family: Georgia, 'Times New Roman', serif; background: #f5f0eb;
 .no-evidence {
   text-align: center; color: #aaa; font-style: italic;
   font-size: 12px; padding: 20px 0;
+}
+.ev-card.diverges {
+  border-left: 3px solid #e67e22;
+}
+.diverge-badge {
+  font-size: 9px; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.04em; padding: 1px 5px; border-radius: 2px;
+  background: #fdebd0; color: #e67e22; border: 1px solid #e67e22;
+  flex-shrink: 0; align-self: center;
 }
 </style>
 </head>
@@ -367,7 +377,8 @@ function renderCard(ev) {
         ? 'c.\u00a0' + ev.date_min
           + (ev.date_max != null ? '\u2013' + ev.date_max : '')
         : '');
-  return '<div class="ev-card">'
+  const divergesCls = ev.divergence === 'diverges' ? ' diverges' : '';
+  return '<div class="ev-card' + divergesCls + '">'
     + '<div class="ev-card-head">'
     + '<span class="source-badge ' + cls + '">' + ev.source_type + '</span>'
     + '<span class="ev-author">' + esc(ev.author) + '</span>'
@@ -375,6 +386,7 @@ function renderCard(ev) {
     + (ev.valence === 'unpleasant' ? '<span class="valence-pip unpleasant" title="unpleasant"></span>'
        : ev.valence === 'pleasant'  ? '<span class="valence-pip pleasant" title="pleasant"></span>'
        : '')
+    + (ev.divergence === 'diverges' ? '<span class="diverge-badge" title="Passage diverges from expected sensory profile for this event">diverges</span>' : '')
     + '</div>'
     + '<div class="ev-date">' + dateStr + '</div>'
     + '<div class="ev-text">\u201c' + esc(text) + '\u201d</div>'

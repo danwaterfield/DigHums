@@ -139,6 +139,7 @@ def init_db(path: Path = DB_PATH_DEFAULT) -> sqlite3.Connection:
             ("notes",       "TEXT"),
             ("valence",     "TEXT"),
             ("event_id",    "TEXT"),
+            ("divergence",  "TEXT"),
         ]:
             if col not in cols:
                 conn.execute(

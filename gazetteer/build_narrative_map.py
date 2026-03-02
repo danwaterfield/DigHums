@@ -10,6 +10,15 @@ For each text the map shows:
   - A context snippet from the current event
   - A play button that animates the slider through the novel
 
+Route geometry: short segments within London/Bath are fetched from the OSRM
+pedestrian routing API (https://router.project-osrm.org) at build time and
+cached in narrative_routes_cache.json.  Long inter-city jumps (distance > 0.08
+degrees) are kept as dashed straight lines.
+
+Note: OSRM uses the modern street network.  Historical street geometry may
+differ, especially in areas redeveloped after the Great Fire (1666) or the
+Regent Street improvements (1820s).
+
 Usage:
     python3 gazetteer/validate_venues.py --narrative   # generate data first
     python3 gazetteer/build_narrative_map.py
@@ -17,7 +26,10 @@ Usage:
 """
 
 import json
+import math
 import re
+import urllib.request
+import urllib.error
 from pathlib import Path
 
 
@@ -27,6 +39,98 @@ HORWOOD_URL  = "https://www.romanticlondon.org/horwoodplan/{z}/{x}/{y}.png"
 HORWOOD_ATTR = "Map tiles © Romantic London project, based on Richard Horwood 1792–99"
 
 MIN_EVENTS = 5   # texts with fewer events are excluded from the selector
+
+# Maximum great-circle distance (approx degrees) below which we try OSRM routing.
+# Above this threshold (London↔Bath ≈ 1.3°) we keep dashed straight lines.
+OSRM_MAX_DIST = 0.08
+
+OSRM_URL = "https://router.project-osrm.org/route/v1/foot/{lon1},{lat1};{lon2},{lat2}?overview=simplified&geometries=geojson"
+
+CACHE_PATH = Path(__file__).parent / "narrative_routes_cache.json"
+
+
+def _pair_key(lat1, lon1, lat2, lon2) -> str:
+    return f"{lat1:.5f},{lon1:.5f}|{lat2:.5f},{lon2:.5f}"
+
+
+def _fetch_osrm_route(lat1, lon1, lat2, lon2) -> list[list[float]] | None:
+    """
+    Fetch a walking route from OSRM.  Returns a list of [lat, lon] pairs
+    or None if the request fails.
+    """
+    url = OSRM_URL.format(lat1=lat1, lon1=lon1, lat2=lat2, lon2=lon2)
+    try:
+        with urllib.request.urlopen(url, timeout=8) as resp:
+            data = json.loads(resp.read())
+        if data.get("code") != "Ok":
+            return None
+        coords = data["routes"][0]["geometry"]["coordinates"]  # [[lon, lat], ...]
+        return [[c[1], c[0]] for c in coords]                  # → [[lat, lon], ...]
+    except Exception:
+        return None
+
+
+def load_or_build_route_cache(
+    texts: list[dict],
+    cache_path: Path = CACHE_PATH,
+    max_new_routes: int = 60,
+) -> dict:
+    """
+    For all consecutive venue pairs in all texts that are close enough for
+    OSRM routing, fetch routes and cache them.  Returns the full cache dict.
+
+    At most ``max_new_routes`` new routes are fetched per build run so that
+    the build does not block indefinitely on network I/O.  Re-run the builder
+    to fetch additional routes incrementally.
+    """
+    cache: dict = {}
+    if cache_path.exists():
+        try:
+            cache = json.loads(cache_path.read_text(encoding="utf-8"))
+        except Exception:
+            cache = {}
+
+    pairs_needed: list[tuple] = []
+    seen_pairs: set[str] = set()
+    for text in texts:
+        events = text.get("events", [])
+        seen: dict = {}
+        order = []
+        for ev in events:
+            vid = ev.get("venue_id")
+            if vid and vid not in seen:
+                seen[vid] = ev
+                order.append(ev)
+        for i in range(len(order) - 1):
+            a = order[i]
+            b = order[i + 1]
+            dist = math.hypot(a["lat"] - b["lat"], a["lon"] - b["lon"])
+            if dist < OSRM_MAX_DIST:
+                key = _pair_key(a["lat"], a["lon"], b["lat"], b["lon"])
+                if key not in cache and key not in seen_pairs:
+                    seen_pairs.add(key)
+                    pairs_needed.append((a["lat"], a["lon"], b["lat"], b["lon"]))
+
+    fetched = 0
+    for (lat1, lon1, lat2, lon2) in pairs_needed[:max_new_routes]:
+        key = _pair_key(lat1, lon1, lat2, lon2)
+        route = _fetch_osrm_route(lat1, lon1, lat2, lon2)
+        if route:
+            cache[key] = route
+            fetched += 1
+
+    if fetched > 0:
+        cache_path.write_text(
+            json.dumps(cache, ensure_ascii=False, separators=(",", ":")),
+            encoding="utf-8",
+        )
+        print(f"  {fetched} new OSRM routes cached ({len(cache)} total)")
+    elif pairs_needed:
+        print(f"  {len(cache)} OSRM routes in cache (all up to date)")
+    else:
+        print(f"  {len(cache)} OSRM routes in cache")
+
+    return cache
 
 
 def fmt_author(s: str) -> str:
@@ -48,6 +152,10 @@ def build(data_path: Path, out_path: Path) -> None:
     for t in texts:
         t["display_author"] = fmt_author(t["author"])
 
+    # Build / update OSRM route cache
+    route_cache = load_or_build_route_cache(texts)
+    routes_js   = json.dumps(route_cache, ensure_ascii=False, separators=(",", ":"))
+
     data_js = json.dumps(texts, ensure_ascii=False, separators=(",", ":"))
 
     html = f"""<!DOCTYPE html>
@@ -55,6 +163,8 @@ def build(data_path: Path, out_path: Path) -> None:
 <head>
 <meta charset="utf-8">
 <title>Novel Path Map · 18c Fiction</title>
+<!-- OSRM routing note: routes use modern OpenStreetMap pedestrian network.
+     Historical street geometry may differ from the 18th-century layout. -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
@@ -172,7 +282,10 @@ def build(data_path: Path, out_path: Path) -> None:
 
 <script>
 // ── embedded data ──────────────────────────────────────────────────────────
-const TEXTS = {data_js};
+const TEXTS  = {data_js};
+// OSRM walking routes cached at build time (key = "lat1,lon1|lat2,lon2")
+// Uses modern street network — historical routing may differ.
+const ROUTES = {routes_js};
 
 const ROCQUE  = "{ROCQUE_URL}";
 const HORWOOD = "{HORWOOD_URL}";
@@ -259,12 +372,22 @@ function render() {{
   for (let i = 0; i < firstEncounterOrder.length - 1; i++) {{
     const a = firstEncounterOrder[i];
     const b = firstEncounterOrder[i + 1];
-    // skip trivially short segments (same or adjacent coord)
-    const dist = Math.hypot(a.lat - b.lat, a.lon - b.lon);
+    const dist  = Math.hypot(a.lat - b.lat, a.lon - b.lon);
     const color = posToColor(a.pos);
     const weight = dist < 0.001 ? 1 : 2.5;
-    const dash = dist > 0.08 ? '6 4' : null;  // dashed for long jumps (London↔Bath)
-    const pl = L.polyline([[a.lat, a.lon], [b.lat, b.lon]], {{
+    const isLongJump = dist > 0.08;
+    const dash = isLongJump ? '6 4' : null;  // dashed for long jumps (London↔Bath)
+
+    // Use OSRM route if available and within routing range
+    const routeKey = [a.lat.toFixed(5), a.lon.toFixed(5), '|',
+                      b.lat.toFixed(5), b.lon.toFixed(5)].join(',').replace(',|,', '|');
+    const routeCoords = !isLongJump && ROUTES[routeKey];
+
+    const latlngs = routeCoords
+      ? routeCoords  // [[lat, lon], ...] from OSRM
+      : [[a.lat, a.lon], [b.lat, b.lon]];
+
+    const pl = L.polyline(latlngs, {{
       color, weight, opacity: 0.75, dashArray: dash,
     }}).addTo(map);
     layers.push(pl);
