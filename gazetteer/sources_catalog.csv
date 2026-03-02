@@ -8,5 +8,10 @@ anstey_bath,poetry,ChristopherAnstey,New Bath Guide,1766,1760,1775,poetry/Anstey
 burney_diary1,diary,FrancesBurney,Early Diary Vol 1,1889,1768,1778,diary/Burney_DiaryVol1.txt,Published posthumously
 burney_diary2,diary,FrancesBurney,Early Diary Vol 2,1889,1778,1800,diary/Burney_DiaryVol2.txt,Published posthumously
 boswell_life_johnson,diary,JamesBoswell,Life of Johnson,1791,1763,1784,diary/Boswell_LifeOfJohnson.txt,Osgood abridgement; London taverns Fleet St Covent Garden 1760s-80s
+boswell_loj_v1,diary,JamesBoswell,Life of Johnson Vol 1 (Hill ed.),1791,1709,1765,diary/Boswell_LoJ_Vol1.txt,Full Hill scholarly edition; London 1709-1765
+boswell_loj_v2,diary,JamesBoswell,Life of Johnson Vol 2 (Hill ed.),1791,1765,1776,diary/Boswell_LoJ_Vol2.txt,Full Hill scholarly edition; London 1765-1776
+boswell_loj_v3,diary,JamesBoswell,Life of Johnson Vol 3 (Hill ed.),1791,1776,1780,diary/Boswell_LoJ_Vol3.txt,Full Hill scholarly edition; London 1776-1780
+boswell_loj_v4,diary,JamesBoswell,Life of Johnson Vol 4 (Hill ed.),1791,1780,1784,diary/Boswell_LoJ_Vol4.txt,Full Hill scholarly edition; London 1780-1784
 piozzi_anecdotes,diary,HesterPiozzi,Anecdotes of the late Samuel Johnson,1786,1764,1784,diary/Piozzi_AnecdotesOfJohnson.txt,Johnson circle; Streatham Fleet St 1764-84
+piozzi_autobiography,diary,HesterPiozzi,Autobiography Letters and Literary Remains,1861,1741,1821,diary/Piozzi_Autobiography.txt,2-vol memoir covering Thrale circle London Bath
 walpole_letters1,letters,HoraceWalpole,Letters Vol 1,1840,1732,1755,letters/Walpole_LettersVol1.txt,
