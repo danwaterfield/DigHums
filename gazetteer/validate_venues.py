@@ -85,6 +85,10 @@ VENUE_ALIASES = {
         ("Covent Garden", None),
         ("Covent-Garden", None),
     ],
+    "LON016": [                             # Covent Garden Piazza
+        ("Covent-Garden Piazza", None),
+        (r"\bthe Piazza\b", "London"),      # city-filtered: avoids Italian piazzas
+    ],
     "LON008": [                             # King's Theatre / Opera House, Haymarket
         ("King's Theatre", None),
         ("Opera-house", None),              # Burney's spelling
@@ -256,6 +260,9 @@ VENUE_ALIASES = {
         ("Milsom Street", "Bath"),
         ("Milsom-Street", "Bath"),
     ],
+    "BAT010": [                             # Bath Abbey
+        ("Bath Abbey", None),
+    ],
     "BAT011": [("North Parade", "Bath")],
     "BAT012": [("South Parade", "Bath")],
 
@@ -269,6 +276,25 @@ VENUE_ALIASES = {
     ],
     "BAT016": [("Pulteney Street", "Bath"), ("Pulteney-Street", "Bath")],
 
+    # MONUMENTS AND LANDMARKS
+    "LON021": [                             # Tower of London
+        ("Tower of London", None),
+        (r"\bthe Tower\b", "London"),       # city-filtered: avoids false positives
+    ],
+    "LON022": [                             # St Paul's Cathedral
+        ("St Paul's Cathedral", None),
+        ("St. Paul's Cathedral", None),
+        ("St Paul's", None),
+        ("St. Paul's", None),
+    ],
+    "LON023": [                             # Westminster Abbey
+        ("Westminster Abbey", None),
+        (r"\bthe Abbey\b", "London"),       # city-filtered: avoids Gothic abbey refs
+    ],
+    "LON096": [                             # Greenwich Park
+        ("Greenwich Park", None),
+        ("Greenwich", None),
+    ],
     # PRISONS
     "LON074": [
         ("Newgate", None),
