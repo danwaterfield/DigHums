@@ -77,3 +77,47 @@ def test_leaflet_included(html):
 
 def test_venue_explorer_link(html):
     assert "venue_explorer.html" in html
+
+
+# ── C5: Environmental layer tests ─────────────────────────────────────────────
+
+def test_cet_data_embedded(html):
+    """CET_DATA constant is present and contains at least one year of data."""
+    assert "CET_DATA" in html
+    # 1684 is the Frost Fair year; Jan temp was -3.0 — verify it appears
+    assert "1684" in html
+
+
+def test_temperature_indicator_present(html):
+    """Temperature gauge elements are rendered in the controls bar."""
+    assert 'id="temp-badge"' in html
+    assert "temp-badge" in html
+    # Tooltip / title references HadCET or Met Office
+    assert "HadCET" in html or "Met Office" in html
+
+
+def test_mortality_data_embedded(html):
+    """MORTALITY_DATA constant is present and contains bills-of-mortality totals."""
+    assert "MORTALITY_DATA" in html
+    assert 'id="mort-badge"' in html
+
+
+def test_smoke_data_embedded(html):
+    """SMOKE_DATA_ENV constant is present and contains decade estimates."""
+    assert "SMOKE_DATA_ENV" in html
+    assert "so2_index" in html
+
+
+def test_smoke_overlay_present(html):
+    """The smoke haze overlay div is rendered in the map."""
+    assert 'id="smoke-overlay"' in html
+
+
+def test_tier_toggle_present(html):
+    """Tier view toggle button is present."""
+    assert 'id="tier-toggle"' in html
+
+
+def test_venues_include_tier(html):
+    """Venue data includes the tier field."""
+    assert '"tier"' in html

@@ -84,6 +84,28 @@ CREATE TABLE IF NOT EXISTS event_instances (
     source_id   TEXT,
     notes       TEXT
 );
+
+CREATE TABLE IF NOT EXISTS env_temperature (
+    year   INTEGER NOT NULL,
+    month  INTEGER,
+    temp_c REAL NOT NULL,
+    PRIMARY KEY (year, month)
+);
+
+CREATE TABLE IF NOT EXISTS env_mortality (
+    year    INTEGER NOT NULL,
+    month   INTEGER,
+    parish  TEXT NOT NULL DEFAULT 'ALL_LONDON',
+    burials INTEGER NOT NULL,
+    PRIMARY KEY (year, month, parish)
+);
+
+CREATE TABLE IF NOT EXISTS env_smoke (
+    decade_start INTEGER PRIMARY KEY,
+    coal_tons_k  REAL,
+    so2_index    REAL,
+    source       TEXT
+);
 """
 
 def init_db(path: Path = DB_PATH_DEFAULT) -> sqlite3.Connection:

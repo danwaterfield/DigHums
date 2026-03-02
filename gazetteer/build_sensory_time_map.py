@@ -23,7 +23,8 @@ def load_data(venues_path: Path, db_path: Path) -> dict:
     with open(venues_path, newline="", encoding="utf-8") as f:
         venues = [
             {"id": r["id"], "name": r["name"],
-             "lat": float(r["lat"]), "lon": float(r["lon"])}
+             "lat": float(r["lat"]), "lon": float(r["lon"]),
+             "tier": int(r["tier"]) if r.get("tier") else 3}
             for r in csv.DictReader(f)
         ]
 
@@ -42,6 +43,37 @@ def load_data(venues_path: Path, db_path: Path) -> dict:
                 ORDER  BY date_min
             """)
         ]
+
+        # ── Environmental layers ──────────────────────────────────────────────
+        # CET: {year: {month_int: temp_c}} where 0 = annual mean
+        cet: dict[int, dict[int, float]] = {}
+        for row in conn.execute(
+            "SELECT year, month, temp_c FROM env_temperature "
+            "WHERE year BETWEEN 1660 AND 1820"
+        ):
+            yr = row["year"]
+            mo = row["month"] if row["month"] is not None else 0
+            cet.setdefault(yr, {})[mo] = row["temp_c"]
+
+        # Mortality: {year: total_burials}
+        mortality: dict[int, int] = {
+            row["year"]: row["burials"]
+            for row in conn.execute(
+                "SELECT year, burials FROM env_mortality "
+                "WHERE parish = 'ALL_LONDON' ORDER BY year"
+            )
+        }
+
+        # Smoke: list of {decade_start, coal_tons_k, so2_index}
+        smoke = [
+            {"decade_start": row["decade_start"],
+             "coal_tons_k":  row["coal_tons_k"],
+             "so2_index":    row["so2_index"]}
+            for row in conn.execute(
+                "SELECT decade_start, coal_tons_k, so2_index FROM env_smoke "
+                "ORDER BY decade_start"
+            )
+        ]
     finally:
         conn.close()
     return {
@@ -50,6 +82,9 @@ def load_data(venues_path: Path, db_path: Path) -> dict:
         "event_venues": event_venues,
         "event_instances": event_instances,
         "evidence": evidence,
+        "cet": cet,
+        "mortality": mortality,
+        "smoke": smoke,
     }
 
 
@@ -130,6 +165,24 @@ body {{ font-family: 'Georgia', serif; background: #f9f6f0; color: #2c2c2c; disp
 #clear-btn:hover {{ color: #e8d0b0; border-color: #888; }}
 #back-btn {{ background: none; border: none; color: #c8a870; font-size: 0.8em; cursor: pointer; padding: 0 8px 0 0; flex-shrink: 0; }}
 #back-btn:hover {{ color: #fff; }}
+/* ── Environmental indicators ── */
+#env-bar {{ display: flex; align-items: center; gap: 14px; padding: 3px 0 2px; flex-wrap: wrap; }}
+.env-gauge {{ display: flex; align-items: center; gap: 5px; font-size: 0.75em; color: #a8a090; }}
+.env-gauge .env-label {{ color: #888; }}
+.temp-badge {{ background: #1a2a3a; border: 1px solid #3a5a7a; color: #78b0d8; padding: 1px 7px; border-radius: 3px; font-size: 0.82em; font-family: monospace; min-width: 4.5em; text-align: center; transition: background 0.3s, color 0.3s; }}
+.temp-badge.cold  {{ background: #0e2040; border-color: #4a88c0; color: #a8d8ff; }}
+.temp-badge.frost {{ background: #081828; border-color: #80c0f8; color: #c8eeff; font-weight: bold; }}
+.mort-badge {{ background: #2a1010; border: 1px solid #6a2020; color: #e09080; padding: 1px 7px; border-radius: 3px; font-size: 0.82em; font-family: monospace; min-width: 5em; text-align: center; }}
+.smoke-gauge {{ display: flex; align-items: center; gap: 5px; font-size: 0.75em; color: #a89060; }}
+.smoke-bar-track {{ width: 50px; height: 5px; background: #333; border-radius: 2px; }}
+.smoke-bar-fill {{ height: 5px; background: linear-gradient(to right, #c8a050, #8b6020); border-radius: 2px; transition: width 0.4s; }}
+#tier-toggle {{ background: #1a2a3a; border: 1px solid #444; color: #8090a8; padding: 1px 8px; cursor: pointer; border-radius: 12px; font-size: 0.75em; }}
+#tier-toggle:hover {{ background: #253545; }}
+#tier-toggle.active {{ background: #1a3a5a; border-color: #4488cc; color: #aaddff; }}
+/* ── Smoke haze overlay on map ── */
+#map {{ flex: 1; position: relative; }}
+#smoke-overlay {{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 400; opacity: 0; background: linear-gradient(to right, transparent 15%, rgba(140,110,50,0.55) 85%); transition: opacity 0.6s ease; }}
+/* ── Tier marker colours (used in tier-view mode) ── */
 </style>
 </head>
 <body>
@@ -199,10 +252,28 @@ body {{ font-family: 'Georgia', serif; background: #f9f6f0; color: #2c2c2c; disp
     <button class="sense-pill" data-sense="noise">Noise</button>
     <button class="sense-pill" data-sense="crowd">Crowd</button>
     <button class="sense-pill" data-sense="visual">Visual</button>
+    <button id="tier-toggle" onclick="toggleTierView()" title="Colour venues by economic tier">&#9632; Tier</button>
+  </div>
+  <div class="pill-row" id="env-bar">
+    <span class="env-gauge" title="Central England Temperature (HadCET / Met Office)">
+      <span class="env-label">&#127783; Temp</span>
+      <span id="temp-badge" class="temp-badge">&#8212;</span>
+    </span>
+    <span class="env-gauge" title="London burials — Bills of Mortality 1701&#8211;1752 (Death by Numbers)">
+      <span class="env-label">&#9760; Burials</span>
+      <span id="mort-badge" class="mort-badge">n/a</span>
+    </span>
+    <span class="smoke-gauge" title="Coal smoke burden (Brimblecombe 1987; Cavert 2016)">
+      <span class="env-label">&#127844; Smoke</span>
+      <div class="smoke-bar-track"><div class="smoke-bar-fill" id="smoke-bar" style="width:0%"></div></div>
+      <span id="smoke-pct" style="font-size:0.82em;font-family:monospace;color:#c0a060">0%</span>
+    </span>
   </div>
 </div>
 <div id="main">
-  <div id="map"></div>
+  <div id="map">
+    <div id="smoke-overlay"></div>
+  </div>
   <div id="panel">
     <div id="panel-header">
       <button id="back-btn" style="display:none" onclick="backToGlobal()">&#8592; All</button>
@@ -218,6 +289,14 @@ const EVENT_VENUES = {EVENT_VENUES_JSON};
 const EVENT_INSTANCES = {EVENT_INSTANCES_JSON};
 const VENUES = {VENUES_JSON};
 const EVIDENCE = {EVIDENCE_JSON};
+
+// ── Environmental data ─────────────────────────────────────────────────────
+const CET_DATA       = {CET_JSON};         // {{year: {{0:annual, 1:jan, ...12:dec}}}}
+const MORTALITY_DATA = {MORTALITY_JSON};   // {{year: total_burials}}
+const SMOKE_DATA_ENV = {SMOKE_JSON};       // [{{decade_start, so2_index, coal_tons_k}}]
+
+// Tier colour palette (1=impoverished → 5=aristocratic)
+const TIER_COLORS = {{ 1:'#8b2020', 2:'#c07030', 3:'#5a7a4a', 4:'#3a6090', 5:'#9a7020' }};
 
 const EVENTS_BY_ID = Object.fromEntries(EVENTS.map(e => [e.event_id, e]));
 
@@ -236,7 +315,63 @@ EVIDENCE.forEach(p => {{
     if (p.venue_id) evidenceCountByVenue[p.venue_id] = (evidenceCountByVenue[p.venue_id] || 0) + 1;
 }});
 
-const state = {{ month: null, dow: null, band: null, literary: false, selectedVenue: null, modality: null }};
+const state = {{ month: null, dow: null, band: null, literary: false, selectedVenue: null, modality: null, tierView: false }};
+
+// ── Smoke haze overlay ──────────────────────────────────────────────────────
+// Applied once the map div is present; opacity driven by updateEnvIndicators.
+const smokeOverlay = document.getElementById('smoke-overlay');
+
+// ── Environmental indicator update ──────────────────────────────────────────
+function updateEnvIndicators(year, month) {{
+    // Temperature (HadCET)
+    const yearCET = CET_DATA[year];
+    const tempBadge = document.getElementById('temp-badge');
+    if (yearCET !== undefined) {{
+        const temp = (month !== null && yearCET[month] !== undefined)
+            ? yearCET[month]
+            : yearCET[0];  // 0 = annual mean
+        if (temp !== undefined) {{
+            tempBadge.textContent = temp.toFixed(1) + '\u00b0C';
+            tempBadge.className = 'temp-badge' + (temp < 0 ? ' frost' : temp < 4 ? ' cold' : '');
+            tempBadge.title = (temp < 0 ? '\u26ac Frost Fair conditions' : temp < 4 ? '\u26ac Cold' : '') +
+                              ' | CET ' + year + (month ? '-' + String(month).padStart(2,'0') : '') +
+                              ' | Source: Met Office HadCET';
+        }}
+    }} else {{
+        tempBadge.textContent = '\u2014';
+        tempBadge.className = 'temp-badge';
+    }}
+
+    // Mortality (Bills of Mortality)
+    const mortBadge = document.getElementById('mort-badge');
+    const burials = MORTALITY_DATA[year];
+    if (burials !== undefined) {{
+        mortBadge.textContent = burials.toLocaleString();
+        mortBadge.title = 'London burials ' + year + ': ' + burials.toLocaleString() + ' | Source: Death by Numbers';
+    }} else {{
+        mortBadge.textContent = (year < 1701 || year > 1752) ? 'n/a' : '\u2014';
+        mortBadge.title = year < 1701 || year > 1752 ? 'Bills of Mortality data: 1701\u20131752 only' : '';
+    }}
+
+    // Smoke (decade-level coal burden)
+    const decadeStart = Math.floor(year / 10) * 10;
+    const smokeRow = SMOKE_DATA_ENV.find(s => s.decade_start === decadeStart);
+    const smokeBar  = document.getElementById('smoke-bar');
+    const smokePct  = document.getElementById('smoke-pct');
+    if (smokeRow) {{
+        const pct = Math.round(smokeRow.so2_index * 100);
+        if (smokeBar)  smokeBar.style.width  = pct + '%';
+        if (smokePct)  smokePct.textContent  = pct + '%';
+        if (smokeOverlay) smokeOverlay.style.opacity = (smokeRow.so2_index * 0.28).toFixed(3);
+    }}
+}}
+
+function toggleTierView() {{
+    state.tierView = !state.tierView;
+    const btn = document.getElementById('tier-toggle');
+    if (btn) {{ btn.classList.toggle('active', state.tierView); }}
+    updateMap();
+}}
 
 // Map setup
 const map = L.map('map', {{ zoomControl: true }}).setView([51.508, -0.13], 13);
@@ -488,6 +623,7 @@ function updateMap() {{
     const dow   = state.dow;
     const band  = state.band;
     document.getElementById('year-display').textContent = year;
+    updateEnvIndicators(year, month);
 
     // Milestone label
     const ml = document.getElementById('milestone-label');
@@ -514,14 +650,23 @@ function updateMap() {{
 
         marker.setRadius(r);
         const hasEvidence = (evidenceCountByVenue[v.id] || 0) > 0;
+        const tierCol = TIER_COLORS[v.tier] || '#888';
         if (displayLoad < 0.01) {{
-            marker.setStyle({{
-                fillColor: '#aaa', color: hasEvidence ? '#ffffff' : '#888',
-                fillOpacity: 0.3, weight: hasEvidence ? 1.5 : 0.8,
-            }});
+            if (state.tierView) {{
+                marker.setStyle({{
+                    fillColor: tierCol, color: '#ffffff',
+                    fillOpacity: 0.65, weight: 1.2,
+                }});
+            }} else {{
+                marker.setStyle({{
+                    fillColor: '#aaa', color: hasEvidence ? '#ffffff' : '#888',
+                    fillOpacity: 0.3, weight: hasEvidence ? 1.5 : 0.8,
+                }});
+            }}
         }} else {{
             marker.setStyle({{
-                fillColor: col, color: col, fillOpacity: 0.78, weight: 1,
+                fillColor: col, color: state.tierView ? tierCol : col,
+                fillOpacity: 0.78, weight: state.tierView ? 2 : 1,
             }});
         }}
         marker._intensity = intensity;
@@ -855,6 +1000,9 @@ def build(venues_path: Path = VENUES_PATH, db_path: Path = DB_PATH,
         EVENT_INSTANCES_JSON = json.dumps(data["event_instances"], ensure_ascii=False),
         VENUES_JSON          = json.dumps(data["venues"],          ensure_ascii=False),
         EVIDENCE_JSON        = json.dumps(data["evidence"],        ensure_ascii=False),
+        CET_JSON             = json.dumps(data["cet"],             ensure_ascii=False),
+        MORTALITY_JSON       = json.dumps(data["mortality"],       ensure_ascii=False),
+        SMOKE_JSON           = json.dumps(data["smoke"],           ensure_ascii=False),
     )
 
     out_path.write_text(html, encoding="utf-8")
