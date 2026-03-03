@@ -1347,7 +1347,30 @@ function particleFrame() {{
         p.age++;
         if (p.age >= p.maxAge) {{
             if (isNetwork && streetSegsPx.length) {{
-                p._seg    = streetSegsPx[Math.floor(Math.random() * streetSegsPx.length)];
+                // Weight segment selection by proximity to intensity-active venues
+                const weighted = [];
+                VENUES.forEach(v => {{
+                    const loads = venueIntensityCache[v.id];
+                    if (!loads || (loads.composite || 0) < 0.02) return;
+                    const vp = venuePx[v.id];
+                    if (vp) weighted.push({{ vp, w: loads.composite }});
+                }});
+                let chosenSeg;
+                if (weighted.length) {{
+                    // Pick a venue weighted by intensity
+                    const total = weighted.reduce((s, x) => s + x.w, 0);
+                    let rnd = Math.random() * total;
+                    let chosenVp = weighted[weighted.length - 1].vp;
+                    for (const {{ vp, w }} of weighted) {{ rnd -= w; if (rnd <= 0) {{ chosenVp = vp; break; }} }}
+                    // Find nearest segment to chosen venue
+                    let bestDist = Infinity;
+                    streetSegsPx.forEach(seg => {{
+                        const mx = (seg.x0 + seg.x1) * 0.5, my = (seg.y0 + seg.y1) * 0.5;
+                        const d = (mx - chosenVp.px)**2 + (my - chosenVp.py)**2;
+                        if (d < bestDist) {{ bestDist = d; chosenSeg = seg; }}
+                    }});
+                }}
+                p._seg    = chosenSeg || streetSegsPx[Math.floor(Math.random() * streetSegsPx.length)];
                 p._segT   = Math.random();
                 p._segDir = Math.random() < 0.5 ? 1 : -1;
                 p.age = 0;
@@ -1558,6 +1581,8 @@ function _projectStreets() {{
             streetSegsPx.push({{ x0: a.x, y0: a.y, x1: b.x, y1: b.y, len }});
         }}
     }});
+    // Reset network particles so they resample the new projection
+    if (state && state.particleMode === 'network') resetParticles();
 }}
 
 map.on('moveend zoomend', _projectStreets);
