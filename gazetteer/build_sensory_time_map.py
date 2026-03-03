@@ -814,7 +814,7 @@ VENUES.forEach(v => {{
         dashArray: dashArray,
     }}).addTo(map);
     m.bindTooltip('', {{ permanent: false, direction: 'top' }});
-    m.on('click', () => selectVenue(v.id));
+    m.on('click', (e) => {{ e.stopPropagation(); selectVenue(v.id); }});
     markersByVenueId[v.id] = m;
 }});
 
@@ -1215,6 +1215,52 @@ function renderGlobalPanel(activeEvents) {{
         `<div style="font-size:0.72em;color:#777;margin-bottom:2px">&#8250; ${{e.venueName}}</div>` +
         renderEventCard(e.evt, e.inst)
     ).join('');
+}}
+
+function renderLocationPanel(lat, lon, year, month) {{
+    const baseline = computeZoneBaseline(lat, lon, year, month);
+    const body = document.getElementById('panel-body');
+    const title = document.getElementById('panel-title');
+    if (!baseline) {{
+        title.textContent = 'OUTSIDE MAPPED AREA';
+        body.innerHTML = '<p style="opacity:0.6;font-size:0.9em">Click within central London (1660\u20131820 extent).</p>';
+        return;
+    }}
+    title.textContent = baseline.zone.toUpperCase();
+
+    const bar = v => {{
+        const filled = Math.round(Math.max(0, Math.min(1, v)) * 10);
+        return '\u2588'.repeat(filled) + '\u2591'.repeat(10 - filled);
+    }};
+    const label = v => v > 0.7 ? 'high' : v > 0.45 ? 'moderate\u2013high' : v > 0.25 ? 'moderate' : v > 0.1 ? 'low\u2013moderate' : 'low';
+
+    const modalities = [
+        ['Smell',  baseline.smell,  '#b48a28'],
+        ['Noise',  baseline.noise,  '#3c78c8'],
+        ['Crowd',  baseline.crowd,  '#b43c3c'],
+        ['Visual', baseline.visual, '#3ca050'],
+    ];
+
+    let html = `<div style="margin-bottom:10px;font-size:0.82em;opacity:0.65">\u2316 ${{lat.toFixed(4)}}, ${{lon.toFixed(4)}} &middot; ${{baseline.street_character}} streets</div>`;
+
+    modalities.forEach(([name, val, col]) => {{
+        html += `<div style="margin-bottom:8px">
+          <div style="display:flex;align-items:baseline;gap:6px">
+            <span style="font-weight:bold;min-width:50px">${{name}}</span>
+            <span style="font-family:monospace;color:${{col}}">${{bar(val)}}</span>
+            <span style="font-size:0.9em;opacity:0.8">${{label(val)}}</span>
+          </div>
+          <div style="font-size:0.78em;opacity:0.55;margin-left:56px;font-style:italic">
+            ${{baseline.provenance.join(' \u00b7 ')}}
+          </div>
+        </div>`;
+    }});
+
+    html += `<p style="font-size:0.78em;opacity:0.45;margin-top:12px;font-style:italic">
+        Zone inference \u2014 click a venue marker for documented evidence.
+    </p>`;
+
+    body.innerHTML = html;
 }}
 
 function renderVenuePanel(venueId, year, month, dow, band) {{
@@ -1830,6 +1876,12 @@ if (STREET_NETWORK && STREET_NETWORK.length) {{
     const yr = parseInt(document.getElementById('year-slider').value);
     _projectStreets(yr);
 }}
+
+map.on('click', (e) => {{
+    state.selectedVenue = null;
+    const year  = parseInt(document.getElementById('year-slider').value);
+    renderLocationPanel(e.latlng.lat, e.latlng.lng, year, state.month);
+}});
 
 function _networkStep(p) {{
     const seg = p._seg;

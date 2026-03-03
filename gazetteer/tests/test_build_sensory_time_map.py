@@ -225,3 +225,9 @@ def test_zone_fill_layer(html):
     """Zone fill Leaflet layer must be present."""
     assert 'zoneFillLayer' in html
     assert 'updateZoneFills' in html
+
+
+def test_click_anywhere_handler(html):
+    """Map click-anywhere handler and renderLocationPanel must be present."""
+    assert 'function renderLocationPanel' in html
+    assert "map.on('click'" in html
