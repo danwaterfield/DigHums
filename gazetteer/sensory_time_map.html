@@ -60,6 +60,11 @@ body { font-family: 'Georgia', serif; background: #f9f6f0; color: #2c2c2c; displ
 .btype-pill { background: #1a1a2e; border: 1px solid; padding: 2px 8px; cursor: pointer; border-radius: 12px; font-size: 0.76em; opacity: 0.75; transition: opacity 0.15s, background 0.15s; }
 .btype-pill:hover { opacity: 1; }
 .btype-pill.active { background: rgba(255,255,255,0.12); opacity: 1; font-weight: bold; }
+.particle-btn { background: #1a1a2e; border: 1px solid #555; color: #c8b89a; padding: 2px 8px;
+                 cursor: pointer; border-radius: 12px; font-size: 0.78em; opacity: 0.75; }
+.particle-btn:hover { opacity: 1; }
+.particle-btn.active { background: rgba(255,255,255,0.12); border-color: #aaa; color: #fff;
+                        opacity: 1; font-weight: bold; }
 .sense-pill[data-sense="smell"].active { background: #5c4a10; border-color: #c89230; color: #fff; }
 .sense-pill[data-sense="noise"].active { background: #10305c; border-color: #3a7acc; color: #fff; }
 .sense-pill[data-sense="crowd"].active { background: #5c1010; border-color: #cc3030; color: #fff; }
@@ -201,6 +206,7 @@ body { font-family: 'Georgia', serif; background: #f9f6f0; color: #2c2c2c; displ
 <div id="main">
   <div id="map">
     <div id="smoke-overlay"></div>
+    <canvas id="particle-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:410;opacity:0;transition:opacity 0.5s"></canvas>
   </div>
   <div id="panel">
     <div id="panel-header">
@@ -267,7 +273,9 @@ EVIDENCE.forEach(p => {
     if (p.venue_id) evidenceCountByVenue[p.venue_id] = (evidenceCountByVenue[p.venue_id] || 0) + 1;
 });
 
-const state = { month: null, dow: null, band: null, literary: false, selectedVenue: null, modality: null, tierView: false, buildingType: null };
+const state = { month: null, dow: null, band: null, literary: false,
+                 selectedVenue: null, modality: null, tierView: false,
+                 buildingType: null, particleMode: null };
 
 // ── Smoke haze overlay ──────────────────────────────────────────────────────
 // Applied once the map div is present; opacity driven by updateEnvIndicators.
@@ -645,6 +653,7 @@ function updateMap() {
 
     VENUES.forEach(v => {
         const intensity = computeIntensity(v.id, year, month, dow, band);
+        venueIntensityCache[v.id] = intensity;
         const marker = markersByVenueId[v.id];
         if (!marker) return;
 
@@ -732,6 +741,10 @@ function updateMap() {
         renderVenuePanel(state.selectedVenue, year, month, dow, band);
     } else {
         renderGlobalPanel(activeEvents);
+    }
+
+    if (state.particleMode && state.particleMode !== 'off') {
+        _scheduleFieldUpdate();
     }
 }
 
@@ -1014,6 +1027,164 @@ document.addEventListener('keydown', (e) => {
         }
     }
 })();
+
+// ── Particle System ──────────────────────────────────────────────────────────
+const pCanvas = document.getElementById('particle-canvas');
+const pCtx    = pCanvas ? pCanvas.getContext('2d') : null;
+
+// Resize canvas to match map container
+function resizeParticleCanvas() {
+    if (!pCanvas) return;
+    const mapEl = document.getElementById('map');
+    pCanvas.width  = mapEl.offsetWidth;
+    pCanvas.height = mapEl.offsetHeight;
+}
+resizeParticleCanvas();
+window.addEventListener('resize', resizeParticleCanvas);
+
+// Particle state — simple object array (2 000 particles max)
+const MAX_P = 2000;
+const particles = [];
+
+function spawnParticle() {
+    return {
+        px: 0, py: 0,
+        vx: 0, vy: 0,
+        age: 0, maxAge: 200 + Math.random() * 400,
+        r: 180, g: 130, b: 40,
+    };
+}
+
+for (let i = 0; i < MAX_P; i++) particles.push(spawnParticle());
+
+// Vector field grid
+const FIELD_W = 80, FIELD_H = 60;
+const fieldDx = new Float32Array(FIELD_W * FIELD_H);
+const fieldDy = new Float32Array(FIELD_W * FIELD_H);
+
+// Cache of venue pixel positions
+const venuePx = {};
+
+function updateVenuePx() {
+    VENUES.forEach(v => {
+        const pt = map.latLngToContainerPoint([v.lat, v.lon]);
+        venuePx[v.id] = { px: pt.x, py: pt.y };
+    });
+}
+updateVenuePx();
+map.on('moveend zoomend', () => {
+    updateVenuePx();
+    resetParticles();
+});
+
+// Cache of last computed intensities (populated by updateMap)
+const venueIntensityCache = {};
+
+function resetParticles() {
+    particles.forEach(p => { p.age = p.maxAge; });
+}
+
+// Bilinear field sample at pixel (px, py)
+function sampleField(px, py) {
+    if (!pCanvas) return { dx: 0, dy: 0 };
+    const gx = Math.min(FIELD_W - 1, Math.max(0, (px / pCanvas.width)  * FIELD_W)) | 0;
+    const gy = Math.min(FIELD_H - 1, Math.max(0, (py / pCanvas.height) * FIELD_H)) | 0;
+    const i  = gy * FIELD_W + gx;
+    return { dx: fieldDx[i], dy: fieldDy[i] };
+}
+
+// Spawn a particle near a random venue weighted by composite intensity
+function respawnParticle(p, activeCount) {
+    const weighted = [];
+    VENUES.forEach(v => {
+        const loads = venueIntensityCache[v.id];
+        if (!loads) return;
+        const w = loads.composite || 0;
+        if (w > 0.02) weighted.push({ v, w });
+    });
+    if (!weighted.length) {
+        p.px = Math.random() * (pCanvas ? pCanvas.width : 800);
+        p.py = Math.random() * (pCanvas ? pCanvas.height : 600);
+    } else {
+        const total = weighted.reduce((s, x) => s + x.w, 0);
+        let rnd = Math.random() * total;
+        let chosen = weighted[weighted.length - 1].v;
+        for (const { v, w } of weighted) {
+            rnd -= w;
+            if (rnd <= 0) { chosen = v; break; }
+        }
+        const vp = venuePx[chosen.id];
+        if (vp) {
+            p.px = vp.px + (Math.random() - 0.5) * 60;
+            p.py = vp.py + (Math.random() - 0.5) * 60;
+        }
+    }
+    p.vx = (Math.random() - 0.5) * 0.5;
+    p.vy = (Math.random() - 0.5) * 0.5;
+    p.age = 0;
+    p.maxAge = 200 + Math.random() * 400;
+}
+
+// Main RAF loop
+let particleRaf = null;
+let activeParticleCount = 0;
+
+function particleFrame() {
+    if (!pCtx || !pCanvas) return;
+    pCtx.fillStyle = 'rgba(0,0,0,0.04)';
+    pCtx.fillRect(0, 0, pCanvas.width, pCanvas.height);
+
+    for (let i = 0; i < activeParticleCount; i++) {
+        const p = particles[i];
+        p.age++;
+        if (p.age >= p.maxAge) { respawnParticle(p, activeParticleCount); continue; }
+
+        const f = sampleField(p.px, p.py);
+        p.vx = p.vx * 0.95 + f.dx * 0.15;
+        p.vy = p.vy * 0.95 + f.dy * 0.15;
+        p.px += p.vx;
+        p.py += p.vy;
+
+        if (p.px < 0) p.px = pCanvas.width;
+        if (p.px > pCanvas.width) p.px = 0;
+        if (p.py < 0) p.py = pCanvas.height;
+        if (p.py > pCanvas.height) p.py = 0;
+
+        const alpha = Math.min(0.8, (p.age / p.maxAge) * 2 * (1 - p.age / p.maxAge) * 4);
+        pCtx.beginPath();
+        pCtx.arc(p.px, p.py, 1.2, 0, Math.PI * 2);
+        pCtx.fillStyle = `rgba(${p.r},${p.g},${p.b},${alpha.toFixed(2)})`;
+        pCtx.fill();
+    }
+    particleRaf = requestAnimationFrame(particleFrame);
+}
+
+function startParticles(count) {
+    if (particleRaf) cancelAnimationFrame(particleRaf);
+    activeParticleCount = Math.min(count, MAX_P);
+    if (pCanvas) pCanvas.style.opacity = '1';
+    particleRaf = requestAnimationFrame(particleFrame);
+}
+
+function stopParticles() {
+    if (particleRaf) { cancelAnimationFrame(particleRaf); particleRaf = null; }
+    if (pCtx && pCanvas) pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+    if (pCanvas) pCanvas.style.opacity = '0';
+    activeParticleCount = 0;
+}
+
+// Field dispatch + throttled update
+function updateParticleField() {
+    if      (state.particleMode === 'smoke')   _buildSmokefield();
+    else if (state.particleMode === 'flow')    _buildFlowField();
+    else if (state.particleMode === 'network') _buildNetworkField();
+}
+
+let _fieldUpdateTimer = null;
+function _scheduleFieldUpdate() {
+    if (_fieldUpdateTimer) clearTimeout(_fieldUpdateTimer);
+    _fieldUpdateTimer = setTimeout(() => { updateParticleField(); }, 400);
+}
 
 updateMap();
 </script>

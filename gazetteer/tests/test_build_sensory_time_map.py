@@ -135,3 +135,13 @@ def test_street_network_embedded(html):
     assert len(data) > 100  # OHM has 2000+ pre-1820 London streets
     assert isinstance(data[0][0], list)   # [[lat,lon], ...]
     assert len(data[0][0]) == 2
+
+
+def test_particle_canvas_present(html):
+    assert 'id="particle-canvas"' in html
+
+def test_particle_engine_present(html):
+    assert "particleFrame" in html
+    assert "startParticles" in html
+    assert "stopParticles" in html
+    assert "venueIntensityCache" in html
