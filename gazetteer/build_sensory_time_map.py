@@ -1169,6 +1169,7 @@ document.querySelectorAll('.particle-btn').forEach(btn => {{
 }});
 
 function clearFilters() {{
+    if (_fieldUpdateTimer) {{ clearTimeout(_fieldUpdateTimer); _fieldUpdateTimer = null; }}
     state.month = null; state.dow = null; state.band = null; state.modality = null; state.buildingType = null;
     state.particleMode = null;
     document.querySelectorAll('.pill.active, .sense-pill.active, .btype-pill.active').forEach(b => b.classList.remove('active'));
@@ -1444,6 +1445,7 @@ function stopParticles() {{
 
 // Field dispatch + throttled update
 function updateParticleField() {{
+    if (Object.keys(venueIntensityCache).length === 0) return;
     if      (state.particleMode === 'smoke')   _buildSmokefield();
     else if (state.particleMode === 'flow')    _buildFlowField();
     else if (state.particleMode === 'network') _buildNetworkField();
