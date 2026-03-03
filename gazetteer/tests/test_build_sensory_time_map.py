@@ -145,3 +145,10 @@ def test_particle_engine_present(html):
     assert "startParticles" in html
     assert "stopParticles" in html
     assert "venueIntensityCache" in html
+
+
+def test_smoke_mode_field_builder(html):
+    assert "_buildSmokefield" in html
+    assert "windDx" in html
+    assert "enclosureFactor" in html
+    assert "so2_index" in html

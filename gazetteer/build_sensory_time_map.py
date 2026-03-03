@@ -1387,7 +1387,58 @@ function updateParticleField() {{
 }}
 
 // Stubs — replaced by Tasks 3/4/5
-function _buildSmokefield()  {{ /* implemented in Task 3 */ }}
+const WIND_DX = 0.40;   // prevailing SW wind: east drift
+const WIND_DY = -0.15;  // slight northward component
+
+function _buildSmokefield() {{
+    if (!pCanvas) return;
+    const W = pCanvas.width, H = pCanvas.height;
+    const cW = W / FIELD_W, cH = H / FIELD_H;
+
+    for (let gy = 0; gy < FIELD_H; gy++) {{
+        for (let gx = 0; gx < FIELD_W; gx++) {{
+            const cx = (gx + 0.5) * cW;
+            const cy = (gy + 0.5) * cH;
+            let windDx = WIND_DX, windDy = WIND_DY;
+
+            VENUES.forEach(v => {{
+                const loads = venueIntensityCache[v.id];
+                if (!loads || loads.smell < 0.02) return;
+                const enc = v.enclosure || 'open';
+                const enclosureFactor = enc === 'open' ? 1.0 : enc === 'semi_open' ? 0.6 : 0.2;
+                const posF = v.lon > -0.09 ? 1.3 : v.lon < -0.17 ? 0.7 : 1.0;
+                const vp = venuePx[v.id];
+                if (!vp) return;
+                const dx = cx - vp.px, dy = cy - vp.py;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 1 || dist > 300) return;
+                const strength = loads.smell * enclosureFactor * posF * 4000 / (dist * dist);
+                windDx += (dx / dist) * strength;
+                windDy += (dy / dist) * strength;
+            }});
+
+            const mag = Math.sqrt(windDx * windDx + windDy * windDy);
+            if (mag > 2.0) {{ windDx = windDx / mag * 2.0; windDy = windDy / mag * 2.0; }}
+
+            const i = gy * FIELD_W + gx;
+            fieldDx[i] = windDx;
+            fieldDy[i] = windDy;
+        }}
+    }}
+
+    // Particle count: base 600 + smoke-scaled bonus (up to 1400 total)
+    const year = parseInt(document.getElementById('year-slider').value);
+    const decade = Math.floor(year / 10) * 10;
+    const smokeRow = SMOKE_DATA_ENV.find(s => s.decade_start === decade);
+    const so2_index = smokeRow ? smokeRow.so2_index : 0;
+    const count = Math.round(600 + so2_index * 800);
+
+    // Colour: amber-brown
+    for (let i = 0; i < count; i++) {{
+        particles[i].r = 180; particles[i].g = 130; particles[i].b = 40;
+    }}
+    startParticles(count);
+}}
 function _buildFlowField()   {{ /* implemented in Task 4 */ }}
 function _buildNetworkField(){{ /* implemented in Task 5 */ }}
 
