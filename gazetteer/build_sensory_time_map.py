@@ -834,6 +834,9 @@ function proseSummary(venueId, evts, year) {{
     return `<div class="prose-summary">${{sentence}}</div>`;
 }}
 
+// Cache of last computed intensities (populated by updateMap)
+const venueIntensityCache = {{}};
+
 function updateMap() {{
     const year  = parseInt(document.getElementById('year-slider').value);
     const month = state.month;
@@ -1242,6 +1245,8 @@ function resizeParticleCanvas() {{
     const mapEl = document.getElementById('map');
     pCanvas.width  = mapEl.offsetWidth;
     pCanvas.height = mapEl.offsetHeight;
+    updateVenuePx();
+    if (activeParticleCount > 0) resetParticles();
 }}
 resizeParticleCanvas();
 window.addEventListener('resize', resizeParticleCanvas);
@@ -1280,9 +1285,6 @@ map.on('moveend zoomend', () => {{
     updateVenuePx();
     resetParticles();
 }});
-
-// Cache of last computed intensities (populated by updateMap)
-const venueIntensityCache = {{}};
 
 function resetParticles() {{
     particles.forEach(p => {{ p.age = p.maxAge; }});
@@ -1383,6 +1385,11 @@ function updateParticleField() {{
     else if (state.particleMode === 'flow')    _buildFlowField();
     else if (state.particleMode === 'network') _buildNetworkField();
 }}
+
+// Stubs — replaced by Tasks 3/4/5
+function _buildSmokefield()  {{ /* implemented in Task 3 */ }}
+function _buildFlowField()   {{ /* implemented in Task 4 */ }}
+function _buildNetworkField(){{ /* implemented in Task 5 */ }}
 
 let _fieldUpdateTimer = null;
 function _scheduleFieldUpdate() {{
