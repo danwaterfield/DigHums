@@ -180,3 +180,9 @@ def test_particle_mode_buttons_present(html):
 def test_particle_mode_js_handler(html):
     assert "data-pmode" in html
     assert "particleMode" in html
+
+
+def test_venue_opened_closed_in_js(html):
+    """Venues JSON must include opened and closed fields."""
+    # LON001 has opened=1661 in venues.csv
+    assert '"opened": 1661' in html or '"opened":1661' in html

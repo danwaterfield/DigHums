@@ -142,7 +142,9 @@ def load_data(venues_path: Path, db_path: Path) -> dict:
              "enclosure":     r.get("enclosure", ""),
              "building_type": r.get("building_type", ""),
              "material":      r.get("material", ""),
-             "capacity":      r.get("capacity", "")}
+             "capacity":      r.get("capacity", ""),
+             "opened": int(r["opened"]) if r.get("opened", "").strip() else None,
+             "closed": int(r["closed"]) if r.get("closed", "").strip() else None,}
             for r in csv.DictReader(f)
         ]
 
@@ -901,6 +903,22 @@ function updateMap() {{
     let activeEvents = [];
 
     VENUES.forEach(v => {{
+        // Hide venues outside their operational date range
+        if (v.opened && year < v.opened) {{
+            const _m = markersByVenueId[v.id];
+            if (_m) _m.setStyle({{ opacity: 0, fillOpacity: 0 }});
+            return;
+        }}
+        if (v.closed && year > v.closed) {{
+            const _m = markersByVenueId[v.id];
+            if (_m) _m.setStyle({{ opacity: 0, fillOpacity: 0 }});
+            return;
+        }}
+        // Restore visibility for in-range venues
+        {{
+            const _m = markersByVenueId[v.id];
+            if (_m) _m.setStyle({{ opacity: 1, fillOpacity: 0.7 }});
+        }}
         const intensity = computeIntensity(v.id, year, month, dow, band);
         venueIntensityCache[v.id] = intensity;
         const marker = markersByVenueId[v.id];
