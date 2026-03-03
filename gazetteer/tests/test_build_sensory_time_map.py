@@ -199,3 +199,23 @@ def test_zone_inference_functions(html):
     assert 'function pointInPolygon' in html
     assert 'function getZoneForPoint' in html
     assert 'function computeZoneBaseline' in html
+
+
+def test_zone_point_in_polygon_present(html):
+    """pointInPolygon must use GeoJSON [lon,lat] ring order."""
+    # GeoJSON order: xi = ring[i][0] (longitude), yi = ring[i][1] (latitude)
+    assert 'xi = ring[i][0]' in html
+    assert 'yi = ring[i][1]' in html
+
+
+def test_zone_river_proximity_interpolated(html):
+    """river_proximity must be interpolated like other numeric fields."""
+    assert 'p0.river_proximity + t * (p1.river_proximity - p0.river_proximity)' in html
+
+
+def test_zone_env_modifiers_present(html):
+    """computeZoneBaseline must apply all four environmental modifiers."""
+    assert 'river_proximity' in html        # modifier 1
+    assert 'industrial_intensity' in html   # modifier 2
+    assert 'frost fair' in html             # modifier 3
+    assert "=== 'narrow'" in html           # modifier 4

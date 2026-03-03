@@ -487,7 +487,7 @@ function interpolateZoneProps(zoneProps, year) {{
         smell_base:           p0.smell_base           + t * (p1.smell_base           - p0.smell_base),
         noise_base:           p0.noise_base           + t * (p1.noise_base           - p0.noise_base),
         crowd_density:        p0.crowd_density        + t * (p1.crowd_density        - p0.crowd_density),
-        river_proximity:      p0.river_proximity,
+        river_proximity:      p0.river_proximity + t * (p1.river_proximity - p0.river_proximity),
         industrial_intensity: p0.industrial_intensity + t * (p1.industrial_intensity - p0.industrial_intensity),
         street_character:     t < 0.5 ? p0.street_character : p1.street_character,
         building_height:      t < 0.5 ? p0.building_height  : p1.building_height,
@@ -510,7 +510,7 @@ function computeZoneBaseline(lat, lon, year, month) {{
     // Env modifier 1: river smell rises with summer heat
     if (p.river_proximity > 0) {{
         const yearCET = CET_DATA[year] || {{}};
-        const temp = (month && yearCET[month] !== undefined) ? yearCET[month] : (yearCET[0] || 10);
+        const temp = (month !== null && yearCET[month] !== undefined) ? yearCET[month] : (yearCET[0] || 10);
         const riverBoost = p.river_proximity * Math.max(0, (temp - 10) / 22);
         if (riverBoost > 0.02) {{
             smell = Math.min(1, smell + riverBoost);
