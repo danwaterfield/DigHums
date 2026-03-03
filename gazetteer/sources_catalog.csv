@@ -20,3 +20,9 @@ walpole_eo_v3,letters,HoraceWalpole,Letters Earl of Orford Vol 3,1857,1760,1769,
 walpole_eo_v4,letters,HoraceWalpole,Letters Earl of Orford Vol 4,1857,1770,1797,letters/Walpole_LettersEO_Vol4.txt,1770-1797; late London scenes
 walpole_yonge_v1,letters,HoraceWalpole,Letters Yonge Selection Vol 1,1890,1736,1764,letters/Walpole_LettersYonge_Vol1.txt,Selected letters 1736-1764
 walpole_yonge_v2,letters,HoraceWalpole,Letters Yonge Selection Vol 2,1890,1764,1795,letters/Walpole_LettersYonge_Vol2.txt,Selected letters 1764-1795
+moritz_travels,topography,CarlMoritz,Travels in England in 1782,1783,1782,1782,topography/Moritz_TravelsInEngland.txt,German visitor; Vauxhall theatres streets on foot
+tatler_v1,topography,RichardSteele,The Tatler Vol 1,1710,1709,1710,poetry/Tatler_Vol1.txt,Coffee-houses streets fashionable life 1709-10
+tatler_v2,topography,RichardSteele,The Tatler Vol 2,1710,1709,1710,poetry/Tatler_Vol2.txt,Coffee-houses streets fashionable life 1709-10
+tatler_v3,topography,RichardSteele,The Tatler Vol 3,1710,1710,1711,poetry/Tatler_Vol3.txt,Coffee-houses streets fashionable life 1710-11
+tatler_v4,topography,RichardSteele,The Tatler Vol 4,1711,1710,1711,poetry/Tatler_Vol4.txt,Coffee-houses streets fashionable life 1710-11
+spectator_v123,topography,JosephAddison,The Spectator Vols 1-3,1711,1711,1712,poetry/Spectator_Vols123.txt,London social observation coffee-houses 1711-12
