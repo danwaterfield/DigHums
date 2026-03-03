@@ -1392,6 +1392,7 @@ const WIND_DY = -0.15;  // slight northward component
 
 function _buildSmokefield() {{
     if (!pCanvas) return;
+    updateVenuePx();
     const W = pCanvas.width, H = pCanvas.height;
     const cW = W / FIELD_W, cH = H / FIELD_H;
 
@@ -1434,10 +1435,11 @@ function _buildSmokefield() {{
     const count = Math.round(600 + so2_index * 800);
 
     // Colour: amber-brown
-    for (let i = 0; i < count; i++) {{
+    const safeCount = Math.min(count, MAX_P);
+    for (let i = 0; i < safeCount; i++) {{
         particles[i].r = 180; particles[i].g = 130; particles[i].b = 40;
     }}
-    startParticles(count);
+    startParticles(safeCount);
 }}
 function _buildFlowField()   {{ /* implemented in Task 4 */ }}
 function _buildNetworkField(){{ /* implemented in Task 5 */ }}
