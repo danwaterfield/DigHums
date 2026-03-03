@@ -74,7 +74,9 @@ def test_parse_ohm_response_filters_by_date():
     }
     result = parse_ohm_response(fake_response)
     assert len(result) == 1
-    assert result[0] == [[51.51, -0.12], [51.52, -0.13]]
+    assert result[0]["p"] == [[51.51, -0.12], [51.52, -0.13]]
+    assert result[0]["s"] == 1746
+    assert result[0]["e"] is None
 
 
 def test_parse_ohm_response_skips_single_point_ways():

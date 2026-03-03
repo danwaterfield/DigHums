@@ -63,7 +63,7 @@ def parse_ohm_year(date_str) -> int:
 def parse_ohm_response(data: dict) -> list:
     """
     Convert OHM Overpass JSON to list of simplified polylines.
-    Each polyline is [[lat, lon], ...].
+    Each entry is {"p": [[lat,lon],...], "s": start_yr|None, "e": end_yr|None}.
     Filters to ways that existed within 1660–1820.
     """
     segments = []
@@ -85,7 +85,11 @@ def parse_ohm_response(data: dict) -> list:
         # Simplify: epsilon ~0.00015° ≈ 10 m — reduces points by ~60%
         simplified = douglas_peucker(pts, epsilon=0.00015)
         if len(simplified) >= 2:
-            segments.append([[p[0], p[1]] for p in simplified])
+            segments.append({
+                "p": [[p[0], p[1]] for p in simplified],
+                "s": start_yr,   # int or None
+                "e": end_yr,     # int or None
+            })
     return segments
 
 
