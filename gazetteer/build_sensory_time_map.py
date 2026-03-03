@@ -449,6 +449,119 @@ const SMOKE_DATA_ENV = {SMOKE_JSON};       // [{{decade_start, so2_index, coal_t
 const STREET_NETWORK = {STREET_NETWORK_JSON};  // [[lat,lon],...] pre-1820 streets
 const ZONE_DATA = {ZONE_DATA_JSON};            // GeoJSON FeatureCollection — named London zones
 
+// ── Zone inference engine ──────────────────────────────────────────────────
+
+function pointInPolygon(lat, lon, ring) {{
+    // ray casting — ring is array of [lon, lat] pairs (GeoJSON order)
+    let inside = false;
+    for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {{
+        const xi = ring[i][0], yi = ring[i][1];
+        const xj = ring[j][0], yj = ring[j][1];
+        if ((yi > lat) !== (yj > lat) && lon < (xj - xi) * (lat - yi) / (yj - yi) + xi)
+            inside = !inside;
+    }}
+    return inside;
+}}
+
+function getZoneForPoint(lat, lon) {{
+    if (!ZONE_DATA || !ZONE_DATA.features) return null;
+    for (const feat of ZONE_DATA.features) {{
+        const ring = feat.geometry.coordinates[0];
+        if (pointInPolygon(lat, lon, ring)) return feat.properties;
+    }}
+    return null;
+}}
+
+function interpolateZoneProps(zoneProps, year) {{
+    const decades = Object.keys(zoneProps.decades).map(Number).sort((a,b)=>a-b);
+    if (!decades.length) return {{}};
+    if (year <= decades[0]) return zoneProps.decades[String(decades[0])];
+    if (year >= decades[decades.length-1]) return zoneProps.decades[String(decades[decades.length-1])];
+    let d0 = decades[0], d1 = decades[1];
+    for (let i = 0; i < decades.length - 1; i++) {{
+        if (year >= decades[i] && year <= decades[i+1]) {{ d0 = decades[i]; d1 = decades[i+1]; break; }}
+    }}
+    const t = (year - d0) / (d1 - d0);
+    const p0 = zoneProps.decades[String(d0)], p1 = zoneProps.decades[String(d1)];
+    return {{
+        smell_base:           p0.smell_base           + t * (p1.smell_base           - p0.smell_base),
+        noise_base:           p0.noise_base           + t * (p1.noise_base           - p0.noise_base),
+        crowd_density:        p0.crowd_density        + t * (p1.crowd_density        - p0.crowd_density),
+        river_proximity:      p0.river_proximity,
+        industrial_intensity: p0.industrial_intensity + t * (p1.industrial_intensity - p0.industrial_intensity),
+        street_character:     t < 0.5 ? p0.street_character : p1.street_character,
+        building_height:      t < 0.5 ? p0.building_height  : p1.building_height,
+    }};
+}}
+
+// Layer 1 (zone ambient) + Layer 2 (env modifiers)
+// Returns {{smell, noise, crowd, visual, zone, dominant, provenance, street_character}} or null
+function computeZoneBaseline(lat, lon, year, month) {{
+    const zoneProps = getZoneForPoint(lat, lon);
+    if (!zoneProps) return null;
+    const p = interpolateZoneProps(zoneProps, year);
+
+    let smell = p.smell_base;
+    let noise = p.noise_base;
+    let crowd = p.crowd_density;
+    let visual = 0.3;
+    const provenance = [];
+
+    // Env modifier 1: river smell rises with summer heat
+    if (p.river_proximity > 0) {{
+        const yearCET = CET_DATA[year] || {{}};
+        const temp = (month && yearCET[month] !== undefined) ? yearCET[month] : (yearCET[0] || 10);
+        const riverBoost = p.river_proximity * Math.max(0, (temp - 10) / 22);
+        if (riverBoost > 0.02) {{
+            smell = Math.min(1, smell + riverBoost);
+            provenance.push('river smell (' + temp.toFixed(1) + '\u00b0C)');
+        }}
+    }}
+
+    // Env modifier 2: industrial smoke scales with so2_index
+    if (p.industrial_intensity > 0 && SMOKE_DATA_ENV.length) {{
+        const decade = Math.floor(year / 10) * 10;
+        const smokeRow = SMOKE_DATA_ENV.find(s => s.decade_start === decade);
+        const so2 = smokeRow ? smokeRow.so2_index : 0;
+        const maxSo2 = Math.max(...SMOKE_DATA_ENV.map(s => s.so2_index)) || 1;
+        const smokeBoost = p.industrial_intensity * (so2 / maxSo2) * 0.4;
+        const windMult = lon > -0.09 ? 1.3 : lon < -0.17 ? 0.7 : 1.0;
+        const finalSmoke = smokeBoost * windMult;
+        if (finalSmoke > 0.02) {{
+            smell = Math.min(1, smell + finalSmoke * 0.6);
+            visual = Math.min(1, visual + finalSmoke * 0.3);
+            provenance.push('coal smoke (SO\u2082 ' + so2.toFixed(1) + ')');
+        }}
+    }}
+
+    // Env modifier 3: frost fair crowd noise (January, Thames zones, very cold)
+    {{
+        const yearCET = CET_DATA[year] || {{}};
+        const janTemp = yearCET[1] !== undefined ? yearCET[1] : (yearCET['1'] !== undefined ? yearCET['1'] : null);
+        if (janTemp !== null && janTemp < -2 && month === 1 && p.river_proximity > 0.5) {{
+            crowd = Math.min(1, crowd + 0.25);
+            noise = Math.min(1, noise + 0.20);
+            provenance.push('frost fair conditions');
+        }}
+    }}
+
+    // Env modifier 4: narrow streets amplify noise
+    if (p.street_character === 'narrow') {{
+        noise = Math.min(1, noise * 1.35);
+    }}
+
+    if (!provenance.length) provenance.push('zone character (' + zoneProps.name + ')');
+    else provenance.unshift('zone character (' + zoneProps.name + ')');
+
+    return {{
+        smell, noise, crowd, visual,
+        zone: zoneProps.name,
+        dominant: zoneProps.dominant_sense,
+        provenance,
+        street_character: p.street_character,
+    }};
+}}
+
 // Tier colour palette (1=impoverished → 5=aristocratic)
 const TIER_COLORS = {{ 1:'#8b2020', 2:'#c07030', 3:'#5a7a4a', 4:'#3a6090', 5:'#9a7020' }};
 

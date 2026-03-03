@@ -192,3 +192,10 @@ def test_zone_data_embedded(html):
     """ZONE_DATA constant must be present and contain zone names."""
     assert 'const ZONE_DATA' in html
     assert 'Smithfield' in html
+
+
+def test_zone_inference_functions(html):
+    """Zone baseline inference functions must be present."""
+    assert 'function pointInPolygon' in html
+    assert 'function getZoneForPoint' in html
+    assert 'function computeZoneBaseline' in html
