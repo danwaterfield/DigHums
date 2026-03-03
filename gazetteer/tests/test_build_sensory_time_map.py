@@ -152,3 +152,9 @@ def test_smoke_mode_field_builder(html):
     assert "windDx" in html
     assert "enclosureFactor" in html
     assert "so2_index" in html
+
+
+def test_flow_mode_field_builder(html):
+    assert "_buildFlowField" in html
+    assert "MODALITY_COLOURS" in html
+    assert "attractStrength" in html

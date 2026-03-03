@@ -1441,7 +1441,83 @@ function _buildSmokefield() {{
     }}
     startParticles(safeCount);
 }}
-function _buildFlowField()   {{ /* implemented in Task 4 */ }}
+const MODALITY_COLOURS = {{
+    smell:  {{ r: 180, g: 130, b:  40 }},
+    noise:  {{ r:  60, g: 120, b: 200 }},
+    crowd:  {{ r: 180, g:  60, b:  60 }},
+    visual: {{ r:  60, g: 160, b:  80 }},
+}};
+
+function _buildFlowField() {{
+    if (!pCanvas) return;
+    updateVenuePx();
+    const W = pCanvas.width, H = pCanvas.height;
+    const cW = W / FIELD_W, cH = H / FIELD_H;
+
+    // Which modalities are active via sense pills?
+    const activeModals = [];
+    if (!state.modality) {{
+        activeModals.push('smell', 'noise', 'crowd', 'visual');
+    }} else {{
+        activeModals.push(state.modality);
+    }}
+
+    fieldDx.fill(0); fieldDy.fill(0);
+
+    activeModals.forEach(modal => {{
+        for (let gy = 0; gy < FIELD_H; gy++) {{
+            for (let gx = 0; gx < FIELD_W; gx++) {{
+                const cx = (gx + 0.5) * cW;
+                const cy = (gy + 0.5) * cH;
+                let fdx = 0, fdy = 0;
+
+                VENUES.forEach(v => {{
+                    const loads = venueIntensityCache[v.id];
+                    if (!loads || (loads[modal] || 0) < 0.02) return;
+                    const vp = venuePx[v.id];
+                    if (!vp) return;
+                    const dx = cx - vp.px, dy = cy - vp.py;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 1 || dist > 350) return;
+
+                    if (modal === 'crowd') {{
+                        const attractStrength = loads.crowd * 3000 / (dist * dist);
+                        fdx -= (dx / dist) * attractStrength;
+                        fdy -= (dy / dist) * attractStrength;
+                    }} else if (modal === 'noise') {{
+                        const strength = loads.noise * 3500 / (dist * dist);
+                        fdx += (dx / dist) * strength;
+                        fdy += (dy / dist) * strength;
+                        if (v.material === 'stone' && v.enclosure !== 'open') {{
+                            fdx += (dy / dist) * strength * 0.25;
+                            fdy -= (dx / dist) * strength * 0.25;
+                        }}
+                    }} else {{
+                        const str = loads[modal] * (modal === 'visual' ? 1500 : 3000) / (dist * dist);
+                        fdx += (dx / dist) * str;
+                        fdy += (dy / dist) * str;
+                    }}
+                }});
+
+                const mag = Math.sqrt(fdx * fdx + fdy * fdy);
+                if (mag > 2.0) {{ fdx = fdx / mag * 2.0; fdy = fdy / mag * 2.0; }}
+
+                const i = gy * FIELD_W + gx;
+                fieldDx[i] += fdx / activeModals.length;
+                fieldDy[i] += fdy / activeModals.length;
+            }}
+        }}
+    }});
+
+    // Assign particle colours by dominant active modality
+    const col = MODALITY_COLOURS[activeModals[0]] || MODALITY_COLOURS.smell;
+    const count = 900;
+    const safeCount = Math.min(count, MAX_P);
+    for (let i = 0; i < safeCount; i++) {{
+        particles[i].r = col.r; particles[i].g = col.g; particles[i].b = col.b;
+    }}
+    startParticles(safeCount);
+}}
 function _buildNetworkField(){{ /* implemented in Task 5 */ }}
 
 let _fieldUpdateTimer = null;
