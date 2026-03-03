@@ -1363,8 +1363,7 @@ function respawnParticle(p, activeCount) {{
 // Main RAF loop (particleRaf and activeParticleCount declared early — see top of particle system block)
 function particleFrame() {{
     if (!pCtx || !pCanvas) return;
-    pCtx.fillStyle = 'rgba(0,0,0,0.035)';
-    pCtx.fillRect(0, 0, pCanvas.width, pCanvas.height);
+    pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
 
     const isNetwork = state.particleMode === 'network';
 
@@ -1420,9 +1419,10 @@ function particleFrame() {{
             if (p.py > pCanvas.height) p.py = 0;
         }}
 
-        const alpha = Math.min(0.8, (p.age / p.maxAge) * 2 * (1 - p.age / p.maxAge) * 4);
+        const t = p.age / p.maxAge;
+        const alpha = Math.min(0.9, t < 0.1 ? t * 9 : 1 - t);  // fast fade-in, slow fade-out
         pCtx.beginPath();
-        pCtx.arc(p.px, p.py, 1.2, 0, Math.PI * 2);
+        pCtx.arc(p.px, p.py, 1.5, 0, Math.PI * 2);
         pCtx.fillStyle = `rgba(${{p.r}},${{p.g}},${{p.b}},${{alpha.toFixed(2)}})`;
         pCtx.fill();
     }}
