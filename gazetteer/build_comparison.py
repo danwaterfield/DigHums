@@ -50,12 +50,16 @@ def load_data(venues_path: Path, db_path: Path) -> list[dict]:
     with open(venues_path, newline="", encoding="utf-8") as f:
         venues = {
             row["id"]: {
-                "id":        row["id"],
-                "name":      row["name"],
-                "lat":       float(row["lat"]),
-                "lon":       float(row["lon"]),
-                "fiction":    [],
-                "nonfiction": [],
+                "id":           row["id"],
+                "name":         row["name"],
+                "lat":          float(row["lat"]),
+                "lon":          float(row["lon"]),
+                "enclosure":    row.get("enclosure", ""),
+                "building_type": row.get("building_type", ""),
+                "material":     row.get("material", ""),
+                "capacity":     row.get("capacity", ""),
+                "fiction":      [],
+                "nonfiction":   [],
             }
             for row in csv.DictReader(f)
         }
@@ -258,6 +262,7 @@ body { font-family: Georgia, 'Times New Roman', serif; background: #f5f0eb;
   <a href="venue_explorer.html" class="nav-link">&#8592; Venue Explorer</a>
   <select id="venue-select"></select>
   <span class="subtitle" id="top-stats"></span>
+  <span id="top-meta" style="display:flex;gap:4px;flex-wrap:wrap;align-items:center"></span>
 </div>
 
 <div id="columns">
@@ -287,6 +292,26 @@ body { font-family: Georgia, 'Times New Roman', serif; background: #f5f0eb;
 
 <script>
 const VENUES = __VENUES_DATA__;
+
+const BT_COLORS = {
+  'garden':    '#4a7c4f', 'park':      '#4a7c4f',
+  'theatre':   '#8b5e3c', 'assembly':  '#8b5e3c',
+  'church':    '#6b5b8a',
+  'street':    '#7a7a7a', 'square':    '#7a7a7a', 'district': '#7a7a7a',
+  'market':    '#b8860b',
+  'prison':    '#8b0000', 'court':     '#8b0000', 'execution': '#8b0000',
+};
+
+function renderMetaChips(v) {
+  const el = document.getElementById('top-meta');
+  if (!el) return;
+  const parts = [v.enclosure, v.building_type, v.material, v.capacity].filter(Boolean);
+  const color = BT_COLORS[v.building_type] || '#666';
+  el.innerHTML = parts.map(function(p) {
+    return '<span style="font-size:10px;padding:2px 7px;border-radius:10px;border:1px solid '
+        + color + ';color:' + color + ';background:rgba(0,0,0,0.04)">' + p + '</span>';
+  }).join('');
+}
 
 const SOURCE_CLASSES = {
   fiction: 'src-fiction', diary: 'src-diary',
@@ -414,6 +439,7 @@ function render() {
 
   document.getElementById('top-stats').textContent =
     v.name + ' \u00b7 ' + (fic.length + nf.length) + ' total passages';
+  renderMetaChips(v);
 
   renderModBar('fic-mod-bar', fic);
   renderModBar('nf-mod-bar',  nf);

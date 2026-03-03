@@ -24,7 +24,11 @@ def load_data(venues_path: Path, db_path: Path) -> dict:
         venues = [
             {"id": r["id"], "name": r["name"],
              "lat": float(r["lat"]), "lon": float(r["lon"]),
-             "tier": int(r["tier"]) if r.get("tier") else 3}
+             "tier": int(r["tier"]) if r.get("tier") else 3,
+             "enclosure":     r.get("enclosure", ""),
+             "building_type": r.get("building_type", ""),
+             "material":      r.get("material", ""),
+             "capacity":      r.get("capacity", "")}
             for r in csv.DictReader(f)
         ]
 
@@ -147,6 +151,9 @@ body {{ font-family: 'Georgia', serif; background: #f9f6f0; color: #2c2c2c; disp
 .no-events {{ color: #999; font-style: italic; font-size: 0.85em; padding: 8px 0; }}
 .sense-pill {{ background: #1e3a2a; border: 1px solid #555; color: #a8c8a8; padding: 2px 8px; cursor: pointer; border-radius: 12px; font-size: 0.78em; }}
 .sense-pill:hover {{ background: #2a4a3a; }}
+.btype-pill {{ background: #1a1a2e; border: 1px solid; padding: 2px 8px; cursor: pointer; border-radius: 12px; font-size: 0.76em; opacity: 0.75; transition: opacity 0.15s, background 0.15s; }}
+.btype-pill:hover {{ opacity: 1; }}
+.btype-pill.active {{ background: rgba(255,255,255,0.12); opacity: 1; font-weight: bold; }}
 .sense-pill[data-sense="smell"].active {{ background: #5c4a10; border-color: #c89230; color: #fff; }}
 .sense-pill[data-sense="noise"].active {{ background: #10305c; border-color: #3a7acc; color: #fff; }}
 .sense-pill[data-sense="crowd"].active {{ background: #5c1010; border-color: #cc3030; color: #fff; }}
@@ -181,7 +188,7 @@ body {{ font-family: 'Georgia', serif; background: #f9f6f0; color: #2c2c2c; disp
 #tier-toggle.active {{ background: #1a3a5a; border-color: #4488cc; color: #aaddff; }}
 /* ── Smoke haze overlay on map ── */
 #map {{ flex: 1; position: relative; }}
-#smoke-overlay {{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 400; opacity: 0; background: linear-gradient(to right, transparent 15%, rgba(140,110,50,0.55) 85%); transition: opacity 0.6s ease; }}
+#smoke-overlay {{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 400; opacity: 0; background: linear-gradient(to right, rgba(139,119,80,0) 10%, rgba(139,119,80,0.65) 90%); transition: opacity 0.6s ease; }}
 /* ── Tier marker colours (used in tier-view mode) ── */
 </style>
 </head>
@@ -254,6 +261,21 @@ body {{ font-family: 'Georgia', serif; background: #f9f6f0; color: #2c2c2c; disp
     <button class="sense-pill" data-sense="visual">Visual</button>
     <button id="tier-toggle" onclick="toggleTierView()" title="Colour venues by economic tier">&#9632; Tier</button>
   </div>
+  <div class="pill-row" id="btype-row">
+    <span class="pill-label">Type</span>
+    <button class="btype-pill" data-btype="garden" style="border-color:#4a7c4f;color:#4a7c4f">Garden</button>
+    <button class="btype-pill" data-btype="park"   style="border-color:#4a7c4f;color:#4a7c4f">Park</button>
+    <button class="btype-pill" data-btype="theatre"  style="border-color:#8b5e3c;color:#8b5e3c">Theatre</button>
+    <button class="btype-pill" data-btype="assembly" style="border-color:#8b5e3c;color:#8b5e3c">Assembly</button>
+    <button class="btype-pill" data-btype="church"   style="border-color:#6b5b8a;color:#6b5b8a">Church</button>
+    <button class="btype-pill" data-btype="market"   style="border-color:#b8860b;color:#b8860b">Market</button>
+    <button class="btype-pill" data-btype="square"   style="border-color:#7a7a7a;color:#7a7a7a">Square</button>
+    <button class="btype-pill" data-btype="street"   style="border-color:#7a7a7a;color:#7a7a7a">Street</button>
+    <button class="btype-pill" data-btype="prison"   style="border-color:#8b0000;color:#8b0000">Prison</button>
+    <button class="btype-pill" data-btype="court"    style="border-color:#8b0000;color:#8b0000">Court</button>
+    <button class="btype-pill" data-btype="execution" style="border-color:#8b0000;color:#8b0000">Execution</button>
+    <button class="btype-pill" data-btype="district" style="border-color:#7a7a7a;color:#7a7a7a">District</button>
+  </div>
   <div class="pill-row" id="env-bar">
     <span class="env-gauge" title="Central England Temperature (HadCET / Met Office)">
       <span class="env-label">&#127783; Temp</span>
@@ -298,6 +320,29 @@ const SMOKE_DATA_ENV = {SMOKE_JSON};       // [{{decade_start, so2_index, coal_t
 // Tier colour palette (1=impoverished → 5=aristocratic)
 const TIER_COLORS = {{ 1:'#8b2020', 2:'#c07030', 3:'#5a7a4a', 4:'#3a6090', 5:'#9a7020' }};
 
+// Building type border colours for inactive markers
+const BUILDING_TYPE_COLORS = {{
+    'garden':    '#4a7c4f',
+    'park':      '#4a7c4f',
+    'theatre':   '#8b5e3c',
+    'assembly':  '#8b5e3c',
+    'church':    '#6b5b8a',
+    'street':    '#7a7a7a',
+    'square':    '#7a7a7a',
+    'district':  '#7a7a7a',
+    'market':    '#b8860b',
+    'prison':    '#8b0000',
+    'court':     '#8b0000',
+    'execution': '#8b0000',
+}};
+
+// Enclosure dash patterns: makes physical form legible on all markers
+const ENCLOSURE_DASH = {{
+    'open':      null,     // solid stroke
+    'semi_open': '4 3',   // dashed
+    'enclosed':  '1 3',   // dotted
+}};
+
 const EVENTS_BY_ID = Object.fromEntries(EVENTS.map(e => [e.event_id, e]));
 
 const MILESTONES = {{
@@ -315,7 +360,7 @@ EVIDENCE.forEach(p => {{
     if (p.venue_id) evidenceCountByVenue[p.venue_id] = (evidenceCountByVenue[p.venue_id] || 0) + 1;
 }});
 
-const state = {{ month: null, dow: null, band: null, literary: false, selectedVenue: null, modality: null, tierView: false }};
+const state = {{ month: null, dow: null, band: null, literary: false, selectedVenue: null, modality: null, tierView: false, buildingType: null }};
 
 // ── Smoke haze overlay ──────────────────────────────────────────────────────
 // Applied once the map div is present; opacity driven by updateEnvIndicators.
@@ -362,7 +407,11 @@ function updateEnvIndicators(year, month) {{
         const pct = Math.round(smokeRow.so2_index * 100);
         if (smokeBar)  smokeBar.style.width  = pct + '%';
         if (smokePct)  smokePct.textContent  = pct + '%';
-        if (smokeOverlay) smokeOverlay.style.opacity = (smokeRow.so2_index * 0.28).toFixed(3);
+        // Haze overlay: hidden when so2_index = 0 (pre-coal or no data)
+        if (smokeOverlay) smokeOverlay.style.opacity = smokeRow.so2_index > 0
+            ? (smokeRow.so2_index * 0.28).toFixed(3) : '0';
+    }} else {{
+        if (smokeOverlay) smokeOverlay.style.opacity = '0';
     }}
 }}
 
@@ -444,12 +493,15 @@ Object.entries(PROCESSION_ROUTES).forEach(([evtId, route]) => {{
 const markersByVenueId = {{}};
 VENUES.forEach(v => {{
     const hasEvidence = (evidenceCountByVenue[v.id] || 0) > 0;
+    const btColor   = BUILDING_TYPE_COLORS[v.building_type] || '#666';
+    const dashArray = ENCLOSURE_DASH[v.enclosure] || null;
     const m = L.circleMarker([v.lat, v.lon], {{
         radius: 4,
         fillColor: '#aaa',
-        color: hasEvidence ? '#ffffff' : '#888',
+        color: hasEvidence ? btColor : '#888',
         fillOpacity: 0.35,
         weight: hasEvidence ? 1.5 : 0.8,
+        dashArray: dashArray,
     }}).addTo(map);
     m.bindTooltip('', {{ permanent: false, direction: 'top' }});
     m.on('click', () => selectVenue(v.id));
@@ -473,6 +525,17 @@ VENUES.forEach(v => {{
 
 function computeIntensity(venueId, year, month, dow, band) {{
     const loads = {{smell: 0, noise: 0, crowd: 0, visual: 0}};
+
+    // ── Architectural exposure lookup ──────────────────────────────────────
+    const _venue = VENUES.find(v => v.id === venueId);
+    const enc = _venue ? (_venue.enclosure || 'open') : 'open';
+    const mat = _venue ? (_venue.material  || 'outdoor') : 'outdoor';
+    // Exposure multipliers: how much of the external environment penetrates
+    const thermalMult = enc === 'open' ? 1.0 : enc === 'semi_open' ? 0.6 : 0.2;
+    const smokeMult   = enc === 'open' ? 1.0 : enc === 'semi_open' ? 0.8 : 0.4;
+    // Stone reverberation boosts noise in enclosed/semi-open stone buildings
+    const reverbBonus = (mat === 'stone' && enc !== 'open') ? 0.08
+                      : (mat === 'timber' && enc === 'enclosed') ? 0.04 : 0;
 
     EVENT_VENUES.forEach(ev => {{
         if (ev.venue_id !== venueId) return;
@@ -559,10 +622,10 @@ function computeIntensity(venueId, year, month, dow, band) {{
         smokeBoost = (smokeRow ? smokeRow.so2_index : 0) * 0.12;
     }}
 
-    loads.smell  = Math.min(1, loads.smell  + densityBoost * 0.6 + smokeBoost);
-    loads.noise  = Math.min(1, loads.noise  + densityBoost * 0.4);
+    loads.smell  = Math.min(1, loads.smell  + densityBoost * 0.6 + smokeBoost * smokeMult);
+    loads.noise  = Math.min(1, loads.noise  + densityBoost * 0.4 + reverbBonus);
     loads.crowd  = Math.min(1, loads.crowd  + densityBoost * 0.4);
-    loads.visual = Math.min(1, loads.visual + densityBoost * 0.4 + thermalBoost);
+    loads.visual = Math.min(1, loads.visual + densityBoost * 0.4 + thermalBoost * thermalMult);
 
     loads.composite = (loads.smell + loads.noise + loads.crowd + loads.visual) / 4;
     return loads;
@@ -685,30 +748,46 @@ function updateMap() {{
 
         marker.setRadius(r);
         const hasEvidence = (evidenceCountByVenue[v.id] || 0) > 0;
-        const tierCol = TIER_COLORS[v.tier] || '#888';
-        if (displayLoad < 0.01) {{
+        const tierCol    = TIER_COLORS[v.tier] || '#888';
+        const btColor    = BUILDING_TYPE_COLORS[v.building_type] || '#666';
+        const dashArray  = ENCLOSURE_DASH[v.enclosure] || null;
+        // Building-type filter dimming
+        const btDimmed = state.buildingType && v.building_type !== state.buildingType;
+        if (btDimmed) {{
+            marker.setStyle({{
+                fillColor: '#aaa', color: '#666',
+                fillOpacity: 0.08, weight: 0.5, dashArray: dashArray,
+            }});
+        }} else if (displayLoad < 0.01) {{
             if (state.tierView) {{
                 marker.setStyle({{
                     fillColor: tierCol, color: '#ffffff',
-                    fillOpacity: 0.65, weight: 1.2,
+                    fillOpacity: 0.65, weight: 1.2, dashArray: dashArray,
                 }});
             }} else {{
                 marker.setStyle({{
-                    fillColor: '#aaa', color: hasEvidence ? '#ffffff' : '#888',
+                    fillColor: '#aaa', color: hasEvidence ? btColor : '#888',
                     fillOpacity: 0.3, weight: hasEvidence ? 1.5 : 0.8,
+                    dashArray: dashArray,
                 }});
             }}
         }} else {{
             marker.setStyle({{
                 fillColor: col, color: state.tierView ? tierCol : col,
                 fillOpacity: 0.78, weight: state.tierView ? 2 : 1,
+                dashArray: dashArray,
             }});
         }}
         marker._intensity = intensity;
 
-        // Rich tooltip: name + per-modality breakdown + evidence count
+        // Rich tooltip: name + architectural metadata + per-modality breakdown + evidence count
         const evCount = evidenceCountByVenue[v.id] || 0;
         let tip = `<strong>${{v.name}}</strong>`;
+        // Architectural metadata line
+        const metaParts = [v.enclosure, v.building_type, v.material, v.capacity].filter(Boolean);
+        if (metaParts.length) {{
+            tip += `<br><span style="font-size:0.80em;opacity:0.55;font-style:italic">${{metaParts.join(' \u00b7 ')}}</span>`;
+        }}
         if (intensity.composite > 0.01) {{
             const parts = [];
             if (intensity.smell  > 0.01) parts.push(`smell ${{Math.round(intensity.smell*100)}}%`);
@@ -930,9 +1009,20 @@ document.querySelectorAll('.sense-pill').forEach(btn => {{
     }});
 }});
 
+document.querySelectorAll('.btype-pill').forEach(btn => {{
+    btn.addEventListener('click', () => {{
+        const btype = btn.dataset.btype;
+        const wasActive = btn.classList.contains('active');
+        document.querySelectorAll('.btype-pill').forEach(b => b.classList.remove('active'));
+        state.buildingType = wasActive ? null : btype;
+        if (!wasActive) btn.classList.add('active');
+        updateMap();
+    }});
+}});
+
 function clearFilters() {{
-    state.month = null; state.dow = null; state.band = null; state.modality = null;
-    document.querySelectorAll('.pill.active, .sense-pill.active').forEach(b => b.classList.remove('active'));
+    state.month = null; state.dow = null; state.band = null; state.modality = null; state.buildingType = null;
+    document.querySelectorAll('.pill.active, .sense-pill.active, .btype-pill.active').forEach(b => b.classList.remove('active'));
     updateMap();
 }}
 
