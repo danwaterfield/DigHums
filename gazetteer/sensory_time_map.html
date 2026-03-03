@@ -1284,7 +1284,7 @@ function _buildFlowField() {
                         const strength = loads.noise * 3500 / (dist * dist);
                         fdx += (dx / dist) * strength;
                         fdy += (dy / dist) * strength;
-                        if (v.material === 'stone' && v.enclosure !== 'open') {
+                        if (v.material === 'stone' && (v.enclosure === 'enclosed' || v.enclosure === 'semi_open')) {
                             fdx += (dy / dist) * strength * 0.25;
                             fdy -= (dx / dist) * strength * 0.25;
                         }
@@ -1295,9 +1295,6 @@ function _buildFlowField() {
                     }
                 });
 
-                const mag = Math.sqrt(fdx * fdx + fdy * fdy);
-                if (mag > 2.0) { fdx = fdx / mag * 2.0; fdy = fdy / mag * 2.0; }
-
                 const i = gy * FIELD_W + gx;
                 fieldDx[i] += fdx / activeModals.length;
                 fieldDy[i] += fdy / activeModals.length;
@@ -1305,12 +1302,25 @@ function _buildFlowField() {
         }
     });
 
-    // Assign particle colours by dominant active modality
-    const col = MODALITY_COLOURS[activeModals[0]] || MODALITY_COLOURS.smell;
+    // Final clamp pass — bound the accumulated multi-modality field
+    for (let ci = 0; ci < FIELD_W * FIELD_H; ci++) {
+        const fm = Math.sqrt(fieldDx[ci] * fieldDx[ci] + fieldDy[ci] * fieldDy[ci]);
+        if (fm > 2.0) { fieldDx[ci] = fieldDx[ci] / fm * 2.0; fieldDy[ci] = fieldDy[ci] / fm * 2.0; }
+    }
+
+    // Blend particle colours across active modalities
+    let blendR = 0, blendG = 0, blendB = 0;
+    activeModals.forEach(m => {
+        const c = MODALITY_COLOURS[m] || MODALITY_COLOURS.smell;
+        blendR += c.r; blendG += c.g; blendB += c.b;
+    });
+    blendR = Math.round(blendR / activeModals.length);
+    blendG = Math.round(blendG / activeModals.length);
+    blendB = Math.round(blendB / activeModals.length);
     const count = 900;
     const safeCount = Math.min(count, MAX_P);
     for (let i = 0; i < safeCount; i++) {
-        particles[i].r = col.r; particles[i].g = col.g; particles[i].b = col.b;
+        particles[i].r = blendR; particles[i].g = blendG; particles[i].b = blendB;
     }
     startParticles(safeCount);
 }
