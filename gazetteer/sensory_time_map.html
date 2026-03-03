@@ -1112,7 +1112,7 @@ function resetParticles() {
     particles.forEach(p => { p.age = p.maxAge; });
 }
 
-// Bilinear field sample at pixel (px, py)
+// Nearest-neighbour field sample at pixel (px, py)
 function sampleField(px, py) {
     if (!pCanvas) return { dx: 0, dy: 0 };
     const gx = Math.min(FIELD_W - 1, Math.max(0, (px / pCanvas.width)  * FIELD_W)) | 0;
@@ -1247,7 +1247,6 @@ function updateParticleField() {
     else if (state.particleMode === 'network') _buildNetworkField();
 }
 
-// Stubs — replaced by Tasks 3/4/5
 const WIND_DX = 0.40;   // prevailing SW wind: east drift
 const WIND_DY = -0.15;  // slight northward component
 
