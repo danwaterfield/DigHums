@@ -165,3 +165,14 @@ def test_network_mode_field_builder(html):
     assert "STREET_NETWORK" in html
     assert "segT" in html
     assert "_networkStep" in html
+
+
+def test_particle_mode_buttons_present(html):
+    assert 'data-pmode="off"'     in html
+    assert 'data-pmode="smoke"'   in html
+    assert 'data-pmode="flow"'    in html
+    assert 'data-pmode="network"' in html
+
+def test_particle_mode_js_handler(html):
+    assert "data-pmode" in html
+    assert "particleMode" in html
