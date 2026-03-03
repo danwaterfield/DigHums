@@ -1749,10 +1749,29 @@ function _buildSmokefield() {{
     const decade = Math.floor(year / 10) * 10;
     const smokeRow = SMOKE_DATA_ENV.find(s => s.decade_start === decade);
     const so2_index = smokeRow ? smokeRow.so2_index : 0;
+    // Scale particle count by average zone industrial_intensity of active venues
+    let zoneIndMult = 1.0;
+    {{
+        const activeVenues = VENUES.filter(v => {{
+            const cache = venueIntensityCache[v.id];
+            return cache && cache.composite > 0.05;
+        }});
+        if (activeVenues.length > 0) {{
+            let totalInd = 0;
+            activeVenues.forEach(v => {{
+                const zoneFeat = getZoneForPoint(v.lat, v.lon);
+                const zoneProps = zoneFeat ? interpolateZoneProps(zoneFeat, year) : null;
+                totalInd += zoneProps ? (zoneProps.industrial_intensity || 0.3) : 0.3;
+            }});
+            const avgInd = totalInd / activeVenues.length;
+            zoneIndMult = 0.7 + avgInd * 0.9;  // range 0.7x – 1.6x
+        }}
+    }}
     const count = Math.round(600 + so2_index * 800);
+    const scaledCount = Math.round(count * zoneIndMult);
 
     // Colour: amber-brown
-    const safeCount = Math.min(count, MAX_P);
+    const safeCount = Math.min(scaledCount, MAX_P);
     for (let i = 0; i < safeCount; i++) {{
         particles[i].r = 180; particles[i].g = 130; particles[i].b = 40;
     }}

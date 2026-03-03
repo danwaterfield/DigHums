@@ -236,3 +236,8 @@ def test_click_anywhere_handler(html):
 def test_tooltip_provenance_line(html):
     """Tooltip must call computeZoneBaseline and use provenance."""
     assert 'zoneBaseline.provenance' in html
+
+
+def test_zone_aware_particles(html):
+    """Smoke field builder must use zone industrial_intensity to scale particles."""
+    assert 'zoneProps.industrial_intensity' in html
