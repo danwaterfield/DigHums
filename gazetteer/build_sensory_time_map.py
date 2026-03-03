@@ -447,6 +447,7 @@ const CET_DATA       = {CET_JSON};         // {{year: {{0:annual, 1:jan, ...12:d
 const MORTALITY_DATA = {MORTALITY_JSON};   // {{year: total_burials}}
 const SMOKE_DATA_ENV = {SMOKE_JSON};       // [{{decade_start, so2_index, coal_tons_k}}]
 const STREET_NETWORK = {STREET_NETWORK_JSON};  // [[lat,lon],...] pre-1820 streets
+const ZONE_DATA = {ZONE_DATA_JSON};            // GeoJSON FeatureCollection — named London zones
 
 // Tier colour palette (1=impoverished → 5=aristocratic)
 const TIER_COLORS = {{ 1:'#8b2020', 2:'#c07030', 3:'#5a7a4a', 4:'#3a6090', 5:'#9a7020' }};
@@ -1729,6 +1730,9 @@ def build(venues_path: Path = VENUES_PATH, db_path: Path = DB_PATH,
           out_path: Path = OUT_PATH) -> None:
     data = load_data(venues_path, db_path)
 
+    zones_path = Path(__file__).parent / "zones.json"
+    zones_data = json.loads(zones_path.read_text(encoding="utf-8")) if zones_path.exists() else {"type": "FeatureCollection", "features": []}
+
     streets = fetch_ohm_streets()
 
     html = HTML_TEMPLATE.format(
@@ -1741,6 +1745,7 @@ def build(venues_path: Path = VENUES_PATH, db_path: Path = DB_PATH,
         MORTALITY_JSON       = json.dumps(data["mortality"],       ensure_ascii=False),
         SMOKE_JSON           = json.dumps(data["smoke"],           ensure_ascii=False),
         STREET_NETWORK_JSON  = json.dumps(streets,                 ensure_ascii=False),
+        ZONE_DATA_JSON       = json.dumps(zones_data,             ensure_ascii=False),
     )
 
     out_path.write_text(html, encoding="utf-8")

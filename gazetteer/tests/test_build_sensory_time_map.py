@@ -186,3 +186,9 @@ def test_venue_opened_closed_in_js(html):
     """Venues JSON must include opened and closed fields."""
     # LON001 has opened=1661 in venues.csv
     assert '"opened": 1661' in html or '"opened":1661' in html
+
+
+def test_zone_data_embedded(html):
+    """ZONE_DATA constant must be present and contain zone names."""
+    assert 'const ZONE_DATA' in html
+    assert 'Smithfield' in html
