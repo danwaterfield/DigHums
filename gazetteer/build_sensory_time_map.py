@@ -12,7 +12,110 @@ Usage:
 import csv
 import json
 import sqlite3
+import urllib.request
+import urllib.parse
 from pathlib import Path
+
+OHM_CACHE_PATH = Path(__file__).parent / "ohm_streets_cache.json"
+OHM_BBOX       = "51.470,-0.200,51.540,-0.050"   # wider than venue spread
+
+
+def perpendicular_distance(
+    point: tuple,
+    line_start: tuple,
+    line_end: tuple,
+) -> float:
+    x0, y0 = point
+    x1, y1 = line_start
+    x2, y2 = line_end
+    num = abs((y2 - y1) * x0 - (x2 - x1) * y0 + x2 * y1 - y2 * x1)
+    den = ((y2 - y1) ** 2 + (x2 - x1) ** 2) ** 0.5
+    return num / den if den > 0 else 0.0
+
+
+def douglas_peucker(
+    points: list, epsilon: float
+) -> list:
+    if len(points) <= 2:
+        return list(points)
+    d_max, idx = 0.0, 0
+    end = len(points) - 1
+    for i in range(1, end):
+        d = perpendicular_distance(points[i], points[0], points[end])
+        if d > d_max:
+            d_max, idx = d, i
+    if d_max > epsilon:
+        left  = douglas_peucker(points[:idx + 1], epsilon)
+        right = douglas_peucker(points[idx:],     epsilon)
+        return left[:-1] + right
+    return [points[0], points[end]]
+
+
+def parse_ohm_year(date_str) -> int:
+    if not date_str:
+        return None
+    try:
+        return int(str(date_str).split("-")[0])
+    except (ValueError, AttributeError):
+        return None
+
+
+def parse_ohm_response(data: dict) -> list:
+    """
+    Convert OHM Overpass JSON to list of simplified polylines.
+    Each polyline is [[lat, lon], ...].
+    Filters to ways that existed within 1660–1820.
+    """
+    segments = []
+    for el in data.get("elements", []):
+        if el.get("type") != "way":
+            continue
+        tags = el.get("tags", {})
+        geom = el.get("geometry", [])
+        if len(geom) < 2:
+            continue
+        start_yr = parse_ohm_year(tags.get("start_date"))
+        end_yr   = parse_ohm_year(tags.get("end_date"))
+        # Keep if way started by 1820 and hadn't ended before 1660
+        if start_yr is not None and start_yr > 1820:
+            continue
+        if end_yr is not None and end_yr < 1660:
+            continue
+        pts = [(pt["lat"], pt["lon"]) for pt in geom]
+        # Simplify: epsilon ~0.00015° ≈ 10 m — reduces points by ~60%
+        simplified = douglas_peucker(pts, epsilon=0.00015)
+        if len(simplified) >= 2:
+            segments.append([[p[0], p[1]] for p in simplified])
+    return segments
+
+
+def fetch_ohm_streets(cache_path=None) -> list:
+    """
+    Return pre-1820 London street segments from OpenHistoricalMap.
+    Result is cached to ohm_streets_cache.json; subsequent builds are instant.
+    """
+    if cache_path is None:
+        cache_path = OHM_CACHE_PATH
+    if cache_path.exists():
+        return json.loads(cache_path.read_text(encoding="utf-8"))
+
+    query = f"""
+[out:json][timeout:30];
+way["highway"]({OHM_BBOX})["start_date"];
+out geom qt;
+"""
+    url  = "https://overpass-api.openhistoricalmap.org/api/interpreter"
+    data = urllib.parse.urlencode({"data": query}).encode()
+    req  = urllib.request.Request(url, data=data, method="POST")
+    req.add_header("User-Agent", "DigHums-SensoryMap/1.0")
+    with urllib.request.urlopen(req, timeout=35) as resp:
+        raw = json.loads(resp.read().decode("utf-8"))
+
+    segments = parse_ohm_response(raw)
+    cache_path.write_text(json.dumps(segments, separators=(",", ":")), encoding="utf-8")
+    print(f"  OHM streets cached: {len(segments)} segments -> {cache_path.name}")
+    return segments
+
 
 VENUES_PATH = Path(__file__).parent / "venues.csv"
 DB_PATH     = Path(__file__).parent / "sensory.db"
@@ -316,6 +419,7 @@ const EVIDENCE = {EVIDENCE_JSON};
 const CET_DATA       = {CET_JSON};         // {{year: {{0:annual, 1:jan, ...12:dec}}}}
 const MORTALITY_DATA = {MORTALITY_JSON};   // {{year: total_burials}}
 const SMOKE_DATA_ENV = {SMOKE_JSON};       // [{{decade_start, so2_index, coal_tons_k}}]
+const STREET_NETWORK = {STREET_NETWORK_JSON};  // [[lat,lon],...] pre-1820 streets
 
 // Tier colour palette (1=impoverished → 5=aristocratic)
 const TIER_COLORS = {{ 1:'#8b2020', 2:'#c07030', 3:'#5a7a4a', 4:'#3a6090', 5:'#9a7020' }};
@@ -1119,6 +1223,8 @@ def build(venues_path: Path = VENUES_PATH, db_path: Path = DB_PATH,
           out_path: Path = OUT_PATH) -> None:
     data = load_data(venues_path, db_path)
 
+    streets = fetch_ohm_streets()
+
     html = HTML_TEMPLATE.format(
         EVENTS_JSON          = json.dumps(data["events"],          ensure_ascii=False),
         EVENT_VENUES_JSON    = json.dumps(data["event_venues"],    ensure_ascii=False),
@@ -1128,6 +1234,7 @@ def build(venues_path: Path = VENUES_PATH, db_path: Path = DB_PATH,
         CET_JSON             = json.dumps(data["cet"],             ensure_ascii=False),
         MORTALITY_JSON       = json.dumps(data["mortality"],       ensure_ascii=False),
         SMOKE_JSON           = json.dumps(data["smoke"],           ensure_ascii=False),
+        STREET_NETWORK_JSON  = json.dumps(streets,                 ensure_ascii=False),
     )
 
     out_path.write_text(html, encoding="utf-8")

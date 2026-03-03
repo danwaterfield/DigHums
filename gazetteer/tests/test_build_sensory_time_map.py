@@ -121,3 +121,17 @@ def test_tier_toggle_present(html):
 def test_venues_include_tier(html):
     """Venue data includes the tier field."""
     assert '"tier"' in html
+
+
+def test_street_network_embedded(html):
+    """STREET_NETWORK constant is baked into the HTML."""
+    assert "STREET_NETWORK" in html
+    # Should be a non-empty array
+    import re
+    import json
+    m = re.search(r'const STREET_NETWORK = (\[.*?\]);', html, re.DOTALL)
+    assert m is not None
+    data = json.loads(m.group(1))
+    assert len(data) > 100  # OHM has 2000+ pre-1820 London streets
+    assert isinstance(data[0][0], list)   # [[lat,lon], ...]
+    assert len(data[0][0]) == 2

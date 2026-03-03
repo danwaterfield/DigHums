@@ -52,3 +52,6 @@ burney-attribution/models/*.safetensors
 # Logs
 *.log
 gazetteer/sources/
+
+# OHM street cache (regenerated at build time)
+gazetteer/ohm_streets_cache.json
