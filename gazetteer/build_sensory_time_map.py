@@ -93,11 +93,15 @@ def fetch_ohm_streets(cache_path=None) -> list:
     """
     Return pre-1820 London street segments from OpenHistoricalMap.
     Result is cached to ohm_streets_cache.json; subsequent builds are instant.
+    Returns [] gracefully if network is unavailable or cache is corrupt.
     """
     if cache_path is None:
         cache_path = OHM_CACHE_PATH
     if cache_path.exists():
-        return json.loads(cache_path.read_text(encoding="utf-8"))
+        try:
+            return json.loads(cache_path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, Exception):
+            print(f"  OHM cache corrupt or unreadable — re-fetching.")
 
     query = f"""
 [out:json][timeout:30];
@@ -105,16 +109,19 @@ way["highway"]({OHM_BBOX})["start_date"];
 out geom qt;
 """
     url  = "https://overpass-api.openhistoricalmap.org/api/interpreter"
-    data = urllib.parse.urlencode({"data": query}).encode()
-    req  = urllib.request.Request(url, data=data, method="POST")
-    req.add_header("User-Agent", "DigHums-SensoryMap/1.0")
-    with urllib.request.urlopen(req, timeout=35) as resp:
-        raw = json.loads(resp.read().decode("utf-8"))
-
-    segments = parse_ohm_response(raw)
-    cache_path.write_text(json.dumps(segments, separators=(",", ":")), encoding="utf-8")
-    print(f"  OHM streets cached: {len(segments)} segments -> {cache_path.name}")
-    return segments
+    try:
+        data = urllib.parse.urlencode({"data": query}).encode()
+        req  = urllib.request.Request(url, data=data, method="POST")
+        req.add_header("User-Agent", "DigHums-SensoryMap/1.0")
+        with urllib.request.urlopen(req, timeout=35) as resp:
+            raw = json.loads(resp.read().decode("utf-8"))
+        segments = parse_ohm_response(raw)
+        cache_path.write_text(json.dumps(segments, separators=(",", ":")), encoding="utf-8")
+        print(f"  OHM streets cached: {len(segments)} segments -> {cache_path.name}")
+        return segments
+    except Exception as exc:
+        print(f"  WARNING: OHM fetch failed ({exc}). Building without street network.")
+        return []
 
 
 VENUES_PATH = Path(__file__).parent / "venues.csv"
