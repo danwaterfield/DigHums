@@ -219,3 +219,9 @@ def test_zone_env_modifiers_present(html):
     assert 'industrial_intensity' in html   # modifier 2
     assert 'frost fair' in html             # modifier 3
     assert "=== 'narrow'" in html           # modifier 4
+
+
+def test_zone_fill_layer(html):
+    """Zone fill Leaflet layer must be present."""
+    assert 'zoneFillLayer' in html
+    assert 'updateZoneFills' in html

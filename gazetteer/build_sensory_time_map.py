@@ -710,6 +710,41 @@ map.on('baselayerchange', (e) => {{
     _currentBaseKey = e.name;
 }});
 
+// ── Zone fill layer ────────────────────────────────────────────────────────
+const SENSE_FILL_COLORS = {{
+    smell:  '#b48a28',
+    noise:  '#3c78c8',
+    crowd:  '#b43c3c',
+    visual: '#3ca050',
+}};
+
+let zoneFillLayer = null;
+
+function updateZoneFills(year, month) {{
+    if (zoneFillLayer) map.removeLayer(zoneFillLayer);
+    if (!ZONE_DATA || !ZONE_DATA.features.length) return;
+
+    zoneFillLayer = L.geoJSON(ZONE_DATA, {{
+        style: (feat) => {{
+            const p = feat.properties;
+            const props = interpolateZoneProps(p, year);
+            const dominant = p.dominant_sense || 'smell';
+            const color = SENSE_FILL_COLORS[dominant] || '#888';
+            const intensity = props[dominant + '_base'] !== undefined
+                ? props[dominant + '_base']
+                : props.smell_base || 0.3;
+            const opacity = Math.min(0.10, intensity * 0.10);
+            return {{
+                fillColor: color,
+                fillOpacity: opacity,
+                stroke: false,
+                interactive: false,
+            }};
+        }},
+    }}).addTo(map);
+    zoneFillLayer.bringToBack();
+}}
+
 function enableAutoBasemap() {{
     _autoBasemap = true;
     _currentBaseKey = '';  // force switch on next call
@@ -1002,6 +1037,7 @@ function updateMap() {{
     updateEnvIndicators(year, month);
     _projectStreets(year);
     updateBasemap(year);
+    updateZoneFills(year, month);
 
     // Milestone label
     const ml = document.getElementById('milestone-label');
