@@ -904,12 +904,12 @@ function updateMap() {{
 
     VENUES.forEach(v => {{
         // Hide venues outside their operational date range
-        if (v.opened && year < v.opened) {{
+        if (v.opened !== null && year < v.opened) {{
             const _m = markersByVenueId[v.id];
             if (_m) _m.setStyle({{ opacity: 0, fillOpacity: 0 }});
             return;
         }}
-        if (v.closed && year > v.closed) {{
+        if (v.closed !== null && year > v.closed) {{
             const _m = markersByVenueId[v.id];
             if (_m) _m.setStyle({{ opacity: 0, fillOpacity: 0 }});
             return;
