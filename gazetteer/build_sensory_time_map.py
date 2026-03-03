@@ -1337,24 +1337,39 @@ let activeParticleCount = 0;
 
 function particleFrame() {{
     if (!pCtx || !pCanvas) return;
-    pCtx.fillStyle = 'rgba(0,0,0,0.04)';
+    pCtx.fillStyle = 'rgba(0,0,0,0.035)';
     pCtx.fillRect(0, 0, pCanvas.width, pCanvas.height);
+
+    const isNetwork = state.particleMode === 'network';
 
     for (let i = 0; i < activeParticleCount; i++) {{
         const p = particles[i];
         p.age++;
-        if (p.age >= p.maxAge) {{ respawnParticle(p, activeParticleCount); continue; }}
+        if (p.age >= p.maxAge) {{
+            if (isNetwork && streetSegsPx.length) {{
+                p._seg    = streetSegsPx[Math.floor(Math.random() * streetSegsPx.length)];
+                p._segT   = Math.random();
+                p._segDir = Math.random() < 0.5 ? 1 : -1;
+                p.age = 0;
+            }} else {{
+                respawnParticle(p, activeParticleCount);
+            }}
+            continue;
+        }}
 
-        const f = sampleField(p.px, p.py);
-        p.vx = p.vx * 0.95 + f.dx * 0.15;
-        p.vy = p.vy * 0.95 + f.dy * 0.15;
-        p.px += p.vx;
-        p.py += p.vy;
-
-        if (p.px < 0) p.px = pCanvas.width;
-        if (p.px > pCanvas.width) p.px = 0;
-        if (p.py < 0) p.py = pCanvas.height;
-        if (p.py > pCanvas.height) p.py = 0;
+        if (isNetwork) {{
+            _networkStep(p);
+        }} else {{
+            const f = sampleField(p.px, p.py);
+            p.vx = p.vx * 0.95 + f.dx * 0.15;
+            p.vy = p.vy * 0.95 + f.dy * 0.15;
+            p.px += p.vx;
+            p.py += p.vy;
+            if (p.px < 0) p.px = pCanvas.width;
+            if (p.px > pCanvas.width) p.px = 0;
+            if (p.py < 0) p.py = pCanvas.height;
+            if (p.py > pCanvas.height) p.py = 0;
+        }}
 
         const alpha = Math.min(0.8, (p.age / p.maxAge) * 2 * (1 - p.age / p.maxAge) * 4);
         pCtx.beginPath();
@@ -1528,7 +1543,56 @@ function _buildFlowField() {{
     }}
     startParticles(safeCount);
 }}
-function _buildNetworkField(){{ /* implemented in Task 5 */ }}
+// Street segment pixel cache
+let streetSegsPx = [];
+
+function _projectStreets() {{
+    streetSegsPx = [];
+    if (!STREET_NETWORK || !STREET_NETWORK.length) return;
+    STREET_NETWORK.forEach(polyline => {{
+        for (let i = 0; i < polyline.length - 1; i++) {{
+            const a = map.latLngToContainerPoint([polyline[i][0],   polyline[i][1]]);
+            const b = map.latLngToContainerPoint([polyline[i+1][0], polyline[i+1][1]]);
+            const len = Math.sqrt((b.x-a.x)**2 + (b.y-a.y)**2);
+            if (len < 2) continue;
+            streetSegsPx.push({{ x0: a.x, y0: a.y, x1: b.x, y1: b.y, len }});
+        }}
+    }});
+}}
+
+map.on('moveend zoomend', _projectStreets);
+if (STREET_NETWORK && STREET_NETWORK.length) _projectStreets();
+
+function _networkStep(p) {{
+    const seg = p._seg;
+    if (!seg) return;
+    const speed = 0.6 + Math.random() * 0.2;
+    p._segT += p._segDir * speed / seg.len;
+    if (p._segT > 1 || p._segT < 0) {{
+        if (!streetSegsPx.length) return;
+        p._seg    = streetSegsPx[Math.floor(Math.random() * streetSegsPx.length)];
+        p._segT   = p._segDir > 0 ? 0 : 1;
+        p._segDir = Math.random() < 0.5 ? 1 : -1;
+    }}
+    const s = p._seg;
+    p.px = s.x0 + (s.x1 - s.x0) * p._segT;
+    p.py = s.y0 + (s.y1 - s.y0) * p._segT;
+}}
+
+function _buildNetworkField() {{
+    if (!pCanvas || !streetSegsPx.length) return;
+    updateVenuePx();
+    const count = 1200;
+    const safeCount = Math.min(count, MAX_P);
+    for (let i = 0; i < safeCount; i++) {{
+        const p = particles[i];
+        p._seg    = streetSegsPx[Math.floor(Math.random() * streetSegsPx.length)];
+        p._segT   = Math.random();
+        p._segDir = Math.random() < 0.5 ? 1 : -1;
+        p.r = 160; p.g = 110; p.b = 60;
+    }}
+    startParticles(safeCount);
+}}
 
 let _fieldUpdateTimer = null;
 function _scheduleFieldUpdate() {{

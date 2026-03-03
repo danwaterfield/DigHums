@@ -158,3 +158,10 @@ def test_flow_mode_field_builder(html):
     assert "_buildFlowField" in html
     assert "MODALITY_COLOURS" in html
     assert "attractStrength" in html
+
+
+def test_network_mode_field_builder(html):
+    assert "_buildNetworkField" in html
+    assert "STREET_NETWORK" in html
+    assert "segT" in html
+    assert "_networkStep" in html
