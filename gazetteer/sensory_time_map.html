@@ -1061,6 +1061,11 @@ document.addEventListener('keydown', (e) => {
 const pCanvas = document.getElementById('particle-canvas');
 const pCtx    = pCanvas ? pCanvas.getContext('2d') : null;
 
+// Declare shared state before resizeParticleCanvas (called immediately below)
+const venuePx = {};           // venue pixel positions, refreshed on move/resize
+let particleRaf = null;         // RAF handle; null when stopped
+let activeParticleCount = 0;    // how many particles are active this frame
+
 // Resize canvas to match map container
 function resizeParticleCanvas() {
     if (!pCanvas) return;
@@ -1093,9 +1098,7 @@ const FIELD_W = 80, FIELD_H = 60;
 const fieldDx = new Float32Array(FIELD_W * FIELD_H);
 const fieldDy = new Float32Array(FIELD_W * FIELD_H);
 
-// Cache of venue pixel positions
-const venuePx = {};
-
+// Cache of venue pixel positions (declared early — see top of particle system block)
 function updateVenuePx() {
     VENUES.forEach(v => {
         const pt = map.latLngToContainerPoint([v.lat, v.lon]);
@@ -1153,10 +1156,7 @@ function respawnParticle(p, activeCount) {
     p.maxAge = 200 + Math.random() * 400;
 }
 
-// Main RAF loop
-let particleRaf = null;
-let activeParticleCount = 0;
-
+// Main RAF loop (particleRaf and activeParticleCount declared early — see top of particle system block)
 function particleFrame() {
     if (!pCtx || !pCanvas) return;
     pCtx.fillStyle = 'rgba(0,0,0,0.035)';
