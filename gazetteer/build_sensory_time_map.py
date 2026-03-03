@@ -855,6 +855,7 @@ function updateMap() {{
     const band  = state.band;
     document.getElementById('year-display').textContent = year;
     updateEnvIndicators(year, month);
+    _projectStreets(year);
 
     // Milestone label
     const ml = document.getElementById('milestone-label');
@@ -1599,10 +1600,18 @@ function _buildFlowField() {{
 // Street segment pixel cache
 let streetSegsPx = [];
 
-function _projectStreets() {{
+function _projectStreets(year) {{
     streetSegsPx = [];
     if (!STREET_NETWORK || !STREET_NETWORK.length) return;
-    STREET_NETWORK.forEach(polyline => {{
+    const yr = year || parseInt(document.getElementById('year-slider').value);
+    STREET_NETWORK.forEach(entry => {{
+        // New format: {{p:[[lat,lon],...], s:start_yr|null, e:end_yr|null}}
+        // Fallback: bare [[lat,lon],...] array for any old-format cached data
+        const polyline = Array.isArray(entry) ? entry : entry.p;
+        const s = Array.isArray(entry) ? null : entry.s;
+        const e = Array.isArray(entry) ? null : entry.e;
+        if (s !== null && s > yr) return;
+        if (e !== null && e < yr) return;
         for (let i = 0; i < polyline.length - 1; i++) {{
             const a = map.latLngToContainerPoint([polyline[i][0],   polyline[i][1]]);
             const b = map.latLngToContainerPoint([polyline[i+1][0], polyline[i+1][1]]);
@@ -1615,8 +1624,14 @@ function _projectStreets() {{
     if (state && state.particleMode === 'network') resetParticles();
 }}
 
-map.on('moveend zoomend', _projectStreets);
-if (STREET_NETWORK && STREET_NETWORK.length) _projectStreets();
+map.on('moveend zoomend', () => {{
+    const yr = parseInt(document.getElementById('year-slider').value);
+    _projectStreets(yr);
+}});
+if (STREET_NETWORK && STREET_NETWORK.length) {{
+    const yr = parseInt(document.getElementById('year-slider').value);
+    _projectStreets(yr);
+}}
 
 function _networkStep(p) {{
     const seg = p._seg;

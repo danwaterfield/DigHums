@@ -133,8 +133,12 @@ def test_street_network_embedded(html):
     assert m is not None
     data = json.loads(m.group(1))
     assert len(data) > 100  # OHM has 2000+ pre-1820 London streets
-    assert isinstance(data[0][0], list)   # [[lat,lon], ...]
-    assert len(data[0][0]) == 2
+    # New format: {p: [[lat,lon],...], s: start_yr|null, e: end_yr|null}
+    entry = data[0]
+    assert isinstance(entry, dict), "STREET_NETWORK entries must be objects with p/s/e keys"
+    assert "p" in entry, "Entry must have 'p' (polyline) key"
+    assert isinstance(entry["p"], list)
+    assert len(entry["p"][0]) == 2  # first point is [lat, lon]
 
 
 def test_particle_canvas_present(html):
