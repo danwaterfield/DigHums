@@ -335,6 +335,7 @@ body {{ font-family: 'Georgia', serif; background: #f9f6f0; color: #2c2c2c; disp
       <button class="step-btn" onclick="stepYear(10)" title="+10 years">&#8594;</button>
     </div>
     <button id="clear-btn" onclick="clearFilters()" title="Clear all filters">&#215; Clear</button>
+    <button id="automap-btn" onclick="enableAutoBasemap()" title="Auto-switch base map to match year" style="background:#2a2a4e;border:1px solid #555;color:#e8e0d0;padding:2px 8px;cursor:pointer;border-radius:3px;font-size:0.8em;">Auto map</button>
     <a class="nav-link" href="venue_explorer.html">Browse evidence &#8594;</a>
   </div>
   <div class="pill-row">
@@ -571,6 +572,34 @@ const baseLayers = {{
   ),
 }};
 L.control.layers(baseLayers, {{}}, {{ collapsed: false }}).addTo(map);
+
+// ── Auto-switching basemap ─────────────────────────────────────────────────
+let _autoBasemap = true;
+let _currentBaseKey = 'Modern (CartoDB)';
+
+function updateBasemap(year) {{
+    if (!_autoBasemap) return;
+    const key = year < 1740 ? 'Modern (CartoDB)'
+              : year < 1791 ? 'Rocque 1746'
+              : 'Horwood 1792\u201399';
+    if (key === _currentBaseKey) return;
+    map.removeLayer(baseLayers[_currentBaseKey]);
+    baseLayers[key].addTo(map);
+    _currentBaseKey = key;
+}}
+
+// Manual layer-control override disables auto-switching
+map.on('baselayerchange', (e) => {{
+    _autoBasemap = false;
+    _currentBaseKey = e.name;
+}});
+
+function enableAutoBasemap() {{
+    _autoBasemap = true;
+    _currentBaseKey = '';  // force switch on next call
+    const yr = parseInt(document.getElementById('year-slider').value);
+    updateBasemap(yr);
+}}
 
 // ── Procession routes ─────────────────────────────────────────────────────
 // Shown as dashed polylines when the relevant event is temporally active.
@@ -856,6 +885,7 @@ function updateMap() {{
     document.getElementById('year-display').textContent = year;
     updateEnvIndicators(year, month);
     _projectStreets(year);
+    updateBasemap(year);
 
     // Milestone label
     const ml = document.getElementById('milestone-label');
