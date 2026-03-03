@@ -1763,7 +1763,7 @@ function _buildSmokefield() {{
                 const zoneProps = zoneFeat ? interpolateZoneProps(zoneFeat, year) : null;
                 totalInd += zoneProps ? (zoneProps.industrial_intensity || 0.3) : 0.3;
             }});
-            const avgInd = totalInd / activeVenues.length;
+            const avgInd = Math.min(1.0, totalInd / activeVenues.length);
             zoneIndMult = 0.7 + avgInd * 0.9;  // range 0.7x – 1.6x
         }}
     }}
