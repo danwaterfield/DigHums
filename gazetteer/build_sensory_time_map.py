@@ -1130,6 +1130,10 @@ function updateMap() {{
             if (parts.length) tip += '<br><span style="font-size:0.88em;opacity:0.85">' + parts.join(' &middot; ') + '</span>';
         }}
         if (evCount > 0) tip += `<br><span style="font-size:0.82em;opacity:0.7">&#128214; ${{evCount}} passages</span>`;
+        const zoneBaseline = computeZoneBaseline(v.lat, v.lon, year, month);
+        if (zoneBaseline && zoneBaseline.provenance.length > 1) {{
+            tip += `<br><span style="font-size:0.78em;opacity:0.50;font-style:italic">~ ${{zoneBaseline.provenance.slice(1).join(' \u00b7 ')}}</span>`;
+        }}
         marker.setTooltipContent(tip);
 
         // Spread rings

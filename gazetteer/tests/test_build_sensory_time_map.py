@@ -231,3 +231,8 @@ def test_click_anywhere_handler(html):
     """Map click-anywhere handler and renderLocationPanel must be present."""
     assert 'function renderLocationPanel' in html
     assert "map.on('click'" in html
+
+
+def test_tooltip_provenance_line(html):
+    """Tooltip must call computeZoneBaseline and use provenance."""
+    assert 'zoneBaseline.provenance' in html
