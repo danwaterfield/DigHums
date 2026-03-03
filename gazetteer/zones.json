@@ -1,0 +1,245 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "City of London",
+        "dominant_sense": "noise",
+        "decades": {
+          "1660": {"smell_base":0.45,"noise_base":0.60,"crowd_density":0.65,"river_proximity":0.15,"industrial_intensity":0.30,"street_character":"narrow","building_height":"medium"},
+          "1700": {"smell_base":0.48,"noise_base":0.62,"crowd_density":0.68,"river_proximity":0.15,"industrial_intensity":0.33,"street_character":"narrow","building_height":"medium"},
+          "1750": {"smell_base":0.50,"noise_base":0.65,"crowd_density":0.70,"river_proximity":0.15,"industrial_intensity":0.38,"street_character":"narrow","building_height":"tall"},
+          "1800": {"smell_base":0.52,"noise_base":0.68,"crowd_density":0.72,"river_proximity":0.15,"industrial_intensity":0.45,"street_character":"narrow","building_height":"tall"},
+          "1820": {"smell_base":0.55,"noise_base":0.70,"crowd_density":0.73,"river_proximity":0.15,"industrial_intensity":0.50,"street_character":"narrow","building_height":"tall"}
+        }
+      },
+      "geometry": {"type":"Polygon","coordinates":[[[-0.113,51.508],[-0.073,51.508],[-0.073,51.524],[-0.113,51.524],[-0.113,51.508]]]}
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Thames Waterfront East",
+        "dominant_sense": "smell",
+        "decades": {
+          "1660": {"smell_base":0.75,"noise_base":0.55,"crowd_density":0.55,"river_proximity":0.90,"industrial_intensity":0.40,"street_character":"narrow","building_height":"medium"},
+          "1700": {"smell_base":0.78,"noise_base":0.58,"crowd_density":0.58,"river_proximity":0.90,"industrial_intensity":0.45,"street_character":"narrow","building_height":"medium"},
+          "1750": {"smell_base":0.80,"noise_base":0.60,"crowd_density":0.60,"river_proximity":0.90,"industrial_intensity":0.50,"street_character":"narrow","building_height":"medium"},
+          "1800": {"smell_base":0.82,"noise_base":0.62,"crowd_density":0.62,"river_proximity":0.90,"industrial_intensity":0.58,"street_character":"narrow","building_height":"medium"},
+          "1820": {"smell_base":0.85,"noise_base":0.65,"crowd_density":0.65,"river_proximity":0.90,"industrial_intensity":0.65,"street_character":"narrow","building_height":"medium"}
+        }
+      },
+      "geometry": {"type":"Polygon","coordinates":[[[-0.095,51.500],[-0.055,51.500],[-0.055,51.513],[-0.095,51.513],[-0.095,51.500]]]}
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Southwark & Bankside",
+        "dominant_sense": "smell",
+        "decades": {
+          "1660": {"smell_base":0.60,"noise_base":0.55,"crowd_density":0.55,"river_proximity":0.50,"industrial_intensity":0.45,"street_character":"narrow","building_height":"low"},
+          "1700": {"smell_base":0.60,"noise_base":0.55,"crowd_density":0.55,"river_proximity":0.50,"industrial_intensity":0.45,"street_character":"narrow","building_height":"low"},
+          "1750": {"smell_base":0.58,"noise_base":0.55,"crowd_density":0.55,"river_proximity":0.50,"industrial_intensity":0.45,"street_character":"narrow","building_height":"medium"},
+          "1800": {"smell_base":0.55,"noise_base":0.52,"crowd_density":0.52,"river_proximity":0.50,"industrial_intensity":0.50,"street_character":"narrow","building_height":"medium"},
+          "1820": {"smell_base":0.55,"noise_base":0.52,"crowd_density":0.52,"river_proximity":0.50,"industrial_intensity":0.55,"street_character":"narrow","building_height":"medium"}
+        }
+      },
+      "geometry": {"type":"Polygon","coordinates":[[[-0.115,51.488],[-0.068,51.488],[-0.068,51.507],[-0.115,51.507],[-0.115,51.488]]]}
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Covent Garden & Strand",
+        "dominant_sense": "crowd",
+        "decades": {
+          "1660": {"smell_base":0.40,"noise_base":0.55,"crowd_density":0.60,"river_proximity":0.05,"industrial_intensity":0.15,"street_character":"medium","building_height":"medium"},
+          "1700": {"smell_base":0.42,"noise_base":0.60,"crowd_density":0.65,"river_proximity":0.05,"industrial_intensity":0.15,"street_character":"medium","building_height":"medium"},
+          "1750": {"smell_base":0.45,"noise_base":0.65,"crowd_density":0.70,"river_proximity":0.05,"industrial_intensity":0.18,"street_character":"medium","building_height":"medium"},
+          "1800": {"smell_base":0.42,"noise_base":0.62,"crowd_density":0.68,"river_proximity":0.05,"industrial_intensity":0.20,"street_character":"medium","building_height":"tall"},
+          "1820": {"smell_base":0.40,"noise_base":0.60,"crowd_density":0.65,"river_proximity":0.05,"industrial_intensity":0.22,"street_character":"medium","building_height":"tall"}
+        }
+      },
+      "geometry": {"type":"Polygon","coordinates":[[[-0.131,51.508],[-0.109,51.508],[-0.109,51.521],[-0.131,51.521],[-0.131,51.508]]]}
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Westminster & Whitehall",
+        "dominant_sense": "crowd",
+        "decades": {
+          "1660": {"smell_base":0.20,"noise_base":0.40,"crowd_density":0.45,"river_proximity":0.35,"industrial_intensity":0.10,"street_character":"broad","building_height":"medium"},
+          "1700": {"smell_base":0.20,"noise_base":0.42,"crowd_density":0.48,"river_proximity":0.35,"industrial_intensity":0.10,"street_character":"broad","building_height":"medium"},
+          "1750": {"smell_base":0.22,"noise_base":0.45,"crowd_density":0.50,"river_proximity":0.35,"industrial_intensity":0.12,"street_character":"broad","building_height":"tall"},
+          "1800": {"smell_base":0.22,"noise_base":0.48,"crowd_density":0.52,"river_proximity":0.35,"industrial_intensity":0.12,"street_character":"broad","building_height":"tall"},
+          "1820": {"smell_base":0.22,"noise_base":0.50,"crowd_density":0.55,"river_proximity":0.35,"industrial_intensity":0.14,"street_character":"broad","building_height":"tall"}
+        }
+      },
+      "geometry": {"type":"Polygon","coordinates":[[[-0.137,51.493],[-0.118,51.493],[-0.118,51.512],[-0.137,51.512],[-0.137,51.493]]]}
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "St James's & Pall Mall",
+        "dominant_sense": "visual",
+        "decades": {
+          "1660": {"smell_base":0.12,"noise_base":0.25,"crowd_density":0.35,"river_proximity":0.05,"industrial_intensity":0.05,"street_character":"broad","building_height":"medium"},
+          "1700": {"smell_base":0.12,"noise_base":0.28,"crowd_density":0.40,"river_proximity":0.05,"industrial_intensity":0.05,"street_character":"broad","building_height":"medium"},
+          "1750": {"smell_base":0.14,"noise_base":0.30,"crowd_density":0.45,"river_proximity":0.05,"industrial_intensity":0.06,"street_character":"broad","building_height":"tall"},
+          "1800": {"smell_base":0.14,"noise_base":0.32,"crowd_density":0.48,"river_proximity":0.05,"industrial_intensity":0.08,"street_character":"broad","building_height":"tall"},
+          "1820": {"smell_base":0.15,"noise_base":0.35,"crowd_density":0.50,"river_proximity":0.05,"industrial_intensity":0.08,"street_character":"broad","building_height":"tall"}
+        }
+      },
+      "geometry": {"type":"Polygon","coordinates":[[[-0.153,51.499],[-0.130,51.499],[-0.130,51.513],[-0.153,51.513],[-0.153,51.499]]]}
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mayfair & Piccadilly",
+        "dominant_sense": "visual",
+        "decades": {
+          "1660": {"smell_base":0.08,"noise_base":0.15,"crowd_density":0.20,"river_proximity":0.00,"industrial_intensity":0.03,"street_character":"broad","building_height":"low"},
+          "1700": {"smell_base":0.10,"noise_base":0.20,"crowd_density":0.30,"river_proximity":0.00,"industrial_intensity":0.04,"street_character":"broad","building_height":"medium"},
+          "1750": {"smell_base":0.12,"noise_base":0.28,"crowd_density":0.42,"river_proximity":0.00,"industrial_intensity":0.05,"street_character":"broad","building_height":"tall"},
+          "1800": {"smell_base":0.12,"noise_base":0.30,"crowd_density":0.45,"river_proximity":0.00,"industrial_intensity":0.06,"street_character":"broad","building_height":"tall"},
+          "1820": {"smell_base":0.13,"noise_base":0.32,"crowd_density":0.48,"river_proximity":0.00,"industrial_intensity":0.07,"street_character":"broad","building_height":"tall"}
+        }
+      },
+      "geometry": {"type":"Polygon","coordinates":[[[-0.168,51.506],[-0.140,51.506],[-0.140,51.522],[-0.168,51.522],[-0.168,51.506]]]}
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Smithfield & Newgate",
+        "dominant_sense": "smell",
+        "decades": {
+          "1660": {"smell_base":0.80,"noise_base":0.70,"crowd_density":0.65,"river_proximity":0.05,"industrial_intensity":0.30,"street_character":"narrow","building_height":"medium"},
+          "1700": {"smell_base":0.80,"noise_base":0.70,"crowd_density":0.65,"river_proximity":0.05,"industrial_intensity":0.32,"street_character":"narrow","building_height":"medium"},
+          "1750": {"smell_base":0.82,"noise_base":0.72,"crowd_density":0.68,"river_proximity":0.05,"industrial_intensity":0.35,"street_character":"narrow","building_height":"medium"},
+          "1800": {"smell_base":0.80,"noise_base":0.70,"crowd_density":0.65,"river_proximity":0.05,"industrial_intensity":0.38,"street_character":"narrow","building_height":"medium"},
+          "1820": {"smell_base":0.78,"noise_base":0.68,"crowd_density":0.62,"river_proximity":0.05,"industrial_intensity":0.40,"street_character":"narrow","building_height":"medium"}
+        }
+      },
+      "geometry": {"type":"Polygon","coordinates":[[[-0.108,51.517],[-0.089,51.517],[-0.089,51.530],[-0.108,51.530],[-0.108,51.517]]]}
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Fleet Street & Ludgate",
+        "dominant_sense": "noise",
+        "decades": {
+          "1660": {"smell_base":0.35,"noise_base":0.55,"crowd_density":0.55,"river_proximity":0.05,"industrial_intensity":0.20,"street_character":"narrow","building_height":"medium"},
+          "1700": {"smell_base":0.38,"noise_base":0.58,"crowd_density":0.58,"river_proximity":0.05,"industrial_intensity":0.25,"street_character":"narrow","building_height":"medium"},
+          "1750": {"smell_base":0.40,"noise_base":0.62,"crowd_density":0.60,"river_proximity":0.05,"industrial_intensity":0.30,"street_character":"narrow","building_height":"medium"},
+          "1800": {"smell_base":0.40,"noise_base":0.65,"crowd_density":0.62,"river_proximity":0.05,"industrial_intensity":0.35,"street_character":"narrow","building_height":"tall"},
+          "1820": {"smell_base":0.40,"noise_base":0.68,"crowd_density":0.65,"river_proximity":0.05,"industrial_intensity":0.38,"street_character":"narrow","building_height":"tall"}
+        }
+      },
+      "geometry": {"type":"Polygon","coordinates":[[[-0.115,51.511],[-0.097,51.511],[-0.097,51.519],[-0.115,51.519],[-0.115,51.511]]]}
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "St Giles & Seven Dials",
+        "dominant_sense": "smell",
+        "decades": {
+          "1660": {"smell_base":0.55,"noise_base":0.50,"crowd_density":0.60,"river_proximity":0.00,"industrial_intensity":0.20,"street_character":"narrow","building_height":"low"},
+          "1700": {"smell_base":0.60,"noise_base":0.55,"crowd_density":0.65,"river_proximity":0.00,"industrial_intensity":0.22,"street_character":"narrow","building_height":"medium"},
+          "1750": {"smell_base":0.65,"noise_base":0.58,"crowd_density":0.70,"river_proximity":0.00,"industrial_intensity":0.25,"street_character":"narrow","building_height":"medium"},
+          "1800": {"smell_base":0.68,"noise_base":0.60,"crowd_density":0.72,"river_proximity":0.00,"industrial_intensity":0.28,"street_character":"narrow","building_height":"medium"},
+          "1820": {"smell_base":0.70,"noise_base":0.62,"crowd_density":0.75,"river_proximity":0.00,"industrial_intensity":0.30,"street_character":"narrow","building_height":"medium"}
+        }
+      },
+      "geometry": {"type":"Polygon","coordinates":[[[-0.134,51.514],[-0.118,51.514],[-0.118,51.527],[-0.134,51.527],[-0.134,51.514]]]}
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "East End & Wapping",
+        "dominant_sense": "smell",
+        "decades": {
+          "1660": {"smell_base":0.50,"noise_base":0.50,"crowd_density":0.45,"river_proximity":0.40,"industrial_intensity":0.40,"street_character":"narrow","building_height":"low"},
+          "1700": {"smell_base":0.55,"noise_base":0.55,"crowd_density":0.50,"river_proximity":0.45,"industrial_intensity":0.50,"street_character":"narrow","building_height":"low"},
+          "1750": {"smell_base":0.60,"noise_base":0.60,"crowd_density":0.55,"river_proximity":0.50,"industrial_intensity":0.60,"street_character":"narrow","building_height":"medium"},
+          "1800": {"smell_base":0.68,"noise_base":0.65,"crowd_density":0.60,"river_proximity":0.55,"industrial_intensity":0.72,"street_character":"narrow","building_height":"medium"},
+          "1820": {"smell_base":0.72,"noise_base":0.68,"crowd_density":0.65,"river_proximity":0.55,"industrial_intensity":0.80,"street_character":"narrow","building_height":"medium"}
+        }
+      },
+      "geometry": {"type":"Polygon","coordinates":[[[-0.072,51.505],[-0.035,51.505],[-0.035,51.522],[-0.072,51.522],[-0.072,51.505]]]}
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Hyde Park & Kensington",
+        "dominant_sense": "visual",
+        "decades": {
+          "1660": {"smell_base":0.05,"noise_base":0.08,"crowd_density":0.15,"river_proximity":0.00,"industrial_intensity":0.02,"street_character":"broad","building_height":"low"},
+          "1700": {"smell_base":0.05,"noise_base":0.10,"crowd_density":0.20,"river_proximity":0.00,"industrial_intensity":0.02,"street_character":"broad","building_height":"low"},
+          "1750": {"smell_base":0.06,"noise_base":0.12,"crowd_density":0.28,"river_proximity":0.00,"industrial_intensity":0.03,"street_character":"broad","building_height":"low"},
+          "1800": {"smell_base":0.06,"noise_base":0.12,"crowd_density":0.30,"river_proximity":0.00,"industrial_intensity":0.03,"street_character":"broad","building_height":"low"},
+          "1820": {"smell_base":0.06,"noise_base":0.12,"crowd_density":0.32,"river_proximity":0.00,"industrial_intensity":0.03,"street_character":"broad","building_height":"low"}
+        }
+      },
+      "geometry": {"type":"Polygon","coordinates":[[[-0.200,51.499],[-0.152,51.499],[-0.152,51.523],[-0.200,51.523],[-0.200,51.499]]]}
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "St James's Park",
+        "dominant_sense": "visual",
+        "decades": {
+          "1660": {"smell_base":0.08,"noise_base":0.12,"crowd_density":0.25,"river_proximity":0.10,"industrial_intensity":0.03,"street_character":"broad","building_height":"low"},
+          "1700": {"smell_base":0.08,"noise_base":0.14,"crowd_density":0.30,"river_proximity":0.10,"industrial_intensity":0.03,"street_character":"broad","building_height":"low"},
+          "1750": {"smell_base":0.09,"noise_base":0.15,"crowd_density":0.38,"river_proximity":0.10,"industrial_intensity":0.04,"street_character":"broad","building_height":"low"},
+          "1800": {"smell_base":0.09,"noise_base":0.15,"crowd_density":0.40,"river_proximity":0.10,"industrial_intensity":0.04,"street_character":"broad","building_height":"low"},
+          "1820": {"smell_base":0.09,"noise_base":0.16,"crowd_density":0.40,"river_proximity":0.10,"industrial_intensity":0.04,"street_character":"broad","building_height":"low"}
+        }
+      },
+      "geometry": {"type":"Polygon","coordinates":[[[-0.147,51.497],[-0.127,51.497],[-0.127,51.508],[-0.147,51.508],[-0.147,51.497]]]}
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Vauxhall & Lambeth",
+        "dominant_sense": "crowd",
+        "decades": {
+          "1660": {"smell_base":0.15,"noise_base":0.20,"crowd_density":0.20,"river_proximity":0.45,"industrial_intensity":0.15,"street_character":"medium","building_height":"low"},
+          "1700": {"smell_base":0.18,"noise_base":0.25,"crowd_density":0.30,"river_proximity":0.45,"industrial_intensity":0.18,"street_character":"medium","building_height":"low"},
+          "1750": {"smell_base":0.20,"noise_base":0.35,"crowd_density":0.50,"river_proximity":0.45,"industrial_intensity":0.20,"street_character":"medium","building_height":"low"},
+          "1800": {"smell_base":0.22,"noise_base":0.38,"crowd_density":0.52,"river_proximity":0.45,"industrial_intensity":0.25,"street_character":"medium","building_height":"medium"},
+          "1820": {"smell_base":0.22,"noise_base":0.35,"crowd_density":0.45,"river_proximity":0.45,"industrial_intensity":0.30,"street_character":"medium","building_height":"medium"}
+        }
+      },
+      "geometry": {"type":"Polygon","coordinates":[[[-0.135,51.477],[-0.108,51.477],[-0.108,51.495],[-0.135,51.495],[-0.135,51.477]]]}
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Holborn & Inns of Court",
+        "dominant_sense": "noise",
+        "decades": {
+          "1660": {"smell_base":0.30,"noise_base":0.45,"crowd_density":0.50,"river_proximity":0.00,"industrial_intensity":0.18,"street_character":"medium","building_height":"medium"},
+          "1700": {"smell_base":0.32,"noise_base":0.48,"crowd_density":0.52,"river_proximity":0.00,"industrial_intensity":0.20,"street_character":"medium","building_height":"medium"},
+          "1750": {"smell_base":0.34,"noise_base":0.52,"crowd_density":0.55,"river_proximity":0.00,"industrial_intensity":0.22,"street_character":"medium","building_height":"medium"},
+          "1800": {"smell_base":0.35,"noise_base":0.54,"crowd_density":0.56,"river_proximity":0.00,"industrial_intensity":0.25,"street_character":"medium","building_height":"tall"},
+          "1820": {"smell_base":0.35,"noise_base":0.55,"crowd_density":0.57,"river_proximity":0.00,"industrial_intensity":0.28,"street_character":"medium","building_height":"tall"}
+        }
+      },
+      "geometry": {"type":"Polygon","coordinates":[[[-0.121,51.514],[-0.099,51.514],[-0.099,51.525],[-0.121,51.525],[-0.121,51.514]]]}
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Moorfields & Finsbury",
+        "dominant_sense": "visual",
+        "decades": {
+          "1660": {"smell_base":0.20,"noise_base":0.22,"crowd_density":0.25,"river_proximity":0.00,"industrial_intensity":0.15,"street_character":"medium","building_height":"low"},
+          "1700": {"smell_base":0.25,"noise_base":0.28,"crowd_density":0.32,"river_proximity":0.00,"industrial_intensity":0.20,"street_character":"medium","building_height":"low"},
+          "1750": {"smell_base":0.30,"noise_base":0.35,"crowd_density":0.40,"river_proximity":0.00,"industrial_intensity":0.28,"street_character":"medium","building_height":"medium"},
+          "1800": {"smell_base":0.38,"noise_base":0.42,"crowd_density":0.50,"river_proximity":0.00,"industrial_intensity":0.38,"street_character":"narrow","building_height":"medium"},
+          "1820": {"smell_base":0.42,"noise_base":0.48,"crowd_density":0.55,"river_proximity":0.00,"industrial_intensity":0.45,"street_character":"narrow","building_height":"medium"}
+        }
+      },
+      "geometry": {"type":"Polygon","coordinates":[[[-0.092,51.519],[-0.072,51.519],[-0.072,51.532],[-0.092,51.532],[-0.092,51.519]]]}
+    }
+  ]
+}
