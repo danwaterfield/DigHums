@@ -89,6 +89,7 @@ def parse_ohm_response(data: dict) -> list:
                 "p": [[p[0], p[1]] for p in simplified],
                 "s": start_yr,   # int or None
                 "e": end_yr,     # int or None
+                "t": tags.get("highway", ""),  # highway type for width proxy
             })
     return segments
 
@@ -401,9 +402,16 @@ body {{ font-family: 'Georgia', serif; background: #f9f6f0; color: #2c2c2c; disp
   <div class="pill-row">
     <span class="pill-label">Particles</span>
     <button class="particle-btn active" data-pmode="off">Off</button>
-    <button class="particle-btn" data-pmode="smoke">&#127844; Smoke</button>
-    <button class="particle-btn" data-pmode="flow">&#8767; Flow</button>
+    <button class="particle-btn" data-pmode="smoke">&#127844; Atmosphere</button>
+    <button class="particle-btn" data-pmode="flow">&#8767; Senses</button>
     <button class="particle-btn" data-pmode="network">&#9780; Network</button>
+  </div>
+  <div id="particle-legend" style="display:none;padding:2px 0 0 4px;font-size:0.72em;color:#aaa;line-height:1.6;">
+    <span style="color:#7a7a50">&#9679;</span> smoke &nbsp;
+    <span style="color:#b48228">&#183;</span> smell &nbsp;
+    <span style="color:#3a78c8">&#183;</span> noise &nbsp;
+    <span style="color:#b43c3c">&#9679;</span> crowd &nbsp;
+    <span style="color:#3ca050">&#183;</span> visual
   </div>
   <div class="pill-row" id="env-bar">
     <span class="env-gauge" title="Central England Temperature (HadCET / Met Office)">
@@ -491,6 +499,7 @@ function interpolateZoneProps(zoneProps, year) {{
         industrial_intensity: p0.industrial_intensity + t * (p1.industrial_intensity - p0.industrial_intensity),
         street_character:     t < 0.5 ? p0.street_character : p1.street_character,
         building_height:      t < 0.5 ? p0.building_height  : p1.building_height,
+        canyon_factor:        p0.canyon_factor + t * (p1.canyon_factor - p0.canyon_factor),
     }};
 }}
 
@@ -559,6 +568,7 @@ function computeZoneBaseline(lat, lon, year, month) {{
         dominant: zoneProps.dominant_sense,
         provenance,
         street_character: p.street_character,
+        canyon_factor: p.canyon_factor || 1.0,
     }};
 }}
 
@@ -579,6 +589,7 @@ const BUILDING_TYPE_COLORS = {{
     'prison':    '#8b0000',
     'court':     '#8b0000',
     'execution': '#8b0000',
+    'menagerie': '#7b4513',
 }};
 
 // Enclosure dash patterns: makes physical form legible on all markers
@@ -1413,6 +1424,8 @@ document.querySelectorAll('.particle-btn').forEach(btn => {{
         document.querySelectorAll('.particle-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         state.particleMode = mode === 'off' ? null : mode;
+        const legend = document.getElementById('particle-legend');
+        if (legend) legend.style.display = state.particleMode ? 'block' : 'none';
         if (!state.particleMode) {{
             stopParticles();
         }} else {{
@@ -1428,6 +1441,8 @@ function clearFilters() {{
     document.querySelectorAll('.pill.active, .sense-pill.active, .btype-pill.active').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.particle-btn').forEach(b => b.classList.remove('active'));
     document.querySelector('.particle-btn[data-pmode="off"]')?.classList.add('active');
+    const legend = document.getElementById('particle-legend');
+    if (legend) legend.style.display = 'none';
     stopParticles();
     updateMap();
 }}
@@ -1539,12 +1554,22 @@ window.addEventListener('resize', resizeParticleCanvas);
 const MAX_P = 2000;
 const particles = [];
 
+// Per-modality physics + visual profiles
+const MODALITY_PROFILE = {{
+    smoke:  {{ r: 140, g: 120, b:  80, radius: 2.5, speed: 0.6, maxAge: 500, rise: -0.15, maxAlpha: 0.5 }},
+    smell:  {{ r: 180, g: 130, b:  40, radius: 1.2, speed: 0.3, maxAge: 600, rise:  0,    maxAlpha: 0.6 }},
+    noise:  {{ r:  60, g: 120, b: 200, radius: 1.0, speed: 1.8, maxAge: 150, rise:  0,    maxAlpha: 0.8 }},
+    crowd:  {{ r: 180, g:  60, b:  60, radius: 1.8, speed: 0.4, maxAge: 300, rise:  0,    maxAlpha: 0.7 }},
+    visual: {{ r:  60, g: 160, b:  80, radius: 1.0, speed: 0.5, maxAge: 250, rise:  0,    maxAlpha: 0.5 }},
+}};
+
 function spawnParticle() {{
     return {{
         px: 0, py: 0,
         vx: 0, vy: 0,
         age: 0, maxAge: 200 + Math.random() * 400,
         r: 180, g: 130, b: 40,
+        radius: 1.5, rise: 0, modality: 'smell',
     }};
 }}
 
@@ -1555,6 +1580,11 @@ const FIELD_W = 80, FIELD_H = 60;
 const fieldDx = new Float32Array(FIELD_W * FIELD_H);
 const fieldDy = new Float32Array(FIELD_W * FIELD_H);
 
+// Precomputed street direction field (rebuilt on pan/zoom)
+const streetFieldDx  = new Float32Array(FIELD_W * FIELD_H);
+const streetFieldDy  = new Float32Array(FIELD_W * FIELD_H);
+const streetFieldMag = new Float32Array(FIELD_W * FIELD_H);  // 0=no street, 1=strong street
+
 // Cache of venue pixel positions (declared early — see top of particle system block)
 function updateVenuePx() {{
     VENUES.forEach(v => {{
@@ -1563,6 +1593,9 @@ function updateVenuePx() {{
     }});
 }}
 updateVenuePx();
+map.on('movestart zoomstart', () => {{
+    if (pCtx && pCanvas) pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+}});
 map.on('moveend zoomend', () => {{
     updateVenuePx();
     resetParticles();
@@ -1616,7 +1649,12 @@ function respawnParticle(p, activeCount) {{
 // Main RAF loop (particleRaf and activeParticleCount declared early — see top of particle system block)
 function particleFrame() {{
     if (!pCtx || !pCanvas) return;
-    pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+    // Fade existing pixels toward transparent (not black) to create motion trails
+    // destination-out erases canvas pixels proportionally, preserving map underneath
+    pCtx.globalCompositeOperation = 'destination-out';
+    pCtx.fillStyle = 'rgba(0,0,0,0.15)';
+    pCtx.fillRect(0, 0, pCanvas.width, pCanvas.height);
+    pCtx.globalCompositeOperation = 'source-over';
 
     const isNetwork = state.particleMode === 'network';
 
@@ -1635,12 +1673,10 @@ function particleFrame() {{
                 }});
                 let chosenSeg;
                 if (weighted.length) {{
-                    // Pick a venue weighted by intensity
                     const total = weighted.reduce((s, x) => s + x.w, 0);
                     let rnd = Math.random() * total;
                     let chosenVp = weighted[weighted.length - 1].vp;
                     for (const {{ vp, w }} of weighted) {{ rnd -= w; if (rnd <= 0) {{ chosenVp = vp; break; }} }}
-                    // Find nearest segment to chosen venue
                     let bestDist = Infinity;
                     streetSegsPx.forEach(seg => {{
                         const mx = (seg.x0 + seg.x1) * 0.5, my = (seg.y0 + seg.y1) * 0.5;
@@ -1661,9 +1697,11 @@ function particleFrame() {{
         if (isNetwork) {{
             _networkStep(p);
         }} else {{
+            const prof = MODALITY_PROFILE[p.modality] || MODALITY_PROFILE.smell;
             const f = sampleField(p.px, p.py);
-            p.vx = p.vx * 0.95 + f.dx * 0.15;
-            p.vy = p.vy * 0.95 + f.dy * 0.15;
+            const speedMult = prof.speed || 1.0;
+            p.vx = p.vx * 0.95 + f.dx * 0.15 * speedMult;
+            p.vy = p.vy * 0.95 + f.dy * 0.15 * speedMult + (p.rise || 0);
             p.px += p.vx;
             p.py += p.vy;
             if (p.px < 0) p.px = pCanvas.width;
@@ -1673,9 +1711,30 @@ function particleFrame() {{
         }}
 
         const t = p.age / p.maxAge;
-        const alpha = Math.min(0.9, t < 0.1 ? t * 9 : 1 - t);  // fast fade-in, slow fade-out
+        const prof = MODALITY_PROFILE[p.modality] || MODALITY_PROFILE.smell;
+        let alpha;
+        if (p.modality === 'smoke') {{
+            // slow in (20%), plateau, lingering out (40%)
+            alpha = t < 0.2 ? (t / 0.2) : (t < 0.6 ? 1.0 : 1.0 - (t - 0.6) / 0.4);
+        }} else if (p.modality === 'noise') {{
+            // instant on (2%), rapid out (70%)
+            alpha = t < 0.02 ? (t / 0.02) : (t < 0.3 ? 1.0 : 1.0 - (t - 0.3) / 0.7);
+        }} else if (p.modality === 'smell') {{
+            // gradual in (15%), very slow out (50%)
+            alpha = t < 0.15 ? (t / 0.15) : (t < 0.5 ? 1.0 : 1.0 - (t - 0.5) / 0.5);
+        }} else {{
+            // default: fast fade-in, slow fade-out
+            alpha = t < 0.1 ? t * 9 : 1 - t;
+        }}
+        alpha = Math.max(0, Math.min(1, alpha)) * (prof.maxAlpha || 0.7);
+
+        // Smoke dissipation: particles start large and shrink with age
+        const drawRadius = p.modality === 'smoke'
+            ? (p.radius || 2.5) * (1 + 0.5 * (1 - t))
+            : (p.radius || 1.5);
+
         pCtx.beginPath();
-        pCtx.arc(p.px, p.py, 1.5, 0, Math.PI * 2);
+        pCtx.arc(p.px, p.py, drawRadius, 0, Math.PI * 2);
         pCtx.fillStyle = `rgba(${{p.r}},${{p.g}},${{p.b}},${{alpha.toFixed(2)}})`;
         pCtx.fill();
     }}
@@ -1712,13 +1771,41 @@ function _buildSmokefield() {{
     updateVenuePx();
     const W = pCanvas.width, H = pCanvas.height;
     const cW = W / FIELD_W, cH = H / FIELD_H;
+    const year = parseInt(document.getElementById('year-slider').value);
+    // Precompute per-venue canyon factor (zone street enclosure multiplier)
+    const venueCanyonFactor = {{}};
+    VENUES.forEach(v => {{
+        const zb = computeZoneBaseline(v.lat, v.lon, year, null);
+        venueCanyonFactor[v.id] = zb ? (zb.canyon_factor || 1.0) : 1.0;
+    }});
 
     for (let gy = 0; gy < FIELD_H; gy++) {{
         for (let gx = 0; gx < FIELD_W; gx++) {{
             const cx = (gx + 0.5) * cW;
             const cy = (gy + 0.5) * cH;
-            let windDx = WIND_DX, windDy = WIND_DY;
+            const i = gy * FIELD_W + gx;
 
+            // Street direction at this cell (pre-built)
+            const sMag = streetFieldMag[i];
+            const sDx  = streetFieldDx[i];
+            const sDy  = streetFieldDy[i];
+
+            // (1) 30% wind base
+            let fdx = WIND_DX * 0.3;
+            let fdy = WIND_DY * 0.3;
+
+            // (2) 40% street channeling — align street direction with prevailing wind to
+            //     avoid cancellation (choose the street direction that agrees with wind)
+            if (sMag > 0.01) {{
+                const dot = sDx * WIND_DX + sDy * WIND_DY;
+                const chDx = dot >= 0 ? sDx : -sDx;
+                const chDy = dot >= 0 ? sDy : -sDy;
+                fdx += chDx * sMag * 0.4;
+                fdy += chDy * sMag * 0.4;
+            }}
+
+            // (3) 30% venue radial push
+            let venueDx = 0, venueDy = 0;
             VENUES.forEach(v => {{
                 const loads = venueIntensityCache[v.id];
                 if (!loads || loads.smell < 0.02) return;
@@ -1730,17 +1817,18 @@ function _buildSmokefield() {{
                 const dx = cx - vp.px, dy = cy - vp.py;
                 const dist = Math.sqrt(dx * dx + dy * dy);
                 if (dist < 1 || dist > 300) return;
-                const strength = loads.smell * enclosureFactor * posF * 4000 / (dist * dist);
-                windDx += (dx / dist) * strength;
-                windDy += (dy / dist) * strength;
+                const canyonFactor = venueCanyonFactor[v.id] || 1.0;
+                const strength = loads.smell * enclosureFactor * posF * canyonFactor * 4000 / (dist * dist);
+                venueDx += (dx / dist) * strength;
+                venueDy += (dy / dist) * strength;
             }});
+            fdx += venueDx * 0.3;
+            fdy += venueDy * 0.3;
 
-            const mag = Math.sqrt(windDx * windDx + windDy * windDy);
-            if (mag > 2.0) {{ windDx = windDx / mag * 2.0; windDy = windDy / mag * 2.0; }}
-
-            const i = gy * FIELD_W + gx;
-            fieldDx[i] = windDx;
-            fieldDy[i] = windDy;
+            const mag = Math.sqrt(fdx * fdx + fdy * fdy);
+            if (mag > 2.0) {{ fdx = fdx / mag * 2.0; fdy = fdy / mag * 2.0; }}
+            fieldDx[i] = fdx;
+            fieldDy[i] = fdy;
         }}
     }}
 
@@ -1770,25 +1858,33 @@ function _buildSmokefield() {{
     const count = Math.round(600 + so2_index * 800);
     const scaledCount = Math.round(count * zoneIndMult);
 
-    // Colour: amber-brown
+    // 70% smoke (grey-brown, large, rising) + 30% smell (amber, small, lingering)
     const safeCount = Math.min(scaledCount, MAX_P);
+    const smokeCount = Math.round(safeCount * 0.7);
     for (let i = 0; i < safeCount; i++) {{
-        particles[i].r = 180; particles[i].g = 130; particles[i].b = 40;
+        const modal = i < smokeCount ? 'smoke' : 'smell';
+        const prof = MODALITY_PROFILE[modal];
+        const p = particles[i];
+        p.r = prof.r; p.g = prof.g; p.b = prof.b;
+        p.radius = prof.radius;
+        p.rise = prof.rise;
+        p.modality = modal;
+        p.maxAge = prof.maxAge * (0.7 + Math.random() * 0.6);
     }}
     startParticles(safeCount);
 }}
-const MODALITY_COLOURS = {{
-    smell:  {{ r: 180, g: 130, b:  40 }},
-    noise:  {{ r:  60, g: 120, b: 200 }},
-    crowd:  {{ r: 180, g:  60, b:  60 }},
-    visual: {{ r:  60, g: 160, b:  80 }},
-}};
 
 function _buildFlowField() {{
     if (!pCanvas) return;
     updateVenuePx();
     const W = pCanvas.width, H = pCanvas.height;
     const cW = W / FIELD_W, cH = H / FIELD_H;
+    const _flowYear = parseInt(document.getElementById('year-slider').value);
+    const _venueCanyonFactor = {{}};
+    VENUES.forEach(v => {{
+        const zb = computeZoneBaseline(v.lat, v.lon, _flowYear, null);
+        _venueCanyonFactor[v.id] = zb ? (zb.canyon_factor || 1.0) : 1.0;
+    }});
 
     // Which modalities are active via sense pills?
     const activeModals = [];
@@ -1805,7 +1901,25 @@ function _buildFlowField() {{
             for (let gx = 0; gx < FIELD_W; gx++) {{
                 const cx = (gx + 0.5) * cW;
                 const cy = (gy + 0.5) * cH;
+                const i = gy * FIELD_W + gx;
                 let fdx = 0, fdy = 0;
+
+                // Street channeling for noise (strong) and smell (weak)
+                const sMag = streetFieldMag[i];
+                if (sMag > 0.01) {{
+                    if (modal === 'noise') {{
+                        // Fast along streets; corner attenuation natural from low sMag at intersections
+                        fdx += streetFieldDx[i] * sMag * 0.6;
+                        fdy += streetFieldDy[i] * sMag * 0.6;
+                        // Narrow-lane echo: add perpendicular curl component
+                        fdx += streetFieldDy[i] * sMag * 0.3;
+                        fdy -= streetFieldDx[i] * sMag * 0.3;
+                    }} else if (modal === 'smell') {{
+                        // Smell seeps slowly along streets
+                        fdx += streetFieldDx[i] * sMag * 0.2;
+                        fdy += streetFieldDy[i] * sMag * 0.2;
+                    }}
+                }}
 
                 VENUES.forEach(v => {{
                     const loads = venueIntensityCache[v.id];
@@ -1824,10 +1938,16 @@ function _buildFlowField() {{
                         const strength = loads.noise * 3500 / (dist * dist);
                         fdx += (dx / dist) * strength;
                         fdy += (dy / dist) * strength;
+                        // Stone-enclosure curl turbulence (reverb)
                         if (v.material === 'stone' && (v.enclosure === 'enclosed' || v.enclosure === 'semi_open')) {{
                             fdx += (dy / dist) * strength * 0.25;
                             fdy -= (dx / dist) * strength * 0.25;
                         }}
+                    }} else if (modal === 'smell') {{
+                        const cf = _venueCanyonFactor[v.id] || 1.0;
+                        const str = loads.smell * cf * 3000 / (dist * dist);
+                        fdx += (dx / dist) * str;
+                        fdy += (dy / dist) * str;
                     }} else {{
                         const str = loads[modal] * (modal === 'visual' ? 1500 : 3000) / (dist * dist);
                         fdx += (dx / dist) * str;
@@ -1835,48 +1955,145 @@ function _buildFlowField() {{
                     }}
                 }});
 
-                const i = gy * FIELD_W + gx;
                 fieldDx[i] += fdx / activeModals.length;
                 fieldDy[i] += fdy / activeModals.length;
             }}
         }}
     }});
 
-    // Final clamp pass — bound the accumulated multi-modality field
+    // Final clamp pass
     for (let ci = 0; ci < FIELD_W * FIELD_H; ci++) {{
         const fm = Math.sqrt(fieldDx[ci] * fieldDx[ci] + fieldDy[ci] * fieldDy[ci]);
         if (fm > 2.0) {{ fieldDx[ci] = fieldDx[ci] / fm * 2.0; fieldDy[ci] = fieldDy[ci] / fm * 2.0; }}
     }}
 
-    // Blend particle colours across active modalities
-    let blendR = 0, blendG = 0, blendB = 0;
-    activeModals.forEach(m => {{
-        const c = MODALITY_COLOURS[m] || MODALITY_COLOURS.smell;
-        blendR += c.r; blendG += c.g; blendB += c.b;
+    // Assign each particle its own modality profile for distinct visual rendering
+    // Partition proportionally: compute total intensity per modality across active venues
+    const modalTotals = {{}};
+    activeModals.forEach(m => {{ modalTotals[m] = 0; }});
+    VENUES.forEach(v => {{
+        const loads = venueIntensityCache[v.id];
+        if (!loads) return;
+        activeModals.forEach(m => {{ modalTotals[m] += loads[m] || 0; }});
     }});
-    blendR = Math.round(blendR / activeModals.length);
-    blendG = Math.round(blendG / activeModals.length);
-    blendB = Math.round(blendB / activeModals.length);
+    const grandTotal = activeModals.reduce((s, m) => s + modalTotals[m], 0);
+
     const count = 900;
     const safeCount = Math.min(count, MAX_P);
-    for (let i = 0; i < safeCount; i++) {{
-        particles[i].r = blendR; particles[i].g = blendG; particles[i].b = blendB;
+    let offset = 0;
+    activeModals.forEach(m => {{
+        const share = grandTotal > 0 ? modalTotals[m] / grandTotal : 1 / activeModals.length;
+        const pCount = Math.round(safeCount * share);
+        const prof = MODALITY_PROFILE[m] || MODALITY_PROFILE.smell;
+        for (let i = offset; i < Math.min(offset + pCount, safeCount); i++) {{
+            const p = particles[i];
+            p.r = prof.r; p.g = prof.g; p.b = prof.b;
+            p.radius = prof.radius;
+            p.rise = prof.rise;
+            p.modality = m;
+            p.maxAge = prof.maxAge * (0.7 + Math.random() * 0.6);
+        }}
+        offset += pCount;
+    }});
+    // Fill any remainder with the first active modality
+    if (offset < safeCount) {{
+        const prof = MODALITY_PROFILE[activeModals[0]] || MODALITY_PROFILE.smell;
+        for (let i = offset; i < safeCount; i++) {{
+            const p = particles[i];
+            p.r = prof.r; p.g = prof.g; p.b = prof.b;
+            p.radius = prof.radius; p.rise = prof.rise;
+            p.modality = activeModals[0];
+            p.maxAge = prof.maxAge * (0.7 + Math.random() * 0.6);
+        }}
     }}
     startParticles(safeCount);
 }}
 // Street segment pixel cache
 let streetSegsPx = [];
 
+// Highway-type width multiplier for channeling strength
+function _hwayMult(t) {{
+    if (t === 'primary' || t === 'trunk' || t === 'motorway') return 1.8;
+    if (t === 'secondary') return 1.4;
+    if (t === 'tertiary' || t === 'residential' || t === 'unclassified') return 1.0;
+    return 0.6;  // footway, service, path, or unknown
+}}
+
+// Build per-cell street direction field using spatial bucketing (~10x speedup vs naive)
+function _rebuildStreetField() {{
+    if (!pCanvas || !streetSegsPx.length) {{
+        streetFieldDx.fill(0); streetFieldDy.fill(0); streetFieldMag.fill(0);
+        return;
+    }}
+    const W = pCanvas.width, H = pCanvas.height;
+    const cW = W / FIELD_W, cH = H / FIELD_H;
+    const SEARCH_PX = 40;
+    // 8×6 spatial bucket grid
+    const BW = 8, BH = 6;
+    const bW = W / BW, bH = H / BH;
+    const buckets = [];
+    for (let i = 0; i < BW * BH; i++) buckets.push([]);
+    streetSegsPx.forEach(seg => {{
+        const minBx = Math.max(0, Math.floor(Math.min(seg.x0, seg.x1) / bW) - 1);
+        const maxBx = Math.min(BW - 1, Math.floor(Math.max(seg.x0, seg.x1) / bW) + 1);
+        const minBy = Math.max(0, Math.floor(Math.min(seg.y0, seg.y1) / bH) - 1);
+        const maxBy = Math.min(BH - 1, Math.floor(Math.max(seg.y0, seg.y1) / bH) + 1);
+        for (let by = minBy; by <= maxBy; by++)
+            for (let bx = minBx; bx <= maxBx; bx++)
+                buckets[by * BW + bx].push(seg);
+    }});
+    for (let gy = 0; gy < FIELD_H; gy++) {{
+        for (let gx = 0; gx < FIELD_W; gx++) {{
+            const cx = (gx + 0.5) * cW, cy = (gy + 0.5) * cH;
+            let sdx = 0, sdy = 0;
+            const bx0 = Math.max(0, Math.floor(cx / bW) - 1);
+            const bx1 = Math.min(BW - 1, Math.floor(cx / bW) + 1);
+            const by0 = Math.max(0, Math.floor(cy / bH) - 1);
+            const by1 = Math.min(BH - 1, Math.floor(cy / bH) + 1);
+            const seen = new Set();
+            for (let by = by0; by <= by1; by++) {{
+                for (let bx = bx0; bx <= bx1; bx++) {{
+                    for (const seg of buckets[by * BW + bx]) {{
+                        if (seen.has(seg)) continue;
+                        seen.add(seg);
+                        const mx = (seg.x0 + seg.x1) * 0.5, my = (seg.y0 + seg.y1) * 0.5;
+                        const ddx = mx - cx, ddy = my - cy;
+                        const dist = Math.sqrt(ddx * ddx + ddy * ddy);
+                        if (dist < 2 || dist > SEARCH_PX) continue;
+                        const mult = _hwayMult(seg.t);
+                        const w = mult / dist;
+                        // Segment direction (unit vector)
+                        const segDirX = (seg.x1 - seg.x0) / seg.len;
+                        const segDirY = (seg.y1 - seg.y0) / seg.len;
+                        sdx += segDirX * w;
+                        sdy += segDirY * w;
+                    }}
+                }}
+            }}
+            const mag = Math.sqrt(sdx * sdx + sdy * sdy);
+            const idx = gy * FIELD_W + gx;
+            if (mag > 0.001) {{
+                streetFieldDx[idx]  = sdx / mag;
+                streetFieldDy[idx]  = sdy / mag;
+                streetFieldMag[idx] = Math.min(1, mag * 0.08);
+            }} else {{
+                streetFieldDx[idx] = 0; streetFieldDy[idx] = 0; streetFieldMag[idx] = 0;
+            }}
+        }}
+    }}
+}}
+
 function _projectStreets(year) {{
     streetSegsPx = [];
     if (!STREET_NETWORK || !STREET_NETWORK.length) return;
     const yr = year || parseInt(document.getElementById('year-slider').value);
     STREET_NETWORK.forEach(entry => {{
-        // New format: {{p:[[lat,lon],...], s:start_yr|null, e:end_yr|null}}
+        // New format: {{p:[[lat,lon],...], s:start_yr|null, e:end_yr|null, t:highway_type}}
         // Fallback: bare [[lat,lon],...] array for any old-format cached data
         const polyline = Array.isArray(entry) ? entry : entry.p;
         const s = Array.isArray(entry) ? null : entry.s;
         const e = Array.isArray(entry) ? null : entry.e;
+        const t = Array.isArray(entry) ? '' : (entry.t || '');
         if (s !== null && s > yr) return;
         if (e !== null && e < yr) return;
         for (let i = 0; i < polyline.length - 1; i++) {{
@@ -1884,9 +2101,15 @@ function _projectStreets(year) {{
             const b = map.latLngToContainerPoint([polyline[i+1][0], polyline[i+1][1]]);
             const len = Math.sqrt((b.x-a.x)**2 + (b.y-a.y)**2);
             if (len < 2) continue;
-            streetSegsPx.push({{ x0: a.x, y0: a.y, x1: b.x, y1: b.y, len }});
+            streetSegsPx.push({{ x0: a.x, y0: a.y, x1: b.x, y1: b.y, len, t }});
         }}
     }});
+    // Rebuild street direction field for the new projection
+    _rebuildStreetField();
+    // Rebuild flow/smoke field with the new pixel projection (fixes stale vectors after pan/zoom)
+    if (state && state.particleMode && state.particleMode !== 'off' && state.particleMode !== 'network') {{
+        updateParticleField();
+    }}
     // Reset network particles so they resample the new projection
     if (state && state.particleMode === 'network') resetParticles();
 }}

@@ -97,3 +97,4 @@ LON095,Newgate Gallows,London,51.5151,-0.1017,1783,,Public executions moved outs
 LON096,Greenwich Park,London,51.4769,0.0005,,,Royal park on the south bank; site of Greenwich Fair (Easter and Whitsun).,rocque_1746;horwood_1799,3,open,park,outdoor,vast
 RUR001,Rural England,England,52.45,-1.55,,,Pseudo-venue for non-urban English and Celtic rural settings (Scotland; Ireland; English countryside).,rocque_1746,3,open,misc,outdoor,n_a
 RUR002,Continental Gothic,Europe,43.7,11.2,,,Pseudo-venue for continental and fantastical Gothic settings (Italy; France; Spain; Arabia).,rocque_1746,3,open,misc,mixed,n_a
+LON097,Exeter Change Menagerie,London,51.5115,-0.1201,1773,1829,"Strand menagerie on upper floors of the Exchange building. Pidcock then Cross collection. Roars of lions and tigers audible in the Strand and frightened horses. Demolished 1829.",rocque_1746;horwood_1799,3,enclosed,menagerie,timber,medium

@@ -77,6 +77,25 @@ def test_parse_ohm_response_filters_by_date():
     assert result[0]["p"] == [[51.51, -0.12], [51.52, -0.13]]
     assert result[0]["s"] == 1746
     assert result[0]["e"] is None
+    assert result[0]["t"] == "primary"
+
+
+def test_parse_ohm_response_t_field_present():
+    """Each segment must have a 't' (highway type) key."""
+    fake_response = {
+        "elements": [
+            {"type": "way", "id": 1,
+             "tags": {"highway": "residential", "start_date": "1700"},
+             "geometry": [{"lat": 51.51, "lon": -0.12}, {"lat": 51.52, "lon": -0.13}]},
+            {"type": "way", "id": 2,
+             "tags": {"start_date": "1700"},   # no highway tag
+             "geometry": [{"lat": 51.51, "lon": -0.12}, {"lat": 51.52, "lon": -0.13}]},
+        ]
+    }
+    result = parse_ohm_response(fake_response)
+    assert len(result) == 2
+    assert result[0]["t"] == "residential"
+    assert result[1]["t"] == ""   # missing highway tag -> empty string
 
 
 def test_parse_ohm_response_skips_single_point_ways():

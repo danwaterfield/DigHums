@@ -7,14 +7,85 @@
         "name": "City of London",
         "dominant_sense": "noise",
         "decades": {
-          "1660": {"smell_base":0.45,"noise_base":0.60,"crowd_density":0.65,"river_proximity":0.15,"industrial_intensity":0.30,"street_character":"narrow","building_height":"medium"},
-          "1700": {"smell_base":0.48,"noise_base":0.62,"crowd_density":0.68,"river_proximity":0.15,"industrial_intensity":0.33,"street_character":"narrow","building_height":"medium"},
-          "1750": {"smell_base":0.50,"noise_base":0.65,"crowd_density":0.70,"river_proximity":0.15,"industrial_intensity":0.38,"street_character":"narrow","building_height":"tall"},
-          "1800": {"smell_base":0.52,"noise_base":0.68,"crowd_density":0.72,"river_proximity":0.15,"industrial_intensity":0.45,"street_character":"narrow","building_height":"tall"},
-          "1820": {"smell_base":0.55,"noise_base":0.70,"crowd_density":0.73,"river_proximity":0.15,"industrial_intensity":0.50,"street_character":"narrow","building_height":"tall"}
+          "1660": {
+            "smell_base": 0.45,
+            "noise_base": 0.6,
+            "crowd_density": 0.65,
+            "river_proximity": 0.15,
+            "industrial_intensity": 0.3,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 2.5
+          },
+          "1700": {
+            "smell_base": 0.48,
+            "noise_base": 0.62,
+            "crowd_density": 0.68,
+            "river_proximity": 0.15,
+            "industrial_intensity": 0.33,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 1.2
+          },
+          "1750": {
+            "smell_base": 0.5,
+            "noise_base": 0.65,
+            "crowd_density": 0.7,
+            "river_proximity": 0.15,
+            "industrial_intensity": 0.38,
+            "street_character": "narrow",
+            "building_height": "tall",
+            "canyon_factor": 1.2
+          },
+          "1800": {
+            "smell_base": 0.52,
+            "noise_base": 0.68,
+            "crowd_density": 0.72,
+            "river_proximity": 0.15,
+            "industrial_intensity": 0.45,
+            "street_character": "narrow",
+            "building_height": "tall",
+            "canyon_factor": 1.2
+          },
+          "1820": {
+            "smell_base": 0.55,
+            "noise_base": 0.7,
+            "crowd_density": 0.73,
+            "river_proximity": 0.15,
+            "industrial_intensity": 0.5,
+            "street_character": "narrow",
+            "building_height": "tall",
+            "canyon_factor": 1.2
+          }
         }
       },
-      "geometry": {"type":"Polygon","coordinates":[[[-0.113,51.508],[-0.073,51.508],[-0.073,51.524],[-0.113,51.524],[-0.113,51.508]]]}
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -0.113,
+              51.508
+            ],
+            [
+              -0.073,
+              51.508
+            ],
+            [
+              -0.073,
+              51.524
+            ],
+            [
+              -0.113,
+              51.524
+            ],
+            [
+              -0.113,
+              51.508
+            ]
+          ]
+        ]
+      }
     },
     {
       "type": "Feature",
@@ -22,14 +93,85 @@
         "name": "Thames Waterfront East",
         "dominant_sense": "smell",
         "decades": {
-          "1660": {"smell_base":0.75,"noise_base":0.55,"crowd_density":0.55,"river_proximity":0.90,"industrial_intensity":0.40,"street_character":"narrow","building_height":"medium"},
-          "1700": {"smell_base":0.78,"noise_base":0.58,"crowd_density":0.58,"river_proximity":0.90,"industrial_intensity":0.45,"street_character":"narrow","building_height":"medium"},
-          "1750": {"smell_base":0.80,"noise_base":0.60,"crowd_density":0.60,"river_proximity":0.90,"industrial_intensity":0.50,"street_character":"narrow","building_height":"medium"},
-          "1800": {"smell_base":0.82,"noise_base":0.62,"crowd_density":0.62,"river_proximity":0.90,"industrial_intensity":0.58,"street_character":"narrow","building_height":"medium"},
-          "1820": {"smell_base":0.85,"noise_base":0.65,"crowd_density":0.65,"river_proximity":0.90,"industrial_intensity":0.65,"street_character":"narrow","building_height":"medium"}
+          "1660": {
+            "smell_base": 0.75,
+            "noise_base": 0.55,
+            "crowd_density": 0.55,
+            "river_proximity": 0.9,
+            "industrial_intensity": 0.4,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 2.0
+          },
+          "1700": {
+            "smell_base": 0.78,
+            "noise_base": 0.58,
+            "crowd_density": 0.58,
+            "river_proximity": 0.9,
+            "industrial_intensity": 0.45,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 2.0
+          },
+          "1750": {
+            "smell_base": 0.8,
+            "noise_base": 0.6,
+            "crowd_density": 0.6,
+            "river_proximity": 0.9,
+            "industrial_intensity": 0.5,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 2.0
+          },
+          "1800": {
+            "smell_base": 0.82,
+            "noise_base": 0.62,
+            "crowd_density": 0.62,
+            "river_proximity": 0.9,
+            "industrial_intensity": 0.58,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 2.0
+          },
+          "1820": {
+            "smell_base": 0.85,
+            "noise_base": 0.65,
+            "crowd_density": 0.65,
+            "river_proximity": 0.9,
+            "industrial_intensity": 0.65,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 2.0
+          }
         }
       },
-      "geometry": {"type":"Polygon","coordinates":[[[-0.095,51.500],[-0.055,51.500],[-0.055,51.513],[-0.095,51.513],[-0.095,51.500]]]}
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -0.095,
+              51.5
+            ],
+            [
+              -0.055,
+              51.5
+            ],
+            [
+              -0.055,
+              51.513
+            ],
+            [
+              -0.095,
+              51.513
+            ],
+            [
+              -0.095,
+              51.5
+            ]
+          ]
+        ]
+      }
     },
     {
       "type": "Feature",
@@ -37,14 +179,85 @@
         "name": "Southwark & Bankside",
         "dominant_sense": "smell",
         "decades": {
-          "1660": {"smell_base":0.60,"noise_base":0.55,"crowd_density":0.55,"river_proximity":0.50,"industrial_intensity":0.45,"street_character":"narrow","building_height":"low"},
-          "1700": {"smell_base":0.60,"noise_base":0.55,"crowd_density":0.55,"river_proximity":0.50,"industrial_intensity":0.45,"street_character":"narrow","building_height":"low"},
-          "1750": {"smell_base":0.58,"noise_base":0.55,"crowd_density":0.55,"river_proximity":0.50,"industrial_intensity":0.45,"street_character":"narrow","building_height":"medium"},
-          "1800": {"smell_base":0.55,"noise_base":0.52,"crowd_density":0.52,"river_proximity":0.50,"industrial_intensity":0.50,"street_character":"narrow","building_height":"medium"},
-          "1820": {"smell_base":0.55,"noise_base":0.52,"crowd_density":0.52,"river_proximity":0.50,"industrial_intensity":0.55,"street_character":"narrow","building_height":"medium"}
+          "1660": {
+            "smell_base": 0.6,
+            "noise_base": 0.55,
+            "crowd_density": 0.55,
+            "river_proximity": 0.5,
+            "industrial_intensity": 0.45,
+            "street_character": "narrow",
+            "building_height": "low",
+            "canyon_factor": 2.2
+          },
+          "1700": {
+            "smell_base": 0.6,
+            "noise_base": 0.55,
+            "crowd_density": 0.55,
+            "river_proximity": 0.5,
+            "industrial_intensity": 0.45,
+            "street_character": "narrow",
+            "building_height": "low",
+            "canyon_factor": 2.2
+          },
+          "1750": {
+            "smell_base": 0.58,
+            "noise_base": 0.55,
+            "crowd_density": 0.55,
+            "river_proximity": 0.5,
+            "industrial_intensity": 0.45,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 2.2
+          },
+          "1800": {
+            "smell_base": 0.55,
+            "noise_base": 0.52,
+            "crowd_density": 0.52,
+            "river_proximity": 0.5,
+            "industrial_intensity": 0.5,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 2.0
+          },
+          "1820": {
+            "smell_base": 0.55,
+            "noise_base": 0.52,
+            "crowd_density": 0.52,
+            "river_proximity": 0.5,
+            "industrial_intensity": 0.55,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 2.0
+          }
         }
       },
-      "geometry": {"type":"Polygon","coordinates":[[[-0.115,51.488],[-0.068,51.488],[-0.068,51.507],[-0.115,51.507],[-0.115,51.488]]]}
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -0.115,
+              51.488
+            ],
+            [
+              -0.068,
+              51.488
+            ],
+            [
+              -0.068,
+              51.507
+            ],
+            [
+              -0.115,
+              51.507
+            ],
+            [
+              -0.115,
+              51.488
+            ]
+          ]
+        ]
+      }
     },
     {
       "type": "Feature",
@@ -52,14 +265,85 @@
         "name": "Covent Garden & Strand",
         "dominant_sense": "crowd",
         "decades": {
-          "1660": {"smell_base":0.40,"noise_base":0.55,"crowd_density":0.60,"river_proximity":0.05,"industrial_intensity":0.15,"street_character":"medium","building_height":"medium"},
-          "1700": {"smell_base":0.42,"noise_base":0.60,"crowd_density":0.65,"river_proximity":0.05,"industrial_intensity":0.15,"street_character":"medium","building_height":"medium"},
-          "1750": {"smell_base":0.45,"noise_base":0.65,"crowd_density":0.70,"river_proximity":0.05,"industrial_intensity":0.18,"street_character":"medium","building_height":"medium"},
-          "1800": {"smell_base":0.42,"noise_base":0.62,"crowd_density":0.68,"river_proximity":0.05,"industrial_intensity":0.20,"street_character":"medium","building_height":"tall"},
-          "1820": {"smell_base":0.40,"noise_base":0.60,"crowd_density":0.65,"river_proximity":0.05,"industrial_intensity":0.22,"street_character":"medium","building_height":"tall"}
+          "1660": {
+            "smell_base": 0.4,
+            "noise_base": 0.55,
+            "crowd_density": 0.6,
+            "river_proximity": 0.05,
+            "industrial_intensity": 0.15,
+            "street_character": "medium",
+            "building_height": "medium",
+            "canyon_factor": 1.5
+          },
+          "1700": {
+            "smell_base": 0.42,
+            "noise_base": 0.6,
+            "crowd_density": 0.65,
+            "river_proximity": 0.05,
+            "industrial_intensity": 0.15,
+            "street_character": "medium",
+            "building_height": "medium",
+            "canyon_factor": 1.5
+          },
+          "1750": {
+            "smell_base": 0.45,
+            "noise_base": 0.65,
+            "crowd_density": 0.7,
+            "river_proximity": 0.05,
+            "industrial_intensity": 0.18,
+            "street_character": "medium",
+            "building_height": "medium",
+            "canyon_factor": 1.5
+          },
+          "1800": {
+            "smell_base": 0.42,
+            "noise_base": 0.62,
+            "crowd_density": 0.68,
+            "river_proximity": 0.05,
+            "industrial_intensity": 0.2,
+            "street_character": "medium",
+            "building_height": "tall",
+            "canyon_factor": 1.5
+          },
+          "1820": {
+            "smell_base": 0.4,
+            "noise_base": 0.6,
+            "crowd_density": 0.65,
+            "river_proximity": 0.05,
+            "industrial_intensity": 0.22,
+            "street_character": "medium",
+            "building_height": "tall",
+            "canyon_factor": 1.5
+          }
         }
       },
-      "geometry": {"type":"Polygon","coordinates":[[[-0.131,51.508],[-0.109,51.508],[-0.109,51.521],[-0.131,51.521],[-0.131,51.508]]]}
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -0.131,
+              51.508
+            ],
+            [
+              -0.109,
+              51.508
+            ],
+            [
+              -0.109,
+              51.521
+            ],
+            [
+              -0.131,
+              51.521
+            ],
+            [
+              -0.131,
+              51.508
+            ]
+          ]
+        ]
+      }
     },
     {
       "type": "Feature",
@@ -67,14 +351,85 @@
         "name": "Westminster & Whitehall",
         "dominant_sense": "crowd",
         "decades": {
-          "1660": {"smell_base":0.20,"noise_base":0.40,"crowd_density":0.45,"river_proximity":0.35,"industrial_intensity":0.10,"street_character":"broad","building_height":"medium"},
-          "1700": {"smell_base":0.20,"noise_base":0.42,"crowd_density":0.48,"river_proximity":0.35,"industrial_intensity":0.10,"street_character":"broad","building_height":"medium"},
-          "1750": {"smell_base":0.22,"noise_base":0.45,"crowd_density":0.50,"river_proximity":0.35,"industrial_intensity":0.12,"street_character":"broad","building_height":"tall"},
-          "1800": {"smell_base":0.22,"noise_base":0.48,"crowd_density":0.52,"river_proximity":0.35,"industrial_intensity":0.12,"street_character":"broad","building_height":"tall"},
-          "1820": {"smell_base":0.22,"noise_base":0.50,"crowd_density":0.55,"river_proximity":0.35,"industrial_intensity":0.14,"street_character":"broad","building_height":"tall"}
+          "1660": {
+            "smell_base": 0.2,
+            "noise_base": 0.4,
+            "crowd_density": 0.45,
+            "river_proximity": 0.35,
+            "industrial_intensity": 0.1,
+            "street_character": "broad",
+            "building_height": "medium",
+            "canyon_factor": 1.0
+          },
+          "1700": {
+            "smell_base": 0.2,
+            "noise_base": 0.42,
+            "crowd_density": 0.48,
+            "river_proximity": 0.35,
+            "industrial_intensity": 0.1,
+            "street_character": "broad",
+            "building_height": "medium",
+            "canyon_factor": 1.0
+          },
+          "1750": {
+            "smell_base": 0.22,
+            "noise_base": 0.45,
+            "crowd_density": 0.5,
+            "river_proximity": 0.35,
+            "industrial_intensity": 0.12,
+            "street_character": "broad",
+            "building_height": "tall",
+            "canyon_factor": 1.0
+          },
+          "1800": {
+            "smell_base": 0.22,
+            "noise_base": 0.48,
+            "crowd_density": 0.52,
+            "river_proximity": 0.35,
+            "industrial_intensity": 0.12,
+            "street_character": "broad",
+            "building_height": "tall",
+            "canyon_factor": 1.0
+          },
+          "1820": {
+            "smell_base": 0.22,
+            "noise_base": 0.5,
+            "crowd_density": 0.55,
+            "river_proximity": 0.35,
+            "industrial_intensity": 0.14,
+            "street_character": "broad",
+            "building_height": "tall",
+            "canyon_factor": 1.0
+          }
         }
       },
-      "geometry": {"type":"Polygon","coordinates":[[[-0.137,51.493],[-0.118,51.493],[-0.118,51.512],[-0.137,51.512],[-0.137,51.493]]]}
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -0.137,
+              51.493
+            ],
+            [
+              -0.118,
+              51.493
+            ],
+            [
+              -0.118,
+              51.512
+            ],
+            [
+              -0.137,
+              51.512
+            ],
+            [
+              -0.137,
+              51.493
+            ]
+          ]
+        ]
+      }
     },
     {
       "type": "Feature",
@@ -82,14 +437,85 @@
         "name": "St James's & Pall Mall",
         "dominant_sense": "visual",
         "decades": {
-          "1660": {"smell_base":0.12,"noise_base":0.25,"crowd_density":0.35,"river_proximity":0.05,"industrial_intensity":0.05,"street_character":"broad","building_height":"medium"},
-          "1700": {"smell_base":0.12,"noise_base":0.28,"crowd_density":0.40,"river_proximity":0.05,"industrial_intensity":0.05,"street_character":"broad","building_height":"medium"},
-          "1750": {"smell_base":0.14,"noise_base":0.30,"crowd_density":0.45,"river_proximity":0.05,"industrial_intensity":0.06,"street_character":"broad","building_height":"tall"},
-          "1800": {"smell_base":0.14,"noise_base":0.32,"crowd_density":0.48,"river_proximity":0.05,"industrial_intensity":0.08,"street_character":"broad","building_height":"tall"},
-          "1820": {"smell_base":0.15,"noise_base":0.35,"crowd_density":0.50,"river_proximity":0.05,"industrial_intensity":0.08,"street_character":"broad","building_height":"tall"}
+          "1660": {
+            "smell_base": 0.12,
+            "noise_base": 0.25,
+            "crowd_density": 0.35,
+            "river_proximity": 0.05,
+            "industrial_intensity": 0.05,
+            "street_character": "broad",
+            "building_height": "medium",
+            "canyon_factor": 0.8
+          },
+          "1700": {
+            "smell_base": 0.12,
+            "noise_base": 0.28,
+            "crowd_density": 0.4,
+            "river_proximity": 0.05,
+            "industrial_intensity": 0.05,
+            "street_character": "broad",
+            "building_height": "medium",
+            "canyon_factor": 0.8
+          },
+          "1750": {
+            "smell_base": 0.14,
+            "noise_base": 0.3,
+            "crowd_density": 0.45,
+            "river_proximity": 0.05,
+            "industrial_intensity": 0.06,
+            "street_character": "broad",
+            "building_height": "tall",
+            "canyon_factor": 0.8
+          },
+          "1800": {
+            "smell_base": 0.14,
+            "noise_base": 0.32,
+            "crowd_density": 0.48,
+            "river_proximity": 0.05,
+            "industrial_intensity": 0.08,
+            "street_character": "broad",
+            "building_height": "tall",
+            "canyon_factor": 0.8
+          },
+          "1820": {
+            "smell_base": 0.15,
+            "noise_base": 0.35,
+            "crowd_density": 0.5,
+            "river_proximity": 0.05,
+            "industrial_intensity": 0.08,
+            "street_character": "broad",
+            "building_height": "tall",
+            "canyon_factor": 0.8
+          }
         }
       },
-      "geometry": {"type":"Polygon","coordinates":[[[-0.153,51.499],[-0.130,51.499],[-0.130,51.513],[-0.153,51.513],[-0.153,51.499]]]}
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -0.153,
+              51.499
+            ],
+            [
+              -0.13,
+              51.499
+            ],
+            [
+              -0.13,
+              51.513
+            ],
+            [
+              -0.153,
+              51.513
+            ],
+            [
+              -0.153,
+              51.499
+            ]
+          ]
+        ]
+      }
     },
     {
       "type": "Feature",
@@ -97,14 +523,85 @@
         "name": "Mayfair & Piccadilly",
         "dominant_sense": "visual",
         "decades": {
-          "1660": {"smell_base":0.08,"noise_base":0.15,"crowd_density":0.20,"river_proximity":0.00,"industrial_intensity":0.03,"street_character":"broad","building_height":"low"},
-          "1700": {"smell_base":0.10,"noise_base":0.20,"crowd_density":0.30,"river_proximity":0.00,"industrial_intensity":0.04,"street_character":"broad","building_height":"medium"},
-          "1750": {"smell_base":0.12,"noise_base":0.28,"crowd_density":0.42,"river_proximity":0.00,"industrial_intensity":0.05,"street_character":"broad","building_height":"tall"},
-          "1800": {"smell_base":0.12,"noise_base":0.30,"crowd_density":0.45,"river_proximity":0.00,"industrial_intensity":0.06,"street_character":"broad","building_height":"tall"},
-          "1820": {"smell_base":0.13,"noise_base":0.32,"crowd_density":0.48,"river_proximity":0.00,"industrial_intensity":0.07,"street_character":"broad","building_height":"tall"}
+          "1660": {
+            "smell_base": 0.08,
+            "noise_base": 0.15,
+            "crowd_density": 0.2,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.03,
+            "street_character": "broad",
+            "building_height": "low",
+            "canyon_factor": 1.0
+          },
+          "1700": {
+            "smell_base": 0.1,
+            "noise_base": 0.2,
+            "crowd_density": 0.3,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.04,
+            "street_character": "broad",
+            "building_height": "medium",
+            "canyon_factor": 1.0
+          },
+          "1750": {
+            "smell_base": 0.12,
+            "noise_base": 0.28,
+            "crowd_density": 0.42,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.05,
+            "street_character": "broad",
+            "building_height": "tall",
+            "canyon_factor": 0.9
+          },
+          "1800": {
+            "smell_base": 0.12,
+            "noise_base": 0.3,
+            "crowd_density": 0.45,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.06,
+            "street_character": "broad",
+            "building_height": "tall",
+            "canyon_factor": 0.9
+          },
+          "1820": {
+            "smell_base": 0.13,
+            "noise_base": 0.32,
+            "crowd_density": 0.48,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.07,
+            "street_character": "broad",
+            "building_height": "tall",
+            "canyon_factor": 0.9
+          }
         }
       },
-      "geometry": {"type":"Polygon","coordinates":[[[-0.168,51.506],[-0.140,51.506],[-0.140,51.522],[-0.168,51.522],[-0.168,51.506]]]}
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -0.168,
+              51.506
+            ],
+            [
+              -0.14,
+              51.506
+            ],
+            [
+              -0.14,
+              51.522
+            ],
+            [
+              -0.168,
+              51.522
+            ],
+            [
+              -0.168,
+              51.506
+            ]
+          ]
+        ]
+      }
     },
     {
       "type": "Feature",
@@ -112,14 +609,85 @@
         "name": "Smithfield & Newgate",
         "dominant_sense": "smell",
         "decades": {
-          "1660": {"smell_base":0.80,"noise_base":0.70,"crowd_density":0.65,"river_proximity":0.05,"industrial_intensity":0.30,"street_character":"narrow","building_height":"medium"},
-          "1700": {"smell_base":0.80,"noise_base":0.70,"crowd_density":0.65,"river_proximity":0.05,"industrial_intensity":0.32,"street_character":"narrow","building_height":"medium"},
-          "1750": {"smell_base":0.82,"noise_base":0.72,"crowd_density":0.68,"river_proximity":0.05,"industrial_intensity":0.35,"street_character":"narrow","building_height":"medium"},
-          "1800": {"smell_base":0.80,"noise_base":0.70,"crowd_density":0.65,"river_proximity":0.05,"industrial_intensity":0.38,"street_character":"narrow","building_height":"medium"},
-          "1820": {"smell_base":0.78,"noise_base":0.68,"crowd_density":0.62,"river_proximity":0.05,"industrial_intensity":0.40,"street_character":"narrow","building_height":"medium"}
+          "1660": {
+            "smell_base": 0.8,
+            "noise_base": 0.7,
+            "crowd_density": 0.65,
+            "river_proximity": 0.05,
+            "industrial_intensity": 0.3,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 2.5
+          },
+          "1700": {
+            "smell_base": 0.8,
+            "noise_base": 0.7,
+            "crowd_density": 0.65,
+            "river_proximity": 0.05,
+            "industrial_intensity": 0.32,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 2.3
+          },
+          "1750": {
+            "smell_base": 0.82,
+            "noise_base": 0.72,
+            "crowd_density": 0.68,
+            "river_proximity": 0.05,
+            "industrial_intensity": 0.35,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 2.3
+          },
+          "1800": {
+            "smell_base": 0.8,
+            "noise_base": 0.7,
+            "crowd_density": 0.65,
+            "river_proximity": 0.05,
+            "industrial_intensity": 0.38,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 2.0
+          },
+          "1820": {
+            "smell_base": 0.78,
+            "noise_base": 0.68,
+            "crowd_density": 0.62,
+            "river_proximity": 0.05,
+            "industrial_intensity": 0.4,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 2.0
+          }
         }
       },
-      "geometry": {"type":"Polygon","coordinates":[[[-0.108,51.517],[-0.089,51.517],[-0.089,51.530],[-0.108,51.530],[-0.108,51.517]]]}
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -0.108,
+              51.517
+            ],
+            [
+              -0.089,
+              51.517
+            ],
+            [
+              -0.089,
+              51.53
+            ],
+            [
+              -0.108,
+              51.53
+            ],
+            [
+              -0.108,
+              51.517
+            ]
+          ]
+        ]
+      }
     },
     {
       "type": "Feature",
@@ -127,14 +695,85 @@
         "name": "Fleet Street & Ludgate",
         "dominant_sense": "noise",
         "decades": {
-          "1660": {"smell_base":0.35,"noise_base":0.55,"crowd_density":0.55,"river_proximity":0.05,"industrial_intensity":0.20,"street_character":"narrow","building_height":"medium"},
-          "1700": {"smell_base":0.38,"noise_base":0.58,"crowd_density":0.58,"river_proximity":0.05,"industrial_intensity":0.25,"street_character":"narrow","building_height":"medium"},
-          "1750": {"smell_base":0.40,"noise_base":0.62,"crowd_density":0.60,"river_proximity":0.05,"industrial_intensity":0.30,"street_character":"narrow","building_height":"medium"},
-          "1800": {"smell_base":0.40,"noise_base":0.65,"crowd_density":0.62,"river_proximity":0.05,"industrial_intensity":0.35,"street_character":"narrow","building_height":"tall"},
-          "1820": {"smell_base":0.40,"noise_base":0.68,"crowd_density":0.65,"river_proximity":0.05,"industrial_intensity":0.38,"street_character":"narrow","building_height":"tall"}
+          "1660": {
+            "smell_base": 0.35,
+            "noise_base": 0.55,
+            "crowd_density": 0.55,
+            "river_proximity": 0.05,
+            "industrial_intensity": 0.2,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 2.0
+          },
+          "1700": {
+            "smell_base": 0.38,
+            "noise_base": 0.58,
+            "crowd_density": 0.58,
+            "river_proximity": 0.05,
+            "industrial_intensity": 0.25,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 1.8
+          },
+          "1750": {
+            "smell_base": 0.4,
+            "noise_base": 0.62,
+            "crowd_density": 0.6,
+            "river_proximity": 0.05,
+            "industrial_intensity": 0.3,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 1.8
+          },
+          "1800": {
+            "smell_base": 0.4,
+            "noise_base": 0.65,
+            "crowd_density": 0.62,
+            "river_proximity": 0.05,
+            "industrial_intensity": 0.35,
+            "street_character": "narrow",
+            "building_height": "tall",
+            "canyon_factor": 1.6
+          },
+          "1820": {
+            "smell_base": 0.4,
+            "noise_base": 0.68,
+            "crowd_density": 0.65,
+            "river_proximity": 0.05,
+            "industrial_intensity": 0.38,
+            "street_character": "narrow",
+            "building_height": "tall",
+            "canyon_factor": 1.6
+          }
         }
       },
-      "geometry": {"type":"Polygon","coordinates":[[[-0.115,51.511],[-0.097,51.511],[-0.097,51.519],[-0.115,51.519],[-0.115,51.511]]]}
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -0.115,
+              51.511
+            ],
+            [
+              -0.097,
+              51.511
+            ],
+            [
+              -0.097,
+              51.519
+            ],
+            [
+              -0.115,
+              51.519
+            ],
+            [
+              -0.115,
+              51.511
+            ]
+          ]
+        ]
+      }
     },
     {
       "type": "Feature",
@@ -142,14 +781,85 @@
         "name": "St Giles & Seven Dials",
         "dominant_sense": "smell",
         "decades": {
-          "1660": {"smell_base":0.55,"noise_base":0.50,"crowd_density":0.60,"river_proximity":0.00,"industrial_intensity":0.20,"street_character":"narrow","building_height":"low"},
-          "1700": {"smell_base":0.60,"noise_base":0.55,"crowd_density":0.65,"river_proximity":0.00,"industrial_intensity":0.22,"street_character":"narrow","building_height":"medium"},
-          "1750": {"smell_base":0.65,"noise_base":0.58,"crowd_density":0.70,"river_proximity":0.00,"industrial_intensity":0.25,"street_character":"narrow","building_height":"medium"},
-          "1800": {"smell_base":0.68,"noise_base":0.60,"crowd_density":0.72,"river_proximity":0.00,"industrial_intensity":0.28,"street_character":"narrow","building_height":"medium"},
-          "1820": {"smell_base":0.70,"noise_base":0.62,"crowd_density":0.75,"river_proximity":0.00,"industrial_intensity":0.30,"street_character":"narrow","building_height":"medium"}
+          "1660": {
+            "smell_base": 0.55,
+            "noise_base": 0.5,
+            "crowd_density": 0.6,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.2,
+            "street_character": "narrow",
+            "building_height": "low",
+            "canyon_factor": 3.0
+          },
+          "1700": {
+            "smell_base": 0.6,
+            "noise_base": 0.55,
+            "crowd_density": 0.65,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.22,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 3.0
+          },
+          "1750": {
+            "smell_base": 0.65,
+            "noise_base": 0.58,
+            "crowd_density": 0.7,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.25,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 3.0
+          },
+          "1800": {
+            "smell_base": 0.68,
+            "noise_base": 0.6,
+            "crowd_density": 0.72,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.28,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 3.0
+          },
+          "1820": {
+            "smell_base": 0.7,
+            "noise_base": 0.62,
+            "crowd_density": 0.75,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.3,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 3.0
+          }
         }
       },
-      "geometry": {"type":"Polygon","coordinates":[[[-0.134,51.514],[-0.118,51.514],[-0.118,51.527],[-0.134,51.527],[-0.134,51.514]]]}
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -0.134,
+              51.514
+            ],
+            [
+              -0.118,
+              51.514
+            ],
+            [
+              -0.118,
+              51.527
+            ],
+            [
+              -0.134,
+              51.527
+            ],
+            [
+              -0.134,
+              51.514
+            ]
+          ]
+        ]
+      }
     },
     {
       "type": "Feature",
@@ -157,14 +867,85 @@
         "name": "East End & Wapping",
         "dominant_sense": "smell",
         "decades": {
-          "1660": {"smell_base":0.50,"noise_base":0.50,"crowd_density":0.45,"river_proximity":0.40,"industrial_intensity":0.40,"street_character":"narrow","building_height":"low"},
-          "1700": {"smell_base":0.55,"noise_base":0.55,"crowd_density":0.50,"river_proximity":0.45,"industrial_intensity":0.50,"street_character":"narrow","building_height":"low"},
-          "1750": {"smell_base":0.60,"noise_base":0.60,"crowd_density":0.55,"river_proximity":0.50,"industrial_intensity":0.60,"street_character":"narrow","building_height":"medium"},
-          "1800": {"smell_base":0.68,"noise_base":0.65,"crowd_density":0.60,"river_proximity":0.55,"industrial_intensity":0.72,"street_character":"narrow","building_height":"medium"},
-          "1820": {"smell_base":0.72,"noise_base":0.68,"crowd_density":0.65,"river_proximity":0.55,"industrial_intensity":0.80,"street_character":"narrow","building_height":"medium"}
+          "1660": {
+            "smell_base": 0.5,
+            "noise_base": 0.5,
+            "crowd_density": 0.45,
+            "river_proximity": 0.4,
+            "industrial_intensity": 0.4,
+            "street_character": "narrow",
+            "building_height": "low",
+            "canyon_factor": 2.0
+          },
+          "1700": {
+            "smell_base": 0.55,
+            "noise_base": 0.55,
+            "crowd_density": 0.5,
+            "river_proximity": 0.45,
+            "industrial_intensity": 0.5,
+            "street_character": "narrow",
+            "building_height": "low",
+            "canyon_factor": 2.0
+          },
+          "1750": {
+            "smell_base": 0.6,
+            "noise_base": 0.6,
+            "crowd_density": 0.55,
+            "river_proximity": 0.5,
+            "industrial_intensity": 0.6,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 2.0
+          },
+          "1800": {
+            "smell_base": 0.68,
+            "noise_base": 0.65,
+            "crowd_density": 0.6,
+            "river_proximity": 0.55,
+            "industrial_intensity": 0.72,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 2.0
+          },
+          "1820": {
+            "smell_base": 0.72,
+            "noise_base": 0.68,
+            "crowd_density": 0.65,
+            "river_proximity": 0.55,
+            "industrial_intensity": 0.8,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 2.0
+          }
         }
       },
-      "geometry": {"type":"Polygon","coordinates":[[[-0.072,51.505],[-0.035,51.505],[-0.035,51.522],[-0.072,51.522],[-0.072,51.505]]]}
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -0.072,
+              51.505
+            ],
+            [
+              -0.035,
+              51.505
+            ],
+            [
+              -0.035,
+              51.522
+            ],
+            [
+              -0.072,
+              51.522
+            ],
+            [
+              -0.072,
+              51.505
+            ]
+          ]
+        ]
+      }
     },
     {
       "type": "Feature",
@@ -172,14 +953,85 @@
         "name": "Hyde Park & Kensington",
         "dominant_sense": "visual",
         "decades": {
-          "1660": {"smell_base":0.05,"noise_base":0.08,"crowd_density":0.15,"river_proximity":0.00,"industrial_intensity":0.02,"street_character":"broad","building_height":"low"},
-          "1700": {"smell_base":0.05,"noise_base":0.10,"crowd_density":0.20,"river_proximity":0.00,"industrial_intensity":0.02,"street_character":"broad","building_height":"low"},
-          "1750": {"smell_base":0.06,"noise_base":0.12,"crowd_density":0.28,"river_proximity":0.00,"industrial_intensity":0.03,"street_character":"broad","building_height":"low"},
-          "1800": {"smell_base":0.06,"noise_base":0.12,"crowd_density":0.30,"river_proximity":0.00,"industrial_intensity":0.03,"street_character":"broad","building_height":"low"},
-          "1820": {"smell_base":0.06,"noise_base":0.12,"crowd_density":0.32,"river_proximity":0.00,"industrial_intensity":0.03,"street_character":"broad","building_height":"low"}
+          "1660": {
+            "smell_base": 0.05,
+            "noise_base": 0.08,
+            "crowd_density": 0.15,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.02,
+            "street_character": "broad",
+            "building_height": "low",
+            "canyon_factor": 0.4
+          },
+          "1700": {
+            "smell_base": 0.05,
+            "noise_base": 0.1,
+            "crowd_density": 0.2,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.02,
+            "street_character": "broad",
+            "building_height": "low",
+            "canyon_factor": 0.4
+          },
+          "1750": {
+            "smell_base": 0.06,
+            "noise_base": 0.12,
+            "crowd_density": 0.28,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.03,
+            "street_character": "broad",
+            "building_height": "low",
+            "canyon_factor": 0.4
+          },
+          "1800": {
+            "smell_base": 0.06,
+            "noise_base": 0.12,
+            "crowd_density": 0.3,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.03,
+            "street_character": "broad",
+            "building_height": "low",
+            "canyon_factor": 0.4
+          },
+          "1820": {
+            "smell_base": 0.06,
+            "noise_base": 0.12,
+            "crowd_density": 0.32,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.03,
+            "street_character": "broad",
+            "building_height": "low",
+            "canyon_factor": 0.4
+          }
         }
       },
-      "geometry": {"type":"Polygon","coordinates":[[[-0.200,51.499],[-0.152,51.499],[-0.152,51.523],[-0.200,51.523],[-0.200,51.499]]]}
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -0.2,
+              51.499
+            ],
+            [
+              -0.152,
+              51.499
+            ],
+            [
+              -0.152,
+              51.523
+            ],
+            [
+              -0.2,
+              51.523
+            ],
+            [
+              -0.2,
+              51.499
+            ]
+          ]
+        ]
+      }
     },
     {
       "type": "Feature",
@@ -187,14 +1039,85 @@
         "name": "St James's Park",
         "dominant_sense": "visual",
         "decades": {
-          "1660": {"smell_base":0.08,"noise_base":0.12,"crowd_density":0.25,"river_proximity":0.10,"industrial_intensity":0.03,"street_character":"broad","building_height":"low"},
-          "1700": {"smell_base":0.08,"noise_base":0.14,"crowd_density":0.30,"river_proximity":0.10,"industrial_intensity":0.03,"street_character":"broad","building_height":"low"},
-          "1750": {"smell_base":0.09,"noise_base":0.15,"crowd_density":0.38,"river_proximity":0.10,"industrial_intensity":0.04,"street_character":"broad","building_height":"low"},
-          "1800": {"smell_base":0.09,"noise_base":0.15,"crowd_density":0.40,"river_proximity":0.10,"industrial_intensity":0.04,"street_character":"broad","building_height":"low"},
-          "1820": {"smell_base":0.09,"noise_base":0.16,"crowd_density":0.40,"river_proximity":0.10,"industrial_intensity":0.04,"street_character":"broad","building_height":"low"}
+          "1660": {
+            "smell_base": 0.08,
+            "noise_base": 0.12,
+            "crowd_density": 0.25,
+            "river_proximity": 0.1,
+            "industrial_intensity": 0.03,
+            "street_character": "broad",
+            "building_height": "low",
+            "canyon_factor": 0.4
+          },
+          "1700": {
+            "smell_base": 0.08,
+            "noise_base": 0.14,
+            "crowd_density": 0.3,
+            "river_proximity": 0.1,
+            "industrial_intensity": 0.03,
+            "street_character": "broad",
+            "building_height": "low",
+            "canyon_factor": 0.4
+          },
+          "1750": {
+            "smell_base": 0.09,
+            "noise_base": 0.15,
+            "crowd_density": 0.38,
+            "river_proximity": 0.1,
+            "industrial_intensity": 0.04,
+            "street_character": "broad",
+            "building_height": "low",
+            "canyon_factor": 0.4
+          },
+          "1800": {
+            "smell_base": 0.09,
+            "noise_base": 0.15,
+            "crowd_density": 0.4,
+            "river_proximity": 0.1,
+            "industrial_intensity": 0.04,
+            "street_character": "broad",
+            "building_height": "low",
+            "canyon_factor": 0.4
+          },
+          "1820": {
+            "smell_base": 0.09,
+            "noise_base": 0.16,
+            "crowd_density": 0.4,
+            "river_proximity": 0.1,
+            "industrial_intensity": 0.04,
+            "street_character": "broad",
+            "building_height": "low",
+            "canyon_factor": 0.4
+          }
         }
       },
-      "geometry": {"type":"Polygon","coordinates":[[[-0.147,51.497],[-0.127,51.497],[-0.127,51.508],[-0.147,51.508],[-0.147,51.497]]]}
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -0.147,
+              51.497
+            ],
+            [
+              -0.127,
+              51.497
+            ],
+            [
+              -0.127,
+              51.508
+            ],
+            [
+              -0.147,
+              51.508
+            ],
+            [
+              -0.147,
+              51.497
+            ]
+          ]
+        ]
+      }
     },
     {
       "type": "Feature",
@@ -202,14 +1125,85 @@
         "name": "Vauxhall & Lambeth",
         "dominant_sense": "crowd",
         "decades": {
-          "1660": {"smell_base":0.15,"noise_base":0.20,"crowd_density":0.20,"river_proximity":0.45,"industrial_intensity":0.15,"street_character":"medium","building_height":"low"},
-          "1700": {"smell_base":0.18,"noise_base":0.25,"crowd_density":0.30,"river_proximity":0.45,"industrial_intensity":0.18,"street_character":"medium","building_height":"low"},
-          "1750": {"smell_base":0.20,"noise_base":0.35,"crowd_density":0.50,"river_proximity":0.45,"industrial_intensity":0.20,"street_character":"medium","building_height":"low"},
-          "1800": {"smell_base":0.22,"noise_base":0.38,"crowd_density":0.52,"river_proximity":0.45,"industrial_intensity":0.25,"street_character":"medium","building_height":"medium"},
-          "1820": {"smell_base":0.22,"noise_base":0.35,"crowd_density":0.45,"river_proximity":0.45,"industrial_intensity":0.30,"street_character":"medium","building_height":"medium"}
+          "1660": {
+            "smell_base": 0.15,
+            "noise_base": 0.2,
+            "crowd_density": 0.2,
+            "river_proximity": 0.45,
+            "industrial_intensity": 0.15,
+            "street_character": "medium",
+            "building_height": "low",
+            "canyon_factor": 1.2
+          },
+          "1700": {
+            "smell_base": 0.18,
+            "noise_base": 0.25,
+            "crowd_density": 0.3,
+            "river_proximity": 0.45,
+            "industrial_intensity": 0.18,
+            "street_character": "medium",
+            "building_height": "low",
+            "canyon_factor": 1.2
+          },
+          "1750": {
+            "smell_base": 0.2,
+            "noise_base": 0.35,
+            "crowd_density": 0.5,
+            "river_proximity": 0.45,
+            "industrial_intensity": 0.2,
+            "street_character": "medium",
+            "building_height": "low",
+            "canyon_factor": 1.2
+          },
+          "1800": {
+            "smell_base": 0.22,
+            "noise_base": 0.38,
+            "crowd_density": 0.52,
+            "river_proximity": 0.45,
+            "industrial_intensity": 0.25,
+            "street_character": "medium",
+            "building_height": "medium",
+            "canyon_factor": 1.2
+          },
+          "1820": {
+            "smell_base": 0.22,
+            "noise_base": 0.35,
+            "crowd_density": 0.45,
+            "river_proximity": 0.45,
+            "industrial_intensity": 0.3,
+            "street_character": "medium",
+            "building_height": "medium",
+            "canyon_factor": 1.2
+          }
         }
       },
-      "geometry": {"type":"Polygon","coordinates":[[[-0.135,51.477],[-0.108,51.477],[-0.108,51.495],[-0.135,51.495],[-0.135,51.477]]]}
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -0.135,
+              51.477
+            ],
+            [
+              -0.108,
+              51.477
+            ],
+            [
+              -0.108,
+              51.495
+            ],
+            [
+              -0.135,
+              51.495
+            ],
+            [
+              -0.135,
+              51.477
+            ]
+          ]
+        ]
+      }
     },
     {
       "type": "Feature",
@@ -217,14 +1211,85 @@
         "name": "Holborn & Inns of Court",
         "dominant_sense": "noise",
         "decades": {
-          "1660": {"smell_base":0.30,"noise_base":0.45,"crowd_density":0.50,"river_proximity":0.00,"industrial_intensity":0.18,"street_character":"medium","building_height":"medium"},
-          "1700": {"smell_base":0.32,"noise_base":0.48,"crowd_density":0.52,"river_proximity":0.00,"industrial_intensity":0.20,"street_character":"medium","building_height":"medium"},
-          "1750": {"smell_base":0.34,"noise_base":0.52,"crowd_density":0.55,"river_proximity":0.00,"industrial_intensity":0.22,"street_character":"medium","building_height":"medium"},
-          "1800": {"smell_base":0.35,"noise_base":0.54,"crowd_density":0.56,"river_proximity":0.00,"industrial_intensity":0.25,"street_character":"medium","building_height":"tall"},
-          "1820": {"smell_base":0.35,"noise_base":0.55,"crowd_density":0.57,"river_proximity":0.00,"industrial_intensity":0.28,"street_character":"medium","building_height":"tall"}
+          "1660": {
+            "smell_base": 0.3,
+            "noise_base": 0.45,
+            "crowd_density": 0.5,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.18,
+            "street_character": "medium",
+            "building_height": "medium",
+            "canyon_factor": 1.8
+          },
+          "1700": {
+            "smell_base": 0.32,
+            "noise_base": 0.48,
+            "crowd_density": 0.52,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.2,
+            "street_character": "medium",
+            "building_height": "medium",
+            "canyon_factor": 1.7
+          },
+          "1750": {
+            "smell_base": 0.34,
+            "noise_base": 0.52,
+            "crowd_density": 0.55,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.22,
+            "street_character": "medium",
+            "building_height": "medium",
+            "canyon_factor": 1.7
+          },
+          "1800": {
+            "smell_base": 0.35,
+            "noise_base": 0.54,
+            "crowd_density": 0.56,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.25,
+            "street_character": "medium",
+            "building_height": "tall",
+            "canyon_factor": 1.5
+          },
+          "1820": {
+            "smell_base": 0.35,
+            "noise_base": 0.55,
+            "crowd_density": 0.57,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.28,
+            "street_character": "medium",
+            "building_height": "tall",
+            "canyon_factor": 1.5
+          }
         }
       },
-      "geometry": {"type":"Polygon","coordinates":[[[-0.121,51.514],[-0.099,51.514],[-0.099,51.525],[-0.121,51.525],[-0.121,51.514]]]}
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -0.121,
+              51.514
+            ],
+            [
+              -0.099,
+              51.514
+            ],
+            [
+              -0.099,
+              51.525
+            ],
+            [
+              -0.121,
+              51.525
+            ],
+            [
+              -0.121,
+              51.514
+            ]
+          ]
+        ]
+      }
     },
     {
       "type": "Feature",
@@ -232,14 +1297,85 @@
         "name": "Moorfields & Finsbury",
         "dominant_sense": "visual",
         "decades": {
-          "1660": {"smell_base":0.20,"noise_base":0.22,"crowd_density":0.25,"river_proximity":0.00,"industrial_intensity":0.15,"street_character":"medium","building_height":"low"},
-          "1700": {"smell_base":0.25,"noise_base":0.28,"crowd_density":0.32,"river_proximity":0.00,"industrial_intensity":0.20,"street_character":"medium","building_height":"low"},
-          "1750": {"smell_base":0.30,"noise_base":0.35,"crowd_density":0.40,"river_proximity":0.00,"industrial_intensity":0.28,"street_character":"medium","building_height":"medium"},
-          "1800": {"smell_base":0.38,"noise_base":0.42,"crowd_density":0.50,"river_proximity":0.00,"industrial_intensity":0.38,"street_character":"narrow","building_height":"medium"},
-          "1820": {"smell_base":0.42,"noise_base":0.48,"crowd_density":0.55,"river_proximity":0.00,"industrial_intensity":0.45,"street_character":"narrow","building_height":"medium"}
+          "1660": {
+            "smell_base": 0.2,
+            "noise_base": 0.22,
+            "crowd_density": 0.25,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.15,
+            "street_character": "medium",
+            "building_height": "low",
+            "canyon_factor": 1.5
+          },
+          "1700": {
+            "smell_base": 0.25,
+            "noise_base": 0.28,
+            "crowd_density": 0.32,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.2,
+            "street_character": "medium",
+            "building_height": "low",
+            "canyon_factor": 1.5
+          },
+          "1750": {
+            "smell_base": 0.3,
+            "noise_base": 0.35,
+            "crowd_density": 0.4,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.28,
+            "street_character": "medium",
+            "building_height": "medium",
+            "canyon_factor": 1.5
+          },
+          "1800": {
+            "smell_base": 0.38,
+            "noise_base": 0.42,
+            "crowd_density": 0.5,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.38,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 1.3
+          },
+          "1820": {
+            "smell_base": 0.42,
+            "noise_base": 0.48,
+            "crowd_density": 0.55,
+            "river_proximity": 0.0,
+            "industrial_intensity": 0.45,
+            "street_character": "narrow",
+            "building_height": "medium",
+            "canyon_factor": 1.3
+          }
         }
       },
-      "geometry": {"type":"Polygon","coordinates":[[[-0.092,51.519],[-0.072,51.519],[-0.072,51.532],[-0.092,51.532],[-0.092,51.519]]]}
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -0.092,
+              51.519
+            ],
+            [
+              -0.072,
+              51.519
+            ],
+            [
+              -0.072,
+              51.532
+            ],
+            [
+              -0.092,
+              51.532
+            ],
+            [
+              -0.092,
+              51.519
+            ]
+          ]
+        ]
+      }
     }
   ]
 }

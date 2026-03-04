@@ -153,15 +153,21 @@ def test_particle_engine_present(html):
 
 def test_smoke_mode_field_builder(html):
     assert "_buildSmokefield" in html
-    assert "windDx" in html
     assert "enclosureFactor" in html
     assert "so2_index" in html
+    # Street-channeled smoke: all three blend components present
+    assert "streetFieldMag" in html
+    assert "streetFieldDx" in html
+    assert "WIND_DX * 0.3" in html
 
 
 def test_flow_mode_field_builder(html):
     assert "_buildFlowField" in html
-    assert "MODALITY_COLOURS" in html
+    assert "MODALITY_PROFILE" in html
     assert "attractStrength" in html
+    # Street channeling for noise and smell
+    assert "streetFieldDy" in html
+    assert "modalTotals" in html
 
 
 def test_network_mode_field_builder(html):
@@ -177,9 +183,71 @@ def test_particle_mode_buttons_present(html):
     assert 'data-pmode="flow"'    in html
     assert 'data-pmode="network"' in html
 
+
+def test_particle_mode_labels_renamed(html):
+    """Smoke→Atmosphere, Flow→Senses in button labels."""
+    assert "Atmosphere" in html
+    assert "Senses" in html
+
+
+def test_particle_legend_present(html):
+    assert 'id="particle-legend"' in html
+
+
 def test_particle_mode_js_handler(html):
     assert "data-pmode" in html
     assert "particleMode" in html
+
+
+def test_street_direction_field_present(html):
+    """Street direction field arrays and builder must be present."""
+    assert "streetFieldDx"     in html
+    assert "streetFieldDy"     in html
+    assert "streetFieldMag"    in html
+    assert "_rebuildStreetField" in html
+    assert "_hwayMult"         in html
+
+
+def test_street_network_has_t_field(html):
+    """STREET_NETWORK entries must include 't' (highway type) field."""
+    import re, json
+    m = re.search(r'const STREET_NETWORK = (\[.*?\]);', html, re.DOTALL)
+    assert m is not None
+    data = json.loads(m.group(1))
+    assert len(data) > 0
+    entry = data[0]
+    assert "t" in entry, "STREET_NETWORK entry must have 't' (highway type) key"
+
+
+def test_modality_profiles_present(html):
+    """MODALITY_PROFILE constant must define all five modality profiles."""
+    assert "MODALITY_PROFILE" in html
+    for modal in ("smoke", "smell", "noise", "crowd", "visual"):
+        assert f"'{modal}'" in html or f'"{modal}"' in html
+
+
+def test_per_modality_alpha_curves(html):
+    """particleFrame must have per-modality alpha curves."""
+    assert "p.modality === 'smoke'" in html
+    assert "p.modality === 'noise'" in html
+    assert "p.modality === 'smell'" in html
+
+
+def test_particle_trail_fade(html):
+    """particleFrame must use destination-out compositing for trails."""
+    assert "destination-out" in html
+    assert "globalCompositeOperation" in html
+
+
+def test_smoke_dissipation(html):
+    """Smoke particles must start larger and shrink with age."""
+    assert "1 + 0.5 * (1 - t)" in html
+
+
+def test_modality_radius_used(html):
+    """Particles must use p.radius for arc, not fixed 1.5."""
+    assert "drawRadius" in html
+    assert "p.radius" in html
 
 
 def test_venue_opened_closed_in_js(html):
@@ -241,3 +309,53 @@ def test_tooltip_provenance_line(html):
 def test_zone_aware_particles(html):
     """Smoke field builder must use zone industrial_intensity to scale particles."""
     assert 'zoneProps.industrial_intensity' in html
+
+
+# ── Market schedule, canyon factor, and Exeter Change ─────────────────────────
+
+def test_smithfield_event_has_wednesday(html):
+    """Smithfield market must run Mon|Wed|Fri (not Mon|Fri only)."""
+    assert '"Mon|Wed|Fri"' in html or "'Mon|Wed|Fri'" in html
+
+
+def test_covent_garden_event_daily(html):
+    """Covent Garden market must run Mon–Sat."""
+    assert 'Mon|Tue|Wed|Thu|Fri|Sat' in html
+
+
+def test_canyon_factor_in_zones(html):
+    """ZONE_DATA must include canyon_factor in decade entries."""
+    assert 'canyon_factor' in html
+
+
+def test_canyon_factor_interpolated(html):
+    """interpolateZoneProps must interpolate canyon_factor."""
+    assert 'p0.canyon_factor' in html
+
+
+def test_canyon_factor_used_in_smokefield(html):
+    """_buildSmokefield must use venueCanyonFactor."""
+    assert 'venueCanyonFactor' in html
+    assert 'canyonFactor' in html
+
+
+def test_canyon_factor_in_flowfield(html):
+    """_buildFlowField must use _venueCanyonFactor for smell."""
+    assert '_venueCanyonFactor' in html
+
+
+def test_exeter_change_venue(html):
+    """Exeter Change Menagerie (LON097) must be present in VENUES."""
+    assert 'LON097' in html
+    assert 'Exeter Change' in html
+
+
+def test_exeter_change_event(html):
+    """EVT070 Exeter Change Menagerie event must be present."""
+    assert 'EVT070' in html
+    assert 'Menagerie' in html
+
+
+def test_canyon_factor_computeZoneBaseline(html):
+    """computeZoneBaseline must return canyon_factor."""
+    assert 'canyon_factor: p.canyon_factor' in html
