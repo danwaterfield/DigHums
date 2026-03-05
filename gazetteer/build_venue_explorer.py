@@ -124,8 +124,9 @@ body { font-family: 'Inter', system-ui, sans-serif; background: #f4f1eb;
   z-index: 1000;
 }
 #topbar .title { font-size: 14px; font-weight: 700; color: #1a1816; white-space: nowrap; }
-#topbar .nav-link { font-size: 12px; color: #1e3c6e; text-decoration: none; white-space: nowrap; font-weight: 500; }
-#topbar .nav-link:hover { color: #1a1816; text-decoration: underline; }
+.view-tab { background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 10px; border-radius: 3px; font-size: 11px; font-weight: 500; text-decoration: none; display: inline-block; white-space: nowrap; }
+.view-tab:hover { background: #ece8e0; color: #1a1816; }
+.view-tab.active { background: #1e3c6e; border-color: #1e3c6e; color: #fff; font-weight: 600; cursor: default; }
 .filter-group { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
 .filter-label { font-size: 11px; color: #9c9890; white-space: nowrap; font-weight: 500; }
 .pill {
@@ -229,7 +230,13 @@ body { font-family: 'Inter', system-ui, sans-serif; background: #f4f1eb;
 
 <div id="topbar">
   <span class="title">Sensory Map · 18c London &amp; Bath</span>
-  <a href="narrative_map.html" class="nav-link">&#8592; Narrative Map</a>
+  <span style="display:flex;gap:4px;align-items:center;">
+    <span style="font-size:11px;color:#9c9890;font-weight:500;margin-right:2px;">View</span>
+    <a href="sensory_time_map.html" class="view-tab">Sensory Map</a>
+    <span class="view-tab active">Evidence</span>
+    <a href="narrative_map.html" class="view-tab">Narrative</a>
+    <a href="comparison.html" class="view-tab">Comparison</a>
+  </span>
   <span class="sep">|</span>
   <div class="filter-group">
     <span class="filter-label">Modality</span>

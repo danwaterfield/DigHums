@@ -205,6 +205,9 @@ def build(data_path: Path, out_path: Path) -> None:
   #stats {{
     font-size: 12px; color: #888; white-space: nowrap;
   }}
+  .view-tab {{ background: #f0ede6; border: 1px solid #ccc; color: #555; padding: 2px 10px; border-radius: 3px; font-size: 11px; font-weight: 500; text-decoration: none; display: inline-block; white-space: nowrap; }}
+  .view-tab:hover {{ background: #e4e0d8; color: #2c3e50; }}
+  .view-tab.active {{ background: #2c3e50; border-color: #2c3e50; color: #fff; font-weight: 600; cursor: default; }}
 
   /* ── map ── */
   #map {{
@@ -253,6 +256,13 @@ def build(data_path: Path, out_path: Path) -> None:
 
 <div id="controls">
   <span class="title">Novel Path Map</span>
+  <span style="display:flex;gap:4px;align-items:center;">
+    <span style="font-size:11px;color:#888;font-weight:500;margin-right:2px;">View</span>
+    <a href="sensory_time_map.html" class="view-tab">Sensory Map</a>
+    <a href="venue_explorer.html" class="view-tab">Evidence</a>
+    <span class="view-tab active">Narrative</span>
+    <a href="comparison.html" class="view-tab">Comparison</a>
+  </span>
   <select id="text-select"></select>
   <button id="play-btn" title="Play / pause">&#9654;</button>
   <div class="slider-wrap">

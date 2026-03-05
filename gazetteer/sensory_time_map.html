@@ -19,8 +19,9 @@ body { font-family: 'Inter', system-ui, 'Georgia', sans-serif; background: #f4f1
 #play-btn { background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 10px; cursor: pointer; border-radius: 3px; font-size: 0.81em; }
 #play-btn:hover { background: #ece8e0; color: #1a1816; }
 #play-btn.playing { background: #1e3c6e; border-color: #1e3c6e; color: #fff; }
-.nav-link { color: #1e3c6e; text-decoration: none; font-size: 0.81em; margin-left: auto; font-weight: 500; }
-.nav-link:hover { text-decoration: underline; }
+.view-tab { background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 10px; border-radius: 3px; font-size: 0.69em; font-weight: 500; text-decoration: none; display: inline-block; }
+.view-tab:hover { background: #ece8e0; color: #1a1816; }
+.view-tab.active { background: #1e3c6e; border-color: #1e3c6e; color: #fff; font-weight: 600; cursor: default; }
 .pill-row { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 4px; align-items: center; }
 .pill-label { font-size: 0.69em; color: #9c9890; margin-right: 4px; min-width: 3em; font-weight: 500; }
 .pill { background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-size: 0.69em; font-weight: 500; }
@@ -128,7 +129,13 @@ body { font-family: 'Inter', system-ui, 'Georgia', sans-serif; background: #f4f1
     </div>
     <button id="clear-btn" onclick="clearFilters()" title="Clear all filters">&#215; Clear</button>
     <button id="automap-btn" onclick="enableAutoBasemap()" title="Auto-switch base map to match year" style="background:#f4f1eb;border:1px solid #d8d4cc;color:#5c5850;padding:2px 8px;cursor:pointer;border-radius:3px;font-size:0.69em;font-weight:500;">Auto map</button>
-    <a class="nav-link" href="venue_explorer.html">Browse evidence &#8594;</a>
+  </div>
+  <div class="pill-row">
+    <span class="pill-label">View</span>
+    <span class="view-tab active">Sensory Map</span>
+    <a href="venue_explorer.html" class="view-tab">Evidence</a>
+    <a href="narrative_map.html" class="view-tab">Narrative</a>
+    <a href="comparison.html" class="view-tab">Comparison</a>
   </div>
   <div class="pill-row">
     <span class="pill-label">Month</span>
@@ -196,11 +203,11 @@ body { font-family: 'Inter', system-ui, 'Georgia', sans-serif; background: #f4f1
     <button class="particle-btn" data-pmode="network">&#9780; Network</button>
   </div>
   <div id="particle-legend" style="display:none;padding:2px 0 0 4px;font-size:0.72em;color:#aaa;line-height:1.6;">
-    <span style="color:#7a7a50">&#9679;</span> smoke &nbsp;
-    <span style="color:#b48228">&#183;</span> smell &nbsp;
-    <span style="color:#3a78c8">&#183;</span> noise &nbsp;
+    <span style="color:#3a78c8">&#9675;</span> noise &nbsp;
+    <span style="color:#b48228">&#9685;</span> smell &nbsp;
     <span style="color:#b43c3c">&#9679;</span> crowd &nbsp;
-    <span style="color:#3ca050">&#183;</span> visual
+    <span style="color:#b8960a">&#10022;</span> visual &nbsp;
+    <span style="color:#7a7a50">&#126;</span> smoke
   </div>
   <div class="pill-row" id="env-bar">
     <span class="env-gauge" title="Central England Temperature (HadCET / Met Office)">
@@ -1453,6 +1460,181 @@ function respawnParticle(p, activeCount) {
     p.maxAge = 200 + Math.random() * 400;
 }
 
+// ── Senses-mode per-modality canvas renderers ─────────────────────────────────
+
+// Noise: expanding ring pool
+const _noiseRingPool = [];
+const _noiseRingLastSpawn = new Map();  // venueId -> performance.now() timestamp
+
+function _updateNoiseRings() {
+    const now = performance.now();
+    // Advance ages; remove dead rings
+    for (let i = _noiseRingPool.length - 1; i >= 0; i--) {
+        _noiseRingPool[i].age++;
+        if (_noiseRingPool[i].age >= _noiseRingPool[i].maxAge) {
+            _noiseRingPool.splice(i, 1);
+        }
+    }
+    // Spawn new rings from active noisy venues
+    VENUES.forEach(v => {
+        const loads = venueIntensityCache[v.id];
+        if (!loads || loads.noise < 0.02) return;
+        const vp = venuePx[v.id];
+        if (!vp || !pCanvas) return;
+        const isMarket = v.building_type === 'market';
+        const isChurch = v.building_type === 'church';
+        const interval = isMarket ? 250 : isChurch ? 550 : 400;
+        const last = _noiseRingLastSpawn.get(v.id) || 0;
+        if (now - last >= interval && _noiseRingPool.length < 200) {
+            _noiseRingLastSpawn.set(v.id, now);
+            // maxAge in frames (~60fps): church rings last ~100f, regular ~70f
+            const maxAge = isChurch ? 100 : 70;
+            const maxR   = (isChurch ? 120 : 80) + loads.noise * 40;
+            const fi = ((Math.min(FIELD_H - 1, Math.max(0, (vp.py / pCanvas.height) * FIELD_H)) | 0)) * FIELD_W
+                     +  (Math.min(FIELD_W - 1, Math.max(0, (vp.px / pCanvas.width)  * FIELD_W)) | 0);
+            _noiseRingPool.push({
+                cx: vp.px, cy: vp.py, maxR, age: 0, maxAge,
+                noiseLoad: loads.noise, isChurch, isMarket,
+                sMag: streetFieldMag[fi],
+                sDx:  streetFieldDx[fi],
+                sDy:  streetFieldDy[fi],
+            });
+        }
+    });
+}
+
+function _drawNoiseRings() {
+    if (!pCtx) return;
+    pCtx.save();
+    _noiseRingPool.forEach(ring => {
+        const t = ring.age / ring.maxAge;
+        const r = 5 + (ring.maxR - 5) * t;
+        const alpha = Math.max(0, 0.7 * (1 - t));
+        const lineW = Math.max(0.3, 1.5 - t);
+        pCtx.globalAlpha = alpha;
+        pCtx.strokeStyle = 'rgba(90,155,255,1)';
+        pCtx.lineWidth = lineW;
+        pCtx.beginPath();
+        // Narrow street: elongate ellipse along street direction
+        if (ring.sMag > 0.3) {
+            const angle = Math.atan2(ring.sDy, ring.sDx);
+            pCtx.ellipse(ring.cx, ring.cy, r * 1.35, r * 0.75, angle, 0, Math.PI * 2);
+        } else {
+            pCtx.arc(ring.cx, ring.cy, r, 0, Math.PI * 2);
+        }
+        pCtx.stroke();
+    });
+    pCtx.globalAlpha = 1;
+    pCtx.restore();
+}
+
+// Smell: radial gradient halos with wind-drift
+function _drawSmellHalos() {
+    if (!pCtx || !pCanvas) return;
+    const t = performance.now() / 1000;
+    const yr = parseInt(document.getElementById('year-slider').value);
+    pCtx.save();
+    VENUES.forEach(v => {
+        const loads = venueIntensityCache[v.id];
+        if (!loads || loads.smell < 0.02) return;
+        const vp = venuePx[v.id];
+        if (!vp) return;
+        // Pulsing radius: 3-second breathing cycle, offset per venue by lat
+        const pulse = Math.sin(t * (Math.PI * 2 / 3) + v.lat * 20) * 5;
+        let radius = 30 + loads.smell * 50 + pulse;
+        // River-zone venues: moisture holds smell further
+        if (v.lon > -0.09 && v.lat < 51.508) radius *= 1.3;
+        // Narrow street: trapped smell — increase alpha
+        const zb = (typeof computeZoneBaseline === 'function')
+                   ? computeZoneBaseline(v.lat, v.lon, yr, null) : null;
+        const isNarrow = zb && zb.street_character === 'narrow';
+        const baseAlpha = isNarrow ? 0.35 : 0.25;
+        // Wind drift: SW→NE prevailing, slow oscillation
+        const driftX = Math.sin(t * 0.3) * 4 + 5;
+        const driftY = Math.cos(t * 0.25) * 3 - 3;
+        const cx = vp.px + driftX;
+        const cy = vp.py + driftY;
+        const grad = pCtx.createRadialGradient(cx, cy, 0, cx, cy, radius);
+        grad.addColorStop(0, `rgba(195,130,25,${baseAlpha.toFixed(2)})` );
+        grad.addColorStop(1,  'rgba(195,130,25,0)');
+        pCtx.fillStyle = grad;
+        pCtx.beginPath();
+        pCtx.arc(cx, cy, radius, 0, Math.PI * 2);
+        pCtx.fill();
+    });
+    pCtx.restore();
+}
+
+// Crowd: graduated filled circles with orbiting micro-dots
+function _drawCrowdCircles() {
+    if (!pCtx) return;
+    const t = performance.now() / 1000;
+    const isNight = state.band === 'Night';
+    pCtx.save();
+    VENUES.forEach((v, vi) => {
+        const loads = venueIntensityCache[v.id];
+        if (!loads || loads.crowd < 0.02) return;
+        const vp = venuePx[v.id];
+        if (!vp) return;
+        let radius = 8 + loads.crowd * 25;
+        if (isNight) radius *= 0.6;
+        const isLarge = parseInt(v.capacity) > 500;
+        const fillA   = isLarge ? 0.22 : 0.15;
+        const strokeA = isLarge ? 0.50 : 0.40;
+        // Filled circle
+        pCtx.fillStyle   = `rgba(210,55,55,${fillA})`;
+        pCtx.strokeStyle = `rgba(210,55,55,${strokeA})`;
+        pCtx.lineWidth   = isLarge ? 1.5 : 1;
+        pCtx.beginPath();
+        pCtx.arc(vp.px, vp.py, radius, 0, Math.PI * 2);
+        pCtx.fill();
+        pCtx.stroke();
+        // Orbiting micro-dots representing individuals
+        const dotCount = Math.max(3, Math.min(8, Math.floor(3 + loads.crowd * 5)));
+        const orbitR   = radius * 0.65;
+        pCtx.fillStyle = 'rgba(210,55,55,0.65)';
+        for (let d = 0; d < dotCount; d++) {
+            const angle = t * 0.8 + (d / dotCount) * Math.PI * 2 + vi * 0.5;
+            pCtx.beginPath();
+            pCtx.arc(vp.px + Math.cos(angle) * orbitR,
+                     vp.py + Math.sin(angle) * orbitR, 2, 0, Math.PI * 2);
+            pCtx.fill();
+        }
+    });
+    pCtx.restore();
+}
+
+// Visual: warm glow behind venue markers
+function _drawVisualGlow() {
+    if (!pCtx) return;
+    const t = performance.now() / 1000;
+    const isNight = state.band === 'Night';
+    pCtx.save();
+    VENUES.forEach(v => {
+        const loads = venueIntensityCache[v.id];
+        if (!loads || loads.visual < 0.02) return;
+        const vp = venuePx[v.id];
+        if (!vp) return;
+        // Candlelight flicker: 4-second pulse cycle, offset per venue
+        const alpha = 0.275 + Math.sin(t * (Math.PI * 2 / 4) + v.lat * 10) * 0.075;
+        let radius = 12 + loads.visual * 20;
+        let finalAlpha = alpha;
+        if (isNight) { radius *= 1.5; finalAlpha = Math.min(0.55, finalAlpha * 1.3); }
+        // Venue-type hue: church=cooler gold, theatre=warmer orange, default=warm gold
+        let r = 220, g = 175, b = 40;
+        if      (v.building_type === 'church')  { r = 230; g = 205; b = 130; }
+        else if (v.building_type === 'theatre') { r = 240; g = 140; b = 20;  }
+        const grad = pCtx.createRadialGradient(vp.px, vp.py, 0, vp.px, vp.py, radius);
+        grad.addColorStop(0, `rgba(${r},${g},${b},${finalAlpha.toFixed(2)})`);
+        grad.addColorStop(1, `rgba(${r},${g},${b},0)`);
+        pCtx.fillStyle = grad;
+        pCtx.beginPath();
+        pCtx.arc(vp.px, vp.py, radius, 0, Math.PI * 2);
+        pCtx.fill();
+    });
+    pCtx.restore();
+}
+
 // Main RAF loop (particleRaf and activeParticleCount declared early — see top of particle system block)
 function particleFrame() {
     if (!pCtx || !pCanvas) return;
@@ -1464,6 +1646,17 @@ function particleFrame() {
     pCtx.globalCompositeOperation = 'source-over';
 
     const isNetwork = state.particleMode === 'network';
+
+    // Senses mode: dispatch per-modality renderers instead of generic particle loop
+    if (state.particleMode === 'flow') {
+        const activeModals = state.modality ? [state.modality] : ['smell', 'noise', 'crowd', 'visual'];
+        if (activeModals.includes('noise'))  { _updateNoiseRings(); _drawNoiseRings(); }
+        if (activeModals.includes('smell'))  _drawSmellHalos();
+        if (activeModals.includes('crowd'))  _drawCrowdCircles();
+        if (activeModals.includes('visual')) _drawVisualGlow();
+        particleRaf = requestAnimationFrame(particleFrame);
+        return;
+    }
 
     for (let i = 0; i < activeParticleCount; i++) {
         const p = particles[i];
@@ -1835,7 +2028,8 @@ function _buildFlowField() {
             p.maxAge = prof.maxAge * (0.7 + Math.random() * 0.6);
         }
     }
-    startParticles(safeCount);
+    // Senses mode uses per-modality canvas renderers — no particles needed
+    startParticles(0);
 }
 // Street segment pixel cache
 let streetSegsPx = [];

@@ -141,8 +141,9 @@ body { font-family: Georgia, 'Times New Roman', serif; background: #f5f0eb;
   z-index: 100;
 }
 #topbar .title { font-size: 15px; font-weight: bold; color: #2c3e50; white-space: nowrap; }
-.nav-link { font-size: 12px; color: #666; text-decoration: none; white-space: nowrap; }
-.nav-link:hover { color: #2c3e50; text-decoration: underline; }
+.view-tab { background: #f0ede6; border: 1px solid #ccc; color: #555; padding: 2px 10px; border-radius: 3px; font-size: 11px; font-weight: 500; text-decoration: none; display: inline-block; white-space: nowrap; }
+.view-tab:hover { background: #e4e0d8; color: #2c3e50; }
+.view-tab.active { background: #2c3e50; border-color: #2c3e50; color: #fff; font-weight: 600; cursor: default; }
 #venue-select {
   font-family: Georgia, serif; font-size: 13px;
   padding: 4px 8px; border: 1px solid #bbb; border-radius: 4px;
@@ -259,7 +260,13 @@ body { font-family: Georgia, 'Times New Roman', serif; background: #f5f0eb;
 
 <div id="topbar">
   <span class="title">Fiction vs Non-Fiction · 18c Sensory Evidence</span>
-  <a href="venue_explorer.html" class="nav-link">&#8592; Venue Explorer</a>
+  <span style="display:flex;gap:4px;align-items:center;">
+    <span style="font-size:11px;color:#888;font-weight:500;margin-right:2px;">View</span>
+    <a href="sensory_time_map.html" class="view-tab">Sensory Map</a>
+    <a href="venue_explorer.html" class="view-tab">Evidence</a>
+    <a href="narrative_map.html" class="view-tab">Narrative</a>
+    <span class="view-tab active">Comparison</span>
+  </span>
   <select id="venue-select"></select>
   <span class="subtitle" id="top-stats"></span>
   <span id="top-meta" style="display:flex;gap:4px;flex-wrap:wrap;align-items:center"></span>

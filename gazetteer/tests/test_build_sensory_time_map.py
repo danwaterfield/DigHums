@@ -240,14 +240,16 @@ def test_particle_trail_fade(html):
 
 
 def test_smoke_dissipation(html):
-    """Smoke particles must start larger and shrink with age."""
-    assert "1 + 0.5 * (1 - t)" in html
+    """Smoke particles render as velocity-aligned line segments (not fixed-radius arcs)."""
+    assert "Math.hypot(p.vx, p.vy)" in html
+    assert "pCtx.lineCap = 'round'" in html
+    assert "pCtx.moveTo(p.px - p.vx * 3" in html
 
 
 def test_modality_radius_used(html):
-    """Particles must use p.radius for arc, not fixed 1.5."""
+    """Particles must use prof.radius for lineWidth, not a fixed value."""
     assert "drawRadius" in html
-    assert "p.radius" in html
+    assert "prof.radius" in html
 
 
 def test_venue_opened_closed_in_js(html):
@@ -359,3 +361,34 @@ def test_exeter_change_event(html):
 def test_canyon_factor_computeZoneBaseline(html):
     """computeZoneBaseline must return canyon_factor."""
     assert 'canyon_factor: p.canyon_factor' in html
+
+
+def test_noise_rings_renderer(html):
+    """Noise ring state and renderers must be present."""
+    assert '_updateNoiseRings' in html
+    assert '_drawNoiseRings' in html
+    assert '_noiseRingPool' in html
+
+
+def test_smell_halos_renderer(html):
+    """Smell halo renderer must be present."""
+    assert '_drawSmellHalos' in html
+
+
+def test_crowd_circles_renderer(html):
+    """Crowd circle renderer must be present."""
+    assert '_drawCrowdCircles' in html
+
+
+def test_visual_glow_renderer(html):
+    """Visual glow renderer must be present."""
+    assert '_drawVisualGlow' in html
+
+
+def test_senses_mode_compositor(html):
+    """All four per-modality renderer calls must appear in particleFrame."""
+    assert '_updateNoiseRings' in html
+    assert '_drawNoiseRings'   in html
+    assert '_drawSmellHalos'   in html
+    assert '_drawCrowdCircles' in html
+    assert '_drawVisualGlow'   in html
