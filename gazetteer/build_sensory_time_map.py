@@ -710,7 +710,7 @@ function updateBasemap(year) {{
               : year < 1791 ? 'Rocque 1746'
               : 'Horwood 1792\u201399';
     if (key === _currentBaseKey) return;
-    map.removeLayer(baseLayers[_currentBaseKey]);
+    if (baseLayers[_currentBaseKey]) map.removeLayer(baseLayers[_currentBaseKey]);
     baseLayers[key].addTo(map);
     _currentBaseKey = key;
 }}
@@ -825,7 +825,7 @@ VENUES.forEach(v => {{
         dashArray: dashArray,
     }}).addTo(map);
     m.bindTooltip('', {{ permanent: false, direction: 'top' }});
-    m.on('click', (e) => {{ e.stopPropagation(); selectVenue(v.id); }});
+    m.on('click', (e) => {{ L.DomEvent.stopPropagation(e); selectVenue(v.id); }});
     markersByVenueId[v.id] = m;
 }});
 
