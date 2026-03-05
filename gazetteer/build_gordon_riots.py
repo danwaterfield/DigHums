@@ -542,153 +542,130 @@ HTML_TEMPLATE = """\
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Gordon Riots, June 1780</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
   *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
-  html, body {{ height: 100%; font-family: 'Crimson Text', Georgia, serif; background: #0c0a08; color: #ddd0bc; }}
+  html, body {{ height: 100%; font-family: 'Inter', system-ui, sans-serif; background: #f4f1eb; color: #1a1816; }}
   #app {{ display: flex; flex-direction: column; height: 100%; }}
 
-  /* ── Header: two clean rows ── */
-  #header {{
-    background: #080604;
-    border-bottom: 1px solid #1e180e;
-    flex-shrink: 0;
-  }}
-  .hrow {{
-    display: flex; align-items: center; gap: 12px;
-    padding: 9px 18px;
-  }}
-  .hrow + .hrow {{
-    padding-top: 6px; padding-bottom: 7px;
-    border-top: 1px solid #141008;
-    flex-wrap: wrap;
-  }}
+  /* ── Header ── */
+  #header {{ background: #ffffff; border-bottom: 1px solid #d8d4cc; flex-shrink: 0; }}
+  .hrow {{ display: flex; align-items: center; gap: 10px; padding: 8px 16px; }}
+  .hrow + .hrow {{ padding-top: 6px; padding-bottom: 7px; border-top: 1px solid #ece8e0; flex-wrap: wrap; gap: 6px; }}
 
-  #header h1 {{
-    font-family: 'Cinzel', serif; font-weight: 400; font-size: 0.95em;
-    color: #c8a050; letter-spacing: 0.1em; text-transform: uppercase;
-    white-space: nowrap; flex-shrink: 0;
-  }}
-  #header h1 span {{ color: #d04418; }}
+  #header h1 {{ font-size: 0.875em; font-weight: 700; color: #1a1816; white-space: nowrap; flex-shrink: 0; }}
+  #header h1 span {{ color: #c2361a; }}
 
-  /* Separator */
-  .hsep {{ width: 1px; height: 16px; background: #2a200f; flex-shrink: 0; }}
+  .hsep {{ width: 1px; height: 14px; background: #d8d4cc; flex-shrink: 0; }}
 
   /* Day stepper */
   #day-stepper {{ display: flex; align-items: center; gap: 2px; }}
   #day-stepper button {{
-    background: none; border: none; color: #4a3a28; padding: 2px 5px;
+    background: none; border: none; color: #9c9890; padding: 2px 5px;
     cursor: pointer; font-size: 0.75em; line-height: 1; transition: color 0.1s;
   }}
-  #day-stepper button:hover {{ color: #c8a050; }}
-  #day-label {{
-    font-family: 'Cinzel', serif; font-size: 0.72em; letter-spacing: 0.06em;
-    color: #c0a050; min-width: 148px; text-align: center;
-  }}
+  #day-stepper button:hover {{ color: #1a1816; }}
+  #day-label {{ font-size: 0.75em; font-weight: 600; color: #1e3c6e; min-width: 148px; text-align: center; }}
 
   /* Day pills */
   .day-pill {{
-    font-family: 'Cinzel', serif; font-size: 0.62em; letter-spacing: 0.04em;
-    padding: 3px 9px; border: 1px solid #241a0c; color: #6a5a42;
-    cursor: pointer; transition: all 0.12s; white-space: nowrap;
+    font-size: 0.69em; font-weight: 500; padding: 3px 9px;
+    border: 1px solid #d8d4cc; color: #5c5850; background: #f4f1eb;
+    cursor: pointer; transition: all 0.12s; white-space: nowrap; border-radius: 3px;
   }}
-  .day-pill.active {{ background: #601408; border-color: #b03010; color: #f0b050; }}
-  .day-pill:hover:not(.active) {{ border-color: #3a2a14; color: #9a8060; }}
+  .day-pill.active {{ background: #1e3c6e; border-color: #1e3c6e; color: #fff; }}
+  .day-pill:hover:not(.active) {{ border-color: #9c9890; color: #1a1816; }}
 
   /* Type filter pills — row 2 */
   .type-pill {{
-    font-size: 0.64em; padding: 2px 8px; border: 1px solid transparent;
-    cursor: pointer; opacity: 0.45; transition: opacity 0.15s; white-space: nowrap;
+    font-size: 0.69em; font-weight: 500; padding: 3px 9px; border: 1px solid;
+    cursor: pointer; opacity: 0.4; transition: opacity 0.15s; white-space: nowrap;
+    border-radius: 3px; background: transparent;
   }}
   .type-pill.active {{ opacity: 1; }}
 
-  /* Main layout */
   #main {{ display: flex; flex: 1; overflow: hidden; }}
-  #map {{ flex: 1; background: #1c1610; }}
+  #map {{ flex: 1; background: #e8e4dc; }}
   #panel {{
-    width: 360px; flex-shrink: 0; background: #080604;
-    border-left: 1px solid #1e180e; display: flex; flex-direction: column; overflow: hidden;
+    width: 360px; flex-shrink: 0; background: #ffffff;
+    border-left: 1px solid #d8d4cc; display: flex; flex-direction: column; overflow: hidden;
   }}
 
   /* Timeline */
-  #timeline {{ flex: 1; min-height: 0; padding: 10px 14px; overflow-y: auto; }}
-  #timeline::-webkit-scrollbar {{ width: 3px; }}
+  #timeline {{ flex: 1; min-height: 0; padding: 6px 8px; overflow-y: auto; }}
+  #timeline::-webkit-scrollbar {{ width: 4px; }}
   #timeline::-webkit-scrollbar-track {{ background: transparent; }}
-  #timeline::-webkit-scrollbar-thumb {{ background: #2a1e0e; }}
+  #timeline::-webkit-scrollbar-thumb {{ background: #d8d4cc; border-radius: 2px; }}
 
   .tl-entry {{
-    border-left: 2px solid #221808; padding: 9px 11px; margin-bottom: 1px;
-    cursor: pointer; transition: background 0.1s, border-left-color 0.1s;
+    border-left: 3px solid transparent; padding: 8px 10px; margin-bottom: 1px;
+    cursor: pointer; transition: background 0.1s, border-left-color 0.1s; border-radius: 2px;
   }}
-  .tl-entry:hover {{ background: #0f0c08; }}
-  .tl-entry.selected {{ background: #0f0c08; border-left-color: #b03010; }}
+  .tl-entry:hover {{ background: #f8f6f2; }}
+  .tl-entry.selected {{ background: #edf2f8; border-left-color: #1e3c6e; }}
   .tl-date {{
-    font-family: 'Cinzel', serif; font-size: 0.58em; letter-spacing: 0.08em;
-    color: #4a3820; text-transform: uppercase; margin-bottom: 3px;
+    font-size: 0.69em; font-weight: 600; letter-spacing: 0.05em;
+    color: #9c9890; text-transform: uppercase; margin-bottom: 3px;
   }}
-  .tl-title {{ font-size: 0.88em; color: #c0a878; line-height: 1.35; margin-bottom: 2px; }}
-  .tl-type {{ font-size: 0.62em; letter-spacing: 0.03em; }}
+  .tl-title {{ font-size: 0.875em; font-weight: 500; color: #1a1816; line-height: 1.4; margin-bottom: 3px; }}
+  .tl-type {{ font-size: 0.69em; font-weight: 500; }}
 
   /* Event detail */
-  #detail {{ border-top: 1px solid #141008; padding: 14px 16px; flex-shrink: 0; display: none; }}
-  #detail h2 {{
-    font-family: 'Cinzel', serif; font-weight: 400; font-size: 0.82em;
-    color: #c8a050; margin-bottom: 7px; letter-spacing: 0.03em; line-height: 1.45;
+  #detail {{
+    border-top: 1px solid #ece8e0; padding: 12px 14px; flex-shrink: 0;
+    display: none; background: #f8f6f2;
   }}
+  #detail h2 {{ font-size: 0.875em; font-weight: 600; color: #1a1816; margin-bottom: 6px; line-height: 1.45; }}
   #detail .detail-date {{
-    font-family: 'Cinzel', serif; font-size: 0.58em; letter-spacing: 0.08em;
-    text-transform: uppercase; color: #4a3820; margin-bottom: 10px;
+    font-size: 0.69em; font-weight: 600; letter-spacing: 0.05em;
+    text-transform: uppercase; color: #9c9890; margin-bottom: 10px;
   }}
-  #detail p {{ font-size: 0.9em; line-height: 1.65; color: #9a8870; }}
+  #detail p {{ font-size: 0.875em; line-height: 1.65; color: #5c5850; }}
 
   /* Testimonies */
-  #testimonies {{ border-top: 1px solid #141008; padding: 12px 14px; flex-shrink: 0; overflow-y: auto; max-height: 38%; }}
-  #testimonies::-webkit-scrollbar {{ width: 3px; }}
-  #testimonies::-webkit-scrollbar-thumb {{ background: #2a1e0e; }}
+  #testimonies {{ border-top: 1px solid #ece8e0; padding: 10px 12px; flex-shrink: 0; overflow-y: auto; max-height: 38%; }}
+  #testimonies::-webkit-scrollbar {{ width: 4px; }}
+  #testimonies::-webkit-scrollbar-thumb {{ background: #d8d4cc; border-radius: 2px; }}
   #testimonies h3 {{
-    font-family: 'Cinzel', serif; font-weight: 400; font-size: 0.6em;
-    letter-spacing: 0.12em; text-transform: uppercase; color: #6a5030;
-    margin-bottom: 10px;
+    font-size: 0.69em; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #9c9890; margin-bottom: 8px;
   }}
 
   .testimony {{
-    margin-bottom: 10px; padding: 10px 12px; background: #0c0906;
-    border-left: 2px solid #a07828; cursor: pointer; transition: background 0.1s;
+    margin-bottom: 6px; padding: 8px 10px; background: #f8f6f2;
+    border-left: 3px solid #c8a050; cursor: pointer; transition: background 0.1s;
+    border-radius: 0 2px 2px 0;
   }}
-  .testimony:hover {{ background: #120e08; }}
-  .t-witness {{
-    font-family: 'Cinzel', serif; font-size: 0.65em; letter-spacing: 0.04em;
-    color: #c8a050; margin-bottom: 2px;
-  }}
-  .t-location {{ font-size: 0.65em; color: #4a3820; margin-bottom: 6px; }}
-  .t-text {{ font-size: 0.85em; font-style: italic; color: #9a8060; line-height: 1.6; }}
+  .testimony:hover {{ background: #f0ede5; }}
+  .t-witness {{ font-size: 0.75em; font-weight: 600; color: #1a1816; margin-bottom: 2px; }}
+  .t-location {{ font-size: 0.69em; color: #9c9890; margin-bottom: 5px; }}
+  .t-text {{ font-size: 0.875em; font-style: italic; color: #5c5850; line-height: 1.6; }}
   .t-text.collapsed {{ max-height: 52px; overflow: hidden; }}
-  .t-toggle {{ font-size: 0.65em; color: #7a5a28; cursor: pointer; margin-top: 5px; }}
+  .t-toggle {{ font-size: 0.69em; color: #1e3c6e; cursor: pointer; margin-top: 4px; font-style: normal; }}
 
   /* Legend */
-  #legend {{ padding: 10px 14px; border-top: 1px solid #141008; display: flex; flex-wrap: wrap; gap: 7px 14px; }}
-  .leg-item {{ font-size: 0.62em; display: flex; align-items: center; gap: 5px; color: #5a4830; }}
+  #legend {{ padding: 8px 12px; border-top: 1px solid #ece8e0; display: flex; flex-wrap: wrap; gap: 5px 12px; }}
+  .leg-item {{ font-size: 0.69em; font-weight: 500; display: flex; align-items: center; gap: 5px; color: #5c5850; }}
   .leg-dot {{ width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }}
 
   /* Leaflet overrides */
   .leaflet-popup-content-wrapper {{
-    background: #0f0c08; color: #c0a878; border: 1px solid #2e2010;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.75); border-radius: 0;
+    background: #fff; color: #1a1816; border: 1px solid #d8d4cc;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12); border-radius: 3px;
   }}
-  .leaflet-popup-tip {{ background: #0f0c08; }}
-  .leaflet-popup-content {{ font-family: 'Crimson Text', Georgia, serif; font-size: 0.9em; line-height: 1.6; }}
-  .leaflet-popup-close-button {{ color: #4a3820 !important; font-size: 18px !important; }}
+  .leaflet-popup-tip {{ background: #fff; }}
+  .leaflet-popup-content {{ font-family: 'Inter', system-ui, sans-serif; font-size: 0.875em; line-height: 1.6; }}
+  .leaflet-popup-close-button {{ color: #9c9890 !important; font-size: 18px !important; }}
   .leaflet-control-zoom a {{
-    background: #080604 !important; color: #6a5a42 !important;
-    border-color: #2a1e0e !important; border-radius: 0 !important;
-    transition: color 0.1s;
+    background: #fff !important; color: #5c5850 !important;
+    border-color: #d8d4cc !important; border-radius: 3px !important; transition: color 0.1s;
   }}
-  .leaflet-control-zoom a:hover {{ color: #c8a050 !important; }}
-  .leaflet-control-attribution {{ background: rgba(8,6,4,0.75) !important; color: #3a2a18 !important; font-size: 0.65em !important; }}
-  .leaflet-control-attribution a {{ color: #5a4030 !important; }}
-  .leaflet-bar {{ box-shadow: none !important; border: 1px solid #2a1e0e !important; }}
+  .leaflet-control-zoom a:hover {{ color: #1e3c6e !important; }}
+  .leaflet-control-attribution {{ background: rgba(255,255,255,0.85) !important; color: #9c9890 !important; font-size: 0.65em !important; }}
+  .leaflet-control-attribution a {{ color: #5c5850 !important; }}
+  .leaflet-bar {{ box-shadow: 0 1px 5px rgba(0,0,0,0.15) !important; border: none !important; }}
 </style>
 </head>
 <body>
@@ -716,34 +693,34 @@ HTML_TEMPLATE = """\
         <span class="day-pill" data-day="1780-06-09" onclick="selectDay('1780-06-09')">9 Jun</span>
       </div>
       <div style="margin-left:auto;font-size:0.62em;color:#4a3820">
-        <a href="gordon_riots_pulse.html" style="color:#5a4030;text-decoration:none">&#9654; Pulse map</a>
+        <a href="gordon_riots_pulse.html" style="font-size:0.69em;font-weight:500;color:#1e3c6e;text-decoration:none">&#9654; Pulse map</a>
       </div>
     </div>
     <!-- Row 2: type filters -->
     <div class="hrow" id="type-filters">
       <span class="type-pill active" data-type="all"
-            style="border-color:#3a2a14;color:#9a7848;background:#1a1208"
+            style="border-color:#5c5850;color:#5c5850;background:#f4f1eb"
             onclick="toggleType('all')">All types</span>
       <span class="type-pill active" data-type="assembly"
-            style="border-color:#4a90d9;color:#6a9ec8" onclick="toggleType('assembly')">Assembly</span>
+            style="border-color:#2563a8;color:#2563a8" onclick="toggleType('assembly')">Assembly</span>
       <span class="type-pill active" data-type="march"
-            style="border-color:#9b59b6;color:#a870cc" onclick="toggleType('march')">March</span>
+            style="border-color:#6d4db3;color:#6d4db3" onclick="toggleType('march')">March</span>
       <span class="type-pill active" data-type="petition"
-            style="border-color:#27ae60;color:#50b878" onclick="toggleType('petition')">Petition</span>
+            style="border-color:#1a7d4a;color:#1a7d4a" onclick="toggleType('petition')">Petition</span>
       <span class="type-pill active" data-type="attack"
-            style="border-color:#e67e22;color:#d08040" onclick="toggleType('attack')">Attack</span>
+            style="border-color:#c47a1e;color:#c47a1e" onclick="toggleType('attack')">Attack</span>
       <span class="type-pill active" data-type="fire"
-            style="border-color:#e74c3c;color:#d05848" onclick="toggleType('fire')">Fire</span>
+            style="border-color:#c2361a;color:#c2361a" onclick="toggleType('fire')">Fire</span>
       <span class="type-pill active" data-type="prison_break"
-            style="border-color:#8e44ad;color:#9858b8" onclick="toggleType('prison_break')">Prison break</span>
+            style="border-color:#8835a0;color:#8835a0" onclick="toggleType('prison_break')">Prison break</span>
       <span class="type-pill active" data-type="military_clash"
-            style="border-color:#566d82;color:#6888a0" onclick="toggleType('military_clash')">Military</span>
+            style="border-color:#2a6a88;color:#2a6a88" onclick="toggleType('military_clash')">Military</span>
       <span class="type-pill active" data-type="destruction"
-            style="border-color:#c0392b;color:#b84838" onclick="toggleType('destruction')">Destruction</span>
+            style="border-color:#b02a1a;color:#b02a1a" onclick="toggleType('destruction')">Destruction</span>
       <span class="type-pill active" data-type="execution"
-            style="border-color:#7f8c8d;color:#8a9898" onclick="toggleType('execution')">Arrest</span>
+            style="border-color:#607080;color:#607080" onclick="toggleType('execution')">Arrest</span>
       <span class="type-pill active" data-type="aftermath"
-            style="border-color:#6a8082;color:#7a9898" onclick="toggleType('aftermath')">Aftermath</span>
+            style="border-color:#607070;color:#607070" onclick="toggleType('aftermath')">Aftermath</span>
     </div>
   </div>
 
@@ -761,17 +738,17 @@ HTML_TEMPLATE = """\
         <div id="testimony-list"></div>
       </div>
       <div id="legend">
-        <div class="leg-item"><div class="leg-dot" style="background:#4a90d9"></div>Assembly</div>
-        <div class="leg-item"><div class="leg-dot" style="background:#9b59b6"></div>March</div>
-        <div class="leg-item"><div class="leg-dot" style="background:#27ae60"></div>Petition</div>
-        <div class="leg-item"><div class="leg-dot" style="background:#e67e22"></div>Attack</div>
-        <div class="leg-item"><div class="leg-dot" style="background:#e74c3c"></div>Fire</div>
-        <div class="leg-item"><div class="leg-dot" style="background:#8e44ad"></div>Prison break</div>
-        <div class="leg-item"><div class="leg-dot" style="background:#566d82"></div>Military</div>
-        <div class="leg-item"><div class="leg-dot" style="background:#c0392b"></div>Destruction</div>
-        <div class="leg-item"><div class="leg-dot" style="background:#7f8c8d"></div>Arrest</div>
-        <div class="leg-item"><div class="leg-dot" style="background:#95a5a6"></div>Aftermath</div>
-        <div class="leg-item"><div class="leg-dot" style="background:#f39c12;border-radius:2px"></div>Testimony</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#2563a8"></div>Assembly</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#6d4db3"></div>March</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#1a7d4a"></div>Petition</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#c47a1e"></div>Attack</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#c2361a"></div>Fire</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#8835a0"></div>Prison break</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#2a6a88"></div>Military</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#b02a1a"></div>Destruction</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#607080"></div>Arrest</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#607070"></div>Aftermath</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#c8a050;border-radius:2px"></div>Testimony</div>
       </div>
     </div>
   </div>

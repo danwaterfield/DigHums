@@ -18,16 +18,16 @@ OUT_PATH = Path(__file__).parent / "gordon_riots_pulse.html"
 
 # ── Severity weight per type (controls pulse ring size and brightness) ─────────
 TYPE_META = {
-    "assembly":      {"color": "#4a90d9", "severity": 1.0},
-    "march":         {"color": "#9b59b6", "severity": 0.8},
-    "petition":      {"color": "#27ae60", "severity": 0.5},
-    "attack":        {"color": "#e67e22", "severity": 1.4},
-    "fire":          {"color": "#ff4422", "severity": 2.0},
-    "prison_break":  {"color": "#cc44ff", "severity": 1.8},
-    "military_clash":{"color": "#4488aa", "severity": 1.3},
-    "destruction":   {"color": "#ff2244", "severity": 1.6},
-    "execution":     {"color": "#8899aa", "severity": 0.9},
-    "aftermath":     {"color": "#556677", "severity": 0.6},
+    "assembly":      {"color": "#2563a8", "severity": 1.0},
+    "march":         {"color": "#6d4db3", "severity": 0.8},
+    "petition":      {"color": "#1a7d4a", "severity": 0.5},
+    "attack":        {"color": "#c47a1e", "severity": 1.4},
+    "fire":          {"color": "#c2361a", "severity": 2.0},
+    "prison_break":  {"color": "#8835a0", "severity": 1.8},
+    "military_clash":{"color": "#2a6a88", "severity": 1.3},
+    "destruction":   {"color": "#b02a1a", "severity": 1.6},
+    "execution":     {"color": "#607080", "severity": 0.9},
+    "aftermath":     {"color": "#607070", "severity": 0.6},
 }
 
 EVENTS = [
@@ -161,12 +161,12 @@ HTML_TEMPLATE = """\
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Gordon Riots 1780 — Pulse Map</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Crimson+Text:ital,wght@0,400;1,400&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
   *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
-  html, body {{ height: 100%; background: #07090e; color: #ccc; font-family: 'Crimson Text', Georgia, serif; overflow: hidden; }}
+  html, body {{ height: 100%; background: #f4f1eb; font-family: 'Inter', system-ui, sans-serif; overflow: hidden; color: #1a1816; }}
 
   #map {{ position: absolute; inset: 0; }}
   #pulse-canvas {{ position: absolute; inset: 0; pointer-events: none; z-index: 600; }}
@@ -174,61 +174,46 @@ HTML_TEMPLATE = """\
   /* ── HUD: two-row header ── */
   #hud {{
     position: absolute; top: 0; left: 0; right: 0; z-index: 700;
-    background: linear-gradient(180deg, rgba(4,6,12,0.98) 55%, rgba(4,6,12,0.6) 80%, transparent);
-    padding-bottom: 24px;
+    background: rgba(255,255,255,0.96); border-bottom: 1px solid #d8d4cc;
+    backdrop-filter: blur(4px);
   }}
-  .hud-row {{
-    display: flex; align-items: center; gap: 10px;
-    padding: 11px 18px;
-  }}
-  .hud-row + .hud-row {{
-    padding-top: 5px; padding-bottom: 8px;
-    border-top: 1px solid rgba(255,255,255,0.04);
-  }}
+  .hud-row {{ display: flex; align-items: center; gap: 10px; padding: 8px 16px; }}
+  .hud-row + .hud-row {{ padding-top: 5px; padding-bottom: 7px; border-top: 1px solid #ece8e0; }}
 
-  #hud h1 {{
-    font-family: 'Cinzel', serif; font-weight: 400; font-size: 0.9em;
-    color: #b89040; letter-spacing: 0.12em; text-transform: uppercase;
-    white-space: nowrap; flex-shrink: 0;
-  }}
-  #hud h1 span {{ color: #e03010; }}
+  #hud h1 {{ font-size: 0.875em; font-weight: 700; color: #1a1816; white-space: nowrap; flex-shrink: 0; }}
+  #hud h1 span {{ color: #c2361a; }}
 
-  .hud-sep {{ width: 1px; height: 14px; background: rgba(255,255,255,0.08); flex-shrink: 0; }}
+  .hud-sep {{ width: 1px; height: 14px; background: #d8d4cc; flex-shrink: 0; }}
 
   /* Day display */
-  #day-display {{
-    font-family: 'Cinzel', serif; font-size: 0.72em; letter-spacing: 0.07em;
-    color: #b89040; min-width: 162px; flex-shrink: 0;
-  }}
+  #day-display {{ font-size: 0.75em; font-weight: 600; color: #1e3c6e; min-width: 162px; flex-shrink: 0; }}
 
   /* Day pills */
   .dp {{
-    font-family: 'Cinzel', serif; font-size: 0.6em; letter-spacing: 0.04em;
-    padding: 3px 9px; border: 1px solid rgba(255,255,255,0.08);
-    color: #607080; background: transparent; cursor: pointer; transition: all 0.12s;
-    white-space: nowrap;
+    font-size: 0.69em; font-weight: 500; padding: 3px 9px;
+    border: 1px solid #d8d4cc; color: #5c5850; background: #f4f1eb;
+    cursor: pointer; transition: all 0.12s; white-space: nowrap; border-radius: 3px;
   }}
-  .dp.active {{ background: #601408; border-color: #c03010; color: #f0a040; }}
-  .dp:hover:not(.active) {{ border-color: rgba(255,255,255,0.2); color: #9ab0c0; }}
+  .dp.active {{ background: #1e3c6e; border-color: #1e3c6e; color: #fff; }}
+  .dp:hover:not(.active) {{ border-color: #9c9890; color: #1a1816; }}
 
   /* Play controls */
   #controls {{ display: flex; align-items: center; gap: 6px; margin-left: auto; }}
   .ctrl-btn {{
-    font-family: 'Cinzel', serif; font-size: 0.6em; letter-spacing: 0.04em;
-    background: rgba(10,14,24,0.9); border: 1px solid rgba(255,255,255,0.1);
-    color: #607080; padding: 4px 12px; cursor: pointer; transition: all 0.12s;
-    white-space: nowrap;
+    font-size: 0.69em; font-weight: 500; background: #f4f1eb; border: 1px solid #d8d4cc;
+    color: #5c5850; padding: 3px 10px; cursor: pointer; transition: all 0.12s;
+    white-space: nowrap; border-radius: 3px;
   }}
-  .ctrl-btn:hover {{ border-color: rgba(255,255,255,0.3); color: #90b0c8; }}
-  .ctrl-btn.active {{ background: #601408; border-color: #c03010; color: #f0a040; }}
-  .ctrl-btn.speed-active {{ border-color: #404860; color: #8090a8; background: rgba(20,28,50,0.9); }}
+  .ctrl-btn:hover {{ border-color: #9c9890; color: #1a1816; }}
+  .ctrl-btn.active {{ background: #1e3c6e; border-color: #1e3c6e; color: #fff; }}
+  .ctrl-btn.speed-active {{ background: #edf2f8; border-color: #2563a8; color: #1e3c6e; font-weight: 600; }}
 
   /* ── Bottom info panel ── */
   #info-panel {{
     position: absolute; bottom: 0; left: 0; right: 0; z-index: 700;
-    background: linear-gradient(0deg, rgba(4,6,12,0.97) 65%, transparent);
-    padding: 32px 18px 14px;
-    display: flex; gap: 16px; align-items: flex-end;
+    background: rgba(255,255,255,0.96); border-top: 1px solid #d8d4cc;
+    backdrop-filter: blur(4px); padding: 10px 14px 12px;
+    display: flex; gap: 12px; align-items: flex-end;
   }}
 
   /* Horizontal-scroll chip row */
@@ -237,61 +222,53 @@ HTML_TEMPLATE = """\
     display: flex; gap: 8px; align-items: stretch;
     overflow-x: auto; padding-bottom: 2px;
   }}
-  #active-events::-webkit-scrollbar {{ height: 2px; }}
-  #active-events::-webkit-scrollbar-thumb {{ background: rgba(255,255,255,0.12); }}
+  #active-events::-webkit-scrollbar {{ height: 3px; }}
+  #active-events::-webkit-scrollbar-thumb {{ background: #d8d4cc; border-radius: 2px; }}
 
   .event-chip {{
-    flex-shrink: 0; width: 220px;
-    padding: 8px 10px 9px; border-left: 2px solid transparent;
-    background: rgba(8,12,22,0.92);
-    animation: chipIn 0.35s ease-out;
+    flex-shrink: 0; width: 220px; padding: 8px 10px 9px;
+    border-left: 3px solid transparent; background: #f8f6f2;
+    border-radius: 0 3px 3px 0; animation: chipIn 0.35s ease-out;
   }}
   @keyframes chipIn {{
     from {{ opacity: 0; transform: translateX(-8px); }}
     to   {{ opacity: 1; transform: translateX(0); }}
   }}
-  .chip-title {{
-    font-family: 'Cinzel', serif; font-size: 0.68em; letter-spacing: 0.02em;
-    color: #d8b858; margin-bottom: 4px; line-height: 1.3;
-  }}
-  .chip-desc {{ font-size: 0.82em; color: #7a6a58; line-height: 1.45; }}
+  .chip-title {{ font-size: 0.75em; font-weight: 600; color: #1a1816; margin-bottom: 4px; line-height: 1.3; }}
+  .chip-desc {{ font-size: 0.81em; color: #5c5850; line-height: 1.45; }}
 
   /* Testimony */
   #testimony-panel {{
-    width: 270px; flex-shrink: 0;
-    padding: 10px 13px; background: rgba(12,9,4,0.9);
-    border-left: 2px solid #a07828;
-    animation: tmIn 0.5s ease-out;
-    display: none;
+    width: 270px; flex-shrink: 0; padding: 10px 12px; background: #f8f6f2;
+    border-left: 3px solid #c8a050; border-radius: 0 3px 3px 0;
+    animation: tmIn 0.5s ease-out; display: none;
   }}
   @keyframes tmIn {{ from {{ opacity: 0; }} to {{ opacity: 1; }} }}
-  .tm-witness {{
-    font-family: 'Cinzel', serif; font-size: 0.65em; letter-spacing: 0.04em;
-    color: #c09040; margin-bottom: 4px;
-  }}
-  .tm-text {{ font-size: 0.85em; font-style: italic; color: #9a7a50; line-height: 1.55; }}
+  .tm-witness {{ font-size: 0.75em; font-weight: 600; color: #1a1816; margin-bottom: 4px; }}
+  .tm-text {{ font-size: 0.875em; font-style: italic; color: #5c5850; line-height: 1.55; }}
 
   /* ── Legend ── */
   #legend {{
-    position: absolute; right: 14px; top: 88px; z-index: 700;
-    background: rgba(4,6,12,0.88); border: 1px solid rgba(255,255,255,0.07);
-    padding: 10px 13px; font-size: 0.65em;
+    position: absolute; right: 14px; z-index: 700;
+    background: #fff; border: 1px solid #d8d4cc;
+    padding: 10px 13px; font-size: 0.69em;
     display: flex; flex-direction: column; gap: 5px;
+    border-radius: 3px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   }}
   #legend-title {{
-    font-family: 'Cinzel', serif; font-size: 0.85em; letter-spacing: 0.08em;
-    color: #5a6070; text-transform: uppercase; margin-bottom: 4px;
-    border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 5px;
+    font-size: 0.81em; font-weight: 700; letter-spacing: 0.05em;
+    color: #1a1816; text-transform: uppercase; margin-bottom: 4px;
+    border-bottom: 1px solid #ece8e0; padding-bottom: 5px;
   }}
-  .leg {{ display: flex; align-items: center; gap: 7px; color: #5a6878; }}
+  .leg {{ display: flex; align-items: center; gap: 7px; color: #5c5850; font-weight: 500; }}
   .leg-dot {{ width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }}
 
   /* Leaflet */
-  .leaflet-control-attribution {{ background: rgba(4,6,12,0.75) !important; color: #2a3040 !important; font-size: 0.65em !important; }}
-  .leaflet-control-attribution a {{ color: #3a4858 !important; }}
-  .leaflet-bar a {{ background: rgba(6,9,18,0.9) !important; color: #5a7080 !important; border-color: rgba(255,255,255,0.1) !important; border-radius: 0 !important; }}
-  .leaflet-bar a:hover {{ color: #90b0c8 !important; }}
-  .leaflet-bar {{ box-shadow: none !important; }}
+  .leaflet-control-attribution {{ background: rgba(255,255,255,0.85) !important; color: #9c9890 !important; font-size: 0.65em !important; }}
+  .leaflet-control-attribution a {{ color: #5c5850 !important; }}
+  .leaflet-bar a {{ background: #fff !important; color: #5c5850 !important; border-color: #d8d4cc !important; border-radius: 3px !important; }}
+  .leaflet-bar a:hover {{ color: #1e3c6e !important; }}
+  .leaflet-bar {{ box-shadow: 0 1px 5px rgba(0,0,0,0.15) !important; border: none !important; }}
 </style>
 </head>
 <body>
@@ -315,7 +292,7 @@ HTML_TEMPLATE = """\
       <button class="ctrl-btn" id="spd-med"  onclick="setSpeed(2200)">Med</button>
       <button class="ctrl-btn" id="spd-fast" onclick="setSpeed(1000)">Fast</button>
       <div class="hud-sep"></div>
-      <a href="gordon_riots.html" style="font-family:'Cinzel',serif;font-size:0.6em;letter-spacing:0.04em;color:#3a4858;text-decoration:none;white-space:nowrap" onmouseover="this.style.color='#7090a8'" onmouseout="this.style.color='#3a4858'">&#8592; Timeline</a>
+      <a href="gordon_riots.html" style="font-size:0.69em;font-weight:500;color:#1e3c6e;text-decoration:none;white-space:nowrap">&#8592; Timeline</a>
     </div>
   </div>
   <!-- Row 2: day pills -->
@@ -335,15 +312,15 @@ HTML_TEMPLATE = """\
 <!-- Legend -->
 <div id="legend">
   <div id="legend-title">Event type</div>
-  <div class="leg"><div class="leg-dot" style="background:#4a90d9"></div>Assembly</div>
-  <div class="leg"><div class="leg-dot" style="background:#9b59b6"></div>March</div>
-  <div class="leg"><div class="leg-dot" style="background:#27ae60"></div>Petition</div>
-  <div class="leg"><div class="leg-dot" style="background:#e67e22"></div>Attack</div>
-  <div class="leg"><div class="leg-dot" style="background:#ff4422"></div>Fire</div>
-  <div class="leg"><div class="leg-dot" style="background:#cc44ff"></div>Prison break</div>
-  <div class="leg"><div class="leg-dot" style="background:#4488aa"></div>Military</div>
-  <div class="leg"><div class="leg-dot" style="background:#ff2244"></div>Destruction</div>
-  <div class="leg"><div class="leg-dot" style="background:#c8a060;border-radius:2px"></div>Testimony</div>
+  <div class="leg"><div class="leg-dot" style="background:#2563a8"></div>Assembly</div>
+  <div class="leg"><div class="leg-dot" style="background:#6d4db3"></div>March</div>
+  <div class="leg"><div class="leg-dot" style="background:#1a7d4a"></div>Petition</div>
+  <div class="leg"><div class="leg-dot" style="background:#c47a1e"></div>Attack</div>
+  <div class="leg"><div class="leg-dot" style="background:#c2361a"></div>Fire</div>
+  <div class="leg"><div class="leg-dot" style="background:#8835a0"></div>Prison break</div>
+  <div class="leg"><div class="leg-dot" style="background:#2a6a88"></div>Military</div>
+  <div class="leg"><div class="leg-dot" style="background:#b02a1a"></div>Destruction</div>
+  <div class="leg"><div class="leg-dot" style="background:#c8a050;border-radius:2px"></div>Testimony</div>
 </div>
 
 <!-- Info panel -->
@@ -367,7 +344,7 @@ const map = L.map('map', {{
 }});
 L.control.zoom({{ position: 'bottomright' }}).addTo(map);
 
-L.tileLayer('https://{{s}}.basemaps.cartocdn.com/dark_all/{{z}}/{{x}}/{{y}}{{r}}.png', {{
+L.tileLayer('https://{{s}}.basemaps.cartocdn.com/light_all/{{z}}/{{x}}/{{y}}{{r}}.png', {{
   attribution: '\u00a9 OpenStreetMap \u00a9 CartoDB',
   subdomains: 'abcd', maxZoom: 19,
 }}).addTo(map);

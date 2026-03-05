@@ -110,7 +110,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: Georgia, 'Times New Roman', serif; background: #f5f0eb;
+body { font-family: 'Inter', system-ui, sans-serif; background: #f4f1eb;
        display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
 
 /* ── top bar ── */
@@ -123,21 +123,21 @@ body { font-family: Georgia, 'Times New Roman', serif; background: #f5f0eb;
   display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
   z-index: 1000;
 }
-#topbar .title { font-size: 15px; font-weight: bold; color: #2c3e50; white-space: nowrap; }
-#topbar .nav-link { font-size: 12px; color: #666; text-decoration: none; white-space: nowrap; }
-#topbar .nav-link:hover { color: #2c3e50; text-decoration: underline; }
+#topbar .title { font-size: 14px; font-weight: 700; color: #1a1816; white-space: nowrap; }
+#topbar .nav-link { font-size: 12px; color: #1e3c6e; text-decoration: none; white-space: nowrap; font-weight: 500; }
+#topbar .nav-link:hover { color: #1a1816; text-decoration: underline; }
 .filter-group { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
-.filter-label { font-size: 11px; color: #888; white-space: nowrap; }
+.filter-label { font-size: 11px; color: #9c9890; white-space: nowrap; font-weight: 500; }
 .pill {
-  font-size: 11px; padding: 3px 9px; border-radius: 12px; cursor: pointer;
-  border: 1px solid #bbb; background: white; color: #555;
-  transition: background 0.12s, color 0.12s;
+  font-size: 11px; padding: 3px 9px; border-radius: 3px; cursor: pointer;
+  border: 1px solid #d8d4cc; background: #f4f1eb; color: #5c5850;
+  transition: background 0.12s, color 0.12s; font-weight: 500;
 }
-.pill.active { background: #2c3e50; color: white; border-color: #2c3e50; }
-.pill:hover:not(.active) { background: #eee; }
+.pill.active { background: #1e3c6e; color: #fff; border-color: #1e3c6e; }
+.pill:hover:not(.active) { background: #ece8e0; color: #1a1816; }
 .date-group { display: flex; align-items: center; gap: 6px; }
 .date-group span { font-size: 11px; color: #555; min-width: 28px; text-align: center; }
-.date-group input[type=range] { width: 90px; accent-color: #2c3e50; cursor: pointer; }
+.date-group input[type=range] { width: 90px; accent-color: #1e3c6e; cursor: pointer; }
 .sep { color: #ccc; font-size: 14px; }
 
 /* ── main area ── */
@@ -158,7 +158,7 @@ body { font-family: Georgia, 'Times New Roman', serif; background: #f5f0eb;
   flex-shrink: 0;
 }
 #panel-title {
-  font-size: 15px; font-weight: bold; color: #2c3e50; margin-bottom: 3px;
+  font-size: 14px; font-weight: 700; color: #1a1816; margin-bottom: 3px;
 }
 #panel-stats { font-size: 11px; color: #888; margin-bottom: 8px; }
 .panel-pills { display: flex; gap: 5px; flex-wrap: wrap; }
@@ -194,7 +194,7 @@ body { font-family: Georgia, 'Times New Roman', serif; background: #f5f0eb;
 .src-poetry     { background: #ecdaf5; color: #5b1a7a; }
 .src-letters    { background: #e8e8e8; color: #444; }
 .src-legal      { background: #f5e0e0; color: #8b1a1a; }
-.ev-author { font-weight: bold; color: #2c3e50; }
+.ev-author { font-weight: 600; color: #1a1816; }
 .ev-title  { color: #555; font-style: italic; }
 .ev-date   { font-size: 10px; color: #999; margin-bottom: 5px; }
 .ev-text   { color: #333; font-style: italic; line-height: 1.55; }
@@ -258,7 +258,7 @@ body { font-family: Georgia, 'Times New Roman', serif; background: #f5f0eb;
     <input type="range" id="date-to"   min="1660" max="1820" value="1820">
     <span id="lbl-to">1820</span>
   </div>
-  <a href="sensory_time_map.html" style="color:#c8b89a;text-decoration:none;font-size:0.85em;margin-left:auto;">Time map &#8594;</a>
+  <a href="sensory_time_map.html" style="color:#1e3c6e;text-decoration:none;font-size:0.85em;margin-left:auto;font-weight:500;">Time map &#8594;</a>
 </div>
 
 <div id="main">

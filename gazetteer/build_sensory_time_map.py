@@ -218,31 +218,31 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
 * {{ box-sizing: border-box; margin: 0; padding: 0; }}
-body {{ font-family: 'Georgia', serif; background: #f9f6f0; color: #2c2c2c; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }}
-#controls {{ background: #1a1a2e; color: #e8e0d0; padding: 10px 16px; flex-shrink: 0; }}
+body {{ font-family: 'Inter', system-ui, 'Georgia', sans-serif; background: #f4f1eb; color: #1a1816; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }}
+#controls {{ background: #ffffff; border-bottom: 1px solid #d8d4cc; color: #1a1816; padding: 8px 14px; flex-shrink: 0; }}
 #header-row {{ display: flex; align-items: center; gap: 16px; margin-bottom: 8px; flex-wrap: wrap; }}
-.title {{ font-size: 1.1em; letter-spacing: 0.1em; font-weight: bold; }}
+.title {{ font-size: 0.875em; font-weight: 700; letter-spacing: 0; color: #1a1816; }}
 #year-control {{ display: flex; align-items: center; gap: 8px; }}
 #year-slider {{ width: 200px; }}
-#year-display {{ font-size: 1.2em; font-weight: bold; min-width: 3em; text-align: center; }}
-.step-btn {{ background: #2a2a4e; border: 1px solid #555; color: #e8e0d0; padding: 2px 8px; cursor: pointer; border-radius: 3px; }}
-.step-btn:hover {{ background: #3a3a6e; }}
-#play-btn {{ background: #2a2a4e; border: 1px solid #555; color: #e8e0d0; padding: 2px 10px; cursor: pointer; border-radius: 3px; font-size: 0.85em; letter-spacing: 0.05em; }}
-#play-btn:hover {{ background: #3a3a6e; }}
-#play-btn.playing {{ background: #5a2a0a; border-color: #cc7744; color: #ffd0a0; }}
-.nav-link {{ color: #c8b89a; text-decoration: none; font-size: 0.85em; margin-left: auto; }}
+#year-display {{ font-size: 1em; font-weight: 700; min-width: 3em; text-align: center; color: #1e3c6e; }}
+.step-btn {{ background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-size: 0.81em; }}
+.step-btn:hover {{ background: #ece8e0; color: #1a1816; }}
+#play-btn {{ background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 10px; cursor: pointer; border-radius: 3px; font-size: 0.81em; }}
+#play-btn:hover {{ background: #ece8e0; color: #1a1816; }}
+#play-btn.playing {{ background: #1e3c6e; border-color: #1e3c6e; color: #fff; }}
+.nav-link {{ color: #1e3c6e; text-decoration: none; font-size: 0.81em; margin-left: auto; font-weight: 500; }}
 .nav-link:hover {{ text-decoration: underline; }}
 .pill-row {{ display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 4px; align-items: center; }}
-.pill-label {{ font-size: 0.75em; color: #aaa; margin-right: 4px; min-width: 3em; }}
-.pill {{ background: #2a2a4e; border: 1px solid #555; color: #c8b89a; padding: 2px 8px; cursor: pointer; border-radius: 12px; font-size: 0.78em; }}
-.pill:hover {{ background: #3a3a6e; }}
-.pill.active {{ background: #8b1a1a; border-color: #cc4444; color: #fff; }}
-#lit-toggle {{ background: #2a4a2a; border: 1px solid #555; color: #a8d8a8; padding: 2px 10px; cursor: pointer; border-radius: 12px; font-size: 0.78em; }}
-#lit-toggle.active {{ background: #1a6a1a; border-color: #44cc44; color: #fff; }}
+.pill-label {{ font-size: 0.69em; color: #9c9890; margin-right: 4px; min-width: 3em; font-weight: 500; }}
+.pill {{ background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-size: 0.69em; font-weight: 500; }}
+.pill:hover {{ background: #ece8e0; color: #1a1816; }}
+.pill.active {{ background: #1e3c6e; border-color: #1e3c6e; color: #fff; }}
+#lit-toggle {{ background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 10px; cursor: pointer; border-radius: 3px; font-size: 0.69em; font-weight: 500; }}
+#lit-toggle.active {{ background: #1a7d4a; border-color: #1a7d4a; color: #fff; }}
 #main {{ display: flex; flex: 1; overflow: hidden; }}
 #map {{ flex: 1; }}
-#panel {{ width: 340px; flex-shrink: 0; background: #faf7f2; border-left: 1px solid #ddd; overflow-y: auto; display: flex; flex-direction: column; }}
-#panel-header {{ display: flex; align-items: center; background: #2c2c2c; color: #e8e0d0; padding: 10px 14px; font-size: 0.85em; letter-spacing: 0.08em; flex-shrink: 0; }}
+#panel {{ width: 340px; flex-shrink: 0; background: #ffffff; border-left: 1px solid #d8d4cc; overflow-y: auto; display: flex; flex-direction: column; }}
+#panel-header {{ display: flex; align-items: center; background: #f8f6f2; border-bottom: 1px solid #ece8e0; color: #1a1816; padding: 8px 14px; font-size: 0.69em; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; flex-shrink: 0; }}
 #panel-title {{ flex: 1; }}
 #panel-body {{ padding: 10px; flex: 1; }}
 .event-card {{ background: #fff; border: 1px solid #e0d8d0; border-radius: 4px; padding: 10px 12px; margin-bottom: 8px; }}
@@ -266,19 +266,19 @@ body {{ font-family: 'Georgia', serif; background: #f9f6f0; color: #2c2c2c; disp
 .src-poetry     {{ background: #ede0f5; color: #3a1a5c; }}
 .src-letters    {{ background: #e0f5f0; color: #1a5c4a; }}
 .no-events {{ color: #999; font-style: italic; font-size: 0.85em; padding: 8px 0; }}
-.sense-pill {{ background: #1e3a2a; border: 1px solid #555; color: #a8c8a8; padding: 2px 8px; cursor: pointer; border-radius: 12px; font-size: 0.78em; }}
-.sense-pill:hover {{ background: #2a4a3a; }}
-.btype-pill {{ background: #1a1a2e; border: 1px solid; padding: 2px 8px; cursor: pointer; border-radius: 12px; font-size: 0.76em; opacity: 0.75; transition: opacity 0.15s, background 0.15s; }}
+.sense-pill {{ background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-size: 0.69em; font-weight: 500; }}
+.sense-pill:hover {{ background: #ece8e0; color: #1a1816; }}
+.btype-pill {{ background: #f4f1eb; border: 1px solid; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-size: 0.69em; font-weight: 500; opacity: 0.55; transition: opacity 0.15s, background 0.15s; }}
 .btype-pill:hover {{ opacity: 1; }}
-.btype-pill.active {{ background: rgba(255,255,255,0.12); opacity: 1; font-weight: bold; }}
-.particle-btn {{ background: #1a1a2e; border: 1px solid #555; color: #c8b89a; padding: 2px 8px;
-                 cursor: pointer; border-radius: 12px; font-size: 0.78em; opacity: 0.75; }}
+.btype-pill.active {{ background: #fff; opacity: 1; font-weight: 600; }}
+.particle-btn {{ background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 8px;
+                 cursor: pointer; border-radius: 3px; font-size: 0.69em; font-weight: 500; opacity: 0.75; }}
 .particle-btn:hover {{ opacity: 1; }}
-.particle-btn.active {{ background: rgba(255,255,255,0.12); border-color: #aaa; color: #fff;
-                        opacity: 1; font-weight: bold; }}
-.sense-pill[data-sense="smell"].active {{ background: #5c4a10; border-color: #c89230; color: #fff; }}
+.particle-btn.active {{ background: #1e3c6e; border-color: #1e3c6e; color: #fff;
+                        opacity: 1; font-weight: 600; }}
+.sense-pill[data-sense="smell"].active {{ background: #c47a1e; border-color: #c47a1e; color: #fff; }}
 .sense-pill[data-sense="noise"].active {{ background: #10305c; border-color: #3a7acc; color: #fff; }}
-.sense-pill[data-sense="crowd"].active {{ background: #5c1010; border-color: #cc3030; color: #fff; }}
+.sense-pill[data-sense="crowd"].active {{ background: #b02a1a; border-color: #b02a1a; color: #fff; }}
 .sense-pill[data-sense="visual"].active {{ background: #10401a; border-color: #30cc50; color: #fff; }}
 .prose-summary {{ background: #f5efe4; border-left: 3px solid #8b6914; padding: 8px 12px; margin-bottom: 10px; font-size: 0.83em; line-height: 1.5; color: #3a2a08; border-radius: 0 4px 4px 0; }}
 .season-chart {{ display: flex; gap: 2px; margin: 6px 0 2px; }}
@@ -286,25 +286,25 @@ body {{ font-family: 'Georgia', serif; background: #f9f6f0; color: #2c2c2c; disp
 .season-active {{ background: #8b6914; }}
 .season-inactive {{ background: #e0d8cc; }}
 .season-bar:hover {{ opacity: 0.7; }}
-#milestone-label {{ font-size: 0.7em; color: #c8a060; margin-left: 6px; font-style: italic; white-space: nowrap; }}
-.speed-btn {{ background: #2a2a4e; border: 1px solid #555; color: #c8b89a; padding: 1px 5px; cursor: pointer; border-radius: 3px; font-size: 0.72em; }}
-.speed-btn:hover {{ background: #3a3a6e; }}
-.speed-btn.active {{ background: #1a4a2a; border-color: #44aa55; color: #aaffaa; }}
-#clear-btn {{ background: none; border: 1px solid #666; color: #a08870; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-size: 0.78em; }}
-#clear-btn:hover {{ color: #e8d0b0; border-color: #888; }}
-#back-btn {{ background: none; border: none; color: #c8a870; font-size: 0.8em; cursor: pointer; padding: 0 8px 0 0; flex-shrink: 0; }}
-#back-btn:hover {{ color: #fff; }}
+#milestone-label {{ font-size: 0.69em; color: #c47a1e; margin-left: 6px; font-style: italic; white-space: nowrap; font-weight: 500; }}
+.speed-btn {{ background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 1px 5px; cursor: pointer; border-radius: 3px; font-size: 0.69em; font-weight: 500; }}
+.speed-btn:hover {{ background: #ece8e0; color: #1a1816; }}
+.speed-btn.active {{ background: #edf2f8; border-color: #2563a8; color: #1e3c6e; font-weight: 600; }}
+#clear-btn {{ background: none; border: 1px solid #d8d4cc; color: #9c9890; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-size: 0.69em; font-weight: 500; }}
+#clear-btn:hover {{ color: #1a1816; border-color: #9c9890; }}
+#back-btn {{ background: none; border: none; color: #1e3c6e; font-size: 0.81em; cursor: pointer; padding: 0 8px 0 0; flex-shrink: 0; }}
+#back-btn:hover {{ color: #1a1816; }}
 /* ── Environmental indicators ── */
 #env-bar {{ display: flex; align-items: center; gap: 14px; padding: 3px 0 2px; flex-wrap: wrap; }}
-.env-gauge {{ display: flex; align-items: center; gap: 5px; font-size: 0.75em; color: #a8a090; }}
-.env-gauge .env-label {{ color: #888; }}
-.temp-badge {{ background: #1a2a3a; border: 1px solid #3a5a7a; color: #78b0d8; padding: 1px 7px; border-radius: 3px; font-size: 0.82em; font-family: monospace; min-width: 4.5em; text-align: center; transition: background 0.3s, color 0.3s; }}
-.temp-badge.cold  {{ background: #0e2040; border-color: #4a88c0; color: #a8d8ff; }}
+.env-gauge {{ display: flex; align-items: center; gap: 5px; font-size: 0.69em; color: #9c9890; font-weight: 500; }}
+.env-gauge .env-label {{ color: #9c9890; }}
+.temp-badge {{ background: #edf2f8; border: 1px solid #c0d0e4; color: #1e3c6e; padding: 1px 7px; border-radius: 3px; font-size: 0.875em; font-family: monospace; min-width: 4.5em; text-align: center; transition: background 0.3s, color 0.3s; }}
+.temp-badge.cold  {{ background: #ddeeff; border-color: #7ab0d8; color: #1a3c70; }}
 .temp-badge.frost {{ background: #081828; border-color: #80c0f8; color: #c8eeff; font-weight: bold; }}
-.mort-badge {{ background: #2a1010; border: 1px solid #6a2020; color: #e09080; padding: 1px 7px; border-radius: 3px; font-size: 0.82em; font-family: monospace; min-width: 5em; text-align: center; }}
-.smoke-gauge {{ display: flex; align-items: center; gap: 5px; font-size: 0.75em; color: #a89060; }}
-.smoke-bar-track {{ width: 50px; height: 5px; background: #333; border-radius: 2px; }}
-.smoke-bar-fill {{ height: 5px; background: linear-gradient(to right, #c8a050, #8b6020); border-radius: 2px; transition: width 0.4s; }}
+.mort-badge {{ background: #fef0ee; border: 1px solid #f0c0b8; color: #b02a1a; padding: 1px 7px; border-radius: 3px; font-size: 0.875em; font-family: monospace; min-width: 5em; text-align: center; }}
+.smoke-gauge {{ display: flex; align-items: center; gap: 5px; font-size: 0.69em; color: #9c9890; font-weight: 500; }}
+.smoke-bar-track {{ width: 50px; height: 4px; background: #ece8e0; border-radius: 2px; }}
+.smoke-bar-fill {{ height: 4px; background: linear-gradient(to right, #c8a050, #8b5a20); border-radius: 2px; transition: width 0.4s; }}
 #tier-toggle {{ background: #1a2a3a; border: 1px solid #444; color: #8090a8; padding: 1px 8px; cursor: pointer; border-radius: 12px; font-size: 0.75em; }}
 #tier-toggle:hover {{ background: #253545; }}
 #tier-toggle.active {{ background: #1a3a5a; border-color: #4488cc; color: #aaddff; }}
@@ -338,7 +338,7 @@ body {{ font-family: 'Georgia', serif; background: #f9f6f0; color: #2c2c2c; disp
       <button class="step-btn" onclick="stepYear(10)" title="+10 years">&#8594;</button>
     </div>
     <button id="clear-btn" onclick="clearFilters()" title="Clear all filters">&#215; Clear</button>
-    <button id="automap-btn" onclick="enableAutoBasemap()" title="Auto-switch base map to match year" style="background:#2a2a4e;border:1px solid #555;color:#e8e0d0;padding:2px 8px;cursor:pointer;border-radius:3px;font-size:0.8em;">Auto map</button>
+    <button id="automap-btn" onclick="enableAutoBasemap()" title="Auto-switch base map to match year" style="background:#f4f1eb;border:1px solid #d8d4cc;color:#5c5850;padding:2px 8px;cursor:pointer;border-radius:3px;font-size:0.69em;font-weight:500;">Auto map</button>
     <a class="nav-link" href="venue_explorer.html">Browse evidence &#8594;</a>
   </div>
   <div class="pill-row">
@@ -1556,11 +1556,11 @@ const particles = [];
 
 // Per-modality physics + visual profiles
 const MODALITY_PROFILE = {{
-    smoke:  {{ r: 140, g: 120, b:  80, radius: 2.5, speed: 0.6, maxAge: 500, rise: -0.15, maxAlpha: 0.5 }},
-    smell:  {{ r: 180, g: 130, b:  40, radius: 1.2, speed: 0.3, maxAge: 600, rise:  0,    maxAlpha: 0.6 }},
-    noise:  {{ r:  60, g: 120, b: 200, radius: 1.0, speed: 1.8, maxAge: 150, rise:  0,    maxAlpha: 0.8 }},
-    crowd:  {{ r: 180, g:  60, b:  60, radius: 1.8, speed: 0.4, maxAge: 300, rise:  0,    maxAlpha: 0.7 }},
-    visual: {{ r:  60, g: 160, b:  80, radius: 1.0, speed: 0.5, maxAge: 250, rise:  0,    maxAlpha: 0.5 }},
+    smoke:  {{ r:  70, g:  70, b:  95, radius: 1.8, speed: 1.2, maxAge: 450, rise: -0.015, maxAlpha: 0.55 }},
+    smell:  {{ r: 200, g: 140, b:  30, radius: 1.1, speed: 0.5, maxAge: 600, rise:  0,     maxAlpha: 0.65 }},
+    noise:  {{ r:  30, g: 100, b: 230, radius: 0.9, speed: 2.8, maxAge: 150, rise:  0,     maxAlpha: 0.9  }},
+    crowd:  {{ r: 210, g:  50, b:  50, radius: 1.6, speed: 0.7, maxAge: 280, rise:  0,     maxAlpha: 0.75 }},
+    visual: {{ r:  40, g: 170, b:  90, radius: 0.9, speed: 0.6, maxAge: 230, rise:  0,     maxAlpha: 0.55 }},
 }};
 
 function spawnParticle() {{
@@ -1652,7 +1652,7 @@ function particleFrame() {{
     // Fade existing pixels toward transparent (not black) to create motion trails
     // destination-out erases canvas pixels proportionally, preserving map underneath
     pCtx.globalCompositeOperation = 'destination-out';
-    pCtx.fillStyle = 'rgba(0,0,0,0.15)';
+    pCtx.fillStyle = 'rgba(0,0,0,0.06)';
     pCtx.fillRect(0, 0, pCanvas.width, pCanvas.height);
     pCtx.globalCompositeOperation = 'source-over';
 
@@ -1728,15 +1728,22 @@ function particleFrame() {{
         }}
         alpha = Math.max(0, Math.min(1, alpha)) * (prof.maxAlpha || 0.7);
 
-        // Smoke dissipation: particles start large and shrink with age
-        const drawRadius = p.modality === 'smoke'
-            ? (p.radius || 2.5) * (1 + 0.5 * (1 - t))
-            : (p.radius || 1.5);
-
+        // Draw as velocity-aligned line segment — tail direction shows propagation path
+        const drawRadius = prof.radius || 1.2;
+        const spd = Math.hypot(p.vx, p.vy);
+        pCtx.lineWidth = drawRadius;
+        pCtx.lineCap = 'round';
+        pCtx.strokeStyle = `rgba(${{p.r}},${{p.g}},${{p.b}},${{alpha.toFixed(2)}})`;
         pCtx.beginPath();
-        pCtx.arc(p.px, p.py, drawRadius, 0, Math.PI * 2);
-        pCtx.fillStyle = `rgba(${{p.r}},${{p.g}},${{p.b}},${{alpha.toFixed(2)}})`;
-        pCtx.fill();
+        if (spd > 0.05) {{
+            pCtx.moveTo(p.px - p.vx * 3, p.py - p.vy * 3);
+            pCtx.lineTo(p.px, p.py);
+            pCtx.stroke();
+        }} else {{
+            pCtx.arc(p.px, p.py, drawRadius * 0.5, 0, Math.PI * 2);
+            pCtx.fillStyle = `rgba(${{p.r}},${{p.g}},${{p.b}},${{alpha.toFixed(2)}})`;
+            pCtx.fill();
+        }}
     }}
     particleRaf = requestAnimationFrame(particleFrame);
 }}
@@ -1833,7 +1840,6 @@ function _buildSmokefield() {{
     }}
 
     // Particle count: base 600 + smoke-scaled bonus (up to 1400 total)
-    const year = parseInt(document.getElementById('year-slider').value);
     const decade = Math.floor(year / 10) * 10;
     const smokeRow = SMOKE_DATA_ENV.find(s => s.decade_start === decade);
     const so2_index = smokeRow ? smokeRow.so2_index : 0;
@@ -1855,7 +1861,7 @@ function _buildSmokefield() {{
             zoneIndMult = 0.7 + avgInd * 0.9;  // range 0.7x – 1.6x
         }}
     }}
-    const count = Math.round(600 + so2_index * 800);
+    const count = Math.round(250 + so2_index * 400);
     const scaledCount = Math.round(count * zoneIndMult);
 
     // 70% smoke (grey-brown, large, rising) + 30% smell (amber, small, lingering)
@@ -1978,7 +1984,7 @@ function _buildFlowField() {{
     }});
     const grandTotal = activeModals.reduce((s, m) => s + modalTotals[m], 0);
 
-    const count = 900;
+    const count = 600;
     const safeCount = Math.min(count, MAX_P);
     let offset = 0;
     activeModals.forEach(m => {{
