@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Gordon Riots 1780 — Pulse Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Crimson+Text:ital,wght@0,400;1,400&display=swap"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: #07090e; color: #ccc; font-family: 'Crimson Text', Georgia, serif; overflow: hidden; }
+
+  #map { position: absolute; inset: 0; }
+  #pulse-canvas { position: absolute; inset: 0; pointer-events: none; z-index: 600; }
+
+  /* ── HUD: two-row header ── */
+  #hud {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 700;
+    background: linear-gradient(180deg, rgba(4,6,12,0.98) 55%, rgba(4,6,12,0.6) 80%, transparent);
+    padding-bottom: 24px;
+  }
+  .hud-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 11px 18px;
+  }
+  .hud-row + .hud-row {
+    padding-top: 5px; padding-bottom: 8px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+
+  #hud h1 {
+    font-family: 'Cinzel', serif; font-weight: 400; font-size: 0.9em;
+    color: #b89040; letter-spacing: 0.12em; text-transform: uppercase;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  #hud h1 span { color: #e03010; }
+
+  .hud-sep { width: 1px; height: 14px; background: rgba(255,255,255,0.08); flex-shrink: 0; }
+
+  /* Day display */
+  #day-display {
+    font-family: 'Cinzel', serif; font-size: 0.72em; letter-spacing: 0.07em;
+    color: #b89040; min-width: 162px; flex-shrink: 0;
+  }
+
+  /* Day pills */
+  .dp {
+    font-family: 'Cinzel', serif; font-size: 0.6em; letter-spacing: 0.04em;
+    padding: 3px 9px; border: 1px solid rgba(255,255,255,0.08);
+    color: #607080; background: transparent; cursor: pointer; transition: all 0.12s;
+    white-space: nowrap;
+  }
+  .dp.active { background: #601408; border-color: #c03010; color: #f0a040; }
+  .dp:hover:not(.active) { border-color: rgba(255,255,255,0.2); color: #9ab0c0; }
+
+  /* Play controls */
+  #controls { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+  .ctrl-btn {
+    font-family: 'Cinzel', serif; font-size: 0.6em; letter-spacing: 0.04em;
+    background: rgba(10,14,24,0.9); border: 1px solid rgba(255,255,255,0.1);
+    color: #607080; padding: 4px 12px; cursor: pointer; transition: all 0.12s;
+    white-space: nowrap;
+  }
+  .ctrl-btn:hover { border-color: rgba(255,255,255,0.3); color: #90b0c8; }
+  .ctrl-btn.active { background: #601408; border-color: #c03010; color: #f0a040; }
+  .ctrl-btn.speed-active { border-color: #404860; color: #8090a8; background: rgba(20,28,50,0.9); }
+
+  /* ── Bottom info panel ── */
+  #info-panel {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 700;
+    background: linear-gradient(0deg, rgba(4,6,12,0.97) 65%, transparent);
+    padding: 32px 18px 14px;
+    display: flex; gap: 16px; align-items: flex-end;
+  }
+
+  /* Horizontal-scroll chip row */
+  #active-events {
+    flex: 1; min-width: 0;
+    display: flex; gap: 8px; align-items: stretch;
+    overflow-x: auto; padding-bottom: 2px;
+  }
+  #active-events::-webkit-scrollbar { height: 2px; }
+  #active-events::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); }
+
+  .event-chip {
+    flex-shrink: 0; width: 220px;
+    padding: 8px 10px 9px; border-left: 2px solid transparent;
+    background: rgba(8,12,22,0.92);
+    animation: chipIn 0.35s ease-out;
+  }
+  @keyframes chipIn {
+    from { opacity: 0; transform: translateX(-8px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  .chip-title {
+    font-family: 'Cinzel', serif; font-size: 0.68em; letter-spacing: 0.02em;
+    color: #d8b858; margin-bottom: 4px; line-height: 1.3;
+  }
+  .chip-desc { font-size: 0.82em; color: #7a6a58; line-height: 1.45; }
+
+  /* Testimony */
+  #testimony-panel {
+    width: 270px; flex-shrink: 0;
+    padding: 10px 13px; background: rgba(12,9,4,0.9);
+    border-left: 2px solid #a07828;
+    animation: tmIn 0.5s ease-out;
+    display: none;
+  }
+  @keyframes tmIn { from { opacity: 0; } to { opacity: 1; } }
+  .tm-witness {
+    font-family: 'Cinzel', serif; font-size: 0.65em; letter-spacing: 0.04em;
+    color: #c09040; margin-bottom: 4px;
+  }
+  .tm-text { font-size: 0.85em; font-style: italic; color: #9a7a50; line-height: 1.55; }
+
+  /* ── Legend ── */
+  #legend {
+    position: absolute; right: 14px; top: 88px; z-index: 700;
+    background: rgba(4,6,12,0.88); border: 1px solid rgba(255,255,255,0.07);
+    padding: 10px 13px; font-size: 0.65em;
+    display: flex; flex-direction: column; gap: 5px;
+  }
+  #legend-title {
+    font-family: 'Cinzel', serif; font-size: 0.85em; letter-spacing: 0.08em;
+    color: #5a6070; text-transform: uppercase; margin-bottom: 4px;
+    border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 5px;
+  }
+  .leg { display: flex; align-items: center; gap: 7px; color: #5a6878; }
+  .leg-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+
+  /* Leaflet */
+  .leaflet-control-attribution { background: rgba(4,6,12,0.75) !important; color: #2a3040 !important; font-size: 0.65em !important; }
+  .leaflet-control-attribution a { color: #3a4858 !important; }
+  .leaflet-bar a { background: rgba(6,9,18,0.9) !important; color: #5a7080 !important; border-color: rgba(255,255,255,0.1) !important; border-radius: 0 !important; }
+  .leaflet-bar a:hover { color: #90b0c8 !important; }
+  .leaflet-bar { box-shadow: none !important; }
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+<canvas id="pulse-canvas"></canvas>
+
+<!-- HUD -->
+<div id="hud">
+  <!-- Row 1: title + day label + controls -->
+  <div class="hud-row">
+    <h1>Gordon Riots <span>1780</span></h1>
+    <div class="hud-sep"></div>
+    <div id="day-display">All days, June 1780</div>
+    <div id="controls">
+      <button class="ctrl-btn" id="play-btn" onclick="togglePlay()">&#9654;&ensp;Play</button>
+      <button class="ctrl-btn" onclick="stepDay(-1)">&#9664;</button>
+      <button class="ctrl-btn" onclick="stepDay(+1)">&#9654;</button>
+      <div class="hud-sep"></div>
+      <button class="ctrl-btn speed-active" id="spd-slow" onclick="setSpeed(3500)">Slow</button>
+      <button class="ctrl-btn" id="spd-med"  onclick="setSpeed(2200)">Med</button>
+      <button class="ctrl-btn" id="spd-fast" onclick="setSpeed(1000)">Fast</button>
+      <div class="hud-sep"></div>
+      <a href="gordon_riots.html" style="font-family:'Cinzel',serif;font-size:0.6em;letter-spacing:0.04em;color:#3a4858;text-decoration:none;white-space:nowrap" onmouseover="this.style.color='#7090a8'" onmouseout="this.style.color='#3a4858'">&#8592; Timeline</a>
+    </div>
+  </div>
+  <!-- Row 2: day pills -->
+  <div class="hud-row" style="gap:5px" id="day-pills">
+    <span class="dp active" data-day="all" onclick="jumpDay('all')">All</span>
+    <span class="dp" data-day="1780-06-02" onclick="jumpDay('1780-06-02')">2 Jun</span>
+    <span class="dp" data-day="1780-06-03" onclick="jumpDay('1780-06-03')">3 Jun</span>
+    <span class="dp" data-day="1780-06-04" onclick="jumpDay('1780-06-04')">4 Jun</span>
+    <span class="dp" data-day="1780-06-05" onclick="jumpDay('1780-06-05')">5 Jun</span>
+    <span class="dp" data-day="1780-06-06" onclick="jumpDay('1780-06-06')">6 Jun</span>
+    <span class="dp" data-day="1780-06-07" onclick="jumpDay('1780-06-07')">7 Jun</span>
+    <span class="dp" data-day="1780-06-08" onclick="jumpDay('1780-06-08')">8 Jun</span>
+    <span class="dp" data-day="1780-06-09" onclick="jumpDay('1780-06-09')">9 Jun</span>
+  </div>
+</div>
+
+<!-- Legend -->
+<div id="legend">
+  <div id="legend-title">Event type</div>
+  <div class="leg"><div class="leg-dot" style="background:#4a90d9"></div>Assembly</div>
+  <div class="leg"><div class="leg-dot" style="background:#9b59b6"></div>March</div>
+  <div class="leg"><div class="leg-dot" style="background:#27ae60"></div>Petition</div>
+  <div class="leg"><div class="leg-dot" style="background:#e67e22"></div>Attack</div>
+  <div class="leg"><div class="leg-dot" style="background:#ff4422"></div>Fire</div>
+  <div class="leg"><div class="leg-dot" style="background:#cc44ff"></div>Prison break</div>
+  <div class="leg"><div class="leg-dot" style="background:#4488aa"></div>Military</div>
+  <div class="leg"><div class="leg-dot" style="background:#ff2244"></div>Destruction</div>
+  <div class="leg"><div class="leg-dot" style="background:#c8a060;border-radius:2px"></div>Testimony</div>
+</div>
+
+<!-- Info panel -->
+<div id="info-panel">
+  <div id="active-events"></div>
+  <div id="testimony-panel"></div>
+</div>
+
+<script>
+// ── Data ──────────────────────────────────────────────────────────────────────
+const EVENTS = [{"id": "GR001", "date": "1780-06-02", "lat": 51.4992, "lon": -0.1009, "type": "assembly", "title": "St George's Fields assembly", "desc": "50,000-60,000 gather under Lord George Gordon's 'No Popery' banner. Four columns set out for Westminster."}, {"id": "GR002", "date": "1780-06-02", "lat": 51.5002, "lon": -0.1225, "type": "march", "title": "March across Westminster Bridge", "desc": "The columns converge and process toward Parliament, singing hymns, waving blue cockades."}, {"id": "GR003", "date": "1780-06-02", "lat": 51.4994, "lon": -0.1273, "type": "petition", "title": "Petition delivered at Parliament", "desc": "Gordon presents 120,000-signature petition. Motion to consider repeal defeated. Crowd grows restive."}, {"id": "GR004", "date": "1780-06-02", "lat": 51.5007, "lon": -0.1246, "type": "attack", "title": "MPs attacked outside Parliament", "desc": "Peers dragged from carriages, wigs torn off, coaches smashed. Archbishop of York's robes ripped."}, {"id": "GR005", "date": "1780-06-02", "lat": 51.5148, "lon": -0.1195, "type": "attack", "title": "Sardinian Chapel sacked", "desc": "London's oldest Catholic chapel (1648) gutted. Furnishings burned in the street. First major destruction."}, {"id": "GR006", "date": "1780-06-02", "lat": 51.5137, "lon": -0.1381, "type": "attack", "title": "Bavarian Chapel sacked", "desc": "Warwick Street embassy chapel stripped and burned. Both attacks show signs of advance planning."}, {"id": "GR007", "date": "1780-06-03", "lat": 51.5201, "lon": -0.0923, "type": "attack", "title": "Moorfields chapels burned", "desc": "Catholic chapel in Ropemaker's Alley attacked. Irish immigrant homes targeted. Magistrates refuse Riot Act."}, {"id": "GR008", "date": "1780-06-03", "lat": 51.5215, "lon": -0.0727, "type": "attack", "title": "Spitalfields: Irish weavers attacked", "desc": "Irish Catholic weavers' homes attacked. Economic resentment blends with anti-Catholic sentiment."}, {"id": "GR009", "date": "1780-06-04", "lat": 51.5203, "lon": -0.1221, "type": "destruction", "title": "Lord Mansfield's house sacked", "desc": "Lord Chief Justice's Bloomsbury Square house destroyed. Irreplaceable legal manuscripts burned."}, {"id": "GR010", "date": "1780-06-04", "lat": 51.4994, "lon": -0.1273, "type": "military_clash", "title": "Riot Act read; Horse Guards deployed", "desc": "Riot Act finally read. Troops disperse crowd near Westminster but cannot restore city-wide order."}, {"id": "GR011", "date": "1780-06-05", "lat": 51.5007, "lon": -0.1246, "type": "petition", "title": "Gordon again at Commons; relative calm", "desc": "Gordon presses Parliament. A deceptive calm — rioters regrouping for coordinated prison attacks."}, {"id": "GR012", "date": "1780-06-06", "lat": 51.517, "lon": -0.1022, "type": "prison_break", "title": "NEWGATE PRISON STORMED AND BURNED", "desc": "Thousands attack Newgate. Keeper driven off. Roof set alight. The great door falls in the heat. Prisoners escape. The most shocking event of the riots."}, {"id": "GR013", "date": "1780-06-06", "lat": 51.5153, "lon": -0.1044, "type": "prison_break", "title": "Fleet Prison broken open", "desc": "Debtors' gaol on Farringdon Street opened. Hundreds of prisoners freed. Buildings partially burned."}, {"id": "GR014", "date": "1780-06-06", "lat": 51.4974, "lon": -0.1006, "type": "prison_break", "title": "King's Bench Prison broken open", "desc": "Southwark debtors' gaol attacked simultaneously. Coordinated attacks across the river suggest planning."}, {"id": "GR015", "date": "1780-06-06", "lat": 51.525, "lon": -0.1086, "type": "prison_break", "title": "Clerkenwell House of Correction", "desc": "Bridewell attacked, prisoners freed. Narrow lanes hamper troop movement."}, {"id": "GR016", "date": "1780-06-06", "lat": 51.5256, "lon": -0.1074, "type": "prison_break", "title": "New Prison Clerkenwell opened", "desc": "Second Clerkenwell prison attacked. By dawn June 7, six prisons have been opened or burned."}, {"id": "GR017", "date": "1780-06-06", "lat": 51.5033, "lon": -0.0923, "type": "prison_break", "title": "Borough Clink burned", "desc": "England's oldest prison attacked and burned. It is never rebuilt."}, {"id": "GR018", "date": "1780-06-06", "lat": 51.5183, "lon": -0.1128, "type": "fire", "title": "LANGDALE'S DISTILLERY ABLAZE", "desc": "Holborn Hill gin distillery set on fire. Burning spirit runs in the gutters. Many drink from the streams and die. Glow visible for miles."}, {"id": "GR019", "date": "1780-06-06", "lat": 51.5181, "lon": -0.1443, "type": "destruction", "title": "Mansfield's Cavendish Square house threatened", "desc": "Second Mansfield property threatened. Troops deployed. Kenwood saved by landlord who plied crowd with drink."}, {"id": "GR020", "date": "1780-06-06", "lat": 51.5115, "lon": -0.1297, "type": "destruction", "title": "Justice Hyde's house attacked", "desc": "Judges targeted to prevent reprisals. Frances Burney watches the glow from St Martin's Street."}, {"id": "GR021", "date": "1780-06-07", "lat": 51.515, "lon": -0.09, "type": "military_clash", "title": "Bank of England besieged; Wilkes defends it", "desc": "John Wilkes — once the mob's hero — commands volunteers defending the Bank, firing on the crowd."}, {"id": "GR022", "date": "1780-06-07", "lat": 51.5078, "lon": -0.1038, "type": "military_clash", "title": "Troops fire at Blackfriars Bridge", "desc": "King authorises troops to fire without Riot Act. First coordinated suppression."}, {"id": "GR023", "date": "1780-06-07", "lat": 51.5058, "lon": -0.0876, "type": "military_clash", "title": "Military action near London Bridge", "desc": "Troops clash with rioters. By morning, military occupies key positions across the city."}, {"id": "GR024", "date": "1780-06-07", "lat": 51.4992, "lon": -0.1009, "type": "military_clash", "title": "Cavalry charge at St George's Fields", "desc": "Cavalry charge the assembly point where the riots began. By nightfall: 20,000 troops deployed."}, {"id": "GR025", "date": "1780-06-07", "lat": 51.5014, "lon": -0.1419, "type": "military_clash", "title": "King orders fire without Riot Act", "desc": "George III personally authorises commanders to fire — a constitutionally unprecedented move."}, {"id": "GR026", "date": "1780-06-07", "lat": 51.5183, "lon": -0.1128, "type": "aftermath", "title": "Holborn ruins guarded; fires die", "desc": "Soldiers occupy Langdale's ruins. Bodies of those who drank burning spirits removed."}, {"id": "GR027", "date": "1780-06-08", "lat": 51.5081, "lon": -0.0759, "type": "execution", "title": "Lord George Gordon arrested", "desc": "Gordon sent to the Tower on high treason. Acquitted 1781. Later converts to Judaism."}, {"id": "GR028", "date": "1780-06-09", "lat": 51.5074, "lon": -0.1278, "type": "aftermath", "title": "Order restored — 285 dead", "desc": "285 killed, 200 wounded, 450 arrested, 25 hanged. No repeal. Gordon's movement collapses."}];
+const TESTIMONIES = [{"id": "T001", "date": "1780-06-02", "witness": "Frances Burney", "location": "St Martin's Street", "lat": 51.5115, "lon": -0.1297, "text": "We are all in the utmost alarm. The blue cockades are everywhere. Kitty counted twenty men pass the window in ten minutes, crying 'No Popery.'"}, {"id": "T002", "date": "1780-06-06", "witness": "Frances Burney", "location": "St Martin's Street", "lat": 51.5115, "lon": -0.1297, "text": "The sky is all one red glow. Newgate is burning. The smell of smoke is overwhelming. Papa sat up all night with a poker."}, {"id": "T003", "date": "1780-06-07", "witness": "Frances Burney", "location": "St Martin's Street", "lat": 51.5115, "lon": -0.1297, "text": "The soldiers are at last in the streets. The worst seems to be over. London looks as if it has been through a siege."}, {"id": "T004", "date": "1780-06-06", "witness": "Dr Charles Burney", "location": "St Martin's Street", "lat": 51.5115, "lon": -0.1297, "text": "We can see the reflection of the Holborn fire on the clouds above the rooftops. A terrible night for England."}, {"id": "T005", "date": "1780-06-06", "witness": "Ignatius Sancho", "location": "Charles Street, Westminster", "lat": 51.5013, "lon": -0.1339, "text": "At least a hundred thousand poor, miserable, ragged rabble, with blue cockades — the gutters run with spirit from Langdale's."}, {"id": "T006", "date": "1780-06-07", "witness": "Ignatius Sancho", "location": "Charles Street, Westminster", "lat": 51.5013, "lon": -0.1339, "text": "I, a Black man and a shopkeeper, went unmolested — perhaps the only advantage my colour ever gave me in this city."}, {"id": "T007", "date": "1780-06-07", "witness": "Horace Walpole", "location": "Twickenham", "lat": 51.4456, "lon": -0.3347, "text": "This surpasses all the horrors of the French religious wars. England has disgraced itself."}, {"id": "T008", "date": "1780-06-06", "witness": "Sir Nathaniel Wraxall", "location": "Central London", "lat": 51.5074, "lon": -0.1278, "text": "The great gates yielded to crowbars, the iron hinges shrieked, the flames burst from every window simultaneously."}];
+const MARCH_ROUTE = [[51.4992, -0.1009], [51.5, -0.106], [51.5002, -0.108], [51.5002, -0.1225], [51.501, -0.125], [51.4994, -0.1273]];
+const TYPE_META = {"assembly": {"color": "#4a90d9", "severity": 1.0}, "march": {"color": "#9b59b6", "severity": 0.8}, "petition": {"color": "#27ae60", "severity": 0.5}, "attack": {"color": "#e67e22", "severity": 1.4}, "fire": {"color": "#ff4422", "severity": 2.0}, "prison_break": {"color": "#cc44ff", "severity": 1.8}, "military_clash": {"color": "#4488aa", "severity": 1.3}, "destruction": {"color": "#ff2244", "severity": 1.6}, "execution": {"color": "#8899aa", "severity": 0.9}, "aftermath": {"color": "#556677", "severity": 0.6}};
+
+// ── Map ───────────────────────────────────────────────────────────────────────
+const map = L.map('map', {
+  center: [51.508, -0.108], zoom: 13,
+  zoomControl: false,
+  attributionControl: true,
+});
+L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+  attribution: '© OpenStreetMap © CartoDB',
+  subdomains: 'abcd', maxZoom: 19,
+}).addTo(map);
+
+// ── Canvas ────────────────────────────────────────────────────────────────────
+const canvas = document.getElementById('pulse-canvas');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', () => { resizeCanvas(); rebuildMarchSegments(); });
+map.on('moveend zoomend', rebuildMarchSegments);
+
+// ── State ─────────────────────────────────────────────────────────────────────
+const DAYS = ['all','1780-06-02','1780-06-03','1780-06-04','1780-06-05',
+              '1780-06-06','1780-06-07','1780-06-08','1780-06-09'];
+const DAY_LABELS = {
+  'all':'All days, June 1780',
+  '1780-06-02':'Monday 2 June 1780',
+  '1780-06-03':'Tuesday 3 June 1780',
+  '1780-06-04':'Wednesday 4 June 1780',
+  '1780-06-05':'Thursday 5 June 1780',
+  '1780-06-06':'Friday 6 June 1780',
+  '1780-06-07':'Saturday 7 June 1780',
+  '1780-06-08':'Sunday 8 June 1780',
+  '1780-06-09':'Monday 9 June 1780',
+};
+
+let currentDay = 'all';
+let isPlaying = false;
+let playTimer = null;
+let dayDurationMs = 2500;
+
+// Pulses: { x, y, color, startT, maxR, severity }
+const pulses = [];
+
+// Persistent nodes: { x, y, color, severity, label } — events that have fired
+const nodes = [];
+
+// March particles: { t [0..1], segIdx }
+const marchParticles = [];
+let marchSegs = [];          // pixel-space segments after projection
+let marchActive = false;
+let marchT = 0;              // auto-advance march playhead
+
+// ── Speed ─────────────────────────────────────────────────────────────────────
+function setSpeed(ms) {
+  dayDurationMs = ms;
+  document.querySelectorAll('#spd-slow,#spd-med,#spd-fast').forEach(b => b.classList.remove('speed-active'));
+  const id = ms >= 3000 ? 'spd-slow' : ms >= 1800 ? 'spd-med' : 'spd-fast';
+  document.getElementById(id).classList.add('speed-active');
+}
+
+// ── Leap and projection ───────────────────────────────────────────────────────
+function latLonToPx(lat, lon) {
+  const pt = map.latLngToContainerPoint([lat, lon]);
+  return [pt.x, pt.y];
+}
+
+function rebuildMarchSegments() {
+  marchSegs = [];
+  for (let i = 0; i < MARCH_ROUTE.length - 1; i++) {
+    const [ax, ay] = latLonToPx(MARCH_ROUTE[i][0], MARCH_ROUTE[i][1]);
+    const [bx, by] = latLonToPx(MARCH_ROUTE[i+1][0], MARCH_ROUTE[i+1][1]);
+    const len = Math.hypot(bx - ax, by - ay);
+    marchSegs.push({ ax, ay, bx, by, len });
+  }
+  // Reposition existing nodes and pulses when map moves
+  nodes.forEach(n => {
+    const [x, y] = latLonToPx(n.lat, n.lon);
+    n.x = x; n.y = y;
+  });
+  pulses.forEach(p => {
+    const [x, y] = latLonToPx(p.lat, p.lon);
+    p.x = x; p.y = y;
+  });
+}
+
+// ── Day selection ─────────────────────────────────────────────────────────────
+function jumpDay(day) {
+  currentDay = day;
+  document.querySelectorAll('.dp').forEach(p => p.classList.toggle('active', p.dataset.day === day));
+  document.getElementById('day-display').textContent = DAY_LABELS[day] || day;
+
+  // Rebuild nodes and pulses for this day / all days up to this day
+  nodes.length = 0;
+  pulses.length = 0;
+  marchParticles.length = 0;
+  marchActive = false;
+
+  const now = performance.now();
+
+  if (day === 'all') {
+    // Show all events as persistent nodes, no pulses
+    EVENTS.forEach(evt => addNode(evt));
+    updateInfoPanel('all');
+  } else {
+    // Show all events up to and including this day as nodes
+    const dayIdx = DAYS.indexOf(day);
+    EVENTS.forEach(evt => {
+      const eIdx = DAYS.indexOf(evt.date);
+      if (eIdx > 0 && eIdx <= dayIdx) {
+        if (evt.date === day) {
+          // Today's events: pulse in
+          addPulse(evt, now);
+        }
+        addNode(evt);
+      }
+    });
+
+    // March route active on June 2
+    if (day === '1780-06-02') {
+      marchActive = true;
+      spawnMarchParticles();
+    }
+
+    updateInfoPanel(day);
+  }
+}
+
+function addNode(evt) {
+  const meta = TYPE_META[evt.type] || { color: '#888', severity: 1 };
+  const [x, y] = latLonToPx(evt.lat, evt.lon);
+  nodes.push({ x, y, lat: evt.lat, lon: evt.lon, color: meta.color, severity: meta.severity, id: evt.id });
+}
+
+function addPulse(evt, t) {
+  const meta = TYPE_META[evt.type] || { color: '#888', severity: 1 };
+  const [x, y] = latLonToPx(evt.lat, evt.lon);
+  // Stagger pulses slightly so they don't all fire at once
+  const delay = Math.random() * 300;
+  pulses.push({ x, y, lat: evt.lat, lon: evt.lon, color: meta.color,
+                 startT: t + delay, maxR: 40 + meta.severity * 30,
+                 severity: meta.severity, duration: 1200 + meta.severity * 400 });
+  // Two extra rings for severe events
+  if (meta.severity >= 1.5) {
+    pulses.push({ x, y, lat: evt.lat, lon: evt.lon, color: meta.color,
+                   startT: t + delay + 300, maxR: 70 + meta.severity * 25,
+                   severity: meta.severity * 0.6, duration: 1600 });
+  }
+}
+
+// ── March particles ───────────────────────────────────────────────────────────
+function spawnMarchParticles() {
+  marchParticles.length = 0;
+  const totalLen = marchSegs.reduce((s, seg) => s + seg.len, 0);
+  const N = 40;
+  for (let i = 0; i < N; i++) {
+    marchParticles.push({ t: i / N });
+  }
+}
+
+function getMarchPx(t) {
+  const totalLen = marchSegs.reduce((s, seg) => s + seg.len, 0);
+  let target = ((t % 1) + 1) % 1 * totalLen;
+  for (const seg of marchSegs) {
+    if (target <= seg.len) {
+      const u = target / seg.len;
+      return [seg.ax + (seg.bx - seg.ax) * u, seg.ay + (seg.by - seg.ay) * u];
+    }
+    target -= seg.len;
+  }
+  const last = marchSegs[marchSegs.length - 1];
+  return [last.bx, last.by];
+}
+
+// ── Info panel ────────────────────────────────────────────────────────────────
+function updateInfoPanel(day) {
+  const ae = document.getElementById('active-events');
+  const tp = document.getElementById('testimony-panel');
+
+  // Remove old chips
+  while (ae.firstChild) ae.removeChild(ae.firstChild);
+
+  if (day === 'all') {
+    tp.style.display = 'none';
+    return;
+  }
+
+  // Show today's events as chips
+  const dayEvts = EVENTS.filter(e => e.date === day);
+  dayEvts.forEach(evt => {
+    const meta = TYPE_META[evt.type] || { color: '#888' };
+    const div = document.createElement('div');
+    div.className = 'event-chip';
+    div.style.borderLeftColor = meta.color;
+
+    const title = document.createElement('div');
+    title.className = 'chip-title';
+    title.textContent = evt.title;
+
+    const desc = document.createElement('div');
+    desc.className = 'chip-desc';
+    desc.textContent = evt.desc;
+
+    div.appendChild(title);
+    div.appendChild(desc);
+    ae.appendChild(div);
+  });
+
+  // Show first testimony for this day
+  const tm = TESTIMONIES.find(t => t.date === day);
+  if (tm) {
+    tp.style.display = '';
+
+    const witness = document.createElement('div');
+    witness.className = 'tm-witness';
+    witness.textContent = tm.witness + ' · ' + tm.location;
+
+    const text = document.createElement('div');
+    text.className = 'tm-text';
+    text.textContent = '“' + tm.text + '”';
+
+    while (tp.firstChild) tp.removeChild(tp.firstChild);
+    tp.appendChild(witness);
+    tp.appendChild(text);
+  } else {
+    tp.style.display = 'none';
+  }
+}
+
+// ── Auto-play ─────────────────────────────────────────────────────────────────
+function togglePlay() {
+  isPlaying = !isPlaying;
+  const btn = document.getElementById('play-btn');
+  btn.textContent = isPlaying ? '⏸ Pause' : '▶ Play';
+  btn.classList.toggle('active', isPlaying);
+  if (isPlaying) scheduleNext();
+  else { clearTimeout(playTimer); playTimer = null; }
+}
+
+function scheduleNext() {
+  if (!isPlaying) return;
+  playTimer = setTimeout(() => {
+    const dayIdx = DAYS.indexOf(currentDay);
+    const next = dayIdx >= DAYS.length - 1 ? 0 : dayIdx + 1;
+    jumpDay(DAYS[next]);
+    scheduleNext();
+  }, dayDurationMs);
+}
+
+function stepDay(dir) {
+  if (isPlaying) togglePlay();
+  const idx = DAYS.indexOf(currentDay);
+  jumpDay(DAYS[Math.max(0, Math.min(DAYS.length - 1, idx + dir))]);
+}
+
+// ── RAF loop ──────────────────────────────────────────────────────────────────
+let lastT = 0;
+function frame(now) {
+  requestAnimationFrame(frame);
+
+  const dt = Math.min(now - lastT, 50);
+  lastT = now;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Draw march route line
+  if (marchSegs.length && (currentDay === 'all' || currentDay === '1780-06-02')) {
+    ctx.save();
+    ctx.strokeStyle = 'rgba(155,89,182,0.35)';
+    ctx.lineWidth = 4;
+    ctx.setLineDash([8, 6]);
+    ctx.lineDashOffset = -(now * 0.04 % 14);
+    ctx.beginPath();
+    marchSegs.forEach((seg, i) => {
+      if (i === 0) ctx.moveTo(seg.ax, seg.ay); else ctx.lineTo(seg.ax, seg.ay);
+      ctx.lineTo(seg.bx, seg.by);
+    });
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  // Advance march particles
+  if (marchActive && marchSegs.length) {
+    marchT += dt * 0.00015;
+    marchParticles.forEach(p => {
+      p.t = (p.t + dt * 0.00008) % 1;
+      const [x, y] = getMarchPx(p.t);
+      const alpha = 0.5 + 0.5 * Math.sin(p.t * Math.PI * 2);
+      ctx.beginPath();
+      ctx.arc(x, y, 3, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(155,89,182,' + alpha.toFixed(2) + ')';
+      ctx.fill();
+    });
+  }
+
+  // Draw persistent nodes (dim glow for past events)
+  nodes.forEach(n => {
+    const r = 5 + n.severity * 2;
+    // Outer glow
+    const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 3);
+    grd.addColorStop(0, hexAlpha(n.color, 0.18));
+    grd.addColorStop(1, hexAlpha(n.color, 0));
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, r * 3, 0, Math.PI * 2);
+    ctx.fillStyle = grd;
+    ctx.fill();
+    // Core dot
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+    ctx.fillStyle = hexAlpha(n.color, 0.75);
+    ctx.fill();
+    // Pulse throb for current day's events (subtle, ongoing)
+    const throb = Math.sin(now * 0.004 + n.x) * 0.5 + 0.5;
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, r + throb * 3, 0, Math.PI * 2);
+    ctx.strokeStyle = hexAlpha(n.color, 0.3 * throb);
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+  });
+
+  // Draw pulse rings (expanding on event activation)
+  for (let i = pulses.length - 1; i >= 0; i--) {
+    const p = pulses[i];
+    const elapsed = now - p.startT;
+    if (elapsed < 0) continue;
+    const progress = elapsed / p.duration;
+    if (progress > 1) { pulses.splice(i, 1); continue; }
+
+    const eased = 1 - Math.pow(1 - progress, 2);  // ease-out
+    const r = eased * p.maxR;
+    const alpha = (1 - progress) * 0.7 * p.severity;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+    ctx.strokeStyle = hexAlpha(p.color, alpha);
+    ctx.lineWidth = 2.5 - progress * 1.5;
+    ctx.stroke();
+
+    // Inner fill that fades quickly
+    if (progress < 0.3) {
+      const fillAlpha = (0.3 - progress) / 0.3 * 0.2 * p.severity;
+      ctx.fillStyle = hexAlpha(p.color, fillAlpha);
+      ctx.fill();
+    }
+  }
+
+  // Testimony markers (amber squares)
+  const visibleTms = currentDay === 'all'
+    ? TESTIMONIES
+    : TESTIMONIES.filter(t => t.date <= currentDay);
+  const seenTm = new Set();
+  visibleTms.forEach(t => {
+    const key = t.lat + ',' + t.lon;
+    if (seenTm.has(key)) return;
+    seenTm.add(key);
+    const [x, y] = latLonToPx(t.lat, t.lon);
+    const throb = Math.sin(now * 0.002 + y) * 0.5 + 0.5;
+    ctx.save();
+    ctx.fillStyle = 'rgba(200,160,60,' + (0.6 + 0.3 * throb).toFixed(2) + ')';
+    ctx.fillRect(x - 5, y - 5, 10, 10);
+    ctx.strokeStyle = 'rgba(255,220,120,0.5)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(x - 5, y - 5, 10, 10);
+    ctx.restore();
+  });
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function hexAlpha(hex, alpha) {
+  const r = parseInt(hex.slice(1,3), 16);
+  const g = parseInt(hex.slice(3,5), 16);
+  const b = parseInt(hex.slice(5,7), 16);
+  return 'rgba(' + r + ',' + g + ',' + b + ',' + alpha.toFixed(3) + ')';
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+map.whenReady(() => {
+  rebuildMarchSegments();
+  jumpDay('all');
+  requestAnimationFrame(frame);
+});
+</script>
+</body>
+</html>
