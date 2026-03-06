@@ -60,10 +60,35 @@ def parse_ohm_year(date_str) -> int:
         return None
 
 
+# H/W canyon ratio lookup by OSM highway type.
+# Based on 1667 Rebuilding Act street grades and urban morphology research.
+# H/W < 1.0 = open/dispersed; H/W > 2.0 = canyon/retained
+HW_RATIOS = {
+    "motorway":      0.5,   # not historically relevant, but safe fallback
+    "trunk":         0.7,
+    "primary":       1.0,   # Grade 1 — Cheapside, Strand (~40ft W, ~40ft H)
+    "secondary":     1.3,   # Grade 2 — Fleet St, Bow St (~30ft W)
+    "tertiary":      1.6,   # Grade 3 — by-lanes (~16ft W)
+    "residential":   1.9,   # Grade 3-4 — residential lanes
+    "living_street": 2.2,   # narrow residential
+    "unclassified":  1.4,
+    "service":       2.0,   # mews, yard access
+    "footway":       3.0,   # Grade 4 — courts/alleys (~8ft W)
+    "path":          2.5,
+    "steps":         3.5,
+    "cycleway":      1.8,
+    "track":         1.2,
+    "":              1.2,   # unknown → middle estimate
+}
+
+def hw_for_highway(t: str) -> float:
+    return HW_RATIOS.get(t, 1.2)
+
+
 def parse_ohm_response(data: dict) -> list:
     """
     Convert OHM Overpass JSON to list of simplified polylines.
-    Each entry is {"p": [[lat,lon],...], "s": start_yr|None, "e": end_yr|None}.
+    Each entry is {"p": [[lat,lon],...], "s": start_yr|None, "e": end_yr|None, "h": hw_ratio}.
     Filters to ways that existed within 1660–1820.
     """
     segments = []
@@ -85,11 +110,13 @@ def parse_ohm_response(data: dict) -> list:
         # Simplify: epsilon ~0.00015° ≈ 10 m — reduces points by ~60%
         simplified = douglas_peucker(pts, epsilon=0.00015)
         if len(simplified) >= 2:
+            hw_type = tags.get("highway", "")
             segments.append({
                 "p": [[p[0], p[1]] for p in simplified],
                 "s": start_yr,   # int or None
                 "e": end_yr,     # int or None
-                "t": tags.get("highway", ""),  # highway type for width proxy
+                "t": hw_type,    # highway type for width proxy
+                "h": hw_for_highway(hw_type),  # H/W canyon ratio
             })
     return segments
 
@@ -104,7 +131,18 @@ def fetch_ohm_streets(cache_path=None) -> list:
         cache_path = OHM_CACHE_PATH
     if cache_path.exists():
         try:
-            return json.loads(cache_path.read_text(encoding="utf-8"))
+            segments = json.loads(cache_path.read_text(encoding="utf-8"))
+            # Backfill "h" for legacy cache entries built before canyon physics
+            enriched = False
+            for seg in segments:
+                if "h" not in seg:
+                    seg["h"] = hw_for_highway(seg.get("t", ""))
+                    enriched = True
+            if enriched:
+                # Re-save cache with h field so next build is instant
+                cache_path.write_text(json.dumps(segments, separators=(",", ":")), encoding="utf-8")
+                print(f"  OHM cache enriched with canyon H/W ratios.")
+            return segments
         except (json.JSONDecodeError, Exception):
             print(f"  OHM cache corrupt or unreadable — re-fetching.")
 
@@ -145,7 +183,8 @@ def load_data(venues_path: Path, db_path: Path) -> dict:
              "material":      r.get("material", ""),
              "capacity":      r.get("capacity", ""),
              "opened": int(r["opened"]) if r.get("opened", "").strip() else None,
-             "closed": int(r["closed"]) if r.get("closed", "").strip() else None,}
+             "closed": int(r["closed"]) if r.get("closed", "").strip() else None,
+             "hw_ratio": float(r["hw_ratio"]) if r.get("hw_ratio", "").strip() else None,}
             for r in csv.DictReader(f)
         ]
 
@@ -311,7 +350,40 @@ body {{ font-family: 'Inter', system-ui, 'Georgia', sans-serif; background: #f4f
 #tier-toggle.active {{ background: #1a3a5a; border-color: #4488cc; color: #aaddff; }}
 /* ── Smoke haze overlay on map ── */
 #map {{ flex: 1; position: relative; }}
-#smoke-overlay {{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 400; opacity: 0; background: linear-gradient(to right, rgba(139,119,80,0) 10%, rgba(139,119,80,0.65) 90%); transition: opacity 0.6s ease; }}
+#smoke-overlay {{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 400; opacity: 0;
+  background: radial-gradient(ellipse at 78% 55%, rgba(120,100,55,0.55) 0%, rgba(120,100,55,0) 55%),
+              radial-gradient(ellipse at 55% 75%, rgba(100,80,40,0.30) 0%, rgba(100,80,40,0) 40%),
+              linear-gradient(108deg, rgba(120,100,55,0) 25%, rgba(130,110,60,0.45) 75%);
+  transition: opacity 0.8s ease; }}
+/* ── Heatmap overlay ── */
+#heatmap-canvas {{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 403; opacity: 0; transition: opacity 0.4s; filter: blur(18px); }}
+/* ── Time-of-day atmospheric tint ── */
+#tod-tint {{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 401; opacity: 0; transition: background 1.5s ease, opacity 1.5s ease; }}
+/* ── Night mode overlay + tile dimming ── */
+#night-overlay {{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 404; background: radial-gradient(ellipse at 50% 40%, rgba(0,5,20,0.45) 0%, rgba(0,5,20,0.65) 100%); opacity: 0; transition: opacity 1.4s; }}
+/* ── Venue name labels (shown at high zoom) ── */
+.venue-label {{ background: none; border: none; white-space: nowrap; font-size: 0.65em; font-weight: 600; color: #1a1008; text-shadow: 0 0 3px rgba(255,255,240,0.95), 0 0 7px rgba(255,255,240,0.7); pointer-events: none; padding: 1px 0 0 6px; letter-spacing: 0.01em; }}
+#map.night-mode .leaflet-tile-pane {{ filter: brightness(0.52) saturate(0.75) sepia(0.15); transition: filter 1.4s; }}
+#controls.night-ctrl {{ background: #0d1520; border-bottom-color: #1a2a3a; }}
+#controls.night-ctrl .title {{ color: #7ab8d8; }}
+#controls.night-ctrl #year-display {{ color: #7ab8d8; }}
+#controls.night-ctrl .pill-label {{ color: #4a6a88; }}
+#controls.night-ctrl .pill, #controls.night-ctrl .step-btn, #controls.night-ctrl #play-btn,
+#controls.night-ctrl .particle-btn, #controls.night-ctrl .sense-pill, #controls.night-ctrl .speed-btn,
+#controls.night-ctrl .overlay-btn {{ background: #0e1e30; border-color: #1e3048; color: #6a9abc; }}
+#controls.night-ctrl .overlay-btn.active {{ background: #3a1e6a; border-color: #7a4ecf; color: #c8aaff; font-weight: 600; }}
+#controls.night-ctrl .pill.active {{ background: #1a4870; border-color: #2a70b8; color: #aadcff; }}
+#controls.night-ctrl .btype-pill {{ background: #0e1e30 !important; filter: brightness(1.4) saturate(1.3); }}
+#controls.night-ctrl #milestone-label {{ color: #8aabcc; }}
+/* ── Map legend ── */
+#map-legend {{ position: absolute; bottom: 32px; left: 10px; z-index: 500; background: rgba(255,255,255,0.93); border: 1px solid #d8d4cc; border-radius: 4px; padding: 7px 9px; font-size: 0.72em; min-width: 108px; box-shadow: 0 1px 5px rgba(0,0,0,0.14); pointer-events: none; transition: background 0.8s, border-color 0.8s, color 0.8s; }}
+.leg-title {{ font-weight: 600; margin-bottom: 4px; font-size: 0.85em; letter-spacing: 0.05em; color: inherit; text-transform: uppercase; }}
+.leg-row {{ display: flex; align-items: center; gap: 5px; margin-bottom: 2px; }}
+.leg-dot {{ display: inline-block; border-radius: 50%; flex-shrink: 0; opacity: 0.88; }}
+/* ── Overlay toggle button ── */
+.overlay-btn {{ background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-size: 0.69em; font-weight: 500; }}
+.overlay-btn:hover {{ background: #ece8e0; color: #1a1816; }}
+.overlay-btn.active {{ background: #5c3a98; border-color: #5c3a98; color: #fff; font-weight: 600; }}
 /* ── Tier marker colours (used in tier-view mode) ── */
 </style>
 </head>
@@ -413,6 +485,10 @@ body {{ font-family: 'Inter', system-ui, 'Georgia', sans-serif; background: #f4f
     <button class="particle-btn" data-pmode="flow">&#8767; Senses</button>
     <button class="particle-btn" data-pmode="network">&#9780; Network</button>
   </div>
+  <div class="pill-row">
+    <span class="pill-label">Layer</span>
+    <button class="overlay-btn" id="heatmap-btn" onclick="toggleHeatmap()">&#9638; Heatmap</button>
+  </div>
   <div id="particle-legend" style="display:none;padding:2px 0 0 4px;font-size:0.72em;color:#aaa;line-height:1.6;">
     <span style="color:#3a78c8">&#9675;</span> noise &nbsp;
     <span style="color:#b48228">&#9685;</span> smell &nbsp;
@@ -439,6 +515,10 @@ body {{ font-family: 'Inter', system-ui, 'Georgia', sans-serif; background: #f4f
 <div id="main">
   <div id="map">
     <div id="smoke-overlay"></div>
+    <div id="tod-tint"></div>
+    <canvas id="heatmap-canvas"></canvas>
+    <div id="night-overlay"></div>
+    <div id="map-legend"></div>
     <canvas id="particle-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:410;opacity:0;transition:opacity 0.5s"></canvas>
   </div>
   <div id="panel">
@@ -1185,6 +1265,9 @@ function updateMap() {{
     if (state.particleMode && state.particleMode !== 'off') {{
         _scheduleFieldUpdate();
     }}
+    applyNightMode(band);
+    updateMapLegend();
+    if (_heatmapOn) {{ _doUpdateHeatmap(); _startPulseRings(); }}
 }}
 
 function getActiveEvents(venueId, year, month, dow, band) {{
@@ -1596,6 +1679,8 @@ const fieldDy = new Float32Array(FIELD_W * FIELD_H);
 const streetFieldDx  = new Float32Array(FIELD_W * FIELD_H);
 const streetFieldDy  = new Float32Array(FIELD_W * FIELD_H);
 const streetFieldMag = new Float32Array(FIELD_W * FIELD_H);  // 0=no street, 1=strong street
+// Per-cell canyon H/W ratio (weighted avg of nearby segments). 1.2 = open; 3.0 = alley
+const canyonFieldHw  = new Float32Array(FIELD_W * FIELD_H).fill(1.2);
 
 // Cache of venue pixel positions (declared early — see top of particle system block)
 function updateVenuePx() {{
@@ -1624,6 +1709,14 @@ function sampleField(px, py) {{
     const gy = Math.min(FIELD_H - 1, Math.max(0, (py / pCanvas.height) * FIELD_H)) | 0;
     const i  = gy * FIELD_W + gx;
     return {{ dx: fieldDx[i], dy: fieldDy[i] }};
+}}
+
+// Sample canyon H/W ratio at pixel position (1.2 = open area baseline)
+function sampleCanyon(px, py) {{
+    if (!pCanvas) return 1.2;
+    const gx = Math.min(FIELD_W - 1, Math.max(0, (px / pCanvas.width)  * FIELD_W)) | 0;
+    const gy = Math.min(FIELD_H - 1, Math.max(0, (py / pCanvas.height) * FIELD_H)) | 0;
+    return canyonFieldHw[gy * FIELD_W + gx] || 1.2;
 }}
 
 // Spawn a particle near a random venue weighted by composite intensity
@@ -1909,7 +2002,22 @@ function particleFrame() {{
         if (isNetwork) {{
             _networkStep(p);
         }} else if (p.modality === 'noise') {{
-            // Noise: free-flight radial burst — no field, just coast and decelerate
+            // Noise: free-flight radial burst — decelerates; canyon walls cause lateral deflection
+            const hw = sampleCanyon(p.px, p.py);
+            // In a narrow canyon (hw > 1.2), sound bounces off walls perpendicular to street axis
+            if (hw > 1.5 && streetFieldMag[
+                (Math.min(FIELD_H-1, Math.max(0, (p.py/pCanvas.height)*FIELD_H)|0)) * FIELD_W +
+                (Math.min(FIELD_W-1, Math.max(0, (p.px/pCanvas.width) *FIELD_W)|0))
+            ] > 0.15) {{
+                const gi = (Math.min(FIELD_H-1, Math.max(0, (p.py/pCanvas.height)*FIELD_H)|0)) * FIELD_W +
+                           (Math.min(FIELD_W-1, Math.max(0, (p.px/pCanvas.width) *FIELD_W)|0));
+                // Perpendicular to street direction = (-dy, dx)
+                const perpX = -streetFieldDy[gi];
+                const perpY =  streetFieldDx[gi];
+                const bounce = (hw - 1.2) * 0.04;
+                p.vx += perpX * bounce * (Math.random() - 0.5) * 2;
+                p.vy += perpY * bounce * (Math.random() - 0.5) * 2;
+            }}
             p.vx *= 0.93;
             p.vy *= 0.93;
             p.px += p.vx;
@@ -1921,9 +2029,12 @@ function particleFrame() {{
         }} else {{
             const prof = MODALITY_PROFILE[p.modality] || MODALITY_PROFILE.smell;
             const f = sampleField(p.px, p.py);
-            const speedMult = prof.speed || 1.0;
+            // Canyon effect: narrow streets slow dispersal (smoke/smell trapped)
+            const hw = sampleCanyon(p.px, p.py);
+            const canyonSpeedMult = Math.max(0.35, 1.2 / Math.max(0.8, hw));
+            const speedMult = (prof.speed || 1.0) * canyonSpeedMult;
             p.vx = p.vx * 0.95 + f.dx * 0.15 * speedMult;
-            p.vy = p.vy * 0.95 + f.dy * 0.15 * speedMult + (p.rise || 0);
+            p.vy = p.vy * 0.95 + f.dy * 0.15 * speedMult + (p.rise || 0) * canyonSpeedMult;
             p.px += p.vx;
             p.py += p.vy;
             if (p.px < 0) p.px = pCanvas.width;
@@ -2257,6 +2368,7 @@ function _hwayMult(t) {{
 function _rebuildStreetField() {{
     if (!pCanvas || !streetSegsPx.length) {{
         streetFieldDx.fill(0); streetFieldDy.fill(0); streetFieldMag.fill(0);
+        canyonFieldHw.fill(1.2);
         return;
     }}
     const W = pCanvas.width, H = pCanvas.height;
@@ -2279,7 +2391,7 @@ function _rebuildStreetField() {{
     for (let gy = 0; gy < FIELD_H; gy++) {{
         for (let gx = 0; gx < FIELD_W; gx++) {{
             const cx = (gx + 0.5) * cW, cy = (gy + 0.5) * cH;
-            let sdx = 0, sdy = 0;
+            let sdx = 0, sdy = 0, sumHw = 0, sumHwW = 0;
             const bx0 = Math.max(0, Math.floor(cx / bW) - 1);
             const bx1 = Math.min(BW - 1, Math.floor(cx / bW) + 1);
             const by0 = Math.max(0, Math.floor(cy / bH) - 1);
@@ -2301,6 +2413,10 @@ function _rebuildStreetField() {{
                         const segDirY = (seg.y1 - seg.y0) / seg.len;
                         sdx += segDirX * w;
                         sdy += segDirY * w;
+                        // Canyon H/W weighted accumulation
+                        const hw = seg.h || 1.2;
+                        sumHw  += hw * w;
+                        sumHwW += w;
                     }}
                 }}
             }}
@@ -2310,11 +2426,43 @@ function _rebuildStreetField() {{
                 streetFieldDx[idx]  = sdx / mag;
                 streetFieldDy[idx]  = sdy / mag;
                 streetFieldMag[idx] = Math.min(1, mag * 0.08);
+                canyonFieldHw[idx]  = sumHwW > 0.001 ? sumHw / sumHwW : 1.2;
             }} else {{
                 streetFieldDx[idx] = 0; streetFieldDy[idx] = 0; streetFieldMag[idx] = 0;
+                canyonFieldHw[idx] = 1.2;
             }}
         }}
     }}
+}}
+
+// Venue-anchor pass: stamp canyonFieldHw with documented H/W ratios around known venues.
+// Blends with OHM-derived values — high-confidence historical data overrides highway-type estimates.
+function _applyVenueCanyonAnchors() {{
+    if (!pCanvas) return;
+    const W = pCanvas.width, H = pCanvas.height;
+    const ANCHOR_PX = 35;  // influence radius in pixels
+    VENUES.forEach(v => {{
+        if (typeof v.hw_ratio !== 'number') return;
+        const vp = venuePx[v.id];
+        if (!vp) return;
+        const gxC = Math.min(FIELD_W - 1, Math.max(0, (vp.px / W) * FIELD_W) | 0);
+        const gyC = Math.min(FIELD_H - 1, Math.max(0, (vp.py / H) * FIELD_H) | 0);
+        const cellW = W / FIELD_W, cellH = H / FIELD_H;
+        const gxR = Math.ceil(ANCHOR_PX / cellW) + 1;
+        const gyR = Math.ceil(ANCHOR_PX / cellH) + 1;
+        for (let gy = Math.max(0, gyC - gyR); gy <= Math.min(FIELD_H - 1, gyC + gyR); gy++) {{
+            for (let gx = Math.max(0, gxC - gxR); gx <= Math.min(FIELD_W - 1, gxC + gxR); gx++) {{
+                const cx = (gx + 0.5) * cellW, cy = (gy + 0.5) * cellH;
+                const dist = Math.sqrt((cx - vp.px) ** 2 + (cy - vp.py) ** 2);
+                if (dist > ANCHOR_PX) continue;
+                // Linear blend: anchor weight 1.0 at centre → 0 at edge; mixed with existing value
+                const t = dist / ANCHOR_PX;
+                const w = 1 - t;
+                const idx = gy * FIELD_W + gx;
+                canyonFieldHw[idx] = canyonFieldHw[idx] * (1 - w) + v.hw_ratio * w;
+            }}
+        }}
+    }});
 }}
 
 function _projectStreets(year) {{
@@ -2328,6 +2476,7 @@ function _projectStreets(year) {{
         const s = Array.isArray(entry) ? null : entry.s;
         const e = Array.isArray(entry) ? null : entry.e;
         const t = Array.isArray(entry) ? '' : (entry.t || '');
+        const h = Array.isArray(entry) ? 1.2 : (entry.h || 1.2);
         if (s !== null && s > yr) return;
         if (e !== null && e < yr) return;
         for (let i = 0; i < polyline.length - 1; i++) {{
@@ -2335,11 +2484,13 @@ function _projectStreets(year) {{
             const b = map.latLngToContainerPoint([polyline[i+1][0], polyline[i+1][1]]);
             const len = Math.sqrt((b.x-a.x)**2 + (b.y-a.y)**2);
             if (len < 2) continue;
-            streetSegsPx.push({{ x0: a.x, y0: a.y, x1: b.x, y1: b.y, len, t, conn1: [], conn0: [] }});
+            streetSegsPx.push({{ x0: a.x, y0: a.y, x1: b.x, y1: b.y, len, t, h, conn1: [], conn0: [] }});
         }}
     }});
     // Rebuild street direction field for the new projection
     _rebuildStreetField();
+    // Overlay documented venue H/W ratios as high-confidence anchors
+    _applyVenueCanyonAnchors();
     // Build endpoint adjacency for network-mode connectivity
     _buildStreetAdjacency();
     // Rebuild flow/smoke field with the new pixel projection (fixes stale vectors after pan/zoom)
@@ -2450,6 +2601,280 @@ let _fieldUpdateTimer = null;
 function _scheduleFieldUpdate() {{
     if (_fieldUpdateTimer) clearTimeout(_fieldUpdateTimer);
     _fieldUpdateTimer = setTimeout(() => {{ updateParticleField(); }}, 400);
+}}
+
+// ── Heatmap overlay ────────────────────────────────────────────────────────────
+const heatCanvas = document.getElementById('heatmap-canvas');
+const heatCtx    = heatCanvas ? heatCanvas.getContext('2d') : null;
+// Off-screen base canvas: stores the static intensity layer (re-rendered on data change)
+const _heatBase    = document.createElement('canvas');
+const _heatBaseCtx = _heatBase.getContext('2d');
+let _heatmapOn   = false;
+
+function _resizeHeatmap() {{
+    if (!heatCanvas) return;
+    const mapEl = document.getElementById('map');
+    const W = mapEl.offsetWidth, H = mapEl.offsetHeight;
+    heatCanvas.width = W; heatCanvas.height = H;
+    _heatBase.width  = W; _heatBase.height  = H;
+}}
+_resizeHeatmap();
+window.addEventListener('resize', _resizeHeatmap);
+
+const HEATMAP_RGB = {{
+    smell:     [195, 130, 25],
+    noise:     [60,  130, 220],
+    crowd:     [200, 55,  55],
+    visual:    [50,  175, 70],
+    composite: [200, 105, 35],
+}};
+
+// Renders the static intensity layer to the off-screen base canvas
+function _doUpdateHeatmap() {{
+    if (!_heatBaseCtx || !_heatBase || !_heatmapOn) return;
+    const W = _heatBase.width, H = _heatBase.height;
+    if (!W || !H) return;
+    const COLS = 60, ROWS = 45;
+    const cellW = W / COLS, cellH = H / ROWS;
+    const grid = new Float32Array(COLS * ROWS);
+    const sense = state.modality || 'composite';
+    const maxRadius = sense === 'noise' ? 135 : (sense === 'smell' ? 240 : 195);
+    const [cr, cg, cb] = HEATMAP_RGB[sense] || HEATMAP_RGB.composite;
+
+    VENUES.forEach(v => {{
+        const loads = venueIntensityCache[v.id];
+        if (!loads) return;
+        const vp = venuePx[v.id];
+        if (!vp) return;
+        const intensity = sense === 'composite' ? loads.composite : (loads[sense] || 0);
+        if (intensity < 0.015) return;
+        const enc = v.enclosure || 'open';
+        const encF = enc === 'enclosed' ? 0.35 : enc === 'semi_open' ? 0.65 : 1.0;
+        const eff = intensity * encF;
+        const colMin = Math.max(0, Math.floor((vp.px - maxRadius) / cellW));
+        const colMax = Math.min(COLS - 1, Math.ceil( (vp.px + maxRadius) / cellW));
+        const rowMin = Math.max(0, Math.floor((vp.py - maxRadius) / cellH));
+        const rowMax = Math.min(ROWS - 1, Math.ceil( (vp.py + maxRadius) / cellH));
+        const maxR2 = maxRadius * maxRadius;
+        const applyCanyon = (sense === 'smoke' || sense === 'composite');
+        for (let row = rowMin; row <= rowMax; row++) {{
+            for (let col = colMin; col <= colMax; col++) {{
+                const cx = (col + 0.5) * cellW, cy = (row + 0.5) * cellH;
+                const dist2 = (cx - vp.px) ** 2 + (cy - vp.py) ** 2;
+                if (dist2 > maxR2) continue;
+                const t = dist2 / maxR2;
+                // Canyon retention: narrow streets concentrate smoke/smell in heatmap
+                let canyonMult = 1.0;
+                if (applyCanyon) {{
+                    const cgx = Math.min(FIELD_W-1, Math.max(0, (cx/W)*FIELD_W)|0);
+                    const cgy = Math.min(FIELD_H-1, Math.max(0, (cy/H)*FIELD_H)|0);
+                    const hw = canyonFieldHw[cgy * FIELD_W + cgx] || 1.2;
+                    canyonMult = Math.min(1.8, hw / 1.2);
+                }}
+                grid[row * COLS + col] = Math.min(1, grid[row * COLS + col] + eff * Math.pow(1 - t, 1.4) * canyonMult);
+            }}
+        }}
+    }});
+
+    // 1-pass box blur
+    const blurred = new Float32Array(COLS * ROWS);
+    for (let row = 1; row < ROWS - 1; row++) {{
+        for (let col = 1; col < COLS - 1; col++) {{
+            let s = 0;
+            for (let dr = -1; dr <= 1; dr++)
+                for (let dc = -1; dc <= 1; dc++)
+                    s += grid[(row + dr) * COLS + (col + dc)];
+            blurred[row * COLS + col] = s / 9;
+        }}
+    }}
+
+    _heatBaseCtx.clearRect(0, 0, W, H);
+    for (let row = 0; row < ROWS; row++) {{
+        for (let col = 0; col < COLS; col++) {{
+            const val = blurred[row * COLS + col] || grid[row * COLS + col];
+            if (val < 0.008) continue;
+            const alpha = Math.min(0.70, val * 0.88);
+            _heatBaseCtx.fillStyle = 'rgba(' + cr + ',' + cg + ',' + cb + ',' + alpha.toFixed(2) + ')';
+            _heatBaseCtx.fillRect(
+                Math.floor(col * cellW), Math.floor(row * cellH),
+                Math.ceil(cellW) + 1, Math.ceil(cellH) + 1
+            );
+        }}
+    }}
+    // If no pulse loop running, blit to display canvas immediately
+    if (!_pulseRaf) {{
+        heatCtx.clearRect(0, 0, W, H);
+        heatCtx.drawImage(_heatBase, 0, 0);
+    }}
+}}
+
+// ── Heatmap pulse rings (RAF loop composites base + expanding rings) ──────────
+let _pulseRaf = null;
+const _pulseRings = [];
+
+function _startPulseRings() {{
+    if (_pulseRaf) cancelAnimationFrame(_pulseRaf);
+    _pulseRings.length = 0;
+    VENUES.forEach(v => {{
+        const loads = venueIntensityCache[v.id];
+        if (!loads || loads.composite < 0.35) return;
+        const vp = venuePx[v.id];
+        if (!vp) return;
+        _pulseRings.push({{ vx: vp.px, vy: vp.py, t: Math.random(), intensity: loads.composite, vid: v.id }});
+    }});
+    function _pulseLoop() {{
+        if (!_heatmapOn || !heatCtx || !heatCanvas) {{ _pulseRaf = null; return; }}
+        const W = heatCanvas.width, H = heatCanvas.height;
+        heatCtx.clearRect(0, 0, W, H);
+        // Blit the static base layer (pre-computed in _doUpdateHeatmap)
+        if (_heatBase.width === W && _heatBase.height === H)
+            heatCtx.drawImage(_heatBase, 0, 0);
+        // Overlay expanding rings
+        const isNight = (state.band === 'night');
+        const [cr, cg, cb] = HEATMAP_RGB[state.modality || 'composite'] || [200, 105, 35];
+        _pulseRings.forEach(ring => {{
+            ring.t += 0.007;
+            if (ring.t > 1) {{
+                ring.t = 0;
+                const vp = venuePx[ring.vid];
+                if (vp) {{ ring.vx = vp.px; ring.vy = vp.py; }}
+            }}
+            const loads = venueIntensityCache[ring.vid];
+            if (!loads || loads.composite < 0.3) return;
+            const r = ring.t * 55 + 6;
+            const alpha = (1 - ring.t) * ring.intensity * (isNight ? 0.60 : 0.40);
+            if (alpha < 0.01) return;
+            heatCtx.strokeStyle = 'rgba(' + cr + ',' + cg + ',' + cb + ',' + alpha.toFixed(2) + ')';
+            heatCtx.lineWidth = 2.5;
+            heatCtx.beginPath();
+            heatCtx.arc(ring.vx, ring.vy, r, 0, Math.PI * 2);
+            heatCtx.stroke();
+        }});
+        _pulseRaf = requestAnimationFrame(_pulseLoop);
+    }}
+    _pulseRaf = requestAnimationFrame(_pulseLoop);
+}}
+
+function toggleHeatmap() {{
+    _heatmapOn = !_heatmapOn;
+    if (heatCanvas) heatCanvas.style.opacity = _heatmapOn ? '0.65' : '0';
+    const btn = document.getElementById('heatmap-btn');
+    if (btn) btn.classList.toggle('active', _heatmapOn);
+    if (_heatmapOn) {{
+        _doUpdateHeatmap();
+        _startPulseRings();
+    }} else {{
+        if (_pulseRaf) {{ cancelAnimationFrame(_pulseRaf); _pulseRaf = null; }}
+        if (heatCtx && heatCanvas) heatCtx.clearRect(0, 0, heatCanvas.width, heatCanvas.height);
+    }}
+}}
+
+map.on('moveend zoomend', () => {{
+    if (_heatmapOn) {{
+        updateVenuePx();
+        _doUpdateHeatmap();
+        // refresh ring positions
+        _pulseRings.forEach(ring => {{
+            const vp = venuePx[ring.vid];
+            if (vp) {{ ring.vx = vp.px; ring.vy = vp.py; }}
+        }});
+    }}
+}});
+
+// ── Night mode ─────────────────────────────────────────────────────────────────
+function applyNightMode(band) {{
+    const isNight = (band === 'night');
+    const mapEl = document.getElementById('map');
+    const ctrl  = document.getElementById('controls');
+    const nightOverlay = document.getElementById('night-overlay');
+    if (mapEl) mapEl.classList.toggle('night-mode', isNight);
+    if (ctrl)  ctrl.classList.toggle('night-ctrl',  isNight);
+    if (nightOverlay) nightOverlay.style.opacity = isNight ? '1' : '0';
+    applyTimeTint(band);
+}}
+
+// ── Time-of-day atmospheric tint ───────────────────────────────────────────────
+const TOD_TINTS = {{
+    dawn:      {{ bg: 'radial-gradient(ellipse at 50% 110%, rgba(210,120,10,0.28) 0%, rgba(210,120,10,0) 60%)', op: '1' }},
+    morning:   {{ bg: 'rgba(255,210,120,0.04)',                                                                  op: '1' }},
+    midday:    {{ bg: 'rgba(200,220,255,0.02)',                                                                  op: '1' }},
+    afternoon: {{ bg: 'rgba(255,180,60,0.06)',                                                                   op: '1' }},
+    evening:   {{ bg: 'radial-gradient(ellipse at 50% 110%, rgba(200,70,0,0.30) 0%, rgba(180,50,0,0) 60%)',     op: '1' }},
+    night:     {{ bg: 'rgba(0,0,0,0)',                                                                           op: '0' }},
+}};
+function applyTimeTint(band) {{
+    const el = document.getElementById('tod-tint');
+    if (!el) return;
+    const t = TOD_TINTS[band] || {{ bg: 'rgba(0,0,0,0)', op: '0' }};
+    el.style.background = t.bg;
+    el.style.opacity    = t.op;
+}}
+
+// ── Venue name labels at zoom ≥ 14 ─────────────────────────────────────────────
+const _venueLabels = {{}};
+function _updateVenueLabels() {{
+    const zoom = map.getZoom();
+    if (zoom < 14) {{
+        Object.values(_venueLabels).forEach(lyr => {{ if (map.hasLayer(lyr)) map.removeLayer(lyr); }});
+        return;
+    }}
+    VENUES.forEach(v => {{
+        if (typeof v.lat !== 'number' || typeof v.lon !== 'number' || !isFinite(v.lat) || !isFinite(v.lon)) return;
+        if (!_venueLabels[v.id]) {{
+            _venueLabels[v.id] = L.marker([v.lat, v.lon], {{
+                icon: L.divIcon({{ className: 'venue-label', html: v.name, iconSize: null, iconAnchor: [0, 0] }}),
+                interactive: false, keyboard: false, zIndexOffset: -100,
+            }});
+        }}
+        if (!map.hasLayer(_venueLabels[v.id])) _venueLabels[v.id].addTo(map);
+    }});
+}}
+map.on('zoomend', _updateVenueLabels);
+
+// ── Map legend (DOM-safe, no innerHTML) ────────────────────────────────────────
+function updateMapLegend() {{
+    const el = document.getElementById('map-legend');
+    if (!el) return;
+    const senseNames  = {{ smell: 'Smell', noise: 'Noise', crowd: 'Crowd', visual: 'Visual' }};
+    const activeLabel = state.modality ? (senseNames[state.modality] || 'Sensory') : 'Sensory intensity';
+    const isNight = (state.band === 'night');
+    el.style.background  = isNight ? 'rgba(10,18,32,0.92)' : 'rgba(255,255,255,0.93)';
+    el.style.borderColor = isNight ? '#1a2a3a' : '#d8d4cc';
+    el.style.color       = isNight ? '#8aabcc' : '#444';
+
+    while (el.firstChild) el.removeChild(el.firstChild);
+
+    const title = document.createElement('div');
+    title.className = 'leg-title';
+    title.textContent = activeLabel;
+    el.appendChild(title);
+
+    [
+        {{ sz: 14, col: '#dc2626', lbl: 'High' }},
+        {{ sz: 11, col: '#f97316', lbl: 'Moderate' }},
+        {{ sz: 8,  col: '#f59e0b', lbl: 'Low' }},
+        {{ sz: 6,  col: '#aaa',    lbl: 'Inactive' }},
+    ].forEach(item => {{
+        const row = document.createElement('div');
+        row.className = 'leg-row';
+        const dot = document.createElement('span');
+        dot.className = 'leg-dot';
+        dot.style.width = item.sz + 'px';
+        dot.style.height = item.sz + 'px';
+        dot.style.background = item.col;
+        const lbl = document.createElement('span');
+        lbl.textContent = item.lbl;
+        row.appendChild(dot);
+        row.appendChild(lbl);
+        el.appendChild(row);
+    }});
+
+    if (state.tierView) {{
+        const note = document.createElement('div');
+        note.style.cssText = 'margin-top:4px;font-size:0.85em;opacity:0.6;font-style:italic';
+        note.textContent = 'Tier view';
+        el.appendChild(note);
+    }}
 }}
 
 updateMap();

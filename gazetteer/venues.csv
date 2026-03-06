@@ -1,100 +1,100 @@
-id,name,city,lat,lon,opened,closed,notes,map_layer,tier,enclosure,building_type,material,capacity
-LON001,Vauxhall Spring Gardens,London,51.4882,-0.1228,1661,,Major renovation under Jonathan Tyers 1728-32. Peak popularity 1730s-1790s.,rocque_1746;horwood_1799,2,open,garden,outdoor,vast
-LON002,Ranelagh Gardens,London,51.4871,-0.1677,1742,1803,Chelsea. Rotunda opened 1742. Closed and demolished 1805. Cannot appear in texts pre-1742.,rocque_1746;horwood_1799,5,semi_open,garden,mixed,large
-LON003,Marylebone Gardens,London,51.5209,-0.1491,1650,1778,Closed 1778. Replaced by housing. Cannot appear in texts post-1778.,rocque_1746,2,open,garden,outdoor,large
-LON004,The Pantheon,London,51.5136,-0.1418,1772,,Oxford Street. Burned 1792; rebuilt as theatre 1795. Cannot appear pre-1772.,rocque_1746;horwood_1799,4,enclosed,assembly,brick,large
-LON005,Almack's Assembly Rooms,London,51.5065,-0.1419,1765,,King Street St James's. Later Willis's Rooms. Cannot appear pre-1765.,rocque_1746;horwood_1799,5,enclosed,assembly,brick,medium
-LON006,Drury Lane Theatre,London,51.5121,-0.1199,1663,,Current building opened 1794 after fire. Pre-1794 texts refer to earlier structure.,rocque_1746;horwood_1799,3,enclosed,theatre,brick,large
-LON007,Covent Garden Theatre,London,51.5130,-0.1224,1732,,Burned 1808; rebuilt 1809. Pre-1808 texts refer to earlier structure.,rocque_1746;horwood_1799,3,enclosed,theatre,brick,large
-LON008,King's Theatre Haymarket,London,51.5058,-0.1313,1705,,Opera house. Burned 1789; rebuilt 1790.,rocque_1746;horwood_1799,5,enclosed,theatre,brick,large
-LON009,St James's Park,London,51.5024,-0.1337,,,Stable throughout the period.,rocque_1746;horwood_1799,3,open,park,outdoor,vast
-LON010,Hyde Park,London,51.5073,-0.1657,,,Stable throughout. Rotten Row a key social promenade.,rocque_1746;horwood_1799,3,open,park,outdoor,vast
-LON011,Grosvenor Square,London,51.5120,-0.1519,1725,,Major aristocratic address. Developed 1720s-1730s. Cannot appear pre-1725.,rocque_1746;horwood_1799,5,semi_open,square,brick,n_a
-LON012,Hanover Square,London,51.5121,-0.1444,1714,,Developed from 1714. Key early Georgian address.,rocque_1746;horwood_1799,5,semi_open,square,brick,n_a
-LON013,Berkeley Square,London,51.5095,-0.1443,1739,,Developed 1730s-1740s. Gardens laid out 1739.,rocque_1746;horwood_1799,5,semi_open,square,brick,n_a
-LON014,St James's Square,London,51.5073,-0.1345,1660,,Aristocratic address stable throughout.,rocque_1746;horwood_1799,5,semi_open,square,brick,n_a
-LON015,The Strand,London,51.5116,-0.1178,,,Major commercial and social thoroughfare. Stable throughout.,rocque_1746;horwood_1799,3,open,street,mixed,n_a
-LON016,Covent Garden Piazza,London,51.5129,-0.1228,1630,,Market and social space stable throughout.,rocque_1746;horwood_1799,2,semi_open,market,stone,large
-LON017,Spring Gardens (Charing Cross),London,51.5071,-0.1282,,,Older pleasure garden near Charing Cross. Distinct from Vauxhall.,rocque_1746,2,open,garden,outdoor,medium
-LON018,White's Club,London,51.5064,-0.1404,1693,,St James's Street. Oldest gentlemen's club. Stable throughout.,rocque_1746;horwood_1799,5,enclosed,assembly,brick,small
-LON019,Boodle's Club,London,51.5064,-0.1407,1762,,St James's Street. Cannot appear pre-1762.,rocque_1746;horwood_1799,5,enclosed,assembly,brick,small
-LON020,Brooks's Club,London,51.5064,-0.1408,1764,,St James's Street. Cannot appear pre-1764.,rocque_1746;horwood_1799,5,enclosed,assembly,brick,small
-LON021,The Tower of London,London,51.5081,-0.0759,,,Stable landmark throughout.,rocque_1746;horwood_1799,3,semi_open,landmark,stone,large
-LON022,St Paul's Cathedral,London,51.5138,-0.0984,1710,,Wren's cathedral completed 1710.,rocque_1746;horwood_1799,3,enclosed,church,stone,large
-LON023,Westminster Abbey,London,51.4993,-0.1273,,,Stable landmark throughout.,rocque_1746;horwood_1799,3,enclosed,church,stone,large
-LON024,Portman Square,London,51.5192,-0.1588,1764,,Developed from 1764. Home House (notable address) 1775.,rocque_1746;horwood_1799,4,semi_open,square,brick,n_a
-LON025,Portland Place,London,51.5216,-0.1436,1778,,Developed from 1778. Cannot appear in earlier texts.,horwood_1799,4,open,street,brick,n_a
-LON026,Bedford Square,London,51.5185,-0.1267,1775,,Bloomsbury. Developed 1775. Cannot appear pre-1775.,rocque_1746;horwood_1799,4,semi_open,square,brick,n_a
-BAT001,Lower Assembly Rooms (Harrison's),Bath,51.3812,-2.3587,1708,1820,Also known as Lindsey's Rooms. The rooms in pre-1771 Bath fiction. Burned 1820.,wood_1736;harcourt_1794,4,enclosed,assembly,stone,medium
-BAT002,Upper Assembly Rooms (New Rooms),Bath,51.3851,-2.3637,1771,,Opened October 1771. These are Austen's rooms in Northanger Abbey. Cannot appear pre-1771.,harcourt_1794,4,enclosed,assembly,stone,medium
-BAT003,The Pump Room,Bath,51.3814,-2.3594,1706,,Current building 1796. Earlier versions from 1706. Major social hub throughout.,wood_1736;harcourt_1794,4,enclosed,assembly,stone,medium
-BAT004,The Circus,Bath,51.3844,-2.3633,1768,,Designed by John Wood the Elder 1754; completed after his death 1768. Cannot appear pre-1768.,wood_1736;harcourt_1794,5,semi_open,square,stone,n_a
-BAT005,Royal Crescent,Bath,51.3848,-2.3664,1774,,Built 1767-1774. Cannot appear in texts set before construction.,harcourt_1794,5,semi_open,square,stone,n_a
-BAT006,Pulteney Bridge,Bath,51.3813,-2.3556,1774,,Designed Robert Adam. Cannot appear pre-1774.,harcourt_1794,3,semi_open,misc,stone,n_a
-BAT007,Sydney Gardens,Bath,51.3841,-2.3503,1795,,Pleasure gardens. Austen's favourite walk. Cannot appear pre-1795.,harcourt_1794,3,open,garden,outdoor,medium
-BAT008,Queen Square,Bath,51.3821,-2.3630,1736,,John Wood the Elder. Completed 1736. Key address in mid-century Bath fiction.,wood_1736;harcourt_1794,4,semi_open,square,stone,n_a
-BAT009,Milsom Street,Bath,51.3837,-2.3620,1761,,Principal shopping street from 1761. Cannot appear pre-1761.,wood_1736;harcourt_1794,3,open,street,stone,n_a
-BAT010,Bath Abbey,Bath,51.3814,-2.3591,,,Stable landmark throughout.,wood_1736;harcourt_1794,3,enclosed,church,stone,medium
-BAT011,North Parade,Bath,51.3807,-2.3582,1740,,Promenade. Developed 1740. Smollett's characters walk here.,wood_1736;harcourt_1794,3,open,street,stone,n_a
-BAT012,South Parade,Bath,51.3800,-2.3576,1743,,Developed 1743. Cannot appear pre-1743.,wood_1736;harcourt_1794,3,open,street,stone,n_a
-LON027,Bond Street,London,51.5133,-0.1458,,,Old and New Bond Street. Principal shopping and fashionable promenade of the West End. Stable throughout.,rocque_1746;horwood_1799,4,open,street,mixed,n_a
-LON028,Pall Mall,London,51.5069,-0.1338,,,Major street between St James's and Charing Cross. Clubs galleries print shops. Stable throughout.,rocque_1746;horwood_1799,4,open,street,mixed,n_a
-LON029,Piccadilly,London,51.5090,-0.1440,,,Major thoroughfare from Piccadilly Circus to Hyde Park Corner. Stable throughout.,rocque_1746;horwood_1799,4,open,street,mixed,n_a
-LON030,St James's Street,London,51.5054,-0.1363,,,Gentlemen's clubs wine merchants. Heart of St James's. Stable throughout.,rocque_1746;horwood_1799,5,open,street,mixed,n_a
-LON031,Fleet Street,London,51.5138,-0.1072,,,Booksellers printers and lawyers. Legal and literary thoroughfare. Stable throughout.,rocque_1746;horwood_1799,3,open,street,mixed,n_a
-LON032,Cheapside,London,51.5147,-0.0940,,,Principal City commercial street. Drapers mercers goldsmiths. Stable throughout.,rocque_1746;horwood_1799,3,open,street,mixed,n_a
-LON033,Oxford Street,London,51.5154,-0.1415,,,Known as Oxford Road pre-c.1740. Shopping street from 1760s. The Pantheon opened here 1772.,rocque_1746;horwood_1799,3,open,street,mixed,n_a
-LON034,Ludgate Hill,London,51.5136,-0.1013,,,City booksellers and publishers near St Paul's. Stable throughout.,rocque_1746;horwood_1799,3,open,street,mixed,n_a
-LON035,Cornhill,London,51.5135,-0.0882,,,City banking and insurance district. Royal Exchange nearby. Stable throughout.,rocque_1746;horwood_1799,3,open,street,mixed,n_a
-LON036,Charing Cross,London,51.5074,-0.1278,,,Junction of Strand/Whitehall/Northumberland Avenue. Stable throughout.,rocque_1746;horwood_1799,2,open,street,mixed,n_a
-LON037,Leicester Fields (Square),London,51.5107,-0.1310,,,Known as Leicester Fields until c.1670. Fashionable early 18c; declined mid-century.,rocque_1746;horwood_1799,2,semi_open,square,mixed,n_a
-LON038,Cavendish Square,London,51.5165,-0.1462,1717,,Developed from 1717. Key address for upper-middle professional ranks.,rocque_1746;horwood_1799,4,semi_open,square,brick,n_a
-LON039,Harley Street,London,51.5219,-0.1480,1757,,Developed from 1757. Fashionable medical and professional address.,rocque_1746;horwood_1799,4,open,street,brick,n_a
-LON040,Brook Street,London,51.5124,-0.1478,1720,,Mayfair. Developed 1720s. Stable thereafter.,rocque_1746;horwood_1799,4,open,street,brick,n_a
-LON054,Don Saltero's Coffee House,London,51.4841,-0.1683,1695,1799,Cheyne Walk Chelsea. Curiosity cabinet and coffee house. Frequented by Smollett. Proposed by the Branghtons in Evelina as a vulgar excursion.,rocque_1746,2,enclosed,assembly,timber,small
-LON055,White-Conduit House,London,51.5300,-0.1062,1745,1849,Islington. Pleasure garden and cricket ground. Lower-middling social register.,rocque_1746;horwood_1799,2,open,garden,outdoor,medium
-LON056,Bagnigge Wells,London,51.5276,-0.1134,1759,1841,Clerkenwell. Mineral spring gardens. Popular with tradespeople and servants.,rocque_1746;horwood_1799,2,open,garden,outdoor,medium
-LON057,Mother Red Cap's,London,51.5404,-0.1421,,,Camden Town tavern. Lower-class excursion destination. Evelina's vulgar alternatives cluster.,rocque_1746;horwood_1799,1,enclosed,assembly,timber,small
-LON041,Will's Coffee House,London,51.5126,-0.1233,1689,1735,Russell Street Covent Garden. Dryden's house. Literary centre 1680s-1720s. Declined after Addison.,rocque_1746,3,enclosed,assembly,timber,small
-LON042,Button's Coffee House,London,51.5128,-0.1238,1712,1752,Russell Street Covent Garden. Addison and Steele's house. Whig literary centre.,rocque_1746,3,enclosed,assembly,timber,small
-LON043,Tom's Coffee House,London,51.5124,-0.1228,1700,,Russell Street Covent Garden. Subscription house. Active through to 1780s.,rocque_1746;horwood_1799,3,enclosed,assembly,timber,small
-LON044,Slaughter's Coffee House,London,51.5110,-0.1267,1692,,St Martin's Lane. Artists and chess players. Active throughout.,rocque_1746;horwood_1799,3,enclosed,assembly,timber,small
-LON045,Lloyd's Coffee House,London,51.5135,-0.0876,1688,,Tower Street then Royal Exchange from 1774. Insurance underwriters.,rocque_1746;horwood_1799,3,enclosed,assembly,timber,small
-LON046,Chapter Coffee House,London,51.5154,-0.1000,1715,,Paternoster Row near St Paul's. Booksellers and publishers. Active throughout.,rocque_1746;horwood_1799,3,enclosed,assembly,timber,small
-LON047,Garraway's Coffee House,London,51.5133,-0.0874,1669,,Exchange Alley. Auctions and financial news. Active throughout.,rocque_1746;horwood_1799,3,enclosed,assembly,timber,small
-LON048,The City of London,London,51.5155,-0.0922,,,The square mile. Commercial and financial heart. Contrasted with West End throughout the period.,rocque_1746;horwood_1799,3,open,district,mixed,n_a
-LON049,Bloomsbury,London,51.5226,-0.1246,,,Inner northern district. Developed progressively through 18c.,rocque_1746;horwood_1799,4,open,district,brick,n_a
-LON050,Holborn,London,51.5185,-0.1197,,,Legal district. Inns of Court. Stable throughout.,rocque_1746;horwood_1799,2,open,district,mixed,n_a
-LON051,Soho,London,51.5137,-0.1337,,,Mixed bohemian district. Huguenot quarter. Stable throughout.,rocque_1746;horwood_1799,2,open,district,mixed,n_a
-LON052,Southwark (the Borough),London,51.5034,-0.0909,,,South bank. Coaching inns Borough High Street debtors prison.,rocque_1746;horwood_1799,2,open,district,mixed,n_a
-LON053,Mayfair,London,51.5089,-0.1467,,,Aristocratic West End district. Developed through 18c. Contrasted with City.,rocque_1746;horwood_1799,5,open,district,brick,n_a
-BAT013,Gay Street,Bath,51.3831,-2.3614,1734,,Connecting Queen Square to the Circus. Built 1734.,wood_1736;harcourt_1794,3,open,street,stone,n_a
-BAT014,Cheap Street,Bath,51.3799,-2.3598,,,Main Bath shopping street. Distinct from London's Cheapside. Stable throughout.,wood_1736;harcourt_1794,3,open,street,stone,n_a
-BAT015,Argyle Street,Bath,51.3820,-2.3601,1789,,Connects Pulteney Bridge to Laura Place. Part of Bathwick Estate development.,harcourt_1794,4,open,street,stone,n_a
-BAT016,Pulteney Street,Bath,51.3838,-2.3554,1789,,Grand main street of Bathwick Estate. Cannot appear pre-1789.,harcourt_1794,4,open,street,stone,n_a
-LON074,Newgate Prison,London,51.5153,-0.1017,1188,,Primary criminal prison of London; adjacent to the Sessions House. Rebuilt 1770-78 (Architects: George Dance the Younger).,horwood_1799,1,enclosed,prison,stone,large
-LON075,Fleet Prison,London,51.5144,-0.1048,1197,1844,Debtors' prison on the east bank of the Fleet River. Demolished 1844.,rocque_1746;horwood_1799,1,enclosed,prison,brick,medium
-LON076,Marshalsea Prison,London,51.5006,-0.0948,1373,1842,Debtors' prison in Southwark. Site now marked in Borough High Street. Cannot appear post-1842.,rocque_1746;horwood_1799,1,semi_open,prison,brick,medium
-LON077,Bridewell Prison,London,51.5128,-0.1024,1553,1855,House of correction near Blackfriars Bridge. Originally a royal palace.,rocque_1746;horwood_1799,1,enclosed,prison,stone,medium
-LON078,King's Bench Prison,London,51.5005,-0.0962,1373,1869,Debtors' and misdemeanour prison in Southwark Borough.,rocque_1746;horwood_1799,1,semi_open,prison,brick,medium
-LON079,Tothill Fields Bridewell,London,51.4961,-0.1335,1618,,Westminster house of correction. Site now occupied by HM Prison Belmarsh predecessor.,rocque_1746;horwood_1799,1,semi_open,prison,brick,small
-LON080,Old Bailey Courthouse,London,51.5151,-0.1017,1539,,The Sessions House on Old Bailey street; Central Criminal Court from 1907. Adjacent to Newgate Prison.,rocque_1746;horwood_1799,2,enclosed,court,stone,medium
-LON081,Bow Street Magistrates Court,London,51.5133,-0.1228,1739,,Founded by Henry Fielding 1739; home of the Bow Street Runners.,rocque_1746;horwood_1799,2,enclosed,court,brick,small
-LON082,Smithfield Market,London,51.5188,-0.1008,,,Livestock and meat market; notorious for smell and noise. West Smithfield area.,rocque_1746;horwood_1799,1,open,market,outdoor,vast
-LON083,Billingsgate Fish Market,London,51.5072,-0.0843,,,Fish market on Lower Thames Street below London Bridge. Notorious for coarse language and smell.,rocque_1746;horwood_1799,1,open,market,outdoor,large
-LON084,Leadenhall Market,London,51.5127,-0.0831,1321,,Poultry and general produce market in the City.,rocque_1746;horwood_1799,3,semi_open,market,stone,large
-LON085,Covent Garden Market,London,51.5127,-0.1228,1654,,Fruit and vegetable market; distinct from the Theatre and Piazza entries.,rocque_1746;horwood_1799,2,open,market,outdoor,large
-LON086,St Giles / Seven Dials,London,51.5162,-0.1276,,,Dense slum district; large Irish population. Centre of Seven Dials rookery.,rocque_1746;horwood_1799,1,open,district,timber,n_a
-LON087,Whitechapel,London,51.5163,-0.0647,,,East End district; mixed immigrant population; extensive street trade.,rocque_1746;horwood_1799,1,open,district,mixed,n_a
-LON088,Spitalfields,London,51.5195,-0.0741,,,Huguenot weaver district; silk industry; became increasingly impoverished late 18c.,rocque_1746;horwood_1799,1,open,district,mixed,n_a
-LON089,Wapping,London,51.5073,-0.0535,,,Riverside district; sailors and dockhands; Execution Dock for pirates.,rocque_1746;horwood_1799,1,open,district,mixed,n_a
-LON090,Cheapside,London,51.5144,-0.0943,,,Major commercial thoroughfare through the City of London.,rocque_1746;horwood_1799,3,open,street,mixed,n_a
-LON091,Holborn,London,51.5183,-0.1197,,,Mixed district merging lawyers' quarter (Inns of Court) with dense residential areas.,rocque_1746;horwood_1799,2,open,district,mixed,n_a
-LON092,Fleet Street,London,51.5139,-0.1056,,,Print trade and taverns; connects City to Temple Bar.,rocque_1746;horwood_1799,3,open,street,mixed,n_a
-LON093,Southwark / Borough,London,51.5024,-0.0932,,,South bank district; tanneries; brewing; Bankside entertainment.,rocque_1746;horwood_1799,1,open,district,mixed,n_a
-LON094,Tyburn Gallows,London,51.5140,-0.1590,,1783,Public execution site at the north-east corner of Hyde Park (near modern Marble Arch). Cannot appear post-1783.,rocque_1746,1,open,execution,outdoor,vast
-LON095,Newgate Gallows,London,51.5151,-0.1017,1783,,Public executions moved outside Newgate Prison after 1783. Cannot appear pre-1783.,horwood_1799,1,semi_open,execution,stone,large
-LON096,Greenwich Park,London,51.4769,0.0005,,,Royal park on the south bank; site of Greenwich Fair (Easter and Whitsun).,rocque_1746;horwood_1799,3,open,park,outdoor,vast
-RUR001,Rural England,England,52.45,-1.55,,,Pseudo-venue for non-urban English and Celtic rural settings (Scotland; Ireland; English countryside).,rocque_1746,3,open,misc,outdoor,n_a
-RUR002,Continental Gothic,Europe,43.7,11.2,,,Pseudo-venue for continental and fantastical Gothic settings (Italy; France; Spain; Arabia).,rocque_1746,3,open,misc,mixed,n_a
-LON097,Exeter Change Menagerie,London,51.5115,-0.1201,1773,1829,"Strand menagerie on upper floors of the Exchange building. Pidcock then Cross collection. Roars of lions and tigers audible in the Strand and frightened horses. Demolished 1829.",rocque_1746;horwood_1799,3,enclosed,menagerie,timber,medium
+id,name,city,lat,lon,opened,closed,notes,map_layer,tier,enclosure,building_type,material,capacity,hw_ratio
+LON001,Vauxhall Spring Gardens,London,51.4882,-0.1228,1661,,Major renovation under Jonathan Tyers 1728-32. Peak popularity 1730s-1790s.,rocque_1746;horwood_1799,2,open,garden,outdoor,vast,0.15
+LON002,Ranelagh Gardens,London,51.4871,-0.1677,1742,1803,Chelsea. Rotunda opened 1742. Closed and demolished 1805. Cannot appear in texts pre-1742.,rocque_1746;horwood_1799,5,semi_open,garden,mixed,large,0.20
+LON003,Marylebone Gardens,London,51.5209,-0.1491,1650,1778,Closed 1778. Replaced by housing. Cannot appear in texts post-1778.,rocque_1746,2,open,garden,outdoor,large,0.15
+LON004,The Pantheon,London,51.5136,-0.1418,1772,,Oxford Street. Burned 1792; rebuilt as theatre 1795. Cannot appear pre-1772.,rocque_1746;horwood_1799,4,enclosed,assembly,brick,large,0.80
+LON005,Almack's Assembly Rooms,London,51.5065,-0.1419,1765,,King Street St James's. Later Willis's Rooms. Cannot appear pre-1765.,rocque_1746;horwood_1799,5,enclosed,assembly,brick,medium,1.30
+LON006,Drury Lane Theatre,London,51.5121,-0.1199,1663,,Current building opened 1794 after fire. Pre-1794 texts refer to earlier structure.,rocque_1746;horwood_1799,3,enclosed,theatre,brick,large,2.00
+LON007,Covent Garden Theatre,London,51.5130,-0.1224,1732,,Burned 1808; rebuilt 1809. Pre-1808 texts refer to earlier structure.,rocque_1746;horwood_1799,3,enclosed,theatre,brick,large,1.00
+LON008,King's Theatre Haymarket,London,51.5058,-0.1313,1705,,Opera house. Burned 1789; rebuilt 1790.,rocque_1746;horwood_1799,5,enclosed,theatre,brick,large,0.80
+LON009,St James's Park,London,51.5024,-0.1337,,,Stable throughout the period.,rocque_1746;horwood_1799,3,open,park,outdoor,vast,0.10
+LON010,Hyde Park,London,51.5073,-0.1657,,,Stable throughout. Rotten Row a key social promenade.,rocque_1746;horwood_1799,3,open,park,outdoor,vast,0.10
+LON011,Grosvenor Square,London,51.5120,-0.1519,1725,,Major aristocratic address. Developed 1720s-1730s. Cannot appear pre-1725.,rocque_1746;horwood_1799,5,semi_open,square,brick,n_a,0.15
+LON012,Hanover Square,London,51.5121,-0.1444,1714,,Developed from 1714. Key early Georgian address.,rocque_1746;horwood_1799,5,semi_open,square,brick,n_a,0.20
+LON013,Berkeley Square,London,51.5095,-0.1443,1739,,Developed 1730s-1740s. Gardens laid out 1739.,rocque_1746;horwood_1799,5,semi_open,square,brick,n_a,0.15
+LON014,St James's Square,London,51.5073,-0.1345,1660,,Aristocratic address stable throughout.,rocque_1746;horwood_1799,5,semi_open,square,brick,n_a,0.15
+LON015,The Strand,London,51.5116,-0.1178,,,Major commercial and social thoroughfare. Stable throughout.,rocque_1746;horwood_1799,3,open,street,mixed,n_a,1.20
+LON016,Covent Garden Piazza,London,51.5129,-0.1228,1630,,Market and social space stable throughout.,rocque_1746;horwood_1799,2,semi_open,market,stone,large,0.15
+LON017,Spring Gardens (Charing Cross),London,51.5071,-0.1282,,,Older pleasure garden near Charing Cross. Distinct from Vauxhall.,rocque_1746,2,open,garden,outdoor,medium,0.20
+LON018,White's Club,London,51.5064,-0.1404,1693,,St James's Street. Oldest gentlemen's club. Stable throughout.,rocque_1746;horwood_1799,5,enclosed,assembly,brick,small,1.30
+LON019,Boodle's Club,London,51.5064,-0.1407,1762,,St James's Street. Cannot appear pre-1762.,rocque_1746;horwood_1799,5,enclosed,assembly,brick,small,1.30
+LON020,Brooks's Club,London,51.5064,-0.1408,1764,,St James's Street. Cannot appear pre-1764.,rocque_1746;horwood_1799,5,enclosed,assembly,brick,small,1.30
+LON021,The Tower of London,London,51.5081,-0.0759,,,Stable landmark throughout.,rocque_1746;horwood_1799,3,semi_open,landmark,stone,large,0.30
+LON022,St Paul's Cathedral,London,51.5138,-0.0984,1710,,Wren's cathedral completed 1710.,rocque_1746;horwood_1799,3,enclosed,church,stone,large,0.30
+LON023,Westminster Abbey,London,51.4993,-0.1273,,,Stable landmark throughout.,rocque_1746;horwood_1799,3,enclosed,church,stone,large,0.35
+LON024,Portman Square,London,51.5192,-0.1588,1764,,Developed from 1764. Home House (notable address) 1775.,rocque_1746;horwood_1799,4,semi_open,square,brick,n_a,0.15
+LON025,Portland Place,London,51.5216,-0.1436,1778,,Developed from 1778. Cannot appear in earlier texts.,horwood_1799,4,open,street,brick,n_a,0.45
+LON026,Bedford Square,London,51.5185,-0.1267,1775,,Bloomsbury. Developed 1775. Cannot appear pre-1775.,rocque_1746;horwood_1799,4,semi_open,square,brick,n_a,0.20
+BAT001,Lower Assembly Rooms (Harrison's),Bath,51.3812,-2.3587,1708,1820,Also known as Lindsey's Rooms. The rooms in pre-1771 Bath fiction. Burned 1820.,wood_1736;harcourt_1794,4,enclosed,assembly,stone,medium,2.00
+BAT002,Upper Assembly Rooms (New Rooms),Bath,51.3851,-2.3637,1771,,Opened October 1771. These are Austen's rooms in Northanger Abbey. Cannot appear pre-1771.,harcourt_1794,4,enclosed,assembly,stone,medium,1.50
+BAT003,The Pump Room,Bath,51.3814,-2.3594,1706,,Current building 1796. Earlier versions from 1706. Major social hub throughout.,wood_1736;harcourt_1794,4,enclosed,assembly,stone,medium,0.50
+BAT004,The Circus,Bath,51.3844,-2.3633,1768,,Designed by John Wood the Elder 1754; completed after his death 1768. Cannot appear pre-1768.,wood_1736;harcourt_1794,5,semi_open,square,stone,n_a,0.70
+BAT005,Royal Crescent,Bath,51.3848,-2.3664,1774,,Built 1767-1774. Cannot appear in texts set before construction.,harcourt_1794,5,semi_open,square,stone,n_a,0.15
+BAT006,Pulteney Bridge,Bath,51.3813,-2.3556,1774,,Designed Robert Adam. Cannot appear pre-1774.,harcourt_1794,3,semi_open,misc,stone,n_a,1.80
+BAT007,Sydney Gardens,Bath,51.3841,-2.3503,1795,,Pleasure gardens. Austen's favourite walk. Cannot appear pre-1795.,harcourt_1794,3,open,garden,outdoor,medium,0.20
+BAT008,Queen Square,Bath,51.3821,-2.3630,1736,,John Wood the Elder. Completed 1736. Key address in mid-century Bath fiction.,wood_1736;harcourt_1794,4,semi_open,square,stone,n_a,0.20
+BAT009,Milsom Street,Bath,51.3837,-2.3620,1761,,Principal shopping street from 1761. Cannot appear pre-1761.,wood_1736;harcourt_1794,3,open,street,stone,n_a,1.40
+BAT010,Bath Abbey,Bath,51.3814,-2.3591,,,Stable landmark throughout.,wood_1736;harcourt_1794,3,enclosed,church,stone,medium,0.40
+BAT011,North Parade,Bath,51.3807,-2.3582,1740,,Promenade. Developed 1740. Smollett's characters walk here.,wood_1736;harcourt_1794,3,open,street,stone,n_a,1.00
+BAT012,South Parade,Bath,51.3800,-2.3576,1743,,Developed 1743. Cannot appear pre-1743.,wood_1736;harcourt_1794,3,open,street,stone,n_a,1.00
+LON027,Bond Street,London,51.5133,-0.1458,,,Old and New Bond Street. Principal shopping and fashionable promenade of the West End. Stable throughout.,rocque_1746;horwood_1799,4,open,street,mixed,n_a,1.60
+LON028,Pall Mall,London,51.5069,-0.1338,,,Major street between St James's and Charing Cross. Clubs galleries print shops. Stable throughout.,rocque_1746;horwood_1799,4,open,street,mixed,n_a,0.80
+LON029,Piccadilly,London,51.5090,-0.1440,,,Major thoroughfare from Piccadilly Circus to Hyde Park Corner. Stable throughout.,rocque_1746;horwood_1799,4,open,street,mixed,n_a,0.90
+LON030,St James's Street,London,51.5054,-0.1363,,,Gentlemen's clubs wine merchants. Heart of St James's. Stable throughout.,rocque_1746;horwood_1799,5,open,street,mixed,n_a,1.30
+LON031,Fleet Street,London,51.5138,-0.1072,,,Booksellers printers and lawyers. Legal and literary thoroughfare. Stable throughout.,rocque_1746;horwood_1799,3,open,street,mixed,n_a,1.30
+LON032,Cheapside,London,51.5147,-0.0940,,,Principal City commercial street. Drapers mercers goldsmiths. Stable throughout.,rocque_1746;horwood_1799,3,open,street,mixed,n_a,1.10
+LON033,Oxford Street,London,51.5154,-0.1415,,,Known as Oxford Road pre-c.1740. Shopping street from 1760s. The Pantheon opened here 1772.,rocque_1746;horwood_1799,3,open,street,mixed,n_a,0.80
+LON034,Ludgate Hill,London,51.5136,-0.1013,,,City booksellers and publishers near St Paul's. Stable throughout.,rocque_1746;horwood_1799,3,open,street,mixed,n_a,1.40
+LON035,Cornhill,London,51.5135,-0.0882,,,City banking and insurance district. Royal Exchange nearby. Stable throughout.,rocque_1746;horwood_1799,3,open,street,mixed,n_a,1.30
+LON036,Charing Cross,London,51.5074,-0.1278,,,Junction of Strand/Whitehall/Northumberland Avenue. Stable throughout.,rocque_1746;horwood_1799,2,open,street,mixed,n_a,0.70
+LON037,Leicester Fields (Square),London,51.5107,-0.1310,,,Known as Leicester Fields until c.1670. Fashionable early 18c; declined mid-century.,rocque_1746;horwood_1799,2,semi_open,square,mixed,n_a,0.15
+LON038,Cavendish Square,London,51.5165,-0.1462,1717,,Developed from 1717. Key address for upper-middle professional ranks.,rocque_1746;horwood_1799,4,semi_open,square,brick,n_a,0.20
+LON039,Harley Street,London,51.5219,-0.1480,1757,,Developed from 1757. Fashionable medical and professional address.,rocque_1746;horwood_1799,4,open,street,brick,n_a,1.10
+LON040,Brook Street,London,51.5124,-0.1478,1720,,Mayfair. Developed 1720s. Stable thereafter.,rocque_1746;horwood_1799,4,open,street,brick,n_a,1.20
+LON054,Don Saltero's Coffee House,London,51.4841,-0.1683,1695,1799,Cheyne Walk Chelsea. Curiosity cabinet and coffee house. Frequented by Smollett. Proposed by the Branghtons in Evelina as a vulgar excursion.,rocque_1746,2,enclosed,assembly,timber,small,0.70
+LON055,White-Conduit House,London,51.5300,-0.1062,1745,1849,Islington. Pleasure garden and cricket ground. Lower-middling social register.,rocque_1746;horwood_1799,2,open,garden,outdoor,medium,0.25
+LON056,Bagnigge Wells,London,51.5276,-0.1134,1759,1841,Clerkenwell. Mineral spring gardens. Popular with tradespeople and servants.,rocque_1746;horwood_1799,2,open,garden,outdoor,medium,0.25
+LON057,Mother Red Cap's,London,51.5404,-0.1421,,,Camden Town tavern. Lower-class excursion destination. Evelina's vulgar alternatives cluster.,rocque_1746;horwood_1799,1,enclosed,assembly,timber,small,1.00
+LON041,Will's Coffee House,London,51.5126,-0.1233,1689,1735,Russell Street Covent Garden. Dryden's house. Literary centre 1680s-1720s. Declined after Addison.,rocque_1746,3,enclosed,assembly,timber,small,0.70
+LON042,Button's Coffee House,London,51.5128,-0.1238,1712,1752,Russell Street Covent Garden. Addison and Steele's house. Whig literary centre.,rocque_1746,3,enclosed,assembly,timber,small,0.70
+LON043,Tom's Coffee House,London,51.5124,-0.1228,1700,,Russell Street Covent Garden. Subscription house. Active through to 1780s.,rocque_1746;horwood_1799,3,enclosed,assembly,timber,small,0.70
+LON044,Slaughter's Coffee House,London,51.5110,-0.1267,1692,,St Martin's Lane. Artists and chess players. Active throughout.,rocque_1746;horwood_1799,3,enclosed,assembly,timber,small,1.50
+LON045,Lloyd's Coffee House,London,51.5135,-0.0876,1688,,Tower Street then Royal Exchange from 1774. Insurance underwriters.,rocque_1746;horwood_1799,3,enclosed,assembly,timber,small,1.00
+LON046,Chapter Coffee House,London,51.5154,-0.1000,1715,,Paternoster Row near St Paul's. Booksellers and publishers. Active throughout.,rocque_1746;horwood_1799,3,enclosed,assembly,timber,small,2.80
+LON047,Garraway's Coffee House,London,51.5133,-0.0874,1669,,Exchange Alley. Auctions and financial news. Active throughout.,rocque_1746;horwood_1799,3,enclosed,assembly,timber,small,3.50
+LON048,The City of London,London,51.5155,-0.0922,,,The square mile. Commercial and financial heart. Contrasted with West End throughout the period.,rocque_1746;horwood_1799,3,open,district,mixed,n_a,1.60
+LON049,Bloomsbury,London,51.5226,-0.1246,,,Inner northern district. Developed progressively through 18c.,rocque_1746;horwood_1799,4,open,district,brick,n_a,1.20
+LON050,Holborn,London,51.5185,-0.1197,,,Legal district. Inns of Court. Stable throughout.,rocque_1746;horwood_1799,2,open,district,mixed,n_a,1.40
+LON051,Soho,London,51.5137,-0.1337,,,Mixed bohemian district. Huguenot quarter. Stable throughout.,rocque_1746;horwood_1799,2,open,district,mixed,n_a,1.80
+LON052,Southwark (the Borough),London,51.5034,-0.0909,,,South bank. Coaching inns Borough High Street debtors prison.,rocque_1746;horwood_1799,2,open,district,mixed,n_a,1.70
+LON053,Mayfair,London,51.5089,-0.1467,,,Aristocratic West End district. Developed through 18c. Contrasted with City.,rocque_1746;horwood_1799,5,open,district,brick,n_a,1.00
+BAT013,Gay Street,Bath,51.3831,-2.3614,1734,,Connecting Queen Square to the Circus. Built 1734.,wood_1736;harcourt_1794,3,open,street,stone,n_a,2.00
+BAT014,Cheap Street,Bath,51.3799,-2.3598,,,Main Bath shopping street. Distinct from London's Cheapside. Stable throughout.,wood_1736;harcourt_1794,3,open,street,stone,n_a,2.00
+BAT015,Argyle Street,Bath,51.3820,-2.3601,1789,,Connects Pulteney Bridge to Laura Place. Part of Bathwick Estate development.,harcourt_1794,4,open,street,stone,n_a,1.30
+BAT016,Pulteney Street,Bath,51.3838,-2.3554,1789,,Grand main street of Bathwick Estate. Cannot appear pre-1789.,harcourt_1794,4,open,street,stone,n_a,0.45
+LON074,Newgate Prison,London,51.5153,-0.1017,1188,,Primary criminal prison of London; adjacent to the Sessions House. Rebuilt 1770-78 (Architects: George Dance the Younger).,horwood_1799,1,enclosed,prison,stone,large,2.00
+LON075,Fleet Prison,London,51.5144,-0.1048,1197,1844,Debtors' prison on the east bank of the Fleet River. Demolished 1844.,rocque_1746;horwood_1799,1,enclosed,prison,brick,medium,2.20
+LON076,Marshalsea Prison,London,51.5006,-0.0948,1373,1842,Debtors' prison in Southwark. Site now marked in Borough High Street. Cannot appear post-1842.,rocque_1746;horwood_1799,1,semi_open,prison,brick,medium,1.70
+LON077,Bridewell Prison,London,51.5128,-0.1024,1553,1855,House of correction near Blackfriars Bridge. Originally a royal palace.,rocque_1746;horwood_1799,1,enclosed,prison,stone,medium,1.30
+LON078,King's Bench Prison,London,51.5005,-0.0962,1373,1869,Debtors' and misdemeanour prison in Southwark Borough.,rocque_1746;horwood_1799,1,semi_open,prison,brick,medium,1.70
+LON079,Tothill Fields Bridewell,London,51.4961,-0.1335,1618,,Westminster house of correction. Site now occupied by HM Prison Belmarsh predecessor.,rocque_1746;horwood_1799,1,semi_open,prison,brick,small,1.00
+LON080,Old Bailey Courthouse,London,51.5151,-0.1017,1539,,The Sessions House on Old Bailey street; Central Criminal Court from 1907. Adjacent to Newgate Prison.,rocque_1746;horwood_1799,2,enclosed,court,stone,medium,2.00
+LON081,Bow Street Magistrates Court,London,51.5133,-0.1228,1739,,Founded by Henry Fielding 1739; home of the Bow Street Runners.,rocque_1746;horwood_1799,2,enclosed,court,brick,small,1.00
+LON082,Smithfield Market,London,51.5188,-0.1008,,,Livestock and meat market; notorious for smell and noise. West Smithfield area.,rocque_1746;horwood_1799,1,open,market,outdoor,vast,0.20
+LON083,Billingsgate Fish Market,London,51.5072,-0.0843,,,Fish market on Lower Thames Street below London Bridge. Notorious for coarse language and smell.,rocque_1746;horwood_1799,1,open,market,outdoor,large,0.80
+LON084,Leadenhall Market,London,51.5127,-0.0831,1321,,Poultry and general produce market in the City.,rocque_1746;horwood_1799,3,semi_open,market,stone,large,1.00
+LON085,Covent Garden Market,London,51.5127,-0.1228,1654,,Fruit and vegetable market; distinct from the Theatre and Piazza entries.,rocque_1746;horwood_1799,2,open,market,outdoor,large,0.20
+LON086,St Giles / Seven Dials,London,51.5162,-0.1276,,,Dense slum district; large Irish population. Centre of Seven Dials rookery.,rocque_1746;horwood_1799,1,open,district,timber,n_a,2.50
+LON087,Whitechapel,London,51.5163,-0.0647,,,East End district; mixed immigrant population; extensive street trade.,rocque_1746;horwood_1799,1,open,district,mixed,n_a,2.00
+LON088,Spitalfields,London,51.5195,-0.0741,,,Huguenot weaver district; silk industry; became increasingly impoverished late 18c.,rocque_1746;horwood_1799,1,open,district,mixed,n_a,2.20
+LON089,Wapping,London,51.5073,-0.0535,,,Riverside district; sailors and dockhands; Execution Dock for pirates.,rocque_1746;horwood_1799,1,open,district,mixed,n_a,1.80
+LON090,Cheapside,London,51.5144,-0.0943,,,Major commercial thoroughfare through the City of London.,rocque_1746;horwood_1799,3,open,street,mixed,n_a,1.10
+LON091,Holborn,London,51.5183,-0.1197,,,Mixed district merging lawyers' quarter (Inns of Court) with dense residential areas.,rocque_1746;horwood_1799,2,open,district,mixed,n_a,1.40
+LON092,Fleet Street,London,51.5139,-0.1056,,,Print trade and taverns; connects City to Temple Bar.,rocque_1746;horwood_1799,3,open,street,mixed,n_a,1.30
+LON093,Southwark / Borough,London,51.5024,-0.0932,,,South bank district; tanneries; brewing; Bankside entertainment.,rocque_1746;horwood_1799,1,open,district,mixed,n_a,1.80
+LON094,Tyburn Gallows,London,51.5140,-0.1590,,1783,Public execution site at the north-east corner of Hyde Park (near modern Marble Arch). Cannot appear post-1783.,rocque_1746,1,open,execution,outdoor,vast,0.10
+LON095,Newgate Gallows,London,51.5151,-0.1017,1783,,Public executions moved outside Newgate Prison after 1783. Cannot appear pre-1783.,horwood_1799,1,semi_open,execution,stone,large,2.00
+LON096,Greenwich Park,London,51.4769,0.0005,,,Royal park on the south bank; site of Greenwich Fair (Easter and Whitsun).,rocque_1746;horwood_1799,3,open,park,outdoor,vast,0.10
+RUR001,Rural England,England,52.45,-1.55,,,Pseudo-venue for non-urban English and Celtic rural settings (Scotland; Ireland; English countryside).,rocque_1746,3,open,misc,outdoor,n_a,0.10
+RUR002,Continental Gothic,Europe,43.7,11.2,,,Pseudo-venue for continental and fantastical Gothic settings (Italy; France; Spain; Arabia).,rocque_1746,3,open,misc,mixed,n_a,0.10
+LON097,Exeter Change Menagerie,London,51.5115,-0.1201,1773,1829,"Strand menagerie on upper floors of the Exchange building. Pidcock then Cross collection. Roars of lions and tigers audible in the Strand and frightened horses. Demolished 1829.",rocque_1746;horwood_1799,3,enclosed,menagerie,timber,medium,1.20
