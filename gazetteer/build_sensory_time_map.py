@@ -873,15 +873,17 @@ const PROCESSION_ROUTES = {{
     label: 'Tyburn Procession (1660\u20131783): Newgate \u2192 Marble Arch, 3 miles',
   }},
   'EVT050': {{
-    // Lord Mayor\u2019s Show: Guildhall \u2192 Cheapside \u2192 Ludgate Hill \u2192 Fleet St \u2192 Temple Bar
+    // Lord Mayor\u2019s Show: Guildhall \u2192 King St \u2192 Cheapside \u2192 Ludgate Hill \u2192 Fleet St \u2192 Temple Bar
     // Route varied by ward of new Mayor; this traces the core ceremonial spine.
     // Source: Lord Mayor\u2019s Show official history; Ian Visits.
     coords: [
       [51.5155, -0.0924],  // Guildhall
-      [51.5131, -0.0890],  // Bank Junction / Mansion House
-      [51.5135, -0.0955],  // Cheapside
-      [51.5138, -0.0984],  // St Paul's Cathedral
-      [51.5125, -0.1040],  // Ludgate Circus
+      [51.5147, -0.0926],  // King Street south \u2014 joining Cheapside
+      [51.5147, -0.0955],  // Cheapside (Old Jewry junction)
+      [51.5147, -0.0975],  // Cheapside (Foster Lane area)
+      [51.5138, -0.0984],  // St Paul\u2019s Cathedral
+      [51.5136, -0.1013],  // Ludgate Hill
+      [51.5128, -0.1049],  // Ludgate Circus
       [51.5134, -0.1071],  // Fleet Street mid
       [51.5133, -0.1127],  // Temple Bar / Royal Courts
     ],
