@@ -9,6 +9,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 REPO_ROOT = Path(__file__).parent.parent.parent
 HTML_PATH = REPO_ROOT / "gazetteer" / "sensory_time_map.html"
+VENUE_GEOMETRIES_PATH = REPO_ROOT / "gazetteer" / "venue_geometries.csv"
 
 
 @pytest.fixture(scope="module")
@@ -57,9 +58,35 @@ def test_events_json_embedded(html):
     assert "Tyburn" in html
 
 
+def test_corrected_event_csv_content_embedded(html):
+    """The built map should reflect the current CSV event notes, not stale DB copies."""
+    assert "Act passed in 1699 (often cited under 1698 regnal dating)" in html
+    assert "Usually open Mondays Wednesdays and Fridays" in html
+    assert "Pre-1752: Oct 28 (Feast of St Simon and St Jude)" in html
+
+
 def test_venues_json_embedded(html):
     assert "LON001" in html
     assert "Vauxhall" in html
+
+
+def test_venue_geometries_csv_scaffold_exists():
+    assert VENUE_GEOMETRIES_PATH.exists()
+    lines = VENUE_GEOMETRIES_PATH.read_text(encoding="utf-8").splitlines()
+    header = lines[0]
+    assert header == "venue_id,year_start,year_end,lat,lon,source_map,confidence,notes"
+    assert len(lines) > 10
+    assert any(line.startswith("LON001,") for line in lines[1:])
+
+
+def test_venue_geometry_support_embedded(html):
+    assert "VENUE_GEOMETRIES" in html
+    assert '"canonical_lat"' in html
+    assert '"canonical_lon"' in html
+    assert "map_layer" in html
+    assert "_pickVenueGeometry" in html
+    assert "_applyVenueDisplayGeometry" in html
+    assert "_venuePlacementSummary" in html
 
 
 def test_literary_toggle_present(html):
@@ -77,6 +104,12 @@ def test_leaflet_included(html):
 
 def test_venue_explorer_link(html):
     assert "venue_explorer.html" in html
+
+
+def test_extended_source_badges_present(html):
+    assert "src-newspaper" in html
+    assert "src-parish" in html
+    assert "src-institutional" in html
 
 
 # ── C5: Environmental layer tests ─────────────────────────────────────────────
@@ -168,6 +201,18 @@ def test_flow_mode_field_builder(html):
     # Street channeling for noise and smell
     assert "streetFieldDy" in html
     assert "modalTotals" in html
+
+
+def test_crowd_street_density_renderer_present(html):
+    """Crowd should be rendered as street density with street/event weighting."""
+    assert "_rebuildCrowdStreetState" in html
+    assert "_drawCrowdDensity" in html
+    assert "_crowdStreetTypeMultiplier" in html
+    assert "_crowdBandMultiplier" in html
+    assert "_eventActivationWeight" in html
+    assert "_eventMatchesBuildingType" in html
+    assert "weekly_market" in html
+    assert "annual_fair" in html
 
 
 def test_network_mode_field_builder(html):
@@ -303,6 +348,12 @@ def test_click_anywhere_handler(html):
     assert "map.on('click'" in html
 
 
+def test_compute_intensity_returns_smoke(html):
+    """computeIntensity must return a .smoke property derived from SO2 index."""
+    assert "loads.smoke" in html
+    assert "smokeLoad" in html or "so2_index" in html
+
+
 def test_tooltip_provenance_line(html):
     """Tooltip must call computeZoneBaseline and use provenance."""
     assert 'zoneBaseline.provenance' in html
@@ -353,8 +404,7 @@ def test_exeter_change_venue(html):
 
 
 def test_exeter_change_event(html):
-    """EVT070 Exeter Change Menagerie event must be present."""
-    assert 'EVT070' in html
+    """Exeter Change should remain embedded as venue data even without a dedicated event row."""
     assert 'Menagerie' in html
 
 
@@ -375,9 +425,9 @@ def test_smell_halos_renderer(html):
     assert '_drawSmellHalos' in html
 
 
-def test_crowd_circles_renderer(html):
-    """Crowd circle renderer must be present."""
-    assert '_drawCrowdCircles' in html
+def test_crowd_density_renderer(html):
+    """Crowd should render through the current street-density layer."""
+    assert '_drawCrowdDensity' in html
 
 
 def test_visual_glow_renderer(html):
@@ -390,5 +440,5 @@ def test_senses_mode_compositor(html):
     assert '_updateNoiseRings' in html
     assert '_drawNoiseRings'   in html
     assert '_drawSmellHalos'   in html
-    assert '_drawCrowdCircles' in html
+    assert '_drawCrowdDensity' in html
     assert '_drawVisualGlow'   in html

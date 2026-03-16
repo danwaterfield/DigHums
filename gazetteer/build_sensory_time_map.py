@@ -168,16 +168,110 @@ out geom qt;
 
 
 VENUES_PATH = Path(__file__).parent / "venues.csv"
+VENUE_GEOMETRIES_PATH = Path(__file__).parent / "venue_geometries.csv"
+EVENTS_PATH = Path(__file__).parent / "events.csv"
+EVENT_VENUES_PATH = Path(__file__).parent / "event_venues.csv"
+EVENT_INSTANCES_PATH = Path(__file__).parent / "event_instances.csv"
 DB_PATH     = Path(__file__).parent / "sensory.db"
 OUT_PATH    = Path(__file__).parent / "sensory_time_map.html"
 
 
-def load_data(venues_path: Path, db_path: Path) -> dict:
+def _parse_csv_int(value: str):
+    value = (value or "").strip()
+    return int(value) if value else None
+
+
+def _parse_csv_float(value: str):
+    value = (value or "").strip()
+    return float(value) if value else None
+
+
+def _coerce_csv_row(row: dict[str, str]) -> dict:
+    """Convert CSV row values to ints/floats/None where possible."""
+    out = {}
+    for key, value in row.items():
+        value = (value or "").strip()
+        if not value:
+            out[key] = None
+            continue
+        for conv in (int, float):
+            try:
+                out[key] = conv(value)
+                break
+            except ValueError:
+                pass
+        else:
+            out[key] = value
+    return out
+
+
+def load_venue_geometries(path: Path) -> dict[str, list[dict]]:
+    """Load optional epoch-specific venue display geometries."""
+    if not path.exists():
+        return {}
+
+    rows: dict[str, list[dict]] = {}
+    with open(path, newline="", encoding="utf-8") as f:
+        for raw in csv.DictReader(f):
+            venue_id = (raw.get("venue_id") or "").strip()
+            lat = _parse_csv_float(raw.get("lat", ""))
+            lon = _parse_csv_float(raw.get("lon", ""))
+            if not venue_id or lat is None or lon is None:
+                continue
+            rows.setdefault(venue_id, []).append({
+                "year_start": _parse_csv_int(raw.get("year_start", "")),
+                "year_end": _parse_csv_int(raw.get("year_end", "")),
+                "lat": lat,
+                "lon": lon,
+                "source_map": (raw.get("source_map") or "").strip() or None,
+                "confidence": (raw.get("confidence") or "").strip() or None,
+                "notes": (raw.get("notes") or "").strip() or None,
+            })
+
+    for geoms in rows.values():
+        geoms.sort(key=lambda g: (
+            ((g["year_end"] if g["year_end"] is not None else 1820) -
+             (g["year_start"] if g["year_start"] is not None else 1660)),
+            g["year_start"] if g["year_start"] is not None else 1660,
+            g["source_map"] or "",
+        ))
+    return rows
+
+
+def load_event_tables(
+    events_path: Path,
+    event_venues_path: Path,
+    event_instances_path: Path,
+) -> tuple[list[dict], list[dict], list[dict]] | None:
+    """Load event tables from CSV when the source-of-truth files are available."""
+    if not (events_path.exists() and event_venues_path.exists() and event_instances_path.exists()):
+        return None
+
+    with open(events_path, newline="", encoding="utf-8") as f:
+        events = [_coerce_csv_row(r) for r in csv.DictReader(f)]
+    with open(event_venues_path, newline="", encoding="utf-8") as f:
+        event_venues = [_coerce_csv_row(r) for r in csv.DictReader(f)]
+    with open(event_instances_path, newline="", encoding="utf-8") as f:
+        event_instances = [_coerce_csv_row(r) for r in csv.DictReader(f)]
+    return events, event_venues, event_instances
+
+
+def load_data(
+    venues_path: Path,
+    db_path: Path,
+    venue_geometries_path: Path = VENUE_GEOMETRIES_PATH,
+    events_path: Path = EVENTS_PATH,
+    event_venues_path: Path = EVENT_VENUES_PATH,
+    event_instances_path: Path = EVENT_INSTANCES_PATH,
+) -> dict:
+    venue_geometries = load_venue_geometries(venue_geometries_path)
     with open(venues_path, newline="", encoding="utf-8") as f:
         venues = [
             {"id": r["id"], "name": r["name"],
              "lat": float(r["lat"]), "lon": float(r["lon"]),
+             "canonical_lat": float(r["lat"]), "canonical_lon": float(r["lon"]),
              "tier": int(r["tier"]) if r.get("tier") else 3,
+             "map_layer":      r.get("map_layer", ""),
              "enclosure":     r.get("enclosure", ""),
              "building_type": r.get("building_type", ""),
              "material":      r.get("material", ""),
@@ -191,9 +285,13 @@ def load_data(venues_path: Path, db_path: Path) -> dict:
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     try:
-        events          = [dict(r) for r in conn.execute("SELECT * FROM events")]
-        event_venues    = [dict(r) for r in conn.execute("SELECT * FROM event_venues")]
-        event_instances = [dict(r) for r in conn.execute("SELECT * FROM event_instances")]
+        event_tables = load_event_tables(events_path, event_venues_path, event_instances_path)
+        if event_tables is None:
+            events          = [dict(r) for r in conn.execute("SELECT * FROM events")]
+            event_venues    = [dict(r) for r in conn.execute("SELECT * FROM event_venues")]
+            event_instances = [dict(r) for r in conn.execute("SELECT * FROM event_instances")]
+        else:
+            events, event_venues, event_instances = event_tables
         evidence        = [
             dict(r) for r in conn.execute("""
                 SELECT venue_id, source_type, author, title, pub_year,
@@ -238,6 +336,7 @@ def load_data(venues_path: Path, db_path: Path) -> dict:
         conn.close()
     return {
         "venues": venues,
+        "venue_geometries": venue_geometries,
         "events": events,
         "event_venues": event_venues,
         "event_instances": event_instances,
@@ -305,6 +404,9 @@ body {{ font-family: 'Inter', system-ui, 'Georgia', sans-serif; background: #f4f
 .src-legal      {{ background: #f5e0e0; color: #8b1a1a; }}
 .src-poetry     {{ background: #ede0f5; color: #3a1a5c; }}
 .src-letters    {{ background: #e0f5f0; color: #1a5c4a; }}
+.src-newspaper  {{ background: #f8ecd2; color: #8a5a11; }}
+.src-parish     {{ background: #d9f0ec; color: #0f615f; }}
+.src-institutional {{ background: #e4e8f6; color: #304c86; }}
 .no-events {{ color: #999; font-style: italic; font-size: 0.85em; padding: 8px 0; }}
 .sense-pill {{ background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-size: 0.69em; font-weight: 500; }}
 .sense-pill:hover {{ background: #ece8e0; color: #1a1816; }}
@@ -492,7 +594,7 @@ body {{ font-family: 'Inter', system-ui, 'Georgia', sans-serif; background: #f4f
   <div id="particle-legend" style="display:none;padding:2px 0 0 4px;font-size:0.72em;color:#aaa;line-height:1.6;">
     <span style="color:#3a78c8">&#9675;</span> noise &nbsp;
     <span style="color:#b48228">&#9685;</span> smell &nbsp;
-    <span style="color:#b43c3c">&#9679;</span> crowd &nbsp;
+    <span style="color:#a86a3a">&#8644;</span> crowd flow &nbsp;
     <span style="color:#b8960a">&#10022;</span> visual &nbsp;
     <span style="color:#7a7a50">&#126;</span> smoke
   </div>
@@ -535,6 +637,7 @@ const EVENTS = {EVENTS_JSON};
 const EVENT_VENUES = {EVENT_VENUES_JSON};
 const EVENT_INSTANCES = {EVENT_INSTANCES_JSON};
 const VENUES = {VENUES_JSON};
+const VENUE_GEOMETRIES = {VENUE_GEOMETRIES_JSON};
 const EVIDENCE = {EVIDENCE_JSON};
 
 // ── Environmental data ─────────────────────────────────────────────────────
@@ -695,6 +798,66 @@ const MILESTONES = {{
     1789: 'French Revolution',   1803: 'Ranelagh closes',
 }};
 
+function getBasemapKeyForYear(year) {{
+    return year < 1740 ? 'Modern (CartoDB)'
+         : year < 1791 ? 'Rocque 1746'
+         : 'Horwood 1792\u201399';
+}}
+
+function _matchesBasemapMapLayer(mapLayer, basemapKey) {{
+    const ml = mapLayer || '';
+    if (basemapKey === 'Rocque 1746') return ml.includes('rocque_1746');
+    if (basemapKey === 'Horwood 1792\u201399') return ml.includes('horwood_1799');
+    return true;
+}}
+
+function _pickVenueGeometry(v, year) {{
+    const candidates = VENUE_GEOMETRIES[v.id] || [];
+    let best = null;
+    let bestSpan = Infinity;
+    candidates.forEach(g => {{
+        if (g.year_start !== null && year < g.year_start) return;
+        if (g.year_end !== null && year > g.year_end) return;
+        const spanStart = g.year_start !== null ? g.year_start : 1660;
+        const spanEnd = g.year_end !== null ? g.year_end : 1820;
+        const span = spanEnd - spanStart;
+        if (!best || span < bestSpan) {{
+            best = g;
+            bestSpan = span;
+        }}
+    }});
+    return best;
+}}
+
+function _distanceMeters(lat0, lon0, lat1, lon1) {{
+    const phi = ((lat0 + lat1) / 2) * Math.PI / 180;
+    const dx = (lon1 - lon0) * 111320 * Math.cos(phi);
+    const dy = (lat1 - lat0) * 110540;
+    return Math.sqrt(dx * dx + dy * dy);
+}}
+
+function _venuePlacementSummary(v, year, shortForm=false) {{
+    const basemapKey = getBasemapKeyForYear(year);
+    const shift = _distanceMeters(v.canonical_lat, v.canonical_lon, v.lat, v.lon);
+    if (v.display_mode === 'epoch') {{
+        const parts = [];
+        parts.push(v.display_source || basemapKey);
+        if (v.display_confidence) parts.push(v.display_confidence + ' confidence');
+        if (!shortForm && shift >= 5) parts.push('shifted ' + Math.round(shift) + 'm from canonical point');
+        if (!shortForm && v.display_notes) parts.push(v.display_notes);
+        return shortForm
+            ? 'map: ' + parts.slice(0, 2).join(' \u00b7 ')
+            : 'Map placement: ' + parts.join(' \u00b7 ');
+    }}
+    if (basemapKey === 'Modern (CartoDB)') return shortForm ? '' : 'Map placement: canonical point on modern basemap.';
+    const support = _matchesBasemapMapLayer(v.map_layer, basemapKey)
+        ? 'no plan-specific geometry recorded yet'
+        : 'nearest surveyed plan fallback';
+    return shortForm
+        ? 'map: canonical point on ' + basemapKey
+        : 'Map placement: canonical point on ' + basemapKey + ' (' + support + ').';
+}}
+
 let playSpeed = 500;
 
 // Evidence count per venue (for literary badge)
@@ -785,7 +948,7 @@ const baseLayers = {{
        minZoom: 11, maxZoom: 17, maxNativeZoom: 16, opacity: 0.9 }}
   ),
 }};
-L.control.layers(baseLayers, {{}}, {{ collapsed: false }}).addTo(map);
+const layerControl = L.control.layers(baseLayers, {{}}, {{ collapsed: false }}).addTo(map);
 
 // ── Auto-switching basemap ─────────────────────────────────────────────────
 let _autoBasemap = true;
@@ -793,18 +956,30 @@ let _currentBaseKey = 'Modern (CartoDB)';
 
 function updateBasemap(year) {{
     if (!_autoBasemap) return;
-    const key = year < 1740 ? 'Modern (CartoDB)'
-              : year < 1791 ? 'Rocque 1746'
-              : 'Horwood 1792\u201399';
-    if (key === _currentBaseKey) return;
-    if (baseLayers[_currentBaseKey]) map.removeLayer(baseLayers[_currentBaseKey]);
-    baseLayers[key].addTo(map);
+    const key = getBasemapKeyForYear(year);
+    const targetLayer = baseLayers[key];
+    Object.entries(baseLayers).forEach(([name, layer]) => {{
+        if (name !== key && map.hasLayer(layer)) map.removeLayer(layer);
+    }});
+    if (key === _currentBaseKey && map.hasLayer(targetLayer)) return;
+    if (!map.hasLayer(baseLayers[key])) baseLayers[key].addTo(map);
     _currentBaseKey = key;
 }}
 
-// Manual layer-control override disables auto-switching
+function bindBasemapManualOverride() {{
+    const container = layerControl.getContainer();
+    if (!container) return;
+    const disableAuto = (evt) => {{
+        if (!(evt.target instanceof HTMLElement)) return;
+        if (!evt.target.classList.contains('leaflet-control-layers-selector')) return;
+        _autoBasemap = false;
+    }};
+    container.addEventListener('click', disableAuto);
+    container.addEventListener('change', disableAuto);
+}}
+bindBasemapManualOverride();
+
 map.on('baselayerchange', (e) => {{
-    _autoBasemap = false;
     _currentBaseKey = e.name;
 }});
 
@@ -848,6 +1023,28 @@ function enableAutoBasemap() {{
     _currentBaseKey = '';  // force switch on next call
     const yr = parseInt(document.getElementById('year-slider').value);
     updateBasemap(yr);
+}}
+
+function _applyVenueDisplayGeometry(year) {{
+    VENUES.forEach(v => {{
+        const geom = _pickVenueGeometry(v, year);
+        const nextLat = geom ? geom.lat : v.canonical_lat;
+        const nextLon = geom ? geom.lon : v.canonical_lon;
+        v.display_mode = geom ? 'epoch' : 'canonical';
+        v.display_source = geom && geom.source_map ? geom.source_map : null;
+        v.display_confidence = geom && geom.confidence ? geom.confidence : null;
+        v.display_notes = geom && geom.notes ? geom.notes : null;
+
+        const changed = v.lat !== nextLat || v.lon !== nextLon;
+        v.lat = nextLat;
+        v.lon = nextLon;
+        if (!changed) return;
+
+        if (markersByVenueId[v.id]) markersByVenueId[v.id].setLatLng([v.lat, v.lon]);
+        if (smellRings[v.id]) smellRings[v.id].setLatLng([v.lat, v.lon]);
+        if (noiseRings[v.id]) noiseRings[v.id].setLatLng([v.lat, v.lon]);
+        if (_venueLabels[v.id]) _venueLabels[v.id].setLatLng([v.lat, v.lon]);
+    }});
 }}
 
 // ── Procession routes ─────────────────────────────────────────────────────
@@ -933,6 +1130,78 @@ VENUES.forEach(v => {{
     }}).addTo(map);
 }});
 
+const TIME_BANDS = ['Dawn', 'Morning', 'Midday', 'Afternoon', 'Evening', 'Night'];
+
+function _dutyCycleAttenuation(fraction, floor) {{
+    const clamped = Math.max(0, Math.min(1, fraction));
+    if (clamped >= 1) return 1;
+    return floor + (1 - floor) * clamped;
+}}
+
+function _eventMonthWindow(evt, year) {{
+    if (evt.month_start === null) return null;
+    let mStart = evt.month_start;
+    if (evt.calendar_break && evt.month_start_ns && year >= evt.calendar_break) {{
+        mStart = evt.month_start_ns;
+    }}
+    const mEnd = evt.month_end !== null ? evt.month_end : mStart;
+    return [mStart, mEnd];
+}}
+
+function _eventActivationWeight(evt, year, month, dow, band) {{
+    const ys = evt.year_start, ye = evt.year_end;
+    if (ys !== null && year < ys) return 0;
+    if (ye !== null && year > ye) return 0;
+
+    let weight = 1;
+    const monthWindow = _eventMonthWindow(evt, year);
+    if (monthWindow) {{
+        const [mStart, mEnd] = monthWindow;
+        if (month !== null) {{
+            if (month < mStart || month > mEnd) return 0;
+        }} else {{
+            weight *= _dutyCycleAttenuation((mEnd - mStart + 1) / 12, 0.30);
+        }}
+    }}
+
+    if (evt.day_of_week) {{
+        const days = evt.day_of_week.split('|');
+        if (dow !== null) {{
+            if (!days.includes(dow)) return 0;
+        }} else {{
+            weight *= _dutyCycleAttenuation(days.length / 7, 0.34);
+        }}
+    }}
+
+    if (evt.time_bands) {{
+        const bands = evt.time_bands.split('|');
+        if (band !== null) {{
+            if (!bands.includes(band)) return 0;
+        }} else {{
+            weight *= _dutyCycleAttenuation(bands.length / TIME_BANDS.length, 0.38);
+        }}
+    }}
+
+    return weight;
+}}
+
+function _instanceActivationWeight(inst, month) {{
+    if (month !== null) {{
+        if (inst.month !== null && inst.month !== month) return 0;
+        return 1;
+    }}
+    return inst.month !== null ? 0.32 : 1;
+}}
+
+function _eventMatchesBuildingType(evtId, buildingType) {{
+    if (!buildingType) return true;
+    return EVENT_VENUES.some(ev => {{
+        if (ev.event_id !== evtId) return false;
+        const venue = VENUES.find(v => v.id === ev.venue_id);
+        return !!venue && venue.building_type === buildingType;
+    }});
+}}
+
 function computeIntensity(venueId, year, month, dow, band) {{
     const loads = {{smell: 0, noise: 0, crowd: 0, visual: 0}};
 
@@ -955,51 +1224,28 @@ function computeIntensity(venueId, year, month, dow, band) {{
         // Irregular/one_off events only appear via EVENT_INSTANCES (specific years)
         if (evt.recurrence === 'irregular' || evt.recurrence === 'one_off') return;
 
-        // Year range
-        const ys = evt.year_start, ye = evt.year_end;
-        if (ys !== null && year < ys) return;
-        if (ye !== null && year > ye) return;
+        const activationWeight = _eventActivationWeight(evt, year, month, dow, band);
+        if (activationWeight <= 0) return;
 
-        // Month (with calendar reform)
-        if (month !== null && evt.month_start !== null) {{
-            let mStart = evt.month_start;
-            if (evt.calendar_break && evt.month_start_ns && year >= evt.calendar_break) {{
-                mStart = evt.month_start_ns;
-            }}
-            const mEnd = evt.month_end !== null ? evt.month_end : mStart;
-            if (month < mStart || month > mEnd) return;
-        }}
-
-        // Day of week
-        if (dow !== null && evt.day_of_week) {{
-            const days = evt.day_of_week.split('|');
-            if (!days.includes(dow)) return;
-        }}
-
-        // Time band
-        if (band !== null && evt.time_bands) {{
-            const bands = evt.time_bands.split('|');
-            if (!bands.includes(band)) return;
-        }}
-
-        loads.smell  = Math.min(1, loads.smell  + (evt.smell_load  || 0));
-        loads.noise  = Math.min(1, loads.noise  + (evt.noise_load  || 0));
-        loads.crowd  = Math.min(1, loads.crowd  + (evt.crowd_load  || 0));
-        loads.visual = Math.min(1, loads.visual + (evt.visual_load || 0));
+        loads.smell  = Math.min(1, loads.smell  + (evt.smell_load  || 0) * activationWeight);
+        loads.noise  = Math.min(1, loads.noise  + (evt.noise_load  || 0) * activationWeight);
+        loads.crowd  = Math.min(1, loads.crowd  + (evt.crowd_load  || 0) * activationWeight);
+        loads.visual = Math.min(1, loads.visual + (evt.visual_load || 0) * activationWeight);
     }});
 
     // Event instances for specific year
     EVENT_INSTANCES.forEach(inst => {{
         if (inst.year !== year) return;
-        if (month !== null && inst.month !== null && inst.month !== month) return;
+        const instWeight = _instanceActivationWeight(inst, month);
+        if (instWeight <= 0) return;
         const linked = EVENT_VENUES.some(ev => ev.event_id === inst.event_id && ev.venue_id === venueId);
         if (!linked) return;
         const evt = EVENTS_BY_ID[inst.event_id];
         if (!evt) return;
-        loads.smell  = Math.min(1, loads.smell  + (evt.smell_load  || 0));
-        loads.noise  = Math.min(1, loads.noise  + (evt.noise_load  || 0));
-        loads.crowd  = Math.min(1, loads.crowd  + (evt.crowd_load  || 0));
-        loads.visual = Math.min(1, loads.visual + (evt.visual_load || 0));
+        loads.smell  = Math.min(1, loads.smell  + (evt.smell_load  || 0) * instWeight);
+        loads.noise  = Math.min(1, loads.noise  + (evt.noise_load  || 0) * instWeight);
+        loads.crowd  = Math.min(1, loads.crowd  + (evt.crowd_load  || 0) * instWeight);
+        loads.visual = Math.min(1, loads.visual + (evt.visual_load || 0) * instWeight);
     }});
 
     // ── D5: Evidence density boost ────────────────────────────────────────
@@ -1037,12 +1283,27 @@ function computeIntensity(venueId, year, month, dow, band) {{
     loads.crowd  = Math.min(1, loads.crowd  + densityBoost * 0.4);
     loads.visual = Math.min(1, loads.visual + densityBoost * 0.4 + thermalBoost * thermalMult);
 
+    // Smoke load: SO2 index × enclosure modifier × zone industrial intensity
+    const _smokDecade = Math.floor(year / 10) * 10;
+    const _smokRow = SMOKE_DATA_ENV.find(s => s.decade_start === _smokDecade)
+                  || SMOKE_DATA_ENV[SMOKE_DATA_ENV.length - 1];
+    const _so2 = _smokRow ? _smokRow.so2_index : 0;
+    const _zoneRaw = _venue ? getZoneForPoint(_venue.lat, _venue.lon) : null;
+    const _zoneInterp = _zoneRaw ? interpolateZoneProps(_zoneRaw, year) : null;
+    const _indIntensity = _zoneInterp ? (_zoneInterp.industrial_intensity || 0.3) : 0.3;
+    loads.smoke = Math.min(1, _so2 * smokeMult * _indIntensity);
+
     loads.composite = (loads.smell + loads.noise + loads.crowd + loads.visual) / 4;
     return loads;
 }}
 
-function intensityColour(c) {{
+function intensityColour(c, modality = null) {{
     if (c < 0.01) return '#aaaaaa';
+    if (modality === 'crowd') {{
+        if (c < 0.3) return '#d3a262';
+        if (c < 0.6) return '#a86b3f';
+        return '#7a4629';
+    }}
     if (c < 0.3)  return '#f59e0b';
     if (c < 0.6)  return '#f97316';
     return '#dc2626';
@@ -1134,6 +1395,7 @@ function updateMap() {{
     const dow   = state.dow;
     const band  = state.band;
     document.getElementById('year-display').textContent = year;
+    _applyVenueDisplayGeometry(year);
     updateEnvIndicators(year, month);
     _projectStreets(year);
     updateBasemap(year);
@@ -1176,8 +1438,13 @@ function updateMap() {{
 
         // If a sense filter is active, drive display from that modality alone
         const displayLoad = state.modality ? (intensity[state.modality] || 0) : intensity.composite;
-        const col = intensityColour(displayLoad);
-        const r = displayLoad < 0.01 ? 4 : 4 + displayLoad * 14;
+        const isCrowdMode = state.modality === 'crowd';
+        const col = intensityColour(displayLoad, state.modality);
+        const r = displayLoad < 0.01
+            ? (isCrowdMode ? 3.4 : 4)
+            : (isCrowdMode
+                ? 3.4 + Math.pow(displayLoad, 0.78) * 4.8
+                : 4 + displayLoad * 14);
 
         marker.setRadius(r);
         const hasEvidence = (evidenceCountByVenue[v.id] || 0) > 0;
@@ -1189,7 +1456,9 @@ function updateMap() {{
         if (btDimmed) {{
             marker.setStyle({{
                 fillColor: '#aaa', color: '#666',
-                fillOpacity: 0.08, weight: 0.5, dashArray: dashArray,
+                fillOpacity: isCrowdMode ? 0.05 : 0.08,
+                weight: 0.5,
+                dashArray: dashArray,
             }});
         }} else if (displayLoad < 0.01) {{
             if (state.tierView) {{
@@ -1207,7 +1476,8 @@ function updateMap() {{
         }} else {{
             marker.setStyle({{
                 fillColor: col, color: state.tierView ? tierCol : col,
-                fillOpacity: 0.78, weight: state.tierView ? 2 : 1,
+                fillOpacity: isCrowdMode ? 0.60 : 0.78,
+                weight: state.tierView ? 1.6 : (isCrowdMode ? 0.9 : 1),
                 dashArray: dashArray,
             }});
         }}
@@ -1220,6 +1490,10 @@ function updateMap() {{
         const metaParts = [v.enclosure, v.building_type, v.material, v.capacity].filter(Boolean);
         if (metaParts.length) {{
             tip += `<br><span style="font-size:0.80em;opacity:0.55;font-style:italic">${{metaParts.join(' \u00b7 ')}}</span>`;
+        }}
+        const placementTip = _venuePlacementSummary(v, year, true);
+        if (placementTip) {{
+            tip += `<br><span style="font-size:0.76em;opacity:0.50;font-style:italic">${{placementTip}}</span>`;
         }}
         if (intensity.composite > 0.01) {{
             const parts = [];
@@ -1240,7 +1514,7 @@ function updateMap() {{
         if (smellRings[v.id]) smellRings[v.id].setRadius(intensity.smell * 400);
         if (noiseRings[v.id]) noiseRings[v.id].setRadius(intensity.noise * 300);
 
-        if (intensity.composite > 0.01) {{
+        if (!btDimmed && intensity.composite > 0.01) {{
             const evts = getActiveEvents(v.id, year, month, dow, band);
             evts.forEach(e => {{
                 if (!activeEvents.find(x => x.evt.event_id === e.evt.event_id && x.venueId === v.id))
@@ -1251,7 +1525,7 @@ function updateMap() {{
 
     // Show/hide procession route polylines
     Object.entries(routeLines).forEach(([evtId, line]) => {{
-        if (isEventActive(evtId, year, month, dow, band)) {{
+        if (isEventActive(evtId, year, month, dow, band) && _eventMatchesBuildingType(evtId, state.buildingType)) {{
             if (!map.hasLayer(line)) line.addTo(map);
         }} else {{
             if (map.hasLayer(line)) map.removeLayer(line);
@@ -1280,31 +1554,19 @@ function getActiveEvents(venueId, year, month, dow, band) {{
         if (!evt) return;
         // Irregular/one_off events only appear via EVENT_INSTANCES (specific years)
         if (evt.recurrence === 'irregular' || evt.recurrence === 'one_off') return;
-        const ys = evt.year_start, ye = evt.year_end;
-        if (ys !== null && year < ys) return;
-        if (ye !== null && year > ye) return;
-        if (month !== null && evt.month_start !== null) {{
-            let mStart = evt.month_start;
-            if (evt.calendar_break && evt.month_start_ns && year >= evt.calendar_break) mStart = evt.month_start_ns;
-            const mEnd = evt.month_end !== null ? evt.month_end : mStart;
-            if (month < mStart || month > mEnd) return;
-        }}
-        if (dow !== null && evt.day_of_week) {{
-            if (!evt.day_of_week.split('|').includes(dow)) return;
-        }}
-        if (band !== null && evt.time_bands) {{
-            if (!evt.time_bands.split('|').includes(band)) return;
-        }}
+        const activationWeight = _eventActivationWeight(evt, year, month, dow, band);
+        if (activationWeight <= 0) return;
         const inst = EVENT_INSTANCES.find(i => i.event_id === evt.event_id && i.year === year);
-        results.push({{evt, inst: inst || null}});
+        results.push({{evt, inst: inst || null, weight: activationWeight}});
     }});
     EVENT_INSTANCES.forEach(inst => {{
         if (inst.year !== year) return;
-        if (month !== null && inst.month !== null && inst.month !== month) return;
+        const instWeight = _instanceActivationWeight(inst, month);
+        if (instWeight <= 0) return;
         if (!EVENT_VENUES.some(ev => ev.event_id === inst.event_id && ev.venue_id === venueId)) return;
         const evt = EVENTS_BY_ID[inst.event_id];
         if (!evt || results.find(r => r.evt.event_id === inst.event_id)) return;
-        results.push({{evt, inst}});
+        results.push({{evt, inst, weight: instWeight}});
     }});
     return results;
 }}
@@ -1381,6 +1643,9 @@ function renderVenuePanel(venueId, year, month, dow, band) {{
 
     const evts = getActiveEvents(venueId, year, month, dow, band);
     let html = proseSummary(venueId, evts, year);
+    if (venue) {{
+        html += `<div style="margin:0 0 10px;font-size:0.78em;opacity:0.58;font-style:italic">${{_venuePlacementSummary(venue, year, false)}}</div>`;
+    }}
     html += evts.length
         ? evts.map(e => renderEventCard(e.evt, e.inst)).join('')
         : '<p class="no-events">No institutional events active at this time.</p>';
@@ -1454,22 +1719,7 @@ function togglePlay() {{
 function isEventActive(evtId, year, month, dow, band) {{
     const evt = EVENTS_BY_ID[evtId];
     if (!evt) return false;
-    const ys = evt.year_start, ye = evt.year_end;
-    if (ys !== null && year < ys) return false;
-    if (ye !== null && year > ye) return false;
-    if (month !== null && evt.month_start !== null) {{
-        let mStart = evt.month_start;
-        if (evt.calendar_break && evt.month_start_ns && year >= evt.calendar_break) mStart = evt.month_start_ns;
-        const mEnd = evt.month_end !== null ? evt.month_end : mStart;
-        if (month < mStart || month > mEnd) return false;
-    }}
-    if (dow !== null && evt.day_of_week) {{
-        if (!evt.day_of_week.split('|').includes(dow)) return false;
-    }}
-    if (band !== null && evt.time_bands) {{
-        if (!evt.time_bands.split('|').includes(band)) return false;
-    }}
-    return true;
+    return _eventActivationWeight(evt, year, month, dow, band) > 0;
 }}
 
 document.querySelectorAll('.pill[data-group]').forEach(btn => {{
@@ -1530,6 +1780,7 @@ function clearFilters() {{
     if (_fieldUpdateTimer) {{ clearTimeout(_fieldUpdateTimer); _fieldUpdateTimer = null; }}
     state.month = null; state.dow = null; state.band = null; state.modality = null; state.buildingType = null;
     state.particleMode = null;
+    state.selectedVenue = null;
     document.querySelectorAll('.pill.active, .sense-pill.active, .btype-pill.active').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.particle-btn').forEach(b => b.classList.remove('active'));
     document.querySelector('.particle-btn[data-pmode="off"]')?.classList.add('active');
@@ -1654,8 +1905,8 @@ const MODALITY_PROFILE = {{
     smell:  {{ r: 195, g: 130, b:  25, radius: 2.0, speed: 0.22, maxAge: 900, rise: 0,     maxAlpha: 0.55 }},
     // noise:  fast radial bursts from source, tiny, very short-lived — sound decays quickly
     noise:  {{ r:  90, g: 155, b: 255, radius: 0.7, speed: 5.0,  maxAge:  65, rise: 0,     maxAlpha: 0.95 }},
-    // crowd:  people drawn toward venue, orbital — shows density of gathering
-    crowd:  {{ r: 210, g:  55, b:  55, radius: 1.5, speed: 0.45, maxAge: 340, rise: 0,     maxAlpha: 0.80 }},
+    // crowd: warm ochre density on streets rather than warning-red venue discs
+    crowd:  {{ r: 168, g: 106, b:  58, radius: 1.5, speed: 0.45, maxAge: 340, rise: 0,     maxAlpha: 0.80 }},
     // visual: golden, moderate — spectacle/illumination spilling outward
     visual: {{ r: 220, g: 175, b:  40, radius: 1.0, speed: 0.55, maxAge: 220, rise: 0,     maxAlpha: 0.55 }},
 }};
@@ -1871,42 +2122,236 @@ function _drawSmellHalos() {{
     pCtx.restore();
 }}
 
-// Crowd: graduated filled circles with orbiting micro-dots
-function _drawCrowdCircles() {{
-    if (!pCtx) return;
-    const t = performance.now() / 1000;
-    const isNight = state.band === 'Night';
-    pCtx.save();
-    VENUES.forEach((v, vi) => {{
+// Crowd: render density as occupied / flowing street segments rather than venue discs.
+// This makes market mornings, theatre evenings, and fair-time crushes legible as
+// spatial pressure on streets rather than generic red circles.
+const crowdStreetState = [];
+
+function _crowdStreetTypeMultiplier(t) {{
+    // These multipliers are heuristic: they translate OpenHistoricalMap street classes
+    // into likely carrying capacity / crowd throughput rather than encoding a sourced
+    // historical count dataset for each road type.
+    if (t === 'primary') return 1.10;
+    if (t === 'secondary') return 1.00;
+    if (t === 'tertiary' || t === 'unclassified') return 0.88;
+    if (t === 'residential') return 0.74;
+    if (t === 'service') return 0.66;
+    if (t === 'footway' || t === 'path' || t === 'steps') return 0.58;
+    return 0.82;
+}}
+
+function _crowdBandMultiplier(buildingType, band, dow) {{
+    if (!band) return 1.0;
+    const isSun = dow === 'Sun';
+    if (buildingType === 'market') {{
+        return {{ Dawn: 1.10, Morning: 1.35, Midday: 1.00, Afternoon: 0.52, Evening: 0.16, Night: 0.06 }}[band] || 0.4;
+    }}
+    if (buildingType === 'theatre') {{
+        return {{ Dawn: 0.04, Morning: 0.08, Midday: 0.16, Afternoon: 0.38, Evening: 1.32, Night: 1.08 }}[band] || 0.2;
+    }}
+    if (buildingType === 'assembly' || buildingType === 'garden') {{
+        return {{ Dawn: 0.10, Morning: 0.18, Midday: 0.34, Afternoon: 0.72, Evening: 1.18, Night: 0.88 }}[band] || 0.4;
+    }}
+    if (buildingType === 'court' || buildingType === 'prison') {{
+        return {{ Dawn: 0.22, Morning: 1.00, Midday: 0.88, Afternoon: 0.48, Evening: 0.12, Night: 0.05 }}[band] || 0.3;
+    }}
+    if (buildingType === 'church') {{
+        const sundayBoost = isSun ? 1.22 : 0.85;
+        return ({{ Dawn: 0.30, Morning: 1.00, Midday: 0.42, Afternoon: 0.18, Evening: 0.22, Night: 0.06 }}[band] || 0.2) * sundayBoost;
+    }}
+    if (buildingType === 'street' || buildingType === 'district' || buildingType === 'square') {{
+        return {{ Dawn: 0.36, Morning: 0.72, Midday: 0.92, Afternoon: 0.82, Evening: 0.60, Night: 0.22 }}[band] || 0.5;
+    }}
+    return {{ Dawn: 0.26, Morning: 0.66, Midday: 0.84, Afternoon: 0.78, Evening: 0.68, Night: 0.24 }}[band] || 0.5;
+}}
+
+function _crowdEventProfile(events) {{
+    const profile = {{ strength: 0.62, reach: 0, pressure: 0.18 }};
+    events.forEach(({{ evt, weight = 1 }}) => {{
+        const eventWeight = Math.max(0, weight);
+        if (evt.category === 'weekly_market') {{
+            profile.strength += 0.46 * eventWeight;
+            profile.reach    += 54 * eventWeight;
+            profile.pressure += 0.18 * eventWeight;
+        }} else if (evt.category === 'annual_fair') {{
+            profile.strength += 0.70 * eventWeight;
+            profile.reach    += 82 * eventWeight;
+            profile.pressure += 0.30 * eventWeight;
+        }} else if (evt.category === 'cultural_event') {{
+            profile.strength += 0.24 * eventWeight;
+            profile.reach    += 34 * eventWeight;
+            profile.pressure += 0.12 * eventWeight;
+        }} else if (evt.category === 'civic_procession') {{
+            profile.strength += 0.34 * eventWeight;
+            profile.reach    += 58 * eventWeight;
+            profile.pressure += 0.20 * eventWeight;
+        }} else if (evt.category === 'execution') {{
+            profile.strength += 0.46 * eventWeight;
+            profile.reach    += 60 * eventWeight;
+            profile.pressure += 0.24 * eventWeight;
+        }} else if (evt.category === 'frost_fair') {{
+            profile.strength += 0.56 * eventWeight;
+            profile.reach    += 92 * eventWeight;
+            profile.pressure += 0.24 * eventWeight;
+        }}
+    }});
+    return profile;
+}}
+
+function _rebuildCrowdStreetState() {{
+    crowdStreetState.length = 0;
+    if (!streetSegsPx.length || !pCanvas) return;
+    const year  = parseInt(document.getElementById('year-slider').value);
+    const month = state.month;
+    const dow   = state.dow;
+    const band  = state.band;
+
+    const crowdProfiles = [];
+    VENUES.forEach(v => {{
+        if (state.buildingType && v.building_type !== state.buildingType) return;
         const loads = venueIntensityCache[v.id];
         if (!loads || loads.crowd < 0.02) return;
         const vp = venuePx[v.id];
         if (!vp) return;
-        let radius = 8 + loads.crowd * 25;
-        if (isNight) radius *= 0.6;
-        const isLarge = parseInt(v.capacity) > 500;
-        const fillA   = isLarge ? 0.22 : 0.15;
-        const strokeA = isLarge ? 0.50 : 0.40;
-        // Filled circle
-        pCtx.fillStyle   = `rgba(210,55,55,${{fillA}})`;
-        pCtx.strokeStyle = `rgba(210,55,55,${{strokeA}})`;
-        pCtx.lineWidth   = isLarge ? 1.5 : 1;
-        pCtx.beginPath();
-        pCtx.arc(vp.px, vp.py, radius, 0, Math.PI * 2);
-        pCtx.fill();
-        pCtx.stroke();
-        // Orbiting micro-dots representing individuals
-        const dotCount = Math.max(3, Math.min(8, Math.floor(3 + loads.crowd * 5)));
-        const orbitR   = radius * 0.65;
-        pCtx.fillStyle = 'rgba(210,55,55,0.65)';
-        for (let d = 0; d < dotCount; d++) {{
-            const angle = t * 0.8 + (d / dotCount) * Math.PI * 2 + vi * 0.5;
-            pCtx.beginPath();
-            pCtx.arc(vp.px + Math.cos(angle) * orbitR,
-                     vp.py + Math.sin(angle) * orbitR, 2, 0, Math.PI * 2);
-            pCtx.fill();
+        const events = getActiveEvents(v.id, year, month, dow, band);
+        const bandMult = _crowdBandMultiplier(v.building_type, band, dow);
+        const evtProfile = _crowdEventProfile(events);
+        const cap = parseInt(v.capacity) || 0;
+        const capMult = cap > 0 ? Math.min(1.45, 0.84 + cap / 720) : 1.0;
+        const strength = loads.crowd * bandMult * evtProfile.strength * capMult * 0.72;
+        if (strength < 0.02) return;
+
+        let reach = 54 + loads.crowd * 105 + evtProfile.reach;
+        if (v.building_type === 'market') reach += 42;
+        else if (v.building_type === 'district' || v.building_type === 'street' || v.building_type === 'square') reach += 28;
+        else if (v.building_type === 'assembly' || v.building_type === 'garden') reach += 22;
+        else if (v.building_type === 'theatre') reach += 18;
+
+        crowdProfiles.push({{
+            v, vp, strength, reach,
+            pressure: evtProfile.pressure,
+            events,
+        }});
+    }});
+
+    if (!crowdProfiles.length) return;
+
+    streetSegsPx.forEach(seg => {{
+        const mx = (seg.x0 + seg.x1) * 0.5;
+        const my = (seg.y0 + seg.y1) * 0.5;
+        const dirX = (seg.x1 - seg.x0) / seg.len;
+        const dirY = (seg.y1 - seg.y0) / seg.len;
+        const capMult = _crowdStreetTypeMultiplier(seg.t);
+        const choke = Math.min(1.9, (seg.h || 1.2) / 1.15);
+
+        let density = 0;
+        let flow = 0;
+        let pulse = 0;
+        let knot = 0;
+
+        crowdProfiles.forEach(profile => {{
+            const dx = mx - profile.vp.px;
+            const dy = my - profile.vp.py;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 1 || dist > profile.reach) return;
+
+            const radialX = dx / dist;
+            const radialY = dy / dist;
+            const align = Math.abs(dirX * radialX + dirY * radialY);
+            const corridor = 0.58 + align * 0.72;
+            const distWeight = Math.pow(1 - dist / profile.reach, 1.55);
+
+            let local = profile.strength * capMult * choke * corridor * distWeight;
+
+            // Major streets take more flow from markets and fairs; alleys become choke-points.
+            if (profile.v.building_type === 'market' &&
+                (seg.t === 'primary' || seg.t === 'secondary')) {{
+                local *= 1.18;
+            }}
+            if ((seg.t === 'footway' || seg.t === 'path' || seg.t === 'steps') &&
+                profile.v.building_type === 'market') {{
+                local *= 0.88;
+            }}
+            if (profile.events.some(e => e.evt.category === 'annual_fair') &&
+                (seg.t === 'residential' || seg.t === 'service' || seg.t === 'footway')) {{
+                local *= 1.12;
+            }}
+
+            local *= 0.82;
+            density += local;
+            flow    += local * (0.64 + align * 0.46);
+            pulse   += local * profile.pressure;
+            knot = Math.max(knot, local * choke);
+        }});
+
+        if (density > 0.05) {{
+            crowdStreetState.push({{
+                seg,
+                density: Math.min(1, density),
+                flow:    Math.min(1, flow),
+                pulse:   Math.min(1, pulse),
+                knot:    Math.min(1, knot),
+                choke,
+            }});
         }}
     }});
+}}
+
+function _drawCrowdDensity() {{
+    if (!pCtx || !crowdStreetState.length) return;
+    const t = performance.now() / 1000;
+    const isNight = state.band === 'Night';
+    pCtx.save();
+    crowdStreetState.forEach(entry => {{
+        const seg = entry.seg;
+        const pulse = 0.90 + Math.sin(t * (0.8 + entry.pulse * 1.7) + (seg.x0 + seg.y0) * 0.01) * 0.10;
+        const major = seg.t === 'primary' || seg.t === 'secondary';
+        const widthBase = major ? 4.4 : (seg.t === 'tertiary' || seg.t === 'unclassified' ? 3.4 : 2.4);
+        const outerWidth = widthBase + entry.density * (major ? 5.2 : 4.1);
+        const coreWidth  = Math.max(1.2, outerWidth * (0.32 + 0.14 / entry.choke));
+        const outerAlpha = Math.min(0.18, entry.density * 0.12 * pulse * (isNight ? 0.68 : 1.0));
+        const coreAlpha  = Math.min(0.36, entry.density * 0.22 * pulse * (isNight ? 0.74 : 1.0)) * Math.min(1.28, entry.choke * 0.78);
+        const dashLen = Math.max(3, 8 - entry.flow * 3.5);
+        const gapLen  = Math.max(4, 10 - entry.flow * 3.0);
+        const dashOffset = -(t * (11 + entry.flow * 20));
+
+        // Broad occupied-street underlay
+        pCtx.setLineDash([]);
+        pCtx.lineCap = 'round';
+        pCtx.strokeStyle = `rgba(132,78,48,${{outerAlpha.toFixed(2)}})`;
+        pCtx.lineWidth = outerWidth;
+        pCtx.beginPath();
+        pCtx.moveTo(seg.x0, seg.y0);
+        pCtx.lineTo(seg.x1, seg.y1);
+        pCtx.stroke();
+
+        // Moving core flow
+        pCtx.setLineDash([dashLen, gapLen]);
+        pCtx.lineDashOffset = dashOffset;
+        pCtx.strokeStyle = `rgba(172,104,58,${{coreAlpha.toFixed(2)}})`;
+        pCtx.lineWidth = coreWidth;
+        pCtx.beginPath();
+        pCtx.moveTo(seg.x0, seg.y0);
+        pCtx.lineTo(seg.x1, seg.y1);
+        pCtx.stroke();
+
+        // Congestion knot at the segment centre for very dense pockets
+        if (entry.knot > 0.62) {{
+            const mx = (seg.x0 + seg.x1) * 0.5;
+            const my = (seg.y0 + seg.y1) * 0.5;
+            const angle = Math.atan2(seg.y1 - seg.y0, seg.x1 - seg.x0);
+            const kAlpha = Math.min(0.22, (entry.knot - 0.52) * 0.22);
+            pCtx.save();
+            pCtx.translate(mx, my);
+            pCtx.rotate(angle);
+            pCtx.fillStyle = `rgba(110,60,34,${{kAlpha.toFixed(2)}})`;
+            pCtx.beginPath();
+            pCtx.ellipse(0, 0, 3 + entry.knot * 4.4, 1.3 + entry.knot * 1.8, 0, 0, Math.PI * 2);
+            pCtx.fill();
+            pCtx.restore();
+        }}
+    }});
+    pCtx.setLineDash([]);
     pCtx.restore();
 }}
 
@@ -1958,7 +2403,7 @@ function particleFrame() {{
         const activeModals = state.modality ? [state.modality] : ['smell', 'noise', 'crowd', 'visual'];
         if (activeModals.includes('noise'))  {{ _updateNoiseRings(); _drawNoiseRings(); }}
         if (activeModals.includes('smell'))  _drawSmellHalos();
-        if (activeModals.includes('crowd'))  _drawCrowdCircles();
+        if (activeModals.includes('crowd'))  _drawCrowdDensity();
         if (activeModals.includes('visual')) _drawVisualGlow();
         particleRaf = requestAnimationFrame(particleFrame);
         return;
@@ -2313,6 +2758,9 @@ function _buildFlowField() {{
         if (fm > 2.0) {{ fieldDx[ci] = fieldDx[ci] / fm * 2.0; fieldDy[ci] = fieldDy[ci] / fm * 2.0; }}
     }}
 
+    if (activeModals.includes('crowd')) _rebuildCrowdStreetState();
+    else crowdStreetState.length = 0;
+
     // Assign each particle its own modality profile for distinct visual rendering
     // Partition proportionally: compute total intensity per modality across active venues
     const modalTotals = {{}};
@@ -2602,6 +3050,7 @@ function _buildNetworkField() {{
 let _fieldUpdateTimer = null;
 function _scheduleFieldUpdate() {{
     if (_fieldUpdateTimer) clearTimeout(_fieldUpdateTimer);
+    if (pCtx && pCanvas) pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
     _fieldUpdateTimer = setTimeout(() => {{ updateParticleField(); }}, 400);
 }}
 
@@ -2626,7 +3075,7 @@ window.addEventListener('resize', _resizeHeatmap);
 const HEATMAP_RGB = {{
     smell:     [195, 130, 25],
     noise:     [60,  130, 220],
-    crowd:     [200, 55,  55],
+    crowd:     [168, 106, 58],
     visual:    [50,  175, 70],
     composite: [200, 105, 35],
 }};
@@ -2886,9 +3335,23 @@ updateMap();
 """
 
 
-def build(venues_path: Path = VENUES_PATH, db_path: Path = DB_PATH,
-          out_path: Path = OUT_PATH) -> None:
-    data = load_data(venues_path, db_path)
+def build(
+    venues_path: Path = VENUES_PATH,
+    db_path: Path = DB_PATH,
+    out_path: Path = OUT_PATH,
+    venue_geometries_path: Path = VENUE_GEOMETRIES_PATH,
+    events_path: Path = EVENTS_PATH,
+    event_venues_path: Path = EVENT_VENUES_PATH,
+    event_instances_path: Path = EVENT_INSTANCES_PATH,
+) -> None:
+    data = load_data(
+        venues_path,
+        db_path,
+        venue_geometries_path,
+        events_path,
+        event_venues_path,
+        event_instances_path,
+    )
 
     zones_path = Path(__file__).parent / "zones.json"
     zones_data = json.loads(zones_path.read_text(encoding="utf-8")) if zones_path.exists() else {"type": "FeatureCollection", "features": []}
@@ -2900,6 +3363,7 @@ def build(venues_path: Path = VENUES_PATH, db_path: Path = DB_PATH,
         EVENT_VENUES_JSON    = json.dumps(data["event_venues"],    ensure_ascii=False),
         EVENT_INSTANCES_JSON = json.dumps(data["event_instances"], ensure_ascii=False),
         VENUES_JSON          = json.dumps(data["venues"],          ensure_ascii=False),
+        VENUE_GEOMETRIES_JSON = json.dumps(data["venue_geometries"], ensure_ascii=False),
         EVIDENCE_JSON        = json.dumps(data["evidence"],        ensure_ascii=False),
         CET_JSON             = json.dumps(data["cet"],             ensure_ascii=False),
         MORTALITY_JSON       = json.dumps(data["mortality"],       ensure_ascii=False),
