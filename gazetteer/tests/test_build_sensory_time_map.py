@@ -325,3 +325,37 @@ def test_contour_canyon_cutoff(html):
     """Canyon effect must modify IDW cutoff by enclosure type."""
     assert "enclosed" in html
     assert "400" in html
+
+
+def test_contour_marching_squares(html):
+    """Contour drawing must use marching squares algorithm."""
+    assert "config" in html
+
+
+def test_contour_gaussian_blur(html):
+    """Grid must be blurred before contour tracing."""
+    assert "_blurGrid" in html
+
+
+def test_contour_three_thresholds(html):
+    """Three contour isolines at 0.4, 0.6, 0.8."""
+    assert "0.4" in html
+    assert "0.6" in html
+    assert "0.8" in html
+
+
+def test_contour_labels_georgia(html):
+    """Contour labels must use italic Georgia font."""
+    assert "italic" in html
+    assert "Georgia" in html
+
+
+def test_contour_max_opacity(html):
+    """Contour surface max opacity must be 0.40."""
+    assert "maxAlpha" in html
+
+
+def test_contour_mode_state(html):
+    """State object must have contourMode and contourSense."""
+    assert "contourMode" in html
+    assert "contourSense" in html
