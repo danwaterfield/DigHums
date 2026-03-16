@@ -466,6 +466,10 @@ body {{ font-family: 'Inter', system-ui, 'Georgia', sans-serif; background: #f4f
 #controls.night-ctrl .pill.active {{ background: #1a4870; border-color: #2a70b8; color: #aadcff; }}
 #controls.night-ctrl .btype-pill {{ background: #0e1e30 !important; filter: brightness(1.4) saturate(1.3); }}
 #controls.night-ctrl #milestone-label {{ color: #8aabcc; }}
+#controls.night-ctrl .contour-btn {{ background: #1a2a3a; border-color: #333; color: #6080a0; }}
+#controls.night-ctrl .contour-btn.active {{ background: #1e3c6e; color: #fff; }}
+#controls.night-ctrl .sense-btn {{ background: #1a2a3a; border-color: #333; color: #6080a0; }}
+#controls.night-ctrl .sense-btn.active {{ background: #3a5a2a; color: #fff; }}
 /* ── Map legend ── */
 #map-legend {{ position: absolute; bottom: 32px; left: 10px; z-index: 500; background: rgba(255,255,255,0.93); border: 1px solid #d8d4cc; border-radius: 4px; padding: 7px 9px; font-size: 0.72em; min-width: 108px; box-shadow: 0 1px 5px rgba(0,0,0,0.14); pointer-events: none; transition: background 0.8s, border-color 0.8s, color 0.8s; }}
 .leg-title {{ font-weight: 600; margin-bottom: 4px; font-size: 0.85em; letter-spacing: 0.05em; color: inherit; text-transform: uppercase; }}
@@ -487,6 +491,7 @@ body {{ font-family: 'Inter', system-ui, 'Georgia', sans-serif; background: #f4f
 .sense-btn.active {{ background: #3a5a2a; border-color: #3a5a2a; color: #fff;
                     opacity: 1; font-weight: 600; }}
 #sense-row {{ display: none; }}
+.contour-surface {{ pointer-events: none; }}
 /* ── Tier marker colours (used in tier-view mode) ── */
 </style>
 </head>
@@ -2275,7 +2280,7 @@ const ContourSurface = L.GridLayer.extend({{
 }});
 
 let contourLayer = null;
-contourLayer = new ContourSurface({{ opacity: 1, zIndex: 400 }});
+contourLayer = new ContourSurface({{ opacity: 1, zIndex: 400, className: 'contour-surface' }});
 
 const _heatBase    = document.createElement('canvas');
 const _heatBaseCtx = _heatBase.getContext('2d');
