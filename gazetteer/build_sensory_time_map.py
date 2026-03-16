@@ -2086,8 +2086,9 @@ const ContourSurface = L.GridLayer.extend({{
         const ctx = tile.getContext('2d');
 
         const zoom = coords.z;
-        const gridW = zoom >= 15 ? 64 : 256;
-        const gridH = zoom >= 15 ? 64 : 256;
+        // Coarse grid — 32x32 is fast enough for smooth wash after bilinear upscale
+        const gridW = 32;
+        const gridH = 32;
         const cellW = tileSize.x / gridW;
         const cellH = tileSize.y / gridH;
 
@@ -2096,30 +2097,51 @@ const ContourSurface = L.GridLayer.extend({{
         const rampKey = mode === 'atmosphere' ? 'atmosphere' : state.contourSense;
         const ramp = CONTOUR_RAMPS[rampKey] || CONTOUR_RAMPS.atmosphere;
 
+        // Precompute venue pixel positions in tile space (avoids per-cell Haversine)
+        const tileOriginX = coords.x * tileSize.x;
+        const tileOriginY = coords.y * tileSize.y;
+        // Metres per pixel at this zoom (approximate, using lat of London ~51.5°)
+        const mPerPx = 156543.03 * Math.cos(51.5 * Math.PI / 180) / Math.pow(2, zoom);
+        const venuesPx = [];
+        VENUES.forEach(v => {{
+            const cache = venueIntensityCache[v.id];
+            if (!cache) return;
+            const pt = map.project(L.latLng(v.lat, v.lon), zoom);
+            const enc = v.enclosure || 'open';
+            const cutoffM = enc === 'enclosed' ? 400 : enc === 'semi_open' ? 600 : 800;
+            venuesPx.push({{
+                px: pt.x - tileOriginX,
+                py: pt.y - tileOriginY,
+                lon: v.lon,
+                cache: cache,
+                cutoffPx: cutoffM / mPerPx,
+                cutoffPx2: (cutoffM / mPerPx) ** 2,
+            }});
+        }});
+
         const _idwPass = (gridOut, modality, applyWindBias) => {{
             for (let gy = 0; gy < gridH; gy++) {{
+                const py = (gy + 0.5) * cellH;
                 for (let gx = 0; gx < gridW; gx++) {{
-                    const px = coords.x * tileSize.x + (gx + 0.5) * cellW;
-                    const py = coords.y * tileSize.y + (gy + 0.5) * cellH;
-                    const latlng = map.unproject([px, py], zoom);
+                    const px = (gx + 0.5) * cellW;
                     let wSum = 0, vSum = 0;
-                    VENUES.forEach(v => {{
-                        const cache = venueIntensityCache[v.id];
-                        if (!cache) return;
-                        const intensity = cache[modality] || 0;
-                        if (intensity <= 0.01) return;
-                        let dist = latlng.distanceTo(L.latLng(v.lat, v.lon));
+                    for (let vi = 0; vi < venuesPx.length; vi++) {{
+                        const vp = venuesPx[vi];
+                        const intensity = vp.cache[modality] || 0;
+                        if (intensity <= 0.01) continue;
+                        let dx = px - vp.px, dy = py - vp.py;
+                        // Wind bias: pixel east of venue → dist compressed (reaches further)
                         if (applyWindBias) {{
-                            if (v.lon < latlng.lng) dist *= 0.77;
-                            else if (v.lon > latlng.lng) dist *= 1.43;
+                            if (dx > 0) dx *= 0.77;    // pixel is east of venue
+                            else dx *= 1.43;            // pixel is west of venue
                         }}
-                        const enc = v.enclosure || 'open';
-                        const cutoff = enc === 'enclosed' ? 400 : enc === 'semi_open' ? 600 : 800;
-                        if (dist > cutoff) return;
-                        const w = 1.0 / Math.max(dist, 1) ** 2;
+                        const dist2 = dx * dx + dy * dy;
+                        if (dist2 > vp.cutoffPx2) continue;
+                        const distM = Math.sqrt(dist2) * mPerPx;
+                        const w = 1.0 / Math.max(distM, 1) ** 2;
                         wSum += w;
                         vSum += w * intensity;
-                    }});
+                    }}
                     gridOut[gy * gridW + gx] = wSum > 0 ? vSum / wSum : 0;
                 }}
             }}
@@ -2140,7 +2162,7 @@ const ContourSurface = L.GridLayer.extend({{
             _idwPass(grid, state.contourSense, false);
         }}
 
-        const sigma = zoom >= 15 ? 1 : 2;
+        const sigma = 1;  // light blur on 32x32 grid
         this._blurGrid(grid, gridW, gridH, sigma);
 
         // Bilinear interpolation for gradient wash
