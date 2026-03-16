@@ -2128,6 +2128,9 @@ const ContourSurface = L.GridLayer.extend({{
             _idwPass(grid, state.contourSense, false);
         }}
 
+        const sigma = zoom >= 15 ? 1 : 2;
+        this._blurGrid(grid, gridW, gridH, sigma);
+
         // Bilinear interpolation for gradient wash
         const imgData = ctx.createImageData(tileSize.x, tileSize.y);
         for (let py2 = 0; py2 < tileSize.y; py2++) {{
