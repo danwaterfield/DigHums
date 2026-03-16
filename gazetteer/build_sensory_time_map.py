@@ -1781,7 +1781,14 @@ document.querySelectorAll('.sense-btn').forEach(btn => {{
 function clearFilters() {{
     state.month = null; state.dow = null; state.band = null; state.modality = null; state.buildingType = null;
     state.selectedVenue = null;
+    state.contourMode = 'off'; state.contourSense = 'smoke';
     document.querySelectorAll('.pill.active, .sense-pill.active, .btype-pill.active').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.contour-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('.contour-btn[data-cmode="off"]')?.classList.add('active');
+    document.querySelectorAll('.sense-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('.sense-btn[data-sense="smoke"]')?.classList.add('active');
+    document.getElementById('sense-row').style.display = 'none';
+    if (contourLayer && map.hasLayer(contourLayer)) map.removeLayer(contourLayer);
     updateMap();
 }}
 
