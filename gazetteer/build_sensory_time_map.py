@@ -475,6 +475,18 @@ body {{ font-family: 'Inter', system-ui, 'Georgia', sans-serif; background: #f4f
 .overlay-btn {{ background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-size: 0.69em; font-weight: 500; }}
 .overlay-btn:hover {{ background: #ece8e0; color: #1a1816; }}
 .overlay-btn.active {{ background: #5c3a98; border-color: #5c3a98; color: #fff; font-weight: 600; }}
+/* ── Contour overlay buttons ── */
+.contour-btn {{ background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 8px;
+               cursor: pointer; border-radius: 3px; font-size: 0.69em; font-weight: 500; opacity: 0.75; }}
+.contour-btn:hover {{ opacity: 1; }}
+.contour-btn.active {{ background: #1e3c6e; border-color: #1e3c6e; color: #fff;
+                      opacity: 1; font-weight: 600; }}
+.sense-btn {{ background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 8px;
+             cursor: pointer; border-radius: 3px; font-size: 0.69em; font-weight: 500; opacity: 0.75; }}
+.sense-btn:hover {{ opacity: 1; }}
+.sense-btn.active {{ background: #3a5a2a; border-color: #3a5a2a; color: #fff;
+                    opacity: 1; font-weight: 600; }}
+#sense-row {{ display: none; }}
 /* ── Tier marker colours (used in tier-view mode) ── */
 </style>
 </head>
@@ -568,6 +580,20 @@ body {{ font-family: 'Inter', system-ui, 'Georgia', sans-serif; background: #f4f
     <button class="btype-pill" data-btype="court"    style="border-color:#8b0000;color:#8b0000">Court</button>
     <button class="btype-pill" data-btype="execution" style="border-color:#8b0000;color:#8b0000">Execution</button>
     <button class="btype-pill" data-btype="district" style="border-color:#7a7a7a;color:#7a7a7a">District</button>
+  </div>
+  <div class="pill-row">
+    <span class="pill-label">Overlay</span>
+    <button class="contour-btn active" data-cmode="off">Off</button>
+    <button class="contour-btn" data-cmode="atmosphere">Atmosphere</button>
+    <button class="contour-btn" data-cmode="senses">Senses</button>
+  </div>
+  <div class="pill-row" id="sense-row">
+    <span class="pill-label">Sense</span>
+    <button class="sense-btn active" data-sense="smoke">Smoke</button>
+    <button class="sense-btn" data-sense="smell">Smell</button>
+    <button class="sense-btn" data-sense="noise">Noise</button>
+    <button class="sense-btn" data-sense="crowd">Crowd</button>
+    <button class="sense-btn" data-sense="visual">Visual</button>
   </div>
   <div class="pill-row">
     <span class="pill-label">Layer</span>
@@ -841,7 +867,7 @@ EVIDENCE.forEach(p => {{
 
 const state = {{ month: null, dow: null, band: null, literary: false,
                  selectedVenue: null, modality: null, tierView: false,
-                 buildingType: null }};
+                 buildingType: null, contourMode: 'off', contourSense: 'smoke' }};
 
 // ── Environmental indicator update ──────────────────────────────────────────
 function updateEnvIndicators(year, month) {{
@@ -1721,6 +1747,29 @@ document.querySelectorAll('.btype-pill').forEach(btn => {{
     }});
 }});
 
+document.querySelectorAll('.contour-btn').forEach(btn => {{
+    btn.addEventListener('click', () => {{
+        document.querySelectorAll('.contour-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.contourMode = btn.dataset.cmode;
+        document.getElementById('sense-row').style.display =
+            state.contourMode === 'senses' ? 'flex' : 'none';
+        if (contourLayer) {{
+            if (state.contourMode === 'off') map.removeLayer(contourLayer);
+            else {{ if (!map.hasLayer(contourLayer)) map.addLayer(contourLayer); contourLayer.redraw(); }}
+        }}
+    }});
+}});
+
+document.querySelectorAll('.sense-btn').forEach(btn => {{
+    btn.addEventListener('click', () => {{
+        document.querySelectorAll('.sense-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.contourSense = btn.dataset.sense;
+        if (contourLayer && state.contourMode === 'senses') contourLayer.redraw();
+    }});
+}});
+
 function clearFilters() {{
     state.month = null; state.dow = null; state.band = null; state.modality = null; state.buildingType = null;
     state.selectedVenue = null;
@@ -1991,6 +2040,8 @@ map.on('click', (e) => {{
 const heatCanvas = document.getElementById('heatmap-canvas');
 const heatCtx    = heatCanvas ? heatCanvas.getContext('2d') : null;
 // Off-screen base canvas: stores the static intensity layer (re-rendered on data change)
+let contourLayer = null;
+
 const _heatBase    = document.createElement('canvas');
 const _heatBaseCtx = _heatBase.getContext('2d');
 let _heatmapOn   = false;

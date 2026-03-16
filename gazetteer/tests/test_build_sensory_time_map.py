@@ -285,3 +285,19 @@ def test_exeter_change_event(html):
 def test_canyon_factor_computeZoneBaseline(html):
     """computeZoneBaseline must return canyon_factor."""
     assert 'canyon_factor: p.canyon_factor' in html
+
+
+def test_contour_overlay_buttons(html):
+    """Contour overlay mode buttons must be present."""
+    assert 'data-cmode="off"' in html
+    assert 'data-cmode="atmosphere"' in html
+    assert 'data-cmode="senses"' in html
+
+
+def test_contour_sense_sub_selector(html):
+    """Sense sub-selector buttons must be present when Senses mode active."""
+    assert 'data-sense="smoke"' in html
+    assert 'data-sense="smell"' in html
+    assert 'data-sense="noise"' in html
+    assert 'data-sense="crowd"' in html
+    assert 'data-sense="visual"' in html
