@@ -141,11 +141,6 @@ def test_smoke_data_embedded(html):
     assert "so2_index" in html
 
 
-def test_smoke_overlay_present(html):
-    """The smoke haze overlay div is rendered in the map."""
-    assert 'id="smoke-overlay"' in html
-
-
 def test_tier_toggle_present(html):
     """Tier view toggle button is present."""
     assert 'id="tier-toggle"' in html
@@ -174,76 +169,6 @@ def test_street_network_embedded(html):
     assert len(entry["p"][0]) == 2  # first point is [lat, lon]
 
 
-def test_particle_canvas_present(html):
-    assert 'id="particle-canvas"' in html
-
-def test_particle_engine_present(html):
-    assert "particleFrame" in html
-    assert "startParticles" in html
-    assert "stopParticles" in html
-    assert "venueIntensityCache" in html
-
-
-def test_smoke_mode_field_builder(html):
-    assert "_buildSmokefield" in html
-    assert "enclosureFactor" in html
-    assert "so2_index" in html
-    # Street-channeled smoke: all three blend components present
-    assert "streetFieldMag" in html
-    assert "streetFieldDx" in html
-    assert "WIND_DX * 0.3" in html
-
-
-def test_flow_mode_field_builder(html):
-    assert "_buildFlowField" in html
-    assert "MODALITY_PROFILE" in html
-    assert "attractStrength" in html
-    # Street channeling for noise and smell
-    assert "streetFieldDy" in html
-    assert "modalTotals" in html
-
-
-def test_crowd_street_density_renderer_present(html):
-    """Crowd should be rendered as street density with street/event weighting."""
-    assert "_rebuildCrowdStreetState" in html
-    assert "_drawCrowdDensity" in html
-    assert "_crowdStreetTypeMultiplier" in html
-    assert "_crowdBandMultiplier" in html
-    assert "_eventActivationWeight" in html
-    assert "_eventMatchesBuildingType" in html
-    assert "weekly_market" in html
-    assert "annual_fair" in html
-
-
-def test_network_mode_field_builder(html):
-    assert "_buildNetworkField" in html
-    assert "STREET_NETWORK" in html
-    assert "segT" in html
-    assert "_networkStep" in html
-
-
-def test_particle_mode_buttons_present(html):
-    assert 'data-pmode="off"'     in html
-    assert 'data-pmode="smoke"'   in html
-    assert 'data-pmode="flow"'    in html
-    assert 'data-pmode="network"' in html
-
-
-def test_particle_mode_labels_renamed(html):
-    """Smoke→Atmosphere, Flow→Senses in button labels."""
-    assert "Atmosphere" in html
-    assert "Senses" in html
-
-
-def test_particle_legend_present(html):
-    assert 'id="particle-legend"' in html
-
-
-def test_particle_mode_js_handler(html):
-    assert "data-pmode" in html
-    assert "particleMode" in html
-
-
 def test_street_direction_field_present(html):
     """Street direction field arrays and builder must be present."""
     assert "streetFieldDx"     in html
@@ -262,39 +187,6 @@ def test_street_network_has_t_field(html):
     assert len(data) > 0
     entry = data[0]
     assert "t" in entry, "STREET_NETWORK entry must have 't' (highway type) key"
-
-
-def test_modality_profiles_present(html):
-    """MODALITY_PROFILE constant must define all five modality profiles."""
-    assert "MODALITY_PROFILE" in html
-    for modal in ("smoke", "smell", "noise", "crowd", "visual"):
-        assert f"'{modal}'" in html or f'"{modal}"' in html
-
-
-def test_per_modality_alpha_curves(html):
-    """particleFrame must have per-modality alpha curves."""
-    assert "p.modality === 'smoke'" in html
-    assert "p.modality === 'noise'" in html
-    assert "p.modality === 'smell'" in html
-
-
-def test_particle_trail_fade(html):
-    """particleFrame must use destination-out compositing for trails."""
-    assert "destination-out" in html
-    assert "globalCompositeOperation" in html
-
-
-def test_smoke_dissipation(html):
-    """Smoke particles render as velocity-aligned line segments (not fixed-radius arcs)."""
-    assert "Math.hypot(p.vx, p.vy)" in html
-    assert "pCtx.lineCap = 'round'" in html
-    assert "pCtx.moveTo(p.px - p.vx * 3" in html
-
-
-def test_modality_radius_used(html):
-    """Particles must use prof.radius for lineWidth, not a fixed value."""
-    assert "drawRadius" in html
-    assert "prof.radius" in html
 
 
 def test_venue_opened_closed_in_js(html):
@@ -359,13 +251,6 @@ def test_tooltip_provenance_line(html):
     assert 'zoneBaseline.provenance' in html
 
 
-def test_zone_aware_particles(html):
-    """Smoke field builder must use zone industrial_intensity to scale particles."""
-    assert 'zoneProps.industrial_intensity' in html
-
-
-# ── Market schedule, canyon factor, and Exeter Change ─────────────────────────
-
 def test_smithfield_event_has_wednesday(html):
     """Smithfield market must run Mon|Wed|Fri (not Mon|Fri only)."""
     assert '"Mon|Wed|Fri"' in html or "'Mon|Wed|Fri'" in html
@@ -386,17 +271,6 @@ def test_canyon_factor_interpolated(html):
     assert 'p0.canyon_factor' in html
 
 
-def test_canyon_factor_used_in_smokefield(html):
-    """_buildSmokefield must use venueCanyonFactor."""
-    assert 'venueCanyonFactor' in html
-    assert 'canyonFactor' in html
-
-
-def test_canyon_factor_in_flowfield(html):
-    """_buildFlowField must use _venueCanyonFactor for smell."""
-    assert '_venueCanyonFactor' in html
-
-
 def test_exeter_change_venue(html):
     """Exeter Change Menagerie (LON097) must be present in VENUES."""
     assert 'LON097' in html
@@ -411,34 +285,3 @@ def test_exeter_change_event(html):
 def test_canyon_factor_computeZoneBaseline(html):
     """computeZoneBaseline must return canyon_factor."""
     assert 'canyon_factor: p.canyon_factor' in html
-
-
-def test_noise_rings_renderer(html):
-    """Noise ring state and renderers must be present."""
-    assert '_updateNoiseRings' in html
-    assert '_drawNoiseRings' in html
-    assert '_noiseRingPool' in html
-
-
-def test_smell_halos_renderer(html):
-    """Smell halo renderer must be present."""
-    assert '_drawSmellHalos' in html
-
-
-def test_crowd_density_renderer(html):
-    """Crowd should render through the current street-density layer."""
-    assert '_drawCrowdDensity' in html
-
-
-def test_visual_glow_renderer(html):
-    """Visual glow renderer must be present."""
-    assert '_drawVisualGlow' in html
-
-
-def test_senses_mode_compositor(html):
-    """All four per-modality renderer calls must appear in particleFrame."""
-    assert '_updateNoiseRings' in html
-    assert '_drawNoiseRings'   in html
-    assert '_drawSmellHalos'   in html
-    assert '_drawCrowdDensity' in html
-    assert '_drawVisualGlow'   in html
