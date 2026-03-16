@@ -1530,6 +1530,9 @@ function updateMap() {{
 
     applyNightMode(band);
     updateMapLegend();
+    if (state.contourMode !== 'off' && contourLayer && map.hasLayer(contourLayer)) {{
+        contourLayer.redraw();
+    }}
     if (_heatmapOn) {{ _doUpdateHeatmap(); _startPulseRings(); }}
 }}
 
@@ -2040,7 +2043,236 @@ map.on('click', (e) => {{
 const heatCanvas = document.getElementById('heatmap-canvas');
 const heatCtx    = heatCanvas ? heatCanvas.getContext('2d') : null;
 // Off-screen base canvas: stores the static intensity layer (re-rendered on data change)
+// ── IDW Contour Surface ────────────────────────────────────────────────────────
+const CONTOUR_RAMPS = {{
+    atmosphere: [[245,235,220],[200,170,100],[140,95,40],[50,30,10]],
+    smell:      [[245,235,220],[210,170,90],[180,110,50],[140,70,30]],
+    noise:      [[230,240,250],[150,180,210],[80,120,170],[20,40,80]],
+    crowd:      [[245,235,220],[220,160,140],[180,80,60],[130,20,20]],
+    visual:     [[230,240,225],[160,185,140],[100,130,80],[40,70,25]],
+    smoke:      [[245,235,220],[180,170,155],[120,105,85],[50,40,30]],
+}};
+
+function sampleRamp(ramp, t) {{
+    t = Math.max(0, Math.min(1, t));
+    const n = ramp.length - 1;
+    const i = Math.min(Math.floor(t * n), n - 1);
+    const f = t * n - i;
+    return [
+        Math.round(ramp[i][0] + f * (ramp[i+1][0] - ramp[i][0])),
+        Math.round(ramp[i][1] + f * (ramp[i+1][1] - ramp[i][1])),
+        Math.round(ramp[i][2] + f * (ramp[i+1][2] - ramp[i][2])),
+    ];
+}}
+
+const ContourSurface = L.GridLayer.extend({{
+    createTile: function(coords) {{
+        const tile = document.createElement('canvas');
+        const tileSize = this.getTileSize();
+        tile.width = tileSize.x;
+        tile.height = tileSize.y;
+        const ctx = tile.getContext('2d');
+
+        const zoom = coords.z;
+        const gridW = zoom >= 15 ? 64 : 256;
+        const gridH = zoom >= 15 ? 64 : 256;
+        const cellW = tileSize.x / gridW;
+        const cellH = tileSize.y / gridH;
+
+        const mode = state.contourMode;
+        if (mode === 'off') return tile;
+        const rampKey = mode === 'atmosphere' ? 'atmosphere' : state.contourSense;
+        const ramp = CONTOUR_RAMPS[rampKey] || CONTOUR_RAMPS.atmosphere;
+
+        const _idwPass = (gridOut, modality, applyWindBias) => {{
+            for (let gy = 0; gy < gridH; gy++) {{
+                for (let gx = 0; gx < gridW; gx++) {{
+                    const px = coords.x * tileSize.x + (gx + 0.5) * cellW;
+                    const py = coords.y * tileSize.y + (gy + 0.5) * cellH;
+                    const latlng = map.unproject([px, py], zoom);
+                    let wSum = 0, vSum = 0;
+                    VENUES.forEach(v => {{
+                        const cache = venueIntensityCache[v.id];
+                        if (!cache) return;
+                        const intensity = cache[modality] || 0;
+                        if (intensity <= 0.01) return;
+                        let dist = latlng.distanceTo(L.latLng(v.lat, v.lon));
+                        if (applyWindBias) {{
+                            if (v.lon < latlng.lng) dist *= 0.77;
+                            else if (v.lon > latlng.lng) dist *= 1.43;
+                        }}
+                        const enc = v.enclosure || 'open';
+                        const cutoff = enc === 'enclosed' ? 400 : enc === 'semi_open' ? 600 : 800;
+                        if (dist > cutoff) return;
+                        const w = 1.0 / Math.max(dist, 1) ** 2;
+                        wSum += w;
+                        vSum += w * intensity;
+                    }});
+                    gridOut[gy * gridW + gx] = wSum > 0 ? vSum / wSum : 0;
+                }}
+            }}
+        }};
+
+        const grid = new Float32Array(gridW * gridH);
+        const maxAlpha = 0.40;
+
+        if (mode === 'atmosphere') {{
+            const smokeGrid = new Float32Array(gridW * gridH);
+            const smellGrid = new Float32Array(gridW * gridH);
+            _idwPass(smokeGrid, 'smoke', true);
+            _idwPass(smellGrid, 'smell', false);
+            for (let i = 0; i < grid.length; i++) {{
+                grid[i] = 0.7 * smokeGrid[i] + 0.3 * smellGrid[i];
+            }}
+        }} else {{
+            _idwPass(grid, state.contourSense, false);
+        }}
+
+        // Bilinear interpolation for gradient wash
+        const imgData = ctx.createImageData(tileSize.x, tileSize.y);
+        for (let py2 = 0; py2 < tileSize.y; py2++) {{
+            for (let px2 = 0; px2 < tileSize.x; px2++) {{
+                const gxf = (px2 / tileSize.x) * gridW - 0.5;
+                const gyf = (py2 / tileSize.y) * gridH - 0.5;
+                const gx0 = Math.max(0, Math.floor(gxf));
+                const gy0 = Math.max(0, Math.floor(gyf));
+                const gx1 = Math.min(gridW - 1, gx0 + 1);
+                const gy1 = Math.min(gridH - 1, gy0 + 1);
+                const fx = Math.max(0, gxf - gx0), fy = Math.max(0, gyf - gy0);
+                const val = (1-fx)*(1-fy) * grid[gy0*gridW+gx0]
+                          +    fx *(1-fy) * grid[gy0*gridW+gx1]
+                          + (1-fx)*   fy  * grid[gy1*gridW+gx0]
+                          +    fx *   fy  * grid[gy1*gridW+gx1];
+                const rgb = sampleRamp(ramp, val);
+                const alpha = Math.round(val * maxAlpha * 255);
+                const idx = (py2 * tileSize.x + px2) * 4;
+                imgData.data[idx] = rgb[0];
+                imgData.data[idx+1] = rgb[1];
+                imgData.data[idx+2] = rgb[2];
+                imgData.data[idx+3] = alpha;
+            }}
+        }}
+        ctx.putImageData(imgData, 0, 0);
+
+        this._drawContours(ctx, grid, gridW, gridH, cellW, cellH, ramp);
+        return tile;
+    }},
+
+    _drawContours: function(ctx, grid, gridW, gridH, cellW, cellH, ramp) {{
+        const thresholds = [
+            {{ val: 0.4, dash: [4, 3], width: 0.8, alpha: 0.45 }},
+            {{ val: 0.6, dash: [4, 3], width: 1.0, alpha: 0.55 }},
+            {{ val: 0.8, dash: [],     width: 1.2, alpha: 0.70 }},
+        ];
+        thresholds.forEach(th => {{
+            const rgb = sampleRamp(ramp, th.val);
+            ctx.strokeStyle = `rgba(${{rgb[0]}},${{rgb[1]}},${{rgb[2]}},${{th.alpha}})`;
+            ctx.lineWidth = th.width;
+            ctx.setLineDash(th.dash);
+            ctx.beginPath();
+            for (let gy = 0; gy < gridH - 1; gy++) {{
+                for (let gx = 0; gx < gridW - 1; gx++) {{
+                    const tl = grid[gy * gridW + gx];
+                    const tr = grid[gy * gridW + gx + 1];
+                    const bl = grid[(gy+1) * gridW + gx];
+                    const br = grid[(gy+1) * gridW + gx + 1];
+                    const config = (tl >= th.val ? 8 : 0) | (tr >= th.val ? 4 : 0)
+                                 | (br >= th.val ? 2 : 0) | (bl >= th.val ? 1 : 0);
+                    if (config === 0 || config === 15) continue;
+                    const lerp = (a, b) => a === b ? 0.5 : (th.val - a) / (b - a);
+                    const cx0 = gx * cellW, cy0 = gy * cellH;
+                    const cx1 = (gx+1) * cellW, cy1 = (gy+1) * cellH;
+                    const top = [cx0 + lerp(tl, tr) * cellW, cy0];
+                    const right = [cx1, cy0 + lerp(tr, br) * cellH];
+                    const bottom = [cx0 + lerp(bl, br) * cellW, cy1];
+                    const left = [cx0, cy0 + lerp(tl, bl) * cellH];
+                    const segments = [];
+                    switch (config) {{
+                        case 1: case 14: segments.push([left, bottom]); break;
+                        case 2: case 13: segments.push([bottom, right]); break;
+                        case 3: case 12: segments.push([left, right]); break;
+                        case 4: case 11: segments.push([top, right]); break;
+                        case 5: segments.push([left, top], [bottom, right]); break;
+                        case 6: case 9:  segments.push([top, bottom]); break;
+                        case 7: case 8:  segments.push([left, top]); break;
+                        case 10: segments.push([left, bottom], [top, right]); break;
+                    }}
+                    segments.forEach(([a, b]) => {{ ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); }});
+                }}
+            }}
+            ctx.stroke();
+        }});
+        ctx.setLineDash([]);
+        this._drawContourLabels(ctx, grid, gridW, gridH, cellW, cellH, ramp);
+    }},
+
+    _drawContourLabels: function(ctx, grid, gridW, gridH, cellW, cellH, ramp) {{
+        const thresholds = [0.4, 0.6, 0.8];
+        ctx.font = 'italic 9px Georgia';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        const placedLabels = [];
+        const minDist2 = 200 * 200;
+        thresholds.forEach(th => {{
+            const rgb = sampleRamp(ramp, th);
+            ctx.fillStyle = `rgba(${{rgb[0]}},${{rgb[1]}},${{rgb[2]}},0.7)`;
+            for (let gy = 0; gy < gridH - 1; gy += 4) {{
+                for (let gx = 0; gx < gridW - 1; gx += 4) {{
+                    const v = grid[gy * gridW + gx];
+                    const vr = grid[gy * gridW + gx + 1];
+                    if ((v < th) !== (vr < th)) {{
+                        const x = (gx + 0.5) * cellW;
+                        const y = (gy + 0.5) * cellH;
+                        const tooClose = placedLabels.some(([lx, ly]) => {{
+                            const dx = x - lx, dy = y - ly;
+                            return dx * dx + dy * dy < minDist2;
+                        }});
+                        if (!tooClose) {{
+                            ctx.fillText(th.toFixed(1), x, y);
+                            placedLabels.push([x, y]);
+                        }}
+                    }}
+                }}
+            }}
+        }});
+    }},
+
+    _blurGrid: function(grid, w, h, sigma) {{
+        const kernel = [];
+        const radius = Math.ceil(sigma * 2);
+        let kSum = 0;
+        for (let i = -radius; i <= radius; i++) {{
+            const g = Math.exp(-(i * i) / (2 * sigma * sigma));
+            kernel.push(g);
+            kSum += g;
+        }}
+        kernel.forEach((_, i, a) => a[i] /= kSum);
+        const tmp = new Float32Array(w * h);
+        for (let y = 0; y < h; y++) {{
+            for (let x = 0; x < w; x++) {{
+                let sum = 0;
+                for (let k = 0; k < kernel.length; k++) {{
+                    const sx = Math.min(w - 1, Math.max(0, x + k - radius));
+                    sum += grid[y * w + sx] * kernel[k];
+                }}
+                tmp[y * w + x] = sum;
+            }}
+        }}
+        for (let y = 0; y < h; y++) {{
+            for (let x = 0; x < w; x++) {{
+                let sum = 0;
+                for (let k = 0; k < kernel.length; k++) {{
+                    const sy = Math.min(h - 1, Math.max(0, y + k - radius));
+                    sum += tmp[sy * w + x] * kernel[k];
+                }}
+                grid[y * w + x] = sum;
+            }}
+        }}
+    }},
+}});
+
 let contourLayer = null;
+contourLayer = new ContourSurface({{ opacity: 1, zIndex: 400 }});
 
 const _heatBase    = document.createElement('canvas');
 const _heatBaseCtx = _heatBase.getContext('2d');

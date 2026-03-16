@@ -301,3 +301,27 @@ def test_contour_sense_sub_selector(html):
     assert 'data-sense="noise"' in html
     assert 'data-sense="crowd"' in html
     assert 'data-sense="visual"' in html
+
+
+def test_contour_grid_layer_present(html):
+    """IDW contour GridLayer must be defined."""
+    assert "L.GridLayer.extend" in html
+    assert "createTile" in html
+
+
+def test_contour_colour_ramps(html):
+    """Colour ramps must be defined for all modalities."""
+    assert "CONTOUR_RAMPS" in html
+    for mode in ["atmosphere", "smell", "noise", "crowd", "visual", "smoke"]:
+        assert mode in html
+
+
+def test_contour_idw_wind_bias(html):
+    """Atmosphere mode must apply wind bias (eastward stretch)."""
+    assert "0.77" in html
+
+
+def test_contour_canyon_cutoff(html):
+    """Canyon effect must modify IDW cutoff by enclosure type."""
+    assert "enclosed" in html
+    assert "400" in html
