@@ -413,11 +413,6 @@ body {{ font-family: 'Inter', system-ui, 'Georgia', sans-serif; background: #f4f
 .btype-pill {{ background: #f4f1eb; border: 1px solid; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-size: 0.69em; font-weight: 500; opacity: 0.55; transition: opacity 0.15s, background 0.15s; }}
 .btype-pill:hover {{ opacity: 1; }}
 .btype-pill.active {{ background: #fff; opacity: 1; font-weight: 600; }}
-.particle-btn {{ background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 8px;
-                 cursor: pointer; border-radius: 3px; font-size: 0.69em; font-weight: 500; opacity: 0.75; }}
-.particle-btn:hover {{ opacity: 1; }}
-.particle-btn.active {{ background: #1e3c6e; border-color: #1e3c6e; color: #fff;
-                        opacity: 1; font-weight: 600; }}
 .sense-pill[data-sense="smell"].active {{ background: #c47a1e; border-color: #c47a1e; color: #fff; }}
 .sense-pill[data-sense="noise"].active {{ background: #10305c; border-color: #3a7acc; color: #fff; }}
 .sense-pill[data-sense="crowd"].active {{ background: #b02a1a; border-color: #b02a1a; color: #fff; }}
@@ -450,13 +445,7 @@ body {{ font-family: 'Inter', system-ui, 'Georgia', sans-serif; background: #f4f
 #tier-toggle {{ background: #1a2a3a; border: 1px solid #444; color: #8090a8; padding: 1px 8px; cursor: pointer; border-radius: 12px; font-size: 0.75em; }}
 #tier-toggle:hover {{ background: #253545; }}
 #tier-toggle.active {{ background: #1a3a5a; border-color: #4488cc; color: #aaddff; }}
-/* ── Smoke haze overlay on map ── */
 #map {{ flex: 1; position: relative; }}
-#smoke-overlay {{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 400; opacity: 0;
-  background: radial-gradient(ellipse at 78% 55%, rgba(120,100,55,0.55) 0%, rgba(120,100,55,0) 55%),
-              radial-gradient(ellipse at 55% 75%, rgba(100,80,40,0.30) 0%, rgba(100,80,40,0) 40%),
-              linear-gradient(108deg, rgba(120,100,55,0) 25%, rgba(130,110,60,0.45) 75%);
-  transition: opacity 0.8s ease; }}
 /* ── Heatmap overlay ── */
 #heatmap-canvas {{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 403; opacity: 0; transition: opacity 0.4s; filter: blur(18px); }}
 /* ── Time-of-day atmospheric tint ── */
@@ -471,7 +460,7 @@ body {{ font-family: 'Inter', system-ui, 'Georgia', sans-serif; background: #f4f
 #controls.night-ctrl #year-display {{ color: #7ab8d8; }}
 #controls.night-ctrl .pill-label {{ color: #4a6a88; }}
 #controls.night-ctrl .pill, #controls.night-ctrl .step-btn, #controls.night-ctrl #play-btn,
-#controls.night-ctrl .particle-btn, #controls.night-ctrl .sense-pill, #controls.night-ctrl .speed-btn,
+#controls.night-ctrl .sense-pill, #controls.night-ctrl .speed-btn,
 #controls.night-ctrl .overlay-btn {{ background: #0e1e30; border-color: #1e3048; color: #6a9abc; }}
 #controls.night-ctrl .overlay-btn.active {{ background: #3a1e6a; border-color: #7a4ecf; color: #c8aaff; font-weight: 600; }}
 #controls.night-ctrl .pill.active {{ background: #1a4870; border-color: #2a70b8; color: #aadcff; }}
@@ -581,22 +570,8 @@ body {{ font-family: 'Inter', system-ui, 'Georgia', sans-serif; background: #f4f
     <button class="btype-pill" data-btype="district" style="border-color:#7a7a7a;color:#7a7a7a">District</button>
   </div>
   <div class="pill-row">
-    <span class="pill-label">Particles</span>
-    <button class="particle-btn active" data-pmode="off">Off</button>
-    <button class="particle-btn" data-pmode="smoke">&#127844; Atmosphere</button>
-    <button class="particle-btn" data-pmode="flow">&#8767; Senses</button>
-    <button class="particle-btn" data-pmode="network">&#9780; Network</button>
-  </div>
-  <div class="pill-row">
     <span class="pill-label">Layer</span>
     <button class="overlay-btn" id="heatmap-btn" onclick="toggleHeatmap()">&#9638; Heatmap</button>
-  </div>
-  <div id="particle-legend" style="display:none;padding:2px 0 0 4px;font-size:0.72em;color:#aaa;line-height:1.6;">
-    <span style="color:#3a78c8">&#9675;</span> noise &nbsp;
-    <span style="color:#b48228">&#9685;</span> smell &nbsp;
-    <span style="color:#a86a3a">&#8644;</span> crowd flow &nbsp;
-    <span style="color:#b8960a">&#10022;</span> visual &nbsp;
-    <span style="color:#7a7a50">&#126;</span> smoke
   </div>
   <div class="pill-row" id="env-bar">
     <span class="env-gauge" title="Central England Temperature (HadCET / Met Office)">
@@ -616,12 +591,10 @@ body {{ font-family: 'Inter', system-ui, 'Georgia', sans-serif; background: #f4f
 </div>
 <div id="main">
   <div id="map">
-    <div id="smoke-overlay"></div>
     <div id="tod-tint"></div>
     <canvas id="heatmap-canvas"></canvas>
     <div id="night-overlay"></div>
     <div id="map-legend"></div>
-    <canvas id="particle-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:410;opacity:0;transition:opacity 0.5s"></canvas>
   </div>
   <div id="panel">
     <div id="panel-header">
@@ -868,11 +841,7 @@ EVIDENCE.forEach(p => {{
 
 const state = {{ month: null, dow: null, band: null, literary: false,
                  selectedVenue: null, modality: null, tierView: false,
-                 buildingType: null, particleMode: null }};
-
-// ── Smoke haze overlay ──────────────────────────────────────────────────────
-// Applied once the map div is present; opacity driven by updateEnvIndicators.
-const smokeOverlay = document.getElementById('smoke-overlay');
+                 buildingType: null }};
 
 // ── Environmental indicator update ──────────────────────────────────────────
 function updateEnvIndicators(year, month) {{
@@ -915,11 +884,6 @@ function updateEnvIndicators(year, month) {{
         const pct = Math.round(smokeRow.so2_index * 100);
         if (smokeBar)  smokeBar.style.width  = pct + '%';
         if (smokePct)  smokePct.textContent  = pct + '%';
-        // Haze overlay: hidden when so2_index = 0 (pre-coal or no data)
-        if (smokeOverlay) smokeOverlay.style.opacity = smokeRow.so2_index > 0
-            ? (smokeRow.so2_index * 0.28).toFixed(3) : '0';
-    }} else {{
-        if (smokeOverlay) smokeOverlay.style.opacity = '0';
     }}
 }}
 
@@ -1538,9 +1502,6 @@ function updateMap() {{
         renderGlobalPanel(activeEvents);
     }}
 
-    if (state.particleMode && state.particleMode !== 'off') {{
-        _scheduleFieldUpdate();
-    }}
     applyNightMode(band);
     updateMapLegend();
     if (_heatmapOn) {{ _doUpdateHeatmap(); _startPulseRings(); }}
@@ -1760,33 +1721,10 @@ document.querySelectorAll('.btype-pill').forEach(btn => {{
     }});
 }});
 
-document.querySelectorAll('.particle-btn').forEach(btn => {{
-    btn.addEventListener('click', () => {{
-        const mode = btn.dataset.pmode;
-        document.querySelectorAll('.particle-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        state.particleMode = mode === 'off' ? null : mode;
-        const legend = document.getElementById('particle-legend');
-        if (legend) legend.style.display = state.particleMode ? 'block' : 'none';
-        if (!state.particleMode) {{
-            stopParticles();
-        }} else {{
-            updateParticleField();
-        }}
-    }});
-}});
-
 function clearFilters() {{
-    if (_fieldUpdateTimer) {{ clearTimeout(_fieldUpdateTimer); _fieldUpdateTimer = null; }}
     state.month = null; state.dow = null; state.band = null; state.modality = null; state.buildingType = null;
-    state.particleMode = null;
     state.selectedVenue = null;
     document.querySelectorAll('.pill.active, .sense-pill.active, .btype-pill.active').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.particle-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector('.particle-btn[data-pmode="off"]')?.classList.add('active');
-    const legend = document.getElementById('particle-legend');
-    if (legend) legend.style.display = 'none';
-    stopParticles();
     updateMap();
 }}
 
@@ -1872,62 +1810,11 @@ document.addEventListener('keydown', (e) => {{
     }}
 }})();
 
-// ── Particle System ──────────────────────────────────────────────────────────
-const pCanvas = document.getElementById('particle-canvas');
-const pCtx    = pCanvas ? pCanvas.getContext('2d') : null;
-
-// Declare shared state before resizeParticleCanvas (called immediately below)
+// ── Street network + venue pixel positions ───────────────────────────────────
 const venuePx = {{}};           // venue pixel positions, refreshed on move/resize
-let particleRaf = null;         // RAF handle; null when stopped
-let activeParticleCount = 0;    // how many particles are active this frame
 
-// Resize canvas to match map container
-function resizeParticleCanvas() {{
-    if (!pCanvas) return;
-    const mapEl = document.getElementById('map');
-    pCanvas.width  = mapEl.offsetWidth;
-    pCanvas.height = mapEl.offsetHeight;
-    updateVenuePx();
-    if (activeParticleCount > 0) resetParticles();
-}}
-resizeParticleCanvas();
-window.addEventListener('resize', resizeParticleCanvas);
-
-// Particle state — simple object array (2 000 particles max)
-const MAX_P = 2000;
-const particles = [];
-
-// Per-modality physics + visual profiles
-const MODALITY_PROFILE = {{
-    // smoke:  slow, rising, channeled by streets — large soft blobs
-    smoke:  {{ r:  80, g:  75, b:  90, radius: 2.2, speed: 0.8, maxAge: 480, rise: -0.02,  maxAlpha: 0.50 }},
-    // smell:  very slow, drifts on wind, large and persistent — lingers long after source
-    smell:  {{ r: 195, g: 130, b:  25, radius: 2.0, speed: 0.22, maxAge: 900, rise: 0,     maxAlpha: 0.55 }},
-    // noise:  fast radial bursts from source, tiny, very short-lived — sound decays quickly
-    noise:  {{ r:  90, g: 155, b: 255, radius: 0.7, speed: 5.0,  maxAge:  65, rise: 0,     maxAlpha: 0.95 }},
-    // crowd: warm ochre density on streets rather than warning-red venue discs
-    crowd:  {{ r: 168, g: 106, b:  58, radius: 1.5, speed: 0.45, maxAge: 340, rise: 0,     maxAlpha: 0.80 }},
-    // visual: golden, moderate — spectacle/illumination spilling outward
-    visual: {{ r: 220, g: 175, b:  40, radius: 1.0, speed: 0.55, maxAge: 220, rise: 0,     maxAlpha: 0.55 }},
-}};
-
-function spawnParticle() {{
-    return {{
-        px: 0, py: 0,
-        vx: 0, vy: 0,
-        age: 0, maxAge: 200 + Math.random() * 400,
-        r: 180, g: 130, b: 40,
-        radius: 1.5, rise: 0, modality: 'smell',
-    }};
-}}
-
-for (let i = 0; i < MAX_P; i++) particles.push(spawnParticle());
-
-// Vector field grid
+// Canyon field grid (used by heatmap for concentration modelling)
 const FIELD_W = 80, FIELD_H = 60;
-const fieldDx = new Float32Array(FIELD_W * FIELD_H);
-const fieldDy = new Float32Array(FIELD_W * FIELD_H);
-
 // Precomputed street direction field (rebuilt on pan/zoom)
 const streetFieldDx  = new Float32Array(FIELD_W * FIELD_H);
 const streetFieldDy  = new Float32Array(FIELD_W * FIELD_H);
@@ -1935,7 +1822,6 @@ const streetFieldMag = new Float32Array(FIELD_W * FIELD_H);  // 0=no street, 1=s
 // Per-cell canyon H/W ratio (weighted avg of nearby segments). 1.2 = open; 3.0 = alley
 const canyonFieldHw  = new Float32Array(FIELD_W * FIELD_H).fill(1.2);
 
-// Cache of venue pixel positions (declared early — see top of particle system block)
 function updateVenuePx() {{
     VENUES.forEach(v => {{
         const pt = map.latLngToContainerPoint([v.lat, v.lon]);
@@ -1943,866 +1829,7 @@ function updateVenuePx() {{
     }});
 }}
 updateVenuePx();
-map.on('movestart zoomstart', () => {{
-    if (pCtx && pCanvas) pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
-}});
-map.on('moveend zoomend', () => {{
-    updateVenuePx();
-    resetParticles();
-}});
 
-function resetParticles() {{
-    particles.forEach(p => {{ p.age = p.maxAge; }});
-}}
-
-// Nearest-neighbour field sample at pixel (px, py)
-function sampleField(px, py) {{
-    if (!pCanvas) return {{ dx: 0, dy: 0 }};
-    const gx = Math.min(FIELD_W - 1, Math.max(0, (px / pCanvas.width)  * FIELD_W)) | 0;
-    const gy = Math.min(FIELD_H - 1, Math.max(0, (py / pCanvas.height) * FIELD_H)) | 0;
-    const i  = gy * FIELD_W + gx;
-    return {{ dx: fieldDx[i], dy: fieldDy[i] }};
-}}
-
-// Sample canyon H/W ratio at pixel position (1.2 = open area baseline)
-function sampleCanyon(px, py) {{
-    if (!pCanvas) return 1.2;
-    const gx = Math.min(FIELD_W - 1, Math.max(0, (px / pCanvas.width)  * FIELD_W)) | 0;
-    const gy = Math.min(FIELD_H - 1, Math.max(0, (py / pCanvas.height) * FIELD_H)) | 0;
-    return canyonFieldHw[gy * FIELD_W + gx] || 1.2;
-}}
-
-// Spawn a particle near a random venue weighted by composite intensity
-function respawnParticle(p, activeCount) {{
-    const weighted = [];
-    VENUES.forEach(v => {{
-        const loads = venueIntensityCache[v.id];
-        if (!loads) return;
-        const w = loads.composite || 0;
-        if (w > 0.02) weighted.push({{ v, w }});
-    }});
-    if (!weighted.length) {{
-        p.px = Math.random() * (pCanvas ? pCanvas.width : 800);
-        p.py = Math.random() * (pCanvas ? pCanvas.height : 600);
-    }} else {{
-        const total = weighted.reduce((s, x) => s + x.w, 0);
-        let rnd = Math.random() * total;
-        let chosen = weighted[weighted.length - 1].v;
-        for (const {{ v, w }} of weighted) {{
-            rnd -= w;
-            if (rnd <= 0) {{ chosen = v; break; }}
-        }}
-        const vp = venuePx[chosen.id];
-        if (vp) {{
-            p.px = vp.px + (Math.random() - 0.5) * 60;
-            p.py = vp.py + (Math.random() - 0.5) * 60;
-        }}
-    }}
-    if (p.modality === 'noise') {{
-        // Noise: tight spawn at venue, strong random outward velocity = sound burst
-        const angle = Math.random() * Math.PI * 2;
-        const spd = 2.5 + Math.random() * 4.0;
-        p.vx = Math.cos(angle) * spd;
-        p.vy = Math.sin(angle) * spd;
-        // Tighten spawn to venue centre
-        if (weighted.length) {{
-            const vp = venuePx[weighted.reduce((a, b) => a.w > b.w ? a : b).v.id];
-            if (vp) {{ p.px = vp.px + (Math.random() - 0.5) * 20; p.py = vp.py + (Math.random() - 0.5) * 20; }}
-        }}
-    }} else {{
-        p.vx = (Math.random() - 0.5) * 0.5;
-        p.vy = (Math.random() - 0.5) * 0.5;
-    }}
-    p.age = 0;
-    p.maxAge = 200 + Math.random() * 400;
-}}
-
-// ── Senses-mode per-modality canvas renderers ─────────────────────────────────
-
-// Noise: expanding ring pool
-const _noiseRingPool = [];
-const _noiseRingLastSpawn = new Map();  // venueId -> performance.now() timestamp
-
-function _updateNoiseRings() {{
-    const now = performance.now();
-    // Advance ages; remove dead rings
-    for (let i = _noiseRingPool.length - 1; i >= 0; i--) {{
-        _noiseRingPool[i].age++;
-        if (_noiseRingPool[i].age >= _noiseRingPool[i].maxAge) {{
-            _noiseRingPool.splice(i, 1);
-        }}
-    }}
-    // Spawn new rings from active noisy venues
-    VENUES.forEach(v => {{
-        const loads = venueIntensityCache[v.id];
-        if (!loads || loads.noise < 0.02) return;
-        const vp = venuePx[v.id];
-        if (!vp || !pCanvas) return;
-        const isMarket = v.building_type === 'market';
-        const isChurch = v.building_type === 'church';
-        const interval = isMarket ? 250 : isChurch ? 550 : 400;
-        const last = _noiseRingLastSpawn.get(v.id) || 0;
-        if (now - last >= interval && _noiseRingPool.length < 200) {{
-            _noiseRingLastSpawn.set(v.id, now);
-            // maxAge in frames (~60fps): church rings last ~100f, regular ~70f
-            const maxAge = isChurch ? 100 : 70;
-            const maxR   = (isChurch ? 120 : 80) + loads.noise * 40;
-            const fi = ((Math.min(FIELD_H - 1, Math.max(0, (vp.py / pCanvas.height) * FIELD_H)) | 0)) * FIELD_W
-                     +  (Math.min(FIELD_W - 1, Math.max(0, (vp.px / pCanvas.width)  * FIELD_W)) | 0);
-            _noiseRingPool.push({{
-                cx: vp.px, cy: vp.py, maxR, age: 0, maxAge,
-                noiseLoad: loads.noise, isChurch, isMarket,
-                sMag: streetFieldMag[fi],
-                sDx:  streetFieldDx[fi],
-                sDy:  streetFieldDy[fi],
-            }});
-        }}
-    }});
-}}
-
-function _drawNoiseRings() {{
-    if (!pCtx) return;
-    pCtx.save();
-    _noiseRingPool.forEach(ring => {{
-        const t = ring.age / ring.maxAge;
-        const r = 5 + (ring.maxR - 5) * t;
-        const alpha = Math.max(0, 0.7 * (1 - t));
-        const lineW = Math.max(0.3, 1.5 - t);
-        pCtx.globalAlpha = alpha;
-        pCtx.strokeStyle = 'rgba(90,155,255,1)';
-        pCtx.lineWidth = lineW;
-        pCtx.beginPath();
-        // Narrow street: elongate ellipse along street direction
-        if (ring.sMag > 0.3) {{
-            const angle = Math.atan2(ring.sDy, ring.sDx);
-            pCtx.ellipse(ring.cx, ring.cy, r * 1.35, r * 0.75, angle, 0, Math.PI * 2);
-        }} else {{
-            pCtx.arc(ring.cx, ring.cy, r, 0, Math.PI * 2);
-        }}
-        pCtx.stroke();
-    }});
-    pCtx.globalAlpha = 1;
-    pCtx.restore();
-}}
-
-// Smell: radial gradient halos with wind-drift
-function _drawSmellHalos() {{
-    if (!pCtx || !pCanvas) return;
-    const t = performance.now() / 1000;
-    const yr = parseInt(document.getElementById('year-slider').value);
-    pCtx.save();
-    VENUES.forEach(v => {{
-        const loads = venueIntensityCache[v.id];
-        if (!loads || loads.smell < 0.02) return;
-        const vp = venuePx[v.id];
-        if (!vp) return;
-        // Pulsing radius: 3-second breathing cycle, offset per venue by lat
-        const pulse = Math.sin(t * (Math.PI * 2 / 3) + v.lat * 20) * 5;
-        let radius = 30 + loads.smell * 50 + pulse;
-        // River-zone venues: moisture holds smell further
-        if (v.lon > -0.09 && v.lat < 51.508) radius *= 1.3;
-        // Narrow street: trapped smell — increase alpha
-        const zb = (typeof computeZoneBaseline === 'function')
-                   ? computeZoneBaseline(v.lat, v.lon, yr, null) : null;
-        const isNarrow = zb && zb.street_character === 'narrow';
-        const baseAlpha = isNarrow ? 0.35 : 0.25;
-        // Wind drift: SW→NE prevailing, slow oscillation
-        const driftX = Math.sin(t * 0.3) * 4 + 5;
-        const driftY = Math.cos(t * 0.25) * 3 - 3;
-        const cx = vp.px + driftX;
-        const cy = vp.py + driftY;
-        const grad = pCtx.createRadialGradient(cx, cy, 0, cx, cy, radius);
-        grad.addColorStop(0, `rgba(195,130,25,${{baseAlpha.toFixed(2)}})` );
-        grad.addColorStop(1,  'rgba(195,130,25,0)');
-        pCtx.fillStyle = grad;
-        pCtx.beginPath();
-        pCtx.arc(cx, cy, radius, 0, Math.PI * 2);
-        pCtx.fill();
-    }});
-    pCtx.restore();
-}}
-
-// Crowd: render density as occupied / flowing street segments rather than venue discs.
-// This makes market mornings, theatre evenings, and fair-time crushes legible as
-// spatial pressure on streets rather than generic red circles.
-const crowdStreetState = [];
-
-function _crowdStreetTypeMultiplier(t) {{
-    // These multipliers are heuristic: they translate OpenHistoricalMap street classes
-    // into likely carrying capacity / crowd throughput rather than encoding a sourced
-    // historical count dataset for each road type.
-    if (t === 'primary') return 1.10;
-    if (t === 'secondary') return 1.00;
-    if (t === 'tertiary' || t === 'unclassified') return 0.88;
-    if (t === 'residential') return 0.74;
-    if (t === 'service') return 0.66;
-    if (t === 'footway' || t === 'path' || t === 'steps') return 0.58;
-    return 0.82;
-}}
-
-function _crowdBandMultiplier(buildingType, band, dow) {{
-    if (!band) return 1.0;
-    const isSun = dow === 'Sun';
-    if (buildingType === 'market') {{
-        return {{ Dawn: 1.10, Morning: 1.35, Midday: 1.00, Afternoon: 0.52, Evening: 0.16, Night: 0.06 }}[band] || 0.4;
-    }}
-    if (buildingType === 'theatre') {{
-        return {{ Dawn: 0.04, Morning: 0.08, Midday: 0.16, Afternoon: 0.38, Evening: 1.32, Night: 1.08 }}[band] || 0.2;
-    }}
-    if (buildingType === 'assembly' || buildingType === 'garden') {{
-        return {{ Dawn: 0.10, Morning: 0.18, Midday: 0.34, Afternoon: 0.72, Evening: 1.18, Night: 0.88 }}[band] || 0.4;
-    }}
-    if (buildingType === 'court' || buildingType === 'prison') {{
-        return {{ Dawn: 0.22, Morning: 1.00, Midday: 0.88, Afternoon: 0.48, Evening: 0.12, Night: 0.05 }}[band] || 0.3;
-    }}
-    if (buildingType === 'church') {{
-        const sundayBoost = isSun ? 1.22 : 0.85;
-        return ({{ Dawn: 0.30, Morning: 1.00, Midday: 0.42, Afternoon: 0.18, Evening: 0.22, Night: 0.06 }}[band] || 0.2) * sundayBoost;
-    }}
-    if (buildingType === 'street' || buildingType === 'district' || buildingType === 'square') {{
-        return {{ Dawn: 0.36, Morning: 0.72, Midday: 0.92, Afternoon: 0.82, Evening: 0.60, Night: 0.22 }}[band] || 0.5;
-    }}
-    return {{ Dawn: 0.26, Morning: 0.66, Midday: 0.84, Afternoon: 0.78, Evening: 0.68, Night: 0.24 }}[band] || 0.5;
-}}
-
-function _crowdEventProfile(events) {{
-    const profile = {{ strength: 0.62, reach: 0, pressure: 0.18 }};
-    events.forEach(({{ evt, weight = 1 }}) => {{
-        const eventWeight = Math.max(0, weight);
-        if (evt.category === 'weekly_market') {{
-            profile.strength += 0.46 * eventWeight;
-            profile.reach    += 54 * eventWeight;
-            profile.pressure += 0.18 * eventWeight;
-        }} else if (evt.category === 'annual_fair') {{
-            profile.strength += 0.70 * eventWeight;
-            profile.reach    += 82 * eventWeight;
-            profile.pressure += 0.30 * eventWeight;
-        }} else if (evt.category === 'cultural_event') {{
-            profile.strength += 0.24 * eventWeight;
-            profile.reach    += 34 * eventWeight;
-            profile.pressure += 0.12 * eventWeight;
-        }} else if (evt.category === 'civic_procession') {{
-            profile.strength += 0.34 * eventWeight;
-            profile.reach    += 58 * eventWeight;
-            profile.pressure += 0.20 * eventWeight;
-        }} else if (evt.category === 'execution') {{
-            profile.strength += 0.46 * eventWeight;
-            profile.reach    += 60 * eventWeight;
-            profile.pressure += 0.24 * eventWeight;
-        }} else if (evt.category === 'frost_fair') {{
-            profile.strength += 0.56 * eventWeight;
-            profile.reach    += 92 * eventWeight;
-            profile.pressure += 0.24 * eventWeight;
-        }}
-    }});
-    return profile;
-}}
-
-function _rebuildCrowdStreetState() {{
-    crowdStreetState.length = 0;
-    if (!streetSegsPx.length || !pCanvas) return;
-    const year  = parseInt(document.getElementById('year-slider').value);
-    const month = state.month;
-    const dow   = state.dow;
-    const band  = state.band;
-
-    const crowdProfiles = [];
-    VENUES.forEach(v => {{
-        if (state.buildingType && v.building_type !== state.buildingType) return;
-        const loads = venueIntensityCache[v.id];
-        if (!loads || loads.crowd < 0.02) return;
-        const vp = venuePx[v.id];
-        if (!vp) return;
-        const events = getActiveEvents(v.id, year, month, dow, band);
-        const bandMult = _crowdBandMultiplier(v.building_type, band, dow);
-        const evtProfile = _crowdEventProfile(events);
-        const cap = parseInt(v.capacity) || 0;
-        const capMult = cap > 0 ? Math.min(1.45, 0.84 + cap / 720) : 1.0;
-        const strength = loads.crowd * bandMult * evtProfile.strength * capMult * 0.72;
-        if (strength < 0.02) return;
-
-        let reach = 54 + loads.crowd * 105 + evtProfile.reach;
-        if (v.building_type === 'market') reach += 42;
-        else if (v.building_type === 'district' || v.building_type === 'street' || v.building_type === 'square') reach += 28;
-        else if (v.building_type === 'assembly' || v.building_type === 'garden') reach += 22;
-        else if (v.building_type === 'theatre') reach += 18;
-
-        crowdProfiles.push({{
-            v, vp, strength, reach,
-            pressure: evtProfile.pressure,
-            events,
-        }});
-    }});
-
-    if (!crowdProfiles.length) return;
-
-    streetSegsPx.forEach(seg => {{
-        const mx = (seg.x0 + seg.x1) * 0.5;
-        const my = (seg.y0 + seg.y1) * 0.5;
-        const dirX = (seg.x1 - seg.x0) / seg.len;
-        const dirY = (seg.y1 - seg.y0) / seg.len;
-        const capMult = _crowdStreetTypeMultiplier(seg.t);
-        const choke = Math.min(1.9, (seg.h || 1.2) / 1.15);
-
-        let density = 0;
-        let flow = 0;
-        let pulse = 0;
-        let knot = 0;
-
-        crowdProfiles.forEach(profile => {{
-            const dx = mx - profile.vp.px;
-            const dy = my - profile.vp.py;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 1 || dist > profile.reach) return;
-
-            const radialX = dx / dist;
-            const radialY = dy / dist;
-            const align = Math.abs(dirX * radialX + dirY * radialY);
-            const corridor = 0.58 + align * 0.72;
-            const distWeight = Math.pow(1 - dist / profile.reach, 1.55);
-
-            let local = profile.strength * capMult * choke * corridor * distWeight;
-
-            // Major streets take more flow from markets and fairs; alleys become choke-points.
-            if (profile.v.building_type === 'market' &&
-                (seg.t === 'primary' || seg.t === 'secondary')) {{
-                local *= 1.18;
-            }}
-            if ((seg.t === 'footway' || seg.t === 'path' || seg.t === 'steps') &&
-                profile.v.building_type === 'market') {{
-                local *= 0.88;
-            }}
-            if (profile.events.some(e => e.evt.category === 'annual_fair') &&
-                (seg.t === 'residential' || seg.t === 'service' || seg.t === 'footway')) {{
-                local *= 1.12;
-            }}
-
-            local *= 0.82;
-            density += local;
-            flow    += local * (0.64 + align * 0.46);
-            pulse   += local * profile.pressure;
-            knot = Math.max(knot, local * choke);
-        }});
-
-        if (density > 0.05) {{
-            crowdStreetState.push({{
-                seg,
-                density: Math.min(1, density),
-                flow:    Math.min(1, flow),
-                pulse:   Math.min(1, pulse),
-                knot:    Math.min(1, knot),
-                choke,
-            }});
-        }}
-    }});
-}}
-
-function _drawCrowdDensity() {{
-    if (!pCtx || !crowdStreetState.length) return;
-    const t = performance.now() / 1000;
-    const isNight = state.band === 'Night';
-    pCtx.save();
-    crowdStreetState.forEach(entry => {{
-        const seg = entry.seg;
-        const pulse = 0.90 + Math.sin(t * (0.8 + entry.pulse * 1.7) + (seg.x0 + seg.y0) * 0.01) * 0.10;
-        const major = seg.t === 'primary' || seg.t === 'secondary';
-        const widthBase = major ? 4.4 : (seg.t === 'tertiary' || seg.t === 'unclassified' ? 3.4 : 2.4);
-        const outerWidth = widthBase + entry.density * (major ? 5.2 : 4.1);
-        const coreWidth  = Math.max(1.2, outerWidth * (0.32 + 0.14 / entry.choke));
-        const outerAlpha = Math.min(0.18, entry.density * 0.12 * pulse * (isNight ? 0.68 : 1.0));
-        const coreAlpha  = Math.min(0.36, entry.density * 0.22 * pulse * (isNight ? 0.74 : 1.0)) * Math.min(1.28, entry.choke * 0.78);
-        const dashLen = Math.max(3, 8 - entry.flow * 3.5);
-        const gapLen  = Math.max(4, 10 - entry.flow * 3.0);
-        const dashOffset = -(t * (11 + entry.flow * 20));
-
-        // Broad occupied-street underlay
-        pCtx.setLineDash([]);
-        pCtx.lineCap = 'round';
-        pCtx.strokeStyle = `rgba(132,78,48,${{outerAlpha.toFixed(2)}})`;
-        pCtx.lineWidth = outerWidth;
-        pCtx.beginPath();
-        pCtx.moveTo(seg.x0, seg.y0);
-        pCtx.lineTo(seg.x1, seg.y1);
-        pCtx.stroke();
-
-        // Moving core flow
-        pCtx.setLineDash([dashLen, gapLen]);
-        pCtx.lineDashOffset = dashOffset;
-        pCtx.strokeStyle = `rgba(172,104,58,${{coreAlpha.toFixed(2)}})`;
-        pCtx.lineWidth = coreWidth;
-        pCtx.beginPath();
-        pCtx.moveTo(seg.x0, seg.y0);
-        pCtx.lineTo(seg.x1, seg.y1);
-        pCtx.stroke();
-
-        // Congestion knot at the segment centre for very dense pockets
-        if (entry.knot > 0.62) {{
-            const mx = (seg.x0 + seg.x1) * 0.5;
-            const my = (seg.y0 + seg.y1) * 0.5;
-            const angle = Math.atan2(seg.y1 - seg.y0, seg.x1 - seg.x0);
-            const kAlpha = Math.min(0.22, (entry.knot - 0.52) * 0.22);
-            pCtx.save();
-            pCtx.translate(mx, my);
-            pCtx.rotate(angle);
-            pCtx.fillStyle = `rgba(110,60,34,${{kAlpha.toFixed(2)}})`;
-            pCtx.beginPath();
-            pCtx.ellipse(0, 0, 3 + entry.knot * 4.4, 1.3 + entry.knot * 1.8, 0, 0, Math.PI * 2);
-            pCtx.fill();
-            pCtx.restore();
-        }}
-    }});
-    pCtx.setLineDash([]);
-    pCtx.restore();
-}}
-
-// Visual: warm glow behind venue markers
-function _drawVisualGlow() {{
-    if (!pCtx) return;
-    const t = performance.now() / 1000;
-    const isNight = state.band === 'Night';
-    pCtx.save();
-    VENUES.forEach(v => {{
-        const loads = venueIntensityCache[v.id];
-        if (!loads || loads.visual < 0.02) return;
-        const vp = venuePx[v.id];
-        if (!vp) return;
-        // Candlelight flicker: 4-second pulse cycle, offset per venue
-        const alpha = 0.275 + Math.sin(t * (Math.PI * 2 / 4) + v.lat * 10) * 0.075;
-        let radius = 12 + loads.visual * 20;
-        let finalAlpha = alpha;
-        if (isNight) {{ radius *= 1.5; finalAlpha = Math.min(0.55, finalAlpha * 1.3); }}
-        // Venue-type hue: church=cooler gold, theatre=warmer orange, default=warm gold
-        let r = 220, g = 175, b = 40;
-        if      (v.building_type === 'church')  {{ r = 230; g = 205; b = 130; }}
-        else if (v.building_type === 'theatre') {{ r = 240; g = 140; b = 20;  }}
-        const grad = pCtx.createRadialGradient(vp.px, vp.py, 0, vp.px, vp.py, radius);
-        grad.addColorStop(0, `rgba(${{r}},${{g}},${{b}},${{finalAlpha.toFixed(2)}})`);
-        grad.addColorStop(1, `rgba(${{r}},${{g}},${{b}},0)`);
-        pCtx.fillStyle = grad;
-        pCtx.beginPath();
-        pCtx.arc(vp.px, vp.py, radius, 0, Math.PI * 2);
-        pCtx.fill();
-    }});
-    pCtx.restore();
-}}
-
-// Main RAF loop (particleRaf and activeParticleCount declared early — see top of particle system block)
-function particleFrame() {{
-    if (!pCtx || !pCanvas) return;
-    // Fade existing pixels toward transparent (not black) to create motion trails
-    // destination-out erases canvas pixels proportionally, preserving map underneath
-    pCtx.globalCompositeOperation = 'destination-out';
-    pCtx.fillStyle = 'rgba(0,0,0,0.06)';
-    pCtx.fillRect(0, 0, pCanvas.width, pCanvas.height);
-    pCtx.globalCompositeOperation = 'source-over';
-
-    const isNetwork = state.particleMode === 'network';
-
-    // Senses mode: dispatch per-modality renderers instead of generic particle loop
-    if (state.particleMode === 'flow') {{
-        const activeModals = state.modality ? [state.modality] : ['smell', 'noise', 'crowd', 'visual'];
-        if (activeModals.includes('noise'))  {{ _updateNoiseRings(); _drawNoiseRings(); }}
-        if (activeModals.includes('smell'))  _drawSmellHalos();
-        if (activeModals.includes('crowd'))  _drawCrowdDensity();
-        if (activeModals.includes('visual')) _drawVisualGlow();
-        particleRaf = requestAnimationFrame(particleFrame);
-        return;
-    }}
-
-    for (let i = 0; i < activeParticleCount; i++) {{
-        const p = particles[i];
-        p.age++;
-        if (p.age >= p.maxAge) {{
-            if (isNetwork && streetSegsPx.length) {{
-                // Weight segment selection by proximity to intensity-active venues
-                const weighted = [];
-                VENUES.forEach(v => {{
-                    const loads = venueIntensityCache[v.id];
-                    if (!loads || (loads.composite || 0) < 0.02) return;
-                    const vp = venuePx[v.id];
-                    if (vp) weighted.push({{ vp, w: loads.composite }});
-                }});
-                let chosenSeg;
-                if (weighted.length) {{
-                    const total = weighted.reduce((s, x) => s + x.w, 0);
-                    let rnd = Math.random() * total;
-                    let chosenVp = weighted[weighted.length - 1].vp;
-                    for (const {{ vp, w }} of weighted) {{ rnd -= w; if (rnd <= 0) {{ chosenVp = vp; break; }} }}
-                    let bestDist = Infinity;
-                    streetSegsPx.forEach(seg => {{
-                        const mx = (seg.x0 + seg.x1) * 0.5, my = (seg.y0 + seg.y1) * 0.5;
-                        const d = (mx - chosenVp.px)**2 + (my - chosenVp.py)**2;
-                        if (d < bestDist) {{ bestDist = d; chosenSeg = seg; }}
-                    }});
-                }}
-                p._seg    = chosenSeg || streetSegsPx[Math.floor(Math.random() * streetSegsPx.length)];
-                p._segT   = Math.random();
-                p._segDir = Math.random() < 0.5 ? 1 : -1;
-                p.age = 0;
-                p.modality = 'crowd';  // network particles use crowd colour
-            }} else {{
-                respawnParticle(p, activeParticleCount);
-            }}
-            continue;
-        }}
-
-        if (isNetwork) {{
-            _networkStep(p);
-        }} else if (p.modality === 'noise') {{
-            // Noise: free-flight radial burst — decelerates; canyon walls cause lateral deflection
-            const hw = sampleCanyon(p.px, p.py);
-            // In a narrow canyon (hw > 1.2), sound bounces off walls perpendicular to street axis
-            if (hw > 1.5 && streetFieldMag[
-                (Math.min(FIELD_H-1, Math.max(0, (p.py/pCanvas.height)*FIELD_H)|0)) * FIELD_W +
-                (Math.min(FIELD_W-1, Math.max(0, (p.px/pCanvas.width) *FIELD_W)|0))
-            ] > 0.15) {{
-                const gi = (Math.min(FIELD_H-1, Math.max(0, (p.py/pCanvas.height)*FIELD_H)|0)) * FIELD_W +
-                           (Math.min(FIELD_W-1, Math.max(0, (p.px/pCanvas.width) *FIELD_W)|0));
-                // Perpendicular to street direction = (-dy, dx)
-                const perpX = -streetFieldDy[gi];
-                const perpY =  streetFieldDx[gi];
-                const bounce = (hw - 1.2) * 0.04;
-                p.vx += perpX * bounce * (Math.random() - 0.5) * 2;
-                p.vy += perpY * bounce * (Math.random() - 0.5) * 2;
-            }}
-            p.vx *= 0.93;
-            p.vy *= 0.93;
-            p.px += p.vx;
-            p.py += p.vy;
-            if (p.px < 0) p.px = pCanvas.width;
-            if (p.px > pCanvas.width) p.px = 0;
-            if (p.py < 0) p.py = pCanvas.height;
-            if (p.py > pCanvas.height) p.py = 0;
-        }} else {{
-            const prof = MODALITY_PROFILE[p.modality] || MODALITY_PROFILE.smell;
-            const f = sampleField(p.px, p.py);
-            // Canyon effect: narrow streets slow dispersal (smoke/smell trapped)
-            const hw = sampleCanyon(p.px, p.py);
-            const canyonSpeedMult = Math.max(0.35, 1.2 / Math.max(0.8, hw));
-            const speedMult = (prof.speed || 1.0) * canyonSpeedMult;
-            p.vx = p.vx * 0.95 + f.dx * 0.15 * speedMult;
-            p.vy = p.vy * 0.95 + f.dy * 0.15 * speedMult + (p.rise || 0) * canyonSpeedMult;
-            p.px += p.vx;
-            p.py += p.vy;
-            if (p.px < 0) p.px = pCanvas.width;
-            if (p.px > pCanvas.width) p.px = 0;
-            if (p.py < 0) p.py = pCanvas.height;
-            if (p.py > pCanvas.height) p.py = 0;
-        }}
-
-        const t = p.age / p.maxAge;
-        const prof = MODALITY_PROFILE[p.modality] || MODALITY_PROFILE.smell;
-        let alpha;
-        if (p.modality === 'smoke') {{
-            // slow in (20%), plateau, lingering out (40%)
-            alpha = t < 0.2 ? (t / 0.2) : (t < 0.6 ? 1.0 : 1.0 - (t - 0.6) / 0.4);
-        }} else if (p.modality === 'noise') {{
-            // instant on (2%), rapid out (70%)
-            alpha = t < 0.02 ? (t / 0.02) : (t < 0.3 ? 1.0 : 1.0 - (t - 0.3) / 0.7);
-        }} else if (p.modality === 'smell') {{
-            // gradual in (15%), very slow out (50%)
-            alpha = t < 0.15 ? (t / 0.15) : (t < 0.5 ? 1.0 : 1.0 - (t - 0.5) / 0.5);
-        }} else {{
-            // default: fast fade-in, slow fade-out
-            alpha = t < 0.1 ? t * 9 : 1 - t;
-        }}
-        alpha = Math.max(0, Math.min(1, alpha)) * (prof.maxAlpha || 0.7);
-
-        // Draw as velocity-aligned line segment — tail direction shows propagation path
-        const drawRadius = prof.radius || 1.2;
-        const spd = Math.hypot(p.vx, p.vy);
-        pCtx.lineWidth = drawRadius;
-        pCtx.lineCap = 'round';
-        pCtx.strokeStyle = `rgba(${{p.r}},${{p.g}},${{p.b}},${{alpha.toFixed(2)}})`;
-        pCtx.beginPath();
-        if (spd > 0.05) {{
-            pCtx.moveTo(p.px - p.vx * 3, p.py - p.vy * 3);
-            pCtx.lineTo(p.px, p.py);
-            pCtx.stroke();
-        }} else {{
-            pCtx.arc(p.px, p.py, drawRadius * 0.5, 0, Math.PI * 2);
-            pCtx.fillStyle = `rgba(${{p.r}},${{p.g}},${{p.b}},${{alpha.toFixed(2)}})`;
-            pCtx.fill();
-        }}
-    }}
-    particleRaf = requestAnimationFrame(particleFrame);
-}}
-
-function startParticles(count) {{
-    if (particleRaf) cancelAnimationFrame(particleRaf);
-    activeParticleCount = Math.min(count, MAX_P);
-    if (pCanvas) pCanvas.style.opacity = '1';
-    particleRaf = requestAnimationFrame(particleFrame);
-}}
-
-function stopParticles() {{
-    if (particleRaf) {{ cancelAnimationFrame(particleRaf); particleRaf = null; }}
-    if (pCtx && pCanvas) pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
-    if (pCanvas) pCanvas.style.opacity = '0';
-    activeParticleCount = 0;
-}}
-
-// Field dispatch + throttled update
-function updateParticleField() {{
-    if (Object.keys(venueIntensityCache).length === 0) return;
-    if      (state.particleMode === 'smoke')   _buildSmokefield();
-    else if (state.particleMode === 'flow')    _buildFlowField();
-    else if (state.particleMode === 'network') _buildNetworkField();
-}}
-
-const WIND_DX = 0.40;   // prevailing SW wind: east drift
-const WIND_DY = -0.15;  // slight northward component
-
-function _buildSmokefield() {{
-    if (!pCanvas) return;
-    updateVenuePx();
-    const W = pCanvas.width, H = pCanvas.height;
-    const cW = W / FIELD_W, cH = H / FIELD_H;
-    const year = parseInt(document.getElementById('year-slider').value);
-    // Precompute per-venue canyon factor (zone street enclosure multiplier)
-    const venueCanyonFactor = {{}};
-    VENUES.forEach(v => {{
-        const zb = computeZoneBaseline(v.lat, v.lon, year, null);
-        venueCanyonFactor[v.id] = zb ? (zb.canyon_factor || 1.0) : 1.0;
-    }});
-
-    for (let gy = 0; gy < FIELD_H; gy++) {{
-        for (let gx = 0; gx < FIELD_W; gx++) {{
-            const cx = (gx + 0.5) * cW;
-            const cy = (gy + 0.5) * cH;
-            const i = gy * FIELD_W + gx;
-
-            // Street direction at this cell (pre-built)
-            const sMag = streetFieldMag[i];
-            const sDx  = streetFieldDx[i];
-            const sDy  = streetFieldDy[i];
-
-            // (1) 30% wind base
-            let fdx = WIND_DX * 0.3;
-            let fdy = WIND_DY * 0.3;
-
-            // (2) 40% street channeling — align street direction with prevailing wind to
-            //     avoid cancellation (choose the street direction that agrees with wind)
-            if (sMag > 0.01) {{
-                const dot = sDx * WIND_DX + sDy * WIND_DY;
-                const chDx = dot >= 0 ? sDx : -sDx;
-                const chDy = dot >= 0 ? sDy : -sDy;
-                fdx += chDx * sMag * 0.4;
-                fdy += chDy * sMag * 0.4;
-            }}
-
-            // (3) 30% venue radial push
-            let venueDx = 0, venueDy = 0;
-            VENUES.forEach(v => {{
-                const loads = venueIntensityCache[v.id];
-                if (!loads || loads.smell < 0.02) return;
-                const enc = v.enclosure || 'open';
-                const enclosureFactor = enc === 'open' ? 1.0 : enc === 'semi_open' ? 0.6 : 0.2;
-                const posF = v.lon > -0.09 ? 1.3 : v.lon < -0.17 ? 0.7 : 1.0;
-                const vp = venuePx[v.id];
-                if (!vp) return;
-                const dx = cx - vp.px, dy = cy - vp.py;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 1 || dist > 300) return;
-                const canyonFactor = venueCanyonFactor[v.id] || 1.0;
-                const strength = loads.smell * enclosureFactor * posF * canyonFactor * 4000 / (dist * dist);
-                venueDx += (dx / dist) * strength;
-                venueDy += (dy / dist) * strength;
-            }});
-            fdx += venueDx * 0.3;
-            fdy += venueDy * 0.3;
-
-            const mag = Math.sqrt(fdx * fdx + fdy * fdy);
-            if (mag > 2.0) {{ fdx = fdx / mag * 2.0; fdy = fdy / mag * 2.0; }}
-            fieldDx[i] = fdx;
-            fieldDy[i] = fdy;
-        }}
-    }}
-
-    // Particle count: base 600 + smoke-scaled bonus (up to 1400 total)
-    const decade = Math.floor(year / 10) * 10;
-    const smokeRow = SMOKE_DATA_ENV.find(s => s.decade_start === decade);
-    const so2_index = smokeRow ? smokeRow.so2_index : 0;
-    // Scale particle count by average zone industrial_intensity of active venues
-    let zoneIndMult = 1.0;
-    {{
-        const activeVenues = VENUES.filter(v => {{
-            const cache = venueIntensityCache[v.id];
-            return cache && cache.composite > 0.05;
-        }});
-        if (activeVenues.length > 0) {{
-            let totalInd = 0;
-            activeVenues.forEach(v => {{
-                const zoneFeat = getZoneForPoint(v.lat, v.lon);
-                const zoneProps = zoneFeat ? interpolateZoneProps(zoneFeat, year) : null;
-                totalInd += zoneProps ? (zoneProps.industrial_intensity || 0.3) : 0.3;
-            }});
-            const avgInd = Math.min(1.0, totalInd / activeVenues.length);
-            zoneIndMult = 0.7 + avgInd * 0.9;  // range 0.7x – 1.6x
-        }}
-    }}
-    const count = Math.round(250 + so2_index * 400);
-    const scaledCount = Math.round(count * zoneIndMult);
-
-    // 70% smoke (grey-brown, large, rising) + 30% smell (amber, small, lingering)
-    const safeCount = Math.min(scaledCount, MAX_P);
-    const smokeCount = Math.round(safeCount * 0.7);
-    for (let i = 0; i < safeCount; i++) {{
-        const modal = i < smokeCount ? 'smoke' : 'smell';
-        const prof = MODALITY_PROFILE[modal];
-        const p = particles[i];
-        p.r = prof.r; p.g = prof.g; p.b = prof.b;
-        p.radius = prof.radius;
-        p.rise = prof.rise;
-        p.modality = modal;
-        p.maxAge = prof.maxAge * (0.7 + Math.random() * 0.6);
-    }}
-    startParticles(safeCount);
-}}
-
-function _buildFlowField() {{
-    if (!pCanvas) return;
-    updateVenuePx();
-    const W = pCanvas.width, H = pCanvas.height;
-    const cW = W / FIELD_W, cH = H / FIELD_H;
-    const _flowYear = parseInt(document.getElementById('year-slider').value);
-    const _venueCanyonFactor = {{}};
-    VENUES.forEach(v => {{
-        const zb = computeZoneBaseline(v.lat, v.lon, _flowYear, null);
-        _venueCanyonFactor[v.id] = zb ? (zb.canyon_factor || 1.0) : 1.0;
-    }});
-
-    // Which modalities are active via sense pills?
-    const activeModals = [];
-    if (!state.modality) {{
-        activeModals.push('smell', 'noise', 'crowd', 'visual');
-    }} else {{
-        activeModals.push(state.modality);
-    }}
-
-    fieldDx.fill(0); fieldDy.fill(0);
-
-    activeModals.forEach(modal => {{
-        for (let gy = 0; gy < FIELD_H; gy++) {{
-            for (let gx = 0; gx < FIELD_W; gx++) {{
-                const cx = (gx + 0.5) * cW;
-                const cy = (gy + 0.5) * cH;
-                const i = gy * FIELD_W + gx;
-                let fdx = 0, fdy = 0;
-
-                // Street channeling for noise (strong) and smell (weak)
-                const sMag = streetFieldMag[i];
-                if (sMag > 0.01) {{
-                    if (modal === 'noise') {{
-                        // Fast along streets; corner attenuation natural from low sMag at intersections
-                        fdx += streetFieldDx[i] * sMag * 0.6;
-                        fdy += streetFieldDy[i] * sMag * 0.6;
-                        // Narrow-lane echo: add perpendicular curl component
-                        fdx += streetFieldDy[i] * sMag * 0.3;
-                        fdy -= streetFieldDx[i] * sMag * 0.3;
-                    }} else if (modal === 'smell') {{
-                        // Smell seeps slowly along streets
-                        fdx += streetFieldDx[i] * sMag * 0.2;
-                        fdy += streetFieldDy[i] * sMag * 0.2;
-                    }}
-                }}
-                // Prevailing SW wind bias for smell (London: SW→NE)
-                if (modal === 'smell') {{ fdx += 0.18; fdy -= 0.06; }}
-
-                VENUES.forEach(v => {{
-                    const loads = venueIntensityCache[v.id];
-                    if (!loads || (loads[modal] || 0) < 0.02) return;
-                    const vp = venuePx[v.id];
-                    if (!vp) return;
-                    const dx = cx - vp.px, dy = cy - vp.py;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 1 || dist > 350) return;
-
-                    if (modal === 'crowd') {{
-                        // Attract toward venue + orbital curl → particles swirl around venue
-                        const attractStrength = loads.crowd * 2500 / (dist * dist);
-                        fdx -= (dx / dist) * attractStrength;
-                        fdy -= (dy / dist) * attractStrength;
-                        fdx += (dy / dist) * attractStrength * 0.6;
-                        fdy -= (dx / dist) * attractStrength * 0.6;
-                    }} else if (modal === 'noise') {{
-                        const strength = loads.noise * 3500 / (dist * dist);
-                        fdx += (dx / dist) * strength;
-                        fdy += (dy / dist) * strength;
-                        // Stone-enclosure curl turbulence (reverb)
-                        if (v.material === 'stone' && (v.enclosure === 'enclosed' || v.enclosure === 'semi_open')) {{
-                            fdx += (dy / dist) * strength * 0.25;
-                            fdy -= (dx / dist) * strength * 0.25;
-                        }}
-                    }} else if (modal === 'smell') {{
-                        const cf = _venueCanyonFactor[v.id] || 1.0;
-                        const str = loads.smell * cf * 3000 / (dist * dist);
-                        fdx += (dx / dist) * str;
-                        fdy += (dy / dist) * str;
-                    }} else {{
-                        const str = loads[modal] * (modal === 'visual' ? 1500 : 3000) / (dist * dist);
-                        fdx += (dx / dist) * str;
-                        fdy += (dy / dist) * str;
-                    }}
-                }});
-
-                fieldDx[i] += fdx / activeModals.length;
-                fieldDy[i] += fdy / activeModals.length;
-            }}
-        }}
-    }});
-
-    // Final clamp pass
-    for (let ci = 0; ci < FIELD_W * FIELD_H; ci++) {{
-        const fm = Math.sqrt(fieldDx[ci] * fieldDx[ci] + fieldDy[ci] * fieldDy[ci]);
-        if (fm > 2.0) {{ fieldDx[ci] = fieldDx[ci] / fm * 2.0; fieldDy[ci] = fieldDy[ci] / fm * 2.0; }}
-    }}
-
-    if (activeModals.includes('crowd')) _rebuildCrowdStreetState();
-    else crowdStreetState.length = 0;
-
-    // Assign each particle its own modality profile for distinct visual rendering
-    // Partition proportionally: compute total intensity per modality across active venues
-    const modalTotals = {{}};
-    activeModals.forEach(m => {{ modalTotals[m] = 0; }});
-    VENUES.forEach(v => {{
-        const loads = venueIntensityCache[v.id];
-        if (!loads) return;
-        activeModals.forEach(m => {{ modalTotals[m] += loads[m] || 0; }});
-    }});
-    const grandTotal = activeModals.reduce((s, m) => s + modalTotals[m], 0);
-
-    const count = 600;
-    const safeCount = Math.min(count, MAX_P);
-    let offset = 0;
-    activeModals.forEach(m => {{
-        const share = grandTotal > 0 ? modalTotals[m] / grandTotal : 1 / activeModals.length;
-        const pCount = Math.round(safeCount * share);
-        const prof = MODALITY_PROFILE[m] || MODALITY_PROFILE.smell;
-        for (let i = offset; i < Math.min(offset + pCount, safeCount); i++) {{
-            const p = particles[i];
-            p.r = prof.r; p.g = prof.g; p.b = prof.b;
-            p.radius = prof.radius;
-            p.rise = prof.rise;
-            p.modality = m;
-            p.maxAge = prof.maxAge * (0.7 + Math.random() * 0.6);
-        }}
-        offset += pCount;
-    }});
-    // Fill any remainder with the first active modality
-    if (offset < safeCount) {{
-        const prof = MODALITY_PROFILE[activeModals[0]] || MODALITY_PROFILE.smell;
-        for (let i = offset; i < safeCount; i++) {{
-            const p = particles[i];
-            p.r = prof.r; p.g = prof.g; p.b = prof.b;
-            p.radius = prof.radius; p.rise = prof.rise;
-            p.modality = activeModals[0];
-            p.maxAge = prof.maxAge * (0.7 + Math.random() * 0.6);
-        }}
-    }}
-    // Senses mode uses per-modality canvas renderers — no particles needed
-    startParticles(0);
-}}
 // Street segment pixel cache
 let streetSegsPx = [];
 
@@ -2816,12 +1843,13 @@ function _hwayMult(t) {{
 
 // Build per-cell street direction field using spatial bucketing (~10x speedup vs naive)
 function _rebuildStreetField() {{
-    if (!pCanvas || !streetSegsPx.length) {{
+    if (!streetSegsPx.length) {{
         streetFieldDx.fill(0); streetFieldDy.fill(0); streetFieldMag.fill(0);
         canyonFieldHw.fill(1.2);
         return;
     }}
-    const W = pCanvas.width, H = pCanvas.height;
+    const mapEl = document.getElementById('map');
+    const W = mapEl.offsetWidth || 800, H = mapEl.offsetHeight || 600;
     const cW = W / FIELD_W, cH = H / FIELD_H;
     const SEARCH_PX = 40;
     // 8×6 spatial bucket grid
@@ -2888,8 +1916,8 @@ function _rebuildStreetField() {{
 // Venue-anchor pass: stamp canyonFieldHw with documented H/W ratios around known venues.
 // Blends with OHM-derived values — high-confidence historical data overrides highway-type estimates.
 function _applyVenueCanyonAnchors() {{
-    if (!pCanvas) return;
-    const W = pCanvas.width, H = pCanvas.height;
+    const mapEl = document.getElementById('map');
+    const W = mapEl.offsetWidth || 800, H = mapEl.offsetHeight || 600;
     const ANCHOR_PX = 35;  // influence radius in pixels
     VENUES.forEach(v => {{
         if (typeof v.hw_ratio !== 'number') return;
@@ -2941,17 +1969,10 @@ function _projectStreets(year) {{
     _rebuildStreetField();
     // Overlay documented venue H/W ratios as high-confidence anchors
     _applyVenueCanyonAnchors();
-    // Build endpoint adjacency for network-mode connectivity
-    _buildStreetAdjacency();
-    // Rebuild flow/smoke field with the new pixel projection (fixes stale vectors after pan/zoom)
-    if (state && state.particleMode && state.particleMode !== 'off' && state.particleMode !== 'network') {{
-        updateParticleField();
-    }}
-    // Reset network particles so they resample the new projection
-    if (state && state.particleMode === 'network') resetParticles();
 }}
 
 map.on('moveend zoomend', () => {{
+    updateVenuePx();
     const yr = parseInt(document.getElementById('year-slider').value);
     _projectStreets(yr);
 }});
@@ -2965,94 +1986,6 @@ map.on('click', (e) => {{
     const year  = parseInt(document.getElementById('year-slider').value);
     renderLocationPanel(e.latlng.lat, e.latlng.lng, year, state.month);
 }});
-
-// Build endpoint-to-endpoint adjacency on streetSegsPx.
-// Each segment gets conn1 (exits at x1,y1) and conn0 (exits at x0,y0).
-// Uses bucketing so segments that share a node find each other in O(N).
-function _buildStreetAdjacency() {{
-    if (!streetSegsPx.length) return;
-    const TOL = 6;  // px tolerance for endpoint matching
-    const buckets = new Map();
-    function bkey(x, y) {{ return (Math.round(x / TOL) * 100003 + Math.round(y / TOL)) | 0; }}
-    streetSegsPx.forEach((seg, i) => {{
-        seg.conn1 = []; seg.conn0 = [];
-        const k0 = bkey(seg.x0, seg.y0), k1 = bkey(seg.x1, seg.y1);
-        if (!buckets.has(k0)) buckets.set(k0, []);
-        if (!buckets.has(k1)) buckets.set(k1, []);
-        buckets.get(k0).push({{ i, end: 0 }});
-        buckets.get(k1).push({{ i, end: 1 }});
-    }});
-    streetSegsPx.forEach((seg, i) => {{
-        // At exit end (x1,y1): look up other segments sharing this bucket
-        const k1 = bkey(seg.x1, seg.y1);
-        (buckets.get(k1) || []).forEach(({{ i: j, end }}) => {{
-            if (j === i) return;
-            const other = streetSegsPx[j];
-            if (end === 0) seg.conn1.push({{ seg: other, t: 0, dir: 1 }});   // enter other from its start
-            else           seg.conn1.push({{ seg: other, t: 1, dir: -1 }});  // enter other from its end
-        }});
-        // At start end (x0,y0)
-        const k0 = bkey(seg.x0, seg.y0);
-        (buckets.get(k0) || []).forEach(({{ i: j, end }}) => {{
-            if (j === i) return;
-            const other = streetSegsPx[j];
-            if (end === 0) seg.conn0.push({{ seg: other, t: 0, dir: 1 }});
-            else           seg.conn0.push({{ seg: other, t: 1, dir: -1 }});
-        }});
-    }});
-}}
-
-function _networkStep(p) {{
-    const seg = p._seg;
-    if (!seg) return;
-    const speed = 0.55 + Math.random() * 0.25;
-    p._segT += p._segDir * speed / seg.len;
-    if (p._segT >= 1) {{
-        const opts = seg.conn1;
-        if (opts && opts.length > 0) {{
-            const nx = opts[Math.floor(Math.random() * opts.length)];
-            p._seg = nx.seg; p._segT = nx.t; p._segDir = nx.dir;
-        }} else {{
-            // Dead end — reverse
-            p._segDir = -1; p._segT = 1;
-        }}
-    }} else if (p._segT <= 0) {{
-        const opts = seg.conn0;
-        if (opts && opts.length > 0) {{
-            const nx = opts[Math.floor(Math.random() * opts.length)];
-            p._seg = nx.seg; p._segT = nx.t; p._segDir = nx.dir;
-        }} else {{
-            p._segDir = 1; p._segT = 0;
-        }}
-    }}
-    const s = p._seg;
-    if (s) {{
-        p.px = s.x0 + (s.x1 - s.x0) * p._segT;
-        p.py = s.y0 + (s.y1 - s.y0) * p._segT;
-    }}
-}}
-
-function _buildNetworkField() {{
-    if (!pCanvas || !streetSegsPx.length) return;
-    updateVenuePx();
-    const count = 1200;
-    const safeCount = Math.min(count, MAX_P);
-    for (let i = 0; i < safeCount; i++) {{
-        const p = particles[i];
-        p._seg    = streetSegsPx[Math.floor(Math.random() * streetSegsPx.length)];
-        p._segT   = Math.random();
-        p._segDir = Math.random() < 0.5 ? 1 : -1;
-        p.r = 160; p.g = 110; p.b = 60;
-    }}
-    startParticles(safeCount);
-}}
-
-let _fieldUpdateTimer = null;
-function _scheduleFieldUpdate() {{
-    if (_fieldUpdateTimer) clearTimeout(_fieldUpdateTimer);
-    if (pCtx && pCanvas) pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
-    _fieldUpdateTimer = setTimeout(() => {{ updateParticleField(); }}, 400);
-}}
 
 // ── Heatmap overlay ────────────────────────────────────────────────────────────
 const heatCanvas = document.getElementById('heatmap-canvas');
