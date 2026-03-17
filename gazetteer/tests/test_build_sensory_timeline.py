@@ -36,25 +36,29 @@ def test_html_generated(html):
 
 
 def test_venues_json_present(html):
-    assert "VENUES_JSON" in html or "const VENUES" in html
+    assert "VENUES_JSON" not in html, "Placeholder was not replaced"
+    assert "const VENUES" in html
+    assert "Vauxhall" in html
 
 
 def test_evidence_json_present(html):
-    assert "EVIDENCE_JSON" in html or "const EVIDENCE" in html
+    assert "EVIDENCE_JSON" not in html, "Placeholder was not replaced"
+    assert "const EVIDENCE" in html
 
 
 def test_decade_summaries_present(html):
-    assert "DECADE_SUMMARIES_JSON" in html or "const DECADE_SUMMARIES" in html
+    assert "DECADE_SUMMARIES_JSON" not in html, "Placeholder was not replaced"
+    assert "const DECADE_SUMMARIES" in html
 
 
 def test_highlights_present(html):
-    assert "HIGHLIGHTS_JSON" in html or "const HIGHLIGHTS" in html
+    assert "HIGHLIGHTS_JSON" not in html, "Placeholder was not replaced"
+    assert "const HIGHLIGHTS" in html
 
 
 def test_only_london_venues(html):
-    # LON prefix venues should appear; BAT prefix (Bath) should not
-    assert "LON" in html
-    assert "BAT" not in html
+    assert '"LON' in html
+    assert '"RUR' not in html
 
 
 # ── Unit tests for pure functions ───────────────────────────────────────────
