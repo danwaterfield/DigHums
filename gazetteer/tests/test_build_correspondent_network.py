@@ -309,3 +309,37 @@ def test_build_cli(tmp_path):
     )
     assert result.returncode == 0, f"stderr: {result.stderr}"
     assert out.exists()
+
+
+# ── Task 5: Integration tests against real data ──────────────────
+
+from build_correspondent_network import TEXT_PATH
+
+
+def test_real_data_parse_count():
+    """Verify we parse all headers from the real OUP text."""
+    text = TEXT_PATH.read_text(encoding="utf-8")
+    entries = parse_headers(text)
+    assert len(entries) >= 240, f"Only parsed {len(entries)} entries (expected ~243)"
+    for e in entries:
+        assert e["year"] is not None, f"Entry {e['number']} has no year"
+
+
+def test_real_data_all_correspondents_have_communities():
+    """Every correspondent in the real data should be assigned a community."""
+    text = TEXT_PATH.read_text(encoding="utf-8")
+    data = build_network_data(text)
+    unknowns = [
+        n["id"] for n in data["nodes"]
+        if n["community"] == "Unknown"
+    ]
+    assert unknowns == [], f"Unassigned correspondents: {unknowns}"
+
+
+def test_real_data_susanna_is_top_correspondent():
+    """Susanna should have the most letters — sanity check."""
+    text = TEXT_PATH.read_text(encoding="utf-8")
+    data = build_network_data(text)
+    nodes = sorted(data["nodes"], key=lambda n: -n["count"])
+    assert nodes[0]["id"] == "Frances Burney"
+    assert "Susanna" in nodes[1]["id"]

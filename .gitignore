@@ -55,3 +55,4 @@ gazetteer/sources/
 
 # OHM street cache (regenerated at build time)
 gazetteer/ohm_streets_cache.json
+gazetteer/.d3.v7.min.js
