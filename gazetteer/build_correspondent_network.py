@@ -1169,6 +1169,9 @@ def build(
     d3_src = _get_d3_source()
     html = HTML_TEMPLATE.replace("{D3_SOURCE}", d3_src, 1)
     html = html.replace("{NETWORK_JSON}", network_json, 1)
+    # Un-double the remaining braces (CSS/JS use {{ }} in the template
+    # to avoid colliding with the Python placeholders above)
+    html = html.replace("{{", "{").replace("}}", "}")
     out_path.write_text(html, encoding="utf-8")
     print(f"Correspondent network -> {out_path}")
     print(f"  {len(data['nodes'])} nodes  {len(data['edges'])} edges  "
