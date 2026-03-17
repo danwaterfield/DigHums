@@ -5,8 +5,9 @@ Build the self-contained venue comparison HTML.
 Reads venues.csv and sensory.db, writes comparison.html.
 
 For each venue the page shows two columns:
-  Left  — Fiction passages (novels, poetry)
-  Right — Non-fiction passages (diary, topography, letters, legal)
+  Left  — Fiction passages (novels)
+  Right — Non-fiction passages (diary, topography, letters, legal,
+           poetry, newspaper, parish, institutional)
 
 Each column displays:
   - Modality breakdown bar
@@ -31,7 +32,10 @@ DB_PATH     = Path(__file__).parent / "sensory.db"
 OUT_PATH    = Path(__file__).parent / "comparison.html"
 
 FICTION_TYPES    = {"fiction"}
-NONFICTION_TYPES = {"diary", "topography", "letters", "legal", "poetry"}
+NONFICTION_TYPES = {
+    "diary", "topography", "letters", "legal", "poetry",
+    "newspaper", "parish", "institutional",
+}
 
 
 def fmt_author(s: str) -> str:
@@ -229,6 +233,9 @@ body { font-family: Georgia, 'Times New Roman', serif; background: #f5f0eb;
 .src-poetry     { background: #ecdaf5; color: #5b1a7a; }
 .src-letters    { background: #e8e8e8; color: #444; }
 .src-legal      { background: #f5e0e0; color: #8b1a1a; }
+.src-newspaper  { background: #f8ecd2; color: #8a5a11; }
+.src-parish     { background: #d9f0ec; color: #0f615f; }
+.src-institutional { background: #e4e8f6; color: #304c86; }
 .ev-author { font-weight: bold; color: #2c3e50; }
 .ev-title  { color: #555; font-style: italic; }
 .ev-date   { font-size: 10px; color: #999; margin-bottom: 4px; }
@@ -266,6 +273,7 @@ body { font-family: Georgia, 'Times New Roman', serif; background: #f5f0eb;
     <a href="venue_explorer.html" class="view-tab">Evidence</a>
     <a href="narrative_map.html" class="view-tab">Narrative</a>
     <span class="view-tab active">Comparison</span>
+    <a href="sensory_timeline.html" class="view-tab">Timeline</a>
   </span>
   <select id="venue-select"></select>
   <span class="subtitle" id="top-stats"></span>
@@ -324,6 +332,8 @@ const SOURCE_CLASSES = {
   fiction: 'src-fiction', diary: 'src-diary',
   topography: 'src-topography', poetry: 'src-poetry',
   letters: 'src-letters', legal: 'src-legal',
+  newspaper: 'src-newspaper', parish: 'src-parish',
+  institutional: 'src-institutional',
 };
 const MOD_COLORS = {
   auditory: '#5b9bd5', olfactory: '#c97c3b', visual: '#6aab6e',

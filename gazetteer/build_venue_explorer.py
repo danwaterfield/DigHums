@@ -195,6 +195,9 @@ body { font-family: 'Inter', system-ui, sans-serif; background: #f4f1eb;
 .src-poetry     { background: #ecdaf5; color: #5b1a7a; }
 .src-letters    { background: #e8e8e8; color: #444; }
 .src-legal      { background: #f5e0e0; color: #8b1a1a; }
+.src-newspaper  { background: #f8ecd2; color: #8a5a11; }
+.src-parish     { background: #d9f0ec; color: #0f615f; }
+.src-institutional { background: #e4e8f6; color: #304c86; }
 .ev-author { font-weight: 600; color: #1a1816; }
 .ev-title  { color: #555; font-style: italic; }
 .ev-date   { font-size: 10px; color: #999; margin-bottom: 5px; }
@@ -236,6 +239,7 @@ body { font-family: 'Inter', system-ui, sans-serif; background: #f4f1eb;
     <span class="view-tab active">Evidence</span>
     <a href="narrative_map.html" class="view-tab">Narrative</a>
     <a href="comparison.html" class="view-tab">Comparison</a>
+    <a href="sensory_timeline.html" class="view-tab">Timeline</a>
   </span>
   <span class="sep">|</span>
   <div class="filter-group">
@@ -255,6 +259,9 @@ body { font-family: 'Inter', system-ui, sans-serif; background: #f4f1eb;
     <button class="pill active" data-f="source" data-v="poetry">Poetry</button>
     <button class="pill active" data-f="source" data-v="letters">Letters</button>
     <button class="pill active" data-f="source" data-v="legal">Legal</button>
+    <button class="pill active" data-f="source" data-v="newspaper">Newspaper</button>
+    <button class="pill active" data-f="source" data-v="parish">Parish</button>
+    <button class="pill active" data-f="source" data-v="institutional">Institutional</button>
   </div>
   <span class="sep">|</span>
   <div class="date-group filter-group">
@@ -333,7 +340,10 @@ L.control.layers(baseLayers, {}, { collapsed: false }).addTo(map);
 // ── state ─────────────────────────────────────────────────────────────────
 const state = {
   modalities:      new Set(['auditory','olfactory','visual','thermal','crowd']),
-  sources:         new Set(['fiction','diary','topography','poetry','letters','legal']),
+  sources:         new Set([
+    'fiction', 'diary', 'topography', 'poetry', 'letters', 'legal',
+    'newspaper', 'parish', 'institutional',
+  ]),
   dateFrom:        1660,
   dateTo:          1820,
   selectedId:      null,
@@ -388,6 +398,8 @@ const SOURCE_CLASSES = {
   fiction: 'src-fiction', diary: 'src-diary',
   topography: 'src-topography', poetry: 'src-poetry',
   letters: 'src-letters', legal: 'src-legal',
+  newspaper: 'src-newspaper', parish: 'src-parish',
+  institutional: 'src-institutional',
 };
 
 function esc(s) {

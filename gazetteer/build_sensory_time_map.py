@@ -527,6 +527,7 @@ body {{ font-family: 'Inter', system-ui, 'Georgia', sans-serif; background: #f4f
     <a href="venue_explorer.html" class="view-tab">Evidence</a>
     <a href="narrative_map.html" class="view-tab">Narrative</a>
     <a href="comparison.html" class="view-tab">Comparison</a>
+    <a href="sensory_timeline.html" class="view-tab">Timeline</a>
   </div>
   <div class="pill-row">
     <span class="pill-label">Month</span>
@@ -2148,7 +2149,7 @@ const ContourSurface = L.GridLayer.extend({{
         }};
 
         const grid = new Float32Array(gridW * gridH);
-        const maxAlpha = 0.40;
+        const maxAlpha = 0.65;
 
         if (mode === 'atmosphere') {{
             const smokeGrid = new Float32Array(gridW * gridH);
@@ -2160,6 +2161,11 @@ const ContourSurface = L.GridLayer.extend({{
             }}
         }} else {{
             _idwPass(grid, state.contourSense, false);
+        }}
+        // Boost: IDW averages are inherently low (0.05–0.15); apply
+        // sqrt gain so the surface is visible and contour thresholds fire
+        for (let i = 0; i < grid.length; i++) {{
+            grid[i] = Math.sqrt(Math.min(1, grid[i] * 3.0));
         }}
 
         const sigma = 1;  // light blur on 32x32 grid
@@ -2197,9 +2203,9 @@ const ContourSurface = L.GridLayer.extend({{
 
     _drawContours: function(ctx, grid, gridW, gridH, cellW, cellH, ramp) {{
         const thresholds = [
-            {{ val: 0.4, dash: [4, 3], width: 0.8, alpha: 0.45 }},
-            {{ val: 0.6, dash: [4, 3], width: 1.0, alpha: 0.55 }},
-            {{ val: 0.8, dash: [],     width: 1.2, alpha: 0.70 }},
+            {{ val: 0.25, dash: [4, 3], width: 0.8, alpha: 0.45 }},
+            {{ val: 0.45, dash: [4, 3], width: 1.0, alpha: 0.55 }},
+            {{ val: 0.65, dash: [],     width: 1.2, alpha: 0.70 }},
         ];
         thresholds.forEach(th => {{
             const rgb = sampleRamp(ramp, th.val);
@@ -2244,7 +2250,7 @@ const ContourSurface = L.GridLayer.extend({{
     }},
 
     _drawContourLabels: function(ctx, grid, gridW, gridH, cellW, cellH, ramp) {{
-        const thresholds = [0.4, 0.6, 0.8];
+        const thresholds = [0.25, 0.45, 0.65];
         ctx.font = 'italic 9px Georgia';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';

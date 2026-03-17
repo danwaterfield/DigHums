@@ -172,3 +172,21 @@ def test_story_mode_keyboard(html):
 
 def test_story_bar_present(html):
     assert "story-bar" in html
+
+
+# ── Navigation integration tests ──────────────────────────────────────────
+
+def test_sensory_map_has_timeline_link():
+    """Sensory time map must link to timeline."""
+    path = REPO_ROOT / "gazetteer" / "sensory_time_map.html"
+    if path.exists():
+        content = path.read_text(encoding="utf-8")
+        assert "sensory_timeline.html" in content
+
+
+def test_venue_explorer_has_timeline_link():
+    """Venue explorer must link to timeline."""
+    path = REPO_ROOT / "gazetteer" / "venue_explorer.html"
+    if path.exists():
+        content = path.read_text(encoding="utf-8")
+        assert "sensory_timeline.html" in content
