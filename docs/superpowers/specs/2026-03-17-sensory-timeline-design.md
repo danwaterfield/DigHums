@@ -30,10 +30,12 @@ Deployed as a static HTML page on GitHub Pages, built by a Python script from
 
 ### Venue selection
 
-All London venues meeting the threshold: 20+ evidence passages and 3+ distinct
-sources. Currently ~25 venues qualify, including Vauxhall (108 passages, 21
-sources), Smithfield (64, 52), Newgate (134, 45), the Strand (108, 26), and
-Drury Lane (73, 19).
+All London venues (filtered by `venue_id LIKE 'LON%'`) meeting the threshold:
+20+ evidence passages and 3+ distinct sources. Currently ~38 venues qualify,
+including Vauxhall (108 passages, 21 sources), Smithfield (64, 52), Newgate
+(134, 45), the Strand (108, 26), and Drury Lane (73, 19). Rural venues
+(`RUR001`, `RUR002`) are excluded by the LON prefix filter — they represent
+Continental Gothic and rural settings outside the project's urban scope.
 
 ### Evidence passages
 
@@ -47,7 +49,7 @@ Each passage carries:
 | `source_type` | `fiction`, `topography`, `diary`, `letters`, `legal`, `institutional`, `poetry` |
 | `date_min`, `date_max` | Integer years |
 | `modality` | `auditory`, `visual`, `crowd`, `olfactory`, `thermal` |
-| `valence` | `pleasant`, `unpleasant`, `neutral`, `mixed` |
+| `valence` | `pleasant`, `unpleasant`, `neutral`, `mixed`, `positive`, `negative` |
 | `text` | The passage text |
 
 ### Decade assignment
@@ -83,7 +85,10 @@ count per modality, normalised against the venue's peak decade.
 - `{VENUES_JSON}` — venue metadata (id, name, lat, lon, building_type,
   enclosure, passage/source counts).
 - `{EVIDENCE_JSON}` — all passages for qualifying venues, sorted by venue then
-  date_min.
+  date_min. Each passage includes: source_id, author, title, source_type,
+  pub_year, date_min, date_max, modality, valence, text. The `context` and
+  `divergence` fields from the database are omitted — they serve the venue
+  explorer's different purpose.
 - `{DECADE_SUMMARIES_JSON}` — per-venue per-decade summary objects.
 
 ## UI Structure
@@ -120,14 +125,19 @@ Three zones, no border-radius anywhere. Typography-led, minimal chrome.
 
 Vertical list of decades. Each shows a small intensity indicator. Clicking
 scrolls the content area. Active decade updates via scroll-spy
-(IntersectionObserver on decade header elements).
+(IntersectionObserver on decade header elements). Decades with no passages
+for the selected venue show a dimmed label and no intensity bar; clicking
+them is a no-op. The content area only renders decade sections that have
+passages.
 
 ### Timeline strip (top, ~72px)
 
-Horizontal bar chart: one column per decade, four stacked bars (smell = amber,
-noise = blue, crowd = red, visual = green). These are the only uses of colour
-in the UI. A small legend row sits below the strip. Clicking a column scrolls
-to that decade.
+Horizontal bar chart: one column per decade, five stacked bars for the five
+modalities: smell (amber), noise (blue), crowd (red), visual (green), thermal
+(purple). These are the only uses of colour in the UI. Thermal data is sparse
+but present for some venues (e.g. Smollett on the cold night air at Vauxhall).
+A small legend row sits below the strip. Clicking a column scrolls to that
+decade.
 
 ### Content area
 
@@ -142,13 +152,19 @@ non-fiction (not coloured pills). Inside each card:
 
 - Source type label (plain text, small caps: FICTION / TRAVEL / DIARY / LEGAL)
 - Author and title
-- Date
+- Date — show `pub_year` as the primary date; if `date_min` differs (fiction
+  describing an earlier period), show both: "1771 (describing 1760s)"
 - Modality tags (small, grey, understated)
 - Passage text in serif italic (Georgia)
 - Source attribution line
 
 **Comparison rows**: where fiction and non-fiction passages exist in the same
 decade for the same venue, they appear side-by-side in a two-column layout.
+"Non-fiction" means any source_type other than `fiction` (i.e. topography,
+diary, letters, legal, institutional, poetry). If multiple fiction or multiple
+non-fiction passages exist, show the single best of each (longest text) in the
+comparison row; remaining passages appear as regular cards below. Comparison
+rows appear in both Story and Explore modes.
 
 ### Top bar
 
@@ -162,11 +178,11 @@ Auto-curated, no manual editorial pass needed.
 **Highlight selection algorithm**: for each venue, for each decade that has
 passages, select one highlight passage using:
 
-1. Prefer passages with `confidence >= 0.8`
-2. Prefer longer text (more vivid, more context)
-3. Prefer passages where the same decade also has a passage of a different
+1. Prefer longer text (more vivid, more context) — this is the primary
+   discriminator since confidence values are nearly all 1.0
+2. Prefer passages where the same decade also has a passage of a different
    `source_type` (enables the fiction/non-fiction comparison moment)
-4. Tiebreak: prefer `fiction` over other source types (more compelling to read)
+3. Tiebreak: prefer `fiction` over other source types (more compelling to read)
 
 **Behaviour**:
 
@@ -208,6 +224,7 @@ to:
 - The narrative map if it exists
 
 The timeline page links back to the other four views in the same nav bar.
+"Timeline" is inserted as the last entry, after "Comparison".
 
 ## Visual Design Principles
 
@@ -251,9 +268,9 @@ Tests to include:
 
 - New build script (`build_sensory_timeline.py`) + output
   (`sensory_timeline.html`)
-- ~25 London venues meeting the evidence threshold
+- ~38 London venues meeting the evidence threshold
 - All evidence passages for those venues, decade-grouped
-- Timeline strip with four sensory bands
+- Timeline strip with five sensory bands
 - Decade sidebar with scroll-spy
 - Story mode (auto-curated) and Explore mode (free scroll)
 - Fiction/non-fiction visual distinction and side-by-side comparison
