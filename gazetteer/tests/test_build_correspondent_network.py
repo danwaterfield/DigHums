@@ -263,3 +263,49 @@ def test_letters_list_has_required_fields():
         assert "year" in letter
         assert "type" in letter
         assert "phase" in letter
+
+
+# ── Task 4: Build function & HTML output ──────────────────────────
+
+import re
+import subprocess
+import tempfile
+
+from build_correspondent_network import build
+
+
+def test_build_produces_html():
+    with tempfile.NamedTemporaryFile(suffix=".html", delete=False) as f:
+        out = Path(f.name)
+    try:
+        build(out_path=out)
+        html = out.read_text(encoding="utf-8")
+        assert "<!doctype html>" in html.lower()
+        assert "Frances Burney" in html
+        assert "d3" in html.lower()
+    finally:
+        out.unlink(missing_ok=True)
+
+
+def test_build_html_has_no_unsubstituted_placeholders():
+    with tempfile.NamedTemporaryFile(suffix=".html", delete=False) as f:
+        out = Path(f.name)
+    try:
+        build(out_path=out)
+        html = out.read_text(encoding="utf-8")
+        unsubst = re.findall(r"(?<!\{)\{[A-Z_]+\}(?!\})", html)
+        assert unsubst == [], f"Unsubstituted placeholders: {unsubst}"
+    finally:
+        out.unlink(missing_ok=True)
+
+
+def test_build_cli(tmp_path):
+    out = tmp_path / "network.html"
+    result = subprocess.run(
+        [sys.executable, "-c",
+         f"from pathlib import Path; import sys; sys.path.insert(0,'gazetteer');"
+         f"from build_correspondent_network import build; build(out_path=Path('{out}'))"],
+        capture_output=True, text=True,
+    )
+    assert result.returncode == 0, f"stderr: {result.stderr}"
+    assert out.exists()
