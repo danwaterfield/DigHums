@@ -645,7 +645,7 @@ function renderStrip() {{
       var pct  = Math.round((val / peak) * 36);
       bars[i].style.height = (pct || 0) + 'px';
     }});
-    stripCell.classList.toggle('active', String(d) === String(state.activeDecode || ''));
+    stripCell.classList.toggle('active', String(d) === String(state.activeDecade || ''));
   }});
 }}
 
@@ -662,29 +662,10 @@ function renderSidebar() {{
 }}
 
 // ── card rendering ──────────────────────────────────────────────────────────
-function renderCard(ev, idx) {{
-  var isStory   = state.mode === 'story';
-  var highlights = state.venueId ? (HIGHLIGHTS[state.venueId] || {{}}) : {{}};
-
-  // In story mode, find which indices are highlights
-  var hlIndices = {{}};
-  if (isStory) {{
-    var allEvidence = state.venueId ? (EVIDENCE[state.venueId] || []) : [];
-    DECADES.forEach(function(d) {{
-      var hl = highlights[String(d)];
-      if (!hl) return;
-      for (var i = 0; i < allEvidence.length; i++) {{
-        if (allEvidence[i] === hl || (allEvidence[i].text === hl.text && allEvidence[i].source_id === hl.source_id)) {{
-          hlIndices[i] = true;
-          break;
-        }}
-      }}
-    }});
-  }}
-
+function renderCard(ev, idx, hlSet) {{
   var isFiction   = ev.source_type === 'fiction';
   var cardClass   = isFiction ? 'card card-fiction' : 'card card-nonfiction';
-  var isDimmed    = isStory && !hlIndices[idx];
+  var isDimmed    = state.mode === 'story' && !hlSet[idx];
   if (isDimmed) cardClass += ' dimmed';
 
   var sourceLabel = SOURCE_LABELS[ev.source_type] || (ev.source_type || '').toUpperCase();
@@ -710,7 +691,7 @@ function renderCard(ev, idx) {{
     '</div>' +
     '<div class="modality-tag">' + esc(modLabel) + '</div>' +
     '<div class="card-text">\u201c' + esc(snippet) + '\u201d</div>' +
-    (ev.source_id ? '<div class="card-source source_type">' + esc(ev.source_id) + '</div>' : '') +
+    '<div class="card-source">' + esc(ev.title) + (ev.pub_year ? ' (' + ev.pub_year + ')' : '') + '</div>' +
   '</div>';
 }}
 
@@ -731,6 +712,12 @@ function renderContent() {{
     if (!byDecade[d]) byDecade[d] = [];
     byDecade[d].push({{ ev: ev, idx: idx }});
   }});
+
+  // Precompute highlight set once for story mode dimming
+  var hlSet = {{}};
+  if (state.mode === 'story') {{
+    getStoryHighlights().forEach(function(i) {{ hlSet[i] = true; }});
+  }}
 
   var html = '';
   var sortedDecades = Object.keys(byDecade).map(Number).sort(function(a,b) {{ return a-b; }});
@@ -756,18 +743,18 @@ function renderContent() {{
       var bestFic    = fictionItems.reduce(function(a, b) {{ return (b.ev.text||'').length > (a.ev.text||'').length ? b : a; }});
       var bestNonFic = nonfictionItems.reduce(function(a, b) {{ return (b.ev.text||'').length > (a.ev.text||'').length ? b : a; }});
       html += '<div class="compare-row">' +
-        renderCard(bestFic.ev, bestFic.idx) +
-        renderCard(bestNonFic.ev, bestNonFic.idx) +
+        renderCard(bestFic.ev, bestFic.idx, hlSet) +
+        renderCard(bestNonFic.ev, bestNonFic.idx, hlSet) +
       '</div>';
       // Remaining items (those not used in compare row)
       var compareIdxs = {{}};
       compareIdxs[bestFic.idx] = true;
       compareIdxs[bestNonFic.idx] = true;
       items.forEach(function(it) {{
-        if (!compareIdxs[it.idx]) html += renderCard(it.ev, it.idx);
+        if (!compareIdxs[it.idx]) html += renderCard(it.ev, it.idx, hlSet);
       }});
     }} else {{
-      items.forEach(function(it) {{ html += renderCard(it.ev, it.idx); }});
+      items.forEach(function(it) {{ html += renderCard(it.ev, it.idx, hlSet); }});
     }}
 
     html += '</div>';
@@ -784,8 +771,7 @@ function setupScrollSpy() {{
     entries.forEach(function(entry) {{
       if (entry.isIntersecting) {{
         var d = entry.target.getAttribute('data-decade');
-        state.activeDecade   = d;
-        state.activeDecode   = d;
+        state.activeDecade = d;
         // Update sidebar
         document.querySelectorAll('.decade-btn').forEach(function(btn) {{
           btn.classList.toggle('active', btn.getAttribute('data-decade') === d);
