@@ -110,3 +110,65 @@ def test_highlight_prefers_fiction():
     ]
     result = bst.select_highlight(passages)
     assert result["source_type"] == "fiction"
+
+
+# ── Tasks 3-6: HTML structure tests ─────────────────────────────────────────
+
+def test_decade_sidebar_buttons(html):
+    assert 'data-decade="1660"' in html
+    assert 'data-decade="1750"' in html
+    assert 'data-decade="1810"' in html
+
+
+def test_timeline_strip_present(html):
+    assert "timeline-strip" in html
+
+
+def test_sense_legend(html):
+    for label in ["Smell", "Noise", "Crowd", "Visual", "Thermal"]:
+        assert label in html
+
+
+def test_venue_selector(html):
+    assert "<select" in html
+    assert "venue-selector" in html
+
+
+def test_story_explore_toggle(html):
+    assert "Story" in html
+    assert "Explore" in html
+
+
+def test_view_nav_links(html):
+    assert "sensory_time_map.html" in html
+    assert "venue_explorer.html" in html
+    assert "comparison.html" in html
+
+
+def test_no_border_radius(html):
+    import re
+    matches = re.findall(r'border-radius:\s*[^0;][^;]*;', html)
+    real_radii = [m for m in matches if not re.match(r'border-radius:\s*0', m)]
+    assert len(real_radii) == 0, f"Found border-radius: {real_radii}"
+
+
+def test_source_type_labels(html):
+    assert "source_type" in html
+
+
+def test_modality_tags_in_template(html):
+    assert "modality" in html
+
+
+def test_georgia_font(html):
+    assert "Georgia" in html
+
+
+def test_story_mode_keyboard(html):
+    assert "ArrowRight" in html
+    assert "ArrowLeft" in html
+    assert "Escape" in html
+
+
+def test_story_bar_present(html):
+    assert "story-bar" in html
