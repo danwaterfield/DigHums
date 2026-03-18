@@ -503,3 +503,48 @@ def test_catalogue_letters_have_direction():
         assert "direction" in letter
         assert "correspondent" in letter
         assert "phase" in letter
+
+
+# ── Task 7: Three-network HTML build ─────────────────────────────
+
+def test_build_produces_html_with_three_networks():
+    import tempfile
+    with tempfile.NamedTemporaryFile(suffix=".html", delete=False) as f:
+        out = Path(f.name)
+    try:
+        build(out_path=out)
+        html = out.read_text(encoding="utf-8")
+        assert "Frances Burney" in html
+        assert "Dr Charles Burney" in html or "Charles Burney Mus Doc" in html
+        assert "Charles Burney Jr" in html or "Charles Burney DD" in html
+    finally:
+        out.unlink(missing_ok=True)
+
+
+def test_build_html_has_catalogue_json():
+    import tempfile
+    with tempfile.NamedTemporaryFile(suffix=".html", delete=False) as f:
+        out = Path(f.name)
+    try:
+        build(out_path=out)
+        html = out.read_text(encoding="utf-8")
+        # The catalogue data should embed all three keys
+        assert '"frances"' in html
+        assert '"cb_sr"' in html
+        assert '"cb_jr"' in html
+    finally:
+        out.unlink(missing_ok=True)
+
+
+def test_build_html_has_tab_buttons():
+    import tempfile
+    with tempfile.NamedTemporaryFile(suffix=".html", delete=False) as f:
+        out = Path(f.name)
+    try:
+        build(out_path=out)
+        html = out.read_text(encoding="utf-8")
+        assert "tab-btn" in html
+        assert "Charles Sr" in html
+        assert "Charles Jr" in html
+    finally:
+        out.unlink(missing_ok=True)

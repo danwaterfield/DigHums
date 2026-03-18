@@ -446,15 +446,16 @@ def _get_d3_source() -> str:
 
 
 # ── HTML template ─────────────────────────────────────────────────
-# Convention: ALL JS braces are doubled.  Only {D3_SOURCE} and
-# {NETWORK_JSON} use single braces (Python .replace() targets).
+# Convention: ALL JS braces are doubled.  Only {D3_SOURCE},
+# {NETWORK_JSON}, and {CATALOGUE_JSON} use single braces
+# (Python .replace() targets).
 
 HTML_TEMPLATE = r"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Frances Burney — Correspondent Network</title>
+<title>Burney Family — Correspondent Networks</title>
 <style>
 *,*::before,*::after {{ box-sizing:border-box; margin:0; padding:0; }}
 html,body {{ height:100%; overflow:hidden; }}
@@ -468,14 +469,15 @@ body {{
 
 /* ── Header ─────────────────────────────────────── */
 .header {{
-  padding: 12px 24px;
+  padding: 10px 24px;
   background: #fff;
   border-bottom: 1px solid #e0e0e0;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 16px;
   flex-shrink: 0;
   z-index: 10;
+  flex-wrap: wrap;
 }}
 .header h1 {{
   font-size: 16px;
@@ -496,6 +498,89 @@ body {{
   gap: 16px;
 }}
 .stats span {{ font-variant-numeric: tabular-nums; }}
+
+/* ── Tab switcher ───────────────────────────────── */
+.tab-bar {{
+  display: flex;
+  gap: 0;
+  margin-left: 12px;
+}}
+.tab-btn {{
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 14px;
+  border: 1px solid #d0d0d0;
+  background: #fff;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}}
+.tab-btn:first-child {{ border-radius: 4px 0 0 4px; }}
+.tab-btn:last-child {{ border-radius: 0 4px 4px 0; }}
+.tab-btn:not(:first-child) {{ margin-left: -1px; }}
+.tab-btn:hover {{ color: #333; background: #f5f5f5; }}
+.tab-btn.active {{
+  background: #2d3436;
+  color: #fff;
+  border-color: #2d3436;
+  z-index: 1;
+  position: relative;
+}}
+.tab-count {{
+  font-size: 10px;
+  font-weight: 400;
+  color: #999;
+  margin-left: 4px;
+}}
+.tab-btn.active .tab-count {{ color: rgba(255,255,255,0.7); }}
+
+/* ── Threshold slider ───────────────────────────── */
+.threshold-bar {{
+  display: none;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 24px 8px;
+  background: #fff;
+  border-bottom: 1px solid #e8e8e8;
+  font-size: 11px;
+  color: #666;
+  flex-shrink: 0;
+}}
+.threshold-bar.visible {{ display: flex; }}
+.threshold-bar label {{ white-space: nowrap; }}
+.threshold-bar input[type="range"] {{
+  width: 180px;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: #e0e0e0;
+  border-radius: 2px;
+  outline: none;
+}}
+.threshold-bar input[type="range"]::-webkit-slider-thumb {{
+  -webkit-appearance: none;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: #2d3436;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  cursor: pointer;
+}}
+.threshold-bar input[type="range"]::-moz-range-thumb {{
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: #2d3436;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  cursor: pointer;
+}}
+.threshold-val {{
+  font-weight: 600;
+  color: #2d3436;
+  min-width: 20px;
+  text-align: center;
+}}
 
 /* ── Main layout ────────────────────────────────── */
 .main {{
@@ -519,13 +604,15 @@ svg {{ display: block; width: 100%; height: 100%; }}
   font-size: 12px;
   line-height: 1.5;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  max-width: 260px;
+  max-width: 300px;
   z-index: 20;
   display: none;
 }}
 .tooltip .tt-name {{ font-weight: 600; font-size: 13px; }}
 .tooltip .tt-community {{ font-size: 11px; color: #666; }}
 .tooltip .tt-detail {{ margin-top: 4px; font-size: 11px; color: #555; }}
+.tooltip .tt-direction {{ font-size: 11px; color: #777; }}
+.tooltip .tt-edge {{ font-size: 11px; color: #555; margin-top: 2px; }}
 
 /* ── Legend ──────────────────────────────────────── */
 .legend {{
@@ -553,12 +640,12 @@ svg {{ display: block; width: 100%; height: 100%; }}
 
 /* ── Detail panel ───────────────────────────────── */
 .detail-panel {{
-  width: 320px;
+  width: 340px;
   background: #fff;
   border-left: 1px solid #e0e0e0;
   overflow-y: auto;
   flex-shrink: 0;
-  transform: translateX(320px);
+  transform: translateX(340px);
   transition: transform 0.25s ease;
   position: absolute;
   top: 0; right: 0; bottom: 0;
@@ -605,6 +692,35 @@ svg {{ display: block; width: 100%; height: 100%; }}
   line-height: 1.8;
 }}
 .dp-stats strong {{ color: #1a1a1a; font-weight: 600; }}
+.dp-direction-bar {{
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 6px 0;
+  background: #f0f0f0;
+}}
+.dp-direction-bar .dp-bar-to {{
+  background: #4a6fa5;
+  height: 100%;
+}}
+.dp-direction-bar .dp-bar-from {{
+  background: #a07855;
+  height: 100%;
+}}
+.dp-cross {{
+  padding: 8px 20px 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 11px;
+  color: #555;
+}}
+.dp-cross-link {{
+  cursor: pointer;
+  color: #4a6fa5;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}}
+.dp-cross-link:hover {{ color: #2d3436; }}
 .dp-letters {{
   padding: 12px 20px;
 }}
@@ -731,8 +847,9 @@ svg {{ display: block; width: 100%; height: 100%; }}
 <body>
 
 <div class="header">
-  <h1>Frances Burney</h1>
-  <span class="subtitle">Correspondent Network, 1768 &ndash; 1839</span>
+  <h1>Burney Family</h1>
+  <span class="subtitle">Correspondent Networks</span>
+  <div class="tab-bar" id="tab-bar"></div>
   <div class="stats">
     <span id="stat-nodes"></span>
     <span id="stat-edges"></span>
@@ -740,9 +857,21 @@ svg {{ display: block; width: 100%; height: 100%; }}
   </div>
 </div>
 
+<div class="threshold-bar" id="threshold-bar">
+  <label>Show correspondents with &ge; <span class="threshold-val" id="threshold-val">5</span> letters</label>
+  <input type="range" id="threshold-slider" min="1" max="50" value="5">
+</div>
+
 <div class="main">
   <div class="graph-area" id="graph-area">
-    <svg id="network-svg"></svg>
+    <svg id="network-svg">
+      <defs>
+        <marker id="arrow-to" viewBox="0 0 10 6" refX="10" refY="3"
+          markerWidth="8" markerHeight="6" orient="auto">
+          <path d="M0,0 L10,3 L0,6" fill="#4a6fa5" opacity="0.5"/>
+        </marker>
+      </defs>
+    </svg>
     <div class="tooltip" id="tooltip"></div>
     <div class="legend" id="legend"></div>
   </div>
@@ -753,10 +882,11 @@ svg {{ display: block; width: 100%; height: 100%; }}
       <div class="dp-community" id="dp-community"></div>
     </div>
     <div class="dp-stats" id="dp-stats"></div>
+    <div class="dp-cross" id="dp-cross"></div>
     <div class="dp-letters">
       <h3>Letters</h3>
       <table class="dp-table">
-        <thead><tr><th>No.</th><th>Date</th><th>Type</th><th>Phase</th></tr></thead>
+        <thead><tr><th>Date</th><th>Dir</th><th>Phase</th></tr></thead>
         <tbody id="dp-tbody"></tbody>
       </table>
     </div>
@@ -766,8 +896,8 @@ svg {{ display: block; width: 100%; height: 100%; }}
 <div class="timeline">
   <div class="timeline-label" id="tl-label"></div>
   <div class="slider-wrap">
-    <input type="range" id="slider-lo" min="1768" max="1839" value="1768">
-    <input type="range" id="slider-hi" min="1768" max="1839" value="1839">
+    <input type="range" id="slider-lo" min="1749" max="1839" value="1749">
+    <input type="range" id="slider-hi" min="1749" max="1839" value="1839">
   </div>
   <div class="phase-pills" id="phase-pills"></div>
 </div>
@@ -779,51 +909,160 @@ svg {{ display: block; width: 100%; height: 100%; }}
 (function() {{
 "use strict";
 
-var DATA = {NETWORK_JSON};
+var OUP_DATA = {NETWORK_JSON};
+var CATALOGUE = {CATALOGUE_JSON};
 
 var COMMUNITY_COLOUR = {{
-  "Centre":         "#2d3436",
-  "Family":         "#4a6fa5",
-  "Literary":       "#a07855",
-  "Court":          "#5a8a7a",
-  "Publishers":     "#7a7a8a",
-  "Intimate circle":"#a07080",
-  "Unknown":        "#b0b0b0"
+  "Centre":           "#2d3436",
+  "Family":           "#4a6fa5",
+  "Literary":         "#a07855",
+  "Court":            "#5a8a7a",
+  "Publishers":       "#7a7a8a",
+  "Intimate circle":  "#a07080",
+  "French circle":    "#6a5a8a",
+  "Musical circle":   "#8a6a50",
+  "Scholarly/Church": "#5a7a6a",
+  "Royal":            "#8a7a5a",
+  "Unknown":          "#b0b0b0"
 }};
 
-var rangeLo = 1768, rangeHi = 1839;
+/* ── Tab definitions ──────────────────────────────── */
+var TABS = [
+  {{ key: "frances", label: "Frances", data: CATALOGUE.frances }},
+  {{ key: "cb_sr",   label: "Charles Sr", data: CATALOGUE.cb_sr }},
+  {{ key: "cb_jr",   label: "Charles Jr", data: CATALOGUE.cb_jr }}
+];
+
+var activeTab = "frances";
+var rangeLo, rangeHi;
 var selectedNode = null;
+var threshold = 5;
+var simulation = null;
+var link = null, node = null;
+var currentData = null;
 
-document.getElementById("stat-nodes").textContent = DATA.nodes.length + " correspondents";
-document.getElementById("stat-edges").textContent = DATA.edges.length + " connections";
-document.getElementById("stat-letters").textContent = DATA.letters.length + " letters";
-
-/* Legend */
-(function() {{
-  var el = document.getElementById("legend");
-  var frag = document.createDocumentFragment();
-  var order = ["Centre","Family","Literary","Court","Publishers","Intimate circle","Unknown"];
-  var present = new Set(DATA.nodes.map(function(n){{ return n.community; }}));
-  order.forEach(function(c) {{
-    if (!present.has(c)) return;
-    var row = document.createElement("div");
-    row.className = "legend-item";
-    var swatch = document.createElement("div");
-    swatch.className = "legend-swatch";
-    swatch.style.background = COMMUNITY_COLOUR[c];
-    var label = document.createElement("span");
-    label.textContent = c;
-    row.appendChild(swatch);
-    row.appendChild(label);
-    frag.appendChild(row);
+/* Cross-network lookup: for each node name, which other tabs contain it */
+var crossNetwork = {{}};
+TABS.forEach(function(tab) {{
+  var nodeIds = new Set(tab.data.nodes.map(function(n) {{ return n.id; }}));
+  nodeIds.forEach(function(id) {{
+    if (!crossNetwork[id]) crossNetwork[id] = {{}};
+    crossNetwork[id][tab.key] = tab.data.nodes.find(function(n) {{ return n.id === id; }});
   }});
-  el.appendChild(frag);
+}});
+
+/* ── Build tabs ────────────────────────────────────── */
+(function() {{
+  var bar = document.getElementById("tab-bar");
+  TABS.forEach(function(tab) {{
+    var btn = document.createElement("button");
+    btn.className = "tab-btn" + (tab.key === activeTab ? " active" : "");
+    btn.dataset.key = tab.key;
+    var nameSpan = document.createTextNode(tab.label);
+    btn.appendChild(nameSpan);
+    var countSpan = document.createElement("span");
+    countSpan.className = "tab-count";
+    countSpan.textContent = "(" + tab.data.letters.length.toLocaleString() + ")";
+    btn.appendChild(countSpan);
+    btn.addEventListener("click", function() {{
+      switchTab(tab.key);
+    }});
+    bar.appendChild(btn);
+  }});
 }})();
 
-/* Phase pills */
-(function() {{
-  var el = document.getElementById("phase-pills");
-  DATA.phases.forEach(function(p) {{
+function switchTab(key) {{
+  activeTab = key;
+  var btns = document.querySelectorAll(".tab-btn");
+  btns.forEach(function(b) {{ b.classList.toggle("active", b.dataset.key === key); }});
+
+  /* Show/hide threshold bar for Frances only */
+  var tbar = document.getElementById("threshold-bar");
+  tbar.classList.toggle("visible", key === "frances");
+
+  dismissDetail();
+  buildGraph();
+}}
+
+/* ── Threshold slider ──────────────────────────────── */
+var thresholdSlider = document.getElementById("threshold-slider");
+var thresholdValEl = document.getElementById("threshold-val");
+thresholdSlider.addEventListener("input", function() {{
+  threshold = +this.value;
+  thresholdValEl.textContent = threshold;
+  buildGraph();
+}});
+
+/* ── SVG setup ─────────────────────────────────────── */
+var svgEl = document.getElementById("network-svg");
+var width = svgEl.clientWidth || 900;
+var height = svgEl.clientHeight || 600;
+var svg = d3.select("#network-svg");
+var g = svg.select("g.graph-root");
+if (g.empty()) g = svg.append("g").attr("class", "graph-root");
+
+var zoom = d3.zoom()
+  .scaleExtent([0.2, 6])
+  .on("zoom", function(event) {{ g.attr("transform", event.transform); }});
+svg.call(zoom);
+svg.on("click", function(event) {{
+  if (event.target === svgEl) dismissDetail();
+}});
+
+/* ── Tooltip element ───────────────────────────────── */
+var tooltip = document.getElementById("tooltip");
+
+/* ── Main graph builder ────────────────────────────── */
+function buildGraph() {{
+  var tab = TABS.find(function(t) {{ return t.key === activeTab; }});
+  var data = tab.data;
+  currentData = data;
+
+  /* Apply threshold for Frances */
+  var filteredNodes, filteredEdges;
+  if (activeTab === "frances" && threshold > 1) {{
+    var keepSet = new Set();
+    keepSet.add(data.subject);
+    data.nodes.forEach(function(n) {{
+      if (n.id === data.subject || n.count >= threshold) keepSet.add(n.id);
+    }});
+    filteredNodes = data.nodes.filter(function(n) {{ return keepSet.has(n.id); }});
+    filteredEdges = data.edges.filter(function(e) {{ return keepSet.has(e.target); }});
+  }} else {{
+    filteredNodes = data.nodes.slice();
+    filteredEdges = data.edges.slice();
+  }}
+
+  /* Deep-clone nodes for simulation (avoid mutating source) */
+  var simNodes = filteredNodes.map(function(n) {{
+    return {{ id: n.id, community: n.community, count: n.count,
+              to_count: n.to_count || 0, from_count: n.from_count || 0 }};
+  }});
+  var simEdges = filteredEdges.map(function(e) {{
+    return {{ source: e.source, target: e.target, weight: e.weight,
+              to_weight: e.to_weight || 0, from_weight: e.from_weight || 0 }};
+  }});
+
+  /* Update stats */
+  document.getElementById("stat-nodes").textContent = simNodes.length + " correspondents";
+  document.getElementById("stat-edges").textContent = simEdges.length + " connections";
+  document.getElementById("stat-letters").textContent = data.letters.length.toLocaleString() + " letters";
+
+  /* Update timeline range */
+  var years = data.letters.map(function(l) {{ return l.year; }}).filter(Boolean);
+  var minYear = d3.min(years) || 1749;
+  var maxYear = d3.max(years) || 1839;
+  rangeLo = minYear;
+  rangeHi = maxYear;
+  var sliderLo = document.getElementById("slider-lo");
+  var sliderHi = document.getElementById("slider-hi");
+  sliderLo.min = minYear; sliderLo.max = maxYear; sliderLo.value = minYear;
+  sliderHi.min = minYear; sliderHi.max = maxYear; sliderHi.value = maxYear;
+
+  /* Rebuild phase pills */
+  var pillContainer = document.getElementById("phase-pills");
+  while (pillContainer.firstChild) pillContainer.removeChild(pillContainer.firstChild);
+  data.phases.forEach(function(p) {{
     var btn = document.createElement("button");
     btn.className = "phase-pill";
     btn.textContent = p.label;
@@ -835,19 +1074,411 @@ document.getElementById("stat-letters").textContent = DATA.letters.length + " le
       updatePills();
       filterGraph();
     }});
-    el.appendChild(btn);
+    pillContainer.appendChild(btn);
   }});
-}})();
 
+  /* Rebuild legend */
+  var legendEl = document.getElementById("legend");
+  while (legendEl.firstChild) legendEl.removeChild(legendEl.firstChild);
+  var order = ["Centre","Family","Literary","Court","Publishers","Intimate circle",
+               "French circle","Musical circle","Scholarly/Church","Royal","Unknown"];
+  var present = new Set(simNodes.map(function(n) {{ return n.community; }}));
+  order.forEach(function(c) {{
+    if (!present.has(c)) return;
+    var row = document.createElement("div");
+    row.className = "legend-item";
+    var swatch = document.createElement("div");
+    swatch.className = "legend-swatch";
+    swatch.style.background = COMMUNITY_COLOUR[c] || "#b0b0b0";
+    var label = document.createElement("span");
+    label.textContent = c;
+    row.appendChild(swatch);
+    row.appendChild(label);
+    legendEl.appendChild(row);
+  }});
+
+  /* Clear previous graph */
+  g.selectAll("*").remove();
+  if (simulation) simulation.stop();
+
+  /* Scales */
+  var maxCount = d3.max(simNodes, function(n) {{ return n.count; }}) || 1;
+  var rScale = d3.scaleSqrt().domain([1, maxCount]).range([4, 28]);
+  var maxWeight = d3.max(simEdges, function(e) {{ return e.weight; }}) || 1;
+  var wScale = d3.scaleSqrt().domain([1, maxWeight]).range([0.5, 6]);
+
+  /* Node lookup */
+  var nodeMap = {{}};
+  simNodes.forEach(function(n) {{ nodeMap[n.id] = n; }});
+
+  /* Links — directional thickness */
+  var linkG = g.append("g").attr("class", "links");
+
+  /* Draw two lines per edge: a thicker "to" and thinner "from" offset slightly */
+  link = linkG.selectAll("g.edge-group")
+    .data(simEdges)
+    .join("g")
+    .attr("class", "edge-group");
+
+  /* Main combined line (stroke = community colour) */
+  link.append("line")
+    .attr("class", "edge-main")
+    .attr("stroke", function(d) {{
+      var t = nodeMap[d.target] || nodeMap[(d.target && d.target.id) || ""];
+      return COMMUNITY_COLOUR[t ? t.community : "Unknown"] || "#ccc";
+    }})
+    .attr("stroke-opacity", 0.25)
+    .attr("stroke-width", function(d) {{ return wScale(d.weight); }});
+
+  /* Directional "to" overlay (blue, thicker on the target side via marker) */
+  link.filter(function(d) {{ return d.to_weight > 0 && d.from_weight > 0; }})
+    .append("line")
+    .attr("class", "edge-dir")
+    .attr("stroke", "#4a6fa5")
+    .attr("stroke-opacity", 0.15)
+    .attr("stroke-width", function(d) {{
+      var ratio = d.to_weight / (d.to_weight + d.from_weight);
+      return Math.max(0.5, wScale(d.weight) * ratio * 1.5);
+    }})
+    .attr("stroke-dasharray", "4,3");
+
+  /* Edge tooltips */
+  link.on("mouseenter", function(event, d) {{
+    while (tooltip.firstChild) tooltip.removeChild(tooltip.firstChild);
+    var subj = data.subject;
+    var edgeDiv = document.createElement("div");
+    edgeDiv.className = "tt-edge";
+    var toStr = (d.to_weight || 0) + " to " + (typeof d.target === "object" ? d.target.id : d.target);
+    var fromStr = (d.from_weight || 0) + " from";
+    edgeDiv.textContent = toStr + ", " + fromStr;
+    tooltip.appendChild(edgeDiv);
+    tooltip.style.display = "block";
+  }}).on("mousemove", function(event) {{
+    var rect = svgEl.getBoundingClientRect();
+    tooltip.style.left = (event.clientX - rect.left + 14) + "px";
+    tooltip.style.top  = (event.clientY - rect.top  - 10) + "px";
+  }}).on("mouseleave", function() {{
+    tooltip.style.display = "none";
+  }});
+
+  /* Nodes */
+  var subjectId = data.subject;
+  node = g.append("g").attr("class", "nodes")
+    .selectAll("g.node-group")
+    .data(simNodes)
+    .join("g")
+    .attr("class", "node-group")
+    .attr("cursor", "pointer");
+
+  /* Cross-network badge ring */
+  node.filter(function(d) {{
+    if (d.id === subjectId) return false;
+    var cn = crossNetwork[d.id];
+    if (!cn) return false;
+    var keys = Object.keys(cn).filter(function(k) {{ return k !== activeTab; }});
+    return keys.length > 0;
+  }}).append("circle")
+    .attr("class", "cross-badge")
+    .attr("r", function(d) {{ return rScale(d.count) + 4; }})
+    .attr("fill", "none")
+    .attr("stroke", "#e0c070")
+    .attr("stroke-width", 2)
+    .attr("stroke-dasharray", "3,2")
+    .attr("opacity", 0.7);
+
+  /* Main circle */
+  node.append("circle")
+    .attr("class", "node-circle")
+    .attr("r", function(d) {{ return d.id === subjectId ? 30 : rScale(d.count); }})
+    .attr("fill", function(d) {{ return COMMUNITY_COLOUR[d.community] || "#b0b0b0"; }})
+    .attr("stroke", function(d) {{ return d.id === subjectId ? "#1a1a1a" : "#fff"; }})
+    .attr("stroke-width", function(d) {{ return d.id === subjectId ? 2.5 : 1.5; }});
+
+  /* Centre label */
+  var subjectInitials = subjectId.split(" ").map(function(w) {{ return w[0]; }}).join("").substring(0,3);
+  node.filter(function(d) {{ return d.id === subjectId; }})
+    .append("text")
+    .text(subjectInitials)
+    .attr("text-anchor", "middle")
+    .attr("dy", "0.35em")
+    .attr("fill", "#fff")
+    .attr("font-size", "11px")
+    .attr("font-weight", "600")
+    .style("pointer-events", "none");
+
+  /* Labels for prominent nodes */
+  var countThreshold = d3.quantile(
+    simNodes.filter(function(n) {{ return n.id !== subjectId; }})
+      .map(function(n) {{ return n.count; }}).sort(d3.ascending),
+    0.8
+  ) || 1;
+
+  node.filter(function(d) {{ return d.id !== subjectId && d.count >= countThreshold; }})
+    .append("text")
+    .text(function(d) {{
+      var parts = d.id.split(" ");
+      return parts.length > 1 ? parts[parts.length - 1] : d.id;
+    }})
+    .attr("dx", function(d) {{ return rScale(d.count) + 4; }})
+    .attr("dy", "0.35em")
+    .attr("font-size", "10px")
+    .attr("fill", "#555")
+    .style("pointer-events", "none");
+
+  /* Node tooltip */
+  node.on("mouseenter", function(event, d) {{
+    if (d.id === subjectId) return;
+    var letters = data.letters.filter(function(l) {{ return l.correspondent === d.id; }});
+    var years = letters.map(function(l) {{ return l.year; }}).filter(Boolean);
+    var yMin = d3.min(years), yMax = d3.max(years);
+
+    while (tooltip.firstChild) tooltip.removeChild(tooltip.firstChild);
+    var nameDiv = document.createElement("div");
+    nameDiv.className = "tt-name";
+    nameDiv.textContent = d.id;
+    tooltip.appendChild(nameDiv);
+
+    var commDiv = document.createElement("div");
+    commDiv.className = "tt-community";
+    commDiv.textContent = d.community;
+    tooltip.appendChild(commDiv);
+
+    var detDiv = document.createElement("div");
+    detDiv.className = "tt-detail";
+    detDiv.textContent = d.count + " letters" + (yMin ? " \u00b7 " + yMin + "\u2013" + yMax : "");
+    tooltip.appendChild(detDiv);
+
+    if (d.to_count || d.from_count) {{
+      var dirDiv = document.createElement("div");
+      dirDiv.className = "tt-direction";
+      dirDiv.textContent = (d.to_count || 0) + " sent \u00b7 " + (d.from_count || 0) + " received";
+      tooltip.appendChild(dirDiv);
+    }}
+
+    /* Cross-network note */
+    var cn = crossNetwork[d.id];
+    if (cn) {{
+      var otherKeys = Object.keys(cn).filter(function(k) {{ return k !== activeTab; }});
+      if (otherKeys.length > 0) {{
+        var crossDiv = document.createElement("div");
+        crossDiv.className = "tt-detail";
+        crossDiv.style.color = "#b08030";
+        var parts = otherKeys.map(function(k) {{
+          var t = TABS.find(function(tb) {{ return tb.key === k; }});
+          return t ? t.label : k;
+        }});
+        crossDiv.textContent = "Also in: " + parts.join(", ");
+        tooltip.appendChild(crossDiv);
+      }}
+    }}
+
+    tooltip.style.display = "block";
+  }}).on("mousemove", function(event) {{
+    var rect = svgEl.getBoundingClientRect();
+    tooltip.style.left = (event.clientX - rect.left + 14) + "px";
+    tooltip.style.top  = (event.clientY - rect.top  - 10) + "px";
+  }}).on("mouseleave", function() {{
+    tooltip.style.display = "none";
+  }});
+
+  /* Click -> detail panel */
+  node.on("click", function(event, d) {{
+    event.stopPropagation();
+    showDetail(d, data, rScale);
+  }});
+
+  /* Force simulation */
+  width = svgEl.clientWidth || 900;
+  height = svgEl.clientHeight || 600;
+
+  simulation = d3.forceSimulation(simNodes)
+    .force("link", d3.forceLink(simEdges).id(function(d) {{ return d.id; }})
+      .distance(function(d) {{ return 50 + 140 / Math.sqrt(d.weight || 1); }})
+      .strength(function(d) {{ return 0.3 + 0.3 * Math.min(d.weight / maxWeight, 1); }})
+    )
+    .force("charge", d3.forceManyBody().strength(function() {{ return simNodes.length > 100 ? -80 : -120; }}))
+    .force("center", d3.forceCenter(width / 2, height / 2))
+    .force("collision", d3.forceCollide().radius(function(d) {{
+      return (d.id === subjectId ? 34 : rScale(d.count) + 3);
+    }}))
+    .on("tick", ticked);
+
+  var centreNode = simNodes.find(function(n) {{ return n.id === subjectId; }});
+  if (centreNode) {{
+    centreNode.fx = width / 2;
+    centreNode.fy = height / 2;
+  }}
+
+  function ticked() {{
+    link.selectAll("line")
+      .attr("x1", function(d) {{ return d.source.x; }})
+      .attr("y1", function(d) {{ return d.source.y; }})
+      .attr("x2", function(d) {{ return d.target.x; }})
+      .attr("y2", function(d) {{ return d.target.y; }});
+    node.attr("transform", function(d) {{ return "translate(" + d.x + "," + d.y + ")"; }});
+  }}
+
+  /* Drag */
+  node.call(d3.drag()
+    .on("start", function(event, d) {{
+      if (!event.active) simulation.alphaTarget(0.3).restart();
+      d.fx = d.x; d.fy = d.y;
+    }})
+    .on("drag", function(event, d) {{
+      d.fx = event.x; d.fy = event.y;
+    }})
+    .on("end", function(event, d) {{
+      if (!event.active) simulation.alphaTarget(0);
+      if (d.id !== subjectId) {{ d.fx = null; d.fy = null; }}
+    }})
+  );
+
+  /* Reset zoom */
+  svg.call(zoom.transform, d3.zoomIdentity);
+
+  updateLabel();
+}}
+
+/* ── Detail panel ──────────────────────────────────── */
+function showDetail(d, data, rScale) {{
+  selectedNode = d;
+  var panel = document.getElementById("detail-panel");
+  document.getElementById("dp-name").textContent = d.id;
+
+  var comm = document.getElementById("dp-community");
+  while (comm.firstChild) comm.removeChild(comm.firstChild);
+  var chip = document.createElement("span");
+  chip.className = "dp-chip";
+  chip.style.background = COMMUNITY_COLOUR[d.community] || "#b0b0b0";
+  comm.appendChild(chip);
+  comm.appendChild(document.createTextNode(" " + d.community));
+
+  var letters = data.letters.filter(function(l) {{ return l.correspondent === d.id; }});
+  var inRange = letters.filter(function(l) {{ return l.year >= rangeLo && l.year <= rangeHi; }});
+  var years = letters.map(function(l) {{ return l.year; }}).filter(Boolean);
+  var yMin = d3.min(years), yMax = d3.max(years);
+
+  var statsEl = document.getElementById("dp-stats");
+  while (statsEl.firstChild) statsEl.removeChild(statsEl.firstChild);
+
+  /* Direction breakdown */
+  var toCount = d.to_count || 0;
+  var fromCount = d.from_count || 0;
+  var total = toCount + fromCount;
+
+  if (total > 0 && (toCount > 0 || fromCount > 0)) {{
+    var dirLine = document.createElement("div");
+    var b1 = document.createElement("strong");
+    b1.textContent = toCount;
+    dirLine.appendChild(b1);
+    dirLine.appendChild(document.createTextNode(" sent \u00b7 "));
+    var b2 = document.createElement("strong");
+    b2.textContent = fromCount;
+    dirLine.appendChild(b2);
+    dirLine.appendChild(document.createTextNode(" received"));
+    statsEl.appendChild(dirLine);
+
+    /* Direction bar */
+    var barOuter = document.createElement("div");
+    barOuter.className = "dp-direction-bar";
+    var barTo = document.createElement("div");
+    barTo.className = "dp-bar-to";
+    barTo.style.width = (toCount / total * 100) + "%";
+    var barFrom = document.createElement("div");
+    barFrom.className = "dp-bar-from";
+    barFrom.style.width = (fromCount / total * 100) + "%";
+    barOuter.appendChild(barTo);
+    barOuter.appendChild(barFrom);
+    statsEl.appendChild(barOuter);
+  }} else {{
+    var countLine = document.createElement("div");
+    var b3 = document.createElement("strong");
+    b3.textContent = letters.length;
+    countLine.appendChild(b3);
+    countLine.appendChild(document.createTextNode(" total letters"));
+    statsEl.appendChild(countLine);
+  }}
+
+  if (inRange.length !== letters.length) {{
+    var rangeLine = document.createElement("div");
+    var b4 = document.createElement("strong");
+    b4.textContent = inRange.length;
+    rangeLine.appendChild(b4);
+    rangeLine.appendChild(document.createTextNode(" in selected range"));
+    statsEl.appendChild(rangeLine);
+  }}
+
+  var dateLine = document.createElement("div");
+  dateLine.textContent = (yMin || "?") + " \u2013 " + (yMax || "?");
+  statsEl.appendChild(dateLine);
+
+  /* Cross-network links */
+  var crossEl = document.getElementById("dp-cross");
+  while (crossEl.firstChild) crossEl.removeChild(crossEl.firstChild);
+  var cn = crossNetwork[d.id];
+  if (cn) {{
+    var otherKeys = Object.keys(cn).filter(function(k) {{ return k !== activeTab; }});
+    otherKeys.forEach(function(k) {{
+      var otherNode = cn[k];
+      var t = TABS.find(function(tb) {{ return tb.key === k; }});
+      if (!t || !otherNode) return;
+      var line = document.createElement("div");
+      line.style.marginBottom = "4px";
+      line.textContent = "Also in ";
+      var lnk = document.createElement("span");
+      lnk.className = "dp-cross-link";
+      lnk.textContent = t.label + ": " + otherNode.count + " letters";
+      lnk.addEventListener("click", function() {{
+        switchTab(k);
+      }});
+      line.appendChild(lnk);
+      crossEl.appendChild(line);
+    }});
+  }}
+
+  /* Letters table */
+  var tbody = document.getElementById("dp-tbody");
+  while (tbody.firstChild) tbody.removeChild(tbody.firstChild);
+  letters.forEach(function(l) {{
+    var tr = document.createElement("tr");
+    if (l.year && (l.year < rangeLo || l.year > rangeHi)) tr.style.opacity = "0.3";
+    var tdDate = document.createElement("td");
+    var monthStr = l.month ? String(l.month).padStart(2, "0") + "/" : "";
+    tdDate.textContent = monthStr + (l.year || "?");
+    var tdDir = document.createElement("td");
+    tdDir.textContent = l.direction || l.type || "";
+    tdDir.style.fontSize = "10px";
+    var tdPhase = document.createElement("td");
+    tdPhase.style.fontSize = "10px";
+    tdPhase.textContent = l.phase || "";
+    tr.appendChild(tdDate);
+    tr.appendChild(tdDir);
+    tr.appendChild(tdPhase);
+    tbody.appendChild(tr);
+  }});
+
+  panel.classList.add("open");
+}}
+
+function dismissDetail() {{
+  selectedNode = null;
+  document.getElementById("detail-panel").classList.remove("open");
+}}
+
+document.getElementById("dp-close").addEventListener("click", dismissDetail);
+
+/* ── Timeline controls ─────────────────────────────── */
 function updatePills() {{
+  var tab = TABS.find(function(t) {{ return t.key === activeTab; }});
   var pills = document.querySelectorAll(".phase-pill");
   pills.forEach(function(pill, i) {{
-    var p = DATA.phases[i];
-    pill.classList.toggle("active", rangeLo === p.start && rangeHi === p.end);
+    if (i < tab.data.phases.length) {{
+      var p = tab.data.phases[i];
+      pill.classList.toggle("active", rangeLo === p.start && rangeHi === p.end);
+    }}
   }});
 }}
 
-/* Sliders */
 var sliderLo = document.getElementById("slider-lo");
 var sliderHi = document.getElementById("slider-hi");
 sliderLo.addEventListener("input", function() {{
@@ -864,273 +1495,65 @@ sliderHi.addEventListener("input", function() {{
 }});
 
 function updateLabel() {{
-  var inRange = DATA.letters.filter(function(l) {{ return l.year >= rangeLo && l.year <= rangeHi; }});
+  var tab = TABS.find(function(t) {{ return t.key === activeTab; }});
+  var inRange = tab.data.letters.filter(function(l) {{ return l.year >= rangeLo && l.year <= rangeHi; }});
   var el = document.getElementById("tl-label");
-  el.textContent = "";
+  while (el.firstChild) el.removeChild(el.firstChild);
   var strong = document.createElement("strong");
   strong.textContent = rangeLo + " \u2013 " + rangeHi;
   el.appendChild(strong);
-  el.appendChild(document.createTextNode(" \u00b7 " + inRange.length + " letters in range"));
+  el.appendChild(document.createTextNode(" \u00b7 " + inRange.length.toLocaleString() + " letters in range"));
 }}
 
-/* SVG setup */
-var svgEl = document.getElementById("network-svg");
-var width = svgEl.clientWidth || 900;
-var height = svgEl.clientHeight || 600;
-
-var svg = d3.select("#network-svg");
-var g = svg.append("g");
-
-var zoom = d3.zoom()
-  .scaleExtent([0.3, 5])
-  .on("zoom", function(event) {{ g.attr("transform", event.transform); }});
-svg.call(zoom);
-svg.on("click", function(event) {{
-  if (event.target === svgEl) dismissDetail();
-}});
-
-/* Scales */
-var maxCount = d3.max(DATA.nodes, function(n){{ return n.count; }}) || 1;
-var rScale = d3.scaleSqrt().domain([1, maxCount]).range([4, 28]);
-var maxWeight = d3.max(DATA.edges, function(e){{ return e.weight; }}) || 1;
-var wScale = d3.scaleSqrt().domain([1, maxWeight]).range([0.5, 5]);
-
-/* Build node lookup */
-var nodeMap = {{}};
-DATA.nodes.forEach(function(n) {{ nodeMap[n.id] = n; }});
-
-/* Links */
-var link = g.append("g").attr("class","links")
-  .selectAll("line")
-  .data(DATA.edges)
-  .join("line")
-    .attr("stroke", function(d) {{
-      var t = nodeMap[d.target] || nodeMap[(d.target && d.target.id) || ""];
-      return COMMUNITY_COLOUR[t ? t.community : "Unknown"] || "#ccc";
-    }})
-    .attr("stroke-opacity", 0.3)
-    .attr("stroke-width", function(d) {{ return wScale(d.weight); }});
-
-/* Nodes */
-var node = g.append("g").attr("class","nodes")
-  .selectAll("g")
-  .data(DATA.nodes)
-  .join("g")
-    .attr("cursor","pointer");
-
-node.append("circle")
-  .attr("r", function(d) {{ return d.id === "Frances Burney" ? 30 : rScale(d.count); }})
-  .attr("fill", function(d) {{ return COMMUNITY_COLOUR[d.community] || "#b0b0b0"; }})
-  .attr("stroke", function(d) {{ return d.id === "Frances Burney" ? "#1a1a1a" : "#fff"; }})
-  .attr("stroke-width", function(d) {{ return d.id === "Frances Burney" ? 2.5 : 1.5; }});
-
-node.filter(function(d) {{ return d.id === "Frances Burney"; }})
-  .append("text")
-  .text("FB")
-  .attr("text-anchor","middle")
-  .attr("dy","0.35em")
-  .attr("fill","#fff")
-  .attr("font-size","12px")
-  .attr("font-weight","600")
-  .style("pointer-events","none");
-
-/* Labels for prominent nodes */
-var countThreshold = d3.quantile(
-  DATA.nodes.filter(function(n){{ return n.id !== "Frances Burney"; }})
-    .map(function(n){{ return n.count; }}).sort(d3.ascending),
-  0.75
-) || 1;
-
-node.filter(function(d) {{ return d.id !== "Frances Burney" && d.count >= countThreshold; }})
-  .append("text")
-  .text(function(d) {{ return d.id.split(" ").slice(-1)[0]; }})
-  .attr("dx", function(d) {{ return rScale(d.count) + 4; }})
-  .attr("dy","0.35em")
-  .attr("font-size","10px")
-  .attr("fill","#555")
-  .style("pointer-events","none");
-
-/* Tooltip */
-var tooltip = document.getElementById("tooltip");
-
-node.on("mouseenter", function(event, d) {{
-  var letters = DATA.letters.filter(function(l) {{ return l.correspondent === d.id; }});
-  var years = letters.map(function(l) {{ return l.year; }});
-  var yMin = d3.min(years), yMax = d3.max(years);
-
-  while (tooltip.firstChild) tooltip.removeChild(tooltip.firstChild);
-  var nameDiv = document.createElement("div");
-  nameDiv.className = "tt-name";
-  nameDiv.textContent = d.id;
-  tooltip.appendChild(nameDiv);
-  var commDiv = document.createElement("div");
-  commDiv.className = "tt-community";
-  commDiv.textContent = d.community;
-  tooltip.appendChild(commDiv);
-  var detDiv = document.createElement("div");
-  detDiv.className = "tt-detail";
-  detDiv.textContent = d.count + " letters" + (yMin ? " \u00b7 " + yMin + "\u2013" + yMax : "");
-  tooltip.appendChild(detDiv);
-  tooltip.style.display = "block";
-}}).on("mousemove", function(event) {{
-  var rect = svgEl.getBoundingClientRect();
-  tooltip.style.left = (event.clientX - rect.left + 14) + "px";
-  tooltip.style.top  = (event.clientY - rect.top  - 10) + "px";
-}}).on("mouseleave", function() {{
-  tooltip.style.display = "none";
-}});
-
-/* Click -> detail panel */
-node.on("click", function(event, d) {{
-  event.stopPropagation();
-  showDetail(d);
-}});
-
-function showDetail(d) {{
-  selectedNode = d;
-  var panel = document.getElementById("detail-panel");
-  document.getElementById("dp-name").textContent = d.id;
-
-  var comm = document.getElementById("dp-community");
-  while (comm.firstChild) comm.removeChild(comm.firstChild);
-  var chip = document.createElement("span");
-  chip.className = "dp-chip";
-  chip.style.background = COMMUNITY_COLOUR[d.community] || "#b0b0b0";
-  comm.appendChild(chip);
-  comm.appendChild(document.createTextNode(" " + d.community));
-
-  var letters = DATA.letters.filter(function(l) {{ return l.correspondent === d.id; }});
-  var inRange = letters.filter(function(l) {{ return l.year >= rangeLo && l.year <= rangeHi; }});
-  var years = letters.map(function(l) {{ return l.year; }});
-  var yMin = d3.min(years), yMax = d3.max(years);
-
-  var statsEl = document.getElementById("dp-stats");
-  while (statsEl.firstChild) statsEl.removeChild(statsEl.firstChild);
-  var countLine = document.createElement("div");
-  var b1 = document.createElement("strong");
-  b1.textContent = letters.length;
-  countLine.appendChild(b1);
-  countLine.appendChild(document.createTextNode(" total letters"));
-  if (inRange.length !== letters.length) {{
-    countLine.appendChild(document.createTextNode(" \u00b7 "));
-    var b2 = document.createElement("strong");
-    b2.textContent = inRange.length;
-    countLine.appendChild(b2);
-    countLine.appendChild(document.createTextNode(" in range"));
-  }}
-  statsEl.appendChild(countLine);
-  var dateLine = document.createElement("div");
-  dateLine.textContent = (yMin || "?") + " \u2013 " + (yMax || "?");
-  statsEl.appendChild(dateLine);
-
-  var tbody = document.getElementById("dp-tbody");
-  while (tbody.firstChild) tbody.removeChild(tbody.firstChild);
-  letters.forEach(function(l) {{
-    var tr = document.createElement("tr");
-    if (l.year < rangeLo || l.year > rangeHi) tr.style.opacity = "0.3";
-    var tdNum = document.createElement("td");
-    tdNum.textContent = l.number;
-    var tdDate = document.createElement("td");
-    var monthStr = l.month ? String(l.month).padStart(2,"0") + "/" : "";
-    tdDate.textContent = monthStr + l.year;
-    var tdType = document.createElement("td");
-    tdType.textContent = l.type;
-    var tdPhase = document.createElement("td");
-    tdPhase.style.fontSize = "10px";
-    tdPhase.textContent = l.phase;
-    tr.appendChild(tdNum);
-    tr.appendChild(tdDate);
-    tr.appendChild(tdType);
-    tr.appendChild(tdPhase);
-    tbody.appendChild(tr);
-  }});
-
-  panel.classList.add("open");
-}}
-
-function dismissDetail() {{
-  selectedNode = null;
-  document.getElementById("detail-panel").classList.remove("open");
-}}
-
-document.getElementById("dp-close").addEventListener("click", dismissDetail);
-
-/* Force simulation */
-var simulation = d3.forceSimulation(DATA.nodes)
-  .force("link", d3.forceLink(DATA.edges).id(function(d){{ return d.id; }})
-    .distance(function(d) {{ return 60 + 120 / Math.sqrt(d.weight || 1); }})
-    .strength(function(d) {{ return 0.3 + 0.3 * Math.min(d.weight / maxWeight, 1); }})
-  )
-  .force("charge", d3.forceManyBody().strength(-120))
-  .force("center", d3.forceCenter(width / 2, height / 2))
-  .force("collision", d3.forceCollide().radius(function(d) {{
-    return (d.id === "Frances Burney" ? 34 : rScale(d.count) + 3);
-  }}))
-  .on("tick", ticked);
-
-var burneyNode = DATA.nodes.find(function(n){{ return n.id === "Frances Burney"; }});
-if (burneyNode) {{
-  burneyNode.fx = width / 2;
-  burneyNode.fy = height / 2;
-}}
-
-function ticked() {{
-  link
-    .attr("x1", function(d) {{ return d.source.x; }})
-    .attr("y1", function(d) {{ return d.source.y; }})
-    .attr("x2", function(d) {{ return d.target.x; }})
-    .attr("y2", function(d) {{ return d.target.y; }});
-  node.attr("transform", function(d) {{ return "translate(" + d.x + "," + d.y + ")"; }});
-}}
-
-/* Drag */
-node.call(d3.drag()
-  .on("start", function(event, d) {{
-    if (!event.active) simulation.alphaTarget(0.3).restart();
-    d.fx = d.x; d.fy = d.y;
-  }})
-  .on("drag", function(event, d) {{
-    d.fx = event.x; d.fy = event.y;
-  }})
-  .on("end", function(event, d) {{
-    if (!event.active) simulation.alphaTarget(0);
-    if (d.id !== "Frances Burney") {{ d.fx = null; d.fy = null; }}
-  }})
-);
-
-/* Filter by range */
+/* ── Filter by range ───────────────────────────────── */
 function filterGraph() {{
   updateLabel();
+  var tab = TABS.find(function(t) {{ return t.key === activeTab; }});
+  var data = tab.data;
   var rangeCounts = {{}};
-  DATA.letters.forEach(function(l) {{
+  data.letters.forEach(function(l) {{
     if (l.year >= rangeLo && l.year <= rangeHi) {{
       rangeCounts[l.correspondent] = (rangeCounts[l.correspondent] || 0) + 1;
     }}
   }});
 
-  node.select("circle")
+  if (!node || !link) return;
+
+  var maxCount = d3.max(data.nodes, function(n) {{ return n.count; }}) || 1;
+  var rScale = d3.scaleSqrt().domain([1, maxCount]).range([4, 28]);
+  var maxWeight = d3.max(data.edges, function(e) {{ return e.weight; }}) || 1;
+  var wScale = d3.scaleSqrt().domain([1, maxWeight]).range([0.5, 6]);
+  var subjectId = data.subject;
+
+  node.select(".node-circle")
     .transition().duration(300)
     .attr("r", function(d) {{
-      if (d.id === "Frances Burney") return 30;
+      if (d.id === subjectId) return 30;
       var c = rangeCounts[d.id] || 0;
       return c > 0 ? rScale(c) : rScale(1) * 0.6;
     }})
     .attr("opacity", function(d) {{
-      if (d.id === "Frances Burney") return 1;
+      if (d.id === subjectId) return 1;
       return (rangeCounts[d.id] || 0) > 0 ? 1 : 0.1;
+    }});
+
+  node.select(".cross-badge")
+    .transition().duration(300)
+    .attr("opacity", function(d) {{
+      return (rangeCounts[d.id] || 0) > 0 ? 0.7 : 0.05;
     }});
 
   node.selectAll("text")
     .transition().duration(300)
     .attr("opacity", function(d) {{
-      if (d.id === "Frances Burney") return 1;
+      if (d.id === subjectId) return 1;
       return (rangeCounts[d.id] || 0) > 0 ? 1 : 0.08;
     }});
 
-  link.transition().duration(300)
+  link.selectAll("line").transition().duration(300)
     .attr("stroke-opacity", function(d) {{
       var tid = typeof d.target === "object" ? d.target.id : d.target;
-      return (rangeCounts[tid] || 0) > 0 ? 0.3 : 0.03;
+      return (rangeCounts[tid] || 0) > 0 ? 0.25 : 0.03;
     }})
     .attr("stroke-width", function(d) {{
       var tid = typeof d.target === "object" ? d.target.id : d.target;
@@ -1138,20 +1561,31 @@ function filterGraph() {{
       return c > 0 ? wScale(c) : 0.3;
     }});
 
-  if (selectedNode) showDetail(selectedNode);
+  if (selectedNode) {{
+    var tab2 = TABS.find(function(t) {{ return t.key === activeTab; }});
+    var maxCount2 = d3.max(tab2.data.nodes, function(n) {{ return n.count; }}) || 1;
+    var rScale2 = d3.scaleSqrt().domain([1, maxCount2]).range([4, 28]);
+    showDetail(selectedNode, tab2.data, rScale2);
+  }}
 }}
 
-/* Resize */
+/* ── Resize ────────────────────────────────────────── */
 window.addEventListener("resize", function() {{
   width = svgEl.clientWidth;
   height = svgEl.clientHeight;
-  simulation.force("center", d3.forceCenter(width / 2, height / 2));
-  if (burneyNode) {{ burneyNode.fx = width / 2; burneyNode.fy = height / 2; }}
-  simulation.alpha(0.3).restart();
+  if (simulation) {{
+    simulation.force("center", d3.forceCenter(width / 2, height / 2));
+    var tab = TABS.find(function(t) {{ return t.key === activeTab; }});
+    var subjectId = tab.data.subject;
+    var centreNode = simulation.nodes().find(function(n) {{ return n.id === subjectId; }});
+    if (centreNode) {{ centreNode.fx = width / 2; centreNode.fy = height / 2; }}
+    simulation.alpha(0.3).restart();
+  }}
 }});
 
-/* Init */
-updateLabel();
+/* ── Init ──────────────────────────────────────────── */
+document.getElementById("threshold-bar").classList.add("visible");
+buildGraph();
 
 }})();
 </script>
@@ -1406,6 +1840,13 @@ def build(
     text = text_path.read_text(encoding="utf-8")
     data = build_network_data(text)
     network_json = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
+
+    # Build catalogue networks for all three family members
+    catalogue = {}
+    for key in ("frances", "cb_sr", "cb_jr"):
+        catalogue[key] = build_catalogue_network(key)
+    catalogue_json = json.dumps(catalogue, ensure_ascii=False, separators=(",", ":"))
+
     d3_src = _get_d3_source()
     # Un-double braces first (CSS/JS use {{ }} in the template to avoid
     # colliding with the Python placeholders), then insert D3 and data
@@ -1413,10 +1854,15 @@ def build(
     html = HTML_TEMPLATE.replace("{{", "{").replace("}}", "}")
     html = html.replace("{D3_SOURCE}", d3_src, 1)
     html = html.replace("{NETWORK_JSON}", network_json, 1)
+    html = html.replace("{CATALOGUE_JSON}", catalogue_json, 1)
     out_path.write_text(html, encoding="utf-8")
     print(f"Correspondent network -> {out_path}")
-    print(f"  {len(data['nodes'])} nodes  {len(data['edges'])} edges  "
+    print(f"  OUP: {len(data['nodes'])} nodes  {len(data['edges'])} edges  "
           f"{len(data['letters'])} letters  {len(data['journals'])} journals")
+    for key in ("frances", "cb_sr", "cb_jr"):
+        cat = catalogue[key]
+        print(f"  {cat['subject']}: {len(cat['nodes'])} nodes  "
+              f"{len(cat['edges'])} edges  {len(cat['letters'])} letters")
 
 
 if __name__ == "__main__":
