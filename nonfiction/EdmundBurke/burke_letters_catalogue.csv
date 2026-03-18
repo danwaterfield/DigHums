@@ -1,0 +1,497 @@
+volume,letter_number,direction,correspondent,date,year
+1,1,to,Rich. Shackleton,Jan 9 1744,1744
+1,2,to,Rich. Shackleton,Nov 1 1744,1744
+1,3,to,Rich. Shackleton,Jan 25 1745,1745
+1,4,to,Rich. Shackleton,Feb 3 1746,1746
+1,5,to,Rich. Shackleton,April 26 1746,1746
+1,6,to,Rich. Shackleton,July 12 1746,1746
+1,7,to,Rich. Shackleton,Mar 1746,1746
+1,8,to,Rich. Shackleton,Aug 31 1751,1751
+1,9,to,Rich. Shackleton,Sept 28 1752,1752
+1,10,to,Rich. Shackleton,Aug 10 1757,1757
+1,11,to,Rich. Shackleton,Aug 25 1761,1761
+1,12,from,Chief Justice Aston -> Mr. Secretary Hamilton,June 24 1762,1762
+1,13,to,Rt. Hon. Wm. G. Hamilton,Mar 1763,1763
+1,14,to,Rich. Shackleton,April 1763,1763
+1,15,to,Rich. Shackleton,July 17 1764,1764
+1,16,from,Rt. Hon. Wm. G. Hamilton,Feb 1765,1765
+1,17,to,Rt. Hon. Wm. G. Hamilton,Feb 1765,1765
+1,18,from,Rt. Hon. Wm. G. Hamilton,Feb 1765,1765
+1,19,to,"Robert Jephson, Esq",Feb 26 1765,1765
+1,20,from,Rt. Hon. Wm. G. Hamilton,April 8 1765,1765
+1,21,to,Rt. Hon. Wm. G. Hamilton,April 10 1765,1765
+1,22,to,"John Hely Hutchinson, Esq",May 1765,1765
+1,23,to,"J. Monck Mason, Esq",May 1765,1765
+1,24,to,"Henry Flood, Esq",May 18 1765,1765
+1,25,from,Rev. Dr. Leland,July 27 1765,1765
+1,26,from,Mr. James Barry -> Messrs. Edm. and Wm. Burke,Dec 5 1765,1765
+1,27,from,"Rev. Dr. Markham -> Wm. Burke, Esq",Dec 29 1765,1765
+1,28,from,Rev. Dr. Leland,Jan 9 1766,1766
+1,29,from,Dr. Marriott,Oct 25 1766,1766
+1,30,from,Mr. Archibald Henderson,1766,1766
+1,31,from,"Sir George Macartney -> Wm. Burke, Esq",1766,1766
+1,32,from,Dr. Marriott,1766,1766
+1,33,to,Marquis of Rockingham,1766,1766
+1,34,to,Rich. Shackleton,1766,1766
+1,35,to,the Lord Mayor of Dublin (Rt. Hon. Francis Featherstone),Feb 25 1767,1767
+1,36,from,Mr. James Barry -> Messrs. Burke,May 23 1767,1767
+1,37,from,Sir Wm. Meredith,June 26 1767,1767
+1,38,from,s. Duke of Richmond,July 1767,1767
+1,39,to,Marquis of Rockingham,Aug 1 1767,1767
+1,40,to,Marquis of Rockingham,Aug 18 1767,1767
+1,41,from,Duke of Newcastle,Aug 30 1767,1767
+1,42,from,Marquis of Rockingham,Aug 31 1767,1767
+1,43,to,Marquis of Rockingham,Mar 1768,1768
+1,44,to,Rich. Shackleton,May 1 1768,1768
+1,45,from,"David Garrick, Esq",June 17 1768,1768
+1,46,to,Marquis of Rockingham,July 18 1768,1768
+1,47,to,Marquis of Rockingham,Oct 9 1769,1769
+1,48,to,Marquis of Rockingham,Oct 1769,1769
+1,49,to,Marquis of Rockingham,Oct 29 1769,1769
+1,50,to,Marquis of Rockingham,Nov 6 1769,1769
+1,51,to,Marquis of Rockingham,Nov 14 1769,1769
+1,52,to,Marquis of Rockingham,Dec 5 1769,1769
+1,53,from,ch 22. Rev. Dr. Leland,Mar 1770,1770
+1,54,from,Rev. Dr. Leland,June 11 1770,1770
+1,55,to,Rich. Shackleton,Aug 15 1770,1770
+1,56,to,Marquis of Rockingham,Sept 8 1770,1770
+1,57,to,Marquis of Rockingham,Sept 23 1770,1770
+1,58,from,Duke of Richmond,Oct 14 1770,1770
+1,59,to,"Arthur Young, Esq",Oct 21 1770,1770
+1,60,to,"Arthur Young, Esq",Jan 9 1771,1771
+1,61,to,"Wm. Dowdeswell, Esq",Feb 1 1771,1771
+1,62,from,"David Garrick, Esq",May 3 1771,1771
+1,63,to,Rich. Shackleton,July 31 1771,1771
+1,64,to,"Arthur Young, Esq",Sept 10 1771,1771
+1,65,to,"Arthur Young, Esq",Oct 1771,1771
+1,66,from,"Charles Townshend, Esq",Oct 15 1771,1771
+1,67,to,"Charles Townshend, Esq",Oct 17 1771,1771
+1,68,to,the Bishop of Chester,Nov 9 1771,1771
+1,69,from,"Charles Townshend, Esq",Nov 20 1771,1771
+1,70,to,"Charles Townshend, Esq",Nov 24 1771,1771
+1,71,to,the Bishop of Chester,1771,1771
+1,72,to,Duke of Richmond,Oct 1772,1772
+1,73,to,"Wm. Dowdeswell, Esq",Oct 27 1772,1772
+1,74,to,Marquis of Rockingham,Oct 29 1772,1772
+1,75,to,"Wm. Dowdeswell, Esq",Nov 7 1772,1772
+1,76,to,Marquis of Rockingham,Nov 11 1772,1772
+1,77,from,Duke of Richmond,Nov 15 1772,1772
+1,78,to,Duke of Richmond,Nov 17 1772,1772
+1,79,to,Marquis of Rockingham,Nov 19 1772,1772
+1,80,to,Marquis of Rockingham,Nov 23 1772,1772
+1,81,from,Duke of Richmond,Nov 25 1772,1772
+1,82,to,Marquis of Rockingham,Nov 26 1772,1772
+1,83,from,Duke of Richmond,Dec 2 1772,1772
+1,84,to,a Prussian Gentleman,1772,1772
+1,85,from,"Rich. Burke, Sen., Esq -> Wm. Burke, Esq",Jan 6 1773,1773
+1,86,to,Marquis of Rockingham,Jan 10 1773,1773
+1,87,to,"Mr. Rich. Burke, Jun., and Mr. T. King",Feb 1773,1773
+1,88,to,Marquis of Rockingham,July 19 1773,1773
+1,89,to,Marquis of Rockingham,Sept 29 1773,1773
+1,90,to,Marquis of Rockingham,Oct 20 1773,1773
+1,91,from,Marquis of Rockingham,Jan 30 1774,1774
+1,92,to,Marquis of Rockingham,Feb 2 1774,1774
+1,93,from,Madame du Deffand,April 5 1774,1774
+1,94,to,"Edm. Burke, Esq",April 29 1774,1774
+1,95,to,"Edm. Burke, Esq",May 20 1774,1774
+1,96,to,the Bishop of Chester,June 20 1774,1774
+1,97,from,Rev Dr. Leland,June 26 1774,1774
+1,98,from,Rev. Dr. Leland,June 27 1774,1774
+1,99,from,Rev. Dr. Wilson,June 28 1774,1774
+1,100,from,"Rev. Dr. ""Wilson",July 11 1774,1774
+1,101,to,Marquis of Rockingham,Sept 16 1774,1774
+1,102,from,Duke of Richmond,Sept 26 1774,1774
+1,103,to,Duke of Richmond,Sept 1774,1774
+1,104,from,"Richard Burke, Esq -> Joseph Bullock, Esq",Oct 5 1774,1774
+1,105,from,Hon. Charles James Fox,Oct 13 1774,1774
+1,106,to,Marquis of Rockingham,Oct 1774,1774
+1,107,to,Mrs. French,Nov 2 1774,1774
+1,108,to,Mrs. Burke,Nov 8 1774,1774
+1,109,to,"Rich. Champion, Esq",Nov 19 1774,1774
+1,110,to,Marquis of Rockingham,Dec 5 1774,1774
+1,111,from,General Lee,Dec 16 1774,1774
+1,112,to,Marquis of Rockingham,Dec 20 1774,1774
+2,1,to,"Rich. Champion, Esq",Jan 10 1775,1775
+2,2,to,Marquis of Rockingham,Jan 12 1775,1775
+2,3,to,Mr. James Barry,Jan 15 1775,1775
+2,4,to,a Committee at Bristol,Jan 20 1775,1775
+2,5,from,Duke of Richmond,Feb 8 1775,1775
+2,6,to,"Wm. Burgh, Esq",Feb 9 1775,1775
+2,7,from,Marquis of Rockingham,Feb 9 1775,1775
+2,8,from,Marquis of Rockingham,Feb 13 1775,1775
+2,9,from,9. Lord North,Feb 1 1775,1775
+2,10,to,"Rich. Champion, Esq",Mar 1775,1775
+2,11,from,Dr. Benj. Franklin,May 15 1775,1775
+2,12,from,Duke of Richmond,June 16 1775,1775
+2,13,to,"Rich. Champion, Esq",June 28 1775,1775
+2,14,to,Marquis of Rockingham,1775,1775
+2,15,from,Marquis of Rockingham,July 11 1775,1775
+2,16,to,"Rich. Champion, Esq",July 19 1775,1775
+2,17,to,Marquis of Rockingham,Aug 4 1775,1775
+2,18,from,"Arthur Lee, Esq",Aug 21 1775,1775
+2,19,to,"Arthur Lee, Esq",Aug 22 1775,1775
+2,20,from,"Wm. Baker, Esq",Aug 22 1775,1775
+2,21,to,Marquis of Rockingham,Aug 23 1775,1775
+2,22,to,Marquis of Rockingham,Sept 14 1775,1775
+2,23,from,Marquis of Rockingham,Sept 24 1775,1775
+2,24,to,Duke of Richmond,Sept 26 1775,1775
+2,25,from,Duke of Portland,Oct 5 1775,1775
+2,26,to,Marquis of Rockingham,Oct 17 1775,1775
+2,27,to,"Rich. Champion, Esq",Oct 20 1775,1775
+2,28,to,"Rich. Champion, Esq",Oct 24 1775,1775
+2,29,to,Marquis of Rockingham,Oct 1775,1775
+2,30,from,Marquis of Rockingham,Nov 2 1775,1775
+2,31,from,Lord John Cavendish,Nov 3 1775,1775
+2,32,from,Duke of Richmond,Nov 25 1775,1775
+2,33,to,"Rich. Champion, Esq",Dec 15 1775,1775
+2,34,to,"Rich. Champion, Esq",Dec 28 1775,1775
+2,35,from,Mrs. Montague,Feb 10 1776,1776
+2,36,from,"ch 17. Wm. Eden, Esq",Mar 1776,1776
+2,37,from,"ch 18. Wm. Eden, Esq",Mar 1776,1776
+2,38,to,"Rich. Champion, Esq",Mar 1776,1776
+2,39,to,"Rich. Champion, Esq",April 3 1776,1776
+2,40,to,"Rich. Champion, Esq",April 22 1776,1776
+2,41,to,Marquis of Rockingham,May 4 1776,1776
+2,42,to,Marchioness of Rockingham,May 4 1776,1776
+2,43,to,"Rich. Champion, Esq",May 30 1776,1776
+2,44,to,"John Bourke, Esq",July 11 1776,1776
+2,45,from,Duke of Richmond,Aug 26 1776,1776
+2,46,from,Duke of Richmond,Oct 31 1776,1776
+2,47,to,"Rich. Champion, Esq",Nov 2 1776,1776
+2,48,to,Dr. Brocklesby,Dec 15 1776,1776
+2,49,from,Marquis of Rockingham,Jan 6 1777,1777
+2,50,to,"Rich. Champion, Esq",Jan 13 1777,1777
+2,51,to,"Rich. Champion, Esq",Jan 21 1777,1777
+2,52,from,"Sir A. I. Elton, Town Clerk of Bristol",Jan 22 1777,1777
+2,53,from,"Rich. Burke, Esq -> Rich. Champion, Esq",Jan 23 1777,1777
+2,54,to,"Su- A. I. Elton, Town Clerk of Bristol",Jan 30 1777,1777
+2,55,to,"Rich. Champion, Esq",Jan 1777,1777
+2,56,to,"Rich. Champion, Esq",Feb 1777,1777
+2,57,to,"Rich. Champion, Esq",April 1777,1777
+2,58,from,a gentleman in Philadelphia,April 4 1777,1777
+2,59,to,Gen. Oglethorpe,June 2 1777,1777
+2,60,to,Lord North,June 5 1777,1777
+2,61,to,Dr. Robertson,June 10 1777,1777
+2,62,to,"Rich. Champion, Esq",June 26 1777,1777
+2,63,to,"Rich. Champion, Esq",July 3 1777,1777
+2,64,to,Dr. Brocklesby,July 21 1777,1777
+2,65,to,"Rich. Champion, Esq",Aug 11 1777,1777
+2,66,to,Earl of Abingdon,Aug 26 1777,1777
+2,67,from,Earl of Abingdon,Aug 28 1777,1777
+2,68,from,"Wm. Burke, Esq -> Philip Francis, Esq",Sept 1 1777,1777
+2,69,from,Hon. Charles James Fox,Sept 8 1777,1777
+2,70,from,"Philip Francis, Esq -> Wm. Burke, Esq",Oct 1 1777,1777
+2,71,from,"Wm. Baker, Esq",Oct 9 1777,1777
+2,72,from,"Wm. Baker, Esq",Oct 22 1777,1777
+2,73,to,"a Member of the Bell Club, Bristol",Oct 31 1777,1777
+2,74,to,Marquis of Rockingham,Nov 5 1777,1777
+2,75,to,"Rich. Champion, Esq",Dec 9 1777,1777
+2,76,from,"Wm. Baker, Esq",Dec 25 1777,1777
+2,77,from,"James Boswell, Esq",Mar 3 1778,1778
+2,78,to,"Rich. Champion, Esq",April 11 1778,1778
+2,79,to,"Rich. Champion, Esq",April 14 1778,1778
+2,80,to,"John Noble, Esq",April 24 1778,1778
+2,81,to,"Rich. Champion, Esq",April 30 1778,1778
+2,82,to,"Samuel Span, Esq., Master of Merchants' Hall, Bristol",May 12 1778,1778
+2,83,to,"Messrs. Harford, Cowles, & Co",May 12 1778,1778
+2,84,from,^uly 1. Rt. Hon. Edm. Sexton Pery,1778,1778
+2,85,from,Hon. Charles James Fox,June 1778,1778
+2,86,from,"Alexander Wedderburne, Esq",July 2 1778,1778
+2,87,from,Rt. Hon. Edm. Sexton Pery,July 10 1778,1778
+2,88,from,Rt. Hon. Edm. Sexton Pery,July 28 1778,1778
+2,89,from,Rt. Hon. Edm. Sexton Pery,Aug 11 1778,1778
+2,90,from,"Luke Gardiner, Esq",Aug 11 1778,1778
+2,91,from,Dr. John Curry,Aug 18 1778,1778
+2,92,from,Rt. Hon. Edm. Sexton Pery,Aug 26 1778,1778
+2,93,to,"Rich. Champion, Esq",Oct 9 1778,1778
+2,94,from,"Wm. Burke, Esq -> Philip Francis, Esq",Dec 14 1778,1778
+2,95,to,"Philip Francis, Esq",Dec 24 1778,1778
+2,96,from,"Wm. Jones, Esq",Feb 28 1779,1779
+2,97,from,Mr. Patrick Bowie,Mar 25 1779,1779
+2,98,to,Mr. Patrick Bowie,Mar 30 1779,1779
+2,99,to,"Michael Miller, Esq., Master of Merchants' Hall, Bristol",April 17 1779,1779
+2,100,from,Rev. John Erskine,April 24 1779,1779
+2,101,from,"Edm, Burke, Esq -> Rev. John Erskine",April 1779,1779
+2,102,to,Rich. Shackleton,May 25 1779,1779
+2,103,to,"Rich. Champion, Esq",June 15 1779,1779
+2,104,from,Dr. John Curry,Aug 6 1779,1779
+2,105,to,Marquis of Rockingham,Aug 8 1779,1779
+2,106,to,"Rich. Champion, Esq",Aug 13 1779,1779
+2,107,from,Mr. Anthony Dermott,Aug 9 1779,1779
+2,108,to,Dr. John Curry,Aug 1 1779,1779
+2,109,to,Mr. Anthony Dermott,Aug 1 1779,1779
+2,110,to,"Rich. Champion, Esq",Aug 20 1779,1779
+2,111,to,"Rich. Champion, Esq",Aug 29 1779,1779
+2,112,from,Dr. John Curry,Sept 4 1779,1779
+2,113,to,the Mayor of Bristol,Dec 9 1779,1779
+2,114,to,Baron Mazeres »,1779,1779
+2,115,to,Marquis of Rockingham,Jan 7 1780,1780
+2,116,to,"Rich. Champion, Esq",Jan 24 1780,1780
+2,117,from,"Thomas Burgh, Esq",Jan 27 1780,1780
+2,118,to,"Joseph Harford, Esq",April 4 1780,1780
+2,119,to,Rich. Shackleton,May 6 1780,1780
+2,120,to,"Sir W. W. Wynne, Bart",May 22 1780,1780
+2,121,to,"Rich. Champion, Esq",May 24 1780,1780
+2,122,from,"Rich. Burke, Sen., Esq -> Rich. Champion, Esq",June 7 1780,1780
+2,123,to,Rich. Shackleton,June 13 1780,1780
+2,124,to,Lord Chief Justice of the Common Fleas,June 15 1780,1780
+2,125,from,Lord North,June 1780,1780
+2,126,to,Viscount Courtenay,July 24 1780,1780
+2,127,to,"Mr. Watts, Bristol",Aug 10 1780,1780
+2,128,to,"John Noble, Esq",Aug 11 1780,1780
+2,129,from,Hon. Charles James Fox,Sept 15 1780,1780
+2,130,to,"Rich. Champion, Esq",Sept 26 1780,1780
+2,131,to,"Joseph Harford, Esq",Sept 27 1780,1780
+2,132,to,Earl of Hillsborough and Lord Viscount Stormont,Oct 3 1780,1780
+2,133,from,"Su- A. I. Elton, Town Clerk of Bristol",Oct 28 1780,1780
+2,134,to,"Rich. Champion, Esq",Jan 7 1781,1781
+2,135,from,"Rich. Burke, Esq -> Rich. Champion, Esq",Mar 16 1781,1781
+2,136,to,"Sir Thomas Rumbold, Bart",Mar 23 1781,1781
+2,137,from,27. Mr. George Crabbe,Mar 1781,1781
+2,138,to,Mr. Tighe,April 10 1781,1781
+2,139,from,General Burgoyne,Aug 2 1781,1781
+2,140,to,Dr. Benj. Franklin,Aug 1781,1781
+2,141,from,Sir Joshua Reynolds,Aug 14 1781,1781
+2,142,from,Mr. George Crabbe,Aug 24 1781,1781
+2,143,from,"George Goold, Esq",Sept 15 1781,1781
+2,144,from,Lord Petre,Sept 18 1781,1781
+2,145,to,Lord Petre,Sept 1781,1781
+2,146,from,Dr. Benj. Franklin,Oct 15 1781,1781
+2,147,to,Mons. Bourdieu,Dec 2 1781,1781
+2,148,to,Mons. Bourdieu,Dec 16 1781,1781
+2,149,to,Dr. Benj. Franklin,Dec 1781,1781
+2,150,from,"Wm. Jones, Esq",Mar 17 1782,1782
+2,151,from,"Wm. Eden, Esq",Mar 22 1782,1782
+2,152,to,Marquis of Rockingham,Mar 22 1782,1782
+2,153,from,Bishop of Killaloe,April 4 1782,1782
+2,154,to,Marquis of Rockingham,April 1782,1782
+2,155,from,of Rockingham -> the King,1782,1782
+2,156,from,Rev. George Crabbe,April 16 1782,1782
+2,157,from,"Rev. Walker King -> Wm. Burke, Esq",April 24 1782,1782
+2,158,to,"Wm. Burke, Esq",April 24 1782,1782
+2,159,to,Marquis of Rockingham,May 1782,1782
+2,160,from,"Wm. Jones, Esq",May 7 1782,1782
+2,161,from,Eari Fitzwilliam,July 3 1782,1782
+3,1,from,Duke of Portland,July 20 1782,1782
+3,2,from,"Wm. Jones, Esq",Oct 8 1782,1782
+3,3,to,Ragonaut Row,1783,1783
+3,4,from,"Wm. Jones, Esq",Feb 25 1783,1783
+3,5,from,"R. B. Sheridan, Esq",1783,1783
+3,6,to,"Joseph Bullock, Esq",Mar 3 1783,1783
+3,7,from,"Rich. Burke, Sen., Esq",Mar 1783,1783
+3,8,from,"Rich. Burke, Sen., Esq -> Mrs. Burke",Aug 4 1783,1783
+3,9,from,"Arthur Pigot, Esq",Oct 1783,1783
+3,10,from,Mr. Wm. Leechman,Dec 6 1783,1783
+3,11,from,Lord Macartney,Jan 31 1784,1784
+3,12,from,Sir Win. Jones,April 13 1784,1784
+3,13,to,Lord Thurlow,Mar 1785,1785
+3,14,to,Rich. Shackleton,Oct 26 1785,1785
+3,15,from,"Rt. Hon. Edrn. Burke -> Philip Francis, Esq",Dec 10 1785,1785
+3,16,from,"Rich. Burke, Sen., Esq",July 1786,1786
+3,17,to,Rt. Hon. Henry Dundas,Mar 25 1787,1787
+3,18,from,Rt. Hon. Henry Dundas,Mar 26 1787,1787
+3,19,to,Rt. Hon. Henry Dundas,April 20 1787,1787
+3,20,to,Mrs. Francis,April 20 1787,1787
+3,21,to,"Rich. Burke, Jun., Esq",June 19 1787,1787
+3,22,to,Rt. Hon. Henry Dundas,Dec 7 1787,1787
+3,23,from,Rt. Hon. Henry Dundas,Dec 8 1787,1787
+3,24,to,Rt. Hon. Henry Dundas,Dec 9 1787,1787
+3,25,to,"William Fawkener, Esq",Jan 30 1788,1788
+3,26,to,the Speaker of the House of Commons,May 1 1788,1788
+3,27,to,Messrs. Rich. Burke,June 25 1788,1788
+3,28,from,Dr. Rich. Brocklesby,July 2 1788,1788
+3,29,to,Dr. Rich. Brocklesby,July 17 1788,1788
+3,30,to,Hon. Charles James Fox,Nov 1788,1788
+3,31,from,"Philip Francis, Esq",Jan 2 1789,1789
+3,32,to,Rt. Hon. Wm. Windham,Jan 24 1789,1789
+3,33,to,Mons. Dupont,Oct 1789,1789
+3,34,to,"Philip Francis, Esq",Dec 11 1789,1789
+3,35,from,"Philip Francis, Esq",Feb 19 1790,1790
+3,36,from,"Rich. Burke, Jun., Esq -> Philip Francis, Esq",Feb 20 1790,1790
+3,37,to,"Philip Francis, Esq",Feb 20 1790,1790
+3,38,to,Capt. Mercer,Feb 26 1790,1790
+3,39,from,Rev. Dr. Hussey,Aug 13 1790,1790
+3,40,from,"T. Hussey, Esq -> Rev. Dr. Hussey",Aug 6 1790,1790
+3,41,to,Mons. Dupont,Oct 28 1790,1790
+3,42,from,"Philip Francis, Esq",Nov 3 1790,1790
+3,43,from,Lord John Cavendish,Nov 14 1790,1790
+3,44,to,Rt. Hon. Wm. Windham,Dec 21 1790,1790
+3,45,to,Hon. John Trevor,Jan 1791,1791
+3,46,to,Madame D'Osmond,Jan 8 1791,1791
+3,47,to,a French Lady,Jan 25 1791,1791
+3,48,to,Capt. Woodford,Feb 11 1791,1791
+3,49,to,Chev. de la Bintinnaye,Mar 1791,1791
+3,50,to,Chev. de Rivarol,June 1 1791,1791
+3,51,to,Marquis de Bouille,July 13 1791,1791
+3,52,to,"Rich. Burke, Sen., Esq",July 25 1791,1791
+3,53,to,"Rich. Burke, Jun., Esq",Aug 5 1791,1791
+3,54,from,Lord Camden,Aug 5 1791,1791
+3,55,from,Sir Win. Scott,Aug 6 1791,1791
+3,56,to,"Rich. Burke, Jun., Esq",Aug 9 1791,1791
+3,57,to,"Rich. Burke, Jun., Esq",Aug 10 1791,1791
+3,58,from,"Rich. Burke, Jun., Esq",Aug 1791,1791
+3,59,from,Lord Auckland,Aug 12 1791,1791
+3,60,from,Lord Charlemont,Aug 13 1791,1791
+3,61,to,"Rich. Burke, Jun., Esq",Aug 16 1791,1791
+3,62,from,"Rich. Burke, Jan., Esq",Aug 16 1791,1791
+3,63,to,"Rich. Burke, Jun., Esq",Aug 16 1791,1791
+3,64,to,"Rich. Burke, Jun., Esq",Aug 1791,1791
+3,65,to,"Rich. Burke, Jun., Esq",Aug 18 1791,1791
+3,66,from,Duke of Dorset,Aug 20 1791,1791
+3,67,from,"J. H. Hutchinson, Esq",Aug 23 1791,1791
+3,68,to,"Rich. Burke, Jun., Esq",Aug 25 1791,1791
+3,69,from,Monsieur (afterwards Louis XVIII.),Aug 26 1791,1791
+3,70,from,"Rich. Burke, Jun., Esq",Aug 26 1791,1791
+3,71,to,"Rich. Burke, Jun., Esq",Sept 1 1791,1791
+3,72,from,"Rich. Burke, Jun., Esq",Sept 2 1791,1791
+3,73,from,Rt. Hon. Edrn. Burke -> Chev. de la Bintinnaye,Sept 10 1791,1791
+3,74,from,"Rich. Burke, Jun., Esq",Sept 10 1791,1791
+3,75,to,Monsieur (afterwards Louis XVIII.),Sept 17 1791,1791
+3,76,from,Earl Fitzwilliam,Sept 18 1791,1791
+3,77,from,"Rt. Hon. Henry Dundas -> Rich. Burke, Jun., Esq",Sept 20 1791,1791
+3,78,from,Dr. Laurence,Sept 24 1791,1791
+3,79,to,"Rich. Burke, Jun., Esq",Sept 26 1791,1791
+3,80,to,Chev. de la Bintinnaye,Oct 2 1791,1791
+3,81,to,Chev. de la Bintinnaye,Oct 13 1791,1791
+3,82,to,Chev. de la Bintinnaye,Nov 2 1791,1791
+3,83,to,"Rich. Burke, Jun., Esq",Dec 13 1791,1791
+3,84,from,"Rich. Burke, Jun., Esq",Dec 15 1791,1791
+3,85,to,"Rich. Burke, Jun., Esq",Dec 15 1791,1791
+3,86,to,"Rich. Burke, Jun., Esq",Dec 16 1791,1791
+3,87,from,"Rt. Hon. Henry Dundas -> Rich. Burke, Jun., Esq",Dec 25 1791,1791
+3,88,to,"Rich. Burke, Jun., Esq",Jan 8 1792,1792
+3,89,to,"Rich. Burke, Jun , Esq",Jan 13 1792,1792
+3,90,to,"Rich. Burke, Jun., Esq",Jan 26 1792,1792
+3,91,to,the Chev. and Abbe de la Bintinnaye,Jan 27 1792,1792
+3,92,to,"William Weddell, Esq",Jan 31 1792,1792
+3,93,to,"Rich. Burke, Jun., Esq",Jan 29 1792,1792
+3,94,to,"Rich. Burke, Jun., Esq",Feb 19 1792,1792
+3,95,to,Rev. Robert Dodge,Feb 29 1792,1792
+3,96,to,"Rich. Burke, Jun., Esq",Mar 1792,1792
+3,97,to,"Edmund Malone, Esq",Mar 1792,1792
+3,98,to,"Rich. Burke, Jun., Esq",Mar 1792,1792
+3,99,to,"Rich. Burke, Jun., Esq",Mar 1792,1792
+3,100,to,the King of Poland,Mar 1792,1792
+3,101,to,"Rich. Burke, Jun., Esq",Mar 1792,1792
+3,102,from,"Rich. Burke, Jun., Esq -> Lord Grenville",June 2 1792,1792
+3,103,to,the Chev. and Abbe de la Bintinnaye,June 18 1792,1792
+3,104,to,"Rich. Burke, Jun., Esq",July 29 1792,1792
+3,105,to,the Countess of Inchiquin,July 1792,1792
+3,106,from,"Rt. Hon. Henry Dundas -> Rich. Burke, Jun., Esq",Aug 1 1792,1792
+3,107,to,Abbe de la Biritinnaye,Aug 3 1792,1792
+3,108,from,"Rich. Burke, Jun., Esq -> Wm. Burke, Esq",Aug 17 1792,1792
+3,109,to,Lord Grenville,Aug 18 1792,1792
+3,110,to,Chev. de Grave,Aug 24 1792,1792
+3,111,to,"Wm. Burke, Esq",Sept 1792,1792
+3,112,to,"Rich. Burke, Jun., Esq",Sept 1792,1792
+3,113,to,"Rich. Burke, Jun., Esq",Sept 1792,1792
+3,114,from,Lord Grenville,Sept 6 1792,1792
+3,115,to,Mrs. Mary Leadbeater,Sept 8 1792,1792
+4,1,to,"Rich. Burke, Jun., Esq",Sept 9 1792,1792
+4,2,to,Lord Grenville,Sept 19 1792,1792
+4,3,to,"Rich. Burke, Jun., Esq",Sept 29 1792,1792
+4,4,to,"Rich. Burke, Jun., Esq",Oct 1 1792,1792
+4,5,to,"Rich. Burke, Jun., Esq",Oct 17 1792,1792
+4,6,to,"Rich. Burke, Jun., Esq",Nov 2 1792,1792
+4,7,to,"Rich. Burke, Jun., Esq",Nov 6 1792,1792
+4,8,from,"Rich. Burke, Jun., Esq -> Wm. Smith, Esq",Nov 25 1792,1792
+4,9,from,"Wm. Smith, Esq -> Rich. Burke, Jun., Esq",Nov 26 1792,1792
+4,10,from,Earl of Upper Ossory,Dec 19 1792,1792
+4,11,from,"Sir Robert Staples, Bart -> Lord Ossory",Dec 12 1792,1792
+4,12,from,"Rich. Burke, Jun., Esq -> Rt. Hon. Henry Dundas",Dec 1792,1792
+4,13,from,Letter -> Lord- Lieutenant of Ireland (proposed for adoption to Rt. Hon. H. Dundas),Feb 1793,1793
+4,14,from,"Rt. Hon. HenryGrattan -> Rich. Burke, Jun., Esq",Mar 20 1793,1793
+4,15,from,Rt. Hon. Henry Grattan,Mar 25 1793,1793
+4,16,from,King of Poland,June 12 1793,1793
+4,17,from,Chev. de Grave,Aug 14 1793,1793
+4,18,to,Rt. Hon. Wm. Windham,Aug 18 1793,1793
+4,19,to,Rt. Hon. Wm. Windham,Aug 23 1793,1793
+4,20,to,Comte de Mercy,Aug 1793,1793
+4,21,to,Sir Gilbert Elliot,Sept 22 1793,1793
+4,22,to,"Wm. Burke, Esq",Sept 1793,1793
+4,23,to,Rt. Hon. Henry Dundas,Oct 7 1793,1793
+4,24,from,Duke of Portland,Oct 10 1793,1793
+4,25,from,Comte d'Artois,Oct 23 1793,1793
+4,26,from,the Royalist Army in Poitou -> the Comte d'Artois,Aug 18 1793,1793
+4,27,from,Comte d'Artois -> the Due d'Harcourt,Oct 10 1793,1793
+4,28,to,Rt. Hon. Wm. Windham,Oct 1793,1793
+4,29,from,Rt. Hon. Wm. Windham,Nov 1 1793,1793
+4,30,to,the Comte d'Artois,Nov 6 1793,1793
+4,31,from,Rt. Hon. Wm. Windham,Nov 7 1793,1793
+4,32,from,Rt. Hon. Wm. Windham,Nov 14 1793,1793
+4,33,to,"Sylvester Douglas, Esq",Nov 14 1793,1793
+4,34,from,Lord Malmesbury,Nov 19 1793,1793
+4,35,to,Rt. Hon. Wm. Windham,Nov 25 1793,1793
+4,36,to,Rt. Hon. Wm. Windham,Jan 8 1794,1794
+4,37,to,"Rich. Burke, Jun., Esq",Jan 10 1794,1794
+4,38,to,Capt. Woodford,Jan 13 1794,1794
+4,39,to,Duke of Portland,Jan 20 1794,1794
+4,40,from,1 . Duke of Portland,June 1 1794,1794
+4,41,from,Earl FitzwiUiam,Aug 4 1794,1794
+4,42,to,Rt. Hon. Wm. Windham,Aug 15 1794,1794
+4,43,from,Rt. Hon. Henry Grattan,Aug 26 1794,1794
+4,44,from,Rt. Hon. Wm. Pitt,Aug 30 1794,1794
+4,45,from,Comte de Serent,Sept 1 1794,1794
+4,46,to,Duke of Portland,Sept 14 1794,1794
+4,47,from,Rt. Hon. Wm. Pitt,Sept 18 1794,1794
+4,48,from,Rt. Hon. Henry Grattan,Sept 1794,1794
+4,49,to,the Abbe de la Bintinnaye,Sept 28 1794,1794
+4,50,from,Henry Grattan Esq,Oct 1 1794,1794
+4,51,to,Vicomte de Cice,Nov 30 1794,1794
+4,52,to,Rt. Hon. Wm. Windham,Dec 30 1794,1794
+4,53,to,Mrs. Crewe,1794,1794
+4,54,from,"Wm. Smith, Esq",Jan 20 1795,1795
+4,55,from,Rev. Dr. Hussey,Jan 29 1795,1795
+4,56,to,Rev. Dr. Hussey,Feb 4 1795,1795
+4,57,from,Rev. Dr. Hussey,Feb 19 1795,1795
+4,58,from,Rev. Dr. Hussey,Feb 26 1795,1795
+4,59,to,Rev. Dr. Hussey,Feb 27 1795,1795
+4,60,from,Rev. Dr. Hussey,Feb 28 1795,1795
+4,61,from,ch 3. Rev. Dr. Hussey,Mar 1795,1795
+4,62,to,Rev. Dr. Hussey,Mar 1795,1795
+4,63,from,ch 10. Rev. Dr. Hussey,Mar 1795,1795
+4,64,from,"ch 14. Henry Grattan, Esq",Mar 1795,1795
+4,65,to,Rev. Dr. Hussey,Mar 1795,1795
+4,66,from,ch 19. Messrs. Byrne and Keogh,Mar 1795,1795
+4,67,to,Rev. Dr. Hussey,May 18 1795,1795
+4,68,to,"Edm. Malone, Esq",May 22 1795,1795
+4,69,to,Rev. Dr. Hussey,June 1795,1795
+4,70,to,Rev. Dr. Hussey,Aug 24 1795,1795
+4,71,to,Rev. Dr. Hussey,Sept 26 1795,1795
+4,72,to,Rev. Dr. Hussey,Nov 28 1795,1795
+4,73,to,Rev. Dr. Hussey,Jan 18 1796,1796
+4,74,to,Mrs. Crewe,Feb 26 1796,1796
+4,75,to,Mrs. Crewe,Mar 1796,1796
+4,76,from,ch 10. Marquis of Buckingham -> Rt. Hon. Wm. Pitt,Mar 1796,1796
+4,77,from,"ch 11. John Bowles, Esq",Mar 1796,1796
+4,78,to,"John Bowles, Esq",Mar 1796,1796
+4,79,from,ch 24. Rt. Hon. Wm. Pitt -> Marquis of Buckingham,Mar 1796,1796
+4,80,from,Rev. Dr. Hussey,June 18 1796,1796
+4,81,to,"John Geoghegan, Esq",June 20 1796,1796
+4,82,to,"John Geoghegan, Esq",June 22 1796,1796
+4,83,to,Mrs. Crewe,Nov 7 1796,1796
+4,84,from,Earl Fitzwilliam,Nov 10 1796,1796
+4,85,to,Mrs. Crewe,Nov 23 1796,1796
+4,86,from,Dr. French Laurence,Nov 24 1796,1796
+4,87,from,Rev. Dr. Hussey,Nov 30 1796,1796
+4,88,from,Earl Fitzwilliam,Dec 5 1796,1796
+4,89,from,Earl Fitzwilliam,Dec 7 1796,1796
+4,90,to,Rev. Dr. Hussey,Dec 1796,1796
+4,91,from,Rt. Hon. Wm. Windham,Dec 20 1796,1796
+4,92,to,Rt. Hon. Wm. Windham,Dec 23 1796,1796
+4,93,from,Rt. Hon. Wm. Windham,Dec 24 1796,1796
+4,94,to,Mrs. Crewe,Dec 27 1796,1796
+4,95,from,Earl Fitzwilliam,Dec 28 1796,1796
+4,96,to,Rt. Hon. Wm. Windham,Jan 9 1797,1797
+4,97,from,Rt. Hon. Wm. Windham,Jan 17 1797,1797
+4,98,from,Rt. Hon. Wm. Windham,Feb 11 1797,1797
+4,99,from,Rt. Hon. Wm. Windham,Feb 17 1797,1797
+4,100,to,Rt. Hon. Wm. Windham,Mar 1797,1797
+4,101,from,Rev. Dr. Hussey,April 2 1797,1797
+4,102,from,Rt. Hon. Wm. Windham,April 25 1797,1797
+4,103,from,Rev. Dr. Hussey,May 9 1797,1797
+4,104,to,Rev. Dr. Hussey,May 12 1797,1797
+4,105,to,Mrs. Crewe,May 21 1797,1797
+4,106,to,Rev. Dr. Hussey,May 22 1797,1797
+4,107,to,"Arthur Young, Esq",May 23 1797,1797
+4,108,from,Mrs. Leadbeater,May 28 1797,1797
