@@ -11,6 +11,7 @@ Usage:
     open gazetteer/correspondent_network.html
 """
 
+import csv
 import json
 import re
 import sys
@@ -1157,6 +1158,242 @@ updateLabel();
 </body>
 </html>
 """
+
+
+# ── Catalogue-based pipeline ──────────────────────────────────────
+
+from burney_names import normalise as _bn_normalise
+from burney_names import community as _bn_community
+from burney_names import is_artefact as _bn_is_artefact
+
+_CATALOGUE_DIR = Path(__file__).resolve().parent.parent / "nonfiction/FrancesBurney"
+
+_CATALOGUE_FILES = {
+    "frances": "catalogue_frances_darblay.csv",
+    "cb_sr":   "catalogue_cb_sr.csv",
+    "cb_jr":   "catalogue_cb_jr.csv",
+}
+
+_CATALOGUE_SUBJECTS = {
+    "frances": "Frances Burney d'Arblay",
+    "cb_sr":   "Dr Charles Burney",
+    "cb_jr":   "Charles Burney Jr",
+}
+
+_CATALOGUE_PHASES = {
+    "frances": _PHASES,
+    "cb_sr": [
+        (1800, 1,  "Final Years"),
+        (1789, 1,  "Late Career"),
+        (1776, 1,  "Streatham & Literary Fame"),
+        (1770, 1,  "Continental Tours"),
+        (1760, 1,  "London Establishment"),
+        (1749, 1,  "Lynn & Early Career"),
+    ],
+    "cb_jr": [
+        (1800, 1,  "Late Career & DD"),
+        (1786, 1,  "Schoolmaster & Greek Scholar"),
+        (1767, 1,  "Early Life & Cambridge"),
+    ],
+}
+
+# Self-reference names for each catalogue subject — these are all names
+# that refer to the letter-writer themselves and should be excluded.
+_SELF_NAMES = {
+    "frances": {"Frances Burney", "Frances Burney d'Arblay"},
+    "cb_sr":   {"Charles Burney", "Dr Charles Burney"},
+    "cb_jr":   {"Charles Burney Jr"},
+}
+
+# Year extraction regex for catalogue dates
+_CAT_YEAR_RE = re.compile(r"\b(1[5-8]\d{2})\b")
+_CAT_MONTH_RE = re.compile(
+    r"\b(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|June?"
+    r"|July?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\b",
+    re.IGNORECASE,
+)
+_CAT_MONTH_MAP = {
+    "jan": 1, "january": 1, "feb": 2, "february": 2,
+    "mar": 3, "march": 3, "apr": 4, "april": 4,
+    "may": 5, "jun": 6, "june": 6, "jul": 7, "july": 7,
+    "aug": 8, "august": 8, "sep": 9, "september": 9,
+    "oct": 10, "october": 10, "nov": 11, "november": 11,
+    "dec": 12, "december": 12,
+}
+
+
+def _parse_catalogue_date(date_str: str) -> tuple[int | None, int | None]:
+    """Extract (year, month) from a catalogue date string."""
+    ym = _CAT_YEAR_RE.search(date_str)
+    mm = _CAT_MONTH_RE.search(date_str)
+    year = int(ym.group(1)) if ym else None
+    month = _CAT_MONTH_MAP.get(mm.group(1).lower()) if mm else None
+    return year, month
+
+
+def _assign_catalogue_phase(year: int, month: int | None, phases: list) -> str:
+    """Assign a phase label using the given phase list."""
+    ym = (year, month or 1)
+    for start_y, start_m, label in phases:
+        if ym >= (start_y, start_m):
+            return label
+    return phases[-1][2] if phases else "Unknown"
+
+
+def _split_compound_correspondent(raw: str) -> list[str]:
+    """Split compound correspondent fields like 'SBP & Frederica Locke'.
+
+    Splits on ' & ', ' and ', and ' to ' (when used to indicate a
+    forwarded letter, e.g. 'Rosette (Rose) Burney to CPB').
+    Returns a list of individual correspondent strings.
+    """
+    # Split on & first
+    parts = re.split(r'\s+&\s+', raw)
+    # Further split on ' to ' only when it looks like forwarding
+    expanded = []
+    for p in parts:
+        # "X to Y" where both are short => forwarded letter notation
+        sub = re.split(r'\s+to\s+', p, maxsplit=1)
+        expanded.extend(sub)
+    return [s.strip() for s in expanded if s.strip()]
+
+
+def load_catalogue(key: str) -> list[dict]:
+    """Load a catalogue CSV and return a list of row dicts.
+
+    *key* is one of ``'frances'``, ``'cb_sr'``, ``'cb_jr'``.
+    Each dict has keys: ``date``, ``direction``, ``correspondent``,
+    ``repository``, ``first_line``.
+    """
+    if key not in _CATALOGUE_FILES:
+        raise ValueError(f"Unknown catalogue key {key!r}; "
+                         f"choose from {sorted(_CATALOGUE_FILES)}")
+    path = _CATALOGUE_DIR / _CATALOGUE_FILES[key]
+    with open(path, newline="", encoding="utf-8") as f:
+        return list(csv.DictReader(f))
+
+
+def build_catalogue_network(key: str) -> dict:
+    """Build a network-data dict from a catalogue CSV.
+
+    Returns::
+
+        {
+            "subject": str,
+            "nodes": [{"id", "community", "count", "to_count", "from_count"}, ...],
+            "edges": [{"source", "target", "weight", "to_weight", "from_weight"}, ...],
+            "letters": [...],
+            "phases": [...]
+        }
+    """
+    rows = load_catalogue(key)
+    subject = _CATALOGUE_SUBJECTS[key]
+    phases_def = _CATALOGUE_PHASES[key]
+
+    # Per-correspondent direction counts
+    to_counts: dict[str, int] = {}
+    from_counts: dict[str, int] = {}
+    letters: list[dict] = []
+
+    for row in rows:
+        raw_corr = row["correspondent"].strip()
+        direction = row.get("direction", "").strip().lower()
+        date_str = row.get("date", "")
+        year, month = _parse_catalogue_date(date_str)
+
+        if not raw_corr or _bn_is_artefact(raw_corr):
+            continue
+
+        # Split compound correspondents
+        individuals = _split_compound_correspondent(raw_corr)
+        for ind in individuals:
+            if _bn_is_artefact(ind):
+                continue
+            canon = _bn_normalise(ind)
+            # Skip self-references (subject writing to themselves)
+            if canon in _SELF_NAMES.get(key, set()):
+                continue
+
+            if direction == "to":
+                to_counts[canon] = to_counts.get(canon, 0) + 1
+            elif direction == "from":
+                from_counts[canon] = from_counts.get(canon, 0) + 1
+            else:
+                # Unknown direction — count in both
+                to_counts[canon] = to_counts.get(canon, 0) + 1
+
+            phase = _assign_catalogue_phase(year, month, phases_def) if year else "Unknown"
+            letters.append({
+                "correspondent": canon,
+                "year": year,
+                "month": month,
+                "direction": direction,
+                "phase": phase,
+            })
+
+    # All correspondents
+    all_names = sorted(set(to_counts) | set(from_counts))
+
+    # Build nodes
+    nodes = []
+    nodes.append({
+        "id": subject,
+        "community": "Centre",
+        "count": len(letters),
+        "to_count": 0,
+        "from_count": 0,
+    })
+    for name in all_names:
+        tc = to_counts.get(name, 0)
+        fc = from_counts.get(name, 0)
+        nodes.append({
+            "id": name,
+            "community": _bn_community(name),
+            "count": tc + fc,
+            "to_count": tc,
+            "from_count": fc,
+        })
+
+    # Sort non-subject nodes by count descending
+    nodes[1:] = sorted(nodes[1:], key=lambda n: -n["count"])
+
+    # Build edges
+    edges = []
+    for name in all_names:
+        tc = to_counts.get(name, 0)
+        fc = from_counts.get(name, 0)
+        edges.append({
+            "source": subject,
+            "target": name,
+            "weight": tc + fc,
+            "to_weight": tc,
+            "from_weight": fc,
+        })
+
+    # Phase definitions for UI
+    phase_defs = [
+        {"label": label, "start": sy, "end": 0}
+        for sy, _, label in reversed(phases_def)
+    ]
+    for i, p in enumerate(phase_defs):
+        if i + 1 < len(phase_defs):
+            p["end"] = phase_defs[i + 1]["start"]
+        else:
+            # End at a sensible year
+            if key == "frances":
+                p["end"] = 1839
+            elif key == "cb_sr":
+                p["end"] = 1814
+            elif key == "cb_jr":
+                p["end"] = 1817
+
+    return {
+        "subject": subject,
+        "nodes": nodes,
+        "edges": edges,
+        "letters": letters,
+        "phases": phase_defs,
+    }
 
 
 # ── Build function ────────────────────────────────────────────────

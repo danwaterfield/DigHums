@@ -343,3 +343,163 @@ def test_real_data_susanna_is_top_correspondent():
     nodes = sorted(data["nodes"], key=lambda n: -n["count"])
     assert nodes[0]["id"] == "Frances Burney"
     assert "Susanna" in nodes[1]["id"]
+
+
+# ── Task 6: Catalogue-based pipeline tests ────────────────────────
+
+from build_correspondent_network import load_catalogue, build_catalogue_network
+
+
+def test_load_catalogue_frances_count():
+    rows = load_catalogue("frances")
+    assert len(rows) >= 6000, f"Expected ~6057 rows, got {len(rows)}"
+
+
+def test_load_catalogue_cb_sr_count():
+    rows = load_catalogue("cb_sr")
+    assert len(rows) >= 950, f"Expected ~991 rows, got {len(rows)}"
+
+
+def test_load_catalogue_cb_jr_count():
+    rows = load_catalogue("cb_jr")
+    assert len(rows) >= 900, f"Expected ~908 rows, got {len(rows)}"
+
+
+def test_load_catalogue_invalid_key():
+    import pytest
+    with pytest.raises(ValueError, match="Unknown catalogue key"):
+        load_catalogue("invalid")
+
+
+def test_load_catalogue_has_required_fields():
+    rows = load_catalogue("frances")
+    for key in ("date", "direction", "correspondent"):
+        assert key in rows[0], f"Missing field: {key}"
+
+
+def test_build_catalogue_network_structure_frances():
+    data = build_catalogue_network("frances")
+    assert "subject" in data
+    assert "nodes" in data
+    assert "edges" in data
+    assert "letters" in data
+    assert "phases" in data
+    assert data["subject"] == "Frances Burney d'Arblay"
+
+
+def test_build_catalogue_network_structure_cb_sr():
+    data = build_catalogue_network("cb_sr")
+    assert data["subject"] == "Dr Charles Burney"
+
+
+def test_build_catalogue_network_structure_cb_jr():
+    data = build_catalogue_network("cb_jr")
+    assert data["subject"] == "Charles Burney Jr"
+
+
+def test_catalogue_nodes_have_direction_counts():
+    data = build_catalogue_network("frances")
+    for node in data["nodes"]:
+        assert "count" in node
+        assert "to_count" in node
+        assert "from_count" in node
+
+
+def test_catalogue_edges_have_direction_weights():
+    data = build_catalogue_network("frances")
+    for edge in data["edges"]:
+        assert "weight" in edge
+        assert "to_weight" in edge
+        assert "from_weight" in edge
+
+
+def test_catalogue_direction_sum():
+    """to_weight + from_weight == weight for every edge."""
+    data = build_catalogue_network("frances")
+    for edge in data["edges"]:
+        assert edge["to_weight"] + edge["from_weight"] == edge["weight"], (
+            f"Direction mismatch for {edge['target']}: "
+            f"{edge['to_weight']} + {edge['from_weight']} != {edge['weight']}"
+        )
+
+
+def test_catalogue_artefacts_filtered():
+    """Artefacts like [?], NYPL(B) etc. should not appear as nodes."""
+    data = build_catalogue_network("frances")
+    node_ids = {n["id"] for n in data["nodes"]}
+    assert "[?]" not in node_ids
+    assert "NYPL(B)" not in node_ids
+    assert "BM(Bar)" not in node_ids
+    assert "to" not in node_ids
+    assert "from" not in node_ids
+    assert "" not in node_ids
+
+
+def test_catalogue_artefacts_filtered_cb_sr():
+    data = build_catalogue_network("cb_sr")
+    node_ids = {n["id"] for n in data["nodes"]}
+    assert "[?]" not in node_ids
+
+
+def test_catalogue_frances_susanna_top():
+    """Susanna should be the top correspondent in the Frances catalogue."""
+    data = build_catalogue_network("frances")
+    # Skip the subject node (index 0)
+    correspondents = data["nodes"][1:]
+    top = correspondents[0]
+    assert "Susanna" in top["id"], f"Expected Susanna at top, got {top['id']}"
+
+
+def test_catalogue_cb_sr_twining_top():
+    """Thomas Twining should be the top correspondent in CB Sr catalogue."""
+    data = build_catalogue_network("cb_sr")
+    correspondents = data["nodes"][1:]
+    # Twining should be in the top 3 (after FBA which is huge)
+    top_names = [n["id"] for n in correspondents[:3]]
+    assert any("Twining" in n for n in top_names), (
+        f"Expected Twining in top 3, got {top_names}"
+    )
+
+
+def test_catalogue_frances_phases():
+    data = build_catalogue_network("frances")
+    labels = [p["label"] for p in data["phases"]]
+    assert "Apprentice Years" in labels
+    assert "Widowhood" in labels
+
+
+def test_catalogue_cb_sr_phases():
+    data = build_catalogue_network("cb_sr")
+    labels = [p["label"] for p in data["phases"]]
+    assert "Lynn & Early Career" in labels
+    assert "Final Years" in labels
+
+
+def test_catalogue_cb_jr_phases():
+    data = build_catalogue_network("cb_jr")
+    labels = [p["label"] for p in data["phases"]]
+    assert "Early Life & Cambridge" in labels
+    assert "Late Career & DD" in labels
+
+
+def test_catalogue_no_self_loops_frances():
+    """The subject should not appear as a correspondent edge target."""
+    data = build_catalogue_network("frances")
+    targets = {e["target"] for e in data["edges"]}
+    assert "Frances Burney d'Arblay" not in targets
+    assert "Frances Burney" not in targets
+
+
+def test_catalogue_no_self_loops_cb_sr():
+    data = build_catalogue_network("cb_sr")
+    targets = {e["target"] for e in data["edges"]}
+    assert "Dr Charles Burney" not in targets
+    assert "Charles Burney" not in targets
+
+
+def test_catalogue_letters_have_direction():
+    data = build_catalogue_network("frances")
+    for letter in data["letters"][:20]:
+        assert "direction" in letter
+        assert "correspondent" in letter
+        assert "phase" in letter
