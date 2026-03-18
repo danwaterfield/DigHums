@@ -56,3 +56,19 @@ gazetteer/sources/
 # OHM street cache (regenerated at build time)
 gazetteer/ohm_streets_cache.json
 gazetteer/.d3.v7.min.js
+
+# Large corpus texts (keep locally, too big for GitHub)
+nonfiction/FrancesBurney/BarrettDiaryAndLetters*.txt
+nonfiction/FrancesBurney/DiaryAndLetters*.txt
+nonfiction/FrancesBurney/EarlyDiary*.txt
+nonfiction/FrancesBurney/JournalsAndLetters.txt
+nonfiction/SamuelJohnson/*.txt
+nonfiction/HesterThralePiozzi/*.txt
+
+# Catalogue/manuscript photographs (keep locally)
+nonfiction/FrancesBurney/CatalogueBurneyFamily/
+nonfiction/Charles Burney/LibraryAuctionCatalogue/
+nonfiction/Manuscripts/
+
+# Superpowers brainstorm sessions
+.superpowers/
