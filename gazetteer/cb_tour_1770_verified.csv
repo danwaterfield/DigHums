@@ -1,0 +1,14 @@
+city,lat,lon,date_arrive,date_depart,notes
+Paris,48.8566,2.3522,1770-06-11,1770-06-24,"Arrived 11 June. Met Diderot, d'Holbach, Suard, Gretry, Balbastre. Left 24 June."
+Lyon,45.764,4.8357,1770-06-25,1770-06-27,3 days en route to Geneva.
+Geneva,46.2044,6.1432,1770-06-28,1770-06-29,2 days. Visited Voltaire at Ferney nearby.
+Ferney,46.2587,6.1468,1770-06-29,1770-06-29,Day visit to Voltaire. 'My heart leaped at the sight of so extraordinary a man.'
+Turin,45.0703,7.6869,1770-07-02,1770-07-14,Approximate dates. En route to Milan.
+Milan,45.4642,9.19,1770-07-16,1770-07-25,"Arrived 16 July, left 25 July. Met Sammartini."
+Brescia,45.5416,10.2118,1770-07-26,1770-07-27,Brief stop en route to Padua.
+Padua,45.4064,11.8768,1770-07-28,1770-07-30,"3 days. Visited Tartini's legacy, met musicians."
+Venice,45.4408,12.3155,1770-08-03,1770-08-19,"Arrived 3 August, left 19 August. Met Galuppi, Sacchini."
+Bologna,44.4949,11.3426,1770-08-21,1770-08-31,"Arrived 21 August, left 31 August. Met Padre Martini, Farinelli, Mozart, Laura Bassi."
+Florence,43.7696,11.2558,1770-09-01,1770-09-17,Arrived 1 September. Met Nardini. Departure date approximate.
+Rome,41.9028,12.4964,1770-09-18,1770-10-31,Approximate. Met singers and attended papal ceremonies.
+Naples,40.8518,14.2681,1770-11-01,1770-11-20,"Approximate. Met Jommelli, Piccinni, Caffarelli, Paisiello."
