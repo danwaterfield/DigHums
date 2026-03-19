@@ -173,11 +173,11 @@
   },
   "Baldassare Galuppi": {
     "dates": "1706-1785",
-    "bio": "Venetian opera and keyboard composer. Met Burney in Venice 1770."
+    "bio": "Venetian opera and keyboard composer. 'Had more influence on English music than any other Italian composer.' Met Burney 1770."
   },
   "Giovanni Battista Sammartini": {
     "dates": "c.1700-1775",
-    "bio": "Milanese symphonist. Met Burney July 1770."
+    "bio": "Milanese symphonist, pioneer of the classical style. Met Burney July 1770."
   },
   "Laura Bassi": {
     "dates": "1711-1778",
@@ -221,7 +221,7 @@
   },
   "Thomas Gray": {
     "dates": "1716-1771",
-    "bio": "Poet. Author of 'Elegy Written in a Country Churchyard'. Walpole's closest correspondent (144 letters)."
+    "bio": "Poet, author of 'Elegy Written in a Country Churchyard'. Had recommended the idea of a music history to Burney. Walpole's closest correspondent."
   },
   "Frederick the Great": {
     "dates": "1712-1786",
@@ -229,7 +229,7 @@
   },
   "Sir William Hamilton": {
     "dates": "1730-1803",
-    "bio": "British envoy to Naples. Antiquarian, volcanologist. Met Burney in Naples 1770."
+    "bio": "British envoy to Naples. Antiquarian, volcanologist. Helped Burney access Royal Museum at Portici and arranged musical introductions. Later famous for wife Emma and Nelson affair."
   },
   "Joseph Priestley": {
     "dates": "1733-1804",
@@ -242,5 +242,113 @@
   "Dr. Brocklesby": {
     "dates": "1722-1797",
     "bio": "Richard Brocklesby. Physician. Attended Samuel Johnson in his final illness. Also physician to Edmund Burke. Fellow of the Royal Society. Bridge between Johnson and Burke networks."
+  },
+  "Abbé Arnaud": {
+    "dates": "1721-1784",
+    "bio": "Former director of the Opéra Comique, Paris. Met Burney June 1770."
+  },
+  "Jean Monet": {
+    "dates": "fl.1770s",
+    "bio": "Connected to Paris theatre world. Met Burney 1770."
+  },
+  "William Herschel": {
+    "dates": "1738-1822",
+    "bio": "Astronomer, discovered Uranus. Musical connection to Burney — both musicians turned scientists."
+  },
+  "William Mason": {
+    "dates": "1725-1797",
+    "bio": "Poet, garden designer. Burney wrote to him before the 1770 tour. Also Walpole correspondent."
+  },
+  "George Montagu": {
+    "dates": "c.1713-1780",
+    "bio": "Walpole's most prolific correspondent (252 letters in our data)."
+  },
+  "Henry Seymour Conway": {
+    "dates": "1721-1795",
+    "bio": "Soldier, politician. Walpole's cousin and major correspondent (139 letters)."
+  },
+  "William Cole": {
+    "dates": "1714-1782",
+    "bio": "Antiquary, clergyman. Walpole's second most frequent correspondent (161 letters)."
+  },
+  "Lord Stormont": {
+    "dates": "1727-1796",
+    "bio": "David Murray, 7th Viscount Stormont. British ambassador to Austria. Facilitated Burney's introductions in Vienna 1772."
+  },
+  "Louis Devisme": {
+    "dates": "1720-1776",
+    "bio": "British plenipotentiary in Munich. 'Of the greatest assistance' to Burney, esp. accessing the Elector's library."
+  },
+  "John Osborn": {
+    "dates": "fl.1770s",
+    "bio": "British Envoy at Dresden. Introduced Burney to the Elector."
+  },
+  "Gaetano Guadagni": {
+    "dates": "1728-1792",
+    "bio": "Famous castrato. Created the role of Orfeo for Gluck. Met Burney in Munich 1772."
+  },
+  "Regina Mingotti": {
+    "dates": "1722-1808",
+    "bio": "Retired opera singer. Met Burney in Munich 1772."
+  },
+  "Nicola Jommelli": {
+    "dates": "1714-1774",
+    "bio": "Opera composer. Met Burney in Naples 1770. Catholic."
+  },
+  "Niccolo Piccinni": {
+    "dates": "1728-1800",
+    "bio": "Opera composer, later embroiled in the Gluck-Piccinni war in Paris. Met Burney in Naples 1770."
+  },
+  "Giovanni Paisiello": {
+    "dates": "1740-1816",
+    "bio": "Neapolitan opera composer. Active when Burney visited Naples 1770."
+  },
+  "Gaetano Caffarelli": {
+    "dates": "1710-1783",
+    "bio": "Celebrated castrato. Retired to Naples. Met Burney 1770."
+  },
+  "Pietro Nardini": {
+    "dates": "1722-1793",
+    "bio": "Violinist, pupil of Tartini. Met Burney in Florence 1770."
+  },
+  "Antonio Sacchini": {
+    "dates": "1730-1786",
+    "bio": "Opera composer. Met Burney in Venice 1770, later in London."
+  },
+  "Andre Gretry": {
+    "dates": "1741-1813",
+    "bio": "Belgian-born opera composer based in Paris. Met Burney 1770."
+  },
+  "Claude Balbastre": {
+    "dates": "1724-1799",
+    "bio": "Organist at Saint-Roch, Paris. Burney heard him play June 12 1770 and visited his house."
+  },
+  "Christian Cannabich": {
+    "dates": "1731-1798",
+    "bio": "Kapellmeister of the Mannheim orchestra. Met Burney August 1772."
+  },
+  "Friedrich Klopstock": {
+    "dates": "1724-1803",
+    "bio": "Poet. Burney met him in Hamburg, October 1772."
+  },
+  "Christoph Daniel Ebeling": {
+    "dates": "1741-1817",
+    "bio": "German musicologist, Hamburg. Translated Burney's France/Italy volume into German. Corresponded from August 1771."
+  },
+  "Richard Shackleton": {
+    "dates": "1726-1792",
+    "bio": "Quaker schoolmaster. Burke's closest childhood friend. 21 letters with Burke."
+  },
+  "Richard Champion": {
+    "dates": "1743-1791",
+    "bio": "Bristol porcelain manufacturer. Burke's political ally. 35 letters."
+  },
+  "Marquis of Rockingham": {
+    "dates": "1730-1782",
+    "bio": "Charles Watson-Wentworth. Whig PM 1765-66, 1782. Burke's political patron. 49 letters."
+  },
+  "Charles James Fox": {
+    "dates": "1749-1806",
+    "bio": "Whig politician. Burke's ally then opponent over the French Revolution."
   }
 }
