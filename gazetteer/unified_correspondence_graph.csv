@@ -3,7 +3,7 @@ Frances Burney,Susanna Burney Phillips,1153,1705,1877,hemlow_catalogue
 Alexandre d'Arblay,Frances Burney,676,1790,1819,hemlow_catalogue
 Frances Burney,Hester Thrale Piozzi,541,1778,1821,hemlow_catalogue|piozzi
 Charles Burney Jr,Charles Burney Sr,415,1780,1812,hemlow_catalogue
-Charles Burney Sr,Frances Burney,397,1764,1815,hemlow_catalogue
+Charles Burney Sr,Frances Burney,399,1764,1815,hemlow_catalogue
 Hester Thrale Piozzi,Samuel Johnson,334,1765,1784,johnson_hill|piozzi
 Charlotte Broome,Frances Burney,328,1782,1839,hemlow_catalogue
 George Montagu,Horace Walpole,252,1736,1770,walpole_1820
@@ -57,7 +57,7 @@ Frances Burney,Hester Maria Thrale (Lady Keith),21,1816,1826,hemlow_catalogue
 Frances Burney,Marianne (Burney) Bourdois,21,1806,1812,hemlow_catalogue
 Edmund Burke,Richard Shackleton,21,1744,1785,burke_1844
 Edmund Burke,William Windham,21,1789,1797,burke_1844
-"Hamilton, Mary",Horace Walpole,21,1783,1795,correspsearch
+Horace Walpole,Mary Hamilton,21,1783,1795,correspsearch
 Amelia Angerstein,Frances Burney,20,1812,1833,hemlow_catalogue
 Frances Burney,James Burney,20,1775,1817,hemlow_catalogue
 Horace Walpole,Richard West,20,1710,1742,walpole_1820
@@ -108,6 +108,7 @@ Etiennette,Frances Burney,9,1796,1819,hemlow_catalogue
 Frances Burney,Princess Augusta,9,1819,1825,hemlow_catalogue
 Capt. James Keir,Joseph Priestley,9,,,priestley
 Charles Burney Sr,Samuel Johnson,9,1755,1780,hemlow_catalogue|lonsdale_lynn
+Catherine de Boulogne,Frances Burney,9,1804,1818,hemlow_catalogue
 Ann (Astley) Agnew,Frances Burney,8,1814,1814,hemlow_catalogue
 Frances Burney,Queen Charlotte,8,1794,1817,hemlow_catalogue
 Charles Burney Sr,William Mason,8,1769,1790,hemlow_catalogue
@@ -129,9 +130,10 @@ Charles Burney Jr,Richard Payne Knight,7,1808,1811,hemlow_catalogue
 Charles Burney Jr,Thomas Dampier,7,1809,1812,hemlow_catalogue
 Charles Burney Jr,Sir George Pretyman Tomline,7,1811,1817,hemlow_catalogue
 Joseph Warton,Samuel Johnson,7,1753,1780,johnson_hill
-Edmund Burke,Rt. Hon. Henry Dundas,7,1787,1793,burke_1844
+Edmund Burke,Henry Dundas,7,1787,1793,burke_1844
 Edmund Burke,Frances Crewe,7,1794,1797,burke_1844
 "Kant, Immanuel","Lambert, Johann Heinrich",7,1765,1770,correspsearch
+Adrienne de Noailles,Frances Burney,7,1802,1813,hemlow_catalogue
 Charlotte Boyle-Walsingham,Frances Burney,6,1783,1786,hemlow_catalogue
 Frances Burney,William Seward,6,1779,1790,hemlow_catalogue
 Frances Burney,Richard Owen Cambridge,6,1785,1790,hemlow_catalogue
@@ -151,14 +153,12 @@ Charles Burney Sr,Charlotte Smith,6,,,hemlow_catalogue
 Charles Burney Jr,"George, 2nd Earl Spencer",6,1810,1815,hemlow_catalogue
 C J Blomfield,Charles Burney Jr,6,1810,1817,hemlow_catalogue
 John Perkins,Samuel Johnson,6,1774,1784,johnson_hill
-Edmund Burke,Rt. Hon. Wm. G. Hamilton,6,1763,1765,burke_1844
-Edmund Burke,"Philip Francis, Esq",6,1778,1790,burke_1844
+Edmund Burke,William Gerard Hamilton,6,1763,1765,burke_1844
+Edmund Burke,Philip Francis,6,1778,1790,burke_1844
 "Haller, Albrecht von (1708-1777)","Lambert, Johann Heinrich (1728-1777)",6,1758,1760,correspsearch
 Frances Burney,Hannah More,5,1782,1786,hemlow_catalogue
 Frances Burney,Richard Bentley,5,1835,1835,hemlow_catalogue
 Frances Burney,Philippe de Noailles,5,1793,1793,hemlow_catalogue
-Adrienne (de Noailles),Frances Burney,5,1802,1813,hemlow_catalogue
-Catherine (de Boulogne),Frances Burney,5,1804,1818,hemlow_catalogue
 Clarissa Marion ( ) Bolton,Frances Burney,5,1832,1835,hemlow_catalogue
 Elizabeth (Robinson) Montagu,Frances Burney,5,1782,1790,hemlow_catalogue
 Anne (Leigh) Frodsham,Frances Burney,5,1791,1792,hemlow_catalogue
@@ -182,13 +182,15 @@ Dr. Vyse,Samuel Johnson,5,1777,1781,johnson_hill
 Mauritius Lowe,Samuel Johnson,5,1778,1783,johnson_hill
 Samuel Johnson,Susanna Arabella Thrale,5,1783,1784,johnson_hill
 Francesco Sastres,Samuel Johnson,5,1784,1784,johnson_hill
-"Arthur Young, Esq",Edmund Burke,5,1770,1797,burke_1844
-Edmund Burke,Hon. Charles James Fox,5,1774,1788,burke_1844
+Arthur Young,Edmund Burke,5,1770,1797,burke_1844
+Charles James Fox,Edmund Burke,5,1774,1788,burke_1844
 Duke of Portland,Edmund Burke,5,1775,1794,burke_1844
-Edmund Burke,"Wm. Jones, Esq",5,1779,1783,burke_1844
+Edmund Burke,William Jones,5,1779,1783,burke_1844
 Earl Fitzwilliam,Edmund Burke,5,1791,1796,burke_1844
 Joseph Priestley,Thomas Wedgwood,5,1771,1771,priestley
 Dr. William Withering,Joseph Priestley,5,,,priestley
+Arnail-Francois de Jaucourt,Frances Burney,5,1815,1815,hemlow_catalogue
+Frances Burney,Madame de Stael,5,1793,1802,hemlow_catalogue
 Frances Burney,Mary (Granville) Delany,4,1785,1787,hemlow_catalogue
 Frances Burney,Marie-Louise,4,,,hemlow_catalogue
 Elizabeth Juliana Schwellenberg,Frances Burney,4,1792,1792,hemlow_catalogue
@@ -238,11 +240,12 @@ Carl Philipp Emanuel Bach,Heinrich Wilhelm von Gerstenberg,4,1772,1774,correspse
 Carl Philipp Emanuel Bach,Johann Nikolaus Forkel,4,1773,1774,correspsearch_european
 Charles Burney Sr,Jacques-Pierre Brissot,4,1783,1783,fonds_brissot
 Padre Martini,Wolfgang Amadeus Mozart,4,1770,1778,correspsearch_european
+Frances Burney,Henriette de Maurville,4,1815,1824,hemlow_catalogue
+Cecile de Sommery,Frances Burney,4,1818,1818,hemlow_catalogue
 Elizabeth (Vesey) Handcock,Frances Burney,3,1783,1787,hemlow_catalogue
 Frances Burney,Lady Rothes,3,1787,1798,hemlow_catalogue
 Frances Burney,Stephen Allen,3,1833,1833,hemlow_catalogue
 Charles Foster,Frances Burney,3,,,hemlow_catalogue
-Arnail-Francois,Frances Burney,3,1815,1815,hemlow_catalogue
 Antoine-Marie-Rene Terrier de Monciel,Frances Burney,3,,,hemlow_catalogue
 Charles Sicard,Frances Burney,3,,,hemlow_catalogue
 Frances Burney,Marie-Charlotte (Bontemps),3,1795,1795,hemlow_catalogue
@@ -256,10 +259,7 @@ Felicite,Frances Burney,3,1816,1816,hemlow_catalogue
 Frances Burney,William Tudor,3,,,hemlow_catalogue
 Frances Burney,MF,3,,,hemlow_catalogue
 Frances Burney,Mary (Palmer) O'Brien Marchioness of Thomond,3,1791,1791,hemlow_catalogue
-Anne-Louise-Germaine (Necker) de Stael-Holstein,Frances Burney,3,1793,1793,hemlow_catalogue
 CMAPW addington,Frances Burney,3,1820,1820,hemlow_catalogue
-Frances Burney,Henriette (Guignet de Souligne) de Maurville,3,1818,1824,hemlow_catalogue
-Cecile (de Riquet de Caraman) marquise de Sommery,Frances Burney,3,,,hemlow_catalogue
 Frances Burney,Harriet Wilson,3,1822,1822,hemlow_catalogue
 CHFB,Frances Burney,3,1835,1837,hemlow_catalogue
 Frances Burney,Mary Bruce Strange,3,,,hemlow_catalogue
@@ -335,7 +335,6 @@ Charlotte (Allen) Burney,Frances Burney,2,1793,1794,hemlow_catalogue
 Frances (Glanville) Boscawen,Frances Burney,2,,,hemlow_catalogue
 Frances Burney,MG,2,1797,1797,hemlow_catalogue
 David Baillie Warden,Frances Burney,2,,,hemlow_catalogue
-Adrienne (de Noailles) comtesse de Tesse,Frances Burney,2,1811,1811,hemlow_catalogue
 Dominique-Jean baron Larrey,Frances Burney,2,1811,1811,hemlow_catalogue
 David Richter,Frances Burney,2,1800,1800,hemlow_catalogue
 Frances Burney,Richard Twining,2,,,hemlow_catalogue
@@ -356,7 +355,6 @@ Frances Burney,J-F Loisiel,2,,,hemlow_catalogue
 Frances Burney,Marie-Tresse (Poniakowitz [?]),2,1814,1814,hemlow_catalogue
 Frances Burney,Marie-Pierre de Grandmaison,2,1816,1816,hemlow_catalogue
 Frances Burney,Petronille-Jacoba (Van Ryssel) de Latour-Maubourg,2,1815,1822,hemlow_catalogue
-Catherine (de Boullogne),Frances Burney,2,1816,1818,hemlow_catalogue
 Frances Burney,William Cutler [?],2,1777,1777,hemlow_catalogue
 Frances Burney,Lady Hales [?],2,1776,1776,hemlow_catalogue
 Elizabeth (Allen) Meeke,Frances Burney,2,1776,1776,hemlow_catalogue
@@ -477,12 +475,12 @@ Edmund Burke,"John Geoghegan, Esq",2,1796,1796,burke_1844
 Horace Walpole,Rev. Mr. Mason,2,,,walpole_1820
 Joseph Priestley,Sir Joseph Banks,2,,,priestley
 "Ashton, Thomas, 1715-1775",Thomas Gray,2,1739,1740,correspsearch
-"Delany (née Granville, formerly Pendarves), Mary",Horace Walpole,2,1786,1786,correspsearch
-"Hamilton, Mary","Kirkgate, Thomas",2,1792,1792,correspsearch
+Horace Walpole,Mary Delany,2,1786,1786,correspsearch
+"Kirkgate, Thomas",Mary Hamilton,2,1792,1792,correspsearch
 "Ganghofer, Ludwig","Schnitzler, Arthur",2,1899,1899,correspsearch
 Georg Friedrich Händel,Georg Philipp Telemann,2,1750,1754,correspsearch
-"Martini, Giovanni Battista, Padre","Mozart, Wolfgang Amadeus",2,1776,1776,correspsearch_european
-Giovanni Battista Martini,Wolfgang Amadé Mozart,2,1776,1776,correspsearch_european
+"Martini, Giovanni Battista, Padre",Wolfgang Amadeus Mozart,2,1776,1776,correspsearch_european
+Giovanni Battista Martini,Wolfgang Amadeus Mozart,2,1776,1776,correspsearch_european
 Bentz für den Stadtrat von Zittau,Carl Philipp Emanuel Bach,2,1753,1753,correspsearch_european
 Carl Philipp Emanuel Bach,Collegium scholarchale,2,1767,1767,correspsearch_european
 Carl Philipp Emanuel Bach,Johann Philipp Kirnberger,2,1769,1771,correspsearch_european
@@ -545,7 +543,6 @@ Frances Burney,Richard,1,,,hemlow_catalogue
 Durand de Perincz a Madame,Frances Burney,1,,,hemlow_catalogue
 AA [postscript only],Frances Burney,1,,,hemlow_catalogue
 Frances Burney,Marc-Etienne,1,,,hemlow_catalogue
-?,Frances Burney,1,,,hemlow_catalogue
 Frances Burney,Henry Hoare,1,,,hemlow_catalogue
 Frances Burney,Transcript copy,1,,,hemlow_catalogue
 Frances Burney,Sophia Burney,1,1815,1815,hemlow_catalogue
@@ -585,7 +582,6 @@ Frances Burney,Marquis [?] Bourdois,1,1793,1793,hemlow_catalogue
 Frances Burney,Marie-Elisabeth (Bouée) de La Fite,1,,,hemlow_catalogue
 Frances Burney,Rose FitzGerald Baroness,1,1793,1793,hemlow_catalogue
 Frances Burney,Harriet (Collins) de Beauville[?],1,1793,1793,hemlow_catalogue
-CB (with PS from M d'A),Frances Burney,1,1794,1794,hemlow_catalogue
 Frances Burney,Martin (Allen) Rishton,1,1794,1794,hemlow_catalogue
 Edmund Jerningham,Frances Burney,1,1794,1794,hemlow_catalogue
 Esther Young,Frances Burney,1,,,hemlow_catalogue
@@ -599,7 +595,6 @@ Antoine Bourdois,Frances Burney,1,,,hemlow_catalogue
 CBFB (one page written by FBA as NPG),Frances Burney,1,,,hemlow_catalogue
 Frances Burney,Harriet (Collins) de Beauvau,1,,,hemlow_catalogue
 Frances Burney,M d'A with PS by AA,1,,,hemlow_catalogue
-Anne-Louise (Necker) baroness de Stael-Holstein,Frances Burney,1,1802,1802,hemlow_catalogue
 Frances Burney,Mary (Danby) Countess of Ha[rcourt],1,1802,1802,hemlow_catalogue
 Frances Burney,GF Jr,1,,,hemlow_catalogue
 CB [?],Frances Burney,1,1802,1802,hemlow_catalogue
@@ -610,7 +605,6 @@ Dame-Adelaide (de Damas d'Antigny) comtesse de Simiane,Frances Burney,1,1802,180
 Frances Burney,GBFB,1,,,hemlow_catalogue
 Frances Burney,Susan Adams,1,1807,1807,hemlow_catalogue
 Frances (Savery) de Poigneu [?],Frances Burney,1,1808,1808,hemlow_catalogue
-CB (with PS by M d'A),Frances Burney,1,1808,1808,hemlow_catalogue
 EBB (with PS by M d'A),Frances Burney,1,1811,1811,hemlow_catalogue
 Frances Burney,Louis comte de Narbonne-FML,1,1809,1809,hemlow_catalogue
 Frances Burney,Norbury Phillips,1,1800,1800,hemlow_catalogue
@@ -653,7 +647,6 @@ Alfred Turner,Frances Burney,1,1836,1836,hemlow_catalogue
 C W [?] Halliday,Frances Burney,1,,,hemlow_catalogue
 Frances Burney,Harriet [?],1,,,hemlow_catalogue
 Frances Burney,Pont Baptiste Council [?],1,1789,1789,hemlow_catalogue
-Frances Burney,Louise-Germaine (Necker),1,,,hemlow_catalogue
 Charles-Francois Dupetit Dumouriez [?],Frances Burney,1,,,hemlow_catalogue
 Frances Burney,Jean-Baptiste Le Chevalier Le Ministre,1,1794,1794,hemlow_catalogue
 Frances Burney,JB (with PS by FBA),1,1795,1795,hemlow_catalogue
@@ -666,24 +659,18 @@ Frances Burney,Jean-Pierre-Basilien,1,,,hemlow_catalogue
 Denise-Victoire [?],Frances Burney,1,1813,1813,hemlow_catalogue
 Frances Burney,Miss Bron [?],1,,,hemlow_catalogue
 Frances Burney,baron d'Artel [?],1,,,hemlow_catalogue
-Arnail-Francois [?] de Jaucourt,Frances Burney,1,1815,1815,hemlow_catalogue
 Frances Burney,William Locke [?],1,,,hemlow_catalogue
 Frances Burney,Marquis de Lafayette [?] de Gorion-Saint-Cyr,1,,,hemlow_catalogue
-Frances Burney,Henriette (Guignet de Souligné) de Maurville,1,1815,1815,hemlow_catalogue
 Frances Burney,Louise (Farina-Fiorelli) Duchesse d'Orivel [?],1,,,hemlow_catalogue
 Elizabethe-Charlotte,Frances Burney,1,,,hemlow_catalogue
 Durand de Prémorel,Frances Burney,1,,,hemlow_catalogue
-Catherine (de Bouillonne [?]),Frances Burney,1,1816,1816,hemlow_catalogue
 Frances Burney,Victor de Latour-Maubourg,1,,,hemlow_catalogue
 Frances Burney,Marie-Alexendre Lenoir,1,,,hemlow_catalogue
-Catherine (de Boullogne [?]),Frances Burney,1,1818,1818,hemlow_catalogue
-Cecile (du Repaid de Caramar [?]),Frances Burney,1,1818,1818,hemlow_catalogue
 C T F Metcalf,Frances Burney,1,,,hemlow_catalogue
 Frances Burney,Nathalie (de Mortemart?),1,,,hemlow_catalogue
 Charles-Francois Dupetit Dumouriez,Frances Burney,1,,,hemlow_catalogue
 Frances Burney,Jean-Philippe de Boisgelin [?],1,,,hemlow_catalogue
 Frances Burney,Jean-Jacques-Basilion,1,,,hemlow_catalogue
-Arnail-Francois [?],Frances Burney,1,1815,1815,hemlow_catalogue
 Durand de Premorel,Frances Burney,1,,,hemlow_catalogue
 Cecile (du Repaid de Caramar),Frances Burney,1,1818,1818,hemlow_catalogue
 Frances Burney,Richard Thomas Burney pmk,1,1768,1768,hemlow_catalogue
@@ -1173,7 +1160,7 @@ Joseph Priestley,"Mr.  George F.  Kunz,  of Xew York,  I give thanks for a",1,,,
 Joseph Priestley,"Mr.  Conyers Button,  of Philadelphia,  1 am indebted for",1,,,priestley
 "Benjamin Vaughan,  Esq",Joseph Priestley,1,1780,1780,priestley
 Joseph Priestley,"Me.  Wedowood,  near Neweastle-under-Lyne.6",1,1771,1771,priestley
-Horace Walpole,"Vesey (née Vesey, later Handcock), Elizabeth",1,,,correspsearch
+Elizabeth Vesey,Horace Walpole,1,,,correspsearch
 Arnold Sommerfeld,Ludwig Prandtl,1,,,correspsearch
 "Ganghofer, Ludwig","Wedekind, Frank",1,,,correspsearch
 "Arouet, François-Marie","Rousseau, Jean-Jacques",1,1755,1755,correspsearch
