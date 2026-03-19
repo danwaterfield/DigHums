@@ -222,6 +222,7 @@ body {{ margin:0; font-family:'Segoe UI',system-ui,-apple-system,sans-serif; bac
 
 <div id="controls">
   <h1>Charles Burney &mdash; European Tours</h1>
+  <p style="font-size:12px;color:#999;margin:4px 0 10px;line-height:1.5;">Two research journeys for the <em>History of Music</em>: France &amp; Italy (Jun&ndash;Dec 1770) and Germany, Austria &amp; the Low Countries (Jul&ndash;Nov 1772). Gold markers show verified encounters with named individuals. Click any stop for details.</p>
   <div class="tour-pills">
     <button data-tour="1770" class="active">1770 Italy</button>
     <button data-tour="1772" class="active">1772 Germany</button>

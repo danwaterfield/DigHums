@@ -1,5 +1,5 @@
 city,lat,lon,date_arrive,date_depart,notes
-Paris,48.8566,2.3522,1770-06-11,1770-06-24,"Arrived 11 June, left 24 June. Met Diderot, d'Holbach, Suard, Gretry, Balbastre. Garrick's introduction letter to Suard (only one surviving). Had visited Paris before (e.g. 1765 to fetch Esther)."
+Paris,48.8566,2.3522,1770-06-11,1770-06-24,"Arrived 11 June, left 24 June. Met Suard (Garrick's introduction — only surviving letter), Gretry, Balbastre. Garrick furnished letters of introduction for Italy."
 Lyon,45.764,4.8357,1770-06-25,1770-06-27,3 days en route.
 Geneva,46.2044,6.1432,1770-06-28,1770-06-29,2 days. Visited Voltaire at Ferney.
 Ferney,46.2587,6.1468,1770-06-29,1770-06-29,Day visit to Voltaire.
@@ -15,4 +15,4 @@ Naples,40.8518,14.2681,1770-10-16,1770-11-08,"Arrived 16 Oct, LEFT 8 NOVEMBER. M
 Rome (return),41.9028,12.4964,1770-11-10,1770-11-20,APPROXIMATE. Several days working in Rome on return journey.
 Sarzana to Genoa,44.11,9.96,1770-11-25,1770-11-28,APPROXIMATE. Crossed Apennines late November.
 Genoa,44.4056,8.9463,1770-11-28,1770-12-01,APPROXIMATE. Brief stop on return to Paris.
-Paris (return),48.8566,2.3522,1770-12-08,1770-12-20,"Arrived 8 December. Met d'Holbach, Abbe Morellet, Rousseau, Diderot on return visit. Departure date approximate."
+Paris (return),48.8566,2.3522,1770-12-08,1770-12-20,"Arrived 8 December. Met d'Holbach, Abbe Morellet, Rousseau, Diderot on return visit. Deeper engagement with Encyclopédie circle."
