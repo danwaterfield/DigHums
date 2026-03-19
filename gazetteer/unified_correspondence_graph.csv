@@ -40,10 +40,13 @@ Angelique,Frances Burney,35,1794,1798,hemlow_catalogue
 Lucy Porter,Samuel Johnson,35,1749,1784,johnson_hill
 Edmund Burke,Richard Champion,35,1774,1781,burke_1844
 Horace Walpole,Richard Bentley,33,1735,1755,walpole_1820
+Johann Christian Bach,Padre Martini,33,1757,1778,correspsearch_european
 Frances Burney,Marquis de Lafayette,32,1792,1816,hemlow_catalogue
 Ludwig Prandtl,Rudolf Mehmke,32,,,correspsearch
+Carl Philipp Emanuel Bach,Johann Gottlob Immanuel Breitkopf,32,1765,1774,correspsearch_european
 Charles Burney Jr,John Young,31,1808,1816,hemlow_catalogue
 John Nichols,Samuel Johnson,30,1778,1785,johnson_hill
+"Bahr, Hermann","Hofmannsthal, Hugo von",27,1891,1891,correspsearch_european
 Frances Burney,Sarah Martha Holroyd,26,1815,1818,hemlow_catalogue
 Bennet Langton,Samuel Johnson,24,1755,1784,johnson_hill
 Joshua Reynolds,Samuel Johnson,24,1764,1784,johnson_hill
@@ -58,6 +61,7 @@ Edmund Burke,William Windham,21,1789,1797,burke_1844
 Amelia Angerstein,Frances Burney,20,1812,1833,hemlow_catalogue
 Frances Burney,James Burney,20,1775,1817,hemlow_catalogue
 Horace Walpole,Richard West,20,1710,1742,walpole_1820
+"Hofmannsthal, Hugo von","Schnitzler, Arthur",20,1891,1892,correspsearch_european
 Frances Burney,Rosette (Rose) Burney,19,1782,1800,hemlow_catalogue
 Samuel Johnson,Thomas Warton,19,1754,1780,johnson_hill
 Horace Walpole,Lady Hervey,19,1757,1766,walpole_1820
@@ -79,6 +83,7 @@ Cassandra (Leigh) Cooke,Frances Burney,13,1794,1819,hemlow_catalogue
 Charlotte Beckerdorff,Frances Burney,13,1812,1816,hemlow_catalogue
 Charles Burney Jr,G I Huntingford,13,1808,1814,hemlow_catalogue
 Henry Thrale,Samuel Johnson,13,1769,1780,johnson_hill
+Carl Philipp Emanuel Bach,Georg Michael Telemann,13,1767,1771,correspsearch_european
 Frances Burney,Victor de Latour Maubourg,12,,,hemlow_catalogue
 Frances Burney,George Owen Cambridge,12,1817,1836,hemlow_catalogue
 Charles Burney Jr,Rosette (Rose) Burney,12,1784,1816,hemlow_catalogue
@@ -174,7 +179,7 @@ Samuel Johnson,Thomas Cadell,5,1778,1781,johnson_hill
 Dr. Hamilton,Samuel Johnson,5,1783,1784,johnson_hill
 Dr. Vyse,Samuel Johnson,5,1777,1781,johnson_hill
 Mauritius Lowe,Samuel Johnson,5,1778,1783,johnson_hill
-Susanna Arabella Thrale,Samuel Johnson,5,1783,1784,johnson_hill
+Samuel Johnson,Susanna Arabella Thrale,5,1783,1784,johnson_hill
 Francesco Sastres,Samuel Johnson,5,1784,1784,johnson_hill
 "Arthur Young, Esq",Edmund Burke,5,1770,1797,burke_1844
 Edmund Burke,Hon. Charles James Fox,5,1774,1788,burke_1844
@@ -228,6 +233,9 @@ Edmund Burke,Rt. Hon. Edm. Sexton Pery,4,1778,1778,burke_1844
 Dr. John Curry,Edmund Burke,4,1778,1779,burke_1844
 Chev. de la Bintinnaye,Edmund Burke,4,1791,1791,burke_1844
 Horace Walpole,Rev. Dr. Birch,4,1745,1764,walpole_1820
+Carl Philipp Emanuel Bach,Denis Diderot,4,1774,1774,correspsearch|correspsearch_european
+Carl Philipp Emanuel Bach,Heinrich Wilhelm von Gerstenberg,4,1772,1774,correspsearch_european
+Carl Philipp Emanuel Bach,Johann Nikolaus Forkel,4,1773,1774,correspsearch_european
 Elizabeth (Vesey) Handcock,Frances Burney,3,1783,1787,hemlow_catalogue
 Frances Burney,Lady Rothes,3,1787,1798,hemlow_catalogue
 Frances Burney,Stephen Allen,3,1833,1833,hemlow_catalogue
@@ -296,6 +304,8 @@ Edmund Burke,"Rt. Hon. Henry Dundas -> Rich. Burke, Jun., Esq",3,1791,1792,burke
 Edmund Burke,Lord Grenville,3,1792,1792,burke_1844
 Edmund Burke,Rt. Hon. Henry Grattan,3,1793,1794,burke_1844
 Thomas Gray,"West, Richard, 1716-1742",3,1739,1740,correspsearch
+Giovanni Battista Martini,Leopold Mozart,3,1771,1778,correspsearch_european
+Carl Philipp Emanuel Bach,Georg Philipp Telemann,3,1756,1759,correspsearch_european
 Frances Brooke,Frances Burney,2,1783,1783,hemlow_catalogue
 Frances Burney,Margaret Duchess of Portland,2,1783,1785,hemlow_catalogue
 Frances Burney,Susannah Dobson,2,1784,1784,hemlow_catalogue
@@ -468,7 +478,13 @@ Joseph Priestley,Sir Joseph Banks,2,,,priestley
 "Hamilton, Mary","Kirkgate, Thomas",2,1792,1792,correspsearch
 "Ganghofer, Ludwig","Schnitzler, Arthur",2,1899,1899,correspsearch
 Georg Friedrich Händel,Georg Philipp Telemann,2,1750,1754,correspsearch
-Carl Philipp Emanuel Bach,Denis Diderot,2,1774,1774,correspsearch
+"Martini, Giovanni Battista, Padre","Mozart, Wolfgang Amadeus",2,1776,1776,correspsearch_european
+Giovanni Battista Martini,Wolfgang Amadé Mozart,2,1776,1776,correspsearch_european
+Bentz für den Stadtrat von Zittau,Carl Philipp Emanuel Bach,2,1753,1753,correspsearch_european
+Carl Philipp Emanuel Bach,Collegium scholarchale,2,1767,1767,correspsearch_european
+Carl Philipp Emanuel Bach,Johann Philipp Kirnberger,2,1769,1771,correspsearch_european
+Carl Philipp Emanuel Bach,Johann Joachim Eschenburg,2,1771,1771,correspsearch_european
+"Beer-Hofmann, Richard","Hofmannsthal, Hugo von",2,1890,1891,correspsearch_european
 Frances Burney,John Young,1,1783,1783,hemlow_catalogue
 Frances Burney,Sophia Byron,1,1784,1784,hemlow_catalogue
 Frances Burney,Sophia (Crisp) Gast,1,1784,1784,hemlow_catalogue
@@ -1154,3 +1170,11 @@ Horace Walpole,"Vesey (née Vesey, later Handcock), Elizabeth",1,,,correspsearch
 Arnold Sommerfeld,Ludwig Prandtl,1,,,correspsearch
 "Ganghofer, Ludwig","Wedekind, Frank",1,,,correspsearch
 "Arouet, François-Marie","Rousseau, Jean-Jacques",1,1755,1755,correspsearch
+Carl Philipp Emanuel Bach,Johann Elias Bach,1,1742,1742,correspsearch_european
+Carl Philipp Emanuel Bach,Michael Gabriel Fredersdorf,1,1757,1757,correspsearch_european
+Carl Philipp Emanuel Bach,Christoph Gottlieb von Murr,1,1765,1765,correspsearch_european
+Carl Philipp Emanuel Bach,einen Hauptmann,1,1766,1766,correspsearch_european
+Carl Philipp Emanuel Bach,Johann Christian Bach,1,1767,1767,correspsearch_european
+Carl Philipp Emanuel Bach,Hans Jacob Faber,1,1767,1767,correspsearch_european
+Carl Philipp Emanuel Bach,Georg Wilhelm Kottowsky,1,1769,1769,correspsearch_european
+"Bölsche, Wilhelm","Hofmannsthal, Hugo von",1,1891,1891,correspsearch_european
