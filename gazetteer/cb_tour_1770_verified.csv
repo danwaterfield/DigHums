@@ -1,15 +1,18 @@
 city,lat,lon,date_arrive,date_depart,notes
-Paris,48.8566,2.3522,1770-06-11,1770-06-24,"Arrived 11 June, left 24 June. Met Diderot, d'Holbach, Suard, Gretry, Balbastre. Garrick furnished letters of introduction for Italy."
+Paris,48.8566,2.3522,1770-06-11,1770-06-24,"Arrived 11 June, left 24 June. Met Diderot, d'Holbach, Suard, Gretry, Balbastre. Garrick's introduction letter to Suard (only one surviving). Had visited Paris before (e.g. 1765 to fetch Esther)."
 Lyon,45.764,4.8357,1770-06-25,1770-06-27,3 days en route.
 Geneva,46.2044,6.1432,1770-06-28,1770-06-29,2 days. Visited Voltaire at Ferney.
 Ferney,46.2587,6.1468,1770-06-29,1770-06-29,Day visit to Voltaire.
-Turin,45.0703,7.6869,1770-07-01,1770-07-14,"APPROXIMATE. Route from Geneva to Milan via Mont Cenis. Met Pugnani, Bezozzi brothers, Count Benevento. Dates not in Lonsdale."
+Turin,45.0703,7.6869,1770-07-01,1770-07-14,"APPROXIMATE. Met Pugnani, Bezozzi brothers. Dates not confirmed in Lonsdale."
 Milan,45.4642,9.19,1770-07-16,1770-07-25,"Arrived 16 July, left 25 July. Met Sammartini."
-Brescia,45.5416,10.2118,1770-07-26,1770-07-27,Brief stop en route.
+Brescia,45.5416,10.2118,1770-07-26,1770-07-27,Brief stop.
 Padua,45.4064,11.8768,1770-07-28,1770-07-30,3 days. Tartini's legacy.
 Venice,45.4408,12.3155,1770-08-03,1770-08-19,"Arrived 3 August, left 19 August. Met Galuppi, Sacchini."
 Bologna,44.4949,11.3426,1770-08-21,1770-08-31,"Arrived 21 August, left 31 August. Met Padre Martini, Farinelli, Mozart, Laura Bassi."
-Florence,43.7696,11.2558,1770-09-01,1770-09-16,"Arrived 1 September, left 16 September. Met Nardini. Day trip to Figline (no lodging found)."
-Figline Valdarno,43.6189,11.4708,1770-09-10,1770-09-10,"APPROXIMATE date. Day trip from Florence, unable to find lodging."
-Rome,41.9028,12.4964,1770-09-20,1770-10-13,"Arrived ~20 September (4 days from Florence), stayed 3 weeks. Worked in Vatican Library, Orsini private collection. Met Duke of Dorset."
-Naples,40.8518,14.2681,1770-10-16,1770-11-15,"Left Rome 14 October, arrived 2 days later. Met Piccinni, Jommelli, Sir William Hamilton. Worked at Royal Museum Portici, Royal Library. Departure date approximate."
+Florence,43.7696,11.2558,1770-09-01,1770-09-16,"Arrived 1 September, left 16 September. Met Nardini. Day trip to Figline (no lodging)."
+Rome,41.9028,12.4964,1770-09-20,1770-10-13,"Arrived ~20 Sept, 3 weeks. Vatican Library, Orsini collection, met Duke of Dorset. Left 14 October."
+Naples,40.8518,14.2681,1770-10-16,1770-11-08,"Arrived 16 Oct, LEFT 8 NOVEMBER. Met Piccinni, Jommelli, Sir William Hamilton. Royal Museum Portici, Royal Library."
+Rome (return),41.9028,12.4964,1770-11-10,1770-11-20,APPROXIMATE. Several days working in Rome on return journey.
+Sarzana to Genoa,44.11,9.96,1770-11-25,1770-11-28,APPROXIMATE. Crossed Apennines late November.
+Genoa,44.4056,8.9463,1770-11-28,1770-12-01,APPROXIMATE. Brief stop on return to Paris.
+Paris (return),48.8566,2.3522,1770-12-08,1770-12-20,"Arrived 8 December. Met d'Holbach, Abbe Morellet, Rousseau, Diderot on return visit. Departure date approximate."
