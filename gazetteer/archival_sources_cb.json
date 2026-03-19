@@ -1,0 +1,50 @@
+{
+  "Osborn Collection, Yale": {
+    "by_burney": 496,
+    "to_burney": 496,
+    "other": "Travel journal 1770 (3 vols), 5 notebooks for History of Music, fragments, memoranda",
+    "now": "Beinecke Rare Book & Manuscript Library, Yale University"
+  },
+  "Berg Collection, NYPL": {
+    "by_burney": 143,
+    "to_burney": 6,
+    "other": "104 fragments of pocket-books, verses, Memoirs (11 folders)",
+    "now": "New York Public Library, Berg Collection"
+  },
+  "Barrett Collection, British Museum": {
+    "by_burney": 37,
+    "to_burney": 6,
+    "other": "Egerton MSS 3690-708. Includes correspondence with Fanny (3699 ff.1-111, 3700A ff.1-40)",
+    "now": "British Library (transferred from BM)"
+  },
+  "Comyn Collection": {
+    "by_burney": 19,
+    "to_burney": 49,
+    "other": "",
+    "now": "John R.G. Comyn, Taunton, New Jersey (as of 1965)"
+  },
+  "Hyde Collection": {
+    "by_burney": 10,
+    "to_burney": 0,
+    "other": "Materials supplied to Boswell for Life of Johnson, 1789",
+    "now": "Houghton Library, Harvard (Donald & Mary Hyde Collection)"
+  },
+  "John Rylands Library, Manchester": {
+    "by_burney": "several",
+    "to_burney": "several",
+    "other": "Materials for History of Music",
+    "now": "John Rylands Library, University of Manchester"
+  },
+  "Bodleian Library, Oxford": {
+    "by_burney": "letters",
+    "to_burney": "",
+    "other": "",
+    "now": "Bodleian Library, Oxford"
+  },
+  "Folger Shakespeare Library": {
+    "by_burney": 2,
+    "to_burney": 0,
+    "other": "",
+    "now": "Folger Shakespeare Library, Washington DC"
+  }
+}
