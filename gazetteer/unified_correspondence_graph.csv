@@ -24,6 +24,7 @@ James Boswell,Samuel Johnson,93,1763,1784,johnson_hill
 Frances Burney,Frederica Locke,83,1784,1824,hemlow_catalogue
 Alexander d'Arblay,Frances Burney,78,1802,1835,hemlow_catalogue
 Esther Burney,Frances Burney,69,1788,1827,hemlow_catalogue
+Johann Christian Bach,Padre Martini,66,1757,1782,correspsearch_european
 John Taylor,Samuel Johnson,63,1752,1784,johnson_hill
 Charles Burney Sr,Charlotte Harriet,57,1807,1813,hemlow_catalogue
 Frances Burney,Louis,54,1790,1811,hemlow_catalogue
@@ -40,7 +41,6 @@ Angelique,Frances Burney,35,1794,1798,hemlow_catalogue
 Lucy Porter,Samuel Johnson,35,1749,1784,johnson_hill
 Edmund Burke,Richard Champion,35,1774,1781,burke_1844
 Horace Walpole,Richard Bentley,33,1735,1755,walpole_1820
-Johann Christian Bach,Padre Martini,33,1757,1778,correspsearch_european
 Frances Burney,Marquis de Lafayette,32,1792,1816,hemlow_catalogue
 Ludwig Prandtl,Rudolf Mehmke,32,,,correspsearch
 Carl Philipp Emanuel Bach,Johann Gottlob Immanuel Breitkopf,32,1765,1774,correspsearch_european
@@ -236,6 +236,8 @@ Horace Walpole,Rev. Dr. Birch,4,1745,1764,walpole_1820
 Carl Philipp Emanuel Bach,Denis Diderot,4,1774,1774,correspsearch|correspsearch_european
 Carl Philipp Emanuel Bach,Heinrich Wilhelm von Gerstenberg,4,1772,1774,correspsearch_european
 Carl Philipp Emanuel Bach,Johann Nikolaus Forkel,4,1773,1774,correspsearch_european
+Charles Burney Sr,Jacques-Pierre Brissot,4,1783,1783,fonds_brissot
+Padre Martini,Wolfgang Amadeus Mozart,4,1770,1778,correspsearch_european
 Elizabeth (Vesey) Handcock,Frances Burney,3,1783,1787,hemlow_catalogue
 Frances Burney,Lady Rothes,3,1787,1798,hemlow_catalogue
 Frances Burney,Stephen Allen,3,1833,1833,hemlow_catalogue
@@ -306,6 +308,7 @@ Edmund Burke,Rt. Hon. Henry Grattan,3,1793,1794,burke_1844
 Thomas Gray,"West, Richard, 1716-1742",3,1739,1740,correspsearch
 Giovanni Battista Martini,Leopold Mozart,3,1771,1778,correspsearch_european
 Carl Philipp Emanuel Bach,Georg Philipp Telemann,3,1756,1759,correspsearch_european
+Leopold Mozart,Padre Martini,3,1770,1776,correspsearch_european
 Frances Brooke,Frances Burney,2,1783,1783,hemlow_catalogue
 Frances Burney,Margaret Duchess of Portland,2,1783,1785,hemlow_catalogue
 Frances Burney,Susannah Dobson,2,1784,1784,hemlow_catalogue
@@ -485,6 +488,9 @@ Carl Philipp Emanuel Bach,Collegium scholarchale,2,1767,1767,correspsearch_europ
 Carl Philipp Emanuel Bach,Johann Philipp Kirnberger,2,1769,1771,correspsearch_european
 Carl Philipp Emanuel Bach,Johann Joachim Eschenburg,2,1771,1771,correspsearch_european
 "Beer-Hofmann, Richard","Hofmannsthal, Hugo von",2,1890,1891,correspsearch_european
+Charles Burney Sr,Pietro Metastasio,2,1772,1772,tour_contact
+Carlo Broschi Farinelli,Charles Burney Sr,2,1770,1770,tour_contact
+Charles Burney Sr,Johann Christian Bach,2,1762,1782,hemlow_catalogue
 Frances Burney,John Young,1,1783,1783,hemlow_catalogue
 Frances Burney,Sophia Byron,1,1784,1784,hemlow_catalogue
 Frances Burney,Sophia (Crisp) Gast,1,1784,1784,hemlow_catalogue
@@ -1178,3 +1184,21 @@ Carl Philipp Emanuel Bach,Johann Christian Bach,1,1767,1767,correspsearch_europe
 Carl Philipp Emanuel Bach,Hans Jacob Faber,1,1767,1767,correspsearch_european
 Carl Philipp Emanuel Bach,Georg Wilhelm Kottowsky,1,1769,1769,correspsearch_european
 "Bölsche, Wilhelm","Hofmannsthal, Hugo von",1,1891,1891,correspsearch_european
+Charles Burney Sr,Christoph Willibald Gluck,1,1772,1772,tour_contact
+Charles Burney Sr,Wolfgang Amadeus Mozart,1,1770,1770,tour_contact
+Charles Burney Sr,Leopold Mozart,1,1770,1770,tour_contact
+Charles Burney Sr,Nicola Jommelli,1,1770,1770,tour_contact
+Charles Burney Sr,Niccolo Piccinni,1,1770,1770,tour_contact
+Antonio Sacchini,Charles Burney Sr,1,1770,1770,tour_contact
+Charles Burney Sr,Giovanni Battista Sammartini,1,1770,1770,tour_contact
+Charles Burney Sr,Pietro Nardini,1,1770,1770,tour_contact
+Baldassare Galuppi,Charles Burney Sr,1,1770,1770,tour_contact
+Charles Burney Sr,Gaetano Caffarelli,1,1770,1770,tour_contact
+Charles Burney Sr,Giovanni Paisiello,1,1770,1770,tour_contact
+Andre Gretry,Charles Burney Sr,1,1770,1770,tour_contact
+Charles Burney Sr,Claude Balbastre,1,1770,1770,tour_contact
+Charles Burney Sr,Voltaire,1,1770,1770,tour_contact
+Charles Burney Sr,Frederick the Great,1,1772,1772,tour_contact
+Charles Burney Sr,Friedrich Wilhelm Marpurg,1,1772,1772,tour_contact
+Charles Burney Sr,Christian Cannabich,1,1772,1772,tour_contact
+Charles Burney Sr,Friedrich Klopstock,1,1772,1772,tour_contact
