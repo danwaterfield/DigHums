@@ -604,7 +604,11 @@ svg {{ display: block; width: 100%; height: 100%; }}
     <span class="val" id="weight-val">2</span>
   </div>
 
-  <div class="source-checks" id="source-checks"></div>
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+    <div class="source-checks" id="source-checks"></div>
+    <button class="phase-pill" id="select-all-src" style="font-size:9px;padding:2px 8px;">All</button>
+    <button class="phase-pill" id="clear-all-src" style="font-size:9px;padding:2px 8px;">None</button>
+  </div>
 </div>
 
 <div class="main">
@@ -708,6 +712,22 @@ var tooltip = document.getElementById("tooltip");
     container.appendChild(lbl);
   }});
 }})();
+
+/* Select All / Clear All buttons */
+document.getElementById("select-all-src").addEventListener("click", function() {{
+  document.querySelectorAll("#source-checks input[type=checkbox]").forEach(function(cb) {{
+    cb.checked = true;
+    activeSources.add(cb.dataset.src);
+  }});
+  rebuildGraph();
+}});
+document.getElementById("clear-all-src").addEventListener("click", function() {{
+  document.querySelectorAll("#source-checks input[type=checkbox]").forEach(function(cb) {{
+    cb.checked = false;
+    activeSources.delete(cb.dataset.src);
+  }});
+  rebuildGraph();
+}});
 
 /* ── Timeline setup ──────────────────────────────── */
 var sliderLo = document.getElementById("slider-lo");
