@@ -18,6 +18,7 @@ from pathlib import Path
 BASE = Path(__file__).resolve().parent
 GRAPH_CSV = BASE / "unified_correspondence_graph.csv"
 LOCATIONS_CSV = BASE / "correspondent_locations.csv"
+PERSON_INFO = BASE / "person_info.json"
 OUT_PATH = BASE / "full_network.html"
 D3_CACHE = BASE / ".d3.v7.min.js"
 D3_URL = "https://d3js.org/d3.v7.min.js"
@@ -152,8 +153,8 @@ def load_graph() -> dict:
 
 
 # ── HTML template ─────────────────────────────────────────────────
-# Convention: ALL JS braces are doubled.  Only {D3_SOURCE} and
-# {GRAPH_JSON} use single braces (Python .replace() targets).
+# Convention: ALL JS braces are doubled.  Only {D3_SOURCE},
+# {GRAPH_JSON}, and {PERSON_INFO_JSON} use single braces (Python .replace() targets).
 
 HTML_TEMPLATE = r"""<!DOCTYPE html>
 <html lang="en">
@@ -338,6 +339,43 @@ body {{
   width: 8px; height: 8px;
   border-radius: 2px;
   flex-shrink: 0;
+}}
+
+/* ── Reset button ─────────────────────────────── */
+.reset-btn {{
+  font-size: 11px;
+  padding: 4px 14px;
+  border: 1px solid #d0d0d0;
+  border-radius: 12px;
+  background: #fff;
+  color: #555;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+}}
+.reset-btn:hover {{
+  background: #2d3436;
+  color: #fff;
+  border-color: #2d3436;
+}}
+
+/* ── Bio in detail panel ─────────────────────── */
+.dp-dates {{
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 2px;
+}}
+.dp-bio {{
+  font-size: 13px;
+  font-weight: 400;
+  color: #555;
+  line-height: 1.5;
+  margin-top: 6px;
+  margin-bottom: 4px;
+}}
+.dp-bio.dim {{
+  color: #bbb;
+  font-style: italic;
 }}
 
 /* ── Main layout ───────────────────────────────── */
@@ -589,6 +627,7 @@ svg {{ display: block; width: 100%; height: 100%; }}
     <span id="stat-edges"></span>
     <span id="stat-letters"></span>
   </div>
+  <button class="reset-btn" id="reset-view" style="display:none;">Reset View</button>
 </div>
 
 <div class="controls">
@@ -621,6 +660,8 @@ svg {{ display: block; width: 100%; height: 100%; }}
     <div class="dp-header">
       <button class="dp-close" id="dp-close">&times;</button>
       <div class="dp-name" id="dp-name"></div>
+      <div class="dp-dates" id="dp-dates"></div>
+      <div class="dp-bio" id="dp-bio"></div>
       <div class="dp-sources" id="dp-sources"></div>
     </div>
     <div class="dp-stats" id="dp-stats"></div>
@@ -654,6 +695,7 @@ svg {{ display: block; width: 100%; height: 100%; }}
 "use strict";
 
 var DATA = {GRAPH_JSON};
+var PERSON_INFO = {PERSON_INFO_JSON};
 
 var SOURCE_COLOURS = DATA.source_colours;
 var SOURCE_LABELS = DATA.source_labels;
@@ -819,19 +861,7 @@ document.addEventListener("click", function(e) {{
 }});
 
 function highlightAndZoom(nodeId) {{
-  highlightedNodeId = nodeId;
-  updateHighlight();
-  /* Zoom to node */
-  var simNode = null;
-  if (simulation) {{
-    simulation.nodes().forEach(function(n) {{
-      if (n.id === nodeId) simNode = n;
-    }});
-  }}
-  if (simNode && simNode.x != null) {{
-    var t = d3.zoomIdentity.translate(width / 2 - simNode.x, height / 2 - simNode.y);
-    svg.transition().duration(500).call(zoom.transform, t);
-  }}
+  focusOnNode(nodeId);
 }}
 
 function updateHighlight() {{
@@ -857,7 +887,7 @@ function updateHighlight() {{
   g.selectAll(".edge-line").attr("stroke-opacity", function(d) {{
     var sid = typeof d.source === "object" ? d.source.id : d.source;
     var tid = typeof d.target === "object" ? d.target.id : d.target;
-    return (sid === highlightedNodeId || tid === highlightedNodeId) ? 0.6 : 0.03;
+    return (sid === highlightedNodeId || tid === highlightedNodeId) ? 0.6 : 0.02;
   }});
 }}
 
@@ -1082,7 +1112,10 @@ function rebuildGraph() {{
     tooltip.style.top  = (event.clientY - rect.top  - 10) + "px";
   }}).on("mouseleave", function() {{
     tooltip.style.display = "none";
-    if (!highlightedNodeId) {{
+    if (focusedNodeId) {{
+      /* Restore focus highlight (not hover) */
+      updateHighlight();
+    }} else if (!highlightedNodeId) {{
       nodeG.selectAll(".node-group").attr("opacity", 1);
       linkG.selectAll("line").attr("stroke-opacity", 0.15);
     }} else {{
@@ -1138,11 +1171,67 @@ function rebuildGraph() {{
   );
 }}
 
+/* ── Focus / reset ───────────────────────────────── */
+var initialTransform = d3.zoomIdentity;
+var focusedNodeId = null;
+
+function focusOnNode(nodeId) {{
+  focusedNodeId = nodeId;
+  highlightedNodeId = nodeId;
+  updateHighlight();
+  document.getElementById("reset-view").style.display = "";
+
+  /* Zoom to node */
+  var simNode = null;
+  if (simulation) {{
+    simulation.nodes().forEach(function(n) {{
+      if (n.id === nodeId) simNode = n;
+    }});
+  }}
+  if (simNode && simNode.x != null) {{
+    var scale = 1.5;
+    var t = d3.zoomIdentity
+      .translate(width / 2 - simNode.x * scale, height / 2 - simNode.y * scale)
+      .scale(scale);
+    svg.transition().duration(500).call(zoom.transform, t);
+  }}
+}}
+
+function resetView() {{
+  focusedNodeId = null;
+  highlightedNodeId = null;
+  selectedNodeId = null;
+  updateHighlight();
+  document.getElementById("detail-panel").classList.remove("open");
+  document.getElementById("reset-view").style.display = "none";
+  searchInput.value = "";
+  svg.transition().duration(500).call(zoom.transform, initialTransform);
+}}
+
+document.getElementById("reset-view").addEventListener("click", resetView);
+
 /* ── Detail panel ────────────────────────────────── */
 function showDetail(d) {{
   selectedNodeId = d.id;
   var panel = document.getElementById("detail-panel");
   document.getElementById("dp-name").textContent = d.id;
+
+  /* Biographical note */
+  var info = PERSON_INFO[d.id];
+  var datesEl = document.getElementById("dp-dates");
+  var bioEl = document.getElementById("dp-bio");
+  if (info) {{
+    datesEl.textContent = info.dates || "";
+    bioEl.textContent = info.bio || "";
+    bioEl.className = "dp-bio";
+  }} else {{
+    datesEl.textContent = "";
+    bioEl.textContent = "No biographical note available";
+    bioEl.className = "dp-bio dim";
+  }}
+
+  /* Click-to-focus: zoom and highlight 1st degree network */
+  focusOnNode(d.id);
 
   /* Source chips */
   var sourcesEl = document.getElementById("dp-sources");
@@ -1232,7 +1321,11 @@ function showDetail(d) {{
 
 function dismissDetail() {{
   selectedNodeId = null;
+  focusedNodeId = null;
+  highlightedNodeId = null;
+  updateHighlight();
   document.getElementById("detail-panel").classList.remove("open");
+  document.getElementById("reset-view").style.display = "none";
 }}
 
 document.getElementById("dp-close").addEventListener("click", dismissDetail);
@@ -1262,12 +1355,20 @@ def build() -> None:
     data = load_graph()
     graph_json = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
 
+    # Load biographical notes
+    if PERSON_INFO.exists():
+        person_info = json.loads(PERSON_INFO.read_text(encoding="utf-8"))
+    else:
+        person_info = {}
+    person_info_json = json.dumps(person_info, ensure_ascii=False, separators=(",", ":"))
+
     d3_src = _get_d3_source()
 
     # Un-double braces first, then insert D3 and data
     html = HTML_TEMPLATE.replace("{{", "{").replace("}}", "}")
     html = html.replace("{D3_SOURCE}", d3_src, 1)
     html = html.replace("{GRAPH_JSON}", graph_json, 1)
+    html = html.replace("{PERSON_INFO_JSON}", person_info_json, 1)
 
     OUT_PATH.write_text(html, encoding="utf-8")
     print(f"Full network -> {OUT_PATH}")
