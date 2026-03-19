@@ -89,6 +89,7 @@ Frances Burney,George Owen Cambridge,12,1817,1836,hemlow_catalogue
 Charles Burney Jr,Rosette (Rose) Burney,12,1784,1816,hemlow_catalogue
 Edward Cave,Samuel Johnson,12,1734,1756,johnson_hill
 Lewis Paul,Samuel Johnson,12,1740,1763,johnson_hill
+Charles Burney Sr,David Garrick,12,1758,1779,hemlow_catalogue
 Elizabeth (Allen) Burney,Frances Burney,11,1768,1796,hemlow_catalogue
 ERB,Frances Burney,11,1800,1801,hemlow_catalogue
 Charles Burney Sr,Padre Martini,11,1770,1780,hemlow_catalogue
@@ -106,6 +107,7 @@ CBF,Frances Burney,9,1788,1796,hemlow_catalogue
 Etiennette,Frances Burney,9,1796,1819,hemlow_catalogue
 Frances Burney,Princess Augusta,9,1819,1825,hemlow_catalogue
 Capt. James Keir,Joseph Priestley,9,,,priestley
+Charles Burney Sr,Samuel Johnson,9,1755,1780,hemlow_catalogue|lonsdale_lynn
 Ann (Astley) Agnew,Frances Burney,8,1814,1814,hemlow_catalogue
 Frances Burney,Queen Charlotte,8,1794,1817,hemlow_catalogue
 Charles Burney Sr,William Mason,8,1769,1790,hemlow_catalogue
@@ -116,11 +118,11 @@ Charles Burney Jr,John Kaye,8,1808,1816,hemlow_catalogue
 John Ryland,Samuel Johnson,8,1756,1756,johnson_hill
 Mrs. Montagu,Samuel Johnson,8,1774,1783,johnson_hill
 George Strahan,Samuel Johnson,8,1763,1784,johnson_hill
+Charles Burney Sr,Fulke Greville,8,1751,1769,hemlow_catalogue|lonsdale_lynn
 Frances Burney,Samuel Johnson,7,1779,1784,hemlow_catalogue
 Dorothy Young,Frances Burney,7,1771,1793,hemlow_catalogue
 Charles Babbage,Frances Burney,7,1829,1829,hemlow_catalogue
 Frances Burney,Sophia Thrale Hoare,7,1812,1823,hemlow_catalogue
-Charles Burney Sr,Samuel Johnson,7,1755,1780,hemlow_catalogue
 Charles Burney Sr,Horace Walpole,7,1774,1791,hemlow_catalogue
 Charles Burney Jr,Peter Paul Dobree,7,1808,1812,hemlow_catalogue
 Charles Burney Jr,Richard Payne Knight,7,1808,1811,hemlow_catalogue
@@ -143,7 +145,6 @@ Frances Burney,Sarah Baker,6,1818,1827,hemlow_catalogue
 Frances Burney,PML,6,1812,1815,hemlow_catalogue
 Catherine Coussmaker,Frances Burney,6,1778,1778,hemlow_catalogue
 Frances Burney,Sophia Streatfield,6,1779,1781,hemlow_catalogue
-Charles Burney Sr,David Garrick,6,1764,1779,hemlow_catalogue
 Charles Burney Sr,"Garret Wesley, Earl of Mornington",6,1773,1777,hemlow_catalogue
 Charles Burney Sr,Richard Cox,6,,,hemlow_catalogue
 Charles Burney Sr,Charlotte Smith,6,,,hemlow_catalogue
@@ -201,7 +202,6 @@ Frances Burney,Mary (Danby) Countess of Har-,4,1812,1814,hemlow_catalogue
 Frances Burney,Frances Crewe,4,1814,1814,hemlow_catalogue
 Frances Burney,Mme de la Grange,4,1815,1815,hemlow_catalogue
 Frances Burney,Henrietta Maria (Banister) North,4,1778,1782,hemlow_catalogue
-Charles Burney Sr,Fulke Greville,4,1764,1769,hemlow_catalogue
 Charles Burney Sr,Jean-Baptiste-Antoine Suard,4,1771,1777,hemlow_catalogue
 Charles Burney Sr,Thomas Pennant,4,1773,1774,hemlow_catalogue
 Anthony Chamier,Charles Burney Sr,4,1776,1780,hemlow_catalogue
@@ -491,6 +491,7 @@ Carl Philipp Emanuel Bach,Johann Joachim Eschenburg,2,1771,1771,correspsearch_eu
 Charles Burney Sr,Pietro Metastasio,2,1772,1772,tour_contact
 Carlo Broschi Farinelli,Charles Burney Sr,2,1770,1770,tour_contact
 Charles Burney Sr,Johann Christian Bach,2,1762,1782,hemlow_catalogue
+Charles Burney Sr,Stephen Allen,2,1751,1760,lonsdale_lynn
 Frances Burney,John Young,1,1783,1783,hemlow_catalogue
 Frances Burney,Sophia Byron,1,1784,1784,hemlow_catalogue
 Frances Burney,Sophia (Crisp) Gast,1,1784,1784,hemlow_catalogue
@@ -1202,3 +1203,6 @@ Charles Burney Sr,Frederick the Great,1,1772,1772,tour_contact
 Charles Burney Sr,Friedrich Wilhelm Marpurg,1,1772,1772,tour_contact
 Charles Burney Sr,Christian Cannabich,1,1772,1772,tour_contact
 Charles Burney Sr,Friedrich Klopstock,1,1772,1772,tour_contact
+Charles Burney Sr,Mrs Greville,1,1758,1760,lonsdale_lynn
+Charles Burney Sr,Robert Squire,1,1751,1760,lonsdale_lynn
+Charles Burney Sr,Sir John Turner,1,1751,1760,lonsdale_lynn
