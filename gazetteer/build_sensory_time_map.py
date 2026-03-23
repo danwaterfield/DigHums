@@ -785,6 +785,7 @@ const BUILDING_TYPE_COLORS = {{
     'court':     '#8b0000',
     'execution': '#8b0000',
     'menagerie': '#7b4513',
+    'bookseller': '#8B4513',
 }};
 
 // Enclosure dash patterns: makes physical form legible on all markers

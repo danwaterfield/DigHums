@@ -359,3 +359,7 @@ def test_contour_mode_state(html):
     """State object must have contourMode and contourSense."""
     assert "contourMode" in html
     assert "contourSense" in html
+
+
+def test_bookseller_building_type_colour(html):
+    assert "'bookseller'" in html

@@ -302,6 +302,7 @@ const BT_COLORS = {
     'church':    '#6b5b8a',
     'street':    '#7a7a7a', 'square':    '#7a7a7a', 'district': '#7a7a7a',
     'market':    '#b8860b',
+    'bookseller': '#8B4513',
     'prison':    '#8b0000', 'court':     '#8b0000', 'execution': '#8b0000',
 };
 
