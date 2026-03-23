@@ -363,3 +363,9 @@ def test_contour_mode_state(html):
 
 def test_bookseller_building_type_colour(html):
     assert "'bookseller'" in html
+
+
+def test_bookseller_venues_in_sensory_map(html):
+    """Bookseller venues from venues.csv appear in the sensory map."""
+    assert "LON100" in html  # Millar-Cadell shop
+    assert "LON101" in html  # Dodsley's shop
