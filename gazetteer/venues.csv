@@ -98,3 +98,10 @@ LON096,Greenwich Park,London,51.4769,0.0005,,,Royal park on the south bank; site
 RUR001,Rural England,England,52.45,-1.55,,,Pseudo-venue for non-urban English and Celtic rural settings (Scotland; Ireland; English countryside).,rocque_1746,3,open,misc,outdoor,n_a,0.10
 RUR002,Continental Gothic,Europe,43.7,11.2,,,Pseudo-venue for continental and fantastical Gothic settings (Italy; France; Spain; Arabia).,rocque_1746,3,open,misc,mixed,n_a,0.10
 LON097,Exeter Change Menagerie,London,51.5115,-0.1201,1773,1829,"Strand menagerie on upper floors of the Exchange building. Pidcock then Cross collection. Roars of lions and tigers audible in the Strand and frightened horses. Demolished 1829.",rocque_1746;horwood_1799,3,enclosed,menagerie,timber,medium,1.20
+LON098,John Noon's shop (Cheapside),London,51.5135,-0.0930,1735,1745,White Hart near Mercer's Chapel. Bookseller.,rocque_1746,4,enclosed,bookseller,timber,small,1.00
+LON099,Paternoster Row booksellers,London,51.5145,-0.0988,,,Longman Cooper and others. Core of London book trade near St Paul's.,rocque_1746;horwood_1799,3,enclosed,bookseller,timber,small,1.80
+LON100,Millar-Cadell shop (Strand),London,51.5114,-0.1202,1728,1802,Opposite Catherine St. Millar 1728-68 then Cadell 1768-1802.,rocque_1746;horwood_1799,3,enclosed,bookseller,brick,small,1.30
+LON101,Dodsley's shop (Pall Mall),London,51.5070,-0.1340,1735,1764,Tully's Head. Robert Dodsley bookseller and publisher.,rocque_1746,4,enclosed,bookseller,brick,small,0.80
+LON102,Rivington's (St Paul's Churchyard),London,51.5140,-0.0988,1711,,Bible and Crown. Rivington dynasty booksellers.,rocque_1746;horwood_1799,4,enclosed,bookseller,brick,small,1.60
+LON103,Murray's shop (Fleet Street),London,51.5138,-0.1065,1768,1793,32 Fleet Street. John Murray I.,rocque_1746;horwood_1799,4,enclosed,bookseller,brick,small,1.30
+LON104,Temple of the Muses (Finsbury),London,51.5225,-0.0870,1794,,Lackington's massive bookshop. Finsbury Square.,horwood_1799,4,enclosed,bookseller,brick,large,0.60
