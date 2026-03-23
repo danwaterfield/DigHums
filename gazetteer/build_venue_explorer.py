@@ -89,7 +89,35 @@ def build(
     """Build venue_explorer.html."""
     venues  = load_data(venues_path, db_path)
     data_js = json.dumps(venues, ensure_ascii=False, separators=(",", ":"))
-    html    = _render(data_js)
+
+    # ── bookseller data ──────────────────────────────────────────────────
+    booksellers_path = Path(__file__).parent / "booksellers.csv"
+    bookseller_locs_path = Path(__file__).parent / "bookseller_locations.csv"
+
+    bs_by_venue: dict[str, list[dict]] = {}
+    if booksellers_path.exists() and bookseller_locs_path.exists():
+        booksellers: dict[str, dict] = {}
+        with open(booksellers_path, newline="", encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                booksellers[row["bookseller_id"]] = row
+        with open(bookseller_locs_path, newline="", encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                vid = row["venue_id"]
+                if not vid:
+                    continue
+                bs = booksellers.get(row["bookseller_id"], {})
+                entry = {
+                    "name": bs.get("name", ""),
+                    "sign": bs.get("sign", ""),
+                    "type": bs.get("type", ""),
+                    "date_min": int(row["date_min"]) if row["date_min"] else None,
+                    "date_max": int(row["date_max"]) if row["date_max"] else None,
+                    "address": row.get("address_detail", ""),
+                }
+                bs_by_venue.setdefault(vid, []).append(entry)
+
+    bookseller_js = json.dumps(bs_by_venue, ensure_ascii=False, separators=(",", ":"))
+    html = _render(data_js, bookseller_js)
     out_path.write_text(html, encoding="utf-8")
     geocoded = sum(1 for v in venues if v["evidence"])
     total_ev = sum(len(v["evidence"]) for v in venues)
@@ -97,8 +125,10 @@ def build(
     print(f"  {len(venues)} venues  {geocoded} with evidence  {total_ev} passages")
 
 
-def _render(data_js: str) -> str:
-    return HTML_TEMPLATE.replace("__VENUES_DATA__", data_js, 1)
+def _render(data_js: str, bookseller_js: str = "{}") -> str:
+    return (HTML_TEMPLATE
+            .replace("__VENUES_DATA__", data_js, 1)
+            .replace("__BOOKSELLER_DATA__", bookseller_js, 1))
 
 
 HTML_TEMPLATE = """<!DOCTYPE html>
@@ -284,6 +314,7 @@ body { font-family: 'Inter', system-ui, sans-serif; background: #f4f1eb;
     <div id="panel-header" style="display:none">
       <div id="panel-title"></div>
       <div id="panel-meta" style="display:flex;gap:5px;flex-wrap:wrap;margin:4px 0 5px"></div>
+      <div id="panel-booksellers" style="margin:4px 0"></div>
       <div id="panel-stats"></div>
       <div class="panel-pills" id="panel-pills"></div>
     </div>
@@ -294,6 +325,7 @@ body { font-family: 'Inter', system-ui, sans-serif; background: #f4f1eb;
 <script>
 // ── embedded data ─────────────────────────────────────────────────────────
 const VENUES = __VENUES_DATA__;
+const BOOKSELLERS = __BOOKSELLER_DATA__;
 
 // Building type colour scheme (shared with time map)
 const BT_COLORS = {
@@ -315,6 +347,41 @@ function renderMetaChips(v) {
         return '<span style="font-size:10px;padding:2px 7px;border-radius:10px;border:1px solid '
             + color + ';color:' + color + ';background:rgba(0,0,0,0.04)">' + p + '</span>';
     }).join('');
+}
+
+function renderBooksellers(venueId) {
+    var el = document.getElementById('panel-booksellers');
+    if (!el) return;
+    var occupants = BOOKSELLERS[venueId];
+    if (!occupants || !occupants.length) { el.textContent = ''; return; }
+    el.textContent = '';
+    var hdr = document.createElement('div');
+    hdr.style.cssText = 'margin-top:6px;font-size:11px;color:#666;font-weight:600';
+    hdr.textContent = 'Book Trade';
+    el.appendChild(hdr);
+    occupants.forEach(function(b) {
+        var row = document.createElement('div');
+        row.style.cssText = 'font-size:12px;margin:2px 0';
+        var nameSpan = document.createElement('strong');
+        nameSpan.textContent = b.name;
+        row.appendChild(nameSpan);
+        if (b.sign) {
+            var signSpan = document.createElement('span');
+            signSpan.textContent = ' (' + b.sign + ')';
+            row.appendChild(signSpan);
+        }
+        var dateSpan = document.createElement('span');
+        dateSpan.style.color = '#888';
+        dateSpan.textContent = ' ' + (b.date_min || '?') + '\u2013' + (b.date_max || '?');
+        row.appendChild(dateSpan);
+        if (b.type) {
+            var typeSpan = document.createElement('span');
+            typeSpan.style.cssText = 'color:#8B4513;font-size:10px;margin-left:4px';
+            typeSpan.textContent = b.type.replace(/\\|/g, ', ');
+            row.appendChild(typeSpan);
+        }
+        el.appendChild(row);
+    });
 }
 
 // ── Leaflet map ───────────────────────────────────────────────────────────
@@ -461,6 +528,7 @@ function renderPanel() {
 
   document.getElementById('panel-title').textContent = v.name;
   renderMetaChips(v);
+  renderBooksellers(v.id);
   document.getElementById('panel-stats').textContent =
     globalFiltered.length + ' passage' + (globalFiltered.length !== 1 ? 's' : '') + ' \u00b7 ' + bStr;
 

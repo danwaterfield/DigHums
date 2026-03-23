@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from build_venue_explorer import load_data
+from build_venue_explorer import load_data, build
 
 VENUES_PATH = Path(__file__).parent.parent / "venues.csv"
 DB_PATH     = Path(__file__).parent.parent / "sensory.db"
@@ -72,10 +72,26 @@ def test_legal_pill_present():
     assert 'data-v="legal"' in html
 
 
+def test_new_source_pills_present():
+    """Generated HTML must contain pills for newly supported documentary source types."""
+    html = (Path(__file__).parent.parent / "venue_explorer.html").read_text()
+    assert 'data-v="newspaper"' in html
+    assert 'data-v="parish"' in html
+    assert 'data-v="institutional"' in html
+
+
 def test_legal_badge_colour_present():
     """Generated HTML must define the src-legal CSS class."""
     html = (Path(__file__).parent.parent / "venue_explorer.html").read_text()
     assert "src-legal" in html
+
+
+def test_new_badge_colours_present():
+    """Generated HTML must define CSS classes for new documentary source types."""
+    html = (Path(__file__).parent.parent / "venue_explorer.html").read_text()
+    assert "src-newspaper" in html
+    assert "src-parish" in html
+    assert "src-institutional" in html
 
 
 def test_valence_pip_in_js():
@@ -106,3 +122,11 @@ def test_build_generates_valid_html():
     assert "leaflet" in html.lower(), "Missing Leaflet"
     assert len(html) > 20_000,    "HTML suspiciously short"
     out.unlink()
+
+
+def test_bookseller_js_data_in_html():
+    """Built HTML contains BOOKSELLERS data object."""
+    build()
+    html = (Path(__file__).parent.parent / "venue_explorer.html").read_text(encoding="utf-8")
+    assert "BOOKSELLERS" in html
+    assert "Andrew Millar" in html
