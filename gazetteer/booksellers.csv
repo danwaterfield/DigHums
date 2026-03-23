@@ -1,0 +1,17 @@
+bookseller_id,name,sign,type,active_min,active_max,notes
+BS_NOON,John Noon,White Hart,bookseller,1735,1745,Cheapside bookseller near Mercer's Chapel
+BS_BORBET,C. Borbet,Addison's Head,bookseller,1738,1742,Fleet Street bookseller opposite St Dunstan's Church
+BS_LONGMAN,Thomas Longman I,Ship,bookseller|publisher,1724,1755,Founded the Longman publishing dynasty at Paternoster Row
+BS_MILLAR,Andrew Millar,Buchanan's Head,bookseller|publisher,1728,1768,"Publisher of Hume, Fielding, and Johnson's Dictionary"
+BS_CADELL,Thomas Cadell I,,bookseller|publisher,1767,1802,"Succeeded Millar; published Gibbon, Smith, and Burney"
+BS_COOPER,Mary Cooper,Globe,bookseller,1743,1761,One of the most prominent women in the 18c book trade
+BS_DODSLEY,Robert Dodsley,Tully's Head,bookseller|publisher,1735,1764,Poet and publisher; The Annual Register with Burke
+BS_TONSON_SR,Jacob Tonson I,Shakespeare's Head,bookseller|publisher,1678,1720,Publisher of Dryden and Pope; Kit-Cat Club secretary
+BS_TONSON_JR,Jacob Tonson II,Shakespeare's Head,bookseller|publisher,1720,1735,Nephew and successor to Jacob Tonson I
+BS_RIVINGTON,Charles Rivington,Bible and Crown,bookseller|publisher,1711,1742,St Paul's Churchyard publisher; Pamela co-publisher
+BS_STRAHAN,William Strahan,,printer,1738,1785,King's Printer; printed Johnson's Dictionary and Gibbon
+BS_MURRAY_I,John Murray I,,bookseller|publisher,1768,1793,Founded the Murray publishing house at 32 Fleet Street
+BS_LACKINGTON,James Lackington,Temple of the Muses,bookseller,1794,1804,Pioneered cheap book sales; 'Temple of the Muses' was London's largest bookshop
+BS_FLEMING_ALISON,R. Fleming and A. Alison,,printer,1741,1742,Edinburgh printers
+BS_KINCAID,Alexander Kincaid,above the Cross,bookseller|publisher,1741,1770,Edinburgh bookseller and King's Printer for Scotland
+BS_DONALDSON,Alexander Donaldson,,bookseller|publisher,1752,1794,Edinburgh bookseller; won landmark copyright case Donaldson v Becket (1774)

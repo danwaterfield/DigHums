@@ -1,0 +1,14 @@
+bookseller_id,venue_id,date_min,date_max,address_detail,source
+BS_NOON,LON098,1735,1745,"White Hart, near Mercer's Chapel, Cheapside",Harris
+BS_BORBET,LON031,1738,1742,"Addison's Head, over against St Dunstan's Church, Fleet Street",Harris
+BS_LONGMAN,LON099,1724,1755,"Ship, Paternoster Row",Harris
+BS_MILLAR,LON100,1728,1768,opposite Catherine Street in the Strand,Harris
+BS_CADELL,LON100,1767,1802,Strand (successor to Millar),Harris
+BS_COOPER,LON099,1743,1761,"Globe, Paternoster Row",Harris
+BS_DODSLEY,LON101,1735,1764,"Tully's Head, Pall Mall",General knowledge
+BS_TONSON_SR,LON031,1678,1720,"Shakespeare's Head, Fleet Street",General knowledge
+BS_TONSON_JR,LON031,1720,1735,"Shakespeare's Head, Fleet Street",General knowledge
+BS_RIVINGTON,LON102,1711,1742,"Bible and Crown, St Paul's Churchyard",General knowledge
+BS_STRAHAN,LON031,1738,1785,"New Street, Shoe Lane (off Fleet Street)",General knowledge
+BS_MURRAY_I,LON103,1768,1793,32 Fleet Street,General knowledge
+BS_LACKINGTON,LON104,1794,1804,Finsbury Square,General knowledge
