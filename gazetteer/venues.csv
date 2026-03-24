@@ -131,3 +131,27 @@ LON127,Sam's Coffee House,London,51.5148,-0.1000,1700,,Ave Maria Lane near Pater
 LON128,Pasqua Rosee's Coffee House,London,51.5133,-0.0870,1652,1666,St Michael's Alley Cornhill. First coffee house in London c.1652.,rocque_1746,4,enclosed,coffeehouse,timber,small,3.00
 LON129,British Coffee House,London,51.5072,-0.1345,1722,,Cockspur Street near Charing Cross. Scottish meeting place. Boswell frequented.,rocque_1746;horwood_1799,3,enclosed,coffeehouse,timber,small,1.00
 LON130,Peele's Coffee House,London,51.5140,-0.1070,1690,,Fleet Street opposite Fetter Lane. Legal profession.,rocque_1746;horwood_1799,4,enclosed,coffeehouse,timber,small,1.30
+BAT017,Gill's Coffee House,Bath,51.3815,-2.3590,1730,,Near the Pump Room. Principal Bath coffee house. News and gossip.,wood_1736;harcourt_1794,3,enclosed,coffeehouse,stone,small,1.50
+BAT018,Lyncombe's Coffee House,Bath,51.3810,-2.3585,1740,,Near the Abbey. Social meeting place.,wood_1736;harcourt_1794,4,enclosed,coffeehouse,stone,small,1.50
+BAT019,Terret's Coffee House,Bath,51.3812,-2.3595,1750,,Wade's Passage near the Pump Room. Physicians and visitors.,wood_1736;harcourt_1794,4,enclosed,coffeehouse,stone,small,1.50
+BAT020,Bath booksellers (Milsom Street),Bath,51.3837,-2.3618,1761,,Milsom Street. Cruttwell Bull and other Bath booksellers from 1760s.,harcourt_1794,4,enclosed,bookseller,stone,small,1.40
+BAT021,Leake's Bookshop,Bath,51.3815,-2.3592,1730,,Near the Pump Room. James Leake principal Bath bookseller. Fielding connection.,wood_1736;harcourt_1794,4,enclosed,bookseller,stone,small,1.50
+BAT022,Hazard's Bookshop,Bath,51.3799,-2.3598,1770,,Cheap Street. Samuel Hazard bookseller printer and newspaper proprietor.,harcourt_1794,4,enclosed,bookseller,stone,small,2.00
+EDIN001,High Street (Royal Mile),Edinburgh,55.9505,-3.1883,,,The main thoroughfare. Booksellers printers parliament courts. Centre of Edinburgh life.,n_a,2,open,street,stone,n_a,2.50
+EDIN002,Parliament Close,Edinburgh,55.9498,-3.1905,,,Behind St Giles'. Court of Session. Booksellers clustered here including Kincaid and Creech.,n_a,3,open,street,stone,n_a,3.00
+EDIN003,Luckenbooths,Edinburgh,55.9503,-3.1893,,,Row of shops on the High Street near St Giles'. Major bookselling location. Demolished 1817.,n_a,3,enclosed,bookseller,stone,small,3.00
+EDIN004,Creech's Land,Edinburgh,55.9502,-3.1890,1771,,William Creech's bookshop at the east end of the Luckenbooths. Literary salon and gathering place. Burns's Edinburgh publisher.,n_a,3,enclosed,bookseller,stone,small,3.00
+EDIN005,Kincaid's shop,Edinburgh,55.9500,-3.1895,1741,1770,Alexander Kincaid's bookshop in Parliament Close. Hume's Edinburgh publisher.,n_a,3,enclosed,bookseller,stone,small,3.00
+EDIN006,Canongate,Edinburgh,55.9510,-3.1810,,,Lower Royal Mile running down to Holyrood. Mixed residential and trade.,n_a,3,open,street,stone,n_a,2.50
+EDIN007,Cowgate,Edinburgh,55.9490,-3.1880,,,Parallel street below the High Street. Poorer district. Printing presses.,n_a,2,open,street,stone,n_a,3.50
+EDIN008,New Town (Princes Street),Edinburgh,55.9533,-3.1883,1767,,New Town development from 1767. Craig's plan. Genteel expansion north of Nor Loch.,n_a,4,open,street,stone,n_a,0.60
+EDIN009,University of Edinburgh,Edinburgh,55.9470,-3.1870,1583,,South Bridge / Old College area. Hume Blair Robertson Ferguson all connected.,n_a,3,enclosed,church,stone,large,1.00
+EDIN010,St Giles' Cathedral,Edinburgh,55.9500,-3.1903,,,High Street. Centre of Edinburgh religious and civic life.,n_a,3,enclosed,church,stone,large,1.50
+EDIN011,Cross of Edinburgh,Edinburgh,55.9502,-3.1892,,,The Mercat Cross. Commercial and social hub. Kincaid's shop was 'above the Cross'.,n_a,2,open,market,stone,n_a,1.50
+EDIN012,John's Coffee House,Edinburgh,55.9503,-3.1886,1710,,Parliament Close. Principal Edinburgh coffee house. Literati and lawyers.,n_a,3,enclosed,coffeehouse,stone,small,3.00
+EDIN013,Douglas's Coffee House,Edinburgh,55.9505,-3.1870,1750,,Anchor Close off High Street. Select Company of Edinburgh met here.,n_a,4,enclosed,coffeehouse,stone,small,3.50
+EDIN014,Exchange Coffee House,Edinburgh,55.9500,-3.1900,1680,,Near Parliament Close. Merchants and trade.,n_a,4,enclosed,coffeehouse,stone,small,3.00
+EDIN015,Donaldson's shop,Edinburgh,55.9508,-3.1875,1752,,Alexander Donaldson's bookshop. Cheap reprints. Copyright case 1774.,n_a,4,enclosed,bookseller,stone,small,3.00
+EDIN016,Constable's shop,Edinburgh,55.9502,-3.1890,1795,,Archibald Constable at the Cross. Publisher of the Edinburgh Review and Scott.,n_a,3,enclosed,bookseller,stone,small,3.00
+EDIN017,Holyrood Palace,Edinburgh,55.9525,-3.1742,,,Royal palace at the foot of the Royal Mile. Occasional court. Sanctuary for debtors.,n_a,4,enclosed,assembly,stone,large,0.50
+EDIN018,Grassmarket,Edinburgh,55.9476,-3.1942,,,Below the Castle. Market and execution site. Inns and hostelries.,n_a,2,open,market,outdoor,large,0.80

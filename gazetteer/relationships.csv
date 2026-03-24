@@ -314,3 +314,22 @@ BS_STRAHAN,William Strahan,bookseller,printer_of,AUTHOR_EDWARD,"Gibbon, Edward",
 BS_STRAHAN,William Strahan,bookseller,printer_of,AUTHOR_ADAM,"Smith, Adam",author,1776,harris_hume_bibliography.csv
 BS_TAYLOR_3,William Taylor,bookseller,child_of,BS_TAYLOR_2,Thomas Taylor,bookseller,,Plomer (1668-1725)
 BS_WARTER,William Warter,bookseller,child_of,BS_WARTER,William Warter,bookseller,,Plomer (1668-1725)
+AUTHOR_HUME,David Hume,author,frequented,VENUE_EDIN012,"John's Coffee House, Edinburgh",venue,,General knowledge
+AUTHOR_ASMITH,Adam Smith,author,frequented,VENUE_EDIN012,"John's Coffee House, Edinburgh",venue,,General knowledge
+AUTHOR_HBLAIR,Hugh Blair,author,frequented,VENUE_EDIN012,"John's Coffee House, Edinburgh",venue,,General knowledge
+AUTHOR_WROBERTSON,William Robertson,author,frequented,VENUE_EDIN012,"John's Coffee House, Edinburgh",venue,,General knowledge
+AUTHOR_AFERGUSON,Adam Ferguson,author,frequented,VENUE_EDIN013,"Douglas's Coffee House, Edinburgh",venue,,General knowledge
+AUTHOR_JBOSWELL,James Boswell,author,frequented,VENUE_EDIN012,"John's Coffee House, Edinburgh",venue,,General knowledge
+BS_CREECH,William Creech,bookseller,publisher_of,AUTHOR_RBURNS,Robert Burns,author,1787,General knowledge — Edinburgh edition of Poems
+BS_CREECH,William Creech,bookseller,publisher_of,AUTHOR_HBLAIR,Hugh Blair,author,,General knowledge
+BS_CONSTABLE,Archibald Constable,bookseller,publisher_of,AUTHOR_WSCOTT,Walter Scott,author,,General knowledge
+BS_SMELLIE,William Smellie,bookseller,printer_of,AUTHOR_ENCYCLOPAEDIA,Encyclopaedia Britannica,author,1768,General knowledge
+BS_SMELLIE,William Smellie,bookseller,friend_of,AUTHOR_RBURNS,Robert Burns,author,,General knowledge — Crochallan Fencibles
+AUTHOR_HUME,David Hume,author,frequented,VENUE_EDIN002,"Parliament Close, Edinburgh",venue,,"Harris — lived in Jack's Land, Canongate then James Court"
+BS_LEAKE,James Leake,bookseller,friend_of,AUTHOR_HFIELDING,Henry Fielding,author,,General knowledge — Fielding frequented Leake's shop in Bath
+AUTHOR_JAUSTEN,Jane Austen,author,frequented,VENUE_BAT020,"Bath booksellers, Milsom Street",venue,,General knowledge — Austen lived in Bath 1801-06
+AUTHOR_HUME,David Hume,author,frequented,VENUE_EDIN009,University of Edinburgh,venue,,Harris — applied for chair 1745
+AUTHOR_ASMITH,Adam Smith,author,frequented,VENUE_EDIN009,University of Edinburgh,venue,,General knowledge — student then Snell Exhibition
+AUTHOR_AFERGUSON,Adam Ferguson,author,member_of,VENUE_EDIN009,University of Edinburgh,venue,1764,General knowledge — Professor of Moral Philosophy
+AUTHOR_HBLAIR,Hugh Blair,author,member_of,VENUE_EDIN009,University of Edinburgh,venue,1762,General knowledge — Regius Professor of Rhetoric
+AUTHOR_WROBERTSON,William Robertson,author,member_of,VENUE_EDIN009,University of Edinburgh,venue,1762,General knowledge — Principal
