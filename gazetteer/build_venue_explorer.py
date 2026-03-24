@@ -120,6 +120,33 @@ def build(
                 }
                 bs_by_venue.setdefault(vid, []).append(entry)
 
+    # ── bookseller publications ──────────────────────────────────────────
+    pubs_path = Path(__file__).parent / "bookseller_publications.csv"
+    pubs_by_bs: dict[str, list[dict]] = {}
+    if pubs_path.exists():
+        with open(pubs_path, newline="", encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                pubs_by_bs.setdefault(row["bookseller_id"], []).append({
+                    "author": row.get("author", ""),
+                    "title": row.get("title", ""),
+                    "year": row.get("pub_year", ""),
+                    "role": row.get("role", ""),
+                })
+
+    # Attach publications to bookseller entries by venue
+    # Build a mapping: venue_id → bookseller_id → list of entries
+    # Then attach pubs to the right bookseller entries
+    for vid, entries in bs_by_venue.items():
+        for entry in entries:
+            # Find the bookseller_id for this entry (match by name)
+            bs_id = ""
+            for bid, bs in booksellers.items():
+                if bs.get("name", "") == entry["name"]:
+                    bs_id = bid
+                    break
+            if bs_id and bs_id in pubs_by_bs:
+                entry["publications"] = pubs_by_bs[bs_id]
+
     bookseller_js = json.dumps(bs_by_venue, ensure_ascii=False, separators=(",", ":"))
     html = _render(data_js, bookseller_js)
     out_path.write_text(html, encoding="utf-8")
@@ -414,6 +441,24 @@ function renderBooksellers(venueId) {
             notesDiv.style.cssText = 'font-size:10px;color:#777;margin-left:8px;font-style:italic';
             notesDiv.textContent = b.notes;
             el.appendChild(notesDiv);
+        }
+        if (b.publications && b.publications.length) {
+            var pubsDiv = document.createElement('div');
+            pubsDiv.style.cssText = 'font-size:10px;color:#555;margin:2px 0 4px 8px';
+            b.publications.forEach(function(p) {
+                var pLine = document.createElement('div');
+                pLine.style.cssText = 'margin:1px 0';
+                var roleSpan = document.createElement('span');
+                roleSpan.style.cssText = 'color:#8B4513;margin-right:3px';
+                roleSpan.textContent = p.role === 'printer' ? '\u2699' : '\u25b8';
+                pLine.appendChild(roleSpan);
+                var titleSpan = document.createElement('span');
+                titleSpan.textContent = (p.author ? p.author + ', ' : '') + p.title;
+                if (p.year) titleSpan.textContent += ' (' + p.year + ')';
+                pLine.appendChild(titleSpan);
+                pubsDiv.appendChild(pLine);
+            });
+            el.appendChild(pubsDiv);
         }
     });
 }
