@@ -332,6 +332,7 @@ body { font-family: 'Inter', system-ui, sans-serif; background: #f4f1eb;
       <option value="">All types</option>
       <option value="garden">Garden / Park</option>
       <option value="theatre">Theatre / Assembly</option>
+      <option value="coffeehouse">Coffee House</option>
       <option value="church">Church</option>
       <option value="street">Street / Square</option>
       <option value="market">Market</option>
@@ -382,6 +383,7 @@ const BT_COLORS = {
     'street':    '#7a7a7a', 'square':    '#7a7a7a', 'district': '#7a7a7a',
     'market':    '#b8860b',
     'bookseller': '#8B4513',
+    'coffeehouse': '#6F4E37',
     'prison':    '#8b0000', 'court':     '#8b0000', 'execution': '#8b0000',
 };
 
@@ -515,6 +517,7 @@ const BT_GROUPS = {
   'street': 'street', 'square': 'street', 'district': 'street',
   'market': 'market',
   'bookseller': 'bookseller',
+  'coffeehouse': 'coffeehouse',
   'prison': 'prison', 'court': 'prison', 'execution': 'prison',
   'menagerie': 'menagerie',
 };
