@@ -481,7 +481,7 @@ function renderMarkers() {
     var btGroup = BT_GROUPS[v.building_type] || v.building_type;
     var hidden = state.buildingFilter && btGroup !== state.buildingFilter;
     if (hidden) {
-      if (markers[v.id]) markers[v.id].setStyle({ opacity: 0, fillOpacity: 0 });
+      if (markers[v.id]) { markers[v.id].remove(); delete markers[v.id]; }
       return;
     }
     const count  = v.evidence.filter(matchesGlobal).length;
