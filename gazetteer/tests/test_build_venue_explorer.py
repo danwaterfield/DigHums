@@ -66,18 +66,21 @@ def test_no_orphaned_venue_ids():
     assert not orphans, f"Orphaned venue_ids in DB not in venues.csv: {orphans}"
 
 
-def test_legal_pill_present():
-    """Generated HTML must contain a Legal source filter pill."""
+def test_source_filter_dropdown_present():
+    """Generated HTML must contain a source filter dropdown with key source types."""
     html = (Path(__file__).parent.parent / "venue_explorer.html").read_text()
-    assert 'data-v="legal"' in html
+    assert 'id="filter-source"' in html
+    assert '"legal"' in html
+    assert '"newspaper"' in html
+    assert '"parish"' in html
+    assert '"institutional"' in html
 
 
-def test_new_source_pills_present():
-    """Generated HTML must contain pills for newly supported documentary source types."""
+def test_building_filter_dropdown_present():
+    """Generated HTML must contain a building type filter dropdown."""
     html = (Path(__file__).parent.parent / "venue_explorer.html").read_text()
-    assert 'data-v="newspaper"' in html
-    assert 'data-v="parish"' in html
-    assert 'data-v="institutional"' in html
+    assert 'id="filter-building"' in html
+    assert '"bookseller"' in html
 
 
 def test_legal_badge_colour_present():

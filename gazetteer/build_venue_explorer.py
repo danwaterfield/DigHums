@@ -135,7 +135,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Sensory Map · 18c London &amp; Bath</title>
+<title>Venue Explorer · 18c London &amp; Bath</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
@@ -262,7 +262,7 @@ body { font-family: 'Inter', system-ui, sans-serif; background: #f4f1eb;
 <body>
 
 <div id="topbar">
-  <span class="title">Sensory Map · 18c London &amp; Bath</span>
+  <span class="title">Venue Explorer · 18c London &amp; Bath</span>
   <span style="display:flex;gap:4px;align-items:center;">
     <span style="font-size:11px;color:#9c9890;font-weight:500;margin-right:2px;">View</span>
     <a href="sensory_time_map.html" class="view-tab">Sensory Map</a>
@@ -283,15 +283,33 @@ body { font-family: 'Inter', system-ui, sans-serif; background: #f4f1eb;
   <span class="sep">|</span>
   <div class="filter-group">
     <span class="filter-label">Source</span>
-    <button class="pill active" data-f="source" data-v="fiction">Fiction</button>
-    <button class="pill active" data-f="source" data-v="diary">Diary</button>
-    <button class="pill active" data-f="source" data-v="topography">Topography</button>
-    <button class="pill active" data-f="source" data-v="poetry">Poetry</button>
-    <button class="pill active" data-f="source" data-v="letters">Letters</button>
-    <button class="pill active" data-f="source" data-v="legal">Legal</button>
-    <button class="pill active" data-f="source" data-v="newspaper">Newspaper</button>
-    <button class="pill active" data-f="source" data-v="parish">Parish</button>
-    <button class="pill active" data-f="source" data-v="institutional">Institutional</button>
+    <select id="filter-source" style="font-size:11px;padding:2px 4px;border:1px solid #ccc;border-radius:4px;background:#fff;">
+      <option value="">All sources</option>
+      <option value="fiction">Fiction</option>
+      <option value="diary">Diary</option>
+      <option value="topography">Topography</option>
+      <option value="poetry">Poetry</option>
+      <option value="letters">Letters</option>
+      <option value="legal">Legal</option>
+      <option value="newspaper">Newspaper</option>
+      <option value="parish">Parish</option>
+      <option value="institutional">Institutional</option>
+    </select>
+  </div>
+  <span class="sep">|</span>
+  <div class="filter-group">
+    <span class="filter-label">Venue type</span>
+    <select id="filter-building" style="font-size:11px;padding:2px 4px;border:1px solid #ccc;border-radius:4px;background:#fff;">
+      <option value="">All types</option>
+      <option value="garden">Garden / Park</option>
+      <option value="theatre">Theatre / Assembly</option>
+      <option value="church">Church</option>
+      <option value="street">Street / Square</option>
+      <option value="market">Market</option>
+      <option value="bookseller">Bookseller</option>
+      <option value="prison">Prison / Court</option>
+      <option value="menagerie">Menagerie</option>
+    </select>
   </div>
   <span class="sep">|</span>
   <div class="date-group filter-group">
@@ -408,10 +426,8 @@ L.control.layers(baseLayers, {}, { collapsed: false }).addTo(map);
 // ── state ─────────────────────────────────────────────────────────────────
 const state = {
   modalities:      new Set(['auditory','olfactory','visual','thermal','crowd']),
-  sources:         new Set([
-    'fiction', 'diary', 'topography', 'poetry', 'letters', 'legal',
-    'newspaper', 'parish', 'institutional',
-  ]),
+  sourceFilter:    '',
+  buildingFilter:  '',
   dateFrom:        1660,
   dateTo:          1820,
   selectedId:      null,
@@ -421,7 +437,7 @@ const state = {
 // ── helpers ───────────────────────────────────────────────────────────────
 function matchesGlobal(ev) {
   return state.modalities.has(ev.modality)
-      && state.sources.has(ev.source_type)
+      && (!state.sourceFilter || ev.source_type === state.sourceFilter)
       && (ev.date_max === null || ev.date_max >= state.dateFrom)
       && (ev.date_min === null || ev.date_min <= state.dateTo);
 }
@@ -433,19 +449,37 @@ function markerRadius(total) {
 // ── markers ───────────────────────────────────────────────────────────────
 const markers = {};
 
+const BT_GROUPS = {
+  'garden': 'garden', 'park': 'garden',
+  'theatre': 'theatre', 'assembly': 'theatre',
+  'church': 'church',
+  'street': 'street', 'square': 'street', 'district': 'street',
+  'market': 'market',
+  'bookseller': 'bookseller',
+  'prison': 'prison', 'court': 'prison', 'execution': 'prison',
+  'menagerie': 'menagerie',
+};
+
 function renderMarkers() {
   VENUES.forEach(function(v) {
+    var btGroup = BT_GROUPS[v.building_type] || v.building_type;
+    var hidden = state.buildingFilter && btGroup !== state.buildingFilter;
+    if (hidden) {
+      if (markers[v.id]) markers[v.id].setStyle({ opacity: 0, fillOpacity: 0 });
+      return;
+    }
     const count  = v.evidence.filter(matchesGlobal).length;
     const total  = v.evidence.length;
     const active = count > 0;
     const sel    = state.selectedId === v.id;
     const r      = markerRadius(total || 1);
 
+    const btColor = BT_COLORS[v.building_type] || '#8b6914';
     const opts = {
       radius:      r,
-      color:       sel ? '#2c3e50' : (active ? '#8b6914' : '#999'),
-      fillColor:   active ? '#c9a84c' : '#ccc',
-      fillOpacity: sel ? 0.95 : (active ? 0.70 : 0.35),
+      color:       sel ? '#2c3e50' : btColor,
+      fillColor:   btColor,
+      fillOpacity: sel ? 0.85 : (active ? 0.50 : 0.20),
       weight:      sel ? 2.5 : 1.5,
     };
 
@@ -563,12 +597,24 @@ document.querySelectorAll('.pill[data-f]').forEach(function(btn) {
   btn.addEventListener('click', function() {
     const f   = btn.dataset.f;
     const v   = btn.dataset.v;
-    const set = f === 'modality' ? state.modalities : state.sources;
+    const set = state.modalities;
     if (set.has(v)) { set.delete(v); btn.classList.remove('active'); }
     else            { set.add(v);    btn.classList.add('active');    }
     renderMarkers();
     if (state.selectedId) renderPanel();
   });
+});
+
+document.getElementById('filter-source').addEventListener('change', function() {
+  state.sourceFilter = this.value;
+  renderMarkers();
+  if (state.selectedId) renderPanel();
+});
+
+document.getElementById('filter-building').addEventListener('change', function() {
+  state.buildingFilter = this.value;
+  renderMarkers();
+  if (state.selectedId) renderPanel();
 });
 
 document.getElementById('panel-pills').addEventListener('click', function(e) {
