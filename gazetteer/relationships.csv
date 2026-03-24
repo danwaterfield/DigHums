@@ -1,12 +1,18 @@
 person_a_id,person_a_name,person_a_type,relationship,person_b_id,person_b_name,person_b_type,date,source
+AUTHOR_ASMITH,Adam Smith,author,member_of,VENUE_LON109,The Club (Turk's Head),venue,1775,General knowledge
+AUTHOR_APOPE,Alexander Pope,author,frequented,VENUE_LON041,Will's Coffee House,venue,,General knowledge
+AUTHOR_APOPE,Alexander Pope,author,frequented,VENUE_LON042,Button's Coffee House,venue,,General knowledge
 AUTHOR_APOPE,Alexander Pope,author,friend_of,AUTHOR_JSWIFT,Jonathan Swift,author,,General knowledge — Scriblerus Club
 AUTHOR_APOPE,Alexander Pope,author,friend_of,AUTHOR_JGAY,John Gay,author,,General knowledge — Scriblerus Club
 AUTHOR_APOPE,Alexander Pope,author,rival_of,AUTHOR_EHAYWOOD,Eliza Haywood,author,,General knowledge — Dunciad
 AUTHOR_ARADCLIFFE,Ann Radcliffe,author,influenced_by,AUTHOR_HWALPOLE,Horace Walpole,author,,General knowledge — Castle of Otranto
 AUTHOR_CBURNEYSR,Charles Burney Sr,author,friend_of,AUTHOR_SJOHNSON,Samuel Johnson,author,,General knowledge
 AUTHOR_CBURNEYSR,Charles Burney Sr,author,friend_of,AUTHOR_GARRICK,David Garrick,author,,General knowledge
+AUTHOR_CBURNEYSR,Charles Burney Sr,author,member_of,VENUE_LON109,The Club (Turk's Head),venue,1784,General knowledge
 AUTHOR_CSMITH,Charlotte Smith,author,friend_of,AUTHOR_WCOWPER,William Cowper,author,,General knowledge
 AUTHOR_CSMITH,Charlotte Smith,author,influenced_by,AUTHOR_JJROUSSEAU,Jean-Jacques Rousseau,author,,General knowledge
+AUTHOR_GARRICK,David Garrick,author,frequented,VENUE_LON110,Bedford Coffee House,venue,,General knowledge
+AUTHOR_GARRICK,David Garrick,author,member_of,VENUE_LON109,The Club (Turk's Head),venue,1773,General knowledge
 AUTHOR_HUME,David Hume,author,friend_of,AUTHOR_ASMITH,Adam Smith,author,,Harris
 AUTHOR_HUME,David Hume,author,friend_of,AUTHOR_HBLAIR,Hugh Blair,author,,Harris
 AUTHOR_HUME,David Hume,author,friend_of,AUTHOR_WROBERTSON,William Robertson,author,,Harris
@@ -15,8 +21,11 @@ AUTHOR_HUME,David Hume,author,friend_of,AUTHOR_JBOSWELL,James Boswell,author,,Ha
 AUTHOR_HUME,David Hume,author,quarrel_with,AUTHOR_JJROUSSEAU,Jean-Jacques Rousseau,author,1766,Harris
 AUTHOR_EBURKE,Edmund Burke,author,friend_of,AUTHOR_OGOLDSMITH,Oliver Goldsmith,author,,General knowledge — The Club
 AUTHOR_EBURKE,Edmund Burke,author,friend_of,AUTHOR_RBSHERIDAN,Richard Brinsley Sheridan,author,,General knowledge — Parliament
+AUTHOR_EBURKE,Edmund Burke,author,member_of,VENUE_LON109,The Club (Turk's Head),venue,1764,General knowledge
 AUTHOR_EGIBBON,Edward Gibbon,author,friend_of,AUTHOR_SJOHNSON,Samuel Johnson,author,,General knowledge — The Club
 AUTHOR_EGIBBON,Edward Gibbon,author,friend_of,AUTHOR_EBURKE,Edmund Burke,author,,General knowledge — The Club
+AUTHOR_EGIBBON,Edward Gibbon,author,member_of,VENUE_LON109,The Club (Turk's Head),venue,1774,General knowledge
+AUTHOR_EGIBBON,Edward Gibbon,author,member_of,VENUE_LON118,Cocoa Tree Chocolate House,venue,,General knowledge
 AUTHOR_EMONTAGU,Elizabeth Montagu,author,friend_of,AUTHOR_SJOHNSON,Samuel Johnson,author,,General knowledge
 AUTHOR_EMONTAGU,Elizabeth Montagu,author,friend_of,AUTHOR_HCHAPONE,Hester Chapone,author,,General knowledge — Bluestockings
 AUTHOR_EMONTAGU,Elizabeth Montagu,author,friend_of,AUTHOR_HMORE,Hannah More,author,,General knowledge — Bluestockings
@@ -31,14 +40,20 @@ AUTHOR_FBURNEY,Frances Burney,author,spouse_of,AUTHOR_DARBLAY,Alexandre d'Arblay
 AUTHOR_HMORE,Hannah More,author,friend_of,AUTHOR_GARRICK,David Garrick,author,,General knowledge
 AUTHOR_HMORE,Hannah More,author,friend_of,AUTHOR_SJOHNSON,Samuel Johnson,author,,General knowledge
 AUTHOR_HMORE,Hannah More,author,friend_of,AUTHOR_HWALPOLE,Horace Walpole,author,,General knowledge
+AUTHOR_HFIELDING,Henry Fielding,author,frequented,VENUE_LON110,Bedford Coffee House,venue,,General knowledge
 AUTHOR_HFIELDING,Henry Fielding,author,friend_of,AUTHOR_SRICHARDSON,Samuel Richardson,author,,General knowledge — complex rivalry
 AUTHOR_HFIELDING,Henry Fielding,author,sibling_of,AUTHOR_SFIELDING,Sarah Fielding,author,,General knowledge
+AUTHOR_HWALPOLE,Horace Walpole,author,frequented,VENUE_LON119,White's Chocolate House,venue,,General knowledge
+AUTHOR_JBOSWELL,James Boswell,author,member_of,VENUE_LON109,The Club (Turk's Head),venue,1773,General knowledge
 AUTHOR_JAUSTEN,Jane Austen,author,influenced_by,AUTHOR_FBURNEY,Frances Burney,author,,"Perry, Novel Relations"
 AUTHOR_JAUSTEN,Jane Austen,author,influenced_by,AUTHOR_SRICHARDSON,Samuel Richardson,author,,"Perry, Novel Relations"
 AUTHOR_JAUSTEN,Jane Austen,author,sibling_of,AUTHOR_HAUSTEN,Henry Austen,author,,General knowledge — Henry was her literary agent
 AUTHOR_JAUSTEN,Jane Austen,author,sibling_of,AUTHOR_CAUSTEN,Cassandra Austen,author,,General knowledge
+AUTHOR_JSWIFT,Jonathan Swift,author,frequented,VENUE_LON111,St James's Coffee House,venue,,General knowledge
+AUTHOR_JSWIFT,Jonathan Swift,author,frequented,VENUE_LON112,Grecian Coffee House,venue,,General knowledge
 AUTHOR_JSWIFT,Jonathan Swift,author,friend_of,AUTHOR_JGAY,John Gay,author,,General knowledge — Scriblerus Club
 AUTHOR_JSWIFT,Jonathan Swift,author,friend_of,AUTHOR_HSTJOHN,"Henry St John, Viscount Bolingbroke",author,,General knowledge
+AUTHOR_JREYNOLDS,Joshua Reynolds,author,member_of,VENUE_LON109,The Club (Turk's Head),venue,1764,General knowledge
 AUTHOR_LSTERNE,Laurence Sterne,author,friend_of,AUTHOR_GARRICK,David Garrick,author,,General knowledge
 AUTHOR_LSTERNE,Laurence Sterne,author,friend_of,AUTHOR_JREYNOLDS,Joshua Reynolds,author,,General knowledge
 AUTHOR_MEDGEWORTH,Maria Edgeworth,author,child_of,AUTHOR_RLEDGEWORTH,Richard Lovell Edgeworth,author,,General knowledge
@@ -48,7 +63,10 @@ AUTHOR_MWOLLSTONECRAFT,Mary Wollstonecraft,author,friend_of,AUTHOR_JPRIESTLEY,Jo
 AUTHOR_MWOLLSTONECRAFT,Mary Wollstonecraft,author,friend_of,AUTHOR_RPRICE,Richard Price,author,,General knowledge — Newington Green
 AUTHOR_MWOLLSTONECRAFT,Mary Wollstonecraft,author,spouse_of,AUTHOR_WGODWIN,William Godwin,author,1797,General knowledge
 AUTHOR_OGOLDSMITH,Oliver Goldsmith,author,friend_of,AUTHOR_JREYNOLDS,Joshua Reynolds,author,,General knowledge — The Club
+AUTHOR_OGOLDSMITH,Oliver Goldsmith,author,member_of,VENUE_LON109,The Club (Turk's Head),venue,1764,General knowledge
+AUTHOR_RBSHERIDAN,Richard Brinsley Sheridan,author,frequented,VENUE_LON110,Bedford Coffee House,venue,,General knowledge
 AUTHOR_RBSHERIDAN,Richard Brinsley Sheridan,author,friend_of,AUTHOR_FBURNEY,Frances Burney,author,,General knowledge
+AUTHOR_RBSHERIDAN,Richard Brinsley Sheridan,author,member_of,VENUE_LON109,The Club (Turk's Head),venue,1777,General knowledge
 AUTHOR_RBSHERIDAN,Richard Brinsley Sheridan,author,spouse_of,AUTHOR_ELINLEY,Elizabeth Linley,author,1773,General knowledge
 AUTHOR_SJOHNSON,Samuel Johnson,author,child_of,BS_JOHNSON_4,Michael Johnson,bookseller,,General knowledge — father was Lichfield bookseller
 AUTHOR_SJOHNSON,Samuel Johnson,author,friend_of,AUTHOR_JBOSWELL,James Boswell,author,,General knowledge
@@ -58,6 +76,7 @@ AUTHOR_SJOHNSON,Samuel Johnson,author,friend_of,AUTHOR_OGOLDSMITH,Oliver Goldsmi
 AUTHOR_SJOHNSON,Samuel Johnson,author,friend_of,AUTHOR_JREYNOLDS,Joshua Reynolds,author,,General knowledge — The Club
 AUTHOR_SJOHNSON,Samuel Johnson,author,friend_of,AUTHOR_GARRICK,David Garrick,author,,General knowledge — schoolfellows
 AUTHOR_SJOHNSON,Samuel Johnson,author,friend_of,AUTHOR_CLENNOX,Charlotte Lennox,author,,General knowledge
+AUTHOR_SJOHNSON,Samuel Johnson,author,member_of,VENUE_LON109,The Club (Turk's Head),venue,1764,General knowledge
 AUTHOR_SJOHNSON,Samuel Johnson,author,patron_of,AUTHOR_CLENNOX,Charlotte Lennox,author,,General knowledge — championed Female Quixote
 AUTHOR_SRICHARDSON,Samuel Richardson,author,friend_of,AUTHOR_SJOHNSON,Samuel Johnson,author,,General knowledge
 AUTHOR_SRICHARDSON,Samuel Richardson,author,friend_of,AUTHOR_CLENNOX,Charlotte Lennox,author,,General knowledge
@@ -108,6 +127,7 @@ BS_BROME,Charles Brome,bookseller,widow_of,,Henry,unknown,,Plomer (1668-1725)
 BS_MEARNE_2,Charles Mearne,bookseller,child_of,,Samuel  Meame,unknown,,Plomer (1668-1725)
 BS_MORDEN,Charles Morden,bookseller,child_of,BS_MORDEN_2,Robert Morden,bookseller,,Plomer (1668-1725)
 BS_RIVINGTON_2,Charles Rivington,bookseller,child_of,BS_RIVINGTON_2,Charles Rivington,bookseller,,Plomer (1668-1725)
+BS_RIVINGTON,Charles Rivington,bookseller,frequented,VENUE_LON113,Child's Coffee House,venue,,General knowledge — St Paul's Churchyard booksellers
 BS_RIVINGTON,Charles Rivington,bookseller,publisher_of,AUTHOR_SAMUEL,"Richardson, Samuel",author,1740,white_bibliography_batch2.csv
 BS_DRING,Daniel Dring,bookseller,child_of,BS_DRING,Daniel Dring,bookseller,,Plomer (1668-1725)
 BS_MIDWINTER,Daniel Midwinter,bookseller,succeeded_by,BS_DANIEL,M. Daniel,bookseller,,Plomer (1668-1725)
@@ -269,6 +289,7 @@ BS_CROUCH_4,Thomas Crouch,bookseller,child_of,BS_CROUCH_3,Samuel Crouch,booksell
 BS_DRING_2,Thomas Dring,bookseller,child_of,BS_DRING_2,Thomas Dring,bookseller,,Plomer (1668-1725)
 BS_HARRISON_3,Thomas Harrison,bookseller,apprentice_of,BS_CROUCH_3,Samuel Crouch,bookseller,,Plomer (1668-1725)
 BS_LONGMAN_2,Thomas Longman,bookseller,child_of,BS_LONGMAN_2,Thomas Longman,bookseller,,Plomer (1668-1725)
+BS_LONGMAN,Thomas Longman I,bookseller,frequented,VENUE_LON046,Chapter Coffee House,venue,,General knowledge — Paternoster Row booksellers
 BS_LONGMAN,Thomas Longman I,bookseller,publisher_of,AUTHOR_DAVID,"Hume, David",author,1740,harris_hume_bibliography.csv
 BS_OSBORNE,Thomas Osborne,bookseller,succeeded_by,BS_THOMAS,John Thomas,bookseller,,Plomer (1668-1725)
 BS_PASSINGER_2,Thomas Passinger,bookseller,nephew_of,BS_PASSINGER,Sarah Passinger,bookseller,,Plomer (1668-1725)
