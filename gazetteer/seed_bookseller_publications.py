@@ -132,7 +132,7 @@ if sources_path.exists():
 print(f"Loaded {len(all_bib_entries)} bibliography entries from {len(BIB_FILES) + 1} files")
 
 
-def match_bib(author_sub, title_sub, year):
+def match_bib(author_sub, title_sub, year, active_max=None):
     """Find matching bibliography entries."""
     matches = []
     for entry in all_bib_entries:
@@ -152,16 +152,37 @@ def match_bib(author_sub, title_sub, year):
         if year and str(year) != str(e_date).strip():
             continue
 
+        # Filter out publications after bookseller's active period
+        if active_max and e_date:
+            try:
+                pub_year = int(str(e_date).strip()[:4])
+                if pub_year > active_max + 5:  # small grace period
+                    continue
+            except ValueError:
+                pass
+
         matches.append(entry)
     return matches
 
+
+# Load bookseller active dates for filtering
+bs_active = {}
+bs_path = bib_dir / "booksellers.csv"
+if bs_path.exists():
+    with open(bs_path, newline="", encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            try:
+                bs_active[row["bookseller_id"]] = int(row["active_max"])
+            except (ValueError, KeyError):
+                pass
 
 # Build publication links
 publications = []
 seen = set()  # deduplicate
 
 for bs_id, role, author_sub, title_sub, year in KNOWN_LINKS:
-    matches = match_bib(author_sub, title_sub, year)
+    active_max = bs_active.get(bs_id)
+    matches = match_bib(author_sub, title_sub, year, active_max)
     for m in matches:
         key = (bs_id, role, m["_file"], m["author"], m["title"])
         if key in seen:

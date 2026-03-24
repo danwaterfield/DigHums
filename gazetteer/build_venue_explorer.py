@@ -209,15 +209,13 @@ body { font-family: 'Inter', system-ui, sans-serif; background: #f4f1eb;
   flex: 0 0 35%;
   border-left: 1px solid #ddd;
   background: #faf9f7;
-  display: flex; flex-direction: column;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 /* ── panel header ── */
 #panel-header {
   padding: 12px 14px 8px;
   border-bottom: 1px solid #e0dbd4;
-  flex-shrink: 0;
 }
 #panel-title {
   font-size: 14px; font-weight: 700; color: #1a1816; margin-bottom: 3px;
@@ -234,7 +232,7 @@ body { font-family: 'Inter', system-ui, sans-serif; background: #f4f1eb;
 
 /* ── evidence list ── */
 #evidence-list {
-  flex: 1; overflow-y: auto; padding: 10px 12px;
+  padding: 10px 12px;
 }
 .ev-card {
   background: white; border: 1px solid #e0dbd4; border-radius: 5px;

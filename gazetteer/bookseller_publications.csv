@@ -10,17 +10,12 @@ BS_CADELL,publisher,harris_hume_bibliography.csv,"Johnson, Samuel",The Lives of 
 BS_CADELL,publisher,almeroth_williams_bibliography.csv,"Colquhoun, Patrick",A Treatise on the Police of the Metropolis,1796
 BS_CADELL,publisher,sources_catalog.csv,PatrickColquhoun,A Treatise on the Police of the Metropolis,1800
 BS_CADELL,publisher,white_bibliography_batch1.csv,"Colquhoun, Patrick","A Treatise on the Police of the Metropolis ..., 7th edn",1806
-BS_CADELL,publisher,white_bibliography_batch1.csv,"Burney, Fanny","Diary and Letters of Madame D'Arblay, author of Evelina, Cecilia, &c., edited by ... Charlotte Barrett, 4 vols",1842
-BS_CADELL,publisher,white_bibliography_batch1.csv,"Burney, Fanny","The Early Diary of Frances Burney 1768-1778, edited by Annie Raine Ellis, 2 vols",1889
-BS_CADELL,publisher,sources_catalog.csv,FrancesBurney,Early Diary Vol 1,1889
-BS_CADELL,publisher,sources_catalog.csv,FrancesBurney,Early Diary Vol 2,1889
 BS_COOPER,publisher,harris_hume_bibliography.csv,"Hume, David","A True Account of the Behaviour and Conduct of Archibald Stewart, Esq; Late Lord Provost of Edinburgh",1748
 BS_DODSLEY,publisher,harris_hume_bibliography.csv,"Shaftesbury, Third Earl of (Anthony Ashley Cooper)","Characteristicks of Men, Manners, Opinions, Times, 3 vols",1711
 BS_DODSLEY,publisher,harris_hume_bibliography.csv,"Burke, Edmund",A Philosophical Enquiry into the Origin of Our Ideas of the Sublime and Beautiful,1757
 BS_DODSLEY,publisher,white_bibliography_batch1.csv,"Goldsmith, Oliver","The Citizen of the World ..., 2 vols",1762
 BS_DODSLEY,publisher,white_bibliography_batch1.csv,"Goldsmith, Oliver",The Vicar of Wakefield ...,1766
 BS_DODSLEY,publisher,white_bibliography_batch2.csv,"Young, Arthur",The Farmer's Letters to the People of England,1768
-BS_DODSLEY,publisher,almeroth_williams_bibliography.csv,"Young, Arthur (ed.)","Annals of Agriculture and Other Useful Arts, 46 vols",1784
 BS_DONALDSON,publisher,harris_hume_bibliography.csv,"Hume, David",Political Discourses,1752
 BS_FLEMING_ALISON,printer,harris_hume_bibliography.csv,"Hume, David","Essays, Moral and Political, Volume the First",1741
 BS_FLEMING_ALISON,printer,harris_hume_bibliography.csv,"Hume, David","Essays, Moral and Political, Volume the Second",1742
@@ -62,4 +57,3 @@ BS_TONSON_SR,publisher,white_bibliography_batch2.csv,"Steele, Richard and Joseph
 BS_TONSON_SR,publisher,white_bibliography_batch2.csv,"Steele, Richard and Joseph Addison",The Spectator,1711
 BS_TONSON_SR,publisher,sources_catalog.csv,JosephAddison,The Spectator Vols 1-3,1711
 BS_TONSON_SR,publisher,harris_hume_bibliography.csv,"Shaftesbury, Third Earl of (Anthony Ashley Cooper)","Characteristicks of Men, Manners, Opinions, Times, 3 vols",1711
-BS_TONSON_SR,publisher,harris_hume_bibliography.csv,"Addison, Joseph","The Works of the Right Honourable Joseph Addison, ed. Richard Hurd, 6 vols",1856
