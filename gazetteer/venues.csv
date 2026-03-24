@@ -95,8 +95,17 @@ LON093,Southwark / Borough,London,51.5024,-0.0932,,,South bank district; tanneri
 LON094,Tyburn Gallows,London,51.5140,-0.1590,,1783,Public execution site at the north-east corner of Hyde Park (near modern Marble Arch). Cannot appear post-1783.,rocque_1746,1,open,execution,outdoor,vast,0.10
 LON095,Newgate Gallows,London,51.5151,-0.1017,1783,,Public executions moved outside Newgate Prison after 1783. Cannot appear pre-1783.,horwood_1799,1,semi_open,execution,stone,large,2.00
 LON096,Greenwich Park,London,51.4769,0.0005,,,Royal park on the south bank; site of Greenwich Fair (Easter and Whitsun).,rocque_1746;horwood_1799,3,open,park,outdoor,vast,0.10
-RUR001,Rural England,England,52.45,-1.55,,,Pseudo-venue for non-urban English and Celtic rural settings (Scotland; Ireland; English countryside).,rocque_1746,3,open,misc,outdoor,n_a,0.10
-RUR002,Continental Gothic,Europe,43.7,11.2,,,Pseudo-venue for continental and fantastical Gothic settings (Italy; France; Spain; Arabia).,rocque_1746,3,open,misc,mixed,n_a,0.10
+SUR001,Surrey (Highbury),England,51.24,-0.30,,,Austen's Emma. Highbury modelled on Leatherhead/Box Hill area of Surrey.,n_a,3,open,district,outdoor,n_a,0.10
+IRL001,Ireland,Ireland,53.35,-7.50,,,Edgeworth's Castle Rackrent. Rural Ireland.,n_a,3,open,district,outdoor,n_a,0.10
+SCO001,Scottish Highlands,Scotland,56.80,-5.00,,,Radcliffe's Castles of Athlin and Dunbayne. Highland setting.,n_a,3,open,district,outdoor,n_a,0.10
+ITA001,Italian Alps / Southern France,Italy,44.40,6.70,,,Radcliffe's Mysteries of Udolpho. Pyrenees to Apennines.,n_a,3,open,district,outdoor,n_a,0.10
+EUR001,Madrid / Germany,Europe,45.00,5.00,,,Lewis's The Monk. Madrid with German interpolated tales.,n_a,3,open,district,outdoor,n_a,0.10
+FRA001,France,France,47.00,2.00,,,Radcliffe's Romance of the Forest. Provincial France.,n_a,3,open,district,outdoor,n_a,0.10
+ITA002,Naples / Southern Italy,Italy,40.85,14.27,,,Radcliffe's The Italian. Naples and the Abruzzo.,n_a,3,open,district,outdoor,n_a,0.10
+ITA003,Sicily,Italy,37.50,14.00,,,Radcliffe's A Sicilian Romance. Castle of Mazzini.,n_a,3,open,district,outdoor,n_a,0.10
+MDE001,Arabia / Middle East,Arabia,33.00,44.00,,,Beckford's Vathek. Samarah and Istakhar.,n_a,3,open,district,outdoor,n_a,0.10
+ENG001,Medieval England,England,52.00,-1.20,,,Reeve's Old English Baron. Medieval English castle setting.,n_a,3,open,district,outdoor,n_a,0.10
+ITA004,Otranto / Southern Italy,Italy,40.15,18.49,,,Walpole's Castle of Otranto. Puglia.,n_a,3,open,district,outdoor,n_a,0.10
 LON097,Exeter Change Menagerie,London,51.5115,-0.1201,1773,1829,Strand menagerie on upper floors of the Exchange building. Pidcock then Cross collection. Roars of lions and tigers audible in the Strand and frightened horses. Demolished 1829.,rocque_1746;horwood_1799,3,enclosed,menagerie,timber,medium,1.20
 LON098,John Noon's shop (Cheapside),London,51.5135,-0.0930,1735,1745,White Hart near Mercer's Chapel. Bookseller.,rocque_1746,4,enclosed,bookseller,timber,small,1.00
 LON099,Paternoster Row booksellers,London,51.5145,-0.0988,,,Longman Cooper and others. Core of London book trade near St Paul's.,rocque_1746;horwood_1799,3,enclosed,bookseller,timber,small,1.80

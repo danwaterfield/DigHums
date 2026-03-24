@@ -291,7 +291,15 @@ body { font-family: 'Inter', system-ui, sans-serif; background: #f4f1eb;
 <body>
 
 <div id="topbar">
-  <span class="title">Venue Explorer · 18c London &amp; Bath</span>
+  <span class="title">Venue Explorer</span>
+  <span style="display:flex;gap:4px;align-items:center;">
+    <span style="font-size:11px;color:#9c9890;font-weight:500;margin-right:2px;">City</span>
+    <button class="view-tab" onclick="map.setView([51.515,-0.09],13)">London</button>
+    <button class="view-tab" onclick="map.setView([51.382,-2.36],15)">Bath</button>
+    <button class="view-tab" onclick="map.setView([55.950,-3.19],15)">Edinburgh</button>
+    <button class="view-tab" onclick="map.setView([51.0,1.0],6)">Overview</button>
+  </span>
+  <span class="sep">|</span>
   <span style="display:flex;gap:4px;align-items:center;">
     <span style="font-size:11px;color:#9c9890;font-weight:500;margin-right:2px;">View</span>
     <a href="sensory_time_map.html" class="view-tab">Sensory Map</a>
