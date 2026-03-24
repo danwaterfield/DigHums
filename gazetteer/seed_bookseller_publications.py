@@ -37,6 +37,8 @@ KNOWN_LINKS = [
     ("BS_MILLAR", "publisher", "Smith, Adam", "Theory of Moral Sentiments", 1759),
     ("BS_MILLAR", "publisher", "Robertson", "History of Scotland", 1759),
     ("BS_MILLAR", "publisher", "Thomson", None, None),  # James Thomson's Seasons
+    ("BS_MILLAR", "publisher", "Fielding, Sarah", "Adventures of David Simple", 1744),
+    ("BS_MILLAR", "publisher", "Fielding, Sarah", "Governess", 1749),
 
     # === Strahan as printer (often alongside Millar as publisher) ===
     ("BS_STRAHAN", "printer", "Johnson", "Dictionary of the English Language", 1755),
@@ -50,14 +52,22 @@ KNOWN_LINKS = [
     ("BS_CADELL", "publisher", "Robertson", "History of the Reign of the Emperor Charles V", 1769),
     ("BS_CADELL", "publisher", "Burke", "Philosophical Enquiry", 1757),
     ("BS_CADELL", "publisher", "Johnson", "Lives of the Most Eminent English Poets", 1781),
-    ("BS_CADELL", "publisher", "Burney", None, None),  # Frances Burney's Evelina etc.
+    ("BS_CADELL", "publisher", "Burney", "Evelina", 1778),
+    ("BS_CADELL", "publisher", "Burney", "Cecilia", 1782),
+    ("BS_CADELL", "publisher", "Burney", "Camilla", 1796),
+    ("BS_CADELL", "publisher", "Radcliffe", "Mysteries of Udolpho", None),
+    ("BS_CADELL", "publisher", "Smith, Charlotte", "Emmeline", None),
+    ("BS_CADELL", "publisher", "Inchbald", "Simple Story", None),
+    ("BS_CADELL", "publisher", "More, Hannah", "Strictures", None),
+    ("BS_CADELL", "publisher", "Chapone", "Letters on the Improvement", None),
 
     # === Dodsley ===
     ("BS_DODSLEY", "publisher", "Burke", "Philosophical Enquiry", 1757),
     ("BS_DODSLEY", "publisher", "Johnson", "Vanity of Human Wishes", None),
     ("BS_DODSLEY", "publisher", "Johnson", "Rasselas", None),
     ("BS_DODSLEY", "publisher", "Sterne", None, None),
-    ("BS_DODSLEY", "publisher", "Goldsmith", None, None),
+    ("BS_DODSLEY", "publisher", "Goldsmith", "Vicar of Wakefield", None),
+    ("BS_DODSLEY", "publisher", "Goldsmith", "Deserted Village", None),
     ("BS_DODSLEY", "publisher", "Shaftesbury", "Characteristicks", None),
     ("BS_DODSLEY", "publisher", "Young", None, None),
 
@@ -66,6 +76,7 @@ KNOWN_LINKS = [
     ("BS_TONSON_SR", "publisher", "Milton", "Paradise Lost", None),
     ("BS_TONSON_SR", "publisher", "Locke", "Essay Concerning Human Understanding", None),
     ("BS_TONSON_SR", "publisher", "Addison", None, None),
+    ("BS_TONSON_SR", "publisher", "Manley", "New Atalantis", None),
     ("BS_TONSON_SR", "publisher", "Shaftesbury", "Characteristicks", 1711),
 
     # === Tonson Jr ===
@@ -75,12 +86,15 @@ KNOWN_LINKS = [
 
     # === Rivington ===
     ("BS_RIVINGTON", "publisher", "Richardson", "Pamela", None),
+    ("BS_RIVINGTON", "publisher", "Richardson", "Clarissa", None),
 
     # === Longman ===
     ("BS_LONGMAN", "publisher", "Hume", "Treatise of Human Nature, Books 2", 1740),
+    ("BS_LONGMAN", "publisher", "Fordyce", "Sermons to Young Women", None),
 
     # === Murray I ===
     ("BS_MURRAY_I", "publisher", "Priestley", None, None),
+    ("BS_MURRAY_I", "publisher", "Lennox", "Female Quixote", None),
 
     # === Edinburgh booksellers (linking to Harris entries) ===
     ("BS_KINCAID", "publisher", "Hume", "Essays, Moral and Political, Volume the First", 1741),
@@ -103,6 +117,7 @@ BIB_FILES = [
     "white_bibliography_batch1.csv",
     "white_bibliography_batch2.csv",
     "almeroth_williams_bibliography.csv",
+    "perry_novel_relations_bibliography.csv",
 ]
 
 bib_dir = Path(__file__).parent

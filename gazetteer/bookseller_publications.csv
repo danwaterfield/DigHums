@@ -2,19 +2,30 @@ bookseller_id,role,bibliography_file,author,title,pub_year
 BS_BORBET,publisher,harris_hume_bibliography.csv,"Hume, David",An Abstract of a Book lately Published; Entitled A Treatise of Human Nature,1740
 BS_CADELL,publisher,harris_hume_bibliography.csv,"Burke, Edmund",A Philosophical Enquiry into the Origin of Our Ideas of the Sublime and Beautiful,1757
 BS_CADELL,publisher,harris_hume_bibliography.csv,"Robertson, William","The History of the Reign of the Emperor Charles V, 3 vols",1769
+BS_CADELL,publisher,perry_novel_relations_bibliography.csv,"Chapone, Hester",Letters on the Improvement of the Mind,1773
 BS_CADELL,publisher,harris_hume_bibliography.csv,"Gibbon, Edward","The History of the Decline and Fall of the Roman Empire, 6 vols",1776
 BS_CADELL,publisher,harris_hume_bibliography.csv,"Smith, Adam","An Inquiry into the Nature and Causes of the Wealth of Nations, 2 vols",1776
 BS_CADELL,publisher,white_bibliography_batch2.csv,"Smith, Adam",An Inquiry into the Nature and Causes of the Wealth of Nations,1776
 BS_CADELL,publisher,harris_hume_bibliography.csv,"Hume, David",My Own Life,1777
+BS_CADELL,publisher,perry_novel_relations_bibliography.csv,"Burney, Frances","Evelina; or, The History of a Young Lady's Entrance into the World",1778
 BS_CADELL,publisher,harris_hume_bibliography.csv,"Johnson, Samuel",The Lives of the Most Eminent English Poets,1781
+BS_CADELL,publisher,perry_novel_relations_bibliography.csv,"Burney, Frances","Cecilia; or, Memoirs of an Heiress",1782
+BS_CADELL,publisher,perry_novel_relations_bibliography.csv,"Smith, Charlotte","Emmeline, the Orphan of the Castle",1788
+BS_CADELL,publisher,perry_novel_relations_bibliography.csv,"Inchbald, Elizabeth",A Simple Story,1791
+BS_CADELL,publisher,perry_novel_relations_bibliography.csv,"Radcliffe, Ann",The Mysteries of Udolpho,1794
+BS_CADELL,publisher,perry_novel_relations_bibliography.csv,"Burney, Frances","Camilla; or, A Picture of Youth",1796
 BS_CADELL,publisher,almeroth_williams_bibliography.csv,"Colquhoun, Patrick",A Treatise on the Police of the Metropolis,1796
+BS_CADELL,publisher,perry_novel_relations_bibliography.csv,"More, Hannah",Strictures on the Modern System of Female Education,1799
 BS_CADELL,publisher,sources_catalog.csv,PatrickColquhoun,A Treatise on the Police of the Metropolis,1800
 BS_CADELL,publisher,white_bibliography_batch1.csv,"Colquhoun, Patrick","A Treatise on the Police of the Metropolis ..., 7th edn",1806
 BS_COOPER,publisher,harris_hume_bibliography.csv,"Hume, David","A True Account of the Behaviour and Conduct of Archibald Stewart, Esq; Late Lord Provost of Edinburgh",1748
 BS_DODSLEY,publisher,harris_hume_bibliography.csv,"Shaftesbury, Third Earl of (Anthony Ashley Cooper)","Characteristicks of Men, Manners, Opinions, Times, 3 vols",1711
 BS_DODSLEY,publisher,harris_hume_bibliography.csv,"Burke, Edmund",A Philosophical Enquiry into the Origin of Our Ideas of the Sublime and Beautiful,1757
-BS_DODSLEY,publisher,white_bibliography_batch1.csv,"Goldsmith, Oliver","The Citizen of the World ..., 2 vols",1762
+BS_DODSLEY,publisher,perry_novel_relations_bibliography.csv,"Johnson, Samuel",Rasselas,1759
+BS_DODSLEY,publisher,perry_novel_relations_bibliography.csv,"Sterne, Laurence",Tristram Shandy,1759
 BS_DODSLEY,publisher,white_bibliography_batch1.csv,"Goldsmith, Oliver",The Vicar of Wakefield ...,1766
+BS_DODSLEY,publisher,perry_novel_relations_bibliography.csv,"Goldsmith, Oliver",The Vicar of Wakefield,1766
+BS_DODSLEY,publisher,perry_novel_relations_bibliography.csv,"Sterne, Laurence",A Sentimental Journey,1768
 BS_DODSLEY,publisher,white_bibliography_batch2.csv,"Young, Arthur",The Farmer's Letters to the People of England,1768
 BS_DONALDSON,publisher,harris_hume_bibliography.csv,"Hume, David",Political Discourses,1752
 BS_FLEMING_ALISON,printer,harris_hume_bibliography.csv,"Hume, David","Essays, Moral and Political, Volume the First",1741
@@ -23,11 +34,18 @@ BS_KINCAID,publisher,harris_hume_bibliography.csv,"Hume, David","Essays, Moral a
 BS_KINCAID,publisher,harris_hume_bibliography.csv,"Hume, David","Essays, Moral and Political, Volume the Second",1742
 BS_KINCAID,publisher,harris_hume_bibliography.csv,"Hume, David",Political Discourses,1752
 BS_LONGMAN,publisher,harris_hume_bibliography.csv,"Hume, David","A Treatise of Human Nature, Books 2 and 3: Of the Passions; Of Morals",1740
+BS_MILLAR,publisher,perry_novel_relations_bibliography.csv,"Thomson, James",The Seasons,1726
+BS_MILLAR,publisher,perry_novel_relations_bibliography.csv,"Fielding, Henry",Joseph Andrews,1742
+BS_MILLAR,publisher,white_bibliography_batch1.csv,"Fielding, Sarah","The Adventures of David Simple ..., 2 vols",1744
+BS_MILLAR,publisher,perry_novel_relations_bibliography.csv,"Fielding, Sarah",The Adventures of David Simple,1744
 BS_MILLAR,publisher,harris_hume_bibliography.csv,"Hume, David","Three Essays, Moral and Political",1748
 BS_MILLAR,publisher,harris_hume_bibliography.csv,"Hume, David",Philosophical Essays Concerning Human Understanding,1748
 BS_MILLAR,publisher,white_bibliography_batch1.csv,"Fielding, Henry","The History of Tom Jones, a Foundling ...",1749
+BS_MILLAR,publisher,perry_novel_relations_bibliography.csv,"Fielding, Henry",Tom Jones,1749
+BS_MILLAR,publisher,perry_novel_relations_bibliography.csv,"Fielding, Sarah","The Governess; or, The Little Female Academy",1749
 BS_MILLAR,publisher,harris_hume_bibliography.csv,"Hume, David",An Enquiry Concerning the Principles of Morals,1751
 BS_MILLAR,publisher,white_bibliography_batch1.csv,"Fielding, Henry","Amelia, A Comedy",1751
+BS_MILLAR,publisher,perry_novel_relations_bibliography.csv,"Fielding, Henry",Amelia,1751
 BS_MILLAR,publisher,white_bibliography_batch1.csv,"Fielding, Henry","An Enquiry into the Causes of the Late Increase of Robbers ..., with some Proposals for Remedying this Growing Evil",1751
 BS_MILLAR,publisher,almeroth_williams_bibliography.csv,"Fielding, Henry",An Enquiry into the Causes of the Late Increase of Robbers,1751
 BS_MILLAR,publisher,harris_hume_bibliography.csv,"Johnson, Samuel","A Dictionary of the English Language, 2 vols",1755
@@ -36,24 +54,32 @@ BS_MILLAR,publisher,harris_hume_bibliography.csv,"Hume, David","The History of G
 BS_MILLAR,publisher,harris_hume_bibliography.csv,"Hume, David","The History of England under the House of Tudor, 2 vols",1759
 BS_MILLAR,publisher,harris_hume_bibliography.csv,"Smith, Adam",The Theory of Moral Sentiments,1759
 BS_MILLAR,publisher,harris_hume_bibliography.csv,"Robertson, William","The History of Scotland, 2 vols",1759
+BS_MURRAY_I,publisher,perry_novel_relations_bibliography.csv,"Lennox, Charlotte",The Female Quixote,1752
 BS_MURRAY_I,publisher,harris_hume_bibliography.csv,"Priestley, Joseph",An Examination of Dr. Reid's Inquiry into the Human Mind,1774
 BS_NOON,publisher,harris_hume_bibliography.csv,"Hume, David","A Treatise of Human Nature, Book 1: Of the Understanding",1739
 BS_RIVINGTON,publisher,white_bibliography_batch2.csv,"Richardson, Samuel",Pamela; or Virtue Rewarded,1740
+BS_RIVINGTON,publisher,perry_novel_relations_bibliography.csv,"Richardson, Samuel","Pamela; or, Virtue Rewarded",1740
+BS_RIVINGTON,publisher,perry_novel_relations_bibliography.csv,"Richardson, Samuel","Clarissa; or, The History of a Young Lady",1747
 BS_STRAHAN,printer,harris_hume_bibliography.csv,"Johnson, Samuel","A Dictionary of the English Language, 2 vols",1755
 BS_STRAHAN,printer,harris_hume_bibliography.csv,"Robertson, William","The History of Scotland, 2 vols",1759
 BS_STRAHAN,printer,harris_hume_bibliography.csv,"Gibbon, Edward","The History of the Decline and Fall of the Roman Empire, 6 vols",1776
 BS_STRAHAN,printer,harris_hume_bibliography.csv,"Smith, Adam","An Inquiry into the Nature and Causes of the Wealth of Nations, 2 vols",1776
 BS_STRAHAN,printer,white_bibliography_batch2.csv,"Smith, Adam",An Inquiry into the Nature and Causes of the Wealth of Nations,1776
 BS_TONSON_JR,publisher,white_bibliography_batch2.csv,"Steele, Richard and Joseph Addison",The Tatler,1709
+BS_TONSON_JR,publisher,perry_novel_relations_bibliography.csv,"Steele, Richard",The Tatler,1709
 BS_TONSON_JR,publisher,sources_catalog.csv,RichardSteele,The Tatler Vol 1,1710
 BS_TONSON_JR,publisher,sources_catalog.csv,RichardSteele,The Tatler Vol 2,1710
 BS_TONSON_JR,publisher,sources_catalog.csv,RichardSteele,The Tatler Vol 3,1710
 BS_TONSON_JR,publisher,white_bibliography_batch2.csv,"Steele, Richard and Joseph Addison",The Spectator,1711
+BS_TONSON_JR,publisher,perry_novel_relations_bibliography.csv,"Addison, Joseph and Richard Steele",The Spectator,1711
 BS_TONSON_JR,publisher,sources_catalog.csv,JosephAddison,The Spectator Vols 1-3,1711
 BS_TONSON_JR,publisher,sources_catalog.csv,RichardSteele,The Tatler Vol 4,1711
+BS_TONSON_JR,publisher,perry_novel_relations_bibliography.csv,"Steele, Richard",The Conscious Lovers,1722
 BS_TONSON_JR,publisher,harris_hume_bibliography.csv,"Pope, Alexander",An Essay on Man,1733
 BS_TONSON_SR,publisher,harris_hume_bibliography.csv,"Locke, John",An Essay Concerning Human Understanding,1690
 BS_TONSON_SR,publisher,white_bibliography_batch2.csv,"Steele, Richard and Joseph Addison",The Tatler,1709
+BS_TONSON_SR,publisher,perry_novel_relations_bibliography.csv,"Manley, Delarivière",The New Atalantis,1709
 BS_TONSON_SR,publisher,white_bibliography_batch2.csv,"Steele, Richard and Joseph Addison",The Spectator,1711
+BS_TONSON_SR,publisher,perry_novel_relations_bibliography.csv,"Addison, Joseph and Richard Steele",The Spectator,1711
 BS_TONSON_SR,publisher,sources_catalog.csv,JosephAddison,The Spectator Vols 1-3,1711
 BS_TONSON_SR,publisher,harris_hume_bibliography.csv,"Shaftesbury, Third Earl of (Anthony Ashley Cooper)","Characteristicks of Men, Manners, Opinions, Times, 3 vols",1711
