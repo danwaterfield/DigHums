@@ -99,7 +99,8 @@ SUR001,Surrey (Highbury),England,51.24,-0.30,,,Austen's Emma. Highbury modelled 
 IRL001,Ireland,Ireland,53.35,-7.50,,,Edgeworth's Castle Rackrent. Rural Ireland.,n_a,3,open,district,outdoor,n_a,0.10
 SCO001,Scottish Highlands,Scotland,56.80,-5.00,,,Radcliffe's Castles of Athlin and Dunbayne. Highland setting.,n_a,3,open,district,outdoor,n_a,0.10
 ITA001,Italian Alps / Southern France,Italy,44.40,6.70,,,Radcliffe's Mysteries of Udolpho. Pyrenees to Apennines.,n_a,3,open,district,outdoor,n_a,0.10
-EUR001,Madrid / Germany,Europe,45.00,5.00,,,Lewis's The Monk. Madrid with German interpolated tales.,n_a,3,open,district,outdoor,n_a,0.10
+EUR001,Madrid,Spain,40.42,-3.70,,,Lewis's The Monk. Capuchin monastery; primary setting.,n_a,3,open,district,outdoor,n_a,0.10
+EUR002,Castle Lindenberg (Germany),Germany,48.50,9.00,,,Lewis's The Monk. Bleeding Nun episode; Raymond and Agnes subplot.,n_a,4,open,district,outdoor,n_a,0.10
 FRA001,France,France,47.00,2.00,,,Radcliffe's Romance of the Forest. Provincial France.,n_a,3,open,district,outdoor,n_a,0.10
 ITA002,Naples / Southern Italy,Italy,40.85,14.27,,,Radcliffe's The Italian. Naples and the Abruzzo.,n_a,3,open,district,outdoor,n_a,0.10
 ITA003,Sicily,Italy,37.50,14.00,,,Radcliffe's A Sicilian Romance. Castle of Mazzini.,n_a,3,open,district,outdoor,n_a,0.10
