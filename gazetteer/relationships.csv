@@ -1,4 +1,71 @@
 person_a_id,person_a_name,person_a_type,relationship,person_b_id,person_b_name,person_b_type,date,source
+AUTHOR_APOPE,Alexander Pope,author,friend_of,AUTHOR_JSWIFT,Jonathan Swift,author,,General knowledge — Scriblerus Club
+AUTHOR_APOPE,Alexander Pope,author,friend_of,AUTHOR_JGAY,John Gay,author,,General knowledge — Scriblerus Club
+AUTHOR_APOPE,Alexander Pope,author,rival_of,AUTHOR_EHAYWOOD,Eliza Haywood,author,,General knowledge — Dunciad
+AUTHOR_ARADCLIFFE,Ann Radcliffe,author,influenced_by,AUTHOR_HWALPOLE,Horace Walpole,author,,General knowledge — Castle of Otranto
+AUTHOR_CBURNEYSR,Charles Burney Sr,author,friend_of,AUTHOR_SJOHNSON,Samuel Johnson,author,,General knowledge
+AUTHOR_CBURNEYSR,Charles Burney Sr,author,friend_of,AUTHOR_GARRICK,David Garrick,author,,General knowledge
+AUTHOR_CSMITH,Charlotte Smith,author,friend_of,AUTHOR_WCOWPER,William Cowper,author,,General knowledge
+AUTHOR_CSMITH,Charlotte Smith,author,influenced_by,AUTHOR_JJROUSSEAU,Jean-Jacques Rousseau,author,,General knowledge
+AUTHOR_HUME,David Hume,author,friend_of,AUTHOR_ASMITH,Adam Smith,author,,Harris
+AUTHOR_HUME,David Hume,author,friend_of,AUTHOR_HBLAIR,Hugh Blair,author,,Harris
+AUTHOR_HUME,David Hume,author,friend_of,AUTHOR_WROBERTSON,William Robertson,author,,Harris
+AUTHOR_HUME,David Hume,author,friend_of,AUTHOR_AFERGUSON,Adam Ferguson,author,,Harris
+AUTHOR_HUME,David Hume,author,friend_of,AUTHOR_JBOSWELL,James Boswell,author,,Harris — though complicated
+AUTHOR_HUME,David Hume,author,quarrel_with,AUTHOR_JJROUSSEAU,Jean-Jacques Rousseau,author,1766,Harris
+AUTHOR_EBURKE,Edmund Burke,author,friend_of,AUTHOR_OGOLDSMITH,Oliver Goldsmith,author,,General knowledge — The Club
+AUTHOR_EBURKE,Edmund Burke,author,friend_of,AUTHOR_RBSHERIDAN,Richard Brinsley Sheridan,author,,General knowledge — Parliament
+AUTHOR_EGIBBON,Edward Gibbon,author,friend_of,AUTHOR_SJOHNSON,Samuel Johnson,author,,General knowledge — The Club
+AUTHOR_EGIBBON,Edward Gibbon,author,friend_of,AUTHOR_EBURKE,Edmund Burke,author,,General knowledge — The Club
+AUTHOR_EMONTAGU,Elizabeth Montagu,author,friend_of,AUTHOR_SJOHNSON,Samuel Johnson,author,,General knowledge
+AUTHOR_EMONTAGU,Elizabeth Montagu,author,friend_of,AUTHOR_HCHAPONE,Hester Chapone,author,,General knowledge — Bluestockings
+AUTHOR_EMONTAGU,Elizabeth Montagu,author,friend_of,AUTHOR_HMORE,Hannah More,author,,General knowledge — Bluestockings
+AUTHOR_FBURNEY,Frances Burney,author,child_of,AUTHOR_CBURNEYSR,Charles Burney Sr,author,,General knowledge
+AUTHOR_FBURNEY,Frances Burney,author,friend_of,AUTHOR_SJOHNSON,Samuel Johnson,author,,General knowledge
+AUTHOR_FBURNEY,Frances Burney,author,friend_of,AUTHOR_HTHRALE,Hester Thrale Piozzi,author,,General knowledge
+AUTHOR_FBURNEY,Frances Burney,author,patron,AUTHOR_QUEENCHARLOTTE,Queen Charlotte,author,1786,General knowledge
+AUTHOR_FBURNEY,Frances Burney,author,sibling_of,AUTHOR_SBURNEY,Susan Burney,author,,General knowledge
+AUTHOR_FBURNEY,Frances Burney,author,sibling_of,AUTHOR_CBURNEYJR,Charles Burney Jr,author,,General knowledge
+AUTHOR_FBURNEY,Frances Burney,author,sibling_of,AUTHOR_JBURNEY,James Burney,author,,General knowledge
+AUTHOR_FBURNEY,Frances Burney,author,spouse_of,AUTHOR_DARBLAY,Alexandre d'Arblay,author,1793,General knowledge
+AUTHOR_HMORE,Hannah More,author,friend_of,AUTHOR_GARRICK,David Garrick,author,,General knowledge
+AUTHOR_HMORE,Hannah More,author,friend_of,AUTHOR_SJOHNSON,Samuel Johnson,author,,General knowledge
+AUTHOR_HMORE,Hannah More,author,friend_of,AUTHOR_HWALPOLE,Horace Walpole,author,,General knowledge
+AUTHOR_HFIELDING,Henry Fielding,author,friend_of,AUTHOR_SRICHARDSON,Samuel Richardson,author,,General knowledge — complex rivalry
+AUTHOR_HFIELDING,Henry Fielding,author,sibling_of,AUTHOR_SFIELDING,Sarah Fielding,author,,General knowledge
+AUTHOR_JAUSTEN,Jane Austen,author,influenced_by,AUTHOR_FBURNEY,Frances Burney,author,,"Perry, Novel Relations"
+AUTHOR_JAUSTEN,Jane Austen,author,influenced_by,AUTHOR_SRICHARDSON,Samuel Richardson,author,,"Perry, Novel Relations"
+AUTHOR_JAUSTEN,Jane Austen,author,sibling_of,AUTHOR_HAUSTEN,Henry Austen,author,,General knowledge — Henry was her literary agent
+AUTHOR_JAUSTEN,Jane Austen,author,sibling_of,AUTHOR_CAUSTEN,Cassandra Austen,author,,General knowledge
+AUTHOR_JSWIFT,Jonathan Swift,author,friend_of,AUTHOR_JGAY,John Gay,author,,General knowledge — Scriblerus Club
+AUTHOR_JSWIFT,Jonathan Swift,author,friend_of,AUTHOR_HSTJOHN,"Henry St John, Viscount Bolingbroke",author,,General knowledge
+AUTHOR_LSTERNE,Laurence Sterne,author,friend_of,AUTHOR_GARRICK,David Garrick,author,,General knowledge
+AUTHOR_LSTERNE,Laurence Sterne,author,friend_of,AUTHOR_JREYNOLDS,Joshua Reynolds,author,,General knowledge
+AUTHOR_MEDGEWORTH,Maria Edgeworth,author,child_of,AUTHOR_RLEDGEWORTH,Richard Lovell Edgeworth,author,,General knowledge
+AUTHOR_MEDGEWORTH,Maria Edgeworth,author,influenced_by,AUTHOR_JJROUSSEAU,Jean-Jacques Rousseau,author,,"Perry, Novel Relations"
+AUTHOR_MWOLLSTONECRAFT,Mary Wollstonecraft,author,child_of_result,AUTHOR_MSHELLEY,Mary Shelley,author,1797,General knowledge
+AUTHOR_MWOLLSTONECRAFT,Mary Wollstonecraft,author,friend_of,AUTHOR_JPRIESTLEY,Joseph Priestley,author,,General knowledge — Rational Dissenters
+AUTHOR_MWOLLSTONECRAFT,Mary Wollstonecraft,author,friend_of,AUTHOR_RPRICE,Richard Price,author,,General knowledge — Newington Green
+AUTHOR_MWOLLSTONECRAFT,Mary Wollstonecraft,author,spouse_of,AUTHOR_WGODWIN,William Godwin,author,1797,General knowledge
+AUTHOR_OGOLDSMITH,Oliver Goldsmith,author,friend_of,AUTHOR_JREYNOLDS,Joshua Reynolds,author,,General knowledge — The Club
+AUTHOR_RBSHERIDAN,Richard Brinsley Sheridan,author,friend_of,AUTHOR_FBURNEY,Frances Burney,author,,General knowledge
+AUTHOR_RBSHERIDAN,Richard Brinsley Sheridan,author,spouse_of,AUTHOR_ELINLEY,Elizabeth Linley,author,1773,General knowledge
+AUTHOR_SJOHNSON,Samuel Johnson,author,child_of,BS_JOHNSON_4,Michael Johnson,bookseller,,General knowledge — father was Lichfield bookseller
+AUTHOR_SJOHNSON,Samuel Johnson,author,friend_of,AUTHOR_JBOSWELL,James Boswell,author,,General knowledge
+AUTHOR_SJOHNSON,Samuel Johnson,author,friend_of,AUTHOR_HTHRALE,Hester Thrale Piozzi,author,,General knowledge
+AUTHOR_SJOHNSON,Samuel Johnson,author,friend_of,AUTHOR_EBURKE,Edmund Burke,author,,General knowledge — The Club
+AUTHOR_SJOHNSON,Samuel Johnson,author,friend_of,AUTHOR_OGOLDSMITH,Oliver Goldsmith,author,,General knowledge — The Club
+AUTHOR_SJOHNSON,Samuel Johnson,author,friend_of,AUTHOR_JREYNOLDS,Joshua Reynolds,author,,General knowledge — The Club
+AUTHOR_SJOHNSON,Samuel Johnson,author,friend_of,AUTHOR_GARRICK,David Garrick,author,,General knowledge — schoolfellows
+AUTHOR_SJOHNSON,Samuel Johnson,author,friend_of,AUTHOR_CLENNOX,Charlotte Lennox,author,,General knowledge
+AUTHOR_SJOHNSON,Samuel Johnson,author,patron_of,AUTHOR_CLENNOX,Charlotte Lennox,author,,General knowledge — championed Female Quixote
+AUTHOR_SRICHARDSON,Samuel Richardson,author,friend_of,AUTHOR_SJOHNSON,Samuel Johnson,author,,General knowledge
+AUTHOR_SRICHARDSON,Samuel Richardson,author,friend_of,AUTHOR_CLENNOX,Charlotte Lennox,author,,General knowledge
+AUTHOR_SRICHARDSON,Samuel Richardson,author,mentor_of,AUTHOR_HCHAPONE,Hester Chapone,author,,General knowledge
+AUTHOR_SRICHARDSON,Samuel Richardson,author,spouse_of,AUTHOR_AWILDE,Allington Wilde,author,,General knowledge — married into bookselling family
+AUTHOR_SFIELDING,Sarah Fielding,author,friend_of,AUTHOR_SRICHARDSON,Samuel Richardson,author,,General knowledge
+AUTHOR_TSMOLLETT,Tobias Smollett,author,rival_of,AUTHOR_HFIELDING,Henry Fielding,author,,General knowledge
+AUTHOR_TSMOLLETT,Tobias Smollett,author,rival_of,AUTHOR_LSTERNE,Laurence Sterne,author,,General knowledge
 BS_,,bookseller,succeeded_by,,Elizabeth  Calvert,unknown,,Plomer (1668-1725)
 BS_RHAMES,Aaron Rhames,bookseller,child_of,,Matthew  Rhodes,unknown,,Plomer (1668-1725)
 BS_ROPER,Abel Roper,bookseller,nephew_of,BS_ROPER,Abel Roper,bookseller,,Plomer (1668-1725)
