@@ -105,3 +105,7 @@ LON101,Dodsley's shop (Pall Mall),London,51.5070,-0.1340,1735,1764,Tully's Head.
 LON102,Rivington's (St Paul's Churchyard),London,51.5140,-0.0988,1711,,Bible and Crown. Rivington dynasty booksellers.,rocque_1746;horwood_1799,4,enclosed,bookseller,brick,small,1.60
 LON103,Murray's shop (Fleet Street),London,51.5138,-0.1065,1768,1793,32 Fleet Street. John Murray I.,rocque_1746;horwood_1799,4,enclosed,bookseller,brick,small,1.30
 LON104,Temple of the Muses (Finsbury),London,51.5225,-0.0870,1794,,Lackington's massive bookshop. Finsbury Square.,horwood_1799,4,enclosed,bookseller,brick,large,0.60
+LON105,Little Britain,London,51.5170,-0.0980,,,Major bookselling street near Aldersgate and St Bartholomew's. Peak late 17c; declined after 1720.,rocque_1746,3,open,bookseller,mixed,n_a,2.00
+LON106,London Bridge booksellers,London,51.5070,-0.0870,,,Bookshops on and near London Bridge. Active 17c-18c.,rocque_1746,4,open,bookseller,mixed,n_a,1.50
+LON107,Royal Exchange booksellers,London,51.5135,-0.0870,,,Booksellers in and around the Royal Exchange. Cornhill area.,rocque_1746;horwood_1799,4,enclosed,bookseller,brick,small,1.20
+LON108,Aldersgate Street booksellers,London,51.5190,-0.0975,,,Near Little Britain. Book trade cluster with Duck Lane.,rocque_1746,4,open,bookseller,mixed,n_a,1.80
