@@ -106,6 +106,9 @@ def build(
                 if not vid:
                     continue
                 bs = booksellers.get(row["bookseller_id"], {})
+                notes_raw = bs.get("notes", "")
+                # Strip "Plomer (1668-1725); " prefix for display
+                notes_display = re.sub(r'^Plomer \([^)]+\);\s*', '', notes_raw).strip('; ')
                 entry = {
                     "name": bs.get("name", ""),
                     "sign": bs.get("sign", ""),
@@ -113,6 +116,7 @@ def build(
                     "date_min": int(row["date_min"]) if row["date_min"] else None,
                     "date_max": int(row["date_max"]) if row["date_max"] else None,
                     "address": row.get("address_detail", ""),
+                    "notes": notes_display,
                 }
                 bs_by_venue.setdefault(vid, []).append(entry)
 
@@ -399,6 +403,18 @@ function renderBooksellers(venueId) {
             row.appendChild(typeSpan);
         }
         el.appendChild(row);
+        if (b.address) {
+            var addrDiv = document.createElement('div');
+            addrDiv.style.cssText = 'font-size:10px;color:#999;margin-left:8px';
+            addrDiv.textContent = b.address;
+            el.appendChild(addrDiv);
+        }
+        if (b.notes) {
+            var notesDiv = document.createElement('div');
+            notesDiv.style.cssText = 'font-size:10px;color:#777;margin-left:8px;font-style:italic';
+            notesDiv.textContent = b.notes;
+            el.appendChild(notesDiv);
+        }
     });
 }
 
