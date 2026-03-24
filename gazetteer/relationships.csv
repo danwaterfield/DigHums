@@ -1,0 +1,228 @@
+person_a_id,person_a_name,person_a_type,relationship,person_b_id,person_b_name,person_b_type,date,source
+BS_,,bookseller,succeeded_by,,Elizabeth  Calvert,unknown,,Plomer (1668-1725)
+BS_RHAMES,Aaron Rhames,bookseller,child_of,,Matthew  Rhodes,unknown,,Plomer (1668-1725)
+BS_ROPER,Abel Roper,bookseller,nephew_of,BS_ROPER,Abel Roper,bookseller,,Plomer (1668-1725)
+BS_ROPER,Abel Roper,bookseller,succeeded_by,BS_ROPER,Abel Roper,bookseller,,Plomer (1668-1725)
+BS_DONALDSON,Alexander Donaldson,bookseller,publisher_of,AUTHOR_DAVID,"Hume, David",author,1752,harris_hume_bibliography.csv
+BS_HENDERSON,Alexander Henderson,bookseller,succeeded_by,BS_COLLINS_2,Freeman Collins,bookseller,,Plomer (1668-1725)
+BS_KINCAID,Alexander Kincaid,bookseller,publisher_of,AUTHOR_DAVID,"Hume, David",author,1741,harris_hume_bibliography.csv
+BS_WILDE,Allington Wilde,bookseller,child_of,BS_WILDE_2,John Wilde,bookseller,,Plomer (1668-1725)
+BS_WILDE,Allington Wilde,bookseller,spouse_of,BS_RICHARDSON_4,Samuel Richardson,bookseller,,Plomer (1668-1725)
+BS_CLARK,Andrew Clark,bookseller,succeeded_by,,James  Flesher,unknown,,Plomer (1668-1725)
+BS_MILLAR,Andrew Millar,bookseller,publisher_of,AUTHOR_JAMES,"Thomson, James",author,1726,perry_novel_relations_bibliography.csv
+BS_MILLAR,Andrew Millar,bookseller,publisher_of,AUTHOR_HENRY,"Fielding, Henry",author,1742,perry_novel_relations_bibliography.csv
+BS_MILLAR,Andrew Millar,bookseller,publisher_of,AUTHOR_SARAH,"Fielding, Sarah",author,1744,white_bibliography_batch1.csv
+BS_MILLAR,Andrew Millar,bookseller,publisher_of,AUTHOR_DAVID,"Hume, David",author,1748,harris_hume_bibliography.csv
+BS_MILLAR,Andrew Millar,bookseller,publisher_of,AUTHOR_SAMUEL,"Johnson, Samuel",author,1755,harris_hume_bibliography.csv
+BS_MILLAR,Andrew Millar,bookseller,publisher_of,AUTHOR_ADAM,"Smith, Adam",author,1759,harris_hume_bibliography.csv
+BS_MILLAR,Andrew Millar,bookseller,publisher_of,AUTHOR_WILLIAM,"Robertson, William",author,1759,harris_hume_bibliography.csv
+BS_MILLAR,Andrew Millar,bookseller,succeeded_by,BS_CADELL,Thomas Cadell I,bookseller,1768,Harris
+BS_BALDWIN,Ann Baldwin,bookseller,widow_of,BS_BALDWIN_2,Richard Baldwin,bookseller,,Plomer (1668-1725)
+BS_SPEED,Anne Speed,bookseller,spouse_of,BS_SPEED,Anne Speed,bookseller,,Plomer (1668-1725)
+BS_GODBID,Arthur Godbid,bookseller,child_of,BS_GODBID,Arthur Godbid,bookseller,,Plomer (1668-1725)
+BS_CHURCHILL,Awnsham Churchill,bookseller,child_of,BS_CHURCHILL,Awnsham Churchill,bookseller,,Plomer (1668-1725)
+BS_SIMMONS,B. Simmons,bookseller,succeeded_by,BS_SIMMONS,B. Simmons,bookseller,,Plomer (1668-1725)
+BS_CORBETT,Benjamin Corbett,bookseller,child_of,,Waites,unknown,,Plomer (1668-1725)
+BS_COX_2,Benjamin Cox,bookseller,succeeded_by,BS_SMITH_3,E. Smith,bookseller,,Plomer (1668-1725)
+BS_HURLOCK,Benjamin Hurlock,bookseller,child_of,BS_HURLOCK,Benjamin Hurlock,bookseller,,Plomer (1668-1725)
+BS_JOHNSON,Benjamin Johnson,bookseller,apprentice_of,,Mr,unknown,,Plomer (1668-1725)
+BS_JOHNSON,Benjamin Johnson,bookseller,sibling_of,,Michael,unknown,,Plomer (1668-1725)
+BS_MOTTE,Benjamin Motte,bookseller,succeeded_by,,Charles  Bathurst,unknown,,Plomer (1668-1725)
+BS_SPRINT_2,Benjamin Sprint,bookseller,child_of,BS_SPRINT,Bartholomew Sprint,bookseller,,Plomer (1668-1725)
+BS_THRALE,Benjamin Thrale,bookseller,child_of,BS_THRALE_2,Richard Thrale,bookseller,,Plomer (1668-1725)
+BS_TOOKE,Benjamin Tooke,bookseller,succeeded_by,BS_CROOKE_3,John Crooke,bookseller,,Plomer (1668-1725)
+BS_GRIFFIN,Bennet Griffin,bookseller,child_of,BS_GRIFFIN,Bennet Griffin,bookseller,,Plomer (1668-1725)
+BS_BRUDENELL,Brudenell,bookseller,child_of,BS_BRUDENELL,Brudenell,bookseller,,Plomer (1668-1725)
+BS_BORBET,C. Borbet,bookseller,publisher_of,AUTHOR_DAVID,"Hume, David",author,1740,harris_hume_bibliography.csv
+BS_BILL,Charles Bill,bookseller,child_of,BS_BILL,Charles Bill,bookseller,,Plomer (1668-1725)
+BS_BROME,Charles Brome,bookseller,child_of,BS_BROME,Charles Brome,bookseller,,Plomer (1668-1725)
+BS_BROME,Charles Brome,bookseller,succeeded_by,BS_BROME,Charles Brome,bookseller,,Plomer (1668-1725)
+BS_BROME,Charles Brome,bookseller,widow_of,,Henry,unknown,,Plomer (1668-1725)
+BS_MEARNE_2,Charles Mearne,bookseller,child_of,,Samuel  Meame,unknown,,Plomer (1668-1725)
+BS_MORDEN,Charles Morden,bookseller,child_of,BS_MORDEN_2,Robert Morden,bookseller,,Plomer (1668-1725)
+BS_RIVINGTON_2,Charles Rivington,bookseller,child_of,BS_RIVINGTON_2,Charles Rivington,bookseller,,Plomer (1668-1725)
+BS_RIVINGTON,Charles Rivington,bookseller,publisher_of,AUTHOR_SAMUEL,"Richardson, Samuel",author,1740,white_bibliography_batch2.csv
+BS_DRING,Daniel Dring,bookseller,child_of,BS_DRING,Daniel Dring,bookseller,,Plomer (1668-1725)
+BS_MIDWINTER,Daniel Midwinter,bookseller,succeeded_by,BS_DANIEL,M. Daniel,bookseller,,Plomer (1668-1725)
+BS_PAVVLETT,E. Pavvlett,bookseller,widow_of,BS_PAWLETT,Edward Pawlett,bookseller,,Plomer (1668-1725)
+BS_WILKINSON_2,E. Wilkinson,bookseller,widow_of,BS_WILKINSON,Christopher Wilkinson,bookseller,,Plomer (1668-1725)
+BS_JEFFERY,Edmund Jeffery,bookseller,succeeded_by,,Wm,unknown,,Plomer (1668-1725)
+BS_GELLIBRAND,Edward Gellibrand,bookseller,child_of,BS_GELLIBRAND_3,Samuel Gellibrand,bookseller,,Plomer (1668-1725)
+BS_BLARE,Elizabeth Blare,bookseller,widow_of,BS_BLARE_2,Josiah  Or  Joseph Blare,bookseller,,Plomer (1668-1725)
+BS_CROOKE_2,Elizabeth Crooke,bookseller,succeeded_by,BS_CROOKE_2,Elizabeth Crooke,bookseller,,Plomer (1668-1725)
+BS_HARRIS_2,Elizabeth Harris,bookseller,widow_of,BS_HARRIS,Benjamin Harris,bookseller,,Plomer (1668-1725)
+BS_WHITLOCK,Elizabeth Whitlock,bookseller,widow_of,BS_WHITLOCK_2,John Whitlock,bookseller,,Plomer (1668-1725)
+BS_MATTHEWS,Emanuel Matthews,bookseller,child_of,BS_MATTHEWS_2,John Matthews,bookseller,,Plomer (1668-1725)
+BS_FENNER,Enoch Fenner,bookseller,child_of,BS_FENNER_3,Rest Fenner,bookseller,,Plomer (1668-1725)
+BS_HOPPER,George Hopper,bookseller,succeeded_by,,Thomas  Home,unknown,,Plomer (1668-1725)
+BS_JAMES,George James,bookseller,sibling_of,,John,unknown,,Plomer (1668-1725)
+BS_JAMES,George James,bookseller,succeeded_by,BS_BARBER,John Barber,bookseller,,Plomer (1668-1725)
+BS_LARKIN_2,George Larkin,bookseller,child_of,BS_LARKIN_2,George Larkin,bookseller,,Plomer (1668-1725)
+BS_PAWLETT_2,George Pawlett,bookseller,child_of,BS_PAWLETT_2,George Pawlett,bookseller,,Plomer (1668-1725)
+BS_SAWBRIDGE,George Sawbridge,bookseller,succeeded_by,BS_SAWBRIDGE,George Sawbridge,bookseller,,Plomer (1668-1725)
+BS_WALBANCK_2,George Walbanck,bookseller,succeeded_by,BS_WALBANCK_2,George Walbanck,bookseller,,Plomer (1668-1725)
+BS_WELLS,George Wells,bookseller,child_of,,Dr,unknown,,Plomer (1668-1725)
+BS_COWNLY,"Gh,Bert Cownly",bookseller,succeeded_by,,William  Cademan,unknown,,Plomer (1668-1725)
+BS_HILLS,Gilham Hills,bookseller,child_of,BS_HILLS,Gilham Hills,bookseller,,Plomer (1668-1725)
+BS_HINDMARSH,H. Hindmarsh,bookseller,succeeded_by,BS_HINDMARSH,H. Hindmarsh,bookseller,,Plomer (1668-1725)
+BS_SAWBRIDGE_2,Hannah Sawbridge,bookseller,widow_of,BS_SAWBRIDGE_3,Thomas Sawbridge,bookseller,,Plomer (1668-1725)
+BS_CROSSGROVE,Henry Crossgrove,bookseller,child_of,BS_CROSSGROVE,Henry Crossgrove,bookseller,,Plomer (1668-1725)
+BS_CROSSGROVE,Henry Crossgrove,bookseller,widow_of,,John  Fellows,unknown,,Plomer (1668-1725)
+BS_HILLS_3,Henry Hills,bookseller,child_of,BS_HILLS_2,Henry Hills,bookseller,,Plomer (1668-1725)
+BS_KNOX,Henry Knox,bookseller,child_of,BS_KNOX,Henry Knox,bookseller,,Plomer (1668-1725)
+BS_KNOX,Henry Knox,bookseller,sibling_of,,Edinburgh,unknown,,Plomer (1668-1725)
+BS_MILLION,Henry Million,bookseller,child_of,BS_MILLION,Henry Million,bookseller,,Plomer (1668-1725)
+BS_OVERTON,Henry Overton,bookseller,child_of,BS_OVERTON,Henry Overton,bookseller,,Plomer (1668-1725)
+BS_PARKHURST,I Bomas Parkhurst,bookseller,apprentice_of,,John  Garke,unknown,,Plomer (1668-1725)
+BS_DAWKS,Ichabod Dawks,bookseller,child_of,BS_DAWKS_3,Thomas Dawks,bookseller,,Plomer (1668-1725)
+BS_KING_3,J. King,bookseller,succeeded_by,BS_DUNTON,John Dunton,bookseller,,Plomer (1668-1725)
+BS_LYFORD,J. Lyford,bookseller,succeeded_by,BS_KINCAID,Alexander Kincaid,bookseller,,Plomer (1668-1725)
+BS_TONSON,Jacob Tonson,bookseller,child_of,BS_TONSON,Jacob Tonson,bookseller,,Plomer (1668-1725)
+BS_TONSON_2,Jacob Tonson,bookseller,child_of,,Richard,unknown,,Plomer (1668-1725)
+BS_TONSON_2,Jacob Tonson,bookseller,nephew_of,BS_TONSON,Jacob Tonson,bookseller,,Plomer (1668-1725)
+BS_TONSON,Jacob Tonson,bookseller,sibling_of,BS_TONSON,Jacob Tonson,bookseller,,Plomer (1668-1725)
+BS_TONSON_2,Jacob Tonson,bookseller,succeeded_by,BS_JACOB,Wnxi Am Jacob,bookseller,,Plomer (1668-1725)
+BS_TONSON_SR,Jacob Tonson I,bookseller,publisher_of,AUTHOR_JOHN,"Locke, John",author,1690,harris_hume_bibliography.csv
+BS_TONSON_SR,Jacob Tonson I,bookseller,publisher_of,AUTHOR_ADDISON,"Steele, Richard and Joseph Addison",author,1709,white_bibliography_batch2.csv
+BS_TONSON_SR,Jacob Tonson I,bookseller,publisher_of,AUTHOR_DELARIVIÈRE,"Manley, Delarivière",author,1709,perry_novel_relations_bibliography.csv
+BS_TONSON_SR,Jacob Tonson I,bookseller,publisher_of,AUTHOR_STEELE,"Addison, Joseph and Richard Steele",author,1711,perry_novel_relations_bibliography.csv
+BS_TONSON_SR,Jacob Tonson I,bookseller,publisher_of,AUTHOR_JOSEPHADDISON,JosephAddison,author,1711,sources_catalog.csv
+BS_TONSON_SR,Jacob Tonson I,bookseller,publisher_of,AUTHOR_COOPER),"Shaftesbury, Third Earl of (Anthony Ashley Cooper)",author,1711,harris_hume_bibliography.csv
+BS_TONSON_SR,Jacob Tonson I,bookseller,succeeded_by,BS_TONSON_JR,Jacob Tonson II,bookseller,1720,Plomer
+BS_TONSON_JR,Jacob Tonson II,bookseller,publisher_of,AUTHOR_ADDISON,"Steele, Richard and Joseph Addison",author,1709,white_bibliography_batch2.csv
+BS_TONSON_JR,Jacob Tonson II,bookseller,publisher_of,AUTHOR_RICHARD,"Steele, Richard",author,1709,perry_novel_relations_bibliography.csv
+BS_TONSON_JR,Jacob Tonson II,bookseller,publisher_of,AUTHOR_RICHARDSTEELE,RichardSteele,author,1710,sources_catalog.csv
+BS_TONSON_JR,Jacob Tonson II,bookseller,publisher_of,AUTHOR_STEELE,"Addison, Joseph and Richard Steele",author,1711,perry_novel_relations_bibliography.csv
+BS_TONSON_JR,Jacob Tonson II,bookseller,publisher_of,AUTHOR_JOSEPHADDISON,JosephAddison,author,1711,sources_catalog.csv
+BS_TONSON_JR,Jacob Tonson II,bookseller,publisher_of,AUTHOR_ALEXANDER,"Pope, Alexander",author,1733,harris_hume_bibliography.csv
+BS_CURTIS,Jane Curtis,bookseller,spouse_of,BS_CURTIS,Jane Curtis,bookseller,,Plomer (1668-1725)
+BS_BROME_2,Joanna Brome,bookseller,widow_of,BS_BROME,Charles Brome,bookseller,,Plomer (1668-1725)
+BS_ASTWOOD_2,John Astwood,bookseller,child_of,BS_ASTWOOD,J Ames Astwood,bookseller,,Plomer (1668-1725)
+BS_BACK,John Back,bookseller,child_of,,John,unknown,,Plomer (1668-1725)
+BS_BASKETT,John Baskett,bookseller,widow_of,,Andrew  Anderson,unknown,,Plomer (1668-1725)
+BS_BRADFORD,John Bradford,bookseller,sibling_of,BS_BRADFORD,John Bradford,bookseller,,Plomer (1668-1725)
+BS_BULLORD,John Bullord,bookseller,succeeded_by,BS_BLAGRAVE,Obadiah Blagrave,bookseller,,Plomer (1668-1725)
+BS_CHURCHILL_2,John Churchill,bookseller,sibling_of,BS_CHURCHILL_2,John Churchill,bookseller,,Plomer (1668-1725)
+BS_DARBY_2,John Darby,bookseller,spouse_of,BS_CLARKE_7,William Clarke,bookseller,,Plomer (1668-1725)
+BS_DARBY,John Darby,bookseller,succeeded_by,,John,unknown,,Plomer (1668-1725)
+BS_GUY,John Guy,bookseller,sibling_of,BS_GUY,John Guy,bookseller,,Plomer (1668-1725)
+BS_HANCOCK_2,John Hancock,bookseller,child_of,BS_HANCOCK,John Hancock,bookseller,,Plomer (1668-1725)
+BS_LEAKE,John Leake,bookseller,child_of,BS_LEAKE_2,William Leake,bookseller,,Plomer (1668-1725)
+BS_MARLOW,John Marlow,bookseller,child_of,,Quality,unknown,,Plomer (1668-1725)
+BS_MATTHEWS_3,John Matthews,bookseller,child_of,BS_MATTHEWS,Emanuel Matthews,bookseller,,Plomer (1668-1725)
+BS_MINSHULL,John Minshull,bookseller,child_of,,Manchester,unknown,,Plomer (1668-1725)
+BS_MURRAY_I,John Murray I,bookseller,publisher_of,AUTHOR_CHARLOTTE,"Lennox, Charlotte",author,1752,perry_novel_relations_bibliography.csv
+BS_MURRAY_I,John Murray I,bookseller,publisher_of,AUTHOR_JOSEPH,"Priestley, Joseph",author,1774,harris_hume_bibliography.csv
+BS_NOON,John Noon,bookseller,publisher_of,AUTHOR_DAVID,"Hume, David",author,1739,harris_hume_bibliography.csv
+BS_NUTT_2,John Nutt,bookseller,succeeded_by,BS_NUTT_2,John Nutt,bookseller,,Plomer (1668-1725)
+BS_PLAYFORD_2,John Playford,bookseller,child_of,BS_PLAYFORD_2,John Playford,bookseller,,Plomer (1668-1725)
+BS_PLAYFORD_2,John Playford,bookseller,nephew_of,BS_PLAYFORD_2,John Playford,bookseller,,Plomer (1668-1725)
+BS_PLAYFORD_2,John Playford,bookseller,widow_of,BS_GODBID,Arthur Godbid,bookseller,,Plomer (1668-1725)
+BS_ROGERS_2,John Rogers,bookseller,child_of,BS_ROGERS,Henry Rogers,bookseller,,Plomer (1668-1725)
+BS_SPRINT_3,John Sprint,bookseller,child_of,BS_SPRINT_4,Samuel Sprint,bookseller,,Plomer (1668-1725)
+BS_WHITE_2,John White,bookseller,child_of,BS_WHITE_6,Robert White,bookseller,,Plomer (1668-1725)
+BS_WHITLOCK_2,John Whitlock,bookseller,succeeded_by,BS_WHITLOCK_2,John Whitlock,bookseller,,Plomer (1668-1725)
+BS_WILDE_2,John Wilde,bookseller,apprentice_of,BS_WILDE_3,Joseph Wilde,bookseller,,Plomer (1668-1725)
+BS_WILDE_2,John Wilde,bookseller,succeeded_by,BS_WILDE_2,John Wilde,bookseller,,Plomer (1668-1725)
+BS_WILLIAMS,John Williams,bookseller,succeeded_by,BS_WILLIAMS,John Williams,bookseller,,Plomer (1668-1725)
+BS_GREENWOOD,Jonathan Greenwood,bookseller,apprentice_of,,Mr,unknown,,Plomer (1668-1725)
+BS_BOWERS,Joseph Bowers,bookseller,child_of,,Honour,unknown,,Plomer (1668-1725)
+BS_MARSHALL_2,Joseph Marshall,bookseller,child_of,BS_MARSHALL_3,William Marshall,bookseller,,Plomer (1668-1725)
+BS_WILDE_3,Joseph Wilde,bookseller,apprentice_of,BS_SAWBRIDGE,George Sawbridge,bookseller,,Plomer (1668-1725)
+BS_WILDE_3,Joseph Wilde,bookseller,child_of,,Lichfield,unknown,,Plomer (1668-1725)
+BS_CHURCHILL_3,Joshua Churchill,bookseller,child_of,BS_CHURCHILL,Awnsham Churchill,bookseller,,Plomer (1668-1725)
+BS_DANIEL,M. Daniel,bookseller,widow_of,BS_DANIEL_2,Thomas Daniel,bookseller,,Plomer (1668-1725)
+BS_NEWBOROUGH,M. Newborough,bookseller,widow_of,BS_NEWBOROUGH,M. Newborough,bookseller,,Plomer (1668-1725)
+BS_COGGAN_2,Margaret Coggan,bookseller,widow_of,BS_COGGAN,Francis Coggan,bookseller,,Plomer (1668-1725)
+BS_WIDDOWES_2,Margaret Widdowes,bookseller,widow_of,BS_WIDDOWES,Giles Widdowes,bookseller,,Plomer (1668-1725)
+BS_CLARK_2,Mary Clark,bookseller,widow_of,BS_CLARK,Andrew Clark,bookseller,,Plomer (1668-1725)
+BS_COOPER,Mary Cooper,bookseller,publisher_of,AUTHOR_DAVID,"Hume, David",author,1748,harris_hume_bibliography.csv
+BS_FABIAN,Mary Fabian,bookseller,widow_of,BS_FABIAN_2,Thomas Fabian,bookseller,,Plomer (1668-1725)
+BS_GARTHWAITE,Mary Garthwaite,bookseller,widow_of,BS_GARTHWAITE,Mary Garthwaite,bookseller,,Plomer (1668-1725)
+BS_HOWELL,Mary Howell,bookseller,widow_of,,Thomas  Howkins,unknown,,Plomer (1668-1725)
+BS_THOMPSON_2,Mary Thompson,bookseller,widow_of,BS_THOMPSON_3,Nathaniel Thompson,bookseller,,Plomer (1668-1725)
+BS_WOTTON,Matthew Wotton,bookseller,succeeded_by,BS_THOMAS,John Thomas,bookseller,,Plomer (1668-1725)
+BS_JOHNSON_4,Michael Johnson,bookseller,child_of,BS_JOHNSON_4,Michael Johnson,bookseller,,Plomer (1668-1725)
+BS_JOHNSON_4,Michael Johnson,bookseller,sibling_of,,Benjamin,unknown,,Plomer (1668-1725)
+BS_PITT,Moses Pitt,bookseller,apprentice_of,BS_LITTLEBURY,Robert Littlebury,bookseller,,Plomer (1668-1725)
+BS_PITT,Moses Pitt,bookseller,child_of,BS_PITT,Moses Pitt,bookseller,,Plomer (1668-1725)
+BS_CROUCH_2,Nathaniel Crouch,bookseller,child_of,BS_CROUCH_3,Samuel Crouch,bookseller,,Plomer (1668-1725)
+BS_PONDER,Nathaniel Ponder,bookseller,apprentice_of,BS_GIBBS_2,Robert Gibbs,bookseller,,Plomer (1668-1725)
+BS_PONDER,Nathaniel Ponder,bookseller,child_of,BS_PONDER,Nathaniel Ponder,bookseller,,Plomer (1668-1725)
+BS_SMITH_8,Obediah Smith,bookseller,child_of,,Francis,unknown,,Plomer (1668-1725)
+BS_FORRESTER_2,P. Forrester,bookseller,sibling_of,BS_FORRESTER_2,P. Forrester,bookseller,,Plomer (1668-1725)
+BS_GWILLIM,Philip Gwillim,bookseller,child_of,BS_GWILLIM,Philip Gwillim,bookseller,,Plomer (1668-1725)
+BS_CRUTTENDEN_2,R. Cruttenden,bookseller,sibling_of,BS_CRUTTENDEN,Henry Cruttenden,bookseller,,Plomer (1668-1725)
+BS_FLEMING_ALISON,R. Fleming and A. Alison,bookseller,printer_of,AUTHOR_DAVID,"Hume, David",author,1741,harris_hume_bibliography.csv
+BS_ROBINSON_3,Ranew Robinson,bookseller,child_of,BS_ROBINSON_2,Josiah Robinson,bookseller,,Plomer (1668-1725)
+BS_ROBINSON_3,Ranew Robinson,bookseller,widow_of,BS_RANEW,Nathaniel Ranew,bookseller,,Plomer (1668-1725)
+BS_BONWICKE_3,Rebecca Bonwicke,bookseller,widow_of,BS_BONWICKE,Henry Bonwicke,bookseller,,Plomer (1668-1725)
+BS_FENNER_3,Rest Fenner,bookseller,child_of,BS_FENNER_2,Rest Fenner,bookseller,,Plomer (1668-1725)
+BS_BURTON_2,Richard Burton,bookseller,spouse_of,,Joseph  Button,unknown,,Plomer (1668-1725)
+BS_JANEWAY_2,Richard Janeway,bookseller,child_of,BS_JANEWAY,Richard Janeway,bookseller,,Plomer (1668-1725)
+BS_THRALE_2,Richard Thrale,bookseller,succeeded_by,,Edmund  Jefl,unknown,,Plomer (1668-1725)
+BS_TONSON_3,Richard Tonson,bookseller,sibling_of,BS_TONSON_3,Richard Tonson,bookseller,,Plomer (1668-1725)
+BS_DODSLEY,Robert Dodsley,bookseller,publisher_of,AUTHOR_COOPER),"Shaftesbury, Third Earl of (Anthony Ashley Cooper)",author,1711,harris_hume_bibliography.csv
+BS_DODSLEY,Robert Dodsley,bookseller,publisher_of,AUTHOR_EDMUND,"Burke, Edmund",author,1757,harris_hume_bibliography.csv
+BS_DODSLEY,Robert Dodsley,bookseller,publisher_of,AUTHOR_SAMUEL,"Johnson, Samuel",author,1759,perry_novel_relations_bibliography.csv
+BS_DODSLEY,Robert Dodsley,bookseller,publisher_of,AUTHOR_LAURENCE,"Sterne, Laurence",author,1759,perry_novel_relations_bibliography.csv
+BS_DODSLEY,Robert Dodsley,bookseller,publisher_of,AUTHOR_OLIVER,"Goldsmith, Oliver",author,1766,white_bibliography_batch1.csv
+BS_DODSLEY,Robert Dodsley,bookseller,publisher_of,AUTHOR_ARTHUR,"Young, Arthur",author,1768,white_bibliography_batch2.csv
+BS_FLEMING,Robert Fleming,bookseller,widow_of,BS_FLETCHER,James Fletcher,bookseller,,Plomer (1668-1725)
+BS_HARFORD,Robert Harford,bookseller,child_of,,Ralph,unknown,,Plomer (1668-1725)
+BS_HARTLEY_3,Robert Hartley,bookseller,child_of,BS_HARTLEY,Hartley,bookseller,,Plomer (1668-1725)
+BS_KNAPLOCK,Robert Knaplock,bookseller,child_of,,Hickes,unknown,,Plomer (1668-1725)
+BS_NICHOLSON_2,Robert Nicholson,bookseller,child_of,BS_NICHOLSON_2,Robert Nicholson,bookseller,,Plomer (1668-1725)
+BS_REDMAYNE,Samuel Redmayne,bookseller,child_of,BS_REDMAYNE_2,William Redmayne,bookseller,,Plomer (1668-1725)
+BS_SIMMONS_2,Samuel Simmons,bookseller,child_of,BS_SIMMONS,B. Simmons,bookseller,,Plomer (1668-1725)
+BS_MALTHUS,Sarah Malthus,bookseller,widow_of,BS_MALTHUS_2,Thomas Malthus,bookseller,,Plomer (1668-1725)
+BS_NEVILL_2,Sarah Nevill,bookseller,widow_of,BS_NEVILL,Joseph Nevill,bookseller,,Plomer (1668-1725)
+BS_PASSINGER,Sarah Passinger,bookseller,widow_of,BS_PASSINGER,Sarah Passinger,bookseller,,Plomer (1668-1725)
+BS_SEDGWICK,Sedgwick,bookseller,succeeded_by,BS_BARBER,John Barber,bookseller,,Plomer (1668-1725)
+BS_SEDGWICK,Sedgwick,bookseller,widow_of,BS_CLARK,Andrew Clark,bookseller,,Plomer (1668-1725)
+BS_SHARPLESS,Sharpless,bookseller,widow_of,BS_HAREFINCH,John Harefinch,bookseller,,Plomer (1668-1725)
+BS_SHARP,Sm  Joshua Sharp,bookseller,sibling_of,BS_SHARP,Sm  Joshua Sharp,bookseller,,Plomer (1668-1725)
+BS_FORRESTER_3,Susanna Forrester,bookseller,widow_of,BS_FORRESTER,Andrew Forrester,bookseller,,Plomer (1668-1725)
+BS_CADELL,Thomas Cadell I,bookseller,publisher_of,AUTHOR_EDMUND,"Burke, Edmund",author,1757,harris_hume_bibliography.csv
+BS_CADELL,Thomas Cadell I,bookseller,publisher_of,AUTHOR_WILLIAM,"Robertson, William",author,1769,harris_hume_bibliography.csv
+BS_CADELL,Thomas Cadell I,bookseller,publisher_of,AUTHOR_HESTER,"Chapone, Hester",author,1773,perry_novel_relations_bibliography.csv
+BS_CADELL,Thomas Cadell I,bookseller,publisher_of,AUTHOR_EDWARD,"Gibbon, Edward",author,1776,harris_hume_bibliography.csv
+BS_CADELL,Thomas Cadell I,bookseller,publisher_of,AUTHOR_ADAM,"Smith, Adam",author,1776,harris_hume_bibliography.csv
+BS_CADELL,Thomas Cadell I,bookseller,publisher_of,AUTHOR_DAVID,"Hume, David",author,1777,harris_hume_bibliography.csv
+BS_CADELL,Thomas Cadell I,bookseller,publisher_of,AUTHOR_FRANCES,"Burney, Frances",author,1778,perry_novel_relations_bibliography.csv
+BS_CADELL,Thomas Cadell I,bookseller,publisher_of,AUTHOR_SAMUEL,"Johnson, Samuel",author,1781,harris_hume_bibliography.csv
+BS_CADELL,Thomas Cadell I,bookseller,publisher_of,AUTHOR_CHARLOTTE,"Smith, Charlotte",author,1788,perry_novel_relations_bibliography.csv
+BS_CADELL,Thomas Cadell I,bookseller,publisher_of,AUTHOR_ELIZABETH,"Inchbald, Elizabeth",author,1791,perry_novel_relations_bibliography.csv
+BS_CADELL,Thomas Cadell I,bookseller,publisher_of,AUTHOR_ANN,"Radcliffe, Ann",author,1794,perry_novel_relations_bibliography.csv
+BS_CADELL,Thomas Cadell I,bookseller,publisher_of,AUTHOR_PATRICK,"Colquhoun, Patrick",author,1796,almeroth_williams_bibliography.csv
+BS_CADELL,Thomas Cadell I,bookseller,publisher_of,AUTHOR_HANNAH,"More, Hannah",author,1799,perry_novel_relations_bibliography.csv
+BS_CADELL,Thomas Cadell I,bookseller,publisher_of,AUTHOR_PATRICKCOLQUHOUN,PatrickColquhoun,author,1800,sources_catalog.csv
+BS_CORBETT_2,Thomas Corbett,bookseller,child_of,BS_CORBET,C Harles Corbet,bookseller,,Plomer (1668-1725)
+BS_CROUCH_4,Thomas Crouch,bookseller,child_of,BS_CROUCH_3,Samuel Crouch,bookseller,,Plomer (1668-1725)
+BS_DRING_2,Thomas Dring,bookseller,child_of,BS_DRING_2,Thomas Dring,bookseller,,Plomer (1668-1725)
+BS_HARRISON_3,Thomas Harrison,bookseller,apprentice_of,BS_CROUCH_3,Samuel Crouch,bookseller,,Plomer (1668-1725)
+BS_LONGMAN_2,Thomas Longman,bookseller,child_of,BS_LONGMAN_2,Thomas Longman,bookseller,,Plomer (1668-1725)
+BS_LONGMAN,Thomas Longman I,bookseller,publisher_of,AUTHOR_DAVID,"Hume, David",author,1740,harris_hume_bibliography.csv
+BS_OSBORNE,Thomas Osborne,bookseller,succeeded_by,BS_THOMAS,John Thomas,bookseller,,Plomer (1668-1725)
+BS_PASSINGER_2,Thomas Passinger,bookseller,nephew_of,BS_PASSINGER,Sarah Passinger,bookseller,,Plomer (1668-1725)
+BS_SPEED_3,Thomas Speed,bookseller,sibling_of,BS_SPEED_3,Thomas Speed,bookseller,,Plomer (1668-1725)
+BS_CHURCHILL_4,Vra^Ll Am Churchill,bookseller,child_of,BS_CHURCHILL_2,John Churchill,bookseller,,Plomer (1668-1725)
+BS_BOTHAM,W. Botham,bookseller,widow_of,,Thomas  Underbill,unknown,,Plomer (1668-1725)
+BS_BOWYER_2,William Bowyer,bookseller,child_of,BS_BOWYER_2,William Bowyer,bookseller,,Plomer (1668-1725)
+BS_BOWYER_3,William Bowyer,bookseller,child_of,BS_BOWYER_2,William Bowyer,bookseller,,Plomer (1668-1725)
+BS_BOWYER_2,William Bowyer,bookseller,widow_of,BS_ALLPORT,Benjamin Allport,bookseller,,Plomer (1668-1725)
+BS_CLARKE_7,William Clarke,bookseller,child_of,BS_CLARKE,J. Clarke,bookseller,,Plomer (1668-1725)
+BS_COCKERAINE,William Cockeraine,bookseller,nephew_of,,Thomas  Cockerill,unknown,,Plomer (1668-1725)
+BS_CROOKE_4,William Crooke,bookseller,child_of,BS_CROOKE,Andrew Crooke,bookseller,,Plomer (1668-1725)
+BS_CROOKE_4,William Crooke,bookseller,succeeded_by,BS_CROOKE,Andrew Crooke,bookseller,,Plomer (1668-1725)
+BS_EWREY,William Ewrey,bookseller,widow_of,BS_FLETCHER,James Fletcher,bookseller,,Plomer (1668-1725)
+BS_KEBLE_2,William Keble,bookseller,child_of,BS_KEBLE,Samuel Keble,bookseller,,Plomer (1668-1725)
+BS_LINDSEY,William Lindsey,bookseller,apprentice_of,,Thomas  Lingard,unknown,,Plomer (1668-1725)
+BS_LINDSEY,William Lindsey,bookseller,child_of,BS_LINTOT,Joshua Lintot,bookseller,,Plomer (1668-1725)
+BS_SAYWELL,William Saywell,bookseller,child_of,,John  Sa,unknown,,Plomer (1668-1725)
+BS_STRAHAN,William Strahan,bookseller,printer_of,AUTHOR_SAMUEL,"Johnson, Samuel",author,1755,harris_hume_bibliography.csv
+BS_STRAHAN,William Strahan,bookseller,printer_of,AUTHOR_WILLIAM,"Robertson, William",author,1759,harris_hume_bibliography.csv
+BS_STRAHAN,William Strahan,bookseller,printer_of,AUTHOR_EDWARD,"Gibbon, Edward",author,1776,harris_hume_bibliography.csv
+BS_STRAHAN,William Strahan,bookseller,printer_of,AUTHOR_ADAM,"Smith, Adam",author,1776,harris_hume_bibliography.csv
+BS_TAYLOR_3,William Taylor,bookseller,child_of,BS_TAYLOR_2,Thomas Taylor,bookseller,,Plomer (1668-1725)
+BS_WARTER,William Warter,bookseller,child_of,BS_WARTER,William Warter,bookseller,,Plomer (1668-1725)
