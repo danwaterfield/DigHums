@@ -1,0 +1,276 @@
+source,target,layers,corr_weight,disc_weight,disc_texts
+Edward Gibbon,Samuel Johnson,discursive|personal,0,7,7
+Edward Gibbon,Edmund Burke,discursive|personal,0,4,4
+Edward Gibbon,Jean-Jacques Rousseau,discursive,0,2,2
+Edward Gibbon,Joshua Reynolds,discursive,0,2,2
+Edward Gibbon,Joseph Addison,discursive,0,2,2
+Edward Gibbon,Jonathan Swift,discursive,0,2,2
+Edward Gibbon,Voltaire,discursive,0,4,4
+Edward Gibbon,Oliver Goldsmith,discursive,0,5,5
+Edward Gibbon,David Hume,discursive,0,8,8
+Edward Gibbon,Benjamin Franklin,discursive,0,2,2
+Edward Gibbon,Isaac Newton,discursive,0,2,2
+Edward Gibbon,R.B. Sheridan,discursive,0,2,2
+Edward Gibbon,John Wilkes,discursive,0,2,2
+Edward Gibbon,Joseph Priestley,discursive,0,2,2
+Jonathan Swift,Alexander Pope,discursive|personal,0,7,7
+Jonathan Swift,Samuel Richardson,discursive,0,2,2
+Jonathan Swift,Samuel Johnson,discursive,0,11,11
+Jonathan Swift,Edmund Burke,discursive,0,4,4
+Jonathan Swift,Frances Burney,discursive,0,2,2
+Jonathan Swift,John Milton,discursive,0,7,7
+Jonathan Swift,Joseph Addison,discursive,0,20,20
+Jonathan Swift,William Shakespeare,discursive,0,5,5
+Jonathan Swift,John Dryden,discursive,0,17,17
+Jonathan Swift,Benjamin Franklin,discursive,0,4,4
+Jonathan Swift,Voltaire,discursive,0,4,4
+Jonathan Swift,Earl of Shaftesbury,discursive,0,3,3
+Jonathan Swift,John Locke,discursive,0,4,4
+Jonathan Swift,David Hume,discursive,0,4,4
+Jonathan Swift,Robert Boyle,discursive,0,5,5
+Jonathan Swift,Richard Steele,discursive,0,7,7
+Jonathan Swift,James Boswell,discursive,0,3,3
+Jonathan Swift,Oliver Goldsmith,discursive,0,3,3
+Jonathan Swift,Laurence Sterne,discursive,0,2,2
+Jonathan Swift,R.B. Sheridan,discursive,0,2,2
+Jonathan Swift,David Garrick,discursive,0,3,3
+Edmund Burke,Samuel Johnson,correspondence|discursive|personal,1,12,12
+Edmund Burke,Arthur Young,correspondence,5,0,0
+Edmund Burke,Benjamin Franklin,correspondence|discursive,4,3,3
+Edmund Burke,David Garrick,correspondence|discursive,3,7,7
+Edmund Burke,Elizabeth Montagu,correspondence,1,0,0
+Edmund Burke,James Boswell,correspondence|discursive,1,7,7
+Edmund Burke,Joshua Reynolds,correspondence|discursive,2,10,10
+Edmund Burke,Oliver Goldsmith,discursive|personal,0,7,7
+Edmund Burke,Frances Burney,discursive,0,5,5
+Edmund Burke,Voltaire,discursive,0,4,4
+Edmund Burke,John Locke,discursive,0,3,3
+Edmund Burke,Thomas Paine,discursive,0,5,5
+Edmund Burke,David Hume,discursive,0,3,3
+Edmund Burke,Earl of Shaftesbury,discursive,0,2,2
+Edmund Burke,Hester Chapone,discursive,0,2,2
+Edmund Burke,John Milton,discursive,0,3,3
+Edmund Burke,R.B. Sheridan,discursive,0,5,5
+Edmund Burke,John Wilkes,discursive,0,5,5
+Edmund Burke,Catharine Macaulay,discursive,0,2,2
+Edmund Burke,Joseph Addison,discursive,0,2,2
+Edmund Burke,Richard Steele,discursive,0,2,2
+Edmund Burke,Isaac Newton,discursive,0,2,2
+Edmund Burke,Hester Thrale,discursive,0,2,2
+Edmund Burke,John Dryden,discursive,0,2,2
+Alexander Pope,Samuel Johnson,discursive,0,4,4
+Alexander Pope,John Milton,discursive,0,2,2
+Alexander Pope,Joseph Addison,discursive,0,6,6
+Alexander Pope,John Dryden,discursive,0,8,8
+Alexander Pope,John Locke,discursive,0,2,2
+Alexander Pope,Voltaire,discursive,0,4,4
+Alexander Pope,Benjamin Franklin,discursive,0,2,2
+Alexander Pope,Richard Steele,discursive,0,2,2
+Laurence Sterne,David Garrick,personal,0,0,0
+Laurence Sterne,Joshua Reynolds,personal,0,0,0
+Laurence Sterne,Samuel Richardson,discursive,0,3,3
+Laurence Sterne,Jean-Jacques Rousseau,discursive,0,2,2
+Laurence Sterne,Samuel Johnson,discursive,0,7,7
+Laurence Sterne,John Milton,discursive,0,2,2
+Laurence Sterne,Joseph Addison,discursive,0,2,2
+Laurence Sterne,James Boswell,discursive,0,2,2
+Laurence Sterne,Oliver Goldsmith,discursive,0,4,4
+Laurence Sterne,Richard Steele,discursive,0,2,2
+Laurence Sterne,Benjamin Franklin,discursive,0,2,2
+Adam Smith,David Hume,correspondence|discursive|personal,1,7,7
+Adam Smith,Jean-Jacques Rousseau,discursive,0,3,3
+Adam Smith,Samuel Johnson,discursive,0,3,3
+Adam Smith,Oliver Goldsmith,discursive,0,2,2
+Adam Smith,Montesquieu,discursive,0,2,2
+R.B. Sheridan,Samuel Johnson,discursive,0,5,5
+R.B. Sheridan,Frances Burney,discursive,0,2,2
+R.B. Sheridan,John Dryden,discursive,0,2,2
+R.B. Sheridan,Oliver Goldsmith,discursive,0,3,3
+R.B. Sheridan,James Boswell,discursive,0,3,3
+R.B. Sheridan,David Garrick,discursive,0,4,4
+Bernard Mandeville,Jean-Jacques Rousseau,discursive,0,2,2
+Bernard Mandeville,Samuel Johnson,discursive,0,2,2
+Bernard Mandeville,John Locke,discursive,0,2,2
+Bernard Mandeville,David Hume,discursive,0,2,2
+David Hume,Horace Walpole,correspondence,3,0,0
+David Hume,Jean-Jacques Rousseau,discursive|personal,0,5,5
+David Hume,James Boswell,discursive|personal,0,2,2
+David Hume,Samuel Johnson,discursive,0,8,8
+David Hume,Joseph Addison,discursive,0,6,6
+David Hume,John Dryden,discursive,0,2,2
+David Hume,John Locke,discursive,0,6,6
+David Hume,Voltaire,discursive,0,10,10
+David Hume,Oliver Goldsmith,discursive,0,3,3
+David Hume,Descartes,discursive,0,4,4
+David Hume,Catharine Macaulay,discursive,0,4,4
+David Hume,Joseph Priestley,discursive,0,2,2
+David Hume,Condillac,discursive,0,2,2
+David Hume,Montesquieu,discursive,0,4,4
+David Hume,Francis Hutcheson,discursive,0,4,4
+David Hume,Thomas Reid,discursive,0,3,3
+David Hume,John Wilkes,discursive,0,2,2
+Joseph Addison,Samuel Richardson,discursive,0,2,2
+Joseph Addison,Samuel Johnson,discursive,0,17,17
+Joseph Addison,John Milton,discursive,0,10,10
+Joseph Addison,William Shakespeare,discursive,0,4,4
+Joseph Addison,John Dryden,discursive,0,15,15
+Joseph Addison,Elizabeth Montagu,discursive,0,2,2
+Joseph Addison,Voltaire,discursive,0,3,3
+Joseph Addison,Richard Steele,discursive,0,12,12
+Joseph Addison,Earl of Shaftesbury,discursive,0,2,2
+Joseph Addison,John Locke,discursive,0,3,3
+Joseph Addison,James Boswell,discursive,0,4,4
+Joseph Addison,Oliver Goldsmith,discursive,0,6,6
+Joseph Addison,Benjamin Franklin,discursive,0,2,2
+Joseph Addison,David Garrick,discursive,0,2,2
+Francis Hutcheson,John Locke,discursive,0,4,4
+Francis Hutcheson,Earl of Shaftesbury,discursive,0,2,2
+Descartes,John Dryden,discursive,0,2,2
+Descartes,John Locke,discursive,0,4,4
+Descartes,Isaac Newton,discursive,0,9,9
+Joseph Priestley,Mary Wollstonecraft,personal,0,0,0
+Joseph Priestley,Samuel Johnson,discursive,0,3,3
+Joseph Priestley,John Locke,discursive,0,2,2
+Joseph Priestley,Benjamin Franklin,discursive,0,5,5
+Joseph Priestley,Thomas Reid,discursive,0,2,2
+Earl of Shaftesbury,John Milton,discursive,0,2,2
+Earl of Shaftesbury,William Shakespeare,discursive,0,3,3
+Earl of Shaftesbury,John Dryden,discursive,0,5,5
+Earl of Shaftesbury,John Locke,discursive,0,6,6
+Earl of Shaftesbury,Robert Boyle,discursive,0,3,3
+James Boswell,Samuel Johnson,correspondence|discursive|personal,94,21,21
+James Boswell,Elizabeth Montagu,correspondence,1,0,0
+James Boswell,Samuel Richardson,discursive,0,2,2
+James Boswell,Jean-Jacques Rousseau,discursive,0,2,2
+James Boswell,Joshua Reynolds,discursive,0,5,5
+James Boswell,William Shakespeare,discursive,0,2,2
+James Boswell,Voltaire,discursive,0,2,2
+James Boswell,Oliver Goldsmith,discursive,0,5,5
+James Boswell,Montesquieu,discursive,0,2,2
+James Boswell,John Wilkes,discursive,0,4,4
+James Boswell,Hester Thrale,discursive,0,4,4
+James Boswell,Catharine Macaulay,discursive,0,2,2
+James Boswell,David Garrick,discursive,0,7,7
+James Boswell,Richard Steele,discursive,0,2,2
+James Boswell,Benjamin Franklin,discursive,0,2,2
+Robert Boyle,Samuel Johnson,discursive,0,2,2
+Robert Boyle,John Milton,discursive,0,5,5
+Robert Boyle,William Shakespeare,discursive,0,2,2
+Robert Boyle,John Dryden,discursive,0,3,3
+Robert Boyle,John Locke,discursive,0,8,8
+Robert Boyle,Isaac Newton,discursive,0,11,11
+Robert Boyle,David Garrick,discursive,0,2,2
+William Godwin,Mary Wollstonecraft,discursive|personal,0,2,2
+Benjamin Franklin,Samuel Johnson,discursive,0,2,2
+Benjamin Franklin,Joshua Reynolds,discursive,0,2,2
+Benjamin Franklin,Oliver Goldsmith,discursive,0,2,2
+Benjamin Franklin,Isaac Newton,discursive,0,2,2
+Isaac Newton,Jean-Jacques Rousseau,discursive,0,2,2
+Isaac Newton,Samuel Johnson,discursive,0,5,5
+Isaac Newton,John Milton,discursive,0,11,11
+Isaac Newton,William Shakespeare,discursive,0,5,5
+Isaac Newton,John Dryden,discursive,0,3,3
+Isaac Newton,John Locke,discursive,0,16,16
+Isaac Newton,Voltaire,discursive,0,3,3
+Isaac Newton,Oliver Goldsmith,discursive,0,2,2
+Isaac Newton,David Hartley,discursive,0,2,2
+Catharine Macaulay,Samuel Johnson,discursive,0,2,2
+Catharine Macaulay,John Milton,discursive,0,2,2
+Catharine Macaulay,John Locke,discursive,0,3,3
+Catharine Macaulay,Oliver Goldsmith,discursive,0,3,3
+Catharine Macaulay,David Garrick,discursive,0,2,2
+Anna Laetitia Barbauld,Samuel Richardson,discursive,0,3,3
+Anna Laetitia Barbauld,Hester Chapone,discursive,0,2,2
+Jean-Jacques Rousseau,Maria Edgeworth,personal,0,0,0
+Jean-Jacques Rousseau,Samuel Richardson,discursive,0,2,2
+Jean-Jacques Rousseau,Samuel Johnson,discursive,0,4,4
+Jean-Jacques Rousseau,John Milton,discursive,0,4,4
+Jean-Jacques Rousseau,Voltaire,discursive,0,9,9
+Jean-Jacques Rousseau,John Locke,discursive,0,5,5
+Jean-Jacques Rousseau,Montesquieu,discursive,0,7,7
+John Wilkes,Samuel Johnson,discursive,0,4,4
+John Wilkes,Joshua Reynolds,discursive,0,3,3
+John Wilkes,David Garrick,discursive,0,3,3
+Hester Thrale,Samuel Johnson,discursive,0,5,5
+Hester Thrale,Joshua Reynolds,discursive,0,3,3
+Hester Thrale,Oliver Goldsmith,discursive,0,3,3
+Hester Thrale,David Garrick,discursive,0,3,3
+John Dryden,Samuel Johnson,discursive,0,16,16
+John Dryden,John Milton,discursive,0,21,21
+John Dryden,William Shakespeare,discursive,0,7,7
+John Dryden,John Locke,discursive,0,6,6
+John Dryden,Voltaire,discursive,0,2,2
+John Dryden,David Garrick,discursive,0,4,4
+John Dryden,Oliver Goldsmith,discursive,0,2,2
+John Dryden,Richard Steele,discursive,0,2,2
+Samuel Richardson,Samuel Johnson,correspondence|discursive|personal,4,11,11
+Samuel Richardson,Hester Chapone,personal,0,0,0
+Samuel Richardson,Henry Fielding,personal,0,0,0
+Samuel Richardson,John Milton,discursive,0,3,3
+Samuel Richardson,William Shakespeare,discursive,0,2,2
+Samuel Richardson,Oliver Goldsmith,discursive,0,4,4
+Samuel Richardson,Voltaire,discursive,0,3,3
+Samuel Richardson,Richard Steele,discursive,0,2,2
+Samuel Johnson,Frances Burney,correspondence|discursive|personal,7,5,5
+Samuel Johnson,David Garrick,correspondence|discursive|personal,6,13,13
+Samuel Johnson,Elizabeth Montagu,correspondence|discursive|personal,1,5,5
+Samuel Johnson,Hannah More,correspondence|personal,1,0,0
+Samuel Johnson,Hester Chapone,correspondence|discursive,1,2,2
+Samuel Johnson,Joshua Reynolds,correspondence|discursive|personal,25,11,11
+Samuel Johnson,Oliver Goldsmith,correspondence|discursive|personal,2,12,12
+Samuel Johnson,Charles Burney Sr,personal,0,0,0
+Samuel Johnson,John Milton,discursive,0,15,15
+Samuel Johnson,William Shakespeare,discursive,0,7,7
+Samuel Johnson,Voltaire,discursive,0,10,10
+Samuel Johnson,John Locke,discursive,0,6,6
+Samuel Johnson,David Hartley,discursive,0,2,2
+Samuel Johnson,Montesquieu,discursive,0,3,3
+Samuel Johnson,Thomas Reid,discursive,0,2,2
+Samuel Johnson,Richard Steele,discursive,0,4,4
+Hester Chapone,Frances Burney,correspondence,11,0,0
+Hester Chapone,Elizabeth Montagu,correspondence|discursive|personal,1,2,2
+Hester Chapone,Oliver Goldsmith,discursive,0,2,2
+Hannah More,Frances Burney,correspondence,5,0,0
+Hannah More,Horace Walpole,correspondence|personal,1,0,0
+Hannah More,Elizabeth Montagu,correspondence|personal,2,0,0
+Hannah More,David Garrick,personal,0,0,0
+Oliver Goldsmith,Joshua Reynolds,discursive|personal,0,6,6
+Oliver Goldsmith,Frances Burney,discursive,0,2,2
+Oliver Goldsmith,John Milton,discursive,0,8,8
+Oliver Goldsmith,William Shakespeare,discursive,0,3,3
+Oliver Goldsmith,John Locke,discursive,0,4,4
+Oliver Goldsmith,Voltaire,discursive,0,2,2
+Oliver Goldsmith,David Garrick,discursive,0,7,7
+Oliver Goldsmith,Richard Steele,discursive,0,4,4
+Montesquieu,John Milton,discursive,0,3,3
+Montesquieu,John Locke,discursive,0,6,6
+Montesquieu,Voltaire,discursive,0,7,7
+Charles Burney Sr,David Garrick,personal,0,0,0
+Charles Burney Sr,Frances Burney,personal,0,0,0
+John Locke,John Milton,discursive,0,15,15
+John Locke,William Shakespeare,discursive,0,6,6
+John Locke,Thomas Paine,discursive,0,2,2
+John Locke,Voltaire,discursive,0,4,4
+John Locke,David Hartley,discursive,0,3,3
+John Locke,Thomas Reid,discursive,0,2,2
+John Locke,Condillac,discursive,0,3,3
+William Shakespeare,John Milton,discursive,0,17,17
+William Shakespeare,Voltaire,discursive,0,2,2
+William Shakespeare,David Garrick,discursive,0,3,3
+Maria Edgeworth,Frances Burney,correspondence,1,0,0
+David Garrick,Elizabeth Montagu,correspondence,1,0,0
+David Garrick,Joshua Reynolds,correspondence|discursive,1,7,7
+David Garrick,Frances Burney,discursive,0,3,3
+David Garrick,John Milton,discursive,0,2,2
+David Garrick,Voltaire,discursive,0,2,2
+Joshua Reynolds,Elizabeth Montagu,correspondence,1,0,0
+Joshua Reynolds,Frances Burney,discursive,0,3,3
+Joshua Reynolds,Voltaire,discursive,0,2,2
+Joshua Reynolds,John Milton,discursive,0,2,2
+John Milton,Voltaire,discursive,0,6,6
+John Milton,Richard Steele,discursive,0,2,2
+John Milton,Elizabeth Montagu,discursive,0,3,3
+Voltaire,Elizabeth Montagu,discursive,0,2,2
+Horace Walpole,Frances Burney,correspondence,1,0,0
+Horace Walpole,Elizabeth Montagu,correspondence,1,0,0
+Frances Burney,Elizabeth Montagu,correspondence,7,0,0
