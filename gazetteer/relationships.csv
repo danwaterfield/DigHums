@@ -333,3 +333,44 @@ AUTHOR_ASMITH,Adam Smith,author,frequented,VENUE_EDIN009,University of Edinburgh
 AUTHOR_AFERGUSON,Adam Ferguson,author,member_of,VENUE_EDIN009,University of Edinburgh,venue,1764,General knowledge — Professor of Moral Philosophy
 AUTHOR_HBLAIR,Hugh Blair,author,member_of,VENUE_EDIN009,University of Edinburgh,venue,1762,General knowledge — Regius Professor of Rhetoric
 AUTHOR_WROBERTSON,William Robertson,author,member_of,VENUE_EDIN009,University of Edinburgh,venue,1762,General knowledge — Principal
+,David Garrick,person,friend_of,,Edmund Burke,person,1765,garrick_boaden_1831
+,David Garrick,person,friend_of,,Elizabeth Montagu,person,1770,garrick_boaden_1831
+,David Garrick,person,friend_of,,Joshua Reynolds,person,1761,garrick_boaden_1831
+,David Garrick,person,friend_of,,Oliver Goldsmith,person,1766,garrick_boaden_1831
+,David Garrick,person,friend_of,,Denis Diderot,person,1763,garrick_boaden_1831
+,David Garrick,person,friend_of,,Voltaire,person,1764,garrick_boaden_1831
+,David Garrick,person,friend_of,,Beaumarchais,person,1769,garrick_boaden_1831
+,David Garrick,person,succeeded_by,,R.B. Sheridan,person,1776,garrick_boaden_1831
+,David Garrick,person,quarrel_with,,George Colman,person,1766,garrick_boaden_1831
+,David Garrick,person,quarrel_with,,Charles Churchill,person,1761,garrick_boaden_1831
+,David Garrick,person,quarrel_with,,Robert Dodsley,person,1757,garrick_boaden_1831
+,David Garrick,person,friend_of,,William Hogarth,person,1745,garrick_boaden_1831
+,David Garrick,person,friend_of,,Thomas Gainsborough,person,1766,garrick_boaden_1831
+,David Garrick,person,friend_of,,Edward Gibbon,person,1776,garrick_boaden_1831
+,David Garrick,person,publisher_of,,Willoughby Lacy,person,1747,garrick_boaden_1831
+,Hester Thrale Piozzi,person,friend_of,,Arthur Murphy,person,1765,piozzi_thraliana
+,Hester Thrale Piozzi,person,quarrel_with,,Giuseppe Baretti,person,1776,piozzi_thraliana
+,Hester Thrale Piozzi,person,friend_of,,William Seward,person,1776,piozzi_thraliana
+,Hester Thrale Piozzi,person,friend_of,,Charles Burney Sr,person,1776,piozzi_thraliana
+,Hester Thrale Piozzi,person,friend_of,,Joshua Reynolds,person,1777,piozzi_thraliana
+,Hester Thrale Piozzi,person,friend_of,,Elizabeth Montagu,person,1777,piozzi_thraliana
+,Hester Thrale Piozzi,person,friend_of,,Sarah Siddons,person,1789,piozzi_thraliana
+,Hester Thrale Piozzi,person,friend_of,,Hannah More,person,1778,piozzi_thraliana
+,Hester Thrale Piozzi,person,friend_of,,Hester Chapone,person,1778,piozzi_thraliana
+,Arthur Murphy,person,friend_of,,Samuel Johnson,person,1765,piozzi_thraliana
+,William Seward,person,friend_of,,Frances Burney,person,1776,piozzi_thraliana
+,Elizabeth Montagu,person,friend_of,,Elizabeth Carter,person,1758,montagu_blunt
+,Elizabeth Montagu,person,friend_of,,Mrs Vesey,person,1762,montagu_blunt
+,Elizabeth Montagu,person,friend_of,,Duchess of Portland,person,1762,montagu_blunt
+,Elizabeth Montagu,person,friend_of,,Lord Lyttelton,person,1762,montagu_blunt
+,Elizabeth Montagu,person,friend_of,,James Beattie,person,1770,montagu_blunt
+,Mary Berry,person,friend_of,,Horace Walpole,person,1788,berry_lewis
+,Mary Berry,person,friend_of,,Mrs Damer,person,1788,berry_lewis
+,Mary Berry,person,friend_of,,Madame de Stael,person,1784,berry_lewis
+,Mary Berry,person,friend_of,,Frances Burney,person,1812,berry_lewis
+,Horace Walpole,person,friend_of,,General Conway,person,1771,walpole_last_journals
+,Horace Walpole,person,friend_of,,Edward Gibbon,person,1776,walpole_last_journals
+,Edmund Burke,person,rival_of,,Charles James Fox,person,1780,walpole_last_journals
+,Edmund Burke,person,rival_of,,Lord North,person,1774,walpole_last_journals
+,Charles James Fox,person,friend_of,,R.B. Sheridan,person,1780,walpole_last_journals
+,R.B. Sheridan,person,rival_of,,William Pitt,person,1783,walpole_last_journals

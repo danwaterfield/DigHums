@@ -1,1192 +1,1412 @@
 person_a,person_b,weight,year_min,year_max,sources
-Frances Burney,Susanna Burney Phillips,1153,1705,1877,hemlow_catalogue
+- (Bardilly) Meignenn,Frances Burney,1,1816,1816,hemlow_catalogue
+A Gray,Charles Burney Jr,1,1807,1807,coulombeau_waterfield
+A Lady,Samuel Johnson,1,1762,1762,johnson_hill
+A Young Clergyman,Samuel Johnson,1,1780,1780,johnson_hill
+AMR,Charles Burney Jr,2,1781,1781,coulombeau_waterfield
+Abbe de la Bintinnaye,Edmund Burke,2,1792,1792,burke_1844
+Abercrombie Gordon,Charles Burney Jr,6,1779,1808,coulombeau_waterfield
+Aberdeen Gordon,Charles Burney Jr,1,1788,1788,hemlow_catalogue
+Aberdeen journal,Charles Burney Jr,1,1779,1779,coulombeau_waterfield
+Adam Smith,David Hume,1,1750,1776,known_connection
+Adhémar (de Chavagnac) vicomte de la Rochefaucauld,Frances Burney,1,1816,1816,hemlow_catalogue
+Adolph,Frances Burney,1,,,hemlow_catalogue
+Adrienne de Chavagnac,Frances Burney,3,,,hemlow_catalogue
+Adrienne de Noailles,Frances Burney,8,1802,1813,hemlow_catalogue
+Adèmie (de Chavagnac) vicom-,Frances Burney,1,1816,1816,hemlow_catalogue
+Alexander Chalmers,Charles Burney Jr,5,1784,1803,coulombeau_waterfield
+Alexander Gerard,Charles Burney Jr,1,1780,1780,coulombeau_waterfield
+Alexander Wedderburne,Edmund Burke,1,1778,1778,burke_1844
+Alexander d'Arblay,Charles Burney Jr,2,1812,1817,coulombeau_waterfield
+Alexander d'Arblay,Frances Burney,79,1802,1835,hemlow_catalogue
+Alexandre d'Arblay,Charles Burney Jr,10,1794,1812,coulombeau_waterfield
+Alexandre d'Arblay,Choderlos de Laclos,1,1784,1793,waterfield_thesis
 Alexandre d'Arblay,Frances Burney,676,1790,1819,hemlow_catalogue
-Frances Burney,Hester Thrale Piozzi,541,1778,1821,hemlow_catalogue|piozzi
-Charles Burney Jr,Charles Burney Sr,415,1780,1812,hemlow_catalogue
-Charles Burney Sr,Frances Burney,399,1764,1815,hemlow_catalogue
-Hester Thrale Piozzi,Samuel Johnson,334,1765,1784,johnson_hill|piozzi
-Charlotte Broome,Frances Burney,328,1782,1839,hemlow_catalogue
-George Montagu,Horace Walpole,252,1736,1770,walpole_1820
-Frances Burney,Princess Sophia,181,1818,1837,hemlow_catalogue
-Frances Burney,Samuel Crisp,180,1773,1782,hemlow_catalogue
-Frances Burney,Marie de Maisonneuve,172,1798,1838,hemlow_catalogue
-Charles Burney Jr,Frances Burney,165,1766,1821,hemlow_catalogue
-Hester Thrale Piozzi,Penelope Pennington,164,1789,1821,piozzi
-Horace Walpole,William Cole,161,1730,1782,walpole_1820
-Henry Seymour Conway,Horace Walpole,139,1740,1795,walpole_1820
-Horace Walpole,Thomas Gray,139,1734,1771,correspsearch
-Charles Burney Jr,Charles Parr Burney,133,1795,1817,hemlow_catalogue
-Frances Burney,Georgiana Waddington,126,1705,1824,hemlow_catalogue
-Frances Burney,Maria (Allen) Rishton,108,1765,1812,hemlow_catalogue
-Charles Burney Sr,Thomas Twining,103,1773,1782,hemlow_catalogue
-Frances Burney,Princess Elizabeth,100,1814,1832,hemlow_catalogue
-James Boswell,Samuel Johnson,93,1763,1784,johnson_hill
-Frances Burney,Frederica Locke,83,1784,1824,hemlow_catalogue
-Alexander d'Arblay,Frances Burney,78,1802,1835,hemlow_catalogue
-Esther Burney,Frances Burney,69,1788,1827,hemlow_catalogue
-Johann Christian Bach,Padre Martini,66,1757,1782,correspsearch_european
-John Taylor,Samuel Johnson,63,1752,1784,johnson_hill
-Charles Burney Sr,Charlotte Harriet,57,1807,1813,hemlow_catalogue
-Frances Burney,Louis,54,1790,1811,hemlow_catalogue
-Horace Walpole,William Wentworth,51,1756,1790,walpole_1820
-Edmund Burke,Marquis of Rockingham,49,1766,1782,burke_1844
-Frances Burney,Princess Mary,48,1816,1832,hemlow_catalogue
-Charles Parr Burney,Frances Burney,42,1812,1839,hemlow_catalogue
-Charles Burney Sr,William Bewley,41,1757,1781,hemlow_catalogue
-Charles Burney Sr,Hester Thrale Piozzi,40,1750,1782,hemlow_catalogue
-Frances Burney,Thomas Lowndes,39,1777,1779,hemlow_catalogue
-Edmund Burke,Richard Burke Jr,37,1787,1794,burke_1844
-Frances Burney,Lally-Tollendal,35,1792,1822,hemlow_catalogue
-Angelique,Frances Burney,35,1794,1798,hemlow_catalogue
-Lucy Porter,Samuel Johnson,35,1749,1784,johnson_hill
-Edmund Burke,Richard Champion,35,1774,1781,burke_1844
-Horace Walpole,Richard Bentley,33,1735,1755,walpole_1820
-Frances Burney,Marquis de Lafayette,32,1792,1816,hemlow_catalogue
-Ludwig Prandtl,Rudolf Mehmke,32,,,correspsearch
-Carl Philipp Emanuel Bach,Johann Gottlob Immanuel Breitkopf,32,1765,1774,correspsearch_european
-Charles Burney Jr,John Young,31,1808,1816,hemlow_catalogue
-John Nichols,Samuel Johnson,30,1778,1785,johnson_hill
-"Bahr, Hermann","Hofmannsthal, Hugo von",27,1891,1891,correspsearch_european
-Frances Burney,Sarah Martha Holroyd,26,1815,1818,hemlow_catalogue
-Bennet Langton,Samuel Johnson,24,1755,1784,johnson_hill
-Joshua Reynolds,Samuel Johnson,24,1764,1784,johnson_hill
-Charles Burney Sr,Frances Crewe,24,1793,1807,hemlow_catalogue
-Frances Burney,Sarah Harriet Burney,22,1817,1839,hemlow_catalogue
-Edmund Burke,Thomas Hussey,22,1790,1797,burke_1844
-Frances Burney,Hester Maria Thrale (Lady Keith),21,1816,1826,hemlow_catalogue
-Frances Burney,Marianne (Burney) Bourdois,21,1806,1812,hemlow_catalogue
-Edmund Burke,Richard Shackleton,21,1744,1785,burke_1844
-Edmund Burke,William Windham,21,1789,1797,burke_1844
-Horace Walpole,Mary Hamilton,21,1783,1795,correspsearch
+Alexandre d'Arblay,Louis de Narbonne,1,1792,1793,waterfield_thesis
+Alexandre d'Arblay,Louis-Alexandre Berthier,1,1801,1802,waterfield_thesis
+Alexandre d'Arblay,Marquis de Lafayette,1,1789,1834,known_connection
+Alfred Tennel,Frances Burney,1,,,hemlow_catalogue
+Alfred Turner,Frances Burney,1,1836,1836,hemlow_catalogue
 Amelia Angerstein,Frances Burney,20,1812,1833,hemlow_catalogue
-Frances Burney,James Burney,20,1775,1817,hemlow_catalogue
-Horace Walpole,Richard West,20,1710,1742,walpole_1820
-"Hofmannsthal, Hugo von","Schnitzler, Arthur",20,1891,1892,correspsearch_european
-Frances Burney,Rosette (Rose) Burney,19,1782,1800,hemlow_catalogue
-Samuel Johnson,Thomas Warton,19,1754,1780,johnson_hill
-Horace Walpole,Lady Hervey,19,1757,1766,walpole_1820
-Charlotte Barrett,Frances Burney,19,1822,1839,hemlow_catalogue
-Charles Burney Sr,Samuel Johnson,19,1755,1784,hemlow_catalogue|johnson_hill|lonsdale_lynn
-Frances Burney,Gasparo Pacchierotti,18,1781,1783,hemlow_catalogue
-Charles Burney Jr,Samuel Parr,18,1786,1817,hemlow_catalogue
-Frances Reynolds,Samuel Johnson,18,1762,1784,johnson_hill
-Elizabeth Lady Templetown,Frances Burney,17,1786,1823,hemlow_catalogue
-Samuel Johnson,William Strahan,17,1754,1778,johnson_hill
-Dr. Brocklesby,Samuel Johnson,17,1783,1784,johnson_hill
-Countess of Ailesbury,Horace Walpole,17,1761,1779,walpole_1820
-Joseph Priestley,Josiah Wedgwood,17,1781,1781,priestley
-CAB,Frances Burney,15,1780,1785,hemlow_catalogue
-Duc de Luxembourg,Frances Burney,15,1814,1817,hemlow_catalogue
-Duke of Richmond,Edmund Burke,14,1770,1776,burke_1844
-Frances Bowdler,Frances Burney,13,1786,1821,hemlow_catalogue
-Frances Burney,Jacob Bryant,13,1786,1790,hemlow_catalogue
-Cassandra (Leigh) Cooke,Frances Burney,13,1794,1819,hemlow_catalogue
-Charlotte Beckerdorff,Frances Burney,13,1812,1816,hemlow_catalogue
-Charles Burney Jr,G I Huntingford,13,1808,1814,hemlow_catalogue
-Henry Thrale,Samuel Johnson,13,1769,1780,johnson_hill
-Carl Philipp Emanuel Bach,Georg Michael Telemann,13,1767,1771,correspsearch_european
-Frances Burney,Victor de Latour Maubourg,12,,,hemlow_catalogue
-Frances Burney,George Owen Cambridge,12,1817,1836,hemlow_catalogue
-Charles Burney Jr,Rosette (Rose) Burney,12,1784,1816,hemlow_catalogue
-Edward Cave,Samuel Johnson,12,1734,1756,johnson_hill
-Lewis Paul,Samuel Johnson,12,1740,1763,johnson_hill
-Charles Burney Sr,David Garrick,12,1758,1779,hemlow_catalogue
-Elizabeth (Allen) Burney,Frances Burney,11,1768,1796,hemlow_catalogue
-ERB,Frances Burney,11,1800,1801,hemlow_catalogue
-Charles Burney Sr,Padre Martini,11,1770,1780,hemlow_catalogue
-Mrs. Aston,Samuel Johnson,11,1769,1782,johnson_hill
-Frances Burney,Mary (Hamilton) Dickenson,10,1783,1785,hemlow_catalogue
-Frances Burney,Sarah (Burney) Payne,10,1825,1839,hemlow_catalogue
-Frances Burney,James Hutton,10,1775,1777,hemlow_catalogue
-Charles Burney Sr,Christian Latrobe,10,1799,1804,hemlow_catalogue
-Dr. Birch,Samuel Johnson,10,1743,1756,johnson_hill
-Edmund Hector,Samuel Johnson,10,1776,1784,johnson_hill
-Horace Walpole,John Chute,10,1754,1771,walpole_1820
-Frances Burney,Hester (Mulso) Chapone,9,1783,1793,hemlow_catalogue
-CBF,Frances Burney,9,1788,1796,hemlow_catalogue
-Etiennette,Frances Burney,9,1796,1819,hemlow_catalogue
-Frances Burney,Princess Augusta,9,1819,1825,hemlow_catalogue
-Capt. James Keir,Joseph Priestley,9,,,priestley
-Catherine de Boulogne,Frances Burney,9,1804,1818,hemlow_catalogue
-Ann (Astley) Agnew,Frances Burney,8,1814,1814,hemlow_catalogue
-Frances Burney,Queen Charlotte,8,1794,1817,hemlow_catalogue
-Charles Burney Sr,William Mason,8,1769,1790,hemlow_catalogue
-Charles Burney Sr,Denis Diderot,8,1771,1777,hemlow_catalogue
-Charles Burney Sr,Joseph Cooper Walker,8,1793,1793,hemlow_catalogue
-Charles Burney Sr,John Wall Callcott,8,,,hemlow_catalogue
-Charles Burney Jr,John Kaye,8,1808,1816,hemlow_catalogue
-John Ryland,Samuel Johnson,8,1756,1756,johnson_hill
-Mrs. Montagu,Samuel Johnson,8,1774,1783,johnson_hill
-George Strahan,Samuel Johnson,8,1763,1784,johnson_hill
-Charles Burney Sr,Fulke Greville,8,1751,1769,hemlow_catalogue|lonsdale_lynn
-Frances Burney,Samuel Johnson,7,1779,1784,hemlow_catalogue
-Dorothy Young,Frances Burney,7,1771,1793,hemlow_catalogue
-Charles Babbage,Frances Burney,7,1829,1829,hemlow_catalogue
-Frances Burney,Sophia Thrale Hoare,7,1812,1823,hemlow_catalogue
-Charles Burney Sr,Horace Walpole,7,1774,1791,hemlow_catalogue
-Charles Burney Jr,Peter Paul Dobree,7,1808,1812,hemlow_catalogue
-Charles Burney Jr,Richard Payne Knight,7,1808,1811,hemlow_catalogue
-Charles Burney Jr,Thomas Dampier,7,1809,1812,hemlow_catalogue
-Charles Burney Jr,Sir George Pretyman Tomline,7,1811,1817,hemlow_catalogue
-Joseph Warton,Samuel Johnson,7,1753,1780,johnson_hill
-Edmund Burke,Henry Dundas,7,1787,1793,burke_1844
-Edmund Burke,Frances Crewe,7,1794,1797,burke_1844
-"Kant, Immanuel","Lambert, Johann Heinrich",7,1765,1770,correspsearch
-Adrienne de Noailles,Frances Burney,7,1802,1813,hemlow_catalogue
-Charlotte Boyle-Walsingham,Frances Burney,6,1783,1786,hemlow_catalogue
-Frances Burney,William Seward,6,1779,1790,hemlow_catalogue
-Frances Burney,Richard Owen Cambridge,6,1785,1790,hemlow_catalogue
-Frances Burney,Jane (Campbell) Smelt,6,1787,1788,hemlow_catalogue
-Frances (Phillips) Raper,Frances Burney,6,1816,1816,hemlow_catalogue
-Denise-Victoire,Frances Burney,6,1794,1813,hemlow_catalogue
-Frances Burney,William Locke,6,1794,1822,hemlow_catalogue
-Frances Burney,Lady Lucy (Fitzgerald) Foley,6,1812,1817,hemlow_catalogue
-Frances Burney,George Hay,6,1818,1818,hemlow_catalogue
-Frances Burney,Sarah Baker,6,1818,1827,hemlow_catalogue
-Frances Burney,PML,6,1812,1815,hemlow_catalogue
-Catherine Coussmaker,Frances Burney,6,1778,1778,hemlow_catalogue
-Frances Burney,Sophia Streatfield,6,1779,1781,hemlow_catalogue
-Charles Burney Sr,"Garret Wesley, Earl of Mornington",6,1773,1777,hemlow_catalogue
-Charles Burney Sr,Richard Cox,6,,,hemlow_catalogue
-Charles Burney Sr,Charlotte Smith,6,,,hemlow_catalogue
-Charles Burney Jr,"George, 2nd Earl Spencer",6,1810,1815,hemlow_catalogue
-C J Blomfield,Charles Burney Jr,6,1810,1817,hemlow_catalogue
-John Perkins,Samuel Johnson,6,1774,1784,johnson_hill
-Edmund Burke,William Gerard Hamilton,6,1763,1765,burke_1844
-Edmund Burke,Philip Francis,6,1778,1790,burke_1844
-"Haller, Albrecht von (1708-1777)","Lambert, Johann Heinrich (1728-1777)",6,1758,1760,correspsearch
-Frances Burney,Hannah More,5,1782,1786,hemlow_catalogue
-Frances Burney,Richard Bentley,5,1835,1835,hemlow_catalogue
-Frances Burney,Philippe de Noailles,5,1793,1793,hemlow_catalogue
-Clarissa Marion ( ) Bolton,Frances Burney,5,1832,1835,hemlow_catalogue
-Elizabeth (Robinson) Montagu,Frances Burney,5,1782,1790,hemlow_catalogue
-Anne (Leigh) Frodsham,Frances Burney,5,1791,1792,hemlow_catalogue
-Frances Burney,SBP mutilated,5,1792,1792,hemlow_catalogue
-Frances Burney,Hector (Mulso) Chapone,5,1798,1800,hemlow_catalogue
-Frances Burney,William Wilberforce,5,1816,1816,hemlow_catalogue
-Frances Burney,Sarah (Payne) Burney,5,1813,1821,hemlow_catalogue
-Caroline Anna Moore,Frances Burney,5,1824,1825,hemlow_catalogue
-Frances Burney,Harriet Bowdler,5,1815,1818,hemlow_catalogue
-Charles Burney Sr,Christoph Daniel Ebeling,5,1771,1773,hemlow_catalogue
-Arthur Young,Charles Burney Sr,5,1773,1773,hemlow_catalogue
-Charles Burney Sr,Ralph Griffiths,5,1777,1796,hemlow_catalogue
-Charles Burney Sr,Edmond Malone,5,1804,1804,hemlow_catalogue
-Charles Burney Sr,Johann Christian Hittner,5,1807,1807,hemlow_catalogue
-Charles Burney Jr,John Philip Kemble,5,1808,1817,hemlow_catalogue
-Charles Burney Jr,William Vincent,5,1808,1812,hemlow_catalogue
-David Garrick,Samuel Johnson,5,1765,1771,johnson_hill
-Samuel Johnson,Thomas Cadell,5,1778,1781,johnson_hill
-Dr. Hamilton,Samuel Johnson,5,1783,1784,johnson_hill
-Dr. Vyse,Samuel Johnson,5,1777,1781,johnson_hill
-Mauritius Lowe,Samuel Johnson,5,1778,1783,johnson_hill
-Samuel Johnson,Susanna Arabella Thrale,5,1783,1784,johnson_hill
-Francesco Sastres,Samuel Johnson,5,1784,1784,johnson_hill
-Arthur Young,Edmund Burke,5,1770,1797,burke_1844
-Charles James Fox,Edmund Burke,5,1774,1788,burke_1844
-Duke of Portland,Edmund Burke,5,1775,1794,burke_1844
-Edmund Burke,William Jones,5,1779,1783,burke_1844
-Earl Fitzwilliam,Edmund Burke,5,1791,1796,burke_1844
-Joseph Priestley,Thomas Wedgwood,5,1771,1771,priestley
-Dr. William Withering,Joseph Priestley,5,,,priestley
-Arnail-Francois de Jaucourt,Frances Burney,5,1815,1815,hemlow_catalogue
-Frances Burney,Madame de Stael,5,1793,1802,hemlow_catalogue
-Frances Burney,Mary (Granville) Delany,4,1785,1787,hemlow_catalogue
-Frances Burney,Marie-Louise,4,,,hemlow_catalogue
-Elizabeth Juliana Schwellenberg,Frances Burney,4,1792,1792,hemlow_catalogue
-Frances Burney,Margaret Planta,4,1802,1802,hemlow_catalogue
-Edward Foss,Frances Burney,4,1818,1818,hemlow_catalogue
-Frances Burney,Jean-Gabriel Peltier,4,1791,1792,hemlow_catalogue
-Frances Burney,Lady Hales,4,1770,1776,hemlow_catalogue
-Frances Burney,Thomas Barlow,4,1775,1775,hemlow_catalogue
-Frances Burney,Henrietta Maria (Bannister) North,4,1778,1782,hemlow_catalogue
-Frances Burney,Mary (Danby) Countess of Har-,4,1812,1814,hemlow_catalogue
-Frances Burney,Frances Crewe,4,1814,1814,hemlow_catalogue
-Frances Burney,Mme de la Grange,4,1815,1815,hemlow_catalogue
-Frances Burney,Henrietta Maria (Banister) North,4,1778,1782,hemlow_catalogue
-Charles Burney Sr,Jean-Baptiste-Antoine Suard,4,1771,1777,hemlow_catalogue
-Charles Burney Sr,Thomas Pennant,4,1773,1774,hemlow_catalogue
-Anthony Chamier,Charles Burney Sr,4,1776,1780,hemlow_catalogue
-Charles Burney Sr,Rosette [Rose] Burney,4,,,hemlow_catalogue
-Charles Burney Sr,Lady Mary Lowther,4,1807,1807,hemlow_catalogue
-Charles Burney Sr,Clarissa Marion,4,1832,1835,hemlow_catalogue
-Charles Burney Jr,Thomas Twining,4,1787,1790,hemlow_catalogue
-Charles Burney Jr,Shute Barrington,4,1809,1815,hemlow_catalogue
-Charles Burney Jr,William Wilberforce,4,1809,1814,hemlow_catalogue
-Charles Burney Jr,Patrick Kelly,4,1809,1813,hemlow_catalogue
-Charles Burney Jr,Thomas Maurice,4,1812,1816,hemlow_catalogue
-James Elphinston,Samuel Johnson,4,1750,1750,johnson_hill
-Samuel Johnson,Samuel Richardson,4,1750,1756,johnson_hill
-Miss Boothby,Samuel Johnson,4,1755,1759,johnson_hill
-Mrs. Johnson,Samuel Johnson,4,,,johnson_hill
-Samuel Johnson,Thomas Percy,4,,,johnson_hill
-Francis Barber,Samuel Johnson,4,1768,1783,johnson_hill
-George Steevens,Samuel Johnson,4,1774,1777,johnson_hill
-Robert Levett,Samuel Johnson,4,1774,1776,johnson_hill
-John Hoole,Samuel Johnson,4,1774,1784,johnson_hill
-Samuel Johnson,Sir John Hawkins,4,1784,1784,johnson_hill
-Henry Thrale,Hester Thrale Piozzi,4,1773,1779,piozzi
-Dr. Gray,Hester Thrale Piozzi,4,1800,1817,piozzi
-Edmund Burke,Rev. Dr. Leland,4,1765,1774,burke_1844
-"Charles Townshend, Esq",Edmund Burke,4,1771,1771,burke_1844
-Dr. Benj. Franklin,Edmund Burke,4,1775,1781,burke_1844
-Edmund Burke,"Wm. Baker, Esq",4,1775,1777,burke_1844
-Edmund Burke,Rt. Hon. Edm. Sexton Pery,4,1778,1778,burke_1844
-Dr. John Curry,Edmund Burke,4,1778,1779,burke_1844
-Chev. de la Bintinnaye,Edmund Burke,4,1791,1791,burke_1844
-Horace Walpole,Rev. Dr. Birch,4,1745,1764,walpole_1820
-Carl Philipp Emanuel Bach,Denis Diderot,4,1774,1774,correspsearch|correspsearch_european
-Carl Philipp Emanuel Bach,Heinrich Wilhelm von Gerstenberg,4,1772,1774,correspsearch_european
-Carl Philipp Emanuel Bach,Johann Nikolaus Forkel,4,1773,1774,correspsearch_european
-Charles Burney Sr,Jacques-Pierre Brissot,4,1783,1783,fonds_brissot
-Padre Martini,Wolfgang Amadeus Mozart,4,1770,1778,correspsearch_european
-Frances Burney,Henriette de Maurville,4,1815,1824,hemlow_catalogue
-Cecile de Sommery,Frances Burney,4,1818,1818,hemlow_catalogue
-Dr. Brocklesby,Edmund Burke,4,1776,1788,burke_1844
-Elizabeth (Vesey) Handcock,Frances Burney,3,1783,1787,hemlow_catalogue
-Frances Burney,Lady Rothes,3,1787,1798,hemlow_catalogue
-Frances Burney,Stephen Allen,3,1833,1833,hemlow_catalogue
-Charles Foster,Frances Burney,3,,,hemlow_catalogue
-Antoine-Marie-Rene Terrier de Monciel,Frances Burney,3,,,hemlow_catalogue
-Charles Sicard,Frances Burney,3,,,hemlow_catalogue
-Frances Burney,Marie-Charlotte (Bontemps),3,1795,1795,hemlow_catalogue
-Frances Burney,Jean-Baptiste-Gabriel Bazille,3,,,hemlow_catalogue
-Frances Burney,Louis-Alexandre Berthier,3,1801,1801,hemlow_catalogue
-Frances Burney,Mathieu,3,1805,1805,hemlow_catalogue
-Frances Burney,Laurent,3,1814,1814,hemlow_catalogue
-Frances Burney,Louise-Josephine,3,1815,1815,hemlow_catalogue
-Adrienne (de Chavagnac),Frances Burney,3,,,hemlow_catalogue
-Felicite,Frances Burney,3,1816,1816,hemlow_catalogue
-Frances Burney,William Tudor,3,,,hemlow_catalogue
-Frances Burney,MF,3,,,hemlow_catalogue
-Frances Burney,Mary (Palmer) O'Brien Marchioness of Thomond,3,1791,1791,hemlow_catalogue
-CMAPW addington,Frances Burney,3,1820,1820,hemlow_catalogue
-Frances Burney,Harriet Wilson,3,1822,1822,hemlow_catalogue
-CHFB,Frances Burney,3,1835,1837,hemlow_catalogue
-Frances Burney,Mary Bruce Strange,3,,,hemlow_catalogue
-Frances Burney,Isabella Strange,3,1778,1778,hemlow_catalogue
-Frances Burney,Henry Thrale,3,1780,1780,hemlow_catalogue
-Dunbar (Suttanner) Fisher,Frances Burney,3,1813,1813,hemlow_catalogue
-Cecilia (Ogilvie) Lock,Frances Burney,3,1814,1814,hemlow_catalogue
-Charles Parr,Frances Burney,3,1814,1814,hemlow_catalogue
-Frances Burney,Lady Charlotte Fitzgerald,3,1817,1817,hemlow_catalogue
-Eleonore,Frances Burney,3,1814,1818,hemlow_catalogue
-Charles Burney Sr,Samuel Crisp,3,1770,1776,hemlow_catalogue
-Charles Burney Sr,James Hutton,3,1788,1788,hemlow_catalogue
-Charles Burney Sr,Dr James Lind,3,1774,1775,hemlow_catalogue
-Anna (Dillingham) Ord,Charles Burney Sr,3,1776,1776,hemlow_catalogue
-Charles Burney Sr,Francesco Roncaglia,3,1778,1778,hemlow_catalogue
-Charles Burney Sr,Susanna Burney Phillips,3,,,hemlow_catalogue
-Charles Burney Sr,Lord Charles Bruce,3,1807,1807,hemlow_catalogue
-Charles Burney Jr,Charles Butler,3,1806,1816,hemlow_catalogue
-Caroline Princess of Wales,Charles Burney Jr,3,1809,1812,hemlow_catalogue
-Charles Burney Jr,Edmond Malone,3,1809,1810,hemlow_catalogue
-Charles Burney Jr,Sir Thomas Lawrence,3,1811,1815,hemlow_catalogue
-Charles Burney Jr,Joseph Planta,3,1812,1815,hemlow_catalogue
-Charles Burney Jr,Robert Finch,3,1814,1814,hemlow_catalogue
-John Levett,Samuel Johnson,3,1743,1743,johnson_hill
-John Newbery,Samuel Johnson,3,1751,1751,johnson_hill
-Joseph Baretti,Samuel Johnson,3,1761,1762,johnson_hill
-Samuel Johnson,William Drummond,3,1766,1767,johnson_hill
-Dr. Farmer,Samuel Johnson,3,1770,1780,johnson_hill
-Samuel Johnson,Warren Hastings,3,1774,1781,johnson_hill
-Dr. Lawrence,Samuel Johnson,3,1775,1782,johnson_hill
-Mrs. Boswell,Samuel Johnson,3,1776,1782,johnson_hill
-Mrs. Prowse,Samuel Johnson,3,,,johnson_hill
-Mrs. Strahan,Samuel Johnson,3,1781,1782,johnson_hill
-Miss Burney,Samuel Johnson,3,,,johnson_hill
-Samuel Johnson,William Gerard Hamilton,3,1782,1784,johnson_hill
-Miss Lawrence,Samuel Johnson,3,1782,1783,johnson_hill
-Samuel Johnson,William Windham,3,1783,1784,johnson_hill
-Ozias Humphry,Samuel Johnson,3,1784,1784,johnson_hill
-Edmund Burke,"Wm. Dowdeswell, Esq",3,1771,1772,burke_1844
-Edmund Burke,the Bishop of Chester,3,1771,1774,burke_1844
-Edmund Burke,"Wm. Burke, Esq",3,1782,1793,burke_1844
-Edmund Burke,"Rich. Burke, Sen., Esq",3,1783,1791,burke_1844
-Edmund Burke,"Rt. Hon. Henry Dundas -> Rich. Burke, Jun., Esq",3,1791,1792,burke_1844
-Edmund Burke,Lord Grenville,3,1792,1792,burke_1844
-Edmund Burke,Rt. Hon. Henry Grattan,3,1793,1794,burke_1844
-Thomas Gray,"West, Richard, 1716-1742",3,1739,1740,correspsearch
-Giovanni Battista Martini,Leopold Mozart,3,1771,1778,correspsearch_european
-Carl Philipp Emanuel Bach,Georg Philipp Telemann,3,1756,1759,correspsearch_european
-Leopold Mozart,Padre Martini,3,1770,1776,correspsearch_european
-Frances Brooke,Frances Burney,2,1783,1783,hemlow_catalogue
-Frances Burney,Margaret Duchess of Portland,2,1783,1785,hemlow_catalogue
-Frances Burney,Susannah Dobson,2,1784,1784,hemlow_catalogue
-CB jr,Frances Burney,2,1785,1785,hemlow_catalogue
-Edward Jerningham,Frances Burney,2,1786,1794,hemlow_catalogue
-Frances Burney,William Watts,2,,,hemlow_catalogue
-Frances Burney,John Jebb,2,1832,1832,hemlow_catalogue
-Frances Burney,Johanna Christina Huttner,2,,,hemlow_catalogue
-(Astley) Agnew,Frances Burney,2,1834,1835,hemlow_catalogue
-Frances Burney,Maria (Burney) Bourdois,2,1839,1839,hemlow_catalogue
-Frances Burney,Jean-Baptiste Le Chevalier,2,1794,1794,hemlow_catalogue
-Frances Burney,Mme Bion,2,,,hemlow_catalogue
-Cesar,Frances Burney,2,1804,1804,hemlow_catalogue
-Frances Burney,Jean-Pierre,2,1808,1811,hemlow_catalogue
+Andree Amelié,Charles Burney,1,,,hemlow_catalogue
+Andrew Lumisden,Charles Burney,2,1776,1780,hemlow_catalogue
+Andrew Spottiswoode,Charles Burney,1,1806,1806,hemlow_catalogue
+André Grétry,Charles Burney,1,1770,1770,tour_contact
+Angelique,Frances Burney,35,1794,1798,hemlow_catalogue
+Ann Agnew,Frances Burney,10,1814,1835,hemlow_catalogue
+Anna (Wilbraham) Grosvenor,Frances Burney,1,,,hemlow_catalogue
+Anna Ord,Charles Burney,3,1776,1776,hemlow_catalogue
+Anne (Philips) Lady Murray,Frances Burney,1,,,hemlow_catalogue
 Anne (de Beauveau),Frances Burney,2,1811,1811,hemlow_catalogue
-Frances Burney,Precourt Bazille,2,1803,1803,hemlow_catalogue
-Florentin de Latour Maubourg,Frances Burney,2,,,hemlow_catalogue
-Frances Burney,Henry Raper,2,1819,1819,hemlow_catalogue
-Frances Burney,Thomas King,2,,,hemlow_catalogue
-Frances Burney,Rosette [Hester] Burney,2,1789,1789,hemlow_catalogue
-Frances Burney,Marianne (Burney),2,1793,1796,hemlow_catalogue
-Frances Burney,Suzanne[?] Simmond,2,1793,1793,hemlow_catalogue
-Charlotte (Allen) Burney,Frances Burney,2,1793,1794,hemlow_catalogue
-Frances (Glanville) Boscawen,Frances Burney,2,,,hemlow_catalogue
-Frances Burney,MG,2,1797,1797,hemlow_catalogue
-David Baillie Warden,Frances Burney,2,,,hemlow_catalogue
-Dominique-Jean baron Larrey,Frances Burney,2,1811,1811,hemlow_catalogue
-David Richter,Frances Burney,2,1800,1800,hemlow_catalogue
-Frances Burney,Richard Twining,2,,,hemlow_catalogue
-Eleanore princess d'Henin,Frances Burney,2,1818,1818,hemlow_catalogue
-Frances Burney,Julia (Locke) Angerstein,2,,,hemlow_catalogue
-Frances Burney,RA Keith (Payne) Burney,2,1821,1821,hemlow_catalogue
-Charlotte Fitzgerald Baroness Ros,Frances Burney,2,1824,1824,hemlow_catalogue
-Frances Burney,Marie de Maisonnneuve,2,,,hemlow_catalogue
-CBFB with PS from EBB,Frances Burney,2,1828,1828,hemlow_catalogue
-Comtesse Irma Moore,Frances Burney,2,,,hemlow_catalogue
-Frances Burney,Thomas Faulkner,2,,,hemlow_catalogue
-Frances Burney,Thomas [?],2,1832,1832,hemlow_catalogue
-CFB,Frances Burney,2,1833,1833,hemlow_catalogue
+Anne Frodsham,Frances Burney,5,1791,1792,hemlow_catalogue
+Anne/Key,Frances Burney,1,,,hemlow_catalogue
+Anthony Chamier,Charles Burney,4,1776,1780,hemlow_catalogue
+Anthony Chamier,Frances Burney,1,,,hemlow_catalogue
+Anthony Noll < >,Charles Burney Jr,1,1808,1808,coulombeau_waterfield
+Anthony Nott,Charles Burney Jr,1,1808,1808,hemlow_catalogue
+Antoine Bourdois,Frances Burney,1,,,hemlow_catalogue
+Antoine de Rivarol,Edmund Burke,1,1791,1791,burke_1844
+Antoine-Marie-Rene Terrier de Monciel,Frances Burney,3,,,hemlow_catalogue
+Antonio Sacchini,Charles Burney,1,1770,1770,tour_contact
+Apperley,Samuel Johnson,1,,,johnson_hill
+Archibald Hamilton,Samuel Johnson,1,1776,1776,johnson_hill
+Arcédot Carlos,Frances Burney,1,1817,1817,hemlow_catalogue
+Arnail-Francois de Jaucourt,Frances Burney,5,1815,1815,hemlow_catalogue
+Arnold Sommerfeld,Ludwig Prandtl,1,,,correspsearch
+"Arouet, François-Marie","Rousseau, Jean-Jacques",1,1755,1755,correspsearch
+Arthur Lee,Edmund Burke,2,1775,1775,burke_1844
+Arthur Murray,Charles Burney,1,1778,1778,hemlow_catalogue
+Arthur Percy Upton,Frances Burney,1,,,hemlow_catalogue
+Arthur Pigot,Edmund Burke,1,1783,1783,burke_1844
+Arthur Young,Charles Burney,5,1773,1773,hemlow_catalogue
+Arthur Young,Charles Burney Jr,3,1792,1792,coulombeau_waterfield
+Arthur Young,Edmund Burke,5,1770,1797,burke_1844
+"Ashton, Thomas, 1715-1775",Thomas Gray,2,1739,1740,correspsearch
+BENJ. V M..IIAN,Joseph Priestley,1,,,priestley
+"Bahr, Hermann","Hofmannsthal, Hugo von",27,1891,1891,correspsearch_european
+Baldassare Galuppi,Charles Burney,1,1770,1770,tour_contact
+Barbee Neuville,Frances Burney,1,1803,1803,hemlow_catalogue
+Baron Crewe,Charles Burney Jr,1,,,coulombeau_waterfield
+Baron Mazeres »,Edmund Burke,1,1779,1779,burke_1844
+Baron d'Holbach,Charles Burney,1,1771,1771,hemlow_catalogue
+Basil Montagu,Charles Burney Jr,1,1812,1812,coulombeau_waterfield
+"Beer-Hofmann, Richard","Hofmannsthal, Hugo von",2,1890,1891,correspsearch_european
+Benjamin Franklin,Edmund Burke,4,1775,1781,burke_1844
+Benjamin Moseley,Charles Burney,1,,,hemlow_catalogue
+Benjamin Vaughan,Joseph Priestley,1,1780,1780,priestley
+Benjamin Waddington,Frances Burney,1,1790,1790,hemlow_catalogue
+Benjamin West,Charles Burney Jr,4,1802,1809,coulombeau_waterfield
+Bennet Langton,Charles Burney Jr,9,1786,1799,coulombeau_waterfield
+Bennet Langton,Samuel Johnson,24,1755,1784,johnson_hill
+Bentz für den Stadtrat von Zittau,Carl Philipp Emanuel Bach,2,1753,1753,correspsearch_european
+Bernard Dewes,Frances Burney,1,1788,1788,hemlow_catalogue
+Bernardo marquis del Campo,Frances Burney,1,1789,1789,hemlow_catalogue
+Bishop of Killaloe,Edmund Burke,1,1782,1782,burke_1844
 Bonneville-Lara,Frances Burney,2,1791,1791,hemlow_catalogue
-Frances Burney,Louis Bonne [?],2,1793,1793,hemlow_catalogue
-Frances Burney,L. M. Barral,2,,,hemlow_catalogue
-Frances Burney,J-F Loisiel,2,,,hemlow_catalogue
-Frances Burney,Marie-Tresse (Poniakowitz [?]),2,1814,1814,hemlow_catalogue
-Frances Burney,Marie-Pierre de Grandmaison,2,1816,1816,hemlow_catalogue
-Frances Burney,Petronille-Jacoba (Van Ryssel) de Latour-Maubourg,2,1815,1822,hemlow_catalogue
-Frances Burney,William Cutler [?],2,1777,1777,hemlow_catalogue
-Frances Burney,Lady Hales [?],2,1776,1776,hemlow_catalogue
-Elizabeth (Allen) Meeke,Frances Burney,2,1776,1776,hemlow_catalogue
-Frances Burney,Sophia (?) Gast,2,,,hemlow_catalogue
-Frances Burney,SEB {& CAB},2,,,hemlow_catalogue
-Elizabeth Montagu,Frances Burney,2,1780,1780,hemlow_catalogue
-Frances Burney,Francois Sastres,2,,,hemlow_catalogue
-Frances Burney,with AA to,2,1812,1812,hemlow_catalogue
-Frances Burney,William Lowndes,2,1813,1813,hemlow_catalogue
-Comyn,Frances Burney,2,1813,1813,hemlow_catalogue
-Frances Burney,Lady Bute,2,1814,1814,hemlow_catalogue
-Frances Burney,Martin Charles Burney,2,1814,1814,hemlow_catalogue
-Frances Burney,Harvey (Hervey) Countess of,2,1814,1814,hemlow_catalogue
-Amédée duc de Duras,Frances Burney,2,1815,1815,hemlow_catalogue
-Frances Burney,Mary (Danby) Countess of Harcourt,2,1817,1817,hemlow_catalogue
-Frances Burney,Princess [Knowles],2,1817,1817,hemlow_catalogue
-Frances Burney,Mary (Danby),2,1813,1813,hemlow_catalogue
-Frances Burney,Princess [Elizabeth],2,1813,1816,hemlow_catalogue
-Charles Burney Sr,Christopher Smart,2,1749,1768,hemlow_catalogue
-Charles Burney Sr,Vicenzio Martinelli,2,1760,1770,hemlow_catalogue
-Charles Burney Sr,"John Montagu, 4th Earl of Sandwich",2,1762,1774,hemlow_catalogue
-Charles Burney Sr,Elizabeth (Allen) Burney,2,1762,1764,hemlow_catalogue
-Charles Burney Sr,Frances (Macartney) Greville,2,1767,1767,hemlow_catalogue
-Charles Burney Sr,Sir William Hamilton,2,1770,1770,hemlow_catalogue
-Charles Burney Sr,Regina (Valentini) Mingotti,2,1771,1774,hemlow_catalogue
-Charles Burney Sr,Louis DeVisme,2,1772,1772,hemlow_catalogue
-Charles Burney Sr,Leonard Smelt,2,1774,1774,hemlow_catalogue
-Charles Burney Sr,"Charles, 1st Earl Whitworth",2,1774,1774,hemlow_catalogue
-Charles Burney Sr,James Harris,2,1775,1778,hemlow_catalogue
-Charles Burney Sr,Lucrezia Aguiari,2,1775,1776,hemlow_catalogue
-Andrew Lumisden,Charles Burney Sr,2,1776,1780,hemlow_catalogue
-Charles Burney Sr,Charlotte Lennox,2,,,hemlow_catalogue
-Charles Burney Sr,Joseph Banks,2,,,hemlow_catalogue
-Charles Burney Sr,James Boswell,2,,,hemlow_catalogue
-Charles Burney Sr,Gasparo Pacchierotti,2,1792,1792,hemlow_catalogue
-Charles Burney Sr,Elizabeth (Meeke?) Lamb,2,1791,1791,hemlow_catalogue
-Charles Burney Sr,Joshua Reynolds,2,1791,1791,hemlow_catalogue
-Charles Burney Sr,Elizabeth Lindley and Linley Sheridan,2,,,hemlow_catalogue
-Charles Burney Sr,"Frederic, 5th Earl of Guilford",2,1792,1804,hemlow_catalogue
-Charles Burney Sr,William Windham,2,,,hemlow_catalogue
-Charles Burney Sr,"Louis-Marie-Joseph d'Albert d'Ailly, duc de Chaulnes",2,1794,1794,hemlow_catalogue
-Charles Burney Sr,William Keate,2,,,hemlow_catalogue
-Charles Burney Sr,Sir Joseph Banks,2,,,hemlow_catalogue
-Charles Burney Sr,Dorothy Young,2,,,hemlow_catalogue
-Charles Burney Sr,Edward Miller,2,1796,1796,hemlow_catalogue
-Charles Burney Sr,Sir Uvedale Price,2,,,hemlow_catalogue
-Charles Burney Sr,George Colman [?],2,1797,1797,hemlow_catalogue
-Brownlow North,Charles Burney Sr,2,,,hemlow_catalogue
-Charles Burney Sr,GMAP Waddington,2,,,hemlow_catalogue
-Charles Burney Sr,John Bellour,2,,,hemlow_catalogue
-Charles Burney Sr,Lady Bruce,2,1806,1807,hemlow_catalogue
-Charles Burney Sr,"Thomas, 1st Earl of Ailesbury",2,1807,1807,hemlow_catalogue
-Charles Burney Sr,Frances (Phillips) Burney,2,1807,1807,hemlow_catalogue
-Charles Burney Sr,Esther Burney,2,1807,1807,hemlow_catalogue
-Charles Burney Jr,Gilbert Gerard,2,1778,1788,hemlow_catalogue
-Charles Burney Jr,Susanna Burney Phillips,2,1779,1799,hemlow_catalogue
-Charles Burney Jr,George Ashby,2,1789,1789,hemlow_catalogue
-Charles Burney Jr,Henry Kett,2,1790,1790,hemlow_catalogue
-Charles Burney Jr,Edward Maltby,2,1808,1815,hemlow_catalogue
-Charles Burney Jr,Thomas Gaisford,2,1809,1810,hemlow_catalogue
-Charles Burney Jr,James Ferry,2,1809,1809,hemlow_catalogue
-Charles Burney Jr,Martin Davy,2,1809,1809,hemlow_catalogue
-Charles Burney Jr,Thomas Kidd,2,1809,1809,hemlow_catalogue
-Charles Burney Jr,Josiah Thomas,2,1810,1810,hemlow_catalogue
-Charles Burney Jr,Thomas Young,2,1810,1811,hemlow_catalogue
-Charles Burney Jr,Edward Copleston,2,1810,1816,hemlow_catalogue
-Charles Burney Jr,Edward Crachroft [?],2,1811,1812,hemlow_catalogue
-Charles Burney Jr,Joseph Banks,2,1812,1814,hemlow_catalogue
-Charles Burney Jr,Samuel Butler,2,1813,1815,hemlow_catalogue
-Charles Burney Jr,John Philip Kemble [?],2,1813,1815,hemlow_catalogue
-Charles Burney Jr,Henry Drury,2,1813,1816,hemlow_catalogue
-Charles Burney Jr,George Henry Law,2,1814,1815,hemlow_catalogue
-Charles Burney Jr,George Dyer,2,1814,1815,hemlow_catalogue
-Charles O'Connor,Samuel Johnson,2,1757,1777,johnson_hill
-Earl of Bute,Samuel Johnson,2,1762,1762,johnson_hill
-Dr. Leland,Samuel Johnson,2,1775,1775,johnson_hill
-Samuel Johnson,W. Bagshaw,2,1773,1784,johnson_hill
-Richard Green,Samuel Johnson,2,1775,1784,johnson_hill
-Mrs. Aston and Mrs. Gastrell,Samuel Johnson,2,1775,1784,johnson_hill
-John Wesley,Samuel Johnson,2,1776,1779,johnson_hill
-Dr. Adams,Samuel Johnson,2,,,johnson_hill
-Dr. Dodd,Samuel Johnson,2,1777,1777,johnson_hill
+Brigita Piez Frontoni,Charles Burney,1,1776,1776,hemlow_catalogue
+Brownlow North,Charles Burney,2,,,hemlow_catalogue
+Brownlow North,Charles Burney Jr,1,1781,1781,coulombeau_waterfield
+Burdett Mesangere,Frances Burney,1,,,hemlow_catalogue
+Byrne,Edmund Burke,1,1795,1795,burke_1844
+"Bölsche, Wilhelm","Hofmannsthal, Hugo von",1,1891,1891,correspsearch_european
+C J Blomfield,Charles Burney Jr,16,1807,1817,"coulombeau_waterfield,hemlow_catalogue"
+C J Hatcher,Charles Burney Jr,1,1813,1813,hemlow_catalogue
+C J Hunter,Charles Burney Jr,1,1813,1813,coulombeau_waterfield
+C T F Metcalf,Frances Burney,1,,,hemlow_catalogue
+C T P Metcalf,Frances Burney,1,,,hemlow_catalogue
+C W Berd,Charles Burney Jr,1,1791,1791,coulombeau_waterfield
+C W Halliday,Frances Burney,1,,,hemlow_catalogue
+C W Hatchett,Frances Burney,1,,,hemlow_catalogue
+C W LeBas,Charles Burney Jr,3,1813,1813,coulombeau_waterfield
+"CAB, FB",Charles Burney Jr,1,1780,1780,coulombeau_waterfield
+"CAB, SEB, FB",Charles Burney Jr,1,1781,1781,coulombeau_waterfield
+CBFB (one page written by FBA as NPG),Frances Burney,1,,,hemlow_catalogue
+CBFB with PS from EBB,Frances Burney,2,1828,1828,hemlow_catalogue
+CFB,Frances Burney,2,1833,1833,hemlow_catalogue
+CTT P Metcalfe,Charles Burney,1,1836,1836,hemlow_catalogue
+Cadell,Charles Burney Jr,7,1795,1809,coulombeau_waterfield
+Capt. James Keir,Joseph Priestley,10,,,priestley
+Capt. Mercer,Edmund Burke,1,1790,1790,burke_1844
+Capt. Woodford,Edmund Burke,2,1791,1794,burke_1844
 Captain Langton,Samuel Johnson,2,1778,1782,johnson_hill
+Carl Philipp Emanuel Bach,Christoph Gottlieb von Murr,1,1765,1765,correspsearch_european
+Carl Philipp Emanuel Bach,Collegium scholarchale,2,1767,1767,correspsearch_european
+Carl Philipp Emanuel Bach,Denis Diderot,4,1774,1774,correspsearch|correspsearch_european
+Carl Philipp Emanuel Bach,Georg Michael Telemann,13,1767,1771,correspsearch_european
+Carl Philipp Emanuel Bach,Georg Philipp Telemann,3,1756,1759,correspsearch_european
+Carl Philipp Emanuel Bach,Georg Wilhelm Kottowsky,1,1769,1769,correspsearch_european
+Carl Philipp Emanuel Bach,Hans Jacob Faber,1,1767,1767,correspsearch_european
+Carl Philipp Emanuel Bach,Heinrich Wilhelm von Gerstenberg,4,1772,1774,correspsearch_european
+Carl Philipp Emanuel Bach,Johann Christian Bach,1,1767,1767,correspsearch_european
+Carl Philipp Emanuel Bach,Johann Elias Bach,1,1742,1742,correspsearch_european
+Carl Philipp Emanuel Bach,Johann Gottlob Immanuel Breitkopf,32,1765,1774,correspsearch_european
+Carl Philipp Emanuel Bach,Johann Joachim Eschenburg,2,1771,1771,correspsearch_european
+Carl Philipp Emanuel Bach,Johann Nikolaus Forkel,4,1773,1774,correspsearch_european
+Carl Philipp Emanuel Bach,Johann Philipp Kirnberger,2,1769,1771,correspsearch_european
+Carl Philipp Emanuel Bach,Michael Gabriel Fredersdorf,1,1757,1757,correspsearch_european
+Carl Philipp Emanuel Bach,einen Hauptmann,1,1766,1766,correspsearch_european
+Carlo Broschi Farinelli,Charles Burney,2,1770,1770,tour_contact
+Caroline Anna Moore,Frances Burney,5,1824,1825,hemlow_catalogue
+Cassandra Cooke,Frances Burney,13,1794,1819,hemlow_catalogue
+Catherine Coussmaker,Frances Burney,6,1778,1778,hemlow_catalogue
+Catherine de Boulogne,Frances Burney,9,1804,1818,hemlow_catalogue
+Cecile (du Repaid de Caramar),Frances Burney,1,1818,1818,hemlow_catalogue
+Cecile de Sommery,Frances Burney,4,1818,1818,hemlow_catalogue
+Cecilia Burney,Charles Burney Jr,1,1788,1817,burney_letter_2022
+Cecilia Lock,Frances Burney,4,1814,1814,hemlow_catalogue
+Cecilia Maria Henslow,Charles Burney,1,,,hemlow_catalogue
+Cesar,Frances Burney,2,1804,1804,hemlow_catalogue
+Charles Arne,Charles Burney,1,1744,1748,waterfield_thesis
+Charles Babbage,Frances Burney,7,1829,1829,hemlow_catalogue
+Charles Blagden,Charles Burney,1,1792,1792,hemlow_catalogue
+Charles Burney,Charles Burney Jr,573,1780,1814,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney,Charles Butler,1,,,hemlow_catalogue
+Charles Burney,Charles Clagget,1,,,hemlow_catalogue
+Charles Burney,Charles Davy,1,1772,1772,hemlow_catalogue
+Charles Burney,Charlotte Broome,1,,,hemlow_catalogue
+Charles Burney,Charlotte Harriet Payne Burney,58,1807,1813,hemlow_catalogue
+Charles Burney,Charlotte Lennox,2,,,hemlow_catalogue
+Charles Burney,Charlotte Smith,6,,,hemlow_catalogue
+Charles Burney,Christian Cannabich,1,1772,1772,tour_contact
+Charles Burney,Christian Latrobe,10,1799,1804,hemlow_catalogue
+Charles Burney,Christoph Daniel Ebeling,5,1771,1773,hemlow_catalogue
+Charles Burney,Christoph Willibald Gluck,1,1772,1772,tour_contact
+Charles Burney,Christopher Smart,2,1749,1768,hemlow_catalogue
+Charles Burney,Clarissa Marion Bolton,4,1832,1835,hemlow_catalogue
+Charles Burney,Claude Balbastre,1,1770,1770,tour_contact
+Charles Burney,Dante Bartheleman,1,1776,1776,hemlow_catalogue
+Charles Burney,David Garrick,12,1758,1779,hemlow_catalogue
+Charles Burney,David Hume,2,1764,1766,"hemlow_catalogue,waterfield_thesis"
+Charles Burney,Denis Diderot,8,1771,1777,hemlow_catalogue
+Charles Burney,Dorothy Young,2,,,hemlow_catalogue
+Charles Burney,Dr James Lind,3,1774,1775,hemlow_catalogue
+Charles Burney,Dr Seward,1,1776,1776,waterfield_thesis
+Charles Burney,Dr Thomas Bever,1,1768,1770,waterfield_thesis
+Charles Burney,Duke of Norfolk,1,1790,1790,hemlow_catalogue
+Charles Burney,Earl Whitworth,2,1774,1774,hemlow_catalogue
+Charles Burney,Earl of Ailesbury,2,1807,1807,hemlow_catalogue
+Charles Burney,Earl of Guilford,2,1792,1804,hemlow_catalogue
+Charles Burney,Earl of Mornington,6,1773,1777,hemlow_catalogue
+Charles Burney,Earl of Sandwich,2,1762,1774,hemlow_catalogue
+Charles Burney,Edmond Ayrton,1,,,hemlow_catalogue
+Charles Burney,Edmond Malone,5,1804,1804,hemlow_catalogue
+Charles Burney,Edmund Burke,1,,,hemlow_catalogue
+Charles Burney,Edward Burke,1,,,hemlow_catalogue
+Charles Burney,Edward Miller,2,1796,1796,hemlow_catalogue
+Charles Burney,Elizabeth Allen Burney,2,1762,1764,hemlow_catalogue
+Charles Burney,Elizabeth Ironmonger,1,,,hemlow_catalogue
+Charles Burney,Elizabeth LeNoir,1,1807,1807,hemlow_catalogue
+Charles Burney,Elizabeth Meeke,2,1791,1791,hemlow_catalogue
+Charles Burney,Elizabeth Sheridan,2,,,hemlow_catalogue
+Charles Burney,Ella Cornelia Knight,1,1800,1800,hemlow_catalogue
+Charles Burney,Esther Burney,3,1752,1807,hemlow_catalogue
+Charles Burney,Executors of Sir Joshua Reynolds,1,1791,1791,hemlow_catalogue
+Charles Burney,Felice de Giardini,1,1774,1774,hemlow_catalogue
+Charles Burney,Ferdinando Bertoni,1,1780,1780,hemlow_catalogue
+Charles Burney,Frances Burney,401,1764,1815,hemlow_catalogue
+Charles Burney,Frances Greville,2,1767,1767,hemlow_catalogue
+Charles Burney,Frances Phillips Burney,2,1807,1807,hemlow_catalogue
+Charles Burney,Francesco Roncaglia,3,1778,1778,hemlow_catalogue
+Charles Burney,Frederica Locke,1,,,hemlow_catalogue
+Charles Burney,Frederick the Great,1,1772,1772,tour_contact
+Charles Burney,Friedrich Klopstock,1,1772,1772,tour_contact
+Charles Burney,Friedrich Wilhelm Marpurg,1,1772,1772,tour_contact
+Charles Burney,Fulke Greville,9,1748,1806,"hemlow_catalogue|lonsdale_lynn,waterfield_thesis"
+Charles Burney,Gabrieli Pozzi,1,1777,1777,hemlow_catalogue
+Charles Burney,Gaetano Caffarelli,1,1770,1770,tour_contact
+Charles Burney,Gaetano Ferdinando Tenducci,1,1776,1776,hemlow_catalogue
+Charles Burney,Gasparo Pacchierotti,2,1792,1792,hemlow_catalogue
+Charles Burney,George Colman,2,1797,1797,hemlow_catalogue
+Charles Burney,George Owen Cambridge,1,1836,1836,hemlow_catalogue
+Charles Burney,George Robinson,1,1773,1773,hemlow_catalogue
+Charles Burney,George Steevens,1,,,hemlow_catalogue
+Charles Burney,George Symme Calcott,1,1790,1790,hemlow_catalogue
+Charles Burney,Georgiana Waddington,2,,,hemlow_catalogue
+Charles Burney,Giambattista Mancini,1,1776,1776,hemlow_catalogue
+Charles Burney,Giovanni Battista Sammartini,1,1770,1770,tour_contact
+Charles Burney,Giovanni Paisiello,1,1770,1770,tour_contact
+Charles Burney,Granville Greville,1,1802,1802,hemlow_catalogue
+Charles Burney,Henry Harington,1,1773,1773,hemlow_catalogue
+Charles Burney,Hester Burney,1,,,hemlow_catalogue
+Charles Burney,Hester Thrale Piozzi,40,1750,1782,hemlow_catalogue
+Charles Burney,Horace Walpole,7,1774,1791,hemlow_catalogue
+Charles Burney,J Moursson,1,1772,1772,hemlow_catalogue
+Charles Burney,Jacques-Pierre Brissot,4,1783,1783,fonds_brissot
+Charles Burney,James Boswell,2,,,hemlow_catalogue
+Charles Burney,James Bradley,1,,,hemlow_catalogue
+Charles Burney,James Harris,2,1775,1778,hemlow_catalogue
+Charles Burney,James Hutton,3,1788,1788,hemlow_catalogue
+Charles Burney,Jean-Baptiste Cléry,1,,,hemlow_catalogue
+Charles Burney,Jean-Baptiste-Antoine Suard,4,1771,1777,hemlow_catalogue
+Charles Burney,Johann Adolph Hasse,1,1773,1773,hemlow_catalogue
+Charles Burney,Johann Christian Bach,2,1762,1782,hemlow_catalogue
+Charles Burney,Johann Christian Hittner,5,1807,1807,hemlow_catalogue
+Charles Burney,John Alcock,1,1771,1771,hemlow_catalogue
+Charles Burney,John Bellour,2,,,hemlow_catalogue
+Charles Burney,John Caramali,1,1807,1807,hemlow_catalogue
+Charles Burney,John Graham,1,1835,1835,hemlow_catalogue
+Charles Burney,John Hawkesworth,1,1769,1769,hemlow_catalogue
+Charles Burney,John Horne Tooke,1,1791,1791,hemlow_catalogue
+Charles Burney,John Osborn,1,1773,1773,hemlow_catalogue
+Charles Burney,John Phillips,1,,,hemlow_catalogue
+Charles Burney,John Wall Callcott,8,,,hemlow_catalogue
+Charles Burney,Joseph Banks,4,,,hemlow_catalogue
+Charles Burney,Joseph Cooper Walker,8,1793,1793,hemlow_catalogue
+Charles Burney,Joseph Haydn,1,1791,1791,hemlow_catalogue
+Charles Burney,Joseph Plymley,1,,,hemlow_catalogue
+Charles Burney,Joseph Warton,1,1772,1772,hemlow_catalogue
+Charles Burney,Joshua Reynolds,2,1791,1791,hemlow_catalogue
+Charles Burney,Keane FitzGerald,1,1767,1767,hemlow_catalogue
+Charles Burney,Lady Banks,1,1791,1791,hemlow_catalogue
+Charles Burney,Lady Bruce,2,1806,1807,hemlow_catalogue
+Charles Burney,Lady Burroughes,1,,,hemlow_catalogue
+Charles Burney,Lady Clifford,1,1764,1764,lonsdale_lynn
+Charles Burney,Lady Manvers,1,1806,1806,hemlow_catalogue
+Charles Burney,Lady Mary Lowther,4,1807,1807,hemlow_catalogue
+Charles Burney,Leonard Smelt,2,1774,1774,hemlow_catalogue
+Charles Burney,Leopold Mozart,1,1770,1770,tour_contact
+Charles Burney,Lord Cardigan,1,1806,1806,hemlow_catalogue
+Charles Burney,Lord Charles Bruce,3,1807,1807,hemlow_catalogue
+Charles Burney,Lord Charles Herne,1,1798,1798,hemlow_catalogue
+Charles Burney,Lord Lonsdale,1,,,hemlow_catalogue
+Charles Burney,Louis DeVisme,2,1772,1772,hemlow_catalogue
+Charles Burney,"Louis-Marie-Joseph d'Albert d'Ailly, duc de Chaulnes",2,1794,1794,hemlow_catalogue
+Charles Burney,Lucrezia Aguiari,2,1775,1776,hemlow_catalogue
+Charles Burney,Luigi Maria Marchetti,1,1781,1781,hemlow_catalogue
+Charles Burney,Madame Saintmard,1,1764,1764,lonsdale_lynn
+Charles Burney,Marie Park,1,,,hemlow_catalogue
+Charles Burney,Marquis Townshend,1,1773,1773,hemlow_catalogue
+Charles Burney,Mary (Palmer) Marchioness of Thomond,1,1807,1807,hemlow_catalogue
+Charles Burney,Miss Drysdale,2,,,hemlow_catalogue
+Charles Burney,Monsieur North,1,1771,1771,hemlow_catalogue
+Charles Burney,Mr Baker,1,1777,1777,hemlow_catalogue
+Charles Burney,Mr Crewe,1,1773,1773,hemlow_catalogue
+Charles Burney,Mr Drummond,1,1770,1780,waterfield_thesis
+Charles Burney,Mrs Crewe,26,1793,1807,hemlow_catalogue
+Charles Burney,Mrs Greville,1,1758,1760,lonsdale_lynn
+Charles Burney,Mrs Rap,1,1776,1776,hemlow_catalogue
+Charles Burney,Niccolo Piccinni,1,1770,1770,tour_contact
+Charles Burney,Nicola Jommelli,1,1770,1770,tour_contact
+Charles Burney,Padre Gioacchino,1,1774,1774,hemlow_catalogue
+Charles Burney,Padre Martini,11,1770,1780,hemlow_catalogue
+Charles Burney,"Parish of St Margaret's, Lynn",1,1755,1755,hemlow_catalogue
+Charles Burney,Paul Panton,1,1779,1779,hemlow_catalogue
+Charles Burney,Philip Hayes,1,1779,1779,hemlow_catalogue
+Charles Burney,Pietro Metastasio,2,1772,1772,tour_contact
+Charles Burney,Pietro Nardini,1,1770,1770,tour_contact
+Charles Burney,Princess Charlotte,1,,,hemlow_catalogue
+Charles Burney,Ralph Griffiths,5,1777,1796,hemlow_catalogue
+Charles Burney,Regina (Valentini) Mingotti,2,1771,1774,hemlow_catalogue
+Charles Burney,Richard Cox,6,,,hemlow_catalogue
+Charles Burney,Richard Wroughton,1,,,hemlow_catalogue
+Charles Burney,"Robert Darcy, 4th Earl of Holdernesse",1,1776,1776,hemlow_catalogue
+Charles Burney,Robert Hudson,1,1768,1770,waterfield_thesis
+Charles Burney,Robert Southey,1,1833,1833,hemlow_catalogue
+Charles Burney,Robert Squire,1,1751,1760,lonsdale_lynn
+Charles Burney,Robert Strange,1,1750,1770,waterfield_thesis
+Charles Burney,Rosette Burney,4,,,hemlow_catalogue
+Charles Burney,Samuel Crisp,3,1770,1776,hemlow_catalogue
+Charles Burney,Samuel Hoole,1,,,hemlow_catalogue
+Charles Burney,Samuel Johnson,20,1755,1784,"hemlow_catalogue|johnson_hill|lonsdale_lynn,johnson_hill"
+Charles Burney,Samuel Wesley,1,1801,1801,hemlow_catalogue
+Charles Burney,Simon Nicolo Henri Linguet,1,1777,1777,hemlow_catalogue
+Charles Burney,Sir John Turner,1,1751,1760,lonsdale_lynn
+Charles Burney,Sir Uvedale Price,2,,,hemlow_catalogue
+Charles Burney,Stephen Allen,2,1751,1760,lonsdale_lynn
+Charles Burney,Susanna Burney Phillips,3,,,hemlow_catalogue
+Charles Burney,TJ Mathias,1,,,hemlow_catalogue
+Charles Burney,Thomas Hutcheson,1,1767,1767,hemlow_catalogue
+Charles Burney,Thomas Pennant,4,1773,1774,hemlow_catalogue
+Charles Burney,Thomas Twining,103,1773,1782,hemlow_catalogue
+Charles Burney,Vicenzio Martinelli,2,1760,1770,hemlow_catalogue
+Charles Burney,Voltaire,1,1770,1770,tour_contact
+Charles Burney,Warren Hastings,1,,,hemlow_catalogue
+Charles Burney,William Ayrton,1,,,hemlow_catalogue
+Charles Burney,William Bewley,41,1757,1781,hemlow_catalogue
+Charles Burney,William Crotch,1,,,hemlow_catalogue
+Charles Burney,William French,1,1791,1791,hemlow_catalogue
+Charles Burney,William Hamilton,2,1770,1770,hemlow_catalogue
+Charles Burney,William Herschel,2,1776,1776,hemlow_catalogue
+Charles Burney,William Keate,2,,,hemlow_catalogue
+Charles Burney,William Locke,2,,,hemlow_catalogue
+Charles Burney,William Lowther later Lord Lonsdale,1,,,hemlow_catalogue
+Charles Burney,William Mason,8,1769,1790,hemlow_catalogue
+Charles Burney,William Parsons,1,,,hemlow_catalogue
+Charles Burney,William Scott,1,,,hemlow_catalogue
+Charles Burney,William Windham,2,,,hemlow_catalogue
+Charles Burney,Wolfgang Amadeus Mozart,1,1770,1770,tour_contact
+Charles Burney,de Grange Blanche,1,1766,1766,hemlow_catalogue
+Charles Burney Jr,Charles Butler,6,1799,1816,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Charles Cordiner,2,1781,1781,coulombeau_waterfield
+Charles Burney Jr,Charles Cross,1,1790,1790,coulombeau_waterfield
+Charles Burney Jr,Charles Greville,1,1812,1812,coulombeau_waterfield
+Charles Burney Jr,Charles Malcolm Manners,1,1817,1817,hemlow_catalogue
+Charles Burney Jr,Charles Manners-Sutton,6,1806,1817,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Charles Matthews,1,1816,1816,coulombeau_waterfield
+Charles Burney Jr,Charles Parr Burney,393,1795,1817,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Charles Taylor,2,1800,1806,coulombeau_waterfield
+Charles Burney Jr,Charlotte Broome,4,1786,1802,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Clement Francis,1,1788,1788,coulombeau_waterfield
+Charles Burney Jr,Count <Zenobio>,1,1816,1816,coulombeau_waterfield
+Charles Burney Jr,Countess Spencer,2,1810,1810,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Cutler Moore,1,,,hemlow_catalogue
+Charles Burney Jr,Douglas Kinnaird,2,1814,1814,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Dr Monkton,1,1809,1809,hemlow_catalogue
+Charles Burney Jr,E H Barker,3,1813,1816,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,E H. Barker,1,1813,1813,coulombeau_waterfield
+Charles Burney Jr,E L Baines,4,1781,1781,coulombeau_waterfield
+Charles Burney Jr,Earl Spencer,16,1807,1817,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Edmond Malone,17,1798,1811,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Edward Cardwell,1,1811,1811,coulombeau_waterfield
+Charles Burney Jr,Edward Copleston,4,1810,1816,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Edward Crachroft,2,1811,1812,hemlow_catalogue
+Charles Burney Jr,Edward Foss,6,1799,1814,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Edward Francesco Burney,1,1780,1780,coulombeau_waterfield
+Charles Burney Jr,Edward Legge,2,1816,1816,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Edward Maltby,4,1808,1815,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,"Edward, Duke of York",1,1813,1813,coulombeau_waterfield
+Charles Burney Jr,Elizabeth Rose,1,1797,1797,hemlow_catalogue
+Charles Burney Jr,Elspet Gray,1,1810,1810,coulombeau_waterfield
+Charles Burney Jr,Esther Burney,6,1800,1815,coulombeau_waterfield
+Charles Burney Jr,Eva Garrick,3,1817,1817,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,"FB, SEB",1,1781,1781,coulombeau_waterfield
+Charles Burney Jr,Frances Burney,361,1766,1821,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Frances Millais,1,1813,1813,hemlow_catalogue
+Charles Burney Jr,"Frances North, 4th Earl of Guilford",1,1815,1815,coulombeau_waterfield
+Charles Burney Jr,Frances Raper,3,1807,1807,coulombeau_waterfield
+Charles Burney Jr,Frances Wollaston,1,1786,1786,coulombeau_waterfield
+Charles Burney Jr,Frances Wood,2,1814,1814,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Francis Milman,1,1813,1813,coulombeau_waterfield
+Charles Burney Jr,"Francis North, 4th Earl of Guilford",4,1802,1817,coulombeau_waterfield
+Charles Burney Jr,Francis Riollay,1,1783,1783,coulombeau_waterfield
+Charles Burney Jr,Francis Wollaston,1,1778,1778,coulombeau_waterfield
+Charles Burney Jr,Francis Wrangham,1,1811,1811,coulombeau_waterfield
+Charles Burney Jr,"Frederic North, 5th Earl of Guilford",1,1807,1807,coulombeau_waterfield
+Charles Burney Jr,"Frederick North, 5th Earl of Guilford",1,1792,1792,coulombeau_waterfield
+Charles Burney Jr,G A Hatch,1,1806,1806,coulombeau_waterfield
+Charles Burney Jr,G E Griffiths,18,1799,1812,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,G Woodfall,1,1817,1817,coulombeau_waterfield
+Charles Burney Jr,G.E Griffiths,1,,,coulombeau_waterfield
+Charles Burney Jr,George 2nd Earl Spencer,4,1803,1804,coulombeau_waterfield
+Charles Burney Jr,George Ashby,2,1789,1789,hemlow_catalogue
+Charles Burney Jr,George Baker,2,1790,1790,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,George Beaumont,7,1802,1814,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,George Beaumont,1,1809,1809,hemlow_catalogue
+Charles Burney Jr,George Canning,2,1807,1810,coulombeau_waterfield
+Charles Burney Jr,George Colman,6,1783,1788,coulombeau_waterfield
+Charles Burney Jr,George Dance,1,1799,1799,coulombeau_waterfield
+Charles Burney Jr,George Dyer,4,1814,1815,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,George Henry Glasse,5,1789,1808,coulombeau_waterfield
+Charles Burney Jr,George Henry Law,1,1814,1814,coulombeau_waterfield
+Charles Burney Jr,George Henry Law,3,1814,1815,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,George Huntingford,60,1785,1816,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,George Isted,1,1810,1810,coulombeau_waterfield
+Charles Burney Jr,George Owen Cambridge,3,1803,1803,coulombeau_waterfield
+Charles Burney Jr,George Pretyman Tomline,19,1805,1817,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,George Steevens,1,1798,1798,coulombeau_waterfield
+Charles Burney Jr,George Woodfall,1,1817,1817,hemlow_catalogue
+Charles Burney Jr,Gilbert Gerard,9,1778,1788,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,H Maty,1,1787,1787,coulombeau_waterfield
+Charles Burney Jr,Hannah (Dillingham) Ord,1,1791,1791,coulombeau_waterfield
+Charles Burney Jr,Harriet Bosse,1,1814,1814,hemlow_catalogue
+Charles Burney Jr,"Henry Addington, 1st Viscount Sidmouth",2,1807,1812,coulombeau_waterfield
+Charles Burney Jr,Henry Colburn,1,1813,1813,coulombeau_waterfield
+Charles Burney Jr,Henry Drury,3,1813,1816,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Henry Fuseli,5,1802,1808,coulombeau_waterfield
+Charles Burney Jr,Henry John Todd,7,1801,1810,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Henry Kent,1,1813,1813,hemlow_catalogue
+Charles Burney Jr,Henry Kett,10,1790,1813,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Herbert Marsh,1,1816,1816,coulombeau_waterfield
+Charles Burney Jr,Hester Thrale Piozzi,1,1807,1807,coulombeau_waterfield
+Charles Burney Jr,Horace Twiss,1,1804,1804,coulombeau_waterfield
+Charles Burney Jr,Hugh Rose,1,1809,1809,coulombeau_waterfield
+Charles Burney Jr,Humphrey Owen,1,1789,1789,hemlow_catalogue
+Charles Burney Jr,Isaac Reed,3,1787,1788,coulombeau_waterfield
+Charles Burney Jr,J Asperne,4,1816,1817,coulombeau_waterfield
+Charles Burney Jr,J H Gell,1,1817,1817,coulombeau_waterfield
+Charles Burney Jr,J Morley,1,1790,1790,coulombeau_waterfield
+Charles Burney Jr,J W Bacon,4,1803,1807,coulombeau_waterfield
+Charles Burney Jr,J W Baron,1,1812,1812,hemlow_catalogue
+Charles Burney Jr,James Beattie,2,1779,1779,coulombeau_waterfield
+Charles Burney Jr,James Boswell,5,1787,1814,coulombeau_waterfield
+Charles Burney Jr,"James Boswell, Jr",1,1814,1814,coulombeau_waterfield
+Charles Burney Jr,James Bruce,1,1787,1787,coulombeau_waterfield
+Charles Burney Jr,James Burney,2,1804,1815,coulombeau_waterfield
+Charles Burney Jr,James Currey,1,1808,1808,coulombeau_waterfield
+Charles Burney Jr,"James Duff, 2nd Earl Fife",8,1786,1804,coulombeau_waterfield
+Charles Burney Jr,James Dunbar,3,1779,1789,coulombeau_waterfield
+Charles Burney Jr,James Edwards,2,1810,1810,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,James Ferry,2,1809,1809,hemlow_catalogue
+Charles Burney Jr,James Fordyce,5,1787,1792,coulombeau_waterfield
+Charles Burney Jr,James Gray,11,1780,1808,coulombeau_waterfield
+Charles Burney Jr,James Henry Monk,4,1810,1815,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,James Hutton,1,1790,1790,coulombeau_waterfield
+Charles Burney Jr,James Mackintosh,1,1815,1815,coulombeau_waterfield
+Charles Burney Jr,James Perry,7,1808,1809,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,James Syjes,1,1800,1800,coulombeau_waterfield
+Charles Burney Jr,James Sykes,1,1800,1800,coulombeau_waterfield
+Charles Burney Jr,James White,1,1814,1814,coulombeau_waterfield
+Charles Burney Jr,James Young,2,1798,1800,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Jean-François Boissade,1,1802,1802,coulombeau_waterfield
+Charles Burney Jr,Jean-François Boissanade,5,1802,1805,coulombeau_waterfield
+Charles Burney Jr,John,1,1790,1790,hemlow_catalogue
+Charles Burney Jr,John Aiken,2,1792,1793,coulombeau_waterfield
+Charles Burney Jr,John Armstrong,1,1795,1795,coulombeau_waterfield
+Charles Burney Jr,John Ash,2,1787,1790,coulombeau_waterfield
+Charles Burney Jr,John Bacon,1,1812,1812,coulombeau_waterfield
+Charles Burney Jr,John Barlow Seale,1,1789,1789,coulombeau_waterfield
+Charles Burney Jr,John Bayot,1,1812,1812,hemlow_catalogue
+Charles Burney Jr,John Blagden-Hale,1,1808,1808,coulombeau_waterfield
+Charles Burney Jr,John Courtenay,1,1810,1810,coulombeau_waterfield
+Charles Burney Jr,John Douglas,1,1790,1790,coulombeau_waterfield
+Charles Burney Jr,John Gillies,1,1817,1817,coulombeau_waterfield
+Charles Burney Jr,John Hewlett,2,1813,1813,coulombeau_waterfield
+Charles Burney Jr,John Hey,2,1790,1790,coulombeau_waterfield
+Charles Burney Jr,John Hoole,3,1782,1802,coulombeau_waterfield
+Charles Burney Jr,John Hoppner,1,1807,1807,coulombeau_waterfield
+Charles Burney Jr,John Houlton,1,1811,1811,coulombeau_waterfield
+Charles Burney Jr,John Inigo Richards,1,1805,1805,coulombeau_waterfield
+Charles Burney Jr,John Ireland,1,1817,1817,coulombeau_waterfield
+Charles Burney Jr,John Kaye,47,1801,1816,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,John Langslow,1,1817,1817,hemlow_catalogue
+Charles Burney Jr,John Lempriere,1,1788,1788,coulombeau_waterfield
+Charles Burney Jr,John Luxmoore,1,1817,1817,coulombeau_waterfield
+Charles Burney Jr,John Moore,1,1791,1791,coulombeau_waterfield
+Charles Burney Jr,John Murray,1,1813,1813,coulombeau_waterfield
+Charles Burney Jr,John Nicholls,1,1809,1809,coulombeau_waterfield
+Charles Burney Jr,John Nichols,2,1795,1796,coulombeau_waterfield
+Charles Burney Jr,John Philip Kemble,18,1793,1817,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,John Pridden,1,1809,1809,coulombeau_waterfield
+Charles Burney Jr,John Randolph,2,1810,1814,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,John Reeves,1,1804,1804,coulombeau_waterfield
+Charles Burney Jr,John Richards,1,1803,1803,coulombeau_waterfield
+Charles Burney Jr,John Robinson,1,1805,1805,coulombeau_waterfield
+Charles Burney Jr,John Sayer,1,1817,1817,coulombeau_waterfield
+Charles Burney Jr,"John Stuart, 1st Marquis of Bute",1,1799,1799,coulombeau_waterfield
+Charles Burney Jr,John Young,264,1788,1817,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,"John, 1st Baron Crewe",1,1806,1806,coulombeau_waterfield
+Charles Burney Jr,Jonathan Raine,2,1811,1811,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Jonathan Raine,1,1812,1812,hemlow_catalogue
+Charles Burney Jr,Joseph <Passlay>,1,1799,1799,coulombeau_waterfield
+Charles Burney Jr,Joseph Banks,10,1791,1816,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Joseph Cradock,1,1810,1810,hemlow_catalogue
+Charles Burney Jr,Joseph Goodall,7,1788,1810,coulombeau_waterfield
+Charles Burney Jr,Joseph Nollekens,8,1803,1815,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Joseph Planta,5,1812,1815,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Joseph Warton,8,1783,1796,coulombeau_waterfield
+Charles Burney Jr,Joseph White,1,1799,1799,coulombeau_waterfield
+Charles Burney Jr,Joshua Iremonger,1,1786,1786,coulombeau_waterfield
+Charles Burney Jr,Josiah Boydell,1,1810,1810,coulombeau_waterfield
+Charles Burney Jr,Josiah Thomas,8,1799,1817,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,K Wyton,1,1815,1815,coulombeau_waterfield
+Charles Burney Jr,Lady Charlotte Lindsay,2,1810,1810,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Lady Collier,1,1798,1798,coulombeau_waterfield
+Charles Burney Jr,"Laurence Parsons, 2nd Earl of Rosse",1,1812,1812,coulombeau_waterfield
+Charles Burney Jr,"Lawrence, Parsons, 2nd Earl of Rosse",1,1812,1812,hemlow_catalogue
+Charles Burney Jr,Leigh,4,1794,1795,coulombeau_waterfield
+Charles Burney Jr,Longmans,1,1814,1814,coulombeau_waterfield
+Charles Burney Jr,Lord Findlater,5,1781,1781,coulombeau_waterfield
+Charles Burney Jr,"Louis, Comte de Narbonne-Lara",4,1793,1793,coulombeau_waterfield
+Charles Burney Jr,Louis-George de Brequigny,1,1785,1785,coulombeau_waterfield
+Charles Burney Jr,Louisa (Maty) Jortin,1,1788,1788,coulombeau_waterfield
+Charles Burney Jr,M Holley,1,1792,1792,hemlow_catalogue
+Charles Burney Jr,M J Routh,5,1790,1808,coulombeau_waterfield
+Charles Burney Jr,M- Riollay,1,1792,1792,coulombeau_waterfield
+Charles Burney Jr,Marianne Bourdois,1,1806,1806,coulombeau_waterfield
+Charles Burney Jr,Marquis of Lansdowne,4,1806,1815,coulombeau_waterfield
+Charles Burney Jr,Marquis of Lansdowne,1,1812,1812,hemlow_catalogue
+Charles Burney Jr,Martin Davy,8,1804,1809,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Martin Routh,19,1790,1816,coulombeau_waterfield
+Charles Burney Jr,Mary Berry,2,1786,1801,coulombeau_waterfield
+Charles Burney Jr,Mary Carter,3,1810,1810,coulombeau_waterfield
+Charles Burney Jr,Matthew Raine,4,1792,1811,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Molesworth Phillips,2,1798,1798,coulombeau_waterfield
+Charles Burney Jr,Mr <Milne>,1,1817,1817,hemlow_catalogue
+Charles Burney Jr,Mr Davies,1,,,coulombeau_waterfield
+Charles Burney Jr,Mr Mason,1,1813,1813,coulombeau_waterfield
+Charles Burney Jr,Mr President,1,1802,1802,coulombeau_waterfield
+Charles Burney Jr,Mr Richardson,1,1815,1815,coulombeau_waterfield
+Charles Burney Jr,Mr. Ross,1,1799,1799,coulombeau_waterfield
+Charles Burney Jr,Mrs Aiken,1,1810,1810,coulombeau_waterfield
+Charles Burney Jr,Mrs Crewe,2,1803,1804,coulombeau_waterfield
+Charles Burney Jr,Mrs Sheridan,1,,,coulombeau_waterfield
+Charles Burney Jr,Nevil Maskelyne,1,1802,1802,coulombeau_waterfield
+Charles Burney Jr,Nevile Maskelyne,1,1809,1809,coulombeau_waterfield
+Charles Burney Jr,Osborne Wight,1,1792,1792,coulombeau_waterfield
+Charles Burney Jr,Patrick Kelly,12,1809,1816,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Patrick Wilson,2,1811,1811,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Paul Henry Maty,1,1785,1785,coulombeau_waterfield
+Charles Burney Jr,Payne,1,1794,1794,coulombeau_waterfield
+Charles Burney Jr,Payne Knight,1,1811,1811,hemlow_catalogue
+Charles Burney Jr,Percival Stockdale,10,1779,1788,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Peter Elmsley,3,1807,1813,coulombeau_waterfield
+Charles Burney Jr,Peter Paul Dobrée,29,1802,1817,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Philippe de Loutherbourg,1,1783,1783,coulombeau_waterfield
+Charles Burney Jr,Prince Hoare,3,1812,1813,coulombeau_waterfield
+Charles Burney Jr,Prince Regent,1,1814,1814,coulombeau_waterfield
+Charles Burney Jr,Princess Caroline,6,1807,1813,coulombeau_waterfield
+Charles Burney Jr,Princess Caroline,3,1809,1812,hemlow_catalogue
+Charles Burney Jr,Priscilla Kemble,1,1800,1800,coulombeau_waterfield
+Charles Burney Jr,R H Barker,1,1814,1814,hemlow_catalogue
+Charles Burney Jr,R Sharp,1,,,coulombeau_waterfield
+Charles Burney Jr,Ralph Griffiths,13,1786,1803,coulombeau_waterfield
+Charles Burney Jr,Reginald Heber,2,1804,1804,coulombeau_waterfield
+Charles Burney Jr,Richard Clark,1,1807,1807,coulombeau_waterfield
+Charles Burney Jr,Richard Farmer,1,1792,1792,coulombeau_waterfield
+Charles Burney Jr,Richard Graves,2,1792,1793,coulombeau_waterfield
+Charles Burney Jr,Richard Heber,7,1799,1817,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Richard L. Edgeworth,2,1797,1799,coulombeau_waterfield
+Charles Burney Jr,Richard Owen Cambridge,1,1783,1783,coulombeau_waterfield
+Charles Burney Jr,Richard Payne Knight,20,1782,1813,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Richard Penneck,1,1788,1788,coulombeau_waterfield
+Charles Burney Jr,Richard Porson,5,1786,1796,coulombeau_waterfield
+Charles Burney Jr,Richard Sharp,1,1791,1791,coulombeau_waterfield
+Charles Burney Jr,Richard Twining,1,1791,1791,coulombeau_waterfield
+Charles Burney Jr,Richard Twining,5,1809,1817,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Robert Burnside,10,1779,1781,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Robert Evans,1,1805,1805,coulombeau_waterfield
+Charles Burney Jr,Robert Finch,9,1814,1814,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Robert Lawless of Payne,1,1793,1793,coulombeau_waterfield
+Charles Burney Jr,Robert Nares,2,1788,1804,coulombeau_waterfield
+Charles Burney Jr,Roger Wilbraham,5,1807,1814,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Rose Burney,1,1784,1784,coulombeau_waterfield
+Charles Burney Jr,Rosette Burney,20,1784,1816,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,S Haroy,1,1779,1779,hemlow_catalogue
+Charles Burney Jr,Sabrina Bricknell,1,1787,1787,coulombeau_waterfield
+Charles Burney Jr,Samue,1,1800,1800,coulombeau_waterfield
+Charles Burney Jr,Samuel Berdmore,3,1787,1792,coulombeau_waterfield
+Charles Burney Jr,Samuel Bopet,1,1810,1810,hemlow_catalogue
+Charles Burney Jr,Samuel Butler,14,1807,1817,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Samuel Hoole,2,1800,1801,coulombeau_waterfield
+Charles Burney Jr,Samuel Lysons,2,1801,1801,coulombeau_waterfield
+Charles Burney Jr,Samuel Parr,133,1781,1817,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Samuel Rogers,4,1806,1813,coulombeau_waterfield
+Charles Burney Jr,Samuel Rose,2,1786,1786,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Samuel Thomas Bloomfield,1,1812,1812,coulombeau_waterfield
+Charles Burney Jr,"Samuel, 1st Viscount Hunt",1,1806,1806,coulombeau_waterfield
+Charles Burney Jr,Sarah Harriet Burney,6,1796,1814,coulombeau_waterfield
+Charles Burney Jr,Scrope Berdmore,2,1808,1809,coulombeau_waterfield
+Charles Burney Jr,Shute Barrington,13,1792,1815,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Sir Benjamin Hobhouse,3,1812,1815,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Sir David Wilkie,1,1814,1814,coulombeau_waterfield
+Charles Burney Jr,Sir Frances Freeing,1,1810,1810,coulombeau_waterfield
+Charles Burney Jr,Sir H C Englefield,2,1814,1815,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Sir James Gray,1,1790,1790,coulombeau_waterfield
+Charles Burney Jr,Sir John N Ashby,1,1817,1817,hemlow_catalogue
+Charles Burney Jr,Sir John Sinclair,1,1807,1807,coulombeau_waterfield
+Charles Burney Jr,Sir John Soane,1,1807,1807,coulombeau_waterfield
+Charles Burney Jr,Sir John St Aubyn,1,1817,1817,coulombeau_waterfield
+Charles Burney Jr,Sir William Weller Pepys,1,1806,1806,coulombeau_waterfield
+Charles Burney Jr,Spencer Percival,1,1810,1810,coulombeau_waterfield
+Charles Burney Jr,Susanna Burney Phillips,15,1779,1799,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,T J Mathias,10,1805,1814,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Thiomas Frognall Dibdin,1,1807,1807,coulombeau_waterfield
+Charles Burney Jr,Thomas Burgess,13,1788,1804,coulombeau_waterfield
+Charles Burney Jr,Thomas Cadell,1,1788,1788,coulombeau_waterfield
+Charles Burney Jr,Thomas Dampier,19,1802,1812,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Thomas Daniell,1,1805,1805,coulombeau_waterfield
+Charles Burney Jr,Thomas Gaisford,12,1803,1810,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Thomas Gordon,1,1780,1780,coulombeau_waterfield
+Charles Burney Jr,Thomas Grenville,1,1813,1813,hemlow_catalogue
+Charles Burney Jr,Thomas Greville,1,1813,1813,coulombeau_waterfield
+Charles Burney Jr,Thomas Kidd,7,1798,1809,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Thomas King,2,1802,1817,coulombeau_waterfield
+Charles Burney Jr,Thomas Lawrence,14,1787,1815,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Thomas MacKnight,2,1784,1788,coulombeau_waterfield
+Charles Burney Jr,Thomas Maurice,12,1804,1817,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Thomas Phillips,2,1815,1817,coulombeau_waterfield
+Charles Burney Jr,Thomas Sheridan,6,1805,1814,coulombeau_waterfield
+Charles Burney Jr,Thomas Shorting,1,1814,1814,hemlow_catalogue
+Charles Burney Jr,Thomas Twining,23,1787,1803,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,Thomas Tyrwhitt,1,1780,1780,coulombeau_waterfield
+Charles Burney Jr,Thomas Warton,2,1789,1789,coulombeau_waterfield
+Charles Burney Jr,Thomas Winstanley,1,1790,1790,coulombeau_waterfield
+Charles Burney Jr,Thomas Young,2,1810,1811,hemlow_catalogue
+Charles Burney Jr,W Douglas,1,,,coulombeau_waterfield
+Charles Burney Jr,W LeBas,1,1813,1813,hemlow_catalogue
+Charles Burney Jr,W Whittle,1,1816,1816,hemlow_catalogue
+Charles Burney Jr,W. Whiffin,1,1816,1816,coulombeau_waterfield
+Charles Burney Jr,Walker King,1,1813,1813,coulombeau_waterfield
+Charles Burney Jr,Walter King,1,1812,1812,coulombeau_waterfield
+Charles Burney Jr,Walter Savage Landor,1,1807,1807,coulombeau_waterfield
+Charles Burney Jr,WilliaM Sotheby,1,1800,1800,coulombeau_waterfield
+Charles Burney Jr,William Austin,1,1815,1815,coulombeau_waterfield
+Charles Burney Jr,William Beloe,3,1787,1808,coulombeau_waterfield
+Charles Burney Jr,"William Bentinck, 3rd Duke of Portland",1,1806,1806,coulombeau_waterfield
+Charles Burney Jr,William Bewley,1,1786,1786,hemlow_catalogue
+Charles Burney Jr,William Davies,4,1800,1809,coulombeau_waterfield
+Charles Burney Jr,William F. Rose,1,1811,1811,coulombeau_waterfield
+Charles Burney Jr,William Godwin,9,1809,1813,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,William Goodenow,1,1810,1810,hemlow_catalogue
+Charles Burney Jr,William Goodwin,1,1813,1813,hemlow_catalogue
+Charles Burney Jr,William Hawley,2,1813,1813,coulombeau_waterfield
+Charles Burney Jr,William Hayley,1,1806,1806,coulombeau_waterfield
+Charles Burney Jr,William Heberden,1,1816,1816,hemlow_catalogue
+Charles Burney Jr,William Herschel,1,1797,1797,coulombeau_waterfield
+Charles Burney Jr,William Howley,2,1814,1817,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,William Kaye,1,1811,1811,hemlow_catalogue
+Charles Burney Jr,William Keate,2,1795,1795,coulombeau_waterfield
+Charles Burney Jr,William Lort Mansel,5,1808,1816,coulombeau_waterfield
+Charles Burney Jr,William Mason,1,1795,1795,coulombeau_waterfield
+Charles Burney Jr,William Ogilvie,4,1781,1810,coulombeau_waterfield
+Charles Burney Jr,William Parsons,10,1795,1806,coulombeau_waterfield
+Charles Burney Jr,William Pitt the Younger,1,1791,1791,coulombeau_waterfield
+Charles Burney Jr,William Robert Spencer,1,1805,1805,coulombeau_waterfield
+Charles Burney Jr,"William Robert, Viscount Feilding",1,1792,1792,coulombeau_waterfield
+Charles Burney Jr,William Rose,4,1780,1785,coulombeau_waterfield
+Charles Burney Jr,William Scott,6,1790,1817,coulombeau_waterfield
+Charles Burney Jr,William Seward,7,1787,1799,coulombeau_waterfield
+Charles Burney Jr,William Sharp,2,1804,1810,coulombeau_waterfield
+Charles Burney Jr,William Shield,1,1817,1817,coulombeau_waterfield
+Charles Burney Jr,William Siddons,1,1804,1804,coulombeau_waterfield
+Charles Burney Jr,William Thomas Fitzgerald,1,1805,1805,coulombeau_waterfield
+Charles Burney Jr,William Thomas Lewis,1,1787,1787,coulombeau_waterfield
+Charles Burney Jr,William Vincent,17,1798,1813,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,William Wilberforce,11,1805,1814,"coulombeau_waterfield,hemlow_catalogue"
+Charles Burney Jr,William Windham,9,1786,1807,coulombeau_waterfield
+Charles Burney Jr,"William, Lord Marysel",1,1816,1816,hemlow_catalogue
+Charles Burney Jr,cb Jr,1,1784,1784,coulombeau_waterfield
 Charles Dilly,Samuel Johnson,2,1779,1784,johnson_hill
-Lord Westcote,Samuel Johnson,2,1780,1780,johnson_hill
-Edmund Allen,Samuel Johnson,2,1781,1783,johnson_hill
-Edmond Malone,Samuel Johnson,2,1782,1782,johnson_hill
-Mrs. Gastrell and Mrs. Aston,Samuel Johnson,2,,,johnson_hill
-Samuel Johnson,Thomas Davies,2,1783,1784,johnson_hill
-Samuel Johnson,William Cumberland Cruikshank,2,1783,1784,johnson_hill
+Charles Foster,Frances Burney,3,,,hemlow_catalogue
+Charles James Fox,Edmund Burke,5,1774,1788,burke_1844
+Charles Jenkinson,Samuel Johnson,1,1777,1777,johnson_hill
+Charles John James,Frances Burney,1,,,hemlow_catalogue
+Charles Landon,Frances Burney,1,,,hemlow_catalogue
+Charles Maurice de Talleyrand-Perigord,Frances Burney,1,1801,1801,hemlow_catalogue
+Charles O'Connor,Samuel Johnson,2,1757,1777,johnson_hill
+Charles Parr,Frances Burney,3,1814,1814,hemlow_catalogue
+Charles Parr Burney,Frances Burney,42,1812,1839,hemlow_catalogue
+Charles Sicard,Frances Burney,3,,,hemlow_catalogue
+Charles Townshend,Edmund Burke,4,1771,1771,burke_1844
+Charles Walmesley,Frances Burney,1,1780,1780,waterfield_thesis
+Charles-Francois Dupetit Dumouriez,Frances Burney,2,,,hemlow_catalogue
+Charles-Maurice de Talleyrand-Perigord,Frances Burney,1,,,hemlow_catalogue
+Charlotte (Gregory) Allenv,Frances Burney,1,,,hemlow_catalogue
+Charlotte Ann Burney,Frances Burney,15,1780,1785,hemlow_catalogue
+Charlotte Barrett,Frances Burney,22,1822,1839,hemlow_catalogue
+Charlotte Beckerdorff,Frances Burney,14,1812,1816,hemlow_catalogue
+Charlotte Bedingfield,Frances Burney,2,1815,1815,hemlow_catalogue
+Charlotte Broome,Clement Francis,1,1786,1792,waterfield_thesis
+Charlotte Broome,Frances Burney,340,1782,1839,hemlow_catalogue
+Charlotte Broome,Ralph Broome,1,1799,1810,waterfield_thesis
+Charlotte Broome,Warren Hastings,1,1786,1800,waterfield_thesis
+Charlotte Coronel,Frances Burney,1,1785,1785,hemlow_catalogue
+Charlotte Fitzgerald Baroness Ros,Frances Burney,2,1824,1824,hemlow_catalogue
+Charlotte P,Frances Burney,1,1782,1782,hemlow_catalogue
+Charlotte Walsingham,Frances Burney,8,1783,1793,hemlow_catalogue
+Chevalier de Grave,Edmund Burke,2,1792,1793,burke_1844
+Chevalier de la Bintinaye,Edmund Burke,6,1791,1792,burke_1844
+Chief Justice Aston,William Gerard Hamilton,1,1762,1762,burke_1844
+Choderlos de Laclos,Frances Burney,1,1793,1793,waterfield_thesis
+Choderlos de Laclos,Germaine de Stael,1,1789,1793,known_connection
+Citizen Perigaux,Joseph Priestley,1,,,priestley
+Claire (de Kersaint),Frances Burney,1,1797,1797,hemlow_catalogue
+Clarissa Marion Bolton,Frances Burney,5,1832,1835,hemlow_catalogue
+Clement Frances St,Frances Burney,1,,,hemlow_catalogue
+Clement Francis,Warren Hastings,1,1782,1792,waterfield_thesis
+Comte d'Artois,Edmund Burke,1,1793,1793,burke_1844
+Comte d'Artois,the Due d'Harcourt,1,1793,1793,burke_1844
+Comte de Mercy,Edmund Burke,1,1793,1793,burke_1844
+Comte de Serent,Edmund Burke,1,1794,1794,burke_1844
+Comtesse Irma Moore,Frances Burney,2,,,hemlow_catalogue
+Comtesse Irma Morel,Frances Burney,1,,,hemlow_catalogue
+Countess de Boufflers,Samuel Johnson,1,1771,1771,johnson_hill
+Countess of Ailesbury,Horace Walpole,18,1761,1797,walpole_1820
+Countess of Harcourt,Frances Burney,9,1802,1817,hemlow_catalogue
+Court Davies,Frances Burney,1,1786,1786,hemlow_catalogue
+César,Frances Burney,1,,,hemlow_catalogue
+Dame-Adelaide (de Damas d'Antigny) comtesse de Simiane,Frances Burney,1,1802,1802,hemlow_catalogue
+David Baillie Warden,Frances Burney,2,,,hemlow_catalogue
+David Garrick,Edmund Burke,3,1765,1779,"burke_1844,known_connection"
+David Garrick,Elizabeth Montagu,1,1760,1779,emco_montagu
+David Garrick,Joshua Reynolds,1,1760,1779,known_connection
+David Garrick,Samuel Johnson,6,1749,1779,"johnson_hill,known_connection"
+David Hume,Horace Walpole,3,1765,1776,"known_connection,walpole_1820"
+David Richter,Frances Burney,2,1800,1800,hemlow_catalogue
+Denise-Victoire,Frances Burney,7,1794,1813,hemlow_catalogue
+Dominique-Jean baron Larrey,Frances Burney,2,1811,1811,hemlow_catalogue
+Dorothy (Gregory) Alison,Frances Burney,1,1782,1782,hemlow_catalogue
+Dorothy Godwin,Frances Burney,1,1792,1792,hemlow_catalogue
+Dorothy Young,Frances Burney,7,1771,1793,hemlow_catalogue
+Dr Willis,Frances Burney,1,1791,1791,hemlow_catalogue
+Dr. Adams,Samuel Johnson,2,,,johnson_hill
+Dr. Beattie,Samuel Johnson,1,1780,1780,johnson_hill
+Dr. Benjamin Rush,Joseph Priestley,1,,,priestley
+Dr. Dodd,Samuel Johnson,2,1777,1777,johnson_hill
+Dr. Edwards,Samuel Johnson,1,1778,1778,johnson_hill
+Dr. Farmer,Samuel Johnson,3,1770,1780,johnson_hill
+Dr. Gray,Hester Thrale Piozzi,4,1800,1817,piozzi
+Dr. Hamilton,Samuel Johnson,5,1783,1784,johnson_hill
+Dr. Hawkesworth,Samuel Johnson,1,,,johnson_hill
 Dr. Heberden,Samuel Johnson,2,,,johnson_hill
-Hester Thrale Piozzi,Mr. Cadell,2,1785,1789,piozzi
+Dr. John Calder,Samuel Johnson,1,1776,1776,johnson_hill
+Dr. John Curry,Edmund Burke,4,1778,1779,burke_1844
+Dr. John Mudge,Samuel Johnson,1,1783,1783,johnson_hill
+Dr. Lawrence,Samuel Johnson,3,1775,1782,johnson_hill
 Dr. Marriott,Edmund Burke,2,1766,1766,burke_1844
-"David Garrick, Esq",Edmund Burke,2,1768,1771,burke_1844
-"Edm. Burke, Esq",Edmund Burke,2,1774,1774,burke_1844
-"Arthur Lee, Esq",Edmund Burke,2,1775,1775,burke_1844
-Edmund Burke,Lord John Cavendish,2,1775,1790,burke_1844
-Edmund Burke,"Rich. Burke, Esq -> Rich. Champion, Esq",2,1777,1781,burke_1844
-Edmund Burke,"Su- A. I. Elton, Town Clerk of Bristol",2,1777,1780,burke_1844
-Edmund Burke,Lord North,2,1777,1780,burke_1844
+Dr. Scott,Samuel Johnson,1,1783,1783,johnson_hill
+Dr. Staunton,Samuel Johnson,1,1762,1762,johnson_hill
+Dr. Thomas Fothergill,Samuel Johnson,1,1775,1775,johnson_hill
+Dr. Thomas Patten,Samuel Johnson,1,1781,1781,johnson_hill
+Dr. Vyse,Samuel Johnson,5,1777,1781,johnson_hill
+Dr. Wetherell,Samuel Johnson,1,1776,1776,johnson_hill
+Dr. Wheeler,Samuel Johnson,1,1778,1778,johnson_hill
+Dr. William Withering,Joseph Priestley,5,,,priestley
+Duc de Duras,Frances Burney,3,1815,1815,hemlow_catalogue
+Duc de Luxembourg,Frances Burney,15,1814,1817,hemlow_catalogue
+Duc de Montesquiou-Fezensac,Frances Burney,1,1814,1814,hemlow_catalogue
+Duchess of Portland,Elizabeth Montagu,1,1740,1785,emco_montagu
+Duchess of Portland,Frances Burney,2,1783,1785,hemlow_catalogue
+Duke of Argyle,Samuel Johnson,1,1773,1773,johnson_hill
+Duke of Dorset,Edmund Burke,1,1791,1791,burke_1844
+Duke of Newcastle,Edmund Burke,1,1767,1767,burke_1844
+Duke of Portland,Edmund Burke,6,1775,1794,burke_1844
+Duke of Richmond,Edmund Burke,14,1770,1776,burke_1844
+Dunbar Fisher,Frances Burney,3,1813,1813,hemlow_catalogue
+Durand de Perincz a Madame,Frances Burney,1,,,hemlow_catalogue
+Durand de Premorel,Frances Burney,1,,,hemlow_catalogue
+Durand de Prémorel,Frances Burney,1,,,hemlow_catalogue
+E Paisy,Frances Burney,1,,,hemlow_catalogue
+Earl Fitzwilliam,Edmund Burke,7,1782,1796,burke_1844
 Earl of Abingdon,Edmund Burke,2,1777,1777,burke_1844
-Edmund Burke,"Wm. Burke, Esq -> Philip Francis, Esq",2,1777,1778,burke_1844
-Edmund Burke,"John Noble, Esq",2,1778,1780,burke_1844
-Edmund Burke,Mr. Patrick Bowie,2,1779,1779,burke_1844
-Edmund Burke,Mr. Anthony Dermott,2,1779,1779,burke_1844
-Edmund Burke,"Joseph Harford, Esq",2,1780,1780,burke_1844
+Earl of Bute,Samuel Johnson,2,1762,1762,johnson_hill
+Earl of Chesterfield,Samuel Johnson,1,1755,1755,johnson_hill
+Earl of Dartmouth,Samuel Johnson,1,1783,1783,johnson_hill
+Earl of Hertford,Samuel Johnson,1,,,johnson_hill
+Earl of Hillsborough,Edmund Burke,1,1780,1780,burke_1844
+Earl of Upper Ossory,Edmund Burke,1,1792,1792,burke_1844
+Edm. Burke,James Barry,1,1765,1765,burke_1844
+Edmond Burne,Frances Burney,1,,,hemlow_catalogue
+Edmond Burwell,Frances Burney,2,,,hemlow_catalogue
+Edmond Malone,Edmund Burke,2,1792,1795,burke_1844
+Edmond Malone,Samuel Johnson,2,1782,1782,johnson_hill
+Edmund Allen,Samuel Johnson,2,1781,1783,johnson_hill
+Edmund Burke,Elizabeth Montagu,1,1760,1797,emco_montagu
+Edmund Burke,French Laurence,2,1791,1796,burke_1844
+Edmund Burke,General Burgoyne,1,1781,1781,burke_1844
+Edmund Burke,General Lee,1,1774,1774,burke_1844
+Edmund Burke,George Crabbe,3,1781,1782,burke_1844
+Edmund Burke,George Goold,1,1781,1781,burke_1844
+Edmund Burke,Henry Dundas,7,1787,1793,burke_1844
+Edmund Burke,Henry Flood,1,1765,1765,burke_1844
+Edmund Burke,Henry Grattan,5,1793,1795,burke_1844
+Edmund Burke,Hon. John Trevor,1,1791,1791,burke_1844
+Edmund Burke,J H. Hutchinson,1,1791,1791,burke_1844
+Edmund Burke,J. Monck Mason,1,1765,1765,burke_1844
+Edmund Burke,James Barry,1,1775,1775,burke_1844
+Edmund Burke,James Boswell,1,1778,1778,burke_1844
+Edmund Burke,James Oglethorpe,1,1777,1777,burke_1844
+Edmund Burke,John Bourke,1,1776,1776,burke_1844
+Edmund Burke,John Bowles,2,1796,1796,burke_1844
+Edmund Burke,John Geoghegan,2,1796,1796,burke_1844
+Edmund Burke,John Hely Hutchinson,1,1765,1765,burke_1844
+Edmund Burke,John Noble,2,1778,1780,burke_1844
+Edmund Burke,Joseph Bullock,1,1783,1783,burke_1844
+Edmund Burke,Joseph Harford,2,1780,1780,burke_1844
+Edmund Burke,Joshua Reynolds,2,1758,1792,"burke_1844,known_connection"
+Edmund Burke,Keogh,1,1795,1795,burke_1844
+Edmund Burke,King of Poland,1,1793,1793,burke_1844
+Edmund Burke,Lord Auckland,1,1791,1791,burke_1844
+Edmund Burke,Lord Camden,1,1791,1791,burke_1844
+Edmund Burke,Lord Charlemont,1,1791,1791,burke_1844
+Edmund Burke,Lord Chief Justice of the Common Fleas,1,1780,1780,burke_1844
+Edmund Burke,Lord Grenville,3,1792,1792,burke_1844
+Edmund Burke,Lord John Cavendish,2,1775,1790,burke_1844
+Edmund Burke,Lord Macartney,1,1784,1784,burke_1844
+Edmund Burke,Lord Malmesbury,1,1793,1793,burke_1844
+Edmund Burke,Lord North,3,1775,1780,burke_1844
 Edmund Burke,Lord Petre,2,1781,1781,burke_1844
+Edmund Burke,Lord Thurlow,1,1785,1785,burke_1844
+Edmund Burke,Lord Viscount Stormont,1,1780,1780,burke_1844
+Edmund Burke,Luke Gardiner,1,1778,1778,burke_1844
+Edmund Burke,Madame D'Osmond,1,1791,1791,burke_1844
+Edmund Burke,Madame du Deffand,1,1774,1774,burke_1844
+Edmund Burke,Marchioness of Rockingham,1,1776,1776,burke_1844
+Edmund Burke,Marquis de Bouille,1,1791,1791,burke_1844
+Edmund Burke,Marquis of Rockingham,49,1766,1782,burke_1844
+Edmund Burke,Messrs. Rich. Burke,1,1788,1788,burke_1844
+Edmund Burke,"Michael Miller, Esq., Master of Merchants' Hall, Bristol",1,1779,1779,burke_1844
 Edmund Burke,Mons. Bourdieu,2,1781,1781,burke_1844
 Edmund Burke,Mons. Dupont,2,1789,1790,burke_1844
-Capt. Woodford,Edmund Burke,2,1791,1794,burke_1844
 Edmund Burke,Monsieur (afterwards Louis XVIII.),2,1791,1791,burke_1844
-Edmund Burke,the Chev. and Abbe de la Bintinnaye,2,1792,1792,burke_1844
-Chev. de Grave,Edmund Burke,2,1792,1793,burke_1844
-Edmund Burke,Rt. Hon. Wm. Pitt,2,1794,1794,burke_1844
-Edmund Burke,"John Geoghegan, Esq",2,1796,1796,burke_1844
-Horace Walpole,Rev. Mr. Mason,2,,,walpole_1820
-Joseph Priestley,Sir Joseph Banks,2,,,priestley
-"Ashton, Thomas, 1715-1775",Thomas Gray,2,1739,1740,correspsearch
-Horace Walpole,Mary Delany,2,1786,1786,correspsearch
-"Kirkgate, Thomas",Mary Hamilton,2,1792,1792,correspsearch
-"Ganghofer, Ludwig","Schnitzler, Arthur",2,1899,1899,correspsearch
-Georg Friedrich Händel,Georg Philipp Telemann,2,1750,1754,correspsearch
-"Martini, Giovanni Battista, Padre",Wolfgang Amadeus Mozart,2,1776,1776,correspsearch_european
-Giovanni Battista Martini,Wolfgang Amadeus Mozart,2,1776,1776,correspsearch_european
-Bentz für den Stadtrat von Zittau,Carl Philipp Emanuel Bach,2,1753,1753,correspsearch_european
-Carl Philipp Emanuel Bach,Collegium scholarchale,2,1767,1767,correspsearch_european
-Carl Philipp Emanuel Bach,Johann Philipp Kirnberger,2,1769,1771,correspsearch_european
-Carl Philipp Emanuel Bach,Johann Joachim Eschenburg,2,1771,1771,correspsearch_european
-"Beer-Hofmann, Richard","Hofmannsthal, Hugo von",2,1890,1891,correspsearch_european
-Charles Burney Sr,Pietro Metastasio,2,1772,1772,tour_contact
-Carlo Broschi Farinelli,Charles Burney Sr,2,1770,1770,tour_contact
-Charles Burney Sr,Johann Christian Bach,2,1762,1782,hemlow_catalogue
-Charles Burney Sr,Stephen Allen,2,1751,1760,lonsdale_lynn
-Frances Burney,John Young,1,1783,1783,hemlow_catalogue
-Frances Burney,Sophia Byron,1,1784,1784,hemlow_catalogue
-Frances Burney,Sophia (Crisp) Gast,1,1784,1784,hemlow_catalogue
-Frances Burney,Stephanie-Felicite comtesse de Genlis,1,1785,1785,hemlow_catalogue
-Charlotte Coronel,Frances Burney,1,1785,1785,hemlow_catalogue
-Frances Burney,William Locke Sr,1,1785,1785,hemlow_catalogue
-Court Davies,Frances Burney,1,1786,1786,hemlow_catalogue
-Elizabeth Johnson,Frances Burney,1,1786,1786,hemlow_catalogue
-Frances Burney,Lady Mary Duncan,1,1787,1787,hemlow_catalogue
-Frances Burney,Sophy Streatfeild,1,1788,1788,hemlow_catalogue
-Bernard Dewes,Frances Burney,1,1788,1788,hemlow_catalogue
-Frances Burney,Jane (Smelt) Cholmeley,1,1788,1788,hemlow_catalogue
-Frances Burney,Steph[en] Digby,1,1788,1788,hemlow_catalogue
-Frances Burney,Lady Carmarthe[n],1,1788,1788,hemlow_catalogue
-Frances Burney,Stephen,1,1787,1787,hemlow_catalogue
-Adolph,Frances Burney,1,,,hemlow_catalogue
-CBFB [with FBA EBB],Frances Burney,1,1828,1828,hemlow_catalogue
-Comtesse Irma Morel,Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Sarah (Payne),1,1832,1832,hemlow_catalogue
-Alfred Tennel[?],Frances Burney,1,,,hemlow_catalogue
-Edward Maltass,Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Nichols,1,,,hemlow_catalogue
-Frances Burney,Zilcah Elizabeth Lacey,1,,,hemlow_catalogue
-C W Hatchett,Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Harriet,1,,,hemlow_catalogue
-Frances Burney,Louis Bonne[?],1,1793,1793,hemlow_catalogue
-Charles-Maurice de Talleyrand-Perigord,Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Jean-Baptiste de Boinville,1,,,hemlow_catalogue
-Frances Burney,William Clarke,1,,,hemlow_catalogue
-Frances Burney,Pierre Victor Malouet,1,,,hemlow_catalogue
-Claire (de Kersaint),Frances Burney,1,1797,1797,hemlow_catalogue
-Frances Burney,William Laine,1,,,hemlow_catalogue
-Frances Burney,Frederic Seraphin,1,1793,1793,hemlow_catalogue
-Charles Maurice de Talleyrand-Perigord,Frances Burney,1,1801,1801,hemlow_catalogue
-Frances Burney,Sir William Burrell,1,1822,1822,hemlow_catalogue
-Frances Burney,Napoleon Bonaparte,1,1802,1802,hemlow_catalogue
-Frances Burney,Gabriel,1,1803,1803,hemlow_catalogue
-Barbee Neuville,Frances Burney,1,1803,1803,hemlow_catalogue
-Frances Burney,Marie Charlotte (Bontemps),1,1803,1803,hemlow_catalogue
-Frances Burney,Gilles Ragon,1,,,hemlow_catalogue
-Frances Burney,baron d'Artel,1,,,hemlow_catalogue
-Frances Burney,Francois,1,,,hemlow_catalogue
-Frances Burney,Jean-Jacques-Basillen,1,,,hemlow_catalogue
-Frances Burney,Jean-Pierre-Basillen,1,,,hemlow_catalogue
-Frances Burney,L M Barral,1,,,hemlow_catalogue
-Frances Burney,de Gault de Malaville,1,,,hemlow_catalogue
-Duc de Montesquiou-Fezensac,Frances Burney,1,1814,1814,hemlow_catalogue
-Frances Burney,Marie-Tereze (Poniatowski),1,1814,1814,hemlow_catalogue
-Elisabeth-Charlotte,Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Richard,1,,,hemlow_catalogue
-Durand de Perincz a Madame,Frances Burney,1,,,hemlow_catalogue
-AA [postscript only],Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Marc-Etienne,1,,,hemlow_catalogue
-Frances Burney,Henry Hoare,1,,,hemlow_catalogue
-Frances Burney,Transcript copy,1,,,hemlow_catalogue
-Frances Burney,Sophia Burney,1,1815,1815,hemlow_catalogue
-Frances Burney,Marie-Alexandre Lenoir,1,,,hemlow_catalogue
-Frances Burney,John Bowman,1,,,hemlow_catalogue
-Frances Burney,Nathalie (de Montesant?),1,,,hemlow_catalogue
-Frances Burney,George Hay (on verso of NYPL(B)),1,,,hemlow_catalogue
-Frances Burney,Sir John Herschel,1,1821,1821,hemlow_catalogue
-Frances Burney,Robert Allen Burney,1,,,hemlow_catalogue
-Foundling Hospital,Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Robert Southey,1,,,hemlow_catalogue
-Frances Burney,John Graham,1,,,hemlow_catalogue
-C T P Metcalf,Frances Burney,1,,,hemlow_catalogue
-Edward A Chaplin,Frances Burney,1,1830,1830,hemlow_catalogue
-Frances Burney,Gilbert Gerard,1,1778,1778,hemlow_catalogue
-Frances Burney,Robert Burnside,1,1779,1779,hemlow_catalogue
-Frances Burney,James (Campbell) Smith,1,1789,1789,hemlow_catalogue
-Bernardo marquis del Campo,Frances Burney,1,1789,1789,hemlow_catalogue
-Frances Burney,Sarah (Kirby) Trimmer,1,,,hemlow_catalogue
-Charlotte (Gregory) Allenv,Frances Burney,1,,,hemlow_catalogue
-Benjamin Waddington,Frances Burney,1,1790,1790,hemlow_catalogue
-Frances Burney,Jenny Bentham,1,,,hemlow_catalogue
-Eva Maria [Veigel] Garrick,Frances Burney,1,,,hemlow_catalogue
-Elizabeth Juliana Schwellenberg (per E Lattikens[?]),Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Frances Matthews,1,1790,1790,hemlow_catalogue
-Clement Frances St,Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Marie-Elisabethe de La Fite,1,1790,1790,hemlow_catalogue
-Dr Willis,Frances Burney,1,1791,1791,hemlow_catalogue
-Frances Burney,Horace Walpole,1,,,hemlow_catalogue
-Frances Burney,Raoul Walpole [?],1,,,hemlow_catalogue
-Frances Burney,Margaret (Cooper) DeLuc,1,1789,1789,hemlow_catalogue
-Charlotte Boyle-Walsingham [?],Frances Burney,1,1793,1793,hemlow_catalogue
-Charlotte [Boyle-Walsingham?],Frances Burney,1,1793,1793,hemlow_catalogue
-Frances Burney,Francois de la Rochefoucauld de Liancourt,1,1793,1793,hemlow_catalogue
-Frances Burney,M d'A thème,1,,,hemlow_catalogue
-Frances Burney,Marquis [?] Bourdois,1,1793,1793,hemlow_catalogue
-Frances Burney,Marie-Elisabeth (Bouée) de La Fite,1,,,hemlow_catalogue
-Frances Burney,Rose FitzGerald Baroness,1,1793,1793,hemlow_catalogue
-Frances Burney,Harriet (Collins) de Beauville[?],1,1793,1793,hemlow_catalogue
-Frances Burney,Martin (Allen) Rishton,1,1794,1794,hemlow_catalogue
-Edmund Jerningham,Frances Burney,1,1794,1794,hemlow_catalogue
-Esther Young,Frances Burney,1,,,hemlow_catalogue
-Dorothy (Smelt) Godwin,Frances Burney,1,1792,1792,hemlow_catalogue
-Frances Burney,Louis comte de Narbonne-Lara,1,,,hemlow_catalogue
-Frances Burney,Louis comte de Narbonne,1,1795,1795,hemlow_catalogue
-ERB [?],Frances Burney,1,,,hemlow_catalogue
-Frances Burney,SBP (with PS by M d'A),1,1799,1799,hemlow_catalogue
-CJJ,Frances Burney,1,,,hemlow_catalogue
-Antoine Bourdois,Frances Burney,1,,,hemlow_catalogue
-CBFB (one page written by FBA as NPG),Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Harriet (Collins) de Beauvau,1,,,hemlow_catalogue
-Frances Burney,M d'A with PS by AA,1,,,hemlow_catalogue
-Frances Burney,Mary (Danby) Countess of Ha[rcourt],1,1802,1802,hemlow_catalogue
-Frances Burney,GF Jr,1,,,hemlow_catalogue
-CB [?],Frances Burney,1,1802,1802,hemlow_catalogue
-CB (composite of extracts of partly [?] copy in CB [?] 5 May-5 Oct 1806),Frances Burney,1,1802,1802,hemlow_catalogue
-Frances Burney,M d'A and Louis comte de Narbonne,1,1802,1802,hemlow_catalogue
-Comtesse Adrienne (de Noailles) de la Tour [?],Frances Burney,1,1802,1802,hemlow_catalogue
-Dame-Adelaide (de Damas d'Antigny) comtesse de Simiane,Frances Burney,1,1802,1802,hemlow_catalogue
-Frances Burney,GBFB,1,,,hemlow_catalogue
-Frances Burney,Susan Adams,1,1807,1807,hemlow_catalogue
-Frances (Savery) de Poigneu [?],Frances Burney,1,1808,1808,hemlow_catalogue
-EBB (with PS by M d'A),Frances Burney,1,1811,1811,hemlow_catalogue
-Frances Burney,Louis comte de Narbonne-FML,1,1809,1809,hemlow_catalogue
-Frances Burney,Norbury Phillips,1,1800,1800,hemlow_catalogue
-Frances Burney,Harriet (Mulso) Chapone,1,1800,1800,hemlow_catalogue
-Frances Burney,Philippe (Philips) Raper,1,,,hemlow_catalogue
-Charlotte Beckedorff,Frances Burney,1,,,hemlow_catalogue
-Anne/Key[?],Frances Burney,1,,,hemlow_catalogue
-Burdett [?] Mesangere,Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Marie de Lafayette,1,1818,1818,hemlow_catalogue
-Frances Burney,Frances Elizabeth,1,1818,1818,hemlow_catalogue
-Frances Burney,Harriett Maltby,1,1818,1818,hemlow_catalogue
-Frances Burney,Marie de Maisonneuve Ma bien chere,1,,,hemlow_catalogue
-Frances Burney,George Edmond Hay,1,1819,1819,hemlow_catalogue
-FBA journal,Frances Burney,1,1819,1819,hemlow_catalogue
-Frances Burney,Princess d'Arblay a [?] vieuse [?],1,1819,1819,hemlow_catalogue
-Frances Burney,Princess of Maidison[?],1,1820,1820,hemlow_catalogue
-Frances Burney,John Kay,1,1820,1820,hemlow_catalogue
-Frances Burney,copy,1,,,hemlow_catalogue
-Frances Burney,Martin[?] Burney,1,,,hemlow_catalogue
-Frances Burney,Harriett Wilson,1,1821,1821,hemlow_catalogue
-Edward Jacob,Frances Burney,1,1821,1821,hemlow_catalogue
-Anne (Philips) Lady Murray,Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Mus[?] H Haley,1,,,hemlow_catalogue
-Frances Burney,Harriot Winder[?],1,1822,1822,hemlow_catalogue
-Arthur Percy Upton,Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Sophia Upton,1,1823,1823,hemlow_catalogue
-Frances (Sayer) de Pontgeu,Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Herrick Hoare,1,,,hemlow_catalogue
-Frances Burney,Hannah Hannah Macsale[?],1,1825,1825,hemlow_catalogue
-Frances Burney,Henry Hoare Bankers,1,1827,1827,hemlow_catalogue
-Frances Burney,LA,1,,,hemlow_catalogue
-Anna (Wilbraham) Grosvenor,Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Sarah (Payne) [?],1,1832,1832,hemlow_catalogue
-Frances Burney,Mrs [?] Justices Prince,1,,,hemlow_catalogue
-Edward Mangin,Frances Burney,1,,,hemlow_catalogue
-Frances Burney,SE 1835,1,,,hemlow_catalogue
-Frances Burney,Mary Ann Smith,1,1836,1836,hemlow_catalogue
-Charles Landon [?],Frances Burney,1,,,hemlow_catalogue
-Alfred Turner,Frances Burney,1,1836,1836,hemlow_catalogue
-C W [?] Halliday,Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Harriet [?],1,,,hemlow_catalogue
-Frances Burney,Pont Baptiste Council [?],1,1789,1789,hemlow_catalogue
-Charles-Francois Dupetit Dumouriez [?],Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Jean-Baptiste Le Chevalier Le Ministre,1,1794,1794,hemlow_catalogue
-Frances Burney,JB (with PS by FBA),1,1795,1795,hemlow_catalogue
-Frances Burney,William [?],1,,,hemlow_catalogue
-Frances Burney,Frederic-Seraphin,1,1798,1798,hemlow_catalogue
-Frances Burney,Joseph,1,,,hemlow_catalogue
-César,Frances Burney,1,,,hemlow_catalogue
-E Paisy,Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Jean-Pierre-Basilien,1,,,hemlow_catalogue
-Denise-Victoire [?],Frances Burney,1,1813,1813,hemlow_catalogue
-Frances Burney,Miss Bron [?],1,,,hemlow_catalogue
-Frances Burney,baron d'Artel [?],1,,,hemlow_catalogue
-Frances Burney,William Locke [?],1,,,hemlow_catalogue
-Frances Burney,Marquis de Lafayette [?] de Gorion-Saint-Cyr,1,,,hemlow_catalogue
-Frances Burney,Louise (Farina-Fiorelli) Duchesse d'Orivel [?],1,,,hemlow_catalogue
-Elizabethe-Charlotte,Frances Burney,1,,,hemlow_catalogue
-Durand de Prémorel,Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Victor de Latour-Maubourg,1,,,hemlow_catalogue
-Frances Burney,Marie-Alexendre Lenoir,1,,,hemlow_catalogue
-C T F Metcalf,Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Nathalie (de Mortemart?),1,,,hemlow_catalogue
-Charles-Francois Dupetit Dumouriez,Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Jean-Philippe de Boisgelin [?],1,,,hemlow_catalogue
-Frances Burney,Jean-Jacques-Basilion,1,,,hemlow_catalogue
-Durand de Premorel,Frances Burney,1,,,hemlow_catalogue
-Cecile (du Repaid de Caramar),Frances Burney,1,1818,1818,hemlow_catalogue
-Frances Burney,Richard Thomas Burney pmk,1,1768,1768,hemlow_catalogue
-Anthony Chamier,Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Sophy Streatfield [?],1,1779,1779,hemlow_catalogue
-Edmond Burwell [?],Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Horton (Male) Chapman,1,1783,1783,hemlow_catalogue
-Frances Burney,William Cutler,1,1777,1777,hemlow_catalogue
-Frances Burney,Sophy Streatfield,1,1779,1779,hemlow_catalogue
-Edmond Burwell,Frances Burney,1,,,hemlow_catalogue
-4 p 12mo,Frances Burney,1,,,hemlow_catalogue
-Charlotte (Jerningham) Bedingfield,Frances Burney,1,1815,1815,hemlow_catalogue
-Frances Burney,Maria Edgeworth,1,1813,1813,hemlow_catalogue
-Frances (Waddington) Bunsen,Frances Burney,1,1813,1813,hemlow_catalogue
-Frances Burney,Princess [Elizabeth?],1,1813,1813,hemlow_catalogue
-Frances Burney,Harriet (Collins) de Boinville,1,1814,1814,hemlow_catalogue
-Elizaveta [?] d'Ivanoff,Frances Burney,1,1814,1814,hemlow_catalogue
-Frances Burney,London,1,1814,1814,hemlow_catalogue
-Frances Burney,Sophie [?],1,,,hemlow_catalogue
-Frances Burney,Princess (Waddington) Bunsen(?),1,1814,1814,hemlow_catalogue
-Frances Burney,Hyde,1,1814,1814,hemlow_catalogue
-Frances Burney,— (Bardilly) Meignenn,1,1816,1816,hemlow_catalogue
-Elizaveta [?],Frances Burney,1,,,hemlow_catalogue
-Adhémar (de Chavagnac) vicomte de la Rochefaucauld,Frances Burney,1,1816,1816,hemlow_catalogue
-Frances Burney,Richard Thomas Burney,1,1768,1768,hemlow_catalogue
-Frances Burney,Sophia (Crisp?) Gast,1,,,hemlow_catalogue
-Frances Burney,Samuel Crisp (with PS by CB),1,,,hemlow_catalogue
-Frances Burney,SBP [?],1,1782,1782,hemlow_catalogue
-Edmond Burne [?],Frances Burney,1,,,hemlow_catalogue
-Dorothy (Gregory) Alison,Frances Burney,1,1782,1782,hemlow_catalogue
-Frances Burney,Hester (Maria) Chapone [?],1,1783,1783,hemlow_catalogue
-Charlotte P [?],Frances Burney,1,1782,1782,hemlow_catalogue
-Charlotte (Broome) Francis,Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Harriet (Collins) de Boieville,1,1814,1814,hemlow_catalogue
-Frances Burney,M d'A (L),1,,,hemlow_catalogue
-Frances Burney,Marquise de Lally-Tollendal,1,1814,1814,hemlow_catalogue
-Frances Burney,London (Harvey),1,1814,1814,hemlow_catalogue
-Cecilia (Ogilvie) Locke,Frances Burney,1,,,hemlow_catalogue
-Frances Burney,Princess (Waddington) Bunsen,1,1814,1814,hemlow_catalogue
-Amédée,Frances Burney,1,1815,1815,hemlow_catalogue
-Charlotte (Jerningham) Bedingfeld,Frances Burney,1,1815,1815,hemlow_catalogue
-Adèmie (de Chavagnac) vicom-,Frances Burney,1,1816,1816,hemlow_catalogue
-Frances Burney,Princess Elizabeth eff [?],1,,,hemlow_catalogue
-Frances Burney,Princess (Krousée) / Former,1,1817,1817,hemlow_catalogue
-Frances Burney,Maria (Edgeworth) Beddoes,1,,,hemlow_catalogue
-Arcédot Carlos,Frances Burney,1,1817,1817,hemlow_catalogue
-Charles Burney Sr,Esther (Sleepe) Burney,1,1752,1752,hemlow_catalogue
-Charles Burney Sr,"Parish of St Margaret's, Lynn",1,1755,1755,hemlow_catalogue
-Charles Burney Sr,de Grange Blanche,1,1766,1766,hemlow_catalogue
-Charles Burney Sr,David Hume,1,1766,1766,hemlow_catalogue
-Charles Burney Sr,Thomas Hutcheson,1,1767,1767,hemlow_catalogue
-Charles Burney Sr,Keane FitzGerald,1,1767,1767,hemlow_catalogue
-Charles Burney Sr,John Hawkesworth,1,1769,1769,hemlow_catalogue
-Charles Burney Sr,Monsieur North,1,1771,1771,hemlow_catalogue
-Baron d'Holbach,Charles Burney Sr,1,1771,1771,hemlow_catalogue
-Charles Burney Sr,John Alcock,1,1771,1771,hemlow_catalogue
-Charles Burney Sr,Charles Davy,1,1772,1772,hemlow_catalogue
-Charles Burney Sr,J Moursson,1,1772,1772,hemlow_catalogue
-Charles Burney Sr,Joseph Warton,1,1772,1772,hemlow_catalogue
-Charles Burney Sr,Henry Harington,1,1773,1773,hemlow_catalogue
-Charles Burney Sr,John Osborn,1,1773,1773,hemlow_catalogue
-Charles Burney Sr,Johann Adolph Hasse,1,1773,1773,hemlow_catalogue
-Charles Burney Sr,Mr Crewe,1,1773,1773,hemlow_catalogue
-Charles Burney Sr,"George, 1st Marquis Townshend",1,1773,1773,hemlow_catalogue
-Charles Burney Sr,George Robinson,1,1773,1773,hemlow_catalogue
-Charles Burney Sr,Padre Gioacchino [?],1,1774,1774,hemlow_catalogue
-Charles Burney Sr,Felice de Giardini,1,1774,1774,hemlow_catalogue
-Charles Burney Sr,"Robert Darcy, 4th Earl of Holdernesse",1,1776,1776,hemlow_catalogue
-Brigit[a] Piez[e] [Frontoni],Charles Burney Sr,1,1776,1776,hemlow_catalogue
-Charles Burney Sr,Mrs Rap[?],1,1776,1776,hemlow_catalogue
-Charles Burney Sr,Giambattista Mancini,1,1776,1776,hemlow_catalogue
-Charles Burney Sr,Dante Bartheleman [?],1,1776,1776,hemlow_catalogue
-Charles Burney Sr,Mr Baker,1,1777,1777,hemlow_catalogue
-Charles Burney Sr,Sir William Herschel,1,1776,1776,hemlow_catalogue
-Charles Burney Sr,Gaetano Ferdinando Tenducci,1,1776,1776,hemlow_catalogue
-Charles Burney Sr,Gabrieli Pozzi,1,1777,1777,hemlow_catalogue
-Charles Burney Sr,Simon Nicolo Henri Linguet,1,1777,1777,hemlow_catalogue
-Arthur Murray,Charles Burney Sr,1,1778,1778,hemlow_catalogue
-Charles Burney Sr,Paul Panton,1,1779,1779,hemlow_catalogue
-Charles Burney Sr,Philip Hayes,1,1779,1779,hemlow_catalogue
-Charles Burney Sr,Ferdinando Bertoni,1,1780,1780,hemlow_catalogue
-Charles Burney Sr,Luigi Maria Marchetti,1,1781,1781,hemlow_catalogue
-Charles Burney Sr,Sir William Scott,1,,,hemlow_catalogue
-10th Duke of Norfolk,Charles Burney Sr,1,1790,1790,hemlow_catalogue
-Charles Burney Sr,Harriett [Hester] Burney,1,,,hemlow_catalogue
-Charles Burney Sr,William Crotch,1,,,hemlow_catalogue
-Charles Burney Sr,George Steevens,1,,,hemlow_catalogue
-Charles Burney Sr,George Symme Calcott,1,1790,1790,hemlow_catalogue
-Charles Burney Sr,Lady Banks,1,1791,1791,hemlow_catalogue
-Charles Burney Sr,William French,1,1791,1791,hemlow_catalogue
-Charles Burney Sr,Edmund Burke,1,,,hemlow_catalogue
-Charles Burney Sr,Charles Clagget,1,,,hemlow_catalogue
-Charles Burney Sr,John Horne Tooke,1,1791,1791,hemlow_catalogue
-Charles Burney Sr,Executors of Sir Joshua Reynolds,1,1791,1791,hemlow_catalogue
-Charles Blagden,Charles Burney Sr,1,1792,1792,hemlow_catalogue
-CBF,Charles Burney Sr,1,,,hemlow_catalogue
-Charles Burney Sr,Franz [Franz Josef] Haydn,1,1791,1791,hemlow_catalogue
-Charles Burney Sr,Edward Burke,1,,,hemlow_catalogue
-Charles Burney Sr,William Locke Sr,1,,,hemlow_catalogue
-Charles Burney Sr,Frederica Locke,1,,,hemlow_catalogue
-Charles Burney Sr,Marie Hester (Hughes) Park,1,,,hemlow_catalogue
-Charles Burney Sr,William Herschel,1,,,hemlow_catalogue
-Charles Burney Sr,Sir William Parsons,1,,,hemlow_catalogue
-Charles Burney Sr,Jean-Baptiste Cléry,1,,,hemlow_catalogue
-Charles Burney Sr,Warren Hastings [to CB],1,,,hemlow_catalogue
-Charles Burney Sr,Charles Butler,1,,,hemlow_catalogue
-Charles Burney Sr,Lord Charles [Herne?],1,1798,1798,hemlow_catalogue
-Charles Burney Sr,William Locke [?],1,,,hemlow_catalogue
-Benjamin Moseley,Charles Burney Sr,1,,,hemlow_catalogue
-Charles Burney Sr,Ella Cornelia Knight,1,1800,1800,hemlow_catalogue
-Charles Burney Sr,Samuel Wesley,1,1801,1801,hemlow_catalogue
-Charles Burney Sr,Miss Drysdale [?],1,,,hemlow_catalogue
-Andree Amelié,Charles Burney Sr,1,,,hemlow_catalogue
-Charles Burney Sr,Granville Greville,1,1802,1802,hemlow_catalogue
-Charles Burney Sr,William Ayrton,1,,,hemlow_catalogue
-Charles Burney Sr,Miss Drysdale[?],1,,,hemlow_catalogue
-Charles Burney Sr,Edmond Ayrton,1,,,hemlow_catalogue
-Charles Burney Sr,Joseph Plymley,1,,,hemlow_catalogue
-Charles Burney Sr,William Lowther later Lord Lonsdale,1,,,hemlow_catalogue
-Cecilia Maria Henslow,Charles Burney Sr,1,,,hemlow_catalogue
-Charles Burney Sr,Samuel Hoole,1,,,hemlow_catalogue
-Charles Burney Sr,Richard Wroughton,1,,,hemlow_catalogue
-Charles Burney Sr,James Bradley,1,,,hemlow_catalogue
-Charles Burney Sr,Lady Burroughes,1,,,hemlow_catalogue
-Charles Burney Sr,TJ Mathias,1,,,hemlow_catalogue
-Charles Burney Sr,John Phillips,1,,,hemlow_catalogue
-Charles Burney Sr,Princess Charlotte [post of Udney],1,,,hemlow_catalogue
-Charles Burney Sr,Lady Crewes,1,1806,1806,hemlow_catalogue
-Charles Burney Sr,Lord Cardigan,1,1806,1806,hemlow_catalogue
-Charles Burney Sr,Lady Manvers,1,1806,1806,hemlow_catalogue
-Andrew Spottiswoode [= ALS CB],Charles Burney Sr,1,1806,1806,hemlow_catalogue
-Charles Burney Sr,John Caramali,1,1807,1807,hemlow_catalogue
-Charles Burney Sr,Mary (Palmer) Marchioness of Thomond,1,1807,1807,hemlow_catalogue
-CB [?],Charles Burney Sr,1,,,hemlow_catalogue
-CHPB,Charles Burney Sr,1,,,hemlow_catalogue
-Charles Burney Sr,Elizabeth Ironmonger,1,,,hemlow_catalogue
-Charles Burney Sr,Lady Crewe [?],1,,,hemlow_catalogue
-Charles Burney Sr,Lord Lonsdale,1,,,hemlow_catalogue
-Charles Burney Sr,Elizabeth Anne (Smart) LeNoir,1,1807,1807,hemlow_catalogue
-Charles Burney Sr,Robert Southey,1,1833,1833,hemlow_catalogue
-Charles Burney Sr,John Graham,1,1835,1835,hemlow_catalogue
-Charles Burney Sr,George Owen Cambridge,1,1836,1836,hemlow_catalogue
-CTT P Metcalfe,Charles Burney Sr,1,1836,1836,hemlow_catalogue
-Charles Burney Jr,Robert Burnside,1,1779,1779,hemlow_catalogue
-Aberdeen Gordon,Charles Burney Jr,1,1788,1788,hemlow_catalogue
-Charles Burney Jr,Percival Stockdale,1,1786,1786,hemlow_catalogue
-Charles Burney Jr,William Bewley,1,1786,1786,hemlow_catalogue
-Charles Burney Jr,Humphrey Owen,1,1789,1789,hemlow_catalogue
-Charles Burney Jr,John [?],1,1790,1790,hemlow_catalogue
-Charles Burney Jr,Sir George Baker,1,1790,1790,hemlow_catalogue
-Charles Burney Jr,Charlotte Broome,1,1800,1800,hemlow_catalogue
-Charles Burney Jr,FBA; CB; CBFB,1,1802,1802,hemlow_catalogue
-Charles Burney Jr,Joseph Nollekens,1,1808,1808,hemlow_catalogue
-Anthony Nott,Charles Burney Jr,1,1808,1808,hemlow_catalogue
-Charles Burney Jr,Roger Wilbraham,1,1808,1808,hemlow_catalogue
-Charles Burney Jr,George Beaumont,1,1809,1809,hemlow_catalogue
-Charles Burney Jr,Dr Monkton [?],1,1809,1809,hemlow_catalogue
-Charles Burney Jr,Richard Twining Sr,1,1809,1809,hemlow_catalogue
-Charles Burney Jr,James Perry,1,1809,1809,hemlow_catalogue
-Charles Burney Jr,Joseph Cradock [?],1,1810,1810,hemlow_catalogue
-Charles Burney Jr,George I Huntingford,1,1810,1810,hemlow_catalogue
-Charles Burney Jr,William Goodenow [?],1,1810,1810,hemlow_catalogue
-Charles Burney Jr,Samuel Bopet [?],1,1810,1810,hemlow_catalogue
-Charles Burney Jr,John Young [?],1,1810,1810,hemlow_catalogue
-Charles Burney Jr,Charles Manners-Sutton,1,1810,1810,hemlow_catalogue
-Charles Burney Jr,Henry John Todd,1,1810,1810,hemlow_catalogue
-Charles Burney Jr,Lady Charlotte (North) Lindsay,1,1810,1810,hemlow_catalogue
-Charles Burney Jr,"Lavinia (Bingham), Countess Spencer",1,1810,1810,hemlow_catalogue
-Charles Burney Jr,Matthew Raine,1,1810,1810,hemlow_catalogue
-Charles Burney Jr,James Edwards,1,1810,1810,hemlow_catalogue
-Charles Burney Jr,William Kaye,1,1811,1811,hemlow_catalogue
-Charles Burney Jr,Patrick Wilson,1,1811,1811,hemlow_catalogue
-Charles Burney Jr,Jonathan Raine,1,1811,1811,hemlow_catalogue
-Charles Burney Jr,Payne Knight,1,1811,1811,hemlow_catalogue
-Charles Burney Jr,John Bayot [?],1,1812,1812,hemlow_catalogue
-Charles Burney Jr,J W Baron,1,1812,1812,hemlow_catalogue
-Charles Burney Jr,"Lawrence, Parsons, 2nd Earl of Rosse",1,1812,1812,hemlow_catalogue
-Charles Burney Jr,Jonathan Raine [?],1,1812,1812,hemlow_catalogue
-Charles Burney Jr,James Henry Monk,1,1812,1812,hemlow_catalogue
-Charles Burney Jr,"Henry Petty-FitzMaurice, Marquis of Lansdowne",1,1812,1812,hemlow_catalogue
-Charles Burney Jr,Sir Benjamin Hobhouse,1,1812,1812,hemlow_catalogue
-Charles Burney Jr,G E Griffiths,1,1812,1812,hemlow_catalogue
-C J Hatcher [to CB Jr?],Charles Burney Jr,1,1813,1813,hemlow_catalogue
-Charles Burney Jr,Frances Millais [?],1,1813,1813,hemlow_catalogue
-Charles Burney Jr,William Goodwin [?],1,1813,1813,hemlow_catalogue
-Charles Burney Jr,William Godwin,1,1813,1813,hemlow_catalogue
-Charles Burney Jr,W LeBas,1,1813,1813,hemlow_catalogue
-Charles Burney Jr,Richard [?] Heber,1,1813,1813,hemlow_catalogue
-Charles Burney Jr,Henry Kent,1,1813,1813,hemlow_catalogue
-Charles Burney Jr,E H Barker,1,1813,1813,hemlow_catalogue
-Charles Burney Jr,Thomas Grenville,1,1813,1813,hemlow_catalogue
-Charles Burney Jr,Sir George Beaumont,1,1814,1814,hemlow_catalogue
-Charles Burney Jr,T J Mathias,1,1814,1814,hemlow_catalogue
-Charles Burney Jr,William Howley,1,1814,1814,hemlow_catalogue
-Charles Burney Jr,John Randolph,1,1814,1814,hemlow_catalogue
-Charles Burney Jr,R H Barker,1,1814,1814,hemlow_catalogue
-Charles Burney Jr,Sir H C Englefield,1,1814,1814,hemlow_catalogue
-Charles Burney Jr,Thomas Shorting [?],1,1814,1814,hemlow_catalogue
-Charles Burney Jr,Douglas Kinnaird,1,1814,1814,hemlow_catalogue
-Charles Burney Jr,Frances Anne (Burney) Wood,1,1814,1814,hemlow_catalogue
-Charles Burney Jr,Edward Foss,1,1814,1814,hemlow_catalogue
-(CB) [?],Charles Burney Jr,1,1814,1814,hemlow_catalogue
-Charles Burney Jr,"William, 2nd Earl Spencer [?]",1,1815,1815,hemlow_catalogue
-Charles Burney Jr,"William, Lord Marysel [?]",1,1816,1816,hemlow_catalogue
-Charles Burney Jr,Edward Legge,1,1816,1816,hemlow_catalogue
-Charles Burney Jr,W Whittle,1,1816,1816,hemlow_catalogue
-Charles Burney Jr,Sir Joseph Banks,1,1816,1816,hemlow_catalogue
-Charles Burney Jr,Richard Twining [?],1,1816,1816,hemlow_catalogue
-Charles Burney Jr,Eva Maria (Veigel) Garrick,1,1817,1817,hemlow_catalogue
-Charles Burney Jr,Sir John N Ashby [?],1,1817,1817,hemlow_catalogue
-Charles Burney Jr,John Langslow,1,1817,1817,hemlow_catalogue
-Charles Burney Jr,Mr <Milne>,1,1817,1817,hemlow_catalogue
-Charles Burney Jr,"George, 2nd Earl Spencer [?]",1,1817,1817,hemlow_catalogue
-Charles Burney Jr,G Woodfall [to CB Jr?],1,1817,1817,hemlow_catalogue
-Charles Burney Jr,William Heberden [to CB Jr or CPB?],1,1816,1816,hemlow_catalogue
-Charles Burney Jr,Charles Malcolm Manners,1,1817,1817,hemlow_catalogue
-Charles Burney Jr,S Haroy [?],1,1779,1779,hemlow_catalogue
-Charles Burney Jr,Cutler [?] Moore [?],1,,,hemlow_catalogue
-Charles Burney Jr,Samuel Rose,1,,,hemlow_catalogue
-Charles Burney Jr,M Holley [?],1,1792,1792,hemlow_catalogue
-Charles Burney Jr,Elizabeth Rose,1,1797,1797,hemlow_catalogue
-Charles Burney Jr,Harriet Bosse [?],1,1814,1814,hemlow_catalogue
-Charles Burney Jr,R[ichard?] Heber,1,1800,1800,hemlow_catalogue
-Charles Burney Jr,James [Young],1,1800,1800,hemlow_catalogue
-Gregory Hickman,Samuel Johnson,1,1731,1731,johnson_hill
-Mrs. Johnson (wife),Samuel Johnson,1,1739,1739,johnson_hill
-Mr. Urban,Samuel Johnson,1,1744,1744,johnson_hill
-Printer of the General Advertiser,Samuel Johnson,1,1750,1750,johnson_hill
-Robert Chambers,Samuel Johnson,1,1754,1754,johnson_hill
-Earl of Chesterfield,Samuel Johnson,1,1755,1755,johnson_hill
-Samuel Johnson,Vice-Chancellor of Oxford,1,1755,1755,johnson_hill
-Miss Carter,Samuel Johnson,1,,,johnson_hill
-Dr. Hawkesworth,Samuel Johnson,1,,,johnson_hill
-Joseph Simpson,Samuel Johnson,1,1759,1759,johnson_hill
-Dr. Staunton,Samuel Johnson,1,1762,1762,johnson_hill
-A Lady,Samuel Johnson,1,1762,1762,johnson_hill
-George Grenville,Samuel Johnson,1,,,johnson_hill
-Edward Lye,Samuel Johnson,1,,,johnson_hill
-Charles Burney,Samuel Johnson,1,1765,1765,johnson_hill
-Mrs. Salusbury,Samuel Johnson,1,1767,1767,johnson_hill
-Apperley,Samuel Johnson,1,,,johnson_hill
-F. A. Barnard,Samuel Johnson,1,1768,1768,johnson_hill
-Miss Flint,Samuel Johnson,1,1769,1769,johnson_hill
-Henry Bright,Samuel Johnson,1,1770,1770,johnson_hill
-John Rivington,Samuel Johnson,1,,,johnson_hill
-Miss Langton,Samuel Johnson,1,1771,1771,johnson_hill
-Countess de Boufflers,Samuel Johnson,1,1771,1771,johnson_hill
-Joseph Banks,Samuel Johnson,1,1772,1772,johnson_hill
-James Granger,Samuel Johnson,1,1772,1772,johnson_hill
-Mr. B-,Samuel Johnson,1,1773,1773,johnson_hill
-Mr. White,Samuel Johnson,1,1773,1773,johnson_hill
-Samuel Johnson,W. S. Johnson,1,,,johnson_hill
-Oliver Goldsmith,Samuel Johnson,1,,,johnson_hill
-Lord Elibank,Samuel Johnson,1,1773,1773,johnson_hill
-Duke of Argyle,Samuel Johnson,1,1773,1773,johnson_hill
-Hollyer,Samuel Johnson,1,,,johnson_hill
-Dr. Thomas Fothergill,Samuel Johnson,1,1775,1775,johnson_hill
-Laird of Rasay,Samuel Johnson,1,1775,1775,johnson_hill
-George Faulkner,Samuel Johnson,1,1775,1775,johnson_hill
-Mrs. Desmoulins,Samuel Johnson,1,1775,1775,johnson_hill
-Archibald Hamilton,Samuel Johnson,1,1776,1776,johnson_hill
-Dr. John Calder,Samuel Johnson,1,1776,1776,johnson_hill
-Dr. John Douglas,Samuel Johnson,1,,,johnson_hill
-Dr. Wetherell,Samuel Johnson,1,1776,1776,johnson_hill
-Earl of Hertford,Samuel Johnson,1,,,johnson_hill
-Francis Fowke,Samuel Johnson,1,1776,1776,johnson_hill
-Charles Jenkinson,Samuel Johnson,1,1777,1777,johnson_hill
-Samuel Johnson,W. Sharp,1,1777,1777,johnson_hill
-Mrs. Gastrell,Samuel Johnson,1,,,johnson_hill
-Samuel Johnson,Saunders Welch,1,1778,1778,johnson_hill
-Dr. Wheeler,Samuel Johnson,1,1778,1778,johnson_hill
-Dr. Edwards,Samuel Johnson,1,1778,1778,johnson_hill
-Samuel Johnson,Thomas Fitzmaurice,1,1785,1785,johnson_hill
-John Hussey,Samuel Johnson,1,1778,1778,johnson_hill
-Mrs. Garrick,Samuel Johnson,1,1779,1779,johnson_hill
-Dr. Beattie,Samuel Johnson,1,1780,1780,johnson_hill
-A Young Clergyman,Samuel Johnson,1,1780,1780,johnson_hill
-Samuel Johnson,Viscountess Southwell,1,1780,1780,johnson_hill
-Samuel Hardy,Samuel Johnson,1,,,johnson_hill
-Samuel Johnson,Thomas Astle,1,1781,1781,johnson_hill
-Dr. Thomas Patten,Samuel Johnson,1,1781,1781,johnson_hill
-Recorder Beatniffe,Samuel Johnson,1,1782,1782,johnson_hill
-George Kearsley,Samuel Johnson,1,1782,1782,johnson_hill
-James Compton,Samuel Johnson,1,1772,1772,johnson_hill
-Samuel Johnson,Thomas Wilson,1,1782,1782,johnson_hill
-Joseph Cradock,Samuel Johnson,1,1783,1783,johnson_hill
-Dr. Scott,Samuel Johnson,1,1783,1783,johnson_hill
-James Barry,Samuel Johnson,1,1783,1783,johnson_hill
-Joseph Fowke,Samuel Johnson,1,1783,1783,johnson_hill
-Samuel Johnson,Worshipful Company of the Mercers,1,,,johnson_hill
-Earl of Dartmouth,Samuel Johnson,1,1783,1783,johnson_hill
-Mr. and Miss Wilkes,Samuel Johnson,1,,,johnson_hill
-Miss Williams,Samuel Johnson,1,1783,1783,johnson_hill
-Samuel Johnson,Sophia Thrale Hoare,1,1783,1783,johnson_hill
-Dr. John Mudge,Samuel Johnson,1,1783,1783,johnson_hill
-Mr. Tomkeson,Samuel Johnson,1,1783,1783,johnson_hill
-Richard Jackson,Samuel Johnson,1,,,johnson_hill
-Mrs. Chapone,Samuel Johnson,1,1783,1783,johnson_hill
-Richard Clark,Samuel Johnson,1,1784,1784,johnson_hill
-Mrs. Rogers,Samuel Johnson,1,,,johnson_hill
-Miss Jane Langton,Samuel Johnson,1,1784,1784,johnson_hill
-Heely,Samuel Johnson,1,1784,1784,johnson_hill
-George Nicol,Samuel Johnson,1,1784,1784,johnson_hill
-Lord Chancellor Thurlow,Samuel Johnson,1,1784,1784,johnson_hill
-John Paradise,Samuel Johnson,1,1784,1784,johnson_hill
-Hester Thrale Piozzi,Mr. Perkins,1,1773,1773,piozzi
-Guardians/executors,Hester Thrale Piozzi,1,,,piozzi
-Hester Thrale Piozzi,Mr. Lysons,1,1784,1784,piozzi
-Hester Thrale Piozzi,Miss Willoughby,1,1821,1821,piozzi
-Hester Thrale Piozzi,John Salusbury,1,1793,1793,piozzi
-Chief Justice Aston -> Mr. Secretary Hamilton,Edmund Burke,1,1762,1762,burke_1844
-Edmund Burke,"Robert Jephson, Esq",1,1765,1765,burke_1844
-Edmund Burke,"John Hely Hutchinson, Esq",1,1765,1765,burke_1844
-Edmund Burke,"J. Monck Mason, Esq",1,1765,1765,burke_1844
-Edmund Burke,"Henry Flood, Esq",1,1765,1765,burke_1844
-Edmund Burke,Mr. James Barry -> Messrs. Edm. and Wm. Burke,1,1765,1765,burke_1844
-Edmund Burke,"Rev. Dr. Markham -> Wm. Burke, Esq",1,1765,1765,burke_1844
+Edmund Burke,Mr. Anthony Dermott,2,1779,1779,burke_1844
 Edmund Burke,Mr. Archibald Henderson,1,1766,1766,burke_1844
-Edmund Burke,"Sir George Macartney -> Wm. Burke, Esq",1,1766,1766,burke_1844
-Edmund Burke,the Lord Mayor of Dublin (Rt. Hon. Francis Featherstone),1,1767,1767,burke_1844
-Edmund Burke,Mr. James Barry -> Messrs. Burke,1,1767,1767,burke_1844
-Edmund Burke,Sir Wm. Meredith,1,1767,1767,burke_1844
-Edmund Burke,s. Duke of Richmond,1,1767,1767,burke_1844
-Duke of Newcastle,Edmund Burke,1,1767,1767,burke_1844
-Edmund Burke,ch 22. Rev. Dr. Leland,1,1770,1770,burke_1844
-Edmund Burke,a Prussian Gentleman,1,1772,1772,burke_1844
-Edmund Burke,"Rich. Burke, Sen., Esq -> Wm. Burke, Esq",1,1773,1773,burke_1844
-Edmund Burke,"Mr. Rich. Burke, Jun., and Mr. T. King",1,1773,1773,burke_1844
-Edmund Burke,Madame du Deffand,1,1774,1774,burke_1844
-Edmund Burke,Rev Dr. Leland,1,1774,1774,burke_1844
-Edmund Burke,Rev. Dr. Wilson,1,1774,1774,burke_1844
-Edmund Burke,"Rev. Dr. ""Wilson",1,1774,1774,burke_1844
-Edmund Burke,"Richard Burke, Esq -> Joseph Bullock, Esq",1,1774,1774,burke_1844
-Edmund Burke,Mrs. French,1,1774,1774,burke_1844
-Edmund Burke,Mrs. Burke,1,1774,1774,burke_1844
-Edmund Burke,General Lee,1,1774,1774,burke_1844
-Edmund Burke,Mr. James Barry,1,1775,1775,burke_1844
-Edmund Burke,a Committee at Bristol,1,1775,1775,burke_1844
-Edmund Burke,"Wm. Burgh, Esq",1,1775,1775,burke_1844
-9. Lord North,Edmund Burke,1,1775,1775,burke_1844
-Edmund Burke,Mrs. Montague,1,1776,1776,burke_1844
-Edmund Burke,"ch 17. Wm. Eden, Esq",1,1776,1776,burke_1844
-Edmund Burke,"ch 18. Wm. Eden, Esq",1,1776,1776,burke_1844
-Edmund Burke,Marchioness of Rockingham,1,1776,1776,burke_1844
-Edmund Burke,"John Bourke, Esq",1,1776,1776,burke_1844
-Edmund Burke,"Sir A. I. Elton, Town Clerk of Bristol",1,1777,1777,burke_1844
-Edmund Burke,a gentleman in Philadelphia,1,1777,1777,burke_1844
-Edmund Burke,Gen. Oglethorpe,1,1777,1777,burke_1844
-Dr. Robertson,Edmund Burke,1,1777,1777,burke_1844
-Edmund Burke,"Philip Francis, Esq -> Wm. Burke, Esq",1,1777,1777,burke_1844
-Edmund Burke,"a Member of the Bell Club, Bristol",1,1777,1777,burke_1844
-Edmund Burke,"James Boswell, Esq",1,1778,1778,burke_1844
-Edmund Burke,"Samuel Span, Esq., Master of Merchants' Hall, Bristol",1,1778,1778,burke_1844
-Edmund Burke,^uly 1. Rt. Hon. Edm. Sexton Pery,1,1778,1778,burke_1844
-"Alexander Wedderburne, Esq",Edmund Burke,1,1778,1778,burke_1844
-Edmund Burke,"Luke Gardiner, Esq",1,1778,1778,burke_1844
-Edmund Burke,"Michael Miller, Esq., Master of Merchants' Hall, Bristol",1,1779,1779,burke_1844
-Edmund Burke,Rev. John Erskine,1,1779,1779,burke_1844
-"Edm, Burke, Esq -> Rev. John Erskine",Edmund Burke,1,1779,1779,burke_1844
-Edmund Burke,the Mayor of Bristol,1,1779,1779,burke_1844
-Baron Mazeres »,Edmund Burke,1,1779,1779,burke_1844
-Edmund Burke,"Thomas Burgh, Esq",1,1780,1780,burke_1844
-Edmund Burke,"Sir W. W. Wynne, Bart",1,1780,1780,burke_1844
-Edmund Burke,"Rich. Burke, Sen., Esq -> Rich. Champion, Esq",1,1780,1780,burke_1844
-Edmund Burke,Lord Chief Justice of the Common Fleas,1,1780,1780,burke_1844
-Edmund Burke,Viscount Courtenay,1,1780,1780,burke_1844
-Edmund Burke,"Mr. Watts, Bristol",1,1780,1780,burke_1844
-Earl of Hillsborough and Lord Viscount Stormont,Edmund Burke,1,1780,1780,burke_1844
-Edmund Burke,"Sir Thomas Rumbold, Bart",1,1781,1781,burke_1844
-27. Mr. George Crabbe,Edmund Burke,1,1781,1781,burke_1844
+Edmund Burke,Mr. Patrick Bowie,2,1779,1779,burke_1844
+Edmund Burke,Mr. T. King,1,1773,1773,burke_1844
 Edmund Burke,Mr. Tighe,1,1781,1781,burke_1844
-Edmund Burke,General Burgoyne,1,1781,1781,burke_1844
-Edmund Burke,Joshua Reynolds,1,1781,1781,burke_1844
-Edmund Burke,Mr. George Crabbe,1,1781,1781,burke_1844
-Edmund Burke,"George Goold, Esq",1,1781,1781,burke_1844
-Edmund Burke,"Wm. Eden, Esq",1,1782,1782,burke_1844
-Bishop of Killaloe,Edmund Burke,1,1782,1782,burke_1844
-Edmund Burke,of Rockingham -> the King,1,1782,1782,burke_1844
-Edmund Burke,Rev. George Crabbe,1,1782,1782,burke_1844
-Edmund Burke,"Rev. Walker King -> Wm. Burke, Esq",1,1782,1782,burke_1844
-Eari Fitzwilliam,Edmund Burke,1,1782,1782,burke_1844
-Edmund Burke,Ragonaut Row,1,1783,1783,burke_1844
-Edmund Burke,"R. B. Sheridan, Esq",1,1783,1783,burke_1844
-Edmund Burke,"Joseph Bullock, Esq",1,1783,1783,burke_1844
-Edmund Burke,"Rich. Burke, Sen., Esq -> Mrs. Burke",1,1783,1783,burke_1844
-"Arthur Pigot, Esq",Edmund Burke,1,1783,1783,burke_1844
+Edmund Burke,"Mr. Watts, Bristol",1,1780,1780,burke_1844
 Edmund Burke,Mr. Wm. Leechman,1,1783,1783,burke_1844
-Edmund Burke,Lord Macartney,1,1784,1784,burke_1844
-Edmund Burke,Sir Win. Jones,1,1784,1784,burke_1844
-Edmund Burke,Lord Thurlow,1,1785,1785,burke_1844
-Edmund Burke,"Rt. Hon. Edrn. Burke -> Philip Francis, Esq",1,1785,1785,burke_1844
+Edmund Burke,Mrs Crewe,7,1794,1797,burke_1844
+Edmund Burke,Mrs. Burke,1,1774,1774,burke_1844
 Edmund Burke,Mrs. Francis,1,1787,1787,burke_1844
-Edmund Burke,"William Fawkener, Esq",1,1788,1788,burke_1844
-Edmund Burke,the Speaker of the House of Commons,1,1788,1788,burke_1844
-Edmund Burke,Messrs. Rich. Burke,1,1788,1788,burke_1844
-Edmund Burke,"Rich. Burke, Jun., Esq -> Philip Francis, Esq",1,1790,1790,burke_1844
-Capt. Mercer,Edmund Burke,1,1790,1790,burke_1844
-Edmund Burke,"T. Hussey, Esq -> Rev. Dr. Hussey",1,1790,1790,burke_1844
-Edmund Burke,Hon. John Trevor,1,1791,1791,burke_1844
-Edmund Burke,Madame D'Osmond,1,1791,1791,burke_1844
-Edmund Burke,a French Lady,1,1791,1791,burke_1844
-Chev. de Rivarol,Edmund Burke,1,1791,1791,burke_1844
-Edmund Burke,Marquis de Bouille,1,1791,1791,burke_1844
-Edmund Burke,Lord Camden,1,1791,1791,burke_1844
-Edmund Burke,Sir Win. Scott,1,1791,1791,burke_1844
-Edmund Burke,Lord Auckland,1,1791,1791,burke_1844
-Edmund Burke,Lord Charlemont,1,1791,1791,burke_1844
-Edmund Burke,"Rich. Burke, Jan., Esq",1,1791,1791,burke_1844
-Duke of Dorset,Edmund Burke,1,1791,1791,burke_1844
-Edmund Burke,"J. H. Hutchinson, Esq",1,1791,1791,burke_1844
-Edmund Burke,Rt. Hon. Edrn. Burke -> Chev. de la Bintinnaye,1,1791,1791,burke_1844
-Dr. Laurence,Edmund Burke,1,1791,1791,burke_1844
-Edmund Burke,"Rich. Burke, Jun , Esq",1,1792,1792,burke_1844
-Edmund Burke,"William Weddell, Esq",1,1792,1792,burke_1844
-Edmund Burke,Rev. Robert Dodge,1,1792,1792,burke_1844
-Edmund Burke,"Edmund Malone, Esq",1,1792,1792,burke_1844
-Edmund Burke,the King of Poland,1,1792,1792,burke_1844
-Edmund Burke,"Rich. Burke, Jun., Esq -> Lord Grenville",1,1792,1792,burke_1844
-Edmund Burke,the Countess of Inchiquin,1,1792,1792,burke_1844
-Abbe de la Biritinnaye,Edmund Burke,1,1792,1792,burke_1844
-Edmund Burke,"Rich. Burke, Jun., Esq -> Wm. Burke, Esq",1,1792,1792,burke_1844
-Edmund Burke,Mrs. Mary Leadbeater,1,1792,1792,burke_1844
-Edmund Burke,"Rich. Burke, Jun., Esq -> Wm. Smith, Esq",1,1792,1792,burke_1844
-Edmund Burke,"Wm. Smith, Esq -> Rich. Burke, Jun., Esq",1,1792,1792,burke_1844
-Earl of Upper Ossory,Edmund Burke,1,1792,1792,burke_1844
-Edmund Burke,"Sir Robert Staples, Bart -> Lord Ossory",1,1792,1792,burke_1844
-Edmund Burke,"Rich. Burke, Jun., Esq -> Rt. Hon. Henry Dundas",1,1792,1792,burke_1844
-Edmund Burke,"Rt. Hon. HenryGrattan -> Rich. Burke, Jun., Esq",1,1793,1793,burke_1844
-Edmund Burke,King of Poland,1,1793,1793,burke_1844
-Comte de Mercy,Edmund Burke,1,1793,1793,burke_1844
-Edmund Burke,Sir Gilbert Elliot,1,1793,1793,burke_1844
-Comte d'Artois,Edmund Burke,1,1793,1793,burke_1844
-Edmund Burke,the Royalist Army in Poitou -> the Comte d'Artois,1,1793,1793,burke_1844
-Comte d'Artois -> the Due d'Harcourt,Edmund Burke,1,1793,1793,burke_1844
-Edmund Burke,the Comte d'Artois,1,1793,1793,burke_1844
-Edmund Burke,"Sylvester Douglas, Esq",1,1793,1793,burke_1844
-Edmund Burke,Lord Malmesbury,1,1793,1793,burke_1844
-1 . Duke of Portland,Edmund Burke,1,1794,1794,burke_1844
-Earl FitzwiUiam,Edmund Burke,1,1794,1794,burke_1844
-Comte de Serent,Edmund Burke,1,1794,1794,burke_1844
-Edmund Burke,the Abbe de la Bintinnaye,1,1794,1794,burke_1844
-Edmund Burke,Henry Grattan Esq,1,1794,1794,burke_1844
-Edmund Burke,Vicomte de Cice,1,1794,1794,burke_1844
-Edmund Burke,"Wm. Smith, Esq",1,1795,1795,burke_1844
-Edmund Burke,ch 3. Rev. Dr. Hussey,1,1795,1795,burke_1844
-Edmund Burke,ch 10. Rev. Dr. Hussey,1,1795,1795,burke_1844
-Edmund Burke,"ch 14. Henry Grattan, Esq",1,1795,1795,burke_1844
-Edmund Burke,ch 19. Messrs. Byrne and Keogh,1,1795,1795,burke_1844
-"Edm. Malone, Esq",Edmund Burke,1,1795,1795,burke_1844
-Edmund Burke,ch 10. Marquis of Buckingham -> Rt. Hon. Wm. Pitt,1,1796,1796,burke_1844
-Edmund Burke,"ch 11. John Bowles, Esq",1,1796,1796,burke_1844
-Edmund Burke,"John Bowles, Esq",1,1796,1796,burke_1844
-Edmund Burke,ch 24. Rt. Hon. Wm. Pitt -> Marquis of Buckingham,1,1796,1796,burke_1844
-Dr. French Laurence,Edmund Burke,1,1796,1796,burke_1844
+Edmund Burke,Mrs. French,1,1774,1774,burke_1844
 Edmund Burke,Mrs. Leadbeater,1,1797,1797,burke_1844
-Horace Walpole,"JOHN CHUTH, Esq",1,1758,1758,walpole_1820
-Hon. H. S. CONV^^AY,Horace Walpole,1,1763,1763,walpole_1820
-Horace Walpole,"THOMAS BRAND, Esq",1,,,walpole_1820
-"DAVID HUME, Esq,",Horace Walpole,1,1766,1766,walpole_1820
-"DAVID HUME, Esq",Horace Walpole,1,1766,1766,walpole_1820
-Horace Walpole,Rev. Mr. Lort,1,1779,1779,walpole_1820
-Hon. GEORGE HARDINGB,Horace Walpole,1,1782,1782,walpole_1820
-Hon. George Hardinge,Horace Walpole,1,1782,1782,walpole_1820
-Horace Walpole,"THOMAS BARRETT, Esq",1,1792,1792,walpole_1820
-Hon. H. S. €0NWAT,Horace Walpole,1,,,walpole_1820
-Horace Walpole,Rev. Mr. Beloe,1,1794,1794,walpole_1820
-COUNTESS of * * * ♦,Horace Walpole,1,1797,1797,walpole_1820
-Joseph Priestley,Josi Ml Wl DGWOOD,1,,,priestley
-Joseph Priestley,Matthew Boulton,1,,,priestley
-Joseph Johnson,Joseph Priestley,1,,,priestley
-Joseph Priestley,Mrs.  Croui b,1,,,priestley
-Joseph Priestley,Mrs.  Crouch,1,,,priestley
-Joseph Priestley,Sir Joseph Ban ks,1,,,priestley
-('ait.  James Ceib,Joseph Priestley,1,,,priestley
-Joseph Priestley,Mr.  Lee,1,,,priestley
-Joseph Priestley,"Mrs,  Ce i",1,,,priestley
-John Vaughan,Joseph Priestley,1,,,priestley
-Joseph Priestley,Wm.  Vaughan,1,,,priestley
-BENJ.  V M..IIAN,Joseph Priestley,1,,,priestley
-Citizen Perigaux,Joseph Priestley,1,,,priestley
-Dr. Benjamin Rush,Joseph Priestley,1,,,priestley
-Joseph Priestley,"ilr?.  Robert A.  Wainewright of London,  Dr.  Priestley's",1,,,priestley
-Joseph Priestley,"William O.  Priestley,  M.D.,  LL.D.,  of London,  I am",1,,,priestley
-Joseph Priestley,"Mr.  W.  M.  Vaughan of Cambridge,  Mass.,  I am in-",1,,,priestley
-Joseph Priestley,"Mr.  George F.  Kunz,  of Xew York,  I give thanks for a",1,,,priestley
-Joseph Priestley,"Mr.  Conyers Button,  of Philadelphia,  1 am indebted for",1,,,priestley
-"Benjamin Vaughan,  Esq",Joseph Priestley,1,1780,1780,priestley
-Joseph Priestley,"Me.  Wedowood,  near Neweastle-under-Lyne.6",1,1771,1771,priestley
+Edmund Burke,Mrs. Mary Leadbeater,1,1792,1792,burke_1844
+Edmund Burke,Mrs. Montague,1,1776,1776,burke_1844
+Edmund Burke,Philip Francis,7,1778,1790,burke_1844
+Edmund Burke,R B. Sheridan,1,1783,1783,burke_1844
+Edmund Burke,Ragonaut Row,1,1783,1783,burke_1844
+Edmund Burke,"Rev. Dr. ""Wilson",1,1774,1774,burke_1844
+Edmund Burke,Rev. Dr. Hussey,2,1795,1795,burke_1844
+Edmund Burke,Rev. Dr. Leland,6,1765,1774,burke_1844
+Edmund Burke,Rev. Dr. Wilson,1,1774,1774,burke_1844
+Edmund Burke,Rev. John Erskine,1,1779,1779,burke_1844
+Edmund Burke,Rev. Robert Dodge,1,1792,1792,burke_1844
+Edmund Burke,Richard Brocklesby,5,1770,1797,"burke_1844,known_connection"
+Edmund Burke,Richard Burke Jr,40,1773,1794,burke_1844
+Edmund Burke,Richard Burke Sr,3,1783,1791,burke_1844
+Edmund Burke,Richard Champion,35,1774,1781,burke_1844
+Edmund Burke,Richard Shackleton,21,1744,1785,burke_1844
+Edmund Burke,Robert Jephson,1,1765,1765,burke_1844
+Edmund Burke,Rt. Hon. Edm. Sexton Pery,4,1778,1778,burke_1844
+Edmund Burke,Rt. Hon. Wm. Pitt,2,1794,1794,burke_1844
+Edmund Burke,Samuel Johnson,1,1758,1784,known_connection
+Edmund Burke,"Samuel Span, Esq., Master of Merchants' Hall, Bristol",1,1778,1778,burke_1844
+Edmund Burke,"Sir A I. Elton, Town Clerk of Bristol",1,1777,1777,burke_1844
+Edmund Burke,Sir Gilbert Elliot,1,1793,1793,burke_1844
+Edmund Burke,Sir Thomas Rumbold,1,1781,1781,burke_1844
+Edmund Burke,Sir W W. Wynne,1,1780,1780,burke_1844
+Edmund Burke,Sir Win. Jones,1,1784,1784,burke_1844
+Edmund Burke,Sir Win. Scott,1,1791,1791,burke_1844
+Edmund Burke,Sir Wm. Meredith,1,1767,1767,burke_1844
+Edmund Burke,"Su- A I. Elton, Town Clerk of Bristol",2,1777,1780,burke_1844
+Edmund Burke,Sylvester Douglas,1,1793,1793,burke_1844
+Edmund Burke,Thomas Burgh,1,1780,1780,burke_1844
+Edmund Burke,Thomas Hussey,22,1790,1797,burke_1844
+Edmund Burke,Vicomte de Cice,1,1794,1794,burke_1844
+Edmund Burke,Viscount Courtenay,1,1780,1780,burke_1844
+Edmund Burke,Warren Hastings,1,1788,1795,known_connection
+Edmund Burke,William Burke,3,1782,1793,burke_1844
+Edmund Burke,William Fawkener,1,1788,1788,burke_1844
+Edmund Burke,William Gerard Hamilton,6,1763,1765,burke_1844
+Edmund Burke,William Jones,5,1779,1783,burke_1844
+Edmund Burke,William Robertson,1,1777,1777,burke_1844
+Edmund Burke,William Weddell,1,1792,1792,burke_1844
+Edmund Burke,William Wilberforce,1,1787,1797,known_connection
+Edmund Burke,William Windham,21,1789,1797,burke_1844
+Edmund Burke,Wm. Baker,4,1775,1777,burke_1844
+Edmund Burke,Wm. Burgh,1,1775,1775,burke_1844
+Edmund Burke,Wm. Dowdeswell,3,1771,1772,burke_1844
+Edmund Burke,Wm. Eden,3,1776,1782,burke_1844
+Edmund Burke,Wm. Smith,1,1795,1795,burke_1844
+Edmund Burke,^uly 1. Rt. Hon. Edm. Sexton Pery,1,1778,1778,burke_1844
+Edmund Burke,a Committee at Bristol,1,1775,1775,burke_1844
+Edmund Burke,a French Lady,1,1791,1791,burke_1844
+Edmund Burke,"a Member of the Bell Club, Bristol",1,1777,1777,burke_1844
+Edmund Burke,a Prussian Gentleman,1,1772,1772,burke_1844
+Edmund Burke,a gentleman in Philadelphia,1,1777,1777,burke_1844
+Edmund Burke,s. Duke of Richmond,1,1767,1767,burke_1844
+Edmund Burke,the Abbe de la Bintinnaye,1,1794,1794,burke_1844
+Edmund Burke,the Bishop of Chester,3,1771,1774,burke_1844
+Edmund Burke,the Chev. de la Bintinnaye,2,1792,1792,burke_1844
+Edmund Burke,the Comte d'Artois,1,1793,1793,burke_1844
+Edmund Burke,the Countess of Inchiquin,1,1792,1792,burke_1844
+Edmund Burke,the King of Poland,1,1792,1792,burke_1844
+Edmund Burke,the Lord Mayor of Dublin (Rt. Hon. Francis Featherstone),1,1767,1767,burke_1844
+Edmund Burke,the Mayor of Bristol,1,1779,1779,burke_1844
+Edmund Burke,the Speaker of the House of Commons,1,1788,1788,burke_1844
+Edmund Hector,Samuel Johnson,10,1776,1784,johnson_hill
+Edmund Jerningham,Frances Burney,1,1794,1794,hemlow_catalogue
+Edward A Chaplin,Frances Burney,1,1830,1830,hemlow_catalogue
+Edward Cave,Samuel Johnson,12,1734,1756,johnson_hill
+Edward Foss,Frances Burney,4,1818,1818,hemlow_catalogue
+Edward Jacob,Frances Burney,1,1821,1821,hemlow_catalogue
+Edward Jerningham,Frances Burney,2,1786,1794,hemlow_catalogue
+Edward Lye,Samuel Johnson,1,,,johnson_hill
+Edward Maltass,Frances Burney,1,,,hemlow_catalogue
+Edward Mangin,Frances Burney,1,,,hemlow_catalogue
+Edward Richard Burney,Frances Burney,12,1800,1801,hemlow_catalogue
+Eleanore princess d'Henin,Frances Burney,2,1818,1818,hemlow_catalogue
+Eleonore,Frances Burney,3,1814,1818,hemlow_catalogue
+Elisabeth-Charlotte,Frances Burney,1,,,hemlow_catalogue
+Elizabeth (Vesey) Handcock,Frances Burney,3,1783,1787,hemlow_catalogue
+Elizabeth Allen Burney,Frances Burney,13,1768,1796,hemlow_catalogue
+Elizabeth Carter,Elizabeth Montagu,1,1740,1800,emco_montagu
+Elizabeth Johnson,Frances Burney,1,1786,1786,hemlow_catalogue
+Elizabeth Juliana Schwellenberg,Frances Burney,5,1792,1792,hemlow_catalogue
+Elizabeth Meeke,Frances Burney,2,1776,1776,hemlow_catalogue
+Elizabeth Meeke,Isabella Strange,1,1775,1777,waterfield_thesis
+Elizabeth Meeke,Samuel Meeke,1,1777,1793,waterfield_thesis
+Elizabeth Montagu,Elizabeth Vesey,1,1750,1791,emco_montagu
+Elizabeth Montagu,Frances Burney,7,1780,1790,hemlow_catalogue
+Elizabeth Montagu,Frances Reynolds,1,1770,1800,emco_montagu
+Elizabeth Montagu,Hannah More,2,1775,1800,"emco_montagu,known_connection"
+Elizabeth Montagu,Hester Chapone,1,1760,1790,known_connection
+Elizabeth Montagu,Hester Thrale Piozzi,1,1770,1800,emco_montagu
+Elizabeth Montagu,Horace Walpole,1,1760,1800,emco_montagu
+Elizabeth Montagu,James Boswell,1,1770,1795,emco_montagu
+Elizabeth Montagu,Joshua Reynolds,1,1760,1792,emco_montagu
+Elizabeth Montagu,Leonard Smelt,1,1770,1800,emco_montagu
+Elizabeth Montagu,Mary Hamilton,1,1770,1800,emco_montagu
+Elizabeth Montagu,Samuel Johnson,1,1760,1784,known_connection
+Elizabeth Montagu,Sarah Scott,1,1740,1795,emco_montagu
+Elizabeth Montagu,William Robertson,1,1760,1793,emco_montagu
 Elizabeth Vesey,Horace Walpole,1,,,correspsearch
-Arnold Sommerfeld,Ludwig Prandtl,1,,,correspsearch
+Elizabethe-Charlotte,Frances Burney,1,,,hemlow_catalogue
+Elizaveta,Frances Burney,1,,,hemlow_catalogue
+Elizaveta d'Ivanoff,Frances Burney,1,1814,1814,hemlow_catalogue
+Esther Burney,Frances Burney,70,1788,1827,hemlow_catalogue
+Esther Burney,Madame Saintmard,1,1764,1764,lonsdale_lynn
+Esther Young,Frances Burney,1,,,hemlow_catalogue
+Etiennette,Frances Burney,9,1796,1819,hemlow_catalogue
+Eva Garrick,Frances Burney,1,,,hemlow_catalogue
+F A. Barnard,Samuel Johnson,1,1768,1768,johnson_hill
+FBA journal,Frances Burney,1,1819,1819,hemlow_catalogue
+Felicite,Frances Burney,3,1816,1816,hemlow_catalogue
+Florentin de Latour Maubourg,Frances Burney,2,,,hemlow_catalogue
+Foundling Hospital,Frances Burney,1,,,hemlow_catalogue
+Frances (Glanville) Boscawen,Frances Burney,2,,,hemlow_catalogue
+Frances (Savery) de Poigneu,Frances Burney,1,1808,1808,hemlow_catalogue
+Frances (Sayer) de Pontgeu,Frances Burney,1,,,hemlow_catalogue
+Frances Bowdler,Frances Burney,13,1786,1821,hemlow_catalogue
+Frances Brooke,Frances Burney,2,1783,1783,hemlow_catalogue
+Frances Bunsen,Frances Burney,3,1813,1814,hemlow_catalogue
+Frances Burney,Frances Elizabeth,1,1818,1818,hemlow_catalogue
+Frances Burney,Frances Matthews,1,1790,1790,hemlow_catalogue
+Frances Burney,Frances Raper,6,1816,1816,hemlow_catalogue
+Frances Burney,Francois,1,,,hemlow_catalogue
+Frances Burney,Francois Sastres,2,,,hemlow_catalogue
+Frances Burney,Francois de la Rochefoucauld de Liancourt,1,1793,1793,hemlow_catalogue
+Frances Burney,Frederic Seraphin,1,1793,1793,hemlow_catalogue
+Frances Burney,Frederic-Seraphin,1,1798,1798,hemlow_catalogue
+Frances Burney,Frederica Locke,83,1784,1824,hemlow_catalogue
+Frances Burney,Gabriel,1,1803,1803,hemlow_catalogue
+Frances Burney,Gasparo Pacchierotti,18,1781,1783,hemlow_catalogue
+Frances Burney,George Edmond Hay,1,1819,1819,hemlow_catalogue
+Frances Burney,George Francis Jr,1,,,hemlow_catalogue
+Frances Burney,George Hay,7,1818,1818,hemlow_catalogue
+Frances Burney,George Owen Cambridge,12,1817,1836,hemlow_catalogue
+Frances Burney,Georgiana Waddington,129,1705,1824,hemlow_catalogue
+Frances Burney,Germaine de Stael,1,1793,1793,known_connection
+Frances Burney,Gilbert Gerard,1,1778,1778,hemlow_catalogue
+Frances Burney,Gilles Ragon,1,,,hemlow_catalogue
+Frances Burney,Hannah Hannah Macsale,1,1825,1825,hemlow_catalogue
+Frances Burney,Hannah More,5,1782,1786,hemlow_catalogue
+Frances Burney,Harriet,2,,,hemlow_catalogue
+Frances Burney,Harriet Bowdler,5,1815,1818,hemlow_catalogue
+Frances Burney,Harriet Wilson,3,1822,1822,hemlow_catalogue
+Frances Burney,Harriet de Boinville,4,1793,1814,hemlow_catalogue
+Frances Burney,Harriett Maltby,1,1818,1818,hemlow_catalogue
+Frances Burney,Harriett Wilson,1,1821,1821,hemlow_catalogue
+Frances Burney,Harriot Winder,1,1822,1822,hemlow_catalogue
+Frances Burney,Harvey (Hervey) Countess of,2,1814,1814,hemlow_catalogue
+Frances Burney,Hector Chapone,5,1798,1800,hemlow_catalogue
+Frances Burney,Henrietta North,8,1778,1782,hemlow_catalogue
+Frances Burney,Henriette de Maurville,4,1815,1824,hemlow_catalogue
+Frances Burney,Henry Hoare,1,,,hemlow_catalogue
+Frances Burney,Henry Hoare Bankers,1,1827,1827,hemlow_catalogue
+Frances Burney,Henry Raper,2,1819,1819,hemlow_catalogue
+Frances Burney,Henry Thrale,3,1780,1780,hemlow_catalogue
+Frances Burney,Herrick Hoare,1,,,hemlow_catalogue
+Frances Burney,Hester Chapone,11,1783,1800,hemlow_catalogue
+Frances Burney,Hester Thrale Piozzi,541,1778,1821,hemlow_catalogue|piozzi
+Frances Burney,Horace Walpole,1,,,hemlow_catalogue
+Frances Burney,Horton (Male) Chapman,1,1783,1783,hemlow_catalogue
+Frances Burney,Isabella Strange,3,1778,1778,hemlow_catalogue
+Frances Burney,J-F Loisiel,2,,,hemlow_catalogue
+Frances Burney,Jacob Bryant,13,1786,1790,hemlow_catalogue
+Frances Burney,Jacques-Louis David,1,1812,1812,waterfield_thesis
+Frances Burney,James (Campbell) Smith,1,1789,1789,hemlow_catalogue
+Frances Burney,James Burney,21,1775,1817,hemlow_catalogue
+Frances Burney,James Hutton,10,1775,1777,hemlow_catalogue
+Frances Burney,Jane Cholmeley,1,1788,1788,hemlow_catalogue
+Frances Burney,Jane Smelt,6,1787,1788,hemlow_catalogue
+Frances Burney,Jean-Baptiste Le Chevalier,2,1794,1794,hemlow_catalogue
+Frances Burney,Jean-Baptiste Le Chevalier Le Ministre,1,1794,1794,hemlow_catalogue
+Frances Burney,Jean-Baptiste de Boinville,1,,,hemlow_catalogue
+Frances Burney,Jean-Baptiste-Gabriel Bazille,3,,,hemlow_catalogue
+Frances Burney,Jean-Gabriel Peltier,4,1791,1792,hemlow_catalogue
+Frances Burney,Jean-Jacques-Basilion,1,,,hemlow_catalogue
+Frances Burney,Jean-Jacques-Basillen,1,,,hemlow_catalogue
+Frances Burney,Jean-Philippe de Boisgelin,1,,,hemlow_catalogue
+Frances Burney,Jean-Pierre,2,1808,1811,hemlow_catalogue
+Frances Burney,Jean-Pierre-Basilien,1,,,hemlow_catalogue
+Frances Burney,Jean-Pierre-Basillen,1,,,hemlow_catalogue
+Frances Burney,Jenny Bentham,1,,,hemlow_catalogue
+Frances Burney,Johanna Christina Huttner,2,,,hemlow_catalogue
+Frances Burney,John Bowman,1,,,hemlow_catalogue
+Frances Burney,John Graham,1,,,hemlow_catalogue
+Frances Burney,John Jebb,2,1832,1832,hemlow_catalogue
+Frances Burney,John Kay,1,1820,1820,hemlow_catalogue
+Frances Burney,John Young,1,1783,1783,hemlow_catalogue
+Frances Burney,Joseph,1,,,hemlow_catalogue
+Frances Burney,Julia Angerstein,2,,,hemlow_catalogue
+Frances Burney,L M Barral,1,,,hemlow_catalogue
+Frances Burney,L M. Barral,2,,,hemlow_catalogue
+Frances Burney,Lady Bute,2,1814,1814,hemlow_catalogue
+Frances Burney,Lady Carmarthen,1,1788,1788,hemlow_catalogue
+Frances Burney,Lady Charlotte Fitzgerald,3,1817,1817,hemlow_catalogue
+Frances Burney,Lady Hales,6,1770,1776,hemlow_catalogue
+Frances Burney,Lady Lucy Foley,6,1812,1817,hemlow_catalogue
+Frances Burney,Lady Mary Duncan,1,1787,1787,hemlow_catalogue
+Frances Burney,Lady Rothes,3,1787,1798,hemlow_catalogue
+Frances Burney,Lady Templetown,17,1786,1823,hemlow_catalogue
+Frances Burney,Laurent,3,1814,1814,hemlow_catalogue
+Frances Burney,Louis,54,1790,1811,hemlow_catalogue
+Frances Burney,Louis Bonne,3,1793,1793,hemlow_catalogue
+Frances Burney,Louis comte de Narbonne,1,1795,1795,hemlow_catalogue
+Frances Burney,Louis comte de Narbonne-FML,1,1809,1809,hemlow_catalogue
+Frances Burney,Louis comte de Narbonne-Lara,1,,,hemlow_catalogue
+Frances Burney,Louis de Narbonne,1,1793,1793,waterfield_thesis
+Frances Burney,Louis-Alexandre Berthier,3,1801,1801,hemlow_catalogue
+Frances Burney,Louise (Farina-Fiorelli) Duchesse d'Orivel,1,,,hemlow_catalogue
+Frances Burney,Louise-Josephine,3,1815,1815,hemlow_catalogue
+Frances Burney,Lucy Burney,1,,,hemlow_catalogue
+Frances Burney,M d'A (L),1,,,hemlow_catalogue
+Frances Burney,M d'A and Louis comte de Narbonne,1,1802,1802,hemlow_catalogue
+Frances Burney,M d'A thème,1,,,hemlow_catalogue
+Frances Burney,M d'A with PS by AA,1,,,hemlow_catalogue
+Frances Burney,Madame Campan,1,1802,1812,waterfield_thesis
+Frances Burney,Madame de Stael,5,1793,1802,hemlow_catalogue
+Frances Burney,Marc-Etienne,1,,,hemlow_catalogue
+Frances Burney,Margaret (Cooper) DeLuc,1,1789,1789,hemlow_catalogue
+Frances Burney,Margaret Planta,4,1802,1802,hemlow_catalogue
+Frances Burney,Maria (Edgeworth) Beddoes,1,,,hemlow_catalogue
+Frances Burney,Maria Edgeworth,1,1813,1813,hemlow_catalogue
+Frances Burney,Maria Rishton,109,1765,1812,hemlow_catalogue
+Frances Burney,Marianne Bourdois,26,1793,1839,hemlow_catalogue
+Frances Burney,Marie de Lafayette,1,1818,1818,hemlow_catalogue
+Frances Burney,Marie de Maisonneuve,175,1798,1838,hemlow_catalogue
+Frances Burney,Marie-Alexandre Lenoir,1,,,hemlow_catalogue
+Frances Burney,Marie-Alexendre Lenoir,1,,,hemlow_catalogue
+Frances Burney,Marie-Charlotte Bontemps,4,1795,1803,hemlow_catalogue
+Frances Burney,Marie-Elisabeth (Bouée) de La Fite,1,,,hemlow_catalogue
+Frances Burney,Marie-Elisabethe de La Fite,1,1790,1790,hemlow_catalogue
+Frances Burney,Marie-Louise,4,,,hemlow_catalogue
+Frances Burney,Marie-Pierre de Grandmaison,2,1816,1816,hemlow_catalogue
+Frances Burney,Marie-Tereze (Poniatowski),1,1814,1814,hemlow_catalogue
+Frances Burney,Marie-Tresse (Poniakowitz ),2,1814,1814,hemlow_catalogue
+Frances Burney,Marquis de Lafayette,33,1792,1816,hemlow_catalogue
+Frances Burney,Marquis de Lally-Tollendal,36,1792,1822,hemlow_catalogue
+Frances Burney,Martin Charles Burney,6,1814,1814,hemlow_catalogue
+Frances Burney,Mary (Palmer) O'Brien Marchioness of Thomond,3,1791,1791,hemlow_catalogue
+Frances Burney,Mary Ann Smith,1,1836,1836,hemlow_catalogue
+Frances Burney,Mary Bruce Strange,3,,,hemlow_catalogue
+Frances Burney,Mary Delany,4,1785,1787,hemlow_catalogue
+Frances Burney,Mary Dickenson,10,1783,1785,hemlow_catalogue
+Frances Burney,Mary Gwynn,2,1797,1797,hemlow_catalogue
+Frances Burney,Mathieu,3,1805,1805,hemlow_catalogue
+Frances Burney,Miss Bron,1,,,hemlow_catalogue
+Frances Burney,Mme Bion,2,,,hemlow_catalogue
+Frances Burney,Mme de la Grange,4,1815,1815,hemlow_catalogue
+Frances Burney,Mrs Crewe,4,1814,1814,hemlow_catalogue
+Frances Burney,Mrs Justices Prince,1,,,hemlow_catalogue
+Frances Burney,Mus H Haley,1,,,hemlow_catalogue
+Frances Burney,Napoleon Bonaparte,1,1802,1802,hemlow_catalogue
+Frances Burney,Nathalie (de Montesant),1,,,hemlow_catalogue
+Frances Burney,Nathalie (de Mortemart),1,,,hemlow_catalogue
+Frances Burney,Nichols,1,,,hemlow_catalogue
+Frances Burney,Norbury Phillips,1,1800,1800,hemlow_catalogue
+Frances Burney,Petronille-Jacoba (Van Ryssel) de Latour-Maubourg,2,1815,1822,hemlow_catalogue
+Frances Burney,Philippe (Philips) Raper,1,,,hemlow_catalogue
+Frances Burney,Philippe de Noailles,5,1793,1793,hemlow_catalogue
+Frances Burney,Pierre Victor Malouet,1,,,hemlow_catalogue
+Frances Burney,Pont Baptiste Council,1,1789,1789,hemlow_catalogue
+Frances Burney,Precourt Bazille,2,1803,1803,hemlow_catalogue
+Frances Burney,Princess (Krousée) / Former,1,1817,1817,hemlow_catalogue
+Frances Burney,Princess Augusta,9,1819,1825,hemlow_catalogue
+Frances Burney,Princess Elizabeth,103,1813,1832,hemlow_catalogue
+Frances Burney,Princess Elizabeth eff,1,,,hemlow_catalogue
+Frances Burney,Princess Knowles,2,1817,1817,hemlow_catalogue
+Frances Burney,Princess Mary,48,1816,1832,hemlow_catalogue
+Frances Burney,Princess Sophia,181,1818,1837,hemlow_catalogue
+Frances Burney,Princess d'Arblay a vieuse,1,1819,1819,hemlow_catalogue
+Frances Burney,Princess of Maidison,1,1820,1820,hemlow_catalogue
+Frances Burney,Queen Charlotte,8,1794,1817,hemlow_catalogue
+Frances Burney,RA Keith (Payne) Burney,2,1821,1821,hemlow_catalogue
+Frances Burney,Raoul Walpole,1,,,hemlow_catalogue
+Frances Burney,Richard,1,,,hemlow_catalogue
+Frances Burney,Richard Bentley,5,1835,1835,hemlow_catalogue
+Frances Burney,Richard Owen Cambridge,6,1785,1790,hemlow_catalogue
+Frances Burney,Richard Thomas Burney,1,1768,1768,hemlow_catalogue
+Frances Burney,Richard Thomas Burney pmk,1,1768,1768,hemlow_catalogue
+Frances Burney,Richard Twining,2,,,hemlow_catalogue
+Frances Burney,Robert Allen Burney,1,,,hemlow_catalogue
+Frances Burney,Robert Burnside,1,1779,1779,hemlow_catalogue
+Frances Burney,Robert Southey,1,,,hemlow_catalogue
+Frances Burney,Rose FitzGerald Baroness,1,1793,1793,hemlow_catalogue
+Frances Burney,Rosette Burney,21,1782,1800,hemlow_catalogue
+Frances Burney,SEB {& CAB},2,,,hemlow_catalogue
+Frances Burney,Samuel Crisp,181,1773,1782,hemlow_catalogue
+Frances Burney,Samuel Johnson,7,1779,1784,hemlow_catalogue
+Frances Burney,Sarah (Kirby) Trimmer,1,,,hemlow_catalogue
+Frances Burney,Sarah (Payne),1,1832,1832,hemlow_catalogue
+Frances Burney,Sarah Baker,6,1818,1827,hemlow_catalogue
+Frances Burney,Sarah Harriet Burney,22,1817,1839,hemlow_catalogue
+Frances Burney,Sarah Holroyd,26,1815,1818,hemlow_catalogue
+Frances Burney,Sarah Payne,11,1825,1839,hemlow_catalogue
+Frances Burney,Sarah Payne Burney,5,1813,1821,hemlow_catalogue
+Frances Burney,Sir John Herschel,1,1821,1821,hemlow_catalogue
+Frances Burney,Sir William Burrell,1,1822,1822,hemlow_catalogue
+Frances Burney,Sophia Burney,1,1815,1815,hemlow_catalogue
+Frances Burney,Sophia Byron,1,1784,1784,hemlow_catalogue
+Frances Burney,Sophia Gast,4,1784,1784,hemlow_catalogue
+Frances Burney,Sophia Hoare,7,1812,1823,hemlow_catalogue
+Frances Burney,Sophia Streatfield,9,1779,1788,hemlow_catalogue
+Frances Burney,Sophia Upton,1,1823,1823,hemlow_catalogue
+Frances Burney,Sophie,1,,,hemlow_catalogue
+Frances Burney,Stephanie-Felicite comtesse de Genlis,1,1785,1785,hemlow_catalogue
+Frances Burney,Stephen,1,1787,1787,hemlow_catalogue
+Frances Burney,Stephen Allen,3,1833,1833,hemlow_catalogue
+Frances Burney,Stephen Digby,1,1788,1788,hemlow_catalogue
+Frances Burney,Susan Adams,1,1807,1807,hemlow_catalogue
+Frances Burney,Susanna Burney Phillips,1160,1705,1877,hemlow_catalogue
+Frances Burney,Susannah Dobson,2,1784,1784,hemlow_catalogue
+Frances Burney,Suzanne Simmond,2,1793,1793,hemlow_catalogue
+Frances Burney,Thomas,2,1832,1832,hemlow_catalogue
+Frances Burney,Thomas Barlow,4,1775,1775,hemlow_catalogue
+Frances Burney,Thomas Faulkner,2,,,hemlow_catalogue
+Frances Burney,Thomas King,2,,,hemlow_catalogue
+Frances Burney,Thomas Lowndes,39,1777,1779,hemlow_catalogue
+Frances Burney,Victor de Latour Maubourg,12,,,hemlow_catalogue
+Frances Burney,Victor de Latour-Maubourg,1,,,hemlow_catalogue
+Frances Burney,Viscountess Keith,21,1816,1826,hemlow_catalogue
+Frances Burney,William,1,,,hemlow_catalogue
+Frances Burney,William Clarke,1,,,hemlow_catalogue
+Frances Burney,William Cutler,3,1777,1777,hemlow_catalogue
+Frances Burney,William Laine,1,,,hemlow_catalogue
+Frances Burney,William Locke,8,1785,1822,hemlow_catalogue
+Frances Burney,William Lowndes,2,1813,1813,hemlow_catalogue
+Frances Burney,William Seward,6,1779,1790,hemlow_catalogue
+Frances Burney,William Tudor,3,,,hemlow_catalogue
+Frances Burney,William Watts,2,,,hemlow_catalogue
+Frances Burney,William Wilberforce,6,1813,1816,"hemlow_catalogue,waterfield_thesis"
+Frances Burney,Zilcah Elizabeth Lacey,1,,,hemlow_catalogue
+Frances Burney,baron d'Artel,2,,,hemlow_catalogue
+Frances Burney,de Gault de Malaville,1,,,hemlow_catalogue
+Frances Burney,with AA to,2,1812,1812,hemlow_catalogue
+Frances Reynolds,Samuel Johnson,18,1762,1784,johnson_hill
+Francesco Sastres,Samuel Johnson,5,1784,1784,johnson_hill
+Francis Barber,Samuel Johnson,4,1768,1783,johnson_hill
+Francis Fowke,Samuel Johnson,1,1776,1776,johnson_hill
+"Ganghofer, Ludwig","Schnitzler, Arthur",2,1899,1899,correspsearch
 "Ganghofer, Ludwig","Wedekind, Frank",1,,,correspsearch
-"Arouet, François-Marie","Rousseau, Jean-Jacques",1,1755,1755,correspsearch
-Carl Philipp Emanuel Bach,Johann Elias Bach,1,1742,1742,correspsearch_european
-Carl Philipp Emanuel Bach,Michael Gabriel Fredersdorf,1,1757,1757,correspsearch_european
-Carl Philipp Emanuel Bach,Christoph Gottlieb von Murr,1,1765,1765,correspsearch_european
-Carl Philipp Emanuel Bach,einen Hauptmann,1,1766,1766,correspsearch_european
-Carl Philipp Emanuel Bach,Johann Christian Bach,1,1767,1767,correspsearch_european
-Carl Philipp Emanuel Bach,Hans Jacob Faber,1,1767,1767,correspsearch_european
-Carl Philipp Emanuel Bach,Georg Wilhelm Kottowsky,1,1769,1769,correspsearch_european
-"Bölsche, Wilhelm","Hofmannsthal, Hugo von",1,1891,1891,correspsearch_european
-Charles Burney Sr,Christoph Willibald Gluck,1,1772,1772,tour_contact
-Charles Burney Sr,Wolfgang Amadeus Mozart,1,1770,1770,tour_contact
-Charles Burney Sr,Leopold Mozart,1,1770,1770,tour_contact
-Charles Burney Sr,Nicola Jommelli,1,1770,1770,tour_contact
-Charles Burney Sr,Niccolo Piccinni,1,1770,1770,tour_contact
-Antonio Sacchini,Charles Burney Sr,1,1770,1770,tour_contact
-Charles Burney Sr,Giovanni Battista Sammartini,1,1770,1770,tour_contact
-Charles Burney Sr,Pietro Nardini,1,1770,1770,tour_contact
-Baldassare Galuppi,Charles Burney Sr,1,1770,1770,tour_contact
-Charles Burney Sr,Gaetano Caffarelli,1,1770,1770,tour_contact
-Charles Burney Sr,Giovanni Paisiello,1,1770,1770,tour_contact
-Andre Gretry,Charles Burney Sr,1,1770,1770,tour_contact
-Charles Burney Sr,Claude Balbastre,1,1770,1770,tour_contact
-Charles Burney Sr,Voltaire,1,1770,1770,tour_contact
-Charles Burney Sr,Frederick the Great,1,1772,1772,tour_contact
-Charles Burney Sr,Friedrich Wilhelm Marpurg,1,1772,1772,tour_contact
-Charles Burney Sr,Christian Cannabich,1,1772,1772,tour_contact
-Charles Burney Sr,Friedrich Klopstock,1,1772,1772,tour_contact
-Charles Burney Sr,Mrs Greville,1,1758,1760,lonsdale_lynn
-Charles Burney Sr,Robert Squire,1,1751,1760,lonsdale_lynn
-Charles Burney Sr,Sir John Turner,1,1751,1760,lonsdale_lynn
+Georg Friedrich Händel,Georg Philipp Telemann,2,1750,1754,correspsearch
+George Faulkner,Samuel Johnson,1,1775,1775,johnson_hill
+George Grenville,Samuel Johnson,1,,,johnson_hill
+George Hardinge,Horace Walpole,2,1782,1782,walpole_1820
+George Kearsley,Samuel Johnson,1,1782,1782,johnson_hill
+George Montagu,Horace Walpole,252,1736,1770,walpole_1820
+George Nicol,Samuel Johnson,1,1784,1784,johnson_hill
+George Steevens,Samuel Johnson,4,1774,1777,johnson_hill
+George Strahan,Samuel Johnson,8,1763,1784,johnson_hill
+Germaine de Stael,Louis de Narbonne,1,1788,1794,known_connection
+Gregory Hickman,Samuel Johnson,1,1731,1731,johnson_hill
+Guardians/executors,Hester Thrale Piozzi,1,,,piozzi
+"Haller, Albrecht von","Lambert, Johann Heinrich",6,1758,1760,correspsearch
+Hannah More,Horace Walpole,1,1773,1797,known_connection
+Hannah More,Samuel Johnson,1,1774,1784,known_connection
+Hannah More,William Wilberforce,1,1787,1833,known_connection
+Heely,Samuel Johnson,1,1784,1784,johnson_hill
+Henry Bright,Samuel Johnson,1,1770,1770,johnson_hill
+Henry Dundas,Richard Burke Jr,4,1791,1792,burke_1844
+Henry Grattan,Richard Burke Jr,1,1793,1793,burke_1844
+Henry Seymour Conway,Horace Walpole,141,1740,1795,walpole_1820
+Henry Thrale,Hester Thrale Piozzi,4,1773,1779,piozzi
+Henry Thrale,Samuel Johnson,13,1769,1780,johnson_hill
+Hester Chapone,Samuel Johnson,1,1783,1783,johnson_hill
+Hester Thrale Piozzi,John Salusbury,1,1793,1793,piozzi
+Hester Thrale Piozzi,Miss Willoughby,1,1821,1821,piozzi
+Hester Thrale Piozzi,Mr. Cadell,2,1785,1789,piozzi
+Hester Thrale Piozzi,Mr. Lysons,1,1784,1784,piozzi
+Hester Thrale Piozzi,Mr. Perkins,1,1773,1773,piozzi
+Hester Thrale Piozzi,Penelope Pennington,164,1789,1821,piozzi
+Hester Thrale Piozzi,Samuel Johnson,335,1765,1784,"johnson_hill|piozzi,known_connection"
+"Hofmannsthal, Hugo von","Schnitzler, Arthur",20,1891,1892,correspsearch_european
+Hollyer,Samuel Johnson,1,,,johnson_hill
+Horace Walpole,John Chute,11,1754,1771,walpole_1820
+Horace Walpole,Lady Hervey,19,1757,1766,walpole_1820
+Horace Walpole,Mary Delany,3,1768,1788,"correspsearch,known_connection"
+Horace Walpole,Mary Hamilton,21,1783,1795,correspsearch
+Horace Walpole,Rev. Dr. Birch,4,1745,1764,walpole_1820
+Horace Walpole,Rev. Mr. Beloe,1,1794,1794,walpole_1820
+Horace Walpole,Rev. Mr. Lort,1,1779,1779,walpole_1820
+Horace Walpole,Rev. Mr. Mason,2,,,walpole_1820
+Horace Walpole,Richard Bentley,33,1735,1755,walpole_1820
+Horace Walpole,Richard West,20,1710,1742,walpole_1820
+Horace Walpole,Thomas Barrett,1,1792,1792,walpole_1820
+Horace Walpole,Thomas Brand,1,,,walpole_1820
+Horace Walpole,Thomas Gray,139,1734,1771,correspsearch
+Horace Walpole,William Cole,161,1730,1782,walpole_1820
+Horace Walpole,William Wentworth,51,1756,1790,walpole_1820
+James Barry,Messrs. Burke,1,1767,1767,burke_1844
+James Barry,Samuel Johnson,1,1783,1783,johnson_hill
+James Barry,William Burke,1,1765,1765,burke_1844
+James Boswell,Samuel Johnson,94,1763,1784,"johnson_hill,known_connection"
+James Burney,Molesworth Phillips,1,1780,1800,waterfield_thesis
+James Compton,Samuel Johnson,1,1772,1772,johnson_hill
+James Elphinston,Samuel Johnson,4,1750,1750,johnson_hill
+James Granger,Samuel Johnson,1,1772,1772,johnson_hill
+Johann Christian Bach,Padre Martini,66,1757,1782,correspsearch_european
+John Douglas,Samuel Johnson,1,,,johnson_hill
+John Hoole,Samuel Johnson,4,1774,1784,johnson_hill
+John Hussey,Samuel Johnson,1,1778,1778,johnson_hill
+John Levett,Samuel Johnson,3,1743,1743,johnson_hill
+John Newbery,Samuel Johnson,3,1751,1751,johnson_hill
+John Nichols,Samuel Johnson,30,1778,1785,johnson_hill
+John Paradise,Samuel Johnson,1,1784,1784,johnson_hill
+John Perkins,Samuel Johnson,6,1774,1784,johnson_hill
+John Rivington,Samuel Johnson,1,,,johnson_hill
+John Ryland,Samuel Johnson,8,1756,1756,johnson_hill
+John Taylor,Samuel Johnson,63,1752,1784,johnson_hill
+John Vaughan,Joseph Priestley,1,,,priestley
+John Wesley,Samuel Johnson,2,1776,1779,johnson_hill
+Joseph Banks,Joseph Priestley,2,,,priestley
+Joseph Banks,Samuel Johnson,1,1772,1772,johnson_hill
+Joseph Baretti,Samuel Johnson,3,1761,1762,johnson_hill
+Joseph Bullock,Richard Burke Sr,1,1774,1774,burke_1844
+Joseph Cradock,Samuel Johnson,1,1783,1783,johnson_hill
+Joseph Fowke,Samuel Johnson,1,1783,1783,johnson_hill
+Joseph Johnson,Joseph Priestley,1,,,priestley
+Joseph Priestley,Josi Ml Wl DGWOOD,1,,,priestley
+Joseph Priestley,Josiah Wedgwood,17,1781,1781,priestley
+Joseph Priestley,Matthew Boulton,1,,,priestley
+Joseph Priestley,"Me. Wedowood, near Neweastle-under-Lyne.6",1,1771,1771,priestley
+Joseph Priestley,"Mr. Conyers Button, of Philadelphia, 1 am indebted for",1,,,priestley
+Joseph Priestley,"Mr. George F. Kunz, of Xew York, I give thanks for a",1,,,priestley
+Joseph Priestley,Mr. Lee,1,,,priestley
+Joseph Priestley,"Mr. W M. Vaughan of Cambridge, Mass., I am in-",1,,,priestley
+Joseph Priestley,"Mrs, Ce i",1,,,priestley
+Joseph Priestley,Mrs. Crouch,1,,,priestley
+Joseph Priestley,Mrs. Croui b,1,,,priestley
+Joseph Priestley,Sir Joseph Ban ks,1,,,priestley
+Joseph Priestley,Thomas Wedgwood,5,1771,1771,priestley
+Joseph Priestley,"William O. Priestley, M D., LL.D., of London, I am",1,,,priestley
+Joseph Priestley,Wm. Vaughan,1,,,priestley
+Joseph Priestley,"ilr. Robert A. Wainewright of London, Dr. Priestley's",1,,,priestley
+Joseph Simpson,Samuel Johnson,1,1759,1759,johnson_hill
+Joseph Warton,Samuel Johnson,7,1753,1780,johnson_hill
+Joshua Reynolds,Samuel Johnson,25,1756,1784,"johnson_hill,known_connection"
+"Kant, Immanuel","Lambert, Johann Heinrich",7,1765,1770,correspsearch
+"Kirkgate, Thomas",Mary Hamilton,2,1792,1792,correspsearch
+Lady Clifford,Madame Saintmard,1,1764,1764,lonsdale_lynn
+Laird of Rasay,Samuel Johnson,1,1775,1775,johnson_hill
+Leopold Mozart,Padre Martini,6,1770,1778,correspsearch_european
+Lewis Paul,Samuel Johnson,12,1740,1763,johnson_hill
+Lord Chancellor Thurlow,Samuel Johnson,1,1784,1784,johnson_hill
+Lord Elibank,Samuel Johnson,1,1773,1773,johnson_hill
+Lord Grenville,Richard Burke Jr,1,1792,1792,burke_1844
+Lord Ossory,Sir Robert Staples,1,1792,1792,burke_1844
+Lord Westcote,Samuel Johnson,2,1780,1780,johnson_hill
+Louis de Narbonne,Marquis de Lafayette,1,1789,1792,known_connection
+Lucy Porter,Samuel Johnson,35,1749,1784,johnson_hill
+Ludwig Prandtl,Rudolf Mehmke,32,,,correspsearch
+Marquis of Buckingham,Rt. Hon. Wm. Pitt,2,1796,1796,burke_1844
+Marquis of Rockingham,the King,1,1782,1782,burke_1844
+"Martini, Giovanni Battista, Padre",Wolfgang Amadeus Mozart,2,1776,1776,correspsearch_european
+Mauritius Lowe,Samuel Johnson,5,1778,1783,johnson_hill
+Miss Boothby,Samuel Johnson,4,1755,1759,johnson_hill
+Miss Burney,Samuel Johnson,3,,,johnson_hill
+Miss Carter,Samuel Johnson,1,,,johnson_hill
+Miss Flint,Samuel Johnson,1,1769,1769,johnson_hill
+Miss Jane Langton,Samuel Johnson,1,1784,1784,johnson_hill
+Miss Langton,Samuel Johnson,1,1771,1771,johnson_hill
+Miss Lawrence,Samuel Johnson,3,1782,1783,johnson_hill
+Miss Williams,Samuel Johnson,1,1783,1783,johnson_hill
+Molesworth Phillips,Susanna Burney Phillips,1,1782,1800,waterfield_thesis
+Mr. B-,Samuel Johnson,1,1773,1773,johnson_hill
+Mr. Tomkeson,Samuel Johnson,1,1783,1783,johnson_hill
+Mr. Urban,Samuel Johnson,1,1744,1744,johnson_hill
+Mr. White,Samuel Johnson,1,1773,1773,johnson_hill
+Mr. and Miss Wilkes,Samuel Johnson,1,,,johnson_hill
+Mrs. Aston,Samuel Johnson,11,1769,1782,johnson_hill
+Mrs. Aston and Mrs. Gastrell,Samuel Johnson,2,1775,1784,johnson_hill
+Mrs. Boswell,Samuel Johnson,3,1776,1782,johnson_hill
+Mrs. Burke,Richard Burke Sr,1,1783,1783,burke_1844
+Mrs. Desmoulins,Samuel Johnson,1,1775,1775,johnson_hill
+Mrs. Garrick,Samuel Johnson,1,1779,1779,johnson_hill
+Mrs. Gastrell,Samuel Johnson,1,,,johnson_hill
+Mrs. Gastrell and Mrs. Aston,Samuel Johnson,2,,,johnson_hill
+Mrs. Johnson,Samuel Johnson,5,1739,1739,johnson_hill
+Mrs. Montagu,Samuel Johnson,8,1774,1783,johnson_hill
+Mrs. Prowse,Samuel Johnson,3,,,johnson_hill
+Mrs. Rogers,Samuel Johnson,1,,,johnson_hill
+Mrs. Salusbury,Samuel Johnson,1,1767,1767,johnson_hill
+Mrs. Strahan,Samuel Johnson,3,1781,1782,johnson_hill
+Oliver Goldsmith,Samuel Johnson,2,1761,1774,"johnson_hill,known_connection"
+Ozias Humphry,Samuel Johnson,3,1784,1784,johnson_hill
+Padre Martini,Wolfgang Amadeus Mozart,6,1770,1778,correspsearch_european
+Philip Francis,Richard Burke Jr,1,1790,1790,burke_1844
+Philip Francis,William Burke,3,1777,1778,burke_1844
+Printer of the General Advertiser,Samuel Johnson,1,1750,1750,johnson_hill
+Recorder Beatniffe,Samuel Johnson,1,1782,1782,johnson_hill
+Rev. Dr. Birch,Samuel Johnson,10,1743,1756,johnson_hill
+Rev. Dr. Hussey,T. Hussey,1,1790,1790,burke_1844
+Rev. Dr. Leland,Samuel Johnson,2,1775,1775,johnson_hill
+Rev. Dr. Markham,William Burke,1,1765,1765,burke_1844
+Rev. Walker King,William Burke,1,1782,1782,burke_1844
+Richard Brocklesby,Samuel Johnson,17,1783,1784,johnson_hill
+Richard Burke Jr,William Burke,1,1792,1792,burke_1844
+Richard Burke Jr,Wm. Smith,2,1792,1792,burke_1844
+Richard Burke Sr,Richard Champion,3,1777,1781,burke_1844
+Richard Burke Sr,William Burke,1,1773,1773,burke_1844
+Richard Clark,Samuel Johnson,1,1784,1784,johnson_hill
+Richard Green,Samuel Johnson,2,1775,1784,johnson_hill
+Richard Jackson,Samuel Johnson,1,,,johnson_hill
+Robert Chambers,Samuel Johnson,1,1754,1754,johnson_hill
+Robert Levett,Samuel Johnson,4,1774,1776,johnson_hill
+Samuel Hardy,Samuel Johnson,1,,,johnson_hill
+Samuel Johnson,Samuel Richardson,4,1750,1756,johnson_hill
+Samuel Johnson,Saunders Welch,1,1778,1778,johnson_hill
+Samuel Johnson,Sir John Hawkins,4,1784,1784,johnson_hill
+Samuel Johnson,Sophia Hoare,1,1783,1783,johnson_hill
+Samuel Johnson,Susanna Arabella Thrale,5,1783,1784,johnson_hill
+Samuel Johnson,Thomas Astle,1,1781,1781,johnson_hill
+Samuel Johnson,Thomas Cadell,5,1778,1781,johnson_hill
+Samuel Johnson,Thomas Davies,2,1783,1784,johnson_hill
+Samuel Johnson,Thomas Fitzmaurice,1,1785,1785,johnson_hill
+Samuel Johnson,Thomas Percy,4,,,johnson_hill
+Samuel Johnson,Thomas Warton,19,1754,1780,johnson_hill
+Samuel Johnson,Thomas Wilson,1,1782,1782,johnson_hill
+Samuel Johnson,Vice-Chancellor of Oxford,1,1755,1755,johnson_hill
+Samuel Johnson,Viscountess Southwell,1,1780,1780,johnson_hill
+Samuel Johnson,W S. Johnson,1,,,johnson_hill
+Samuel Johnson,W. Bagshaw,2,1773,1784,johnson_hill
+Samuel Johnson,W. Sharp,1,1777,1777,johnson_hill
+Samuel Johnson,Warren Hastings,3,1774,1781,johnson_hill
+Samuel Johnson,William Cumberland Cruikshank,2,1783,1784,johnson_hill
+Samuel Johnson,William Drummond,3,1766,1767,johnson_hill
+Samuel Johnson,William Gerard Hamilton,3,1782,1784,johnson_hill
+Samuel Johnson,William Strahan,17,1754,1778,johnson_hill
+Samuel Johnson,William Windham,3,1783,1784,johnson_hill
+Samuel Johnson,Worshipful Company of the Mercers,1,,,johnson_hill
+Sir George Macartney,William Burke,1,1766,1766,burke_1844
+Thomas Gray,"West, Richard, 1716-1742",3,1739,1740,correspsearch
+the Comte d'Artois,the Royalist Army in Poitou,1,1793,1793,burke_1844
+David Garrick,Arthur Murphy,73,1756,1773,garrick_boaden_1831
+David Garrick,Jean Monnet,46,1765,1771,garrick_boaden_1831
+David Garrick,George Steevens,40,1765,1776,garrick_boaden_1831
+David Garrick,Elizabeth Griffith,38,1766,1778,garrick_boaden_1831
+David Garrick,Marie-Jeanne Riccoboni,38,1765,1777,garrick_boaden_1831
+David Garrick,John Hoadly,37,1763,1776,garrick_boaden_1831
+David Garrick,William Smith,33,1769,1776,garrick_boaden_1831
+David Garrick,Lord Camden,30,1771,1778,garrick_boaden_1831
+David Garrick,William Warburton,25,1756,1771,garrick_boaden_1831
+David Garrick,George Colman,24,1765,1778,garrick_boaden_1831
+David Garrick,Frances Abington,24,1774,1778,garrick_boaden_1831
+David Garrick,Richard Cumberland,23,1768,1778,garrick_boaden_1831
+David Garrick,Robert Jephson,21,1763,1777,garrick_boaden_1831
+David Garrick,Hannah More,20,1776,1778,garrick_boaden_1831
+David Garrick,Thomas Francklin,19,1767,1775,garrick_boaden_1831
+David Garrick,Georgiana Countess Spencer,16,1761,1778,garrick_boaden_1831
+David Garrick,Thomas King,15,1767,1776,garrick_boaden_1831
+David Garrick,Spranger Barry,14,1746,1774,garrick_boaden_1831
+David Garrick,Willoughby Lacy,14,1774,1778,garrick_boaden_1831
+David Garrick,George Garrick,13,1767,1776,garrick_boaden_1831
+David Garrick,Samuel Nott,11,1770,1778,garrick_boaden_1831
+David Garrick,Grey Cooper,11,1771,1776,garrick_boaden_1831
+David Garrick,Thomas Arne,10,1762,1775,garrick_boaden_1831
+David Garrick,Hugh Kelly,10,1767,1775,garrick_boaden_1831
+David Garrick,Jane Pope,10,1775,1776,garrick_boaden_1831
+David Garrick,Claude Pierre Patu,10,1755,1756,garrick_boaden_1831
+David Garrick,Samuel Foote,9,1749,1774,garrick_boaden_1831
+David Garrick,Isaac Bickerstaff,9,1767,1772,garrick_boaden_1831
+David Garrick,Duke of Devonshire,8,1757,1763,garrick_boaden_1831
+David Garrick,Percival Stockdale,8,1773,1776,garrick_boaden_1831
+David Garrick,Jean-Baptiste-Antoine Suard,8,1767,1776,garrick_boaden_1831
+David Garrick,Jean-Georges Noverre,8,1754,1755,garrick_boaden_1831
+David Garrick,Catherine Clive,7,1768,1778,garrick_boaden_1831
+David Garrick,Earl of Sandwich,6,1776,1779,garrick_boaden_1831
+David Garrick,Henri-Louis Lekain,6,1765,1771,garrick_boaden_1831
+David Garrick,Charlotte Lennox,4,1768,1775,garrick_boaden_1831
+David Garrick,Voltaire,3,1764,1776,garrick_boaden_1831
+David Garrick,Denis Diderot,2,1763,1765,garrick_boaden_1831
+Elizabeth Montagu,Mrs Vesey,40,1762,1800,montagu_blunt
+Elizabeth Montagu,Lord Bath,30,1762,1764,montagu_blunt
+Elizabeth Montagu,Lord Lyttelton,25,1762,1773,montagu_blunt
+Elizabeth Montagu,Messenger Monsey,20,1762,1783,montagu_blunt
+Elizabeth Montagu,Lord Kames,5,1762,1775,montagu_blunt
+Elizabeth Montagu,James Beattie,5,1770,1790,montagu_blunt
+Mary Berry,Horace Walpole,200,1788,1797,berry_lewis
+Mary Berry,Mrs Damer,40,1788,1852,berry_lewis
+Mary Berry,Lady Ailesbury,15,1789,1803,berry_lewis
+Mary Berry,General Conway,10,1789,1795,berry_lewis
+Mary Berry,Madame de Stael,8,1784,1813,berry_lewis
+Mary Berry,Frances Burney,2,1793,1812,berry_lewis
+Horace Walpole,Sir Horace Mann,15,1771,1783,walpole_last_journals
+Horace Walpole,General Conway,25,1771,1783,walpole_last_journals
+Horace Walpole,Duchess of Gloucester,8,1771,1783,walpole_last_journals
+Horace Walpole,Lady Ossory,10,1771,1783,walpole_last_journals
+Hester Thrale Piozzi,Samuel Lysons,5,1784,1809,piozzi_thraliana
+Hester Thrale Piozzi,Arthur Murphy,5,1765,1789,piozzi_thraliana
+Hester Thrale Piozzi,William Weller Pepys,5,1776,1789,piozzi_thraliana
