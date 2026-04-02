@@ -657,6 +657,20 @@ body {{ font-family: var(--font-sans); background: var(--bg-page); color: var(--
 .tooltip-zone {{ font-size: 0.78em; opacity: 0.50; font-style: italic; }}
 .ev-badge {{ font-size: var(--text-sm); opacity: 0.7; }}
 .outside-hint {{ opacity: 0.6; font-size: 0.9em; }}
+/* -- Scrollbar styling -- */
+#panel {{ scrollbar-width: thin; scrollbar-color: var(--border-default) transparent; }}
+#panel::-webkit-scrollbar {{ width: 6px; }}
+#panel::-webkit-scrollbar-track {{ background: transparent; }}
+#panel::-webkit-scrollbar-thumb {{ background: var(--border-default); border-radius: 3px; }}
+#panel::-webkit-scrollbar-thumb:hover {{ background: var(--border-strong); }}
+/* -- Year slider refinement -- */
+#year-slider {{ height: 4px; }}
+#year-slider::-webkit-slider-runnable-track {{ height: 4px; background: var(--border-default); border-radius: 2px; }}
+#year-slider::-webkit-slider-thumb {{ -webkit-appearance: none; width: 14px; height: 14px; background: var(--accent-primary); border-radius: 50%; border: 2px solid var(--bg-surface); box-shadow: var(--shadow-sm); margin-top: -5px; cursor: pointer; }}
+#year-slider::-moz-range-track {{ height: 4px; background: var(--border-default); border-radius: 2px; border: none; }}
+#year-slider::-moz-range-thumb {{ width: 14px; height: 14px; background: var(--accent-primary); border-radius: 50%; border: 2px solid var(--bg-surface); box-shadow: var(--shadow-sm); cursor: pointer; }}
+#year-slider:focus-visible {{ outline: none; }}
+#year-slider:focus-visible::-webkit-slider-thumb {{ box-shadow: 0 0 0 3px rgba(30,60,110,0.3); }}
 /* -- Tier marker colours (used in tier-view mode) -- */
 </style>
 </head>
