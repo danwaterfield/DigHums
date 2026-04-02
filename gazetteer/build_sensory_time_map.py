@@ -355,6 +355,115 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <title>Sensory Time Map \u2014 London 1660\u20131820</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
+:root {{
+  /* -- Typography -- */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Georgia', 'Times New Roman', serif;
+  --font-mono: 'SF Mono', 'Menlo', 'Monaco', monospace;
+  --text-xs: 0.6875rem;
+  --text-sm: 0.75rem;
+  --text-base: 0.8125rem;
+  --text-md: 0.875rem;
+  --text-lg: 1rem;
+  --leading-tight: 1.3;
+  --leading-normal: 1.5;
+  --tracking-wide: 0.04em;
+
+  /* -- Colors — surface -- */
+  --bg-page: #f5f3ef;
+  --bg-surface: #ffffff;
+  --bg-surface-alt: #f8f6f2;
+  --bg-control: #f0ece6;
+  --bg-control-hover: #e8e4dc;
+  --bg-control-active: #1e3c6e;
+
+  /* -- Colors — text -- */
+  --text-primary: #1a1816;
+  --text-secondary: #5c5850;
+  --text-muted: #9c9890;
+  --text-inverse: #ffffff;
+  --text-link: #1e3c6e;
+
+  /* -- Colors — border -- */
+  --border-default: #d8d4cc;
+  --border-subtle: #ece8e0;
+  --border-strong: #9c9890;
+
+  /* -- Colors — sense modalities -- */
+  --smell-base: #b48a28;
+  --smell-active: #c47a1e;
+  --smell-bar: #7c6f3e;
+  --noise-base: #3c78c8;
+  --noise-active: #10305c;
+  --noise-bar: #3e5c7c;
+  --crowd-base: #b43c3c;
+  --crowd-active: #b02a1a;
+  --crowd-bar: #7c3e3e;
+  --visual-base: #3ca050;
+  --visual-active: #10401a;
+  --visual-bar: #3e7c4a;
+
+  /* -- Colors — semantic -- */
+  --accent-primary: #1e3c6e;
+  --accent-literary: #1a7d4a;
+  --accent-heatmap: #5c3a98;
+  --accent-milestone: #c47a1e;
+  --accent-prose-border: #8b6914;
+  --accent-prose-bg: #f5efe4;
+  --accent-prose-text: #3a2a08;
+
+  /* -- Colors — environmental -- */
+  --temp-bg: #edf2f8;
+  --temp-border: #c0d0e4;
+  --temp-text: #1e3c6e;
+  --mort-bg: #fef0ee;
+  --mort-border: #f0c0b8;
+  --mort-text: #b02a1a;
+  --smoke-track: #ece8e0;
+  --smoke-fill-start: #c8a050;
+  --smoke-fill-end: #8b5a20;
+  --smoke-pct: #c0a060;
+
+  /* -- Colors — source badges -- */
+  --src-fiction-bg: #e0e8f0; --src-fiction-text: #1a3a5c;
+  --src-diary-bg: #e8f0e0; --src-diary-text: #1a4a1a;
+  --src-topography-bg: #f0e8d0; --src-topography-text: #5c3a1a;
+  --src-legal-bg: #f5e0e0; --src-legal-text: #8b1a1a;
+  --src-poetry-bg: #ede0f5; --src-poetry-text: #3a1a5c;
+  --src-letters-bg: #e0f5f0; --src-letters-text: #1a5c4a;
+  --src-newspaper-bg: #f8ecd2; --src-newspaper-text: #8a5a11;
+  --src-parish-bg: #d9f0ec; --src-parish-text: #0f615f;
+  --src-institutional-bg: #e4e8f6; --src-institutional-text: #304c86;
+
+  /* -- Spacing -- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+
+  /* -- Borders & Radii -- */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-pill: 9999px;
+
+  /* -- Shadows -- */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.1);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,0.12);
+
+  /* -- Transitions -- */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.25s ease;
+  --transition-slow: 0.4s ease;
+
+  /* -- Z-index scale -- */
+  --z-tint: 401;
+  --z-heatmap: 403;
+  --z-night: 404;
+  --z-legend: 500;
+}}
 * {{ box-sizing: border-box; margin: 0; padding: 0; }}
 body {{ font-family: 'Inter', system-ui, 'Georgia', sans-serif; background: #f4f1eb; color: #1a1816; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }}
 #controls {{ background: #ffffff; border-bottom: 1px solid #d8d4cc; color: #1a1816; padding: 8px 14px; flex-shrink: 0; }}
