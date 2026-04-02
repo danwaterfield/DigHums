@@ -631,6 +631,32 @@ body {{ font-family: var(--font-sans); background: var(--bg-page); color: var(--
 .leg-title {{ font-weight: 600; margin-bottom: var(--space-1); font-size: var(--text-xs); letter-spacing: var(--tracking-wide); color: inherit; text-transform: uppercase; }}
 .leg-row {{ display: flex; align-items: center; gap: 5px; margin-bottom: 2px; }}
 .leg-dot {{ display: inline-block; border-radius: 50%; flex-shrink: 0; opacity: 0.88; }}
+/* -- Utility classes (replacing inline styles) -- */
+.inline-flex {{ display: inline-flex; gap: 2px; margin-left: 2px; }}
+.automap-btn {{ background: var(--bg-control); border: 1px solid var(--border-default); color: var(--text-secondary); padding: 3px 10px; cursor: pointer; border-radius: var(--radius-sm); font-size: var(--text-xs); font-weight: 500; font-family: inherit; transition: background var(--transition-fast), color var(--transition-fast); }}
+.automap-btn:hover {{ background: var(--bg-control-hover); color: var(--text-primary); }}
+.automap-btn:focus-visible {{ outline: 2px solid var(--accent-primary); outline-offset: 1px; }}
+.smoke-pct {{ font-size: var(--text-sm); font-family: var(--font-mono); color: var(--smoke-pct); }}
+/* -- JS-rendered element styles -- */
+.venue-ref {{ font-size: var(--text-sm); color: var(--text-muted); margin-bottom: 2px; }}
+.passage-text {{ margin-top: var(--space-1); color: var(--text-primary); }}
+.placement-note {{ margin: 0 0 var(--space-3); font-size: var(--text-sm); opacity: 0.58; font-style: italic; }}
+.section-header {{ margin: var(--space-3) 0 var(--space-1); font-size: var(--text-sm); letter-spacing: var(--tracking-wide); color: var(--text-secondary); font-weight: 600; text-transform: uppercase; }}
+.location-coords {{ margin-bottom: var(--space-3); font-size: var(--text-sm); opacity: 0.65; }}
+.modality-row {{ margin-bottom: var(--space-2); }}
+.modality-header {{ display: flex; align-items: baseline; gap: var(--space-2); }}
+.modality-label {{ font-weight: 600; min-width: 50px; }}
+.modality-bar {{ font-family: var(--font-mono); }}
+.modality-level {{ font-size: var(--text-base); opacity: 0.8; }}
+.modality-provenance {{ font-size: var(--text-sm); opacity: 0.55; margin-left: 56px; font-style: italic; }}
+.zone-hint {{ font-size: var(--text-sm); opacity: 0.45; margin-top: var(--space-3); font-style: italic; }}
+.tooltip-meta {{ font-size: 0.80em; opacity: 0.55; font-style: italic; }}
+.tooltip-placement {{ font-size: 0.76em; opacity: 0.50; font-style: italic; }}
+.tooltip-intensity {{ font-size: 0.88em; opacity: 0.85; }}
+.tooltip-evidence {{ font-size: 0.82em; opacity: 0.7; }}
+.tooltip-zone {{ font-size: 0.78em; opacity: 0.50; font-style: italic; }}
+.ev-badge {{ font-size: var(--text-sm); opacity: 0.7; }}
+.outside-hint {{ opacity: 0.6; font-size: 0.9em; }}
 /* -- Tier marker colours (used in tier-view mode) -- */
 </style>
 </head>
@@ -641,7 +667,7 @@ body {{ font-family: var(--font-sans); background: var(--bg-page); color: var(--
     <div id="year-control">
       <button class="step-btn" onclick="stepYear(-10)" title="-10 years">&#8592;</button>
       <button id="play-btn" onclick="togglePlay()" title="Animate through years">&#9654; Play</button>
-      <span style="display:inline-flex;gap:2px;margin-left:2px">
+      <span class="inline-flex">
         <button class="speed-btn" onclick="setSpeed(1000)" title="Slow">&#9664;&#9654;</button>
         <button class="speed-btn active" onclick="setSpeed(500)" title="Normal">&#9654;</button>
         <button class="speed-btn" onclick="setSpeed(200)" title="Fast">&#9654;&#9654;</button>
@@ -658,7 +684,7 @@ body {{ font-family: var(--font-sans); background: var(--bg-page); color: var(--
       <button class="step-btn" onclick="stepYear(10)" title="+10 years">&#8594;</button>
     </div>
     <button id="clear-btn" onclick="clearFilters()" title="Clear all filters">&#215; Clear</button>
-    <button id="automap-btn" onclick="enableAutoBasemap()" title="Auto-switch base map to match year" style="background:#f4f1eb;border:1px solid #d8d4cc;color:#5c5850;padding:2px 8px;cursor:pointer;border-radius:3px;font-size:0.69em;font-weight:500;">Auto map</button>
+    <button id="automap-btn" onclick="enableAutoBasemap()" title="Auto-switch base map to match year" class="automap-btn">Auto map</button>
   </div>
   <div class="pill-row">
     <span class="pill-label">View</span>
@@ -756,7 +782,7 @@ body {{ font-family: var(--font-sans); background: var(--bg-page); color: var(--
     <span class="smoke-gauge" title="Coal smoke burden (Brimblecombe 1987; Cavert 2016)">
       <span class="env-label">&#127844; Smoke</span>
       <div class="smoke-bar-track"><div class="smoke-bar-fill" id="smoke-bar" style="width:0%"></div></div>
-      <span id="smoke-pct" style="font-size:0.82em;font-family:monospace;color:#c0a060">0%</span>
+      <span id="smoke-pct" class="smoke-pct">0%</span>
     </span>
   </div>
 </div>
@@ -1475,7 +1501,7 @@ function renderPassageCard(p) {{
     return `<div class="passage-card">
       <span class="src-badge ${{srcCls}}">${{p.source_type}}</span>
       <strong>${{p.author}}</strong> &mdash; <em>${{p.title}}</em> (${{p.pub_year||''}})
-      <div style="margin-top:4px;color:#333">${{p.text ? p.text.substring(0,200) : ''}}&hellip;</div>
+      <div class="passage-text">${{p.text ? p.text.substring(0,200) : ''}}&hellip;</div>
     </div>`;
 }}
 
@@ -1626,11 +1652,11 @@ function updateMap() {{
         // Architectural metadata line
         const metaParts = [v.enclosure, v.building_type, v.material, v.capacity].filter(Boolean);
         if (metaParts.length) {{
-            tip += `<br><span style="font-size:0.80em;opacity:0.55;font-style:italic">${{metaParts.join(' \u00b7 ')}}</span>`;
+            tip += `<br><span class="tooltip-meta">${{metaParts.join(' \u00b7 ')}}</span>`;
         }}
         const placementTip = _venuePlacementSummary(v, year, true);
         if (placementTip) {{
-            tip += `<br><span style="font-size:0.76em;opacity:0.50;font-style:italic">${{placementTip}}</span>`;
+            tip += `<br><span class="tooltip-placement">${{placementTip}}</span>`;
         }}
         if (intensity.composite > 0.01) {{
             const parts = [];
@@ -1638,12 +1664,12 @@ function updateMap() {{
             if (intensity.noise  > 0.01) parts.push(`noise ${{Math.round(intensity.noise*100)}}%`);
             if (intensity.crowd  > 0.01) parts.push(`crowd ${{Math.round(intensity.crowd*100)}}%`);
             if (intensity.visual > 0.01) parts.push(`visual ${{Math.round(intensity.visual*100)}}%`);
-            if (parts.length) tip += '<br><span style="font-size:0.88em;opacity:0.85">' + parts.join(' &middot; ') + '</span>';
+            if (parts.length) tip += '<br><span class="tooltip-intensity">' + parts.join(' &middot; ') + '</span>';
         }}
-        if (evCount > 0) tip += `<br><span style="font-size:0.82em;opacity:0.7">&#128214; ${{evCount}} passages</span>`;
+        if (evCount > 0) tip += `<br><span class="tooltip-evidence">&#128214; ${{evCount}} passages</span>`;
         const zoneBaseline = computeZoneBaseline(v.lat, v.lon, year, month);
         if (zoneBaseline && zoneBaseline.provenance.length > 1) {{
-            tip += `<br><span style="font-size:0.78em;opacity:0.50;font-style:italic">~ ${{zoneBaseline.provenance.slice(1).join(' \u00b7 ')}}</span>`;
+            tip += `<br><span class="tooltip-zone">~ ${{zoneBaseline.provenance.slice(1).join(' \u00b7 ')}}</span>`;
         }}
         marker.setTooltipContent(tip);
 
@@ -1718,7 +1744,7 @@ function renderGlobalPanel(activeEvents) {{
         return;
     }}
     body.innerHTML = activeEvents.map(e =>
-        `<div style="font-size:0.72em;color:#777;margin-bottom:2px">&#8250; ${{e.venueName}}</div>` +
+        `<div class="venue-ref">&#8250; ${{e.venueName}}</div>` +
         renderEventCard(e.evt, e.inst)
     ).join('');
 }}
@@ -1729,7 +1755,7 @@ function renderLocationPanel(lat, lon, year, month) {{
     const title = document.getElementById('panel-title');
     if (!baseline) {{
         title.textContent = 'OUTSIDE MAPPED AREA';
-        body.innerHTML = '<p style="opacity:0.6;font-size:0.9em">Click within central London (1660\u20131820 extent).</p>';
+        body.innerHTML = '<p class="outside-hint">Click within central London (1660\u20131820 extent).</p>';
         return;
     }}
     title.textContent = baseline.zone.toUpperCase();
@@ -1747,22 +1773,22 @@ function renderLocationPanel(lat, lon, year, month) {{
         ['Visual', baseline.visual, '#3ca050'],
     ];
 
-    let html = `<div style="margin-bottom:10px;font-size:0.82em;opacity:0.65">\u2316 ${{lat.toFixed(4)}}, ${{lon.toFixed(4)}} &middot; ${{baseline.street_character}} streets</div>`;
+    let html = `<div class="location-coords">\u2316 ${{lat.toFixed(4)}}, ${{lon.toFixed(4)}} &middot; ${{baseline.street_character}} streets</div>`;
 
     modalities.forEach(([name, val, col]) => {{
-        html += `<div style="margin-bottom:8px">
-          <div style="display:flex;align-items:baseline;gap:6px">
-            <span style="font-weight:bold;min-width:50px">${{name}}</span>
-            <span style="font-family:monospace;color:${{col}}">${{bar(val)}}</span>
-            <span style="font-size:0.9em;opacity:0.8">${{label(val)}}</span>
+        html += `<div class="modality-row">
+          <div class="modality-header">
+            <span class="modality-label">${{name}}</span>
+            <span class="modality-bar" style="color:${{col}}">${{bar(val)}}</span>
+            <span class="modality-level">${{label(val)}}</span>
           </div>
-          <div style="font-size:0.78em;opacity:0.55;margin-left:56px;font-style:italic">
+          <div class="modality-provenance">
             ${{baseline.provenance.join(' \u00b7 ')}}
           </div>
         </div>`;
     }});
 
-    html += `<p style="font-size:0.78em;opacity:0.45;margin-top:12px;font-style:italic">
+    html += `<p class="zone-hint">
         Zone inference \u2014 click a venue marker for documented evidence.
     </p>`;
 
@@ -1773,7 +1799,7 @@ function renderVenuePanel(venueId, year, month, dow, band) {{
     const venue = VENUES.find(v => v.id === venueId);
     const body = document.getElementById('panel-body');
     const evCount = evidenceCountByVenue[venueId] || 0;
-    const evBadge = evCount > 0 ? ` <span style="font-size:0.75em;opacity:0.7">&#128214; ${{evCount}}</span>` : '';
+    const evBadge = evCount > 0 ? ` <span class="ev-badge">&#128214; ${{evCount}}</span>` : '';
     document.getElementById('back-btn').style.display = '';
     document.getElementById('panel-title').innerHTML =
         (venue ? venue.name : 'VENUE').toUpperCase() + evBadge;
@@ -1781,7 +1807,7 @@ function renderVenuePanel(venueId, year, month, dow, band) {{
     const evts = getActiveEvents(venueId, year, month, dow, band);
     let html = proseSummary(venueId, evts, year);
     if (venue) {{
-        html += `<div style="margin:0 0 10px;font-size:0.78em;opacity:0.58;font-style:italic">${{_venuePlacementSummary(venue, year, false)}}</div>`;
+        html += `<div class="placement-note">${{_venuePlacementSummary(venue, year, false)}}</div>`;
     }}
     html += evts.length
         ? evts.map(e => renderEventCard(e.evt, e.inst)).join('')
@@ -1790,7 +1816,7 @@ function renderVenuePanel(venueId, year, month, dow, band) {{
     if (state.literary) {{
         const passages = EVIDENCE.filter(p => p.venue_id === venueId);
         if (passages.length) {{
-            html += `<div style="margin:10px 0 4px;font-size:0.75em;letter-spacing:0.05em;color:#555">LITERARY EVIDENCE (${{passages.length}} passages)</div>`;
+            html += `<div class="section-header">LITERARY EVIDENCE (${{passages.length}} passages)</div>`;
             html += passages.slice(0, 20).map(renderPassageCard).join('');
         }}
     }}
