@@ -465,104 +465,142 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   --z-legend: 500;
 }}
 * {{ box-sizing: border-box; margin: 0; padding: 0; }}
-body {{ font-family: 'Inter', system-ui, 'Georgia', sans-serif; background: #f4f1eb; color: #1a1816; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }}
-#controls {{ background: #ffffff; border-bottom: 1px solid #d8d4cc; color: #1a1816; padding: 8px 14px; flex-shrink: 0; }}
-#header-row {{ display: flex; align-items: center; gap: 16px; margin-bottom: 8px; flex-wrap: wrap; }}
-.title {{ font-size: 0.875em; font-weight: 700; letter-spacing: 0; color: #1a1816; }}
-#year-control {{ display: flex; align-items: center; gap: 8px; }}
-#year-slider {{ width: 200px; }}
-#year-display {{ font-size: 1em; font-weight: 700; min-width: 3em; text-align: center; color: #1e3c6e; }}
-.step-btn {{ background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-size: 0.81em; }}
-.step-btn:hover {{ background: #ece8e0; color: #1a1816; }}
-#play-btn {{ background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 10px; cursor: pointer; border-radius: 3px; font-size: 0.81em; }}
-#play-btn:hover {{ background: #ece8e0; color: #1a1816; }}
-#play-btn.playing {{ background: #1e3c6e; border-color: #1e3c6e; color: #fff; }}
-.view-tab {{ background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 10px; border-radius: 3px; font-size: 0.69em; font-weight: 500; text-decoration: none; display: inline-block; }}
-.view-tab:hover {{ background: #ece8e0; color: #1a1816; }}
-.view-tab.active {{ background: #1e3c6e; border-color: #1e3c6e; color: #fff; font-weight: 600; cursor: default; }}
-.pill-row {{ display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 4px; align-items: center; }}
-.pill-label {{ font-size: 0.69em; color: #9c9890; margin-right: 4px; min-width: 3em; font-weight: 500; }}
-.pill {{ background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-size: 0.69em; font-weight: 500; }}
-.pill:hover {{ background: #ece8e0; color: #1a1816; }}
-.pill.active {{ background: #1e3c6e; border-color: #1e3c6e; color: #fff; }}
-#lit-toggle {{ background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 10px; cursor: pointer; border-radius: 3px; font-size: 0.69em; font-weight: 500; }}
-#lit-toggle.active {{ background: #1a7d4a; border-color: #1a7d4a; color: #fff; }}
+body {{ font-family: var(--font-sans); background: var(--bg-page); color: var(--text-primary); display: flex; flex-direction: column; height: 100vh; overflow: hidden; font-size: var(--text-base); line-height: var(--leading-normal); }}
+#controls {{ background: var(--bg-surface); border-bottom: 1px solid var(--border-default); padding: var(--space-2) var(--space-3); flex-shrink: 0; }}
+#header-row {{ display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-2); flex-wrap: wrap; }}
+.title {{ font-size: var(--text-md); font-weight: 700; letter-spacing: 0; color: var(--text-primary); }}
+#year-control {{ display: flex; align-items: center; gap: var(--space-2); }}
+#year-slider {{ width: 200px; accent-color: var(--accent-primary); }}
+#year-display {{ font-size: var(--text-lg); font-weight: 700; min-width: 3em; text-align: center; color: var(--accent-primary); font-variant-numeric: tabular-nums; }}
+.step-btn {{ background: var(--bg-control); border: 1px solid var(--border-default); color: var(--text-secondary); padding: 3px 10px; cursor: pointer; border-radius: var(--radius-sm); font-size: var(--text-sm); font-family: inherit; transition: background var(--transition-fast), color var(--transition-fast); }}
+.step-btn:hover {{ background: var(--bg-control-hover); color: var(--text-primary); }}
+.step-btn:focus-visible {{ outline: 2px solid var(--accent-primary); outline-offset: 1px; }}
+#play-btn {{ background: var(--bg-control); border: 1px solid var(--border-default); color: var(--text-secondary); padding: 3px 12px; cursor: pointer; border-radius: var(--radius-sm); font-size: var(--text-sm); font-family: inherit; transition: background var(--transition-fast), color var(--transition-fast); }}
+#play-btn:hover {{ background: var(--bg-control-hover); color: var(--text-primary); }}
+#play-btn:focus-visible {{ outline: 2px solid var(--accent-primary); outline-offset: 1px; }}
+#play-btn.playing {{ background: var(--accent-primary); border-color: var(--accent-primary); color: var(--text-inverse); }}
+.view-tab {{ background: var(--bg-control); border: 1px solid var(--border-default); color: var(--text-secondary); padding: 3px 12px; border-radius: var(--radius-sm); font-size: var(--text-xs); font-weight: 500; text-decoration: none; display: inline-block; font-family: inherit; transition: background var(--transition-fast), color var(--transition-fast); }}
+.view-tab:hover {{ background: var(--bg-control-hover); color: var(--text-primary); }}
+.view-tab.active {{ background: var(--accent-primary); border-color: var(--accent-primary); color: var(--text-inverse); font-weight: 600; cursor: default; }}
+.pill-row {{ display: flex; gap: var(--space-1); flex-wrap: wrap; margin-bottom: var(--space-1); align-items: center; }}
+.pill-label {{ font-size: var(--text-xs); color: var(--text-muted); margin-right: var(--space-1); min-width: 3em; font-weight: 500; }}
+.pill {{ background: var(--bg-control); border: 1px solid var(--border-default); color: var(--text-secondary); padding: 3px 10px; cursor: pointer; border-radius: var(--radius-sm); font-size: var(--text-xs); font-weight: 500; font-family: inherit; transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast); }}
+.pill:hover {{ background: var(--bg-control-hover); color: var(--text-primary); }}
+.pill:focus-visible {{ outline: 2px solid var(--accent-primary); outline-offset: 1px; }}
+.pill.active {{ background: var(--accent-primary); border-color: var(--accent-primary); color: var(--text-inverse); font-weight: 600; }}
+#lit-toggle {{ background: var(--bg-control); border: 1px solid var(--border-default); color: var(--text-secondary); padding: 3px 12px; cursor: pointer; border-radius: var(--radius-sm); font-size: var(--text-xs); font-weight: 500; font-family: inherit; transition: background var(--transition-fast), color var(--transition-fast); }}
+#lit-toggle:focus-visible {{ outline: 2px solid var(--accent-primary); outline-offset: 1px; }}
+#lit-toggle.active {{ background: var(--accent-literary); border-color: var(--accent-literary); color: var(--text-inverse); }}
 #main {{ display: flex; flex: 1; overflow: hidden; }}
-#map {{ flex: 1; }}
-#panel {{ width: 340px; flex-shrink: 0; background: #ffffff; border-left: 1px solid #d8d4cc; overflow-y: auto; display: flex; flex-direction: column; }}
-#panel-header {{ display: flex; align-items: center; background: #f8f6f2; border-bottom: 1px solid #ece8e0; color: #1a1816; padding: 8px 14px; font-size: 0.69em; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; flex-shrink: 0; }}
+#map {{ flex: 1; position: relative; }}
+#panel {{ width: 360px; flex-shrink: 0; background: var(--bg-surface); border-left: 1px solid var(--border-default); overflow-y: auto; display: flex; flex-direction: column; }}
+#panel-header {{ display: flex; align-items: center; background: var(--bg-surface-alt); border-bottom: 1px solid var(--border-subtle); color: var(--text-primary); padding: var(--space-2) var(--space-3); font-size: var(--text-xs); font-weight: 600; letter-spacing: var(--tracking-wide); text-transform: uppercase; flex-shrink: 0; }}
 #panel-title {{ flex: 1; }}
-#panel-body {{ padding: 10px; flex: 1; }}
-.event-card {{ background: #fff; border: 1px solid #e0d8d0; border-radius: 4px; padding: 10px 12px; margin-bottom: 8px; }}
-.event-card h3 {{ font-size: 0.9em; margin-bottom: 4px; }}
-.event-meta {{ font-size: 0.75em; color: #777; margin-bottom: 6px; }}
-.intensity-bars {{ display: grid; grid-template-columns: 4em 1fr; gap: 2px 6px; font-size: 0.72em; align-items: center; }}
-.bar-track {{ background: #eee; border-radius: 2px; height: 6px; }}
-.bar-fill {{ height: 6px; border-radius: 2px; }}
-.bar-smell {{ background: #7c6f3e; }}
-.bar-noise {{ background: #3e5c7c; }}
-.bar-crowd {{ background: #7c3e3e; }}
-.bar-visual {{ background: #3e7c4a; }}
-.event-notes {{ font-size: 0.72em; color: #666; margin-top: 6px; font-style: italic; border-top: 1px solid #eee; padding-top: 4px; }}
-.ev-sources {{ font-size: 0.68em; color: #999; margin-top: 3px; }}
-.passage-card {{ background: #fff8f0; border: 1px solid #e0c8a8; border-radius: 4px; padding: 8px 10px; margin-bottom: 6px; font-size: 0.78em; }}
-.passage-card .src-badge {{ display: inline-block; font-size: 0.7em; padding: 1px 5px; border-radius: 8px; margin-bottom: 4px; }}
-.src-fiction    {{ background: #e0e8f0; color: #1a3a5c; }}
-.src-diary      {{ background: #e8f0e0; color: #1a4a1a; }}
-.src-topography {{ background: #f0e8d0; color: #5c3a1a; }}
-.src-legal      {{ background: #f5e0e0; color: #8b1a1a; }}
-.src-poetry     {{ background: #ede0f5; color: #3a1a5c; }}
-.src-letters    {{ background: #e0f5f0; color: #1a5c4a; }}
-.src-newspaper  {{ background: #f8ecd2; color: #8a5a11; }}
-.src-parish     {{ background: #d9f0ec; color: #0f615f; }}
-.src-institutional {{ background: #e4e8f6; color: #304c86; }}
-.no-events {{ color: #999; font-style: italic; font-size: 0.85em; padding: 8px 0; }}
-.sense-pill {{ background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-size: 0.69em; font-weight: 500; }}
-.sense-pill:hover {{ background: #ece8e0; color: #1a1816; }}
-.btype-pill {{ background: #f4f1eb; border: 1px solid; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-size: 0.69em; font-weight: 500; opacity: 0.55; transition: opacity 0.15s, background 0.15s; }}
+#panel-body {{ padding: var(--space-3); flex: 1; }}
+/* -- Event cards -- */
+.event-card {{ background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: var(--space-3); margin-bottom: var(--space-2); transition: box-shadow var(--transition-fast); }}
+.event-card:hover {{ box-shadow: var(--shadow-sm); }}
+.event-card h3 {{ font-size: var(--text-md); margin-bottom: var(--space-1); font-weight: 600; }}
+.event-meta {{ font-size: var(--text-sm); color: var(--text-muted); margin-bottom: var(--space-2); }}
+/* -- Intensity bars -- */
+.intensity-bars {{ display: grid; grid-template-columns: 4em 1fr; gap: 3px 8px; font-size: var(--text-sm); align-items: center; }}
+.bar-track {{ background: var(--border-subtle); border-radius: var(--radius-sm); height: 6px; }}
+.bar-fill {{ height: 6px; border-radius: var(--radius-sm); transition: width var(--transition-base); }}
+.bar-smell {{ background: var(--smell-bar); }}
+.bar-noise {{ background: var(--noise-bar); }}
+.bar-crowd {{ background: var(--crowd-bar); }}
+.bar-visual {{ background: var(--visual-bar); }}
+/* -- Event notes / sources -- */
+.event-notes {{ font-size: var(--text-sm); color: var(--text-secondary); margin-top: var(--space-2); font-style: italic; border-top: 1px solid var(--border-subtle); padding-top: var(--space-1); }}
+.ev-sources {{ font-size: var(--text-xs); color: var(--text-muted); margin-top: var(--space-1); }}
+/* -- Passage cards -- */
+.passage-card {{ background: #fff8f0; border: 1px solid #e0c8a8; border-radius: var(--radius-md); padding: var(--space-2) var(--space-3); margin-bottom: var(--space-2); font-size: var(--text-sm); line-height: var(--leading-normal); }}
+.passage-card .src-badge {{ display: inline-block; font-size: var(--text-xs); padding: 2px 8px; border-radius: var(--radius-pill); margin-bottom: var(--space-1); font-weight: 500; }}
+.src-fiction    {{ background: var(--src-fiction-bg); color: var(--src-fiction-text); }}
+.src-diary      {{ background: var(--src-diary-bg); color: var(--src-diary-text); }}
+.src-topography {{ background: var(--src-topography-bg); color: var(--src-topography-text); }}
+.src-legal      {{ background: var(--src-legal-bg); color: var(--src-legal-text); }}
+.src-poetry     {{ background: var(--src-poetry-bg); color: var(--src-poetry-text); }}
+.src-letters    {{ background: var(--src-letters-bg); color: var(--src-letters-text); }}
+.src-newspaper  {{ background: var(--src-newspaper-bg); color: var(--src-newspaper-text); }}
+.src-parish     {{ background: var(--src-parish-bg); color: var(--src-parish-text); }}
+.src-institutional {{ background: var(--src-institutional-bg); color: var(--src-institutional-text); }}
+.no-events {{ color: var(--text-muted); font-style: italic; font-size: var(--text-base); padding: var(--space-2) 0; }}
+/* -- Sense pills -- */
+.sense-pill {{ background: var(--bg-control); border: 1px solid var(--border-default); color: var(--text-secondary); padding: 3px 10px; cursor: pointer; border-radius: var(--radius-sm); font-size: var(--text-xs); font-weight: 500; font-family: inherit; transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast); }}
+.sense-pill:hover {{ background: var(--bg-control-hover); color: var(--text-primary); }}
+.sense-pill:focus-visible {{ outline: 2px solid var(--accent-primary); outline-offset: 1px; }}
+.sense-pill[data-sense="smell"].active {{ background: var(--smell-active); border-color: var(--smell-active); color: var(--text-inverse); }}
+.sense-pill[data-sense="noise"].active {{ background: var(--noise-active); border-color: var(--noise-bar); color: var(--text-inverse); }}
+.sense-pill[data-sense="crowd"].active {{ background: var(--crowd-active); border-color: var(--crowd-active); color: var(--text-inverse); }}
+.sense-pill[data-sense="visual"].active {{ background: var(--visual-active); border-color: var(--visual-base); color: var(--text-inverse); }}
+/* -- Building-type pills -- */
+.btype-pill {{ background: var(--bg-control); border: 1px solid; padding: 3px 10px; cursor: pointer; border-radius: var(--radius-sm); font-size: var(--text-xs); font-weight: 500; opacity: 0.55; transition: opacity var(--transition-fast), background var(--transition-fast); font-family: inherit; }}
 .btype-pill:hover {{ opacity: 1; }}
-.btype-pill.active {{ background: #fff; opacity: 1; font-weight: 600; }}
-.sense-pill[data-sense="smell"].active {{ background: #c47a1e; border-color: #c47a1e; color: #fff; }}
-.sense-pill[data-sense="noise"].active {{ background: #10305c; border-color: #3a7acc; color: #fff; }}
-.sense-pill[data-sense="crowd"].active {{ background: #b02a1a; border-color: #b02a1a; color: #fff; }}
-.sense-pill[data-sense="visual"].active {{ background: #10401a; border-color: #30cc50; color: #fff; }}
-.prose-summary {{ background: #f5efe4; border-left: 3px solid #8b6914; padding: 8px 12px; margin-bottom: 10px; font-size: 0.83em; line-height: 1.5; color: #3a2a08; border-radius: 0 4px 4px 0; }}
-.season-chart {{ display: flex; gap: 2px; margin: 6px 0 2px; }}
-.season-bar {{ flex: 1; height: 7px; border-radius: 1px; cursor: pointer; }}
-.season-active {{ background: #8b6914; }}
-.season-inactive {{ background: #e0d8cc; }}
+.btype-pill:focus-visible {{ outline: 2px solid var(--accent-primary); outline-offset: 1px; }}
+.btype-pill.active {{ background: var(--bg-surface); opacity: 1; font-weight: 600; }}
+/* -- Prose summary -- */
+.prose-summary {{ background: var(--accent-prose-bg); border-left: 3px solid var(--accent-prose-border); padding: var(--space-2) var(--space-3); margin-bottom: var(--space-3); font-size: var(--text-base); line-height: var(--leading-normal); color: var(--accent-prose-text); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }}
+/* -- Season chart -- */
+.season-chart {{ display: flex; gap: 2px; margin: var(--space-2) 0 var(--space-1); }}
+.season-bar {{ flex: 1; height: 8px; border-radius: 2px; cursor: pointer; transition: opacity var(--transition-fast); }}
+.season-active {{ background: var(--accent-prose-border); }}
+.season-inactive {{ background: var(--border-default); }}
 .season-bar:hover {{ opacity: 0.7; }}
-#milestone-label {{ font-size: 0.69em; color: #c47a1e; margin-left: 6px; font-style: italic; white-space: nowrap; font-weight: 500; }}
-.speed-btn {{ background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 1px 5px; cursor: pointer; border-radius: 3px; font-size: 0.69em; font-weight: 500; }}
-.speed-btn:hover {{ background: #ece8e0; color: #1a1816; }}
-.speed-btn.active {{ background: #edf2f8; border-color: #2563a8; color: #1e3c6e; font-weight: 600; }}
-#clear-btn {{ background: none; border: 1px solid #d8d4cc; color: #9c9890; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-size: 0.69em; font-weight: 500; }}
-#clear-btn:hover {{ color: #1a1816; border-color: #9c9890; }}
-#back-btn {{ background: none; border: none; color: #1e3c6e; font-size: 0.81em; cursor: pointer; padding: 0 8px 0 0; flex-shrink: 0; }}
-#back-btn:hover {{ color: #1a1816; }}
-/* ── Environmental indicators ── */
-#env-bar {{ display: flex; align-items: center; gap: 14px; padding: 3px 0 2px; flex-wrap: wrap; }}
-.env-gauge {{ display: flex; align-items: center; gap: 5px; font-size: 0.69em; color: #9c9890; font-weight: 500; }}
-.env-gauge .env-label {{ color: #9c9890; }}
-.temp-badge {{ background: #edf2f8; border: 1px solid #c0d0e4; color: #1e3c6e; padding: 1px 7px; border-radius: 3px; font-size: 0.875em; font-family: monospace; min-width: 4.5em; text-align: center; transition: background 0.3s, color 0.3s; }}
+/* -- Milestone -- */
+#milestone-label {{ font-size: var(--text-xs); color: var(--accent-milestone); margin-left: var(--space-2); font-style: italic; white-space: nowrap; font-weight: 500; }}
+/* -- Speed buttons -- */
+.speed-btn {{ background: var(--bg-control); border: 1px solid var(--border-default); color: var(--text-secondary); padding: 2px 6px; cursor: pointer; border-radius: var(--radius-sm); font-size: var(--text-xs); font-weight: 500; font-family: inherit; transition: background var(--transition-fast), color var(--transition-fast); }}
+.speed-btn:hover {{ background: var(--bg-control-hover); color: var(--text-primary); }}
+.speed-btn:focus-visible {{ outline: 2px solid var(--accent-primary); outline-offset: 1px; }}
+.speed-btn.active {{ background: var(--temp-bg); border-color: #2563a8; color: var(--accent-primary); font-weight: 600; }}
+/* -- Clear / Back buttons -- */
+#clear-btn {{ background: none; border: 1px solid var(--border-default); color: var(--text-muted); padding: 3px 10px; cursor: pointer; border-radius: var(--radius-sm); font-size: var(--text-xs); font-weight: 500; font-family: inherit; transition: color var(--transition-fast), border-color var(--transition-fast); }}
+#clear-btn:hover {{ color: var(--text-primary); border-color: var(--border-strong); }}
+#clear-btn:focus-visible {{ outline: 2px solid var(--accent-primary); outline-offset: 1px; }}
+#back-btn {{ background: none; border: none; color: var(--text-link); font-size: var(--text-sm); cursor: pointer; padding: 0 var(--space-2) 0 0; flex-shrink: 0; font-family: inherit; transition: color var(--transition-fast); }}
+#back-btn:hover {{ color: var(--text-primary); }}
+#back-btn:focus-visible {{ outline: 2px solid var(--accent-primary); outline-offset: 1px; }}
+/* -- Environmental indicators -- */
+#env-bar {{ display: flex; align-items: center; gap: var(--space-3); padding: var(--space-1) 0; flex-wrap: wrap; }}
+.env-gauge {{ display: flex; align-items: center; gap: 5px; font-size: var(--text-xs); color: var(--text-muted); font-weight: 500; }}
+.env-gauge .env-label {{ color: var(--text-muted); }}
+.temp-badge {{ background: var(--temp-bg); border: 1px solid var(--temp-border); color: var(--temp-text); padding: 2px 8px; border-radius: var(--radius-sm); font-size: var(--text-sm); font-family: var(--font-mono); min-width: 4.5em; text-align: center; font-variant-numeric: tabular-nums; transition: background var(--transition-base), color var(--transition-base); }}
 .temp-badge.cold  {{ background: #ddeeff; border-color: #7ab0d8; color: #1a3c70; }}
 .temp-badge.frost {{ background: #081828; border-color: #80c0f8; color: #c8eeff; font-weight: bold; }}
-.mort-badge {{ background: #fef0ee; border: 1px solid #f0c0b8; color: #b02a1a; padding: 1px 7px; border-radius: 3px; font-size: 0.875em; font-family: monospace; min-width: 5em; text-align: center; }}
-.smoke-gauge {{ display: flex; align-items: center; gap: 5px; font-size: 0.69em; color: #9c9890; font-weight: 500; }}
-.smoke-bar-track {{ width: 50px; height: 4px; background: #ece8e0; border-radius: 2px; }}
-.smoke-bar-fill {{ height: 4px; background: linear-gradient(to right, #c8a050, #8b5a20); border-radius: 2px; transition: width 0.4s; }}
-#tier-toggle {{ background: #1a2a3a; border: 1px solid #444; color: #8090a8; padding: 1px 8px; cursor: pointer; border-radius: 12px; font-size: 0.75em; }}
+.mort-badge {{ background: var(--mort-bg); border: 1px solid var(--mort-border); color: var(--mort-text); padding: 2px 8px; border-radius: var(--radius-sm); font-size: var(--text-sm); font-family: var(--font-mono); min-width: 5em; text-align: center; font-variant-numeric: tabular-nums; }}
+.smoke-gauge {{ display: flex; align-items: center; gap: 5px; font-size: var(--text-xs); color: var(--text-muted); font-weight: 500; }}
+.smoke-bar-track {{ width: 50px; height: 5px; background: var(--smoke-track); border-radius: var(--radius-sm); }}
+.smoke-bar-fill {{ height: 5px; background: linear-gradient(to right, var(--smoke-fill-start), var(--smoke-fill-end)); border-radius: var(--radius-sm); transition: width var(--transition-slow); }}
+/* -- Tier toggle -- */
+#tier-toggle {{ background: #1a2a3a; border: 1px solid #444; color: #8090a8; padding: 2px 10px; cursor: pointer; border-radius: var(--radius-pill); font-size: var(--text-sm); font-family: inherit; transition: background var(--transition-fast), color var(--transition-fast); }}
 #tier-toggle:hover {{ background: #253545; }}
+#tier-toggle:focus-visible {{ outline: 2px solid var(--accent-primary); outline-offset: 1px; }}
 #tier-toggle.active {{ background: #1a3a5a; border-color: #4488cc; color: #aaddff; }}
-#map {{ flex: 1; position: relative; }}
-/* ── Heatmap overlay ── */
-#heatmap-canvas {{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 403; opacity: 0; transition: opacity 0.4s; filter: blur(18px); }}
-/* ── Time-of-day atmospheric tint ── */
-#tod-tint {{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 401; opacity: 0; transition: background 1.5s ease, opacity 1.5s ease; }}
-/* ── Night mode overlay + tile dimming ── */
-#night-overlay {{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 404; background: radial-gradient(ellipse at 50% 40%, rgba(0,5,20,0.45) 0%, rgba(0,5,20,0.65) 100%); opacity: 0; transition: opacity 1.4s; }}
-/* ── Venue name labels (shown at high zoom) ── */
-.venue-label {{ background: none; border: none; white-space: nowrap; font-size: 0.65em; font-weight: 600; color: #1a1008; text-shadow: 0 0 3px rgba(255,255,240,0.95), 0 0 7px rgba(255,255,240,0.7); pointer-events: none; padding: 1px 0 0 6px; letter-spacing: 0.01em; }}
+/* -- Overlay / contour / sense buttons -- */
+.overlay-btn {{ background: var(--bg-control); border: 1px solid var(--border-default); color: var(--text-secondary); padding: 3px 10px; cursor: pointer; border-radius: var(--radius-sm); font-size: var(--text-xs); font-weight: 500; font-family: inherit; transition: background var(--transition-fast), color var(--transition-fast); }}
+.overlay-btn:hover {{ background: var(--bg-control-hover); color: var(--text-primary); }}
+.overlay-btn:focus-visible {{ outline: 2px solid var(--accent-primary); outline-offset: 1px; }}
+.overlay-btn.active {{ background: var(--accent-heatmap); border-color: var(--accent-heatmap); color: var(--text-inverse); font-weight: 600; }}
+.contour-btn {{ background: var(--bg-control); border: 1px solid var(--border-default); color: var(--text-secondary); padding: 3px 10px; cursor: pointer; border-radius: var(--radius-sm); font-size: var(--text-xs); font-weight: 500; opacity: 0.75; font-family: inherit; transition: background var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast); }}
+.contour-btn:hover {{ opacity: 1; }}
+.contour-btn:focus-visible {{ outline: 2px solid var(--accent-primary); outline-offset: 1px; }}
+.contour-btn.active {{ background: var(--accent-primary); border-color: var(--accent-primary); color: var(--text-inverse); opacity: 1; font-weight: 600; }}
+.sense-btn {{ background: var(--bg-control); border: 1px solid var(--border-default); color: var(--text-secondary); padding: 3px 10px; cursor: pointer; border-radius: var(--radius-sm); font-size: var(--text-xs); font-weight: 500; opacity: 0.75; font-family: inherit; transition: background var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast); }}
+.sense-btn:hover {{ opacity: 1; }}
+.sense-btn:focus-visible {{ outline: 2px solid var(--accent-primary); outline-offset: 1px; }}
+.sense-btn.active {{ background: #3a5a2a; border-color: #3a5a2a; color: var(--text-inverse); opacity: 1; font-weight: 600; }}
+#sense-row {{ display: none; }}
+.contour-surface {{ pointer-events: none; }}
+/* -- Heatmap overlay -- */
+#heatmap-canvas {{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: var(--z-heatmap); opacity: 0; transition: opacity var(--transition-slow); filter: blur(18px); }}
+/* -- Time-of-day atmospheric tint -- */
+#tod-tint {{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: var(--z-tint); opacity: 0; transition: background 1.5s ease, opacity 1.5s ease; }}
+/* -- Night mode overlay -- */
+#night-overlay {{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: var(--z-night); background: radial-gradient(ellipse at 50% 40%, rgba(0,5,20,0.45) 0%, rgba(0,5,20,0.65) 100%); opacity: 0; transition: opacity 1.4s; }}
+/* -- Venue name labels -- */
+.venue-label {{ background: none; border: none; white-space: nowrap; font-size: var(--text-xs); font-weight: 600; color: #1a1008; text-shadow: 0 0 3px rgba(255,255,240,0.95), 0 0 7px rgba(255,255,240,0.7); pointer-events: none; padding: 1px 0 0 6px; letter-spacing: 0.01em; }}
+/* -- Night mode controls -- */
 #map.night-mode .leaflet-tile-pane {{ filter: brightness(0.52) saturate(0.75) sepia(0.15); transition: filter 1.4s; }}
 #controls.night-ctrl {{ background: #0d1520; border-bottom-color: #1a2a3a; }}
 #controls.night-ctrl .title {{ color: #7ab8d8; }}
@@ -579,29 +617,12 @@ body {{ font-family: 'Inter', system-ui, 'Georgia', sans-serif; background: #f4f
 #controls.night-ctrl .contour-btn.active {{ background: #1e3c6e; color: #fff; }}
 #controls.night-ctrl .sense-btn {{ background: #1a2a3a; border-color: #333; color: #6080a0; }}
 #controls.night-ctrl .sense-btn.active {{ background: #3a5a2a; color: #fff; }}
-/* ── Map legend ── */
-#map-legend {{ position: absolute; bottom: 32px; left: 10px; z-index: 500; background: rgba(255,255,255,0.93); border: 1px solid #d8d4cc; border-radius: 4px; padding: 7px 9px; font-size: 0.72em; min-width: 108px; box-shadow: 0 1px 5px rgba(0,0,0,0.14); pointer-events: none; transition: background 0.8s, border-color 0.8s, color 0.8s; }}
-.leg-title {{ font-weight: 600; margin-bottom: 4px; font-size: 0.85em; letter-spacing: 0.05em; color: inherit; text-transform: uppercase; }}
+/* -- Map legend -- */
+#map-legend {{ position: absolute; bottom: 32px; left: 10px; z-index: var(--z-legend); background: rgba(255,255,255,0.95); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: var(--space-2) var(--space-3); font-size: var(--text-sm); min-width: 108px; box-shadow: var(--shadow-md); pointer-events: none; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: background 0.8s, border-color 0.8s, color 0.8s; }}
+.leg-title {{ font-weight: 600; margin-bottom: var(--space-1); font-size: var(--text-xs); letter-spacing: var(--tracking-wide); color: inherit; text-transform: uppercase; }}
 .leg-row {{ display: flex; align-items: center; gap: 5px; margin-bottom: 2px; }}
 .leg-dot {{ display: inline-block; border-radius: 50%; flex-shrink: 0; opacity: 0.88; }}
-/* ── Overlay toggle button ── */
-.overlay-btn {{ background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-size: 0.69em; font-weight: 500; }}
-.overlay-btn:hover {{ background: #ece8e0; color: #1a1816; }}
-.overlay-btn.active {{ background: #5c3a98; border-color: #5c3a98; color: #fff; font-weight: 600; }}
-/* ── Contour overlay buttons ── */
-.contour-btn {{ background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 8px;
-               cursor: pointer; border-radius: 3px; font-size: 0.69em; font-weight: 500; opacity: 0.75; }}
-.contour-btn:hover {{ opacity: 1; }}
-.contour-btn.active {{ background: #1e3c6e; border-color: #1e3c6e; color: #fff;
-                      opacity: 1; font-weight: 600; }}
-.sense-btn {{ background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 8px;
-             cursor: pointer; border-radius: 3px; font-size: 0.69em; font-weight: 500; opacity: 0.75; }}
-.sense-btn:hover {{ opacity: 1; }}
-.sense-btn.active {{ background: #3a5a2a; border-color: #3a5a2a; color: #fff;
-                    opacity: 1; font-weight: 600; }}
-#sense-row {{ display: none; }}
-.contour-surface {{ pointer-events: none; }}
-/* ── Tier marker colours (used in tier-view mode) ── */
+/* -- Tier marker colours (used in tier-view mode) -- */
 </style>
 </head>
 <body>
