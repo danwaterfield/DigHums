@@ -602,20 +602,29 @@ body {{ font-family: var(--font-sans); background: var(--bg-page); color: var(--
 .venue-label {{ background: none; border: none; white-space: nowrap; font-size: var(--text-xs); font-weight: 600; color: #1a1008; text-shadow: 0 0 3px rgba(255,255,240,0.95), 0 0 7px rgba(255,255,240,0.7); pointer-events: none; padding: 1px 0 0 6px; letter-spacing: 0.01em; }}
 /* -- Night mode controls -- */
 #map.night-mode .leaflet-tile-pane {{ filter: brightness(0.52) saturate(0.75) sepia(0.15); transition: filter 1.4s; }}
-#controls.night-ctrl {{ background: #0d1520; border-bottom-color: #1a2a3a; }}
+#controls.night-ctrl {{
+  --bg-surface: #0d1520;
+  --bg-control: #0e1e30;
+  --bg-control-hover: #1a2a3a;
+  --bg-control-active: #1a4870;
+  --border-default: #1e3048;
+  --border-subtle: #1a2a3a;
+  --text-primary: #c8dce8;
+  --text-secondary: #6a9abc;
+  --text-muted: #4a6a88;
+  --text-inverse: #ffffff;
+  --accent-primary: #2a70b8;
+  --accent-milestone: #8aabcc;
+  --accent-heatmap: #3a1e6a;
+  background: var(--bg-surface);
+  border-bottom-color: var(--border-default);
+}}
 #controls.night-ctrl .title {{ color: #7ab8d8; }}
 #controls.night-ctrl #year-display {{ color: #7ab8d8; }}
-#controls.night-ctrl .pill-label {{ color: #4a6a88; }}
-#controls.night-ctrl .pill, #controls.night-ctrl .step-btn, #controls.night-ctrl #play-btn,
-#controls.night-ctrl .sense-pill, #controls.night-ctrl .speed-btn,
-#controls.night-ctrl .overlay-btn {{ background: #0e1e30; border-color: #1e3048; color: #6a9abc; }}
-#controls.night-ctrl .overlay-btn.active {{ background: #3a1e6a; border-color: #7a4ecf; color: #c8aaff; font-weight: 600; }}
 #controls.night-ctrl .pill.active {{ background: #1a4870; border-color: #2a70b8; color: #aadcff; }}
+#controls.night-ctrl .overlay-btn.active {{ background: #3a1e6a; border-color: #7a4ecf; color: #c8aaff; }}
 #controls.night-ctrl .btype-pill {{ background: #0e1e30 !important; filter: brightness(1.4) saturate(1.3); }}
-#controls.night-ctrl #milestone-label {{ color: #8aabcc; }}
-#controls.night-ctrl .contour-btn {{ background: #1a2a3a; border-color: #333; color: #6080a0; }}
 #controls.night-ctrl .contour-btn.active {{ background: #1e3c6e; color: #fff; }}
-#controls.night-ctrl .sense-btn {{ background: #1a2a3a; border-color: #333; color: #6080a0; }}
 #controls.night-ctrl .sense-btn.active {{ background: #3a5a2a; color: #fff; }}
 /* -- Map legend -- */
 #map-legend {{ position: absolute; bottom: 32px; left: 10px; z-index: var(--z-legend); background: rgba(255,255,255,0.95); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: var(--space-2) var(--space-3); font-size: var(--text-sm); min-width: 108px; box-shadow: var(--shadow-md); pointer-events: none; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: background 0.8s, border-color 0.8s, color 0.8s; }}
