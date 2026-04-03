@@ -671,6 +671,17 @@ body {{ font-family: var(--font-sans); background: var(--bg-page); color: var(--
 #year-slider::-moz-range-thumb {{ width: 14px; height: 14px; background: var(--accent-primary); border-radius: 50%; border: 2px solid var(--bg-surface); box-shadow: var(--shadow-sm); cursor: pointer; }}
 #year-slider:focus-visible {{ outline: none; }}
 #year-slider:focus-visible::-webkit-slider-thumb {{ box-shadow: 0 0 0 3px rgba(30,60,110,0.3); }}
+/* -- Collapsible filter sections -- */
+.filter-section {{ border-top: 1px solid var(--border-subtle); }}
+.filter-section[open] {{ padding-bottom: var(--space-1); }}
+.filter-section summary {{ display: flex; align-items: center; cursor: pointer; padding: var(--space-1) 0; font-size: var(--text-xs); font-weight: 600; color: var(--text-secondary); letter-spacing: var(--tracking-wide); text-transform: uppercase; list-style: none; user-select: none; transition: color var(--transition-fast); }}
+.filter-section summary::-webkit-details-marker {{ display: none; }}
+.filter-section summary::before {{ content: '\25b8'; margin-right: var(--space-1); font-size: 0.7em; transition: transform var(--transition-fast); }}
+.filter-section[open] summary::before {{ transform: rotate(90deg); }}
+.filter-section summary:hover {{ color: var(--text-primary); }}
+.filter-section .filter-body {{ padding: var(--space-1) 0 0; }}
+/* -- Environment bar compact -- */
+#env-bar {{ border-top: 1px solid var(--border-subtle); margin-top: var(--space-1); }}
 /* -- Tier marker colours (used in tier-view mode) -- */
 </style>
 </head>
@@ -708,82 +719,97 @@ body {{ font-family: var(--font-sans); background: var(--bg-page); color: var(--
     <a href="comparison.html" class="view-tab">Comparison</a>
     <a href="sensory_timeline.html" class="view-tab">Timeline</a>
   </div>
-  <div class="pill-row">
-    <span class="pill-label">Month</span>
-    <button class="pill" data-group="month" data-val="1">Jan</button>
-    <button class="pill" data-group="month" data-val="2">Feb</button>
-    <button class="pill" data-group="month" data-val="3">Mar</button>
-    <button class="pill" data-group="month" data-val="4">Apr</button>
-    <button class="pill" data-group="month" data-val="5">May</button>
-    <button class="pill" data-group="month" data-val="6">Jun</button>
-    <button class="pill" data-group="month" data-val="7">Jul</button>
-    <button class="pill" data-group="month" data-val="8">Aug</button>
-    <button class="pill" data-group="month" data-val="9">Sep</button>
-    <button class="pill" data-group="month" data-val="10">Oct</button>
-    <button class="pill" data-group="month" data-val="11">Nov</button>
-    <button class="pill" data-group="month" data-val="12">Dec</button>
-  </div>
-  <div class="pill-row">
-    <span class="pill-label">Day</span>
-    <button class="pill" data-group="dow" data-val="Mon">Mon</button>
-    <button class="pill" data-group="dow" data-val="Tue">Tue</button>
-    <button class="pill" data-group="dow" data-val="Wed">Wed</button>
-    <button class="pill" data-group="dow" data-val="Thu">Thu</button>
-    <button class="pill" data-group="dow" data-val="Fri">Fri</button>
-    <button class="pill" data-group="dow" data-val="Sat">Sat</button>
-    <button class="pill" data-group="dow" data-val="Sun">Sun</button>
-    <button id="lit-toggle" onclick="toggleLiterary()">&#9776; Literary layer: OFF</button>
-  </div>
-  <div class="pill-row">
-    <span class="pill-label">Time</span>
-    <button class="pill" data-group="band" data-val="dawn">Dawn</button>
-    <button class="pill" data-group="band" data-val="morning">Morning</button>
-    <button class="pill" data-group="band" data-val="midday">Midday</button>
-    <button class="pill" data-group="band" data-val="afternoon">Afternoon</button>
-    <button class="pill" data-group="band" data-val="evening">Evening</button>
-    <button class="pill" data-group="band" data-val="night">Night</button>
-  </div>
-  <div class="pill-row">
-    <span class="pill-label">Sense</span>
-    <button class="sense-pill" data-sense="smell">Smell</button>
-    <button class="sense-pill" data-sense="noise">Noise</button>
-    <button class="sense-pill" data-sense="crowd">Crowd</button>
-    <button class="sense-pill" data-sense="visual">Visual</button>
-    <button id="tier-toggle" onclick="toggleTierView()" title="Colour venues by economic tier">&#9632; Tier</button>
-  </div>
-  <div class="pill-row" id="btype-row">
-    <span class="pill-label">Type</span>
-    <button class="btype-pill" data-btype="garden" style="border-color:#4a7c4f;color:#4a7c4f">Garden</button>
-    <button class="btype-pill" data-btype="park"   style="border-color:#4a7c4f;color:#4a7c4f">Park</button>
-    <button class="btype-pill" data-btype="theatre"  style="border-color:#8b5e3c;color:#8b5e3c">Theatre</button>
-    <button class="btype-pill" data-btype="assembly" style="border-color:#8b5e3c;color:#8b5e3c">Assembly</button>
-    <button class="btype-pill" data-btype="church"   style="border-color:#6b5b8a;color:#6b5b8a">Church</button>
-    <button class="btype-pill" data-btype="market"   style="border-color:#b8860b;color:#b8860b">Market</button>
-    <button class="btype-pill" data-btype="square"   style="border-color:#7a7a7a;color:#7a7a7a">Square</button>
-    <button class="btype-pill" data-btype="street"   style="border-color:#7a7a7a;color:#7a7a7a">Street</button>
-    <button class="btype-pill" data-btype="prison"   style="border-color:#8b0000;color:#8b0000">Prison</button>
-    <button class="btype-pill" data-btype="court"    style="border-color:#8b0000;color:#8b0000">Court</button>
-    <button class="btype-pill" data-btype="execution" style="border-color:#8b0000;color:#8b0000">Execution</button>
-    <button class="btype-pill" data-btype="district" style="border-color:#7a7a7a;color:#7a7a7a">District</button>
-  </div>
-  <div class="pill-row">
-    <span class="pill-label">Overlay</span>
-    <button class="contour-btn active" data-cmode="off">Off</button>
-    <button class="contour-btn" data-cmode="atmosphere">Atmosphere</button>
-    <button class="contour-btn" data-cmode="senses">Senses</button>
-  </div>
-  <div class="pill-row" id="sense-row">
-    <span class="pill-label">Sense</span>
-    <button class="sense-btn active" data-sense="smoke">Smoke</button>
-    <button class="sense-btn" data-sense="smell">Smell</button>
-    <button class="sense-btn" data-sense="noise">Noise</button>
-    <button class="sense-btn" data-sense="crowd">Crowd</button>
-    <button class="sense-btn" data-sense="visual">Visual</button>
-  </div>
-  <div class="pill-row">
-    <span class="pill-label">Layer</span>
-    <button class="overlay-btn" id="heatmap-btn" onclick="toggleHeatmap()">&#9638; Heatmap</button>
-  </div>
+  <details class="filter-section" open>
+    <summary>Temporal</summary>
+    <div class="filter-body">
+      <div class="pill-row">
+        <span class="pill-label">Month</span>
+        <button class="pill" data-group="month" data-val="1">Jan</button>
+        <button class="pill" data-group="month" data-val="2">Feb</button>
+        <button class="pill" data-group="month" data-val="3">Mar</button>
+        <button class="pill" data-group="month" data-val="4">Apr</button>
+        <button class="pill" data-group="month" data-val="5">May</button>
+        <button class="pill" data-group="month" data-val="6">Jun</button>
+        <button class="pill" data-group="month" data-val="7">Jul</button>
+        <button class="pill" data-group="month" data-val="8">Aug</button>
+        <button class="pill" data-group="month" data-val="9">Sep</button>
+        <button class="pill" data-group="month" data-val="10">Oct</button>
+        <button class="pill" data-group="month" data-val="11">Nov</button>
+        <button class="pill" data-group="month" data-val="12">Dec</button>
+      </div>
+      <div class="pill-row">
+        <span class="pill-label">Day</span>
+        <button class="pill" data-group="dow" data-val="Mon">Mon</button>
+        <button class="pill" data-group="dow" data-val="Tue">Tue</button>
+        <button class="pill" data-group="dow" data-val="Wed">Wed</button>
+        <button class="pill" data-group="dow" data-val="Thu">Thu</button>
+        <button class="pill" data-group="dow" data-val="Fri">Fri</button>
+        <button class="pill" data-group="dow" data-val="Sat">Sat</button>
+        <button class="pill" data-group="dow" data-val="Sun">Sun</button>
+      </div>
+      <div class="pill-row">
+        <span class="pill-label">Time</span>
+        <button class="pill" data-group="band" data-val="dawn">Dawn</button>
+        <button class="pill" data-group="band" data-val="morning">Morning</button>
+        <button class="pill" data-group="band" data-val="midday">Midday</button>
+        <button class="pill" data-group="band" data-val="afternoon">Afternoon</button>
+        <button class="pill" data-group="band" data-val="evening">Evening</button>
+        <button class="pill" data-group="band" data-val="night">Night</button>
+      </div>
+    </div>
+  </details>
+  <details class="filter-section" open>
+    <summary>Sensory</summary>
+    <div class="filter-body">
+      <div class="pill-row">
+        <span class="pill-label">Sense</span>
+        <button class="sense-pill" data-sense="smell">Smell</button>
+        <button class="sense-pill" data-sense="noise">Noise</button>
+        <button class="sense-pill" data-sense="crowd">Crowd</button>
+        <button class="sense-pill" data-sense="visual">Visual</button>
+        <button id="tier-toggle" onclick="toggleTierView()" title="Colour venues by economic tier">&#9632; Tier</button>
+      </div>
+      <div class="pill-row" id="btype-row">
+        <span class="pill-label">Type</span>
+        <button class="btype-pill" data-btype="garden" style="border-color:#4a7c4f;color:#4a7c4f">Garden</button>
+        <button class="btype-pill" data-btype="park"   style="border-color:#4a7c4f;color:#4a7c4f">Park</button>
+        <button class="btype-pill" data-btype="theatre"  style="border-color:#8b5e3c;color:#8b5e3c">Theatre</button>
+        <button class="btype-pill" data-btype="assembly" style="border-color:#8b5e3c;color:#8b5e3c">Assembly</button>
+        <button class="btype-pill" data-btype="church"   style="border-color:#6b5b8a;color:#6b5b8a">Church</button>
+        <button class="btype-pill" data-btype="market"   style="border-color:#b8860b;color:#b8860b">Market</button>
+        <button class="btype-pill" data-btype="square"   style="border-color:#7a7a7a;color:#7a7a7a">Square</button>
+        <button class="btype-pill" data-btype="street"   style="border-color:#7a7a7a;color:#7a7a7a">Street</button>
+        <button class="btype-pill" data-btype="prison"   style="border-color:#8b0000;color:#8b0000">Prison</button>
+        <button class="btype-pill" data-btype="court"    style="border-color:#8b0000;color:#8b0000">Court</button>
+        <button class="btype-pill" data-btype="execution" style="border-color:#8b0000;color:#8b0000">Execution</button>
+        <button class="btype-pill" data-btype="district" style="border-color:#7a7a7a;color:#7a7a7a">District</button>
+      </div>
+    </div>
+  </details>
+  <details class="filter-section">
+    <summary>Visualization</summary>
+    <div class="filter-body">
+      <div class="pill-row">
+        <span class="pill-label">Overlay</span>
+        <button class="contour-btn active" data-cmode="off">Off</button>
+        <button class="contour-btn" data-cmode="atmosphere">Atmosphere</button>
+        <button class="contour-btn" data-cmode="senses">Senses</button>
+      </div>
+      <div class="pill-row" id="sense-row">
+        <span class="pill-label">Sense</span>
+        <button class="sense-btn active" data-sense="smoke">Smoke</button>
+        <button class="sense-btn" data-sense="smell">Smell</button>
+        <button class="sense-btn" data-sense="noise">Noise</button>
+        <button class="sense-btn" data-sense="crowd">Crowd</button>
+        <button class="sense-btn" data-sense="visual">Visual</button>
+      </div>
+      <div class="pill-row">
+        <span class="pill-label">Layer</span>
+        <button class="overlay-btn" id="heatmap-btn" onclick="toggleHeatmap()">&#9638; Heatmap</button>
+        <button id="lit-toggle" onclick="toggleLiterary()">&#9776; Literary layer: OFF</button>
+      </div>
+    </div>
+  </details>
   <div class="pill-row" id="env-bar">
     <span class="env-gauge" title="Central England Temperature (HadCET / Met Office)">
       <span class="env-label">&#127783; Temp</span>
