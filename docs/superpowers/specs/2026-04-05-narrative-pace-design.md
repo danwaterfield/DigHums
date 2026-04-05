@@ -114,9 +114,40 @@ The following common 18c words have shifted meaning substantially and must NOT b
 | nervous | ~15 | "sinewy, vigorous" | "anxious" | Inverts meaning entirely |
 | liberal | ~88 | "generous, free-giving" | "politically left" | Anachronistic classification |
 
+### Tense and POS Analysis (spaCy)
+
+Each sentence is processed through spaCy (`en_core_web_sm`) to extract morphological features. Tense/aspect distributions are used as classifier inputs alongside lexical markers.
+
+**Tense signals by category:**
+
+| Tense/Aspect | spaCy detection | Category signal | Weight |
+|---|---|---|---|
+| Simple past (VBD) | `token.tag_ == "VBD"` | Singulative (default narrative) | Baseline — contributes only when combined with singulative lexical markers |
+| Past progressive (was/were + VBG) | AUX(was/were) + VERB(VBG) | Description / iterative boundary | Medium — "the candles were burning" is static; "she was walking every morning" is iterative |
+| Pluperfect (had + VBN) | AUX(had) + VERB(VBN) | Narrative compression — backstory, analepsis | Weak singulative (compressed events), weak iterative (summarised habits) |
+| Present tense (VBP/VBZ) in past-tense narration | Present-tense verbs in a chapter whose baseline tense is past | Commentary (maxims: "a woman of sense never reveals...") or Description (vivid set-pieces) |  Strong commentary if generalising subject; strong description if concrete subject |
+| Habitual "would" + base verb | `would` tagged as AUX + following VERB(VB) | Iterative | Strong — but must distinguish from conditional "would" (if-clauses, hypotheticals) |
+| Backshifted tense (FID signature) | Proximal deictics ("now", "here", "tomorrow") co-occurring with past tense in same sentence | FID | Strong — the classic Banfield marker |
+
+**Epistolary genre flag:**
+
+Novels tagged `genre: "epistolary"` in metadata (Evelina, Clarissa, Pamela, Humphry Clinker) receive modified tense logic:
+- Present tense is the baseline letter-writing tense, not a marker of commentary or description
+- Present tense contributes to singulative (the epistolary "writing to the moment") rather than commentary
+- FID detection relies more heavily on evaluative/deictic markers and less on tense backshift, since the epistolary present already occupies the tense slot that FID would shift into
+
+**Additional spaCy-derived features used by classifiers:**
+
+- **Copular verb detection** (Description): `token.dep_ == "ROOT" and token.lemma_ == "be"` followed by adjectival/prepositional complement — more reliable than regex for "the room was large"
+- **Proper noun identification** (Singulative): `token.pos_ == "PROPN"` — detects new character/place introductions without relying on capitalisation heuristics
+- **Sentence segmentation**: spaCy's sentencizer replaces rule-based regex, handling abbreviations (Mr., Mrs., Dr., &c.) and period-internal punctuation correctly
+- **Adjective density** (Description): ratio of `token.pos_ == "ADJ"` to total tokens — high density = descriptive
+- **Verb-to-adjective ratio**: high verb ratio = narrative/eventful; high adjective ratio = descriptive/static
+
 ### Scoring Details
 
-- Each classifier produces a raw score based on marker density (marker hits / sentence length in words). Multi-word markers (e.g. "at that moment") count as one hit regardless of their word length.
+- Each classifier combines lexical marker hits with spaCy-derived tense/POS features. Lexical and tense signals are weighted equally by default.
+- Each classifier produces a raw score based on combined marker density and tense/POS features, normalised per sentence length.
 - Raw scores are normalised to sum to 1.0 across the five non-dialogue categories.
 - For ambiguous sentences with no strong markers, scores will tend toward uniform distribution. This is acceptable — the smoothing step absorbs this noise.
 - The lexicon is versioned (`lexicon_version` field in JSON output) to allow iterative refinement.
@@ -260,8 +291,8 @@ The Ghosh cross-reference — what the novels screen out.
 ## Dependencies
 
 Python standard library plus:
+- `spacy` + `en_core_web_sm` model — POS tagging, tense detection, sentence segmentation, dependency parsing
 - `scipy.signal.savgol_filter` — for Savitzky-Golay smoothing
-- No other external dependencies. Sentence segmentation and classification are rule-based using stdlib `re`.
 
 ## File Inventory
 
