@@ -1,5 +1,6 @@
-"""Tests for narrative_pace_classify.py — dialogue classifier (Task 3) and
-singulative/iterative/description classifiers (Task 4)."""
+"""Tests for narrative_pace_classify.py — dialogue classifier (Task 3),
+singulative/iterative/description classifiers (Task 4), and FID/commentary
+classifiers and epistolary flag (Task 5)."""
 
 import sys
 from pathlib import Path
@@ -146,3 +147,64 @@ class TestDescriptionDetection:
         doc = NLP("The ancient grey stone walls were cold and damp and dark.")
         result = classify_sentence(doc)
         assert result["description"] > result["singulative"]
+
+
+class TestFIDDetection:
+    def test_exclamatory_without_quotes(self):
+        doc = NLP("How delightful was the prospect before her!")
+        result = classify_sentence(doc)
+        assert result["dominant_category"] == "fid"
+
+    def test_interrogative_without_quotes(self):
+        doc = NLP("Was she then to endure this insupportable treatment?")
+        result = classify_sentence(doc)
+        assert result["fid"] > result["commentary"]
+
+    def test_evaluative_adjectives(self):
+        doc = NLP("The scene was indeed charming, and the company agreeable beyond measure.")
+        result = classify_sentence(doc)
+        assert result["fid"] > 0.1
+
+    def test_deictic_shift(self):
+        doc = NLP("She would go there tomorrow, and nothing could prevent her now.")
+        result = classify_sentence(doc)
+        assert result["fid"] > result["singulative"]
+
+    def test_prodigious_as_intensifier(self):
+        doc = NLP("It was a prodigious fine evening and she was monstrous pleased.")
+        result = classify_sentence(doc)
+        assert result["fid"] > result["description"]
+
+
+class TestCommentaryDetection:
+    def test_reader_address(self):
+        doc = NLP("The reader will not be surprised to learn that she was disappointed.")
+        result = classify_sentence(doc)
+        assert result["dominant_category"] == "commentary"
+
+    def test_first_person_plural(self):
+        doc = NLP("We must leave our heroine for a moment to explain the circumstances.")
+        result = classify_sentence(doc)
+        assert result["commentary"] > result["singulative"]
+
+    def test_moral_generalisation(self):
+        doc = NLP("Virtue is the only sure foundation of honour and esteem in this world.")
+        result = classify_sentence(doc)
+        assert result["commentary"] > result["description"]
+
+    def test_present_tense_maxim(self):
+        doc = NLP("A woman of delicacy never forgives an affront to her sensibility.")
+        result = classify_sentence(doc)
+        assert result["commentary"] > result["fid"]
+
+
+class TestEpistolaryFlag:
+    def test_present_tense_without_flag_is_commentary(self):
+        doc = NLP("I sit now by the fire and write to you of all that has passed.")
+        result = classify_sentence(doc, epistolary=False)
+        assert result["commentary"] >= result["singulative"]
+
+    def test_present_tense_with_flag_is_singulative(self):
+        doc = NLP("I sit now by the fire and write to you of all that has passed.")
+        result = classify_sentence(doc, epistolary=True)
+        assert result["singulative"] >= result["commentary"]
