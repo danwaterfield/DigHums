@@ -56,22 +56,24 @@ Lexicon-based, operating at sentence level. Dialogue is detected first and exclu
 
 **1. Dialogue**
 - Primary: text enclosed in quotation marks (straight or curly), or following em-dash speech conventions
-- Secondary: speech verb proximity ("said", "cried", "replied", "answered", "exclaimed", "whispered", "observed", "returned")
+- Secondary: speech verb proximity. Full period-verified list (ranked by corpus frequency): "said", "cried" (= exclaimed, not wept), "answered", "returned" (= replied; archaic but 4th most common in corpus), "replied", "continued" (= went on speaking), "added", "repeated", "interrupted", "declared", "exclaimed", "demanded" (= asked/inquired in 18c, not modern "insisted"), "pursued" (= continued speaking; period-specific, now archaic), "resumed" (= began speaking again), "entreated", "whispered", "observed" (= remarked; weight as speech verb near quotation marks), "inquired", "rejoined" (= replied to a reply), "ejaculated" (= exclaimed suddenly; no sexual connotation in 18c)
 - Binary: a sentence is either dialogue or not. If dialogue, the other five categories are not scored.
 
 **2. Singulative narration** — unique events told once
-- Temporal rupture adverbs: "suddenly", "at once", "at that moment", "immediately", "instantly", "in a moment", "without warning"
+- Temporal rupture adverbs: "suddenly", "at once", "at that moment", "immediately", "instantly", "in a moment", "without warning", "presently" (= immediately/soon in 18c, NOT "currently"), "directly" (= immediately in 18c, NOT directionally), "on a sudden", "in a trice", "ere long"
 - Simple past tense action verbs (high-agency: "seized", "ran", "threw", "struck", "fled", "entered", "discovered")
 - Unique temporal markers: "that evening", "the next morning", "on Tuesday" (specific, not habitual)
 - Exclamatory constructions (without speech marks)
 - New proper noun introductions
+- Period-specific archaic temporals: "ere" (= before), "betimes" (= early), "by and by" (= soon)
 
 **3. Iterative narration** — habitual/repeated events
 - Habitual "would" (not conditional): "she would often", "he would every morning"
-- "used to", "was accustomed to", "was wont to"
+- "used to", "was accustomed to", "was wont to" (valid but low frequency — 17 instances vs 735 for "used to")
 - Frequency adverbs: "every", "often", "always", "never", "usually", "generally", "commonly", "frequently", "daily", "nightly", "each morning"
 - Generic plurals in subject position ("the ladies would...", "visitors were always...")
 - Imperfect/habitual constructions
+- "ever and anon" (= from time to time; archaic but period-specific)
 
 **4. Description** — static scene-setting
 - Copular verb + adjective chains ("the room was large and handsomely furnished")
@@ -85,16 +87,32 @@ Lexicon-based, operating at sentence level. Dialogue is detected first and exclu
 - Exclamatory syntax without speech marks: "How delightful!", "What a noble prospect!"
 - Interrogative syntax without speech marks: "Was she to endure this?"
 - Deictic shift: "here", "now", "this", "tomorrow", "yesterday" appearing in past-tense narration (proximal deictics in distal tense context)
-- Evaluative adjectives/adverbs expressing character judgment: "charming", "odious", "insufferable", "delightful", "wretched"
-- Epistemic hedges in narration: "perhaps", "surely", "certainly", "no doubt"
+- Evaluative adjectives/adverbs expressing character judgment (period-verified, ranked by corpus frequency): "cruel", "dreadful", "charming" (stronger than modern — closer to "enchanting"), "agreeable"/"disagreeable" (the period's standard social judgment pair), "amiable" (= worthy of love, not merely "friendly"), "wretched", "shocking", "odious", "delightful", "barbarous", "horrid" (used as colloquial intensifier), "insufferable", "divine" (exclamatory hyperbole), "unaccountable" (= inexplicable; period-specific bewilderment marker), "insupportable" (= unbearable; now archaic), "prodigious" (used as intensifying adverb = "extremely"), "monstrous" (likewise used as adverb = "extremely")
+- Epistemic hedges in narration: "indeed" (5,345 corpus instances — most common hedge by far), "perhaps", "surely" (stronger assertive force in 18c — signals character's emotional conviction), "certainly", "truly", "no doubt", "doubtless", "I dare say", "it seemed"
 
 **6. Commentary** — narrator's own voice
 - First-person-plural: "we", "our", "us" (narrator + reader)
 - Direct reader address: "reader", "the reader will..."
 - Generalising nouns: "mankind", "the world", "a woman", "every man"
 - Present-tense maxims and generalisations
-- Moral/philosophical vocabulary: "virtue", "prudence", "duty", "honour"
+- Moral/philosophical vocabulary (period-verified): "honour" (gendered: male = public reputation; female = chastity), "virtue", "duty", "tenderness" (key sensibility term, = emotional responsiveness), "gratitude" (morally loaded; could shade into romantic obligation), "esteem" (= serious moral approval, rational counterpart to love), "prudence" (ambivalent: practical self-interest, especially in marriage), "delicacy" (gendered: refined moral/sexual sensitivity), "sensibility" (= capacity for refined emotional response, NOT "good sense"), "propriety", "fortitude" (feminine ideal of endurance), "benevolence" (Shaftesburian natural virtue), "compassion", "modesty", "discretion", "condescension" (POSITIVE in 18c = gracious lowering of a superior; NOT modern pejorative)
 - Subjunctive constructions
+
+### Period False Friends — Words Excluded From Markers
+
+The following common 18c words have shifted meaning substantially and must NOT be used with modern senses as classification markers:
+
+| Word | Corpus count | 18c meaning | Modern meaning | Risk if misused |
+|------|-------------|-------------|----------------|-----------------|
+| sensible | ~520 | "aware of, capable of feeling" | "practical, rational" | Misclassifies sensibility as rationality |
+| nice | ~171 | "precise, fastidious, delicate" | "pleasant, kind" | Inverts valence |
+| awful | ~128 | "awe-inspiring, sublime" | "terrible, bad" | Inverts valence |
+| romantic | ~209 | "fanciful, unrealistic" (often pejorative) | "relating to love" | Misclassifies irony as sincerity |
+| enthusiasm | ~93 | "religious fanaticism" (pejorative) | "eager interest" (positive) | Inverts valence |
+| indifferent | ~317 | "impartial, of no consequence" | "uncaring" | False negative affect |
+| impertinent | ~211 | "irrelevant, not pertaining" | "rude" | Misclassifies register |
+| nervous | ~15 | "sinewy, vigorous" | "anxious" | Inverts meaning entirely |
+| liberal | ~88 | "generous, free-giving" | "politically left" | Anachronistic classification |
 
 ### Scoring Details
 
