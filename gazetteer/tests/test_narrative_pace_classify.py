@@ -1,4 +1,5 @@
-"""Tests for narrative_pace_classify.py — dialogue classifier (Task 3)."""
+"""Tests for narrative_pace_classify.py — dialogue classifier (Task 3) and
+singulative/iterative/description classifiers (Task 4)."""
 
 import sys
 from pathlib import Path
@@ -45,15 +46,10 @@ class TestDialogueDetection:
 
 
 class TestNonDialoguePlaceholders:
-    def test_non_dialogue_all_scores_0_2(self):
+    def test_non_dialogue_is_not_dialogue(self):
         doc = NLP("She walked slowly toward the window.")
         result = classify_sentence(doc)
         assert result["is_dialogue"] is False
-        assert result["singulative"] == pytest.approx(0.2)
-        assert result["iterative"] == pytest.approx(0.2)
-        assert result["description"] == pytest.approx(0.2)
-        assert result["fid"] == pytest.approx(0.2)
-        assert result["commentary"] == pytest.approx(0.2)
 
     def test_non_dialogue_scores_sum_to_1(self):
         doc = NLP("He opened the letter and read it twice.")
@@ -86,7 +82,7 @@ class TestReturnShape:
     def test_dominant_category_non_dialogue_placeholder(self):
         doc = NLP("The sky was perfectly clear that morning.")
         result = classify_sentence(doc)
-        # With uniform 0.2 scores the dominant category should be one of the five
+        # dominant category should be one of the five
         valid = {"singulative", "iterative", "description", "fid", "commentary"}
         assert result["dominant_category"] in valid
 
@@ -94,3 +90,59 @@ class TestReturnShape:
         doc = NLP("I write to you from Bath.")
         result = classify_sentence(doc, epistolary=True)
         assert "is_dialogue" in result
+
+
+class TestSingulativeDetection:
+    def test_sudden_action(self):
+        doc = NLP("Suddenly she seized the letter and fled the room.")
+        result = classify_sentence(doc)
+        assert result["dominant_category"] == "singulative"
+
+    def test_temporal_rupture(self):
+        doc = NLP("At that moment Lord Orville entered.")
+        result = classify_sentence(doc)
+        assert result["singulative"] > result["iterative"]
+
+    def test_presently_as_immediacy(self):
+        doc = NLP("He presently returned with a book.")
+        result = classify_sentence(doc)
+        assert result["singulative"] > result["iterative"]
+
+    def test_directly_as_immediacy(self):
+        doc = NLP("She directly quitted the room.")
+        result = classify_sentence(doc)
+        assert result["singulative"] > result["iterative"]
+
+
+class TestIterativeDetection:
+    def test_habitual_would(self):
+        doc = NLP("She would often walk in the garden of a morning.")
+        result = classify_sentence(doc)
+        assert result["dominant_category"] == "iterative"
+
+    def test_used_to(self):
+        doc = NLP("He used to visit every Tuesday without fail.")
+        result = classify_sentence(doc)
+        assert result["iterative"] > result["singulative"]
+
+    def test_frequency_adverbs(self):
+        doc = NLP("Every evening the family assembled in the parlour.")
+        result = classify_sentence(doc)
+        assert result["iterative"] > result["singulative"]
+
+
+class TestDescriptionDetection:
+    def test_copular_adjective(self):
+        doc = NLP("The room was large and handsomely furnished with velvet curtains.")
+        result = classify_sentence(doc)
+        assert result["dominant_category"] == "description"
+
+    def test_spatial_prepositions(self):
+        doc = NLP("Above the mantelpiece hung a portrait, and beneath it stood a marble table.")
+        result = classify_sentence(doc)
+        assert result["description"] > result["singulative"]
+
+    def test_high_adjective_density(self):
+        doc = NLP("The ancient grey stone walls were cold and damp and dark.")
+        result = classify_sentence(doc)
+        assert result["description"] > result["singulative"]
