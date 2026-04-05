@@ -1,0 +1,104 @@
+{
+  "novels": [
+    {
+      "id": "burney_evelina_1778",
+      "author": "burney",
+      "title": "Evelina",
+      "year": 1778,
+      "genre": "epistolary",
+      "word_count": 123456,
+      "sentence_count": 5432,
+      "volume_boundaries": [],
+      "arc": {
+        "positions": [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+        "dialogue": [0.3, 0.25, 0.28, 0.32, 0.27, 0.30, 0.35, 0.29, 0.31, 0.26, 0.28],
+        "singulative": [0.25, 0.30, 0.28, 0.24, 0.29, 0.26, 0.22, 0.27, 0.25, 0.30, 0.27],
+        "iterative": [0.10, 0.12, 0.11, 0.09, 0.13, 0.11, 0.10, 0.12, 0.11, 0.10, 0.11],
+        "description": [0.20, 0.18, 0.19, 0.21, 0.17, 0.19, 0.20, 0.18, 0.19, 0.20, 0.19],
+        "fid": [0.08, 0.07, 0.08, 0.08, 0.07, 0.07, 0.07, 0.08, 0.07, 0.08, 0.08],
+        "commentary": [0.07, 0.08, 0.06, 0.06, 0.07, 0.07, 0.06, 0.06, 0.07, 0.06, 0.07]
+      },
+      "summary": {
+        "dialogue": 0.29,
+        "singulative": 0.27,
+        "iterative": 0.11,
+        "description": 0.19,
+        "fid": 0.07,
+        "commentary": 0.07
+      }
+    },
+    {
+      "id": "radcliffe_mysteries_of_udolpho_1794",
+      "author": "radcliffe",
+      "title": "The Mysteries of Udolpho",
+      "year": 1794,
+      "genre": "gothic",
+      "word_count": 195000,
+      "sentence_count": 8100,
+      "volume_boundaries": [0.25, 0.5, 0.75],
+      "arc": {
+        "positions": [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+        "dialogue": [0.15, 0.18, 0.14, 0.16, 0.15, 0.17, 0.16, 0.14, 0.15, 0.16, 0.15],
+        "singulative": [0.20, 0.22, 0.25, 0.21, 0.23, 0.20, 0.22, 0.24, 0.21, 0.22, 0.21],
+        "iterative": [0.08, 0.07, 0.09, 0.08, 0.07, 0.08, 0.09, 0.08, 0.07, 0.08, 0.08],
+        "description": [0.40, 0.35, 0.33, 0.37, 0.36, 0.37, 0.35, 0.36, 0.38, 0.36, 0.37],
+        "fid": [0.10, 0.11, 0.12, 0.10, 0.11, 0.10, 0.10, 0.11, 0.12, 0.10, 0.11],
+        "commentary": [0.07, 0.07, 0.07, 0.08, 0.08, 0.08, 0.08, 0.07, 0.07, 0.08, 0.08]
+      },
+      "summary": {
+        "dialogue": 0.16,
+        "singulative": 0.22,
+        "iterative": 0.08,
+        "description": 0.37,
+        "fid": 0.11,
+        "commentary": 0.08
+      }
+    },
+    {
+      "id": "fielding_tom_jones_1749",
+      "author": "fielding",
+      "title": "Tom Jones",
+      "year": 1749,
+      "genre": "picaresque",
+      "word_count": 340000,
+      "sentence_count": 14500,
+      "volume_boundaries": [0.17, 0.33, 0.50, 0.67, 0.83],
+      "arc": {
+        "positions": [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+        "dialogue": [0.20, 0.22, 0.24, 0.21, 0.23, 0.22, 0.21, 0.23, 0.22, 0.21, 0.22],
+        "singulative": [0.22, 0.20, 0.21, 0.23, 0.21, 0.22, 0.23, 0.21, 0.22, 0.23, 0.22],
+        "iterative": [0.12, 0.11, 0.13, 0.12, 0.11, 0.12, 0.13, 0.11, 0.12, 0.13, 0.12],
+        "description": [0.18, 0.20, 0.19, 0.17, 0.19, 0.18, 0.17, 0.19, 0.18, 0.17, 0.18],
+        "fid": [0.06, 0.07, 0.06, 0.07, 0.07, 0.06, 0.06, 0.07, 0.06, 0.06, 0.07],
+        "commentary": [0.22, 0.20, 0.17, 0.20, 0.19, 0.20, 0.20, 0.19, 0.20, 0.20, 0.19]
+      },
+      "summary": {
+        "dialogue": 0.22,
+        "singulative": 0.22,
+        "iterative": 0.12,
+        "description": 0.18,
+        "fid": 0.06,
+        "commentary": 0.20
+      }
+    }
+  ],
+  "environmental": [
+    {"decade": 1660, "smell": 25, "smoke": 7, "pollution": 32, "total": 57},
+    {"decade": 1670, "smell": 27, "smoke": 8, "pollution": 35, "total": 62},
+    {"decade": 1680, "smell": 28, "smoke": 9, "pollution": 37, "total": 65},
+    {"decade": 1690, "smell": 26, "smoke": 9, "pollution": 35, "total": 61},
+    {"decade": 1700, "smell": 30, "smoke": 10, "pollution": 40, "total": 70},
+    {"decade": 1710, "smell": 32, "smoke": 11, "pollution": 43, "total": 75},
+    {"decade": 1720, "smell": 33, "smoke": 12, "pollution": 45, "total": 78},
+    {"decade": 1730, "smell": 35, "smoke": 13, "pollution": 48, "total": 83},
+    {"decade": 1740, "smell": 37, "smoke": 14, "pollution": 51, "total": 88},
+    {"decade": 1750, "smell": 38, "smoke": 15, "pollution": 53, "total": 91},
+    {"decade": 1760, "smell": 40, "smoke": 16, "pollution": 56, "total": 96},
+    {"decade": 1770, "smell": 42, "smoke": 18, "pollution": 60, "total": 102},
+    {"decade": 1780, "smell": 43, "smoke": 19, "pollution": 62, "total": 105},
+    {"decade": 1790, "smell": 44, "smoke": 20, "pollution": 64, "total": 108},
+    {"decade": 1800, "smell": 45, "smoke": 22, "pollution": 67, "total": 112},
+    {"decade": 1810, "smell": 44, "smoke": 23, "pollution": 67, "total": 111}
+  ],
+  "lexicon_version": "1.0"
+}
