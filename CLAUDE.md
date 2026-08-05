@@ -1,76 +1,87 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to coding agents working in this repository.
 
 ## Repository Overview
 
-This is a digital humanities text corpus containing 18th and early 19th-century English novels sourced from Project Gutenberg. The repository contains plain text files organized by author, intended for literary analysis, computational text studies, or teaching purposes.
+This repository now has three connected layers:
 
-## Corpus Structure
+1. A root literary corpus of eighteenth- and early nineteenth-century texts.
+2. `burney-attribution/`, a machine-learning authorship-attribution project.
+3. `gazetteer/`, a historical-geography and sensory-evidence project.
 
-```
-DigHums/
-├── JaneAusten/          # 1 novel
-├── FrancesBurney/       # 4 novels (some multi-volume)
-├── AnnRadcliffe/        # 6 novels (expanded 2025-02-10)
-├── MariaEdgeworth/      # 1 novel
-├── HenryFielding/       # 1 novel
-├── SamuelRichardson/    # 1 novel
-├── TobiasSmollett/      # 2 novels
-├── CharlotteSmith/      # 1 novel (added 2025-02-10)
-├── ElizaHaywood/        # 1 novel (added 2025-02-10)
-├── ClaraReeve/          # 1 novel (added 2025-02-10)
-├── HoraceWalpole/       # 1 novel (added 2025-02-10)
-├── MGLewis/             # 1 novel (added 2025-02-10)
-└── WilliamBeckford/     # 1 novel (added 2025-02-10)
-```
+Do not treat the repository as a static text dump only. Several checked-in data
+files and generated outputs are now part of the working project state.
 
-**Total: 13 authors, 28+ texts, ~19 MB**
+## Canonical Sources
 
-## Text File Format
+When accuracy matters, prefer these files over older prose documentation:
 
-All texts are Project Gutenberg eBooks in UTF-8 plain text format (.txt). Each file includes:
-- Project Gutenberg license header at the beginning
-- Original publication metadata (author, title, release date)
-- Full text of the novel
-- Project Gutenberg footer at the end
+- `burney-attribution/data/metadata_v2.csv`
+  Canonical list of fiction texts currently used by the attribution pipeline
+  and by `gazetteer/extract_fiction.py`.
+- `burney-attribution/data/metadata.csv`
+  Legacy 7-author metadata used by the older attribution workflow.
+- `gazetteer/venues.csv`
+  Canonical venue list.
+- `gazetteer/sources_catalog.csv`
+  Canonical non-fiction source catalog for the gazetteer.
+- `gazetteer/events.csv`, `gazetteer/event_venues.csv`,
+  `gazetteer/event_instances.csv`
+  Canonical event definitions and links.
 
-Note: FrancesBurney/CeciliaVol1.docx is in Word format and should be converted to .txt to match the corpus standard.
+## Corpus Layout
 
-## Working with This Corpus
+The root of the repository currently contains 15 author directories. Not every
+text present there is wired into the current code.
 
-When adding new texts:
-- Maintain the author-based directory structure
-- Use .txt format (UTF-8 encoding)
-- Preserve Project Gutenberg headers and footers
-- Name files using the novel title in PascalCase (e.g., PrideAndPrejudice.txt)
-- For multi-volume novels, append "Vol" + number (e.g., TheWandererVol1.txt)
+### Root Literary Holdings
 
-When analyzing texts:
-- Skip or filter out Project Gutenberg boilerplate (before "*** START OF" and after "*** END OF")
-- Be aware that some novels span multiple files (Cecilia, The Wanderer)
-- File sizes range from 268KB to 6.3MB per directory
+- Mostly Project Gutenberg `.txt` files.
+- Multi-volume works remain split by volume.
+- `FrancesBurney/CeciliaVol1.docx` is a duplicate-format artifact; `.txt`
+  remains the corpus standard.
+- `FrancesSheridan/`, `HenryMackenzie/`, and
+  `SamuelRichardson/SirCharlesGrandison_Vol4.txt` are supplemental holdings and
+  are not currently represented in `metadata_v2.csv`.
 
-## Corpus Focus
+### Supplemental Non-Fiction
 
-The collection emphasizes the development of the English novel during its formative period, with particular attention to women writers (Burney, Radcliffe, Austen, Edgeworth, Smith, Haywood, Reeve) and Gothic fiction. This corpus is suitable for:
-- **Authorship attribution** (especially anonymous/"By a Lady" publications)
-- Stylometric analysis
-- Character network analysis
-- Sentiment analysis
-- Comparative studies of 18th-century narrative techniques
-- Gender and authorship studies
-- Gothic vs. domestic novel stylistic comparison
+- `nonfiction/FrancesBurney/` contains three diary-and-letters volumes.
+- The gazetteer has a separate non-fiction corpus under `gazetteer/sources/`.
+  Do not conflate the two without checking the relevant catalogs.
 
-## Anonymous Attribution Testing
+## Working With Texts
 
-Many texts in this corpus were originally published anonymously, making them ideal for testing authorship attribution models:
-- **Frances Burney** - *Evelina* (1778): "By a Lady"
-- **Ann Radcliffe** - *Castles of Athlin and Dunbayne* (1789): Completely anonymous
-- **Ann Radcliffe** - *A Sicilian Romance* (1790): "By the Authoress of..."
-- **Maria Edgeworth** - *Castle Rackrent* (1800): Anonymous
-- **Horace Walpole** - *Castle of Otranto* (1764): "By Onuphrio Muralto"
-- **Eliza Haywood** - *Love in Excess* (1719-20): Initially anonymous
-- **William Beckford** - *Vathek* (1786): Anonymous English edition
+When reading or processing corpus texts:
 
-See `CORPUS_CATALOG.md` for complete attribution details.
+- Strip Project Gutenberg boilerplate before analysis.
+- Expect multi-volume works for Burney, Radcliffe, Fielding, and Richardson.
+- Use the metadata files rather than raw directory listings to determine what
+  the modeling code currently expects.
+
+## Working With Attribution Results
+
+The repository contains both legacy and current evaluation regimes.
+
+- Legacy v1:
+  `burney-attribution/scripts/train_bert.py` and related outputs use chunk-level
+  splits within works, overlapping windows, and the 7-author metadata file.
+- Current v2:
+  `burney-attribution/scripts/train_bert_v2.py` uses work-level splits,
+  non-overlapping chunks, and `metadata_v2.csv`.
+
+When discussing performance, explicitly distinguish between them. The older
+99.9% chunk-level result is not directly comparable to the newer work-level
+holdout result.
+
+## Working With The Gazetteer
+
+`gazetteer/` is a code-and-data project, not just a static map export.
+
+- `sensory.db` is a checked-in SQLite evidence store used by the HTML builders.
+- The HTML files are generated deliverables and convenient previews.
+- The authoritative structured inputs are the Python scripts and CSV catalogs.
+
+If counts in markdown files disagree with the database or CSVs, trust the
+structured data and update the docs.

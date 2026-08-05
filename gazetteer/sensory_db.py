@@ -101,10 +101,11 @@ CREATE TABLE IF NOT EXISTS env_mortality (
 );
 
 CREATE TABLE IF NOT EXISTS env_smoke (
-    decade_start INTEGER PRIMARY KEY,
-    coal_tons_k  REAL,
-    so2_index    REAL,
-    source       TEXT
+    decade_start    INTEGER PRIMARY KEY,
+    coal_tons_k     REAL,
+    so2_index       REAL,
+    emission_factor REAL,
+    source          TEXT
 );
 """
 

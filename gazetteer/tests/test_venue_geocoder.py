@@ -8,6 +8,8 @@ VENUES = [
      "lat": "51.4882", "lon": "-0.1228"},
     {"id": "LON006", "name": "Theatre Royal Drury Lane",
      "lat": "51.5133", "lon": "-0.1226"},
+    {"id": "BAT003", "name": "The Pump Room",
+     "lat": "51.3814", "lon": "-2.3594"},
 ]
 
 def test_vauxhall_passage():
@@ -25,5 +27,30 @@ def test_no_venue_returns_none():
 def test_drury_lane_passage():
     text = "We secured a box at Drury Lane and the noise of the pit was deafening."
     result = geocode_passage(text, "noise of the pit was deafening", VENUES)
+    assert result is not None
+    assert result["venue_id"] == "LON006"
+
+
+def test_city_filtered_supplement_alias_for_bath():
+    text = "We reached Bath by noon, and at the Pump the air felt oppressively warm."
+    result = geocode_passage(
+        text,
+        "air felt oppressively warm",
+        VENUES,
+        primary_cities="Bath",
+    )
+    assert result is not None
+    assert result["venue_id"] == "BAT003"
+
+
+def test_anchor_pos_bypasses_passage_lookup():
+    text = "We secured a box at Drury Lane and the noise of the pit was deafening."
+    anchor_pos = text.index("noise")
+    result = geocode_passage(
+        text,
+        "not actually present",
+        VENUES,
+        anchor_pos=anchor_pos,
+    )
     assert result is not None
     assert result["venue_id"] == "LON006"

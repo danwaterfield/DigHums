@@ -374,3 +374,90 @@ AUTHOR_WROBERTSON,William Robertson,author,member_of,VENUE_EDIN009,University of
 ,Edmund Burke,person,rival_of,,Lord North,person,1774,walpole_last_journals
 ,Charles James Fox,person,friend_of,,R.B. Sheridan,person,1780,walpole_last_journals
 ,R.B. Sheridan,person,rival_of,,William Pitt,person,1783,walpole_last_journals
+,Frances Burney,person,friend_of,,Hester Chapone,person,1782,burney_journal_articles — McCartney BJ17
+,Frances Burney,person,friend_of,,Germaine de Stael,person,1793,burney_journal_articles — McCartney BJ17
+,Frances Burney,person,witness_at,,Warren Hastings trial,event,1788,burney_journal_articles — Wallace BJ15
+,Frances Burney,person,friend_of,,Warren Hastings,person,1786,burney_journal_articles — Wallace BJ15
+,Frances Burney,person,friend_of,,William Windham,person,1788,burney_journal_articles — Wallace BJ15
+,Frances Burney,person,acquaintance_of,,Elizabeth Pleydell,person,1769,burney_journal_articles — Wallace BJ15
+,Frances Burney,person,acquaintance_of,,Lord George Pigot,person,1769,burney_journal_articles — Wallace BJ15
+,Charles Burney Sr,person,patron_client,,Earl of Sandwich,person,1771,burney_journal_articles — Hudson BJ16
+,Charles Burney Sr,person,patron_client,,Elizabeth Montagu,person,1773,burney_journal_articles — Hudson BJ16
+,Frances Burney,person,friend_of,,Mary Delany,person,1783,burney_journal_articles — McCartney BJ17
+,Mary Delany,person,patron_of,,Frances Burney,person,1786,burney_journal_articles — Hudson BJ16 + Zionkowski BJ16
+,Frances Burney,person,colleague_of,,Elizabeth Juliana Schwellenberg,person,1786,burney_journal_articles — Zionkowski BJ16
+,Frances Burney,person,acquaintance_of,,Omai,person,1774,burney_journal_articles — Zionkowski BJ16
+,Frances Burney,person,acquaintance_of,,Count Alexei Orlov,person,1774,burney_journal_articles — Zionkowski BJ16
+,Frances Burney,person,acquaintance_of,,Lucrezia Agujari,person,1775,burney_journal_articles — Zionkowski BJ16
+,Frances Burney,person,friend_of,,Stephen Digby,person,1786,burney_journal_articles — Zionkowski BJ16
+,Charlotte Broome,person,married,,Clement Francis,person,1786,burney_journal_articles — Wallace BJ15
+,Charlotte Broome,person,married,,Ralph Broome,person,1798,burney_journal_articles — Wallace BJ15
+,Clement Francis,person,served_under,,Warren Hastings,person,1782,burney_journal_articles — Wallace BJ15
+,James Burney,person,sailed_with,,Captain Cook,person,1772,burney_journal_articles — Zionkowski BJ16
+,Germaine de Stael,person,friend_of,,Charles-Maurice de Talleyrand-Perigord,person,1788,known_connection — Juniper Hall circle
+,Germaine de Stael,person,friend_of,,Marquis de Lally-Tollendal,person,1793,known_connection — Juniper Hall circle
+,Alexandre d'Arblay,person,friend_of,,Marquis de Lally-Tollendal,person,1793,known_connection — Juniper Hall circle; lifelong
+,Alexandre d'Arblay,person,friend_of,,Arnail-Francois de Jaucourt,person,1793,known_connection — Juniper Hall circle
+,Alexandre d'Arblay,person,friend_of,,Princesse d'Hénin,person,1793,known_connection — émigré circle
+,Frederica Locke,person,host_of,,Alexandre d'Arblay,person,1793,known_connection — Norbury Park host to Juniper Hall émigrés
+,Frederica Locke,person,host_of,,Germaine de Stael,person,1793,known_connection — Norbury Park
+,William Locke,person,patron_of,,Alexandre d'Arblay,person,1793,known_connection — granted land for Camilla Cottage
+,Princesse d'Hénin,person,friend_of,,Marquis de Lally-Tollendal,person,1793,known_connection — close companions in exile
+,Madame de Tessé,person,friend_of,,Marquis de Lafayette,person,1789,known_connection — Lafayette's aunt by marriage
+,Frances Burney,person,patient_of,,Dominique-Jean baron Larrey,person,1811,known_connection — mastectomy Sept 1811
+,Frances Burney,person,colleague_of,,Marie-Elisabethe de La Fite,person,1786,known_connection — fellow Court attendant
+,Frances Burney,person,acquaintance_of,,R.B. Sheridan,person,1779,burney_journal_articles — met via Evelina fame; re-encountered at Hastings trial
+,Louis de Narbonne,person,lover_of,,Germaine de Stael,person,1788,known_connection — affair caused Burney to break with de Stael
+,Louis de Narbonne,person,friend_of,,Charles-Maurice de Talleyrand-Perigord,person,1789,known_connection — diplomatic circle
+,Richard Thomas Burney,person,child_of,,Charles Burney Sr,person,1768,known_connection — son by second wife Elizabeth Allen
+,Richard Thomas Burney,person,sibling_of,,Sarah Harriet Burney,person,1772,known_connection — full siblings
+,Richard Thomas Burney,person,half_sibling_of,,Frances Burney,person,1768,known_connection
+,Richard Thomas Burney,person,half_sibling_of,,Charlotte Broome,person,1768,known_connection
+,Richard Thomas Burney,person,half_sibling_of,,James Burney,person,1768,known_connection
+,Richard Thomas Burney,person,married,,Jane Ross Burney,person,1790,known_connection — married Calcutta
+,Richard Thomas Burney,person,father_of,,Henry Burney,person,1792,known_connection — born Calcutta
+,Richard Thomas Burney,person,hosted_by,,Charles Grant,person,1785,known_connection — stayed with Grant household in Calcutta
+,Richard Thomas Burney,person,influenced_by,,David Brown,person,1786,Firminger 1914 — chaplain at Kidderpore
+,Richard Thomas Burney,person,influenced_by,,John Thomas,person,1787,Firminger 1914 — surgeon-missionary at Kidderpore
+,Henry Burney,person,child_of,,Richard Thomas Burney,person,1792,known_connection — born Calcutta
+,Henry Burney,person,served_in,,East India Company,organisation,1807,known_connection — EIC officer from 1807
+,Ralph Broome,person,married,,Charlotte Broome,person,1798,known_connection
+,Ralph Broome,person,father_of,,Miriam Broome,person,1781,known_connection — illegitimate daughter by Indian woman
+,Ralph Broome,person,defender_of,,Warren Hastings,person,1788,known_connection — published in Hastings's defence
+,Clement Francis,person,married,,Charlotte Broome,person,1786,known_connection
+,Clement Francis,person,father_of,,Charlotte Barrett,person,1786,known_connection
+,Clement Francis,person,father_of,,Marianne Francis,person,1790,known_connection
+,Marianne Francis,person,corresponded_with,,Barbara Wilberforce,person,1810,known_connection — evangelical connection to Clapham Sect
+,Charlotte Barrett,person,child_of,,Charlotte Broome,person,1786,known_connection
+,Charlotte Barrett,person,child_of,,Clement Francis,person,1786,known_connection
+,Tysoe Saul Hancock,person,friend_of,,Warren Hastings,person,1759,known_connection — close in Bengal
+,Tysoe Saul Hancock,person,married,,Philadelphia Hancock,person,1753,known_connection — married Cuddalore
+,Tysoe Saul Hancock,person,father_of,,Eliza de Feuillide,person,1761,known_connection — or Hastings was biological father
+,Warren Hastings,person,godfather_of,,Eliza de Feuillide,person,1761,known_connection — settled £10000 trust
+,Eliza de Feuillide,person,married,,Henry Austen,person,1797,known_connection — Jane Austen's brother
+,Charles Grant,person,member_of,,Clapham Sect,organisation,1790,known_connection
+,David Brown,person,married,,Frances Cowley,person,1796,known_connection — daughter of playwright Hannah Cowley
+,James Burney,person,served_at,,Madras,place,1782,known_connection — commanded HMS Bristol; Hughes's squadron
+,James Burney,person,served_at,,Cuddalore,place,1783,known_connection — naval engagement 20 June 1783
+,Henry Burney,person,married,,Janet Bannerman,person,1818,known_connection — married George Town Penang
+,Henry Burney,person,negotiated_treaty_with,,King Rama III,person,1826,known_connection — Burney Treaty 20 Jun 1826
+,Henry Burney,person,resident_at,,Court of Ava,place,1829,known_connection — British Resident 1829-38
+,Henry Burney,person,father_of,,Richard Thomas Burney Jr,person,1835,known_connection — married Bengal 1861
+,James Burney,person,sailed_with,,Captain Cook,person,1772,known_connection — 2nd voyage Adventure; 3rd voyage Discovery
+,James Burney,person,friend_of,,Omai,person,1773,known_connection — taught him English; introduced to Banks and King George III
+,James Burney,person,friend_of,,Joseph Banks,person,1774,known_connection — via Omai introduction and Cook voyages
+,James Burney,person,friend_of,,Charles Lamb,person,1800,known_connection — close friendship; Lamb circle
+,James Burney,person,visited,,Macao,place,1779,known_connection — Cook's 3rd voyage return Dec 1779
+,James Burney,person,commanded,,HMS Bristol,ship,1782,known_connection — 50-gun; convoy to Madras then Cuddalore
+,Richard Thomas Burney,person,educated_at,,Winchester College,institution,1778,known_connection — via Johnson and Thrale patronage
+,Richard Thomas Burney,person,headmaster_of,,Military Orphan School Kidderpore,institution,1790,known_connection — Senior Master/Headmaster c.1790-1808
+,David Brown,person,chaplain_of,,Military Orphan School Kidderpore,institution,1786,known_connection — ran orphanage 1786-88
+,Ralph Broome,person,published,,Letters from Simpkin the Second,work,1788,known_connection — 9 publications defending Hastings 1788-96
+,Ralph Broome,person,married,,Lucy Jeffreys,person,1790,known_connection — first wife; died 1796 Bristol Hot Wells
+,Charles Burney Sr,person,advised,,Lord Macartney,person,1792,known_connection — holograph report on musical band for Chinese embassy (MS at NYPL Berg)
+,Henry Burney,person,collected,,Burney Parabaik manuscripts,collection,1830,known_connection — Burmese manuscripts now at BL India Office; catalogued by Blackmore 1985
+,Henry Burney,person,father_of,,Rev. Henry Bannerman Burney,person,1830,known_connection — vicar of Norton St Philip Somerset
+,Henry Burney,person,father_of,,Susan Allen Burney,person,1823,known_connection — born Penang 12 May 1823
+,Molesworth Phillips,person,sailed_with,,Captain Cook,person,1776,known_connection — marine lt on 3rd voyage; witnessed Cook's death Hawaii 1779
+,Molesworth Phillips,person,friend_of,,James Burney,person,1776,known_connection — met on Cook's 3rd voyage; Phillips married James's sister Susanna 1782
+,Henry Burney,person,referenced_in,,Documenta Nepalica DNA_0001_0032,document,1838,nepalica.hadw-bw.de — as "Major Burney"; Anglo-Burmese frontier diplomacy visible from Nepal

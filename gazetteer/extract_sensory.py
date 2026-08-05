@@ -5,6 +5,10 @@ For each source, scans the text for sensory terms (lexicon-based),
 extracts a context window around each match, geocodes to a venue,
 and writes to the sensory_evidence table.
 
+Sources listed in sources_catalog.csv may optionally carry
+primary_cities metadata so city-filtered aliases can be applied during
+geocoding.
+
 Usage:
     python3 gazetteer/extract_sensory.py            # dry run, print stats
     python3 gazetteer/extract_sensory.py --write    # write to sensory.db
@@ -52,6 +56,28 @@ def strip_gutenberg(text: str) -> str:
     return text.strip()
 
 
+def normalize_source_text(text: str) -> str:
+    """Normalize common OCR glyphs found in scanned early printed texts."""
+    return (text
+            .replace("\u00ad", "")
+            .replace("\ufb00", "ff")
+            .replace("\ufb01", "fi")
+            .replace("\ufb02", "fl")
+            .replace("\ufb03", "ffi")
+            .replace("\ufb04", "ffl")
+            .replace("ſ", "s")
+            .replace("∫", "s")
+            .replace("Æ", "AE")
+            .replace("æ", "ae")
+            .replace("Œ", "OE")
+            .replace("œ", "oe")
+            .replace("\f", "\n"))
+
+
+def _parse_year(value: str) -> int:
+    return int(value) if value else 0
+
+
 def extract_from_text(
     text: str,
     source_id: str,
@@ -95,7 +121,13 @@ def extract_from_text(
             ctx_end   = min(text_len, abs_term_pos + WINDOW_CHARS // 2)
             passage   = text[ctx_start:ctx_end].strip()
 
-            geo = geocode_passage(text, passage, venues, primary_cities=primary_cities)
+            geo = geocode_passage(
+                text,
+                passage,
+                venues,
+                primary_cities=primary_cities,
+                anchor_pos=abs_term_pos,
+            )
 
             pos = round(abs_term_pos / text_len, 4) if text_len > 0 else 0.0
 
@@ -148,7 +180,7 @@ def extract_from_text(
     return results
 
 
-def run(write: bool = False):
+def run(write: bool = False, source_ids: set[str] | None = None):
     venues = load_venues(VENUES_PATH)
     conn   = init_db(DB_PATH_DEFAULT)
 
@@ -161,25 +193,30 @@ def run(write: bool = False):
         if sid == "fiction_corpus":
             print(f"  [skip] fiction_corpus — use extract_fiction.py")
             continue
+        if source_ids and sid not in source_ids:
+            continue
 
         fp = SOURCES_DIR / entry["file_path"]
         if not fp.exists():
             print(f"  [missing] {fp}")
             continue
 
-        text = strip_gutenberg(fp.read_text(encoding="utf-8", errors="replace"))
+        text = normalize_source_text(
+            strip_gutenberg(fp.read_text(encoding="utf-8", errors="replace"))
+        )
         rows = extract_from_text(
             text=text,
             source_id=sid,
             source_type=entry["source_type"],
             author=entry["author"],
             title=entry["title"],
-            pub_year=int(entry["pub_year"]) if entry["pub_year"] else 0,
-            date_min=int(entry["date_min"]) if entry["date_min"] else 0,
-            date_max=int(entry["date_max"]) if entry["date_max"] else 0,
+            pub_year=_parse_year(entry["pub_year"]),
+            date_min=_parse_year(entry["date_min"]),
+            date_max=_parse_year(entry["date_max"]),
             venues=venues,
             conn=conn,
             write=write,
+            primary_cities=entry.get("primary_cities", ""),
         )
         geocoded = sum(1 for r in rows if r["venue_id"])
         print(f"  {sid:30s}  {len(rows):4d} passages  "
@@ -196,5 +233,11 @@ def run(write: bool = False):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--write", action="store_true")
+    parser.add_argument(
+        "--source-id",
+        action="append",
+        default=[],
+        help="Restrict extraction to one or more source_id values from sources_catalog.csv",
+    )
     args = parser.parse_args()
-    run(write=args.write)
+    run(write=args.write, source_ids=set(args.source_id) or None)

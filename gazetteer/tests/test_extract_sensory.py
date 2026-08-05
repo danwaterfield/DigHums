@@ -1,9 +1,12 @@
 import sqlite3
 import sys
 from pathlib import Path
+
 sys.path.insert(0, str(Path(__file__).parent.parent))
+
+import extract_sensory
+from extract_sensory import extract_from_text, WINDOW_CHARS, normalize_source_text
 from sensory_db import init_db
-from extract_sensory import extract_from_text, WINDOW_CHARS
 
 VENUES = [
     {"id": "LON001", "name": "Vauxhall Spring Gardens",
@@ -78,3 +81,57 @@ def test_extract_writes_valence_to_db(tmp_path):
     ).fetchall()
     assert len(rows) > 0
     assert rows[0][0] in ("pleasant", "neutral", "unpleasant")
+
+
+def test_run_uses_primary_cities_from_catalog(tmp_path, monkeypatch):
+    db_path = tmp_path / "sensory.db"
+    sources_dir = tmp_path / "sources"
+    sources_dir.mkdir()
+    (sources_dir / "bath_guide.txt").write_text(
+        "In Bath we repaired to the Pump, where the heat and crowd were oppressive.",
+        encoding="utf-8",
+    )
+
+    catalog_path = tmp_path / "sources_catalog.csv"
+    catalog_path.write_text(
+        "\n".join([
+            "source_id,source_type,author,title,pub_year,date_min,date_max,primary_cities,file_path,notes",
+            "bath_guide,topography,GuideAuthor,Bath Guide,1780,1780,1780,Bath,bath_guide.txt,",
+        ]),
+        encoding="utf-8",
+    )
+
+    venues_path = tmp_path / "venues.csv"
+    venues_path.write_text(
+        "\n".join([
+            "id,name,lat,lon",
+            "BAT003,The Pump Room,51.3814,-2.3594",
+        ]),
+        encoding="utf-8",
+    )
+
+    monkeypatch.setattr(extract_sensory, "SOURCES_DIR", sources_dir)
+    monkeypatch.setattr(extract_sensory, "CATALOG_PATH", catalog_path)
+    monkeypatch.setattr(extract_sensory, "VENUES_PATH", venues_path)
+    monkeypatch.setattr(extract_sensory, "DB_PATH_DEFAULT", db_path)
+
+    extract_sensory.run(write=True)
+
+    conn = sqlite3.connect(db_path)
+    try:
+        rows = conn.execute(
+            "SELECT venue_id FROM sensory_evidence WHERE source_id='bath_guide'"
+        ).fetchall()
+    finally:
+        conn.close()
+
+    assert rows
+    assert any(row[0] == "BAT003" for row in rows)
+
+
+def test_normalize_source_text_rewrites_common_ocr_glyphs():
+    text = "The noiſe in the co\u00adffee houſe and the \ufb01re alarm."
+    normalized = normalize_source_text(text)
+    assert "noise" in normalized
+    assert "coffee" in normalized
+    assert "fire" in normalized

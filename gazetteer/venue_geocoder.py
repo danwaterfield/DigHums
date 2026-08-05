@@ -54,6 +54,7 @@ def geocode_passage(
     venues: list[dict],
     window_words: int = WINDOW_WORDS,
     primary_cities: str = "",
+    anchor_pos: int | None = None,
 ) -> dict | None:
     """
     Return dict with venue_id, venue_name, lat, lon if a venue alias
@@ -62,13 +63,15 @@ def geocode_passage(
 
     primary_cities: used to apply city_filter on aliases (e.g. "London",
     "Bath"). Pass the text's primary_cities field from corpus_dates.csv.
+    anchor_pos: optional absolute character offset to use directly instead of
+    re-locating the passage substring inside full_text.
     """
     cache_key = (id(venues), primary_cities)
     if cache_key not in _alias_map_cache:
         _alias_map_cache[cache_key] = _build_alias_map(venues, primary_cities)
     alias_map = _alias_map_cache[cache_key]
 
-    idx = full_text.find(passage)
+    idx = anchor_pos if anchor_pos is not None else full_text.find(passage)
     if idx == -1:
         anchor = passage[:60]
         idx = full_text.find(anchor)

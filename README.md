@@ -1,214 +1,212 @@
-# 18th-Century English Novel Corpus
+# DigHums
 
-A digital humanities text corpus containing 18th and early 19th-century English novels sourced from Project Gutenberg, with computational authorship attribution research.
+Digital humanities workspace for eighteenth-century fiction, authorship
+attribution, and historical geography.
 
-## Overview
+This repository is no longer just a plain-text corpus. It now contains:
 
-This repository contains:
-1. **Text Corpus**: 28+ novels from 13 authors (1719-1814)
-2. **Authorship Attribution System**: BERT-based deep learning model achieving 99.9% accuracy
-3. **Anonymous Attribution Testing**: Tests on works published "By a Lady" and anonymously
+1. A literary corpus at the repository root.
+2. A machine-learning attribution project in `burney-attribution/`.
+3. A historical-geography and sensory-evidence project in `gazetteer/`.
 
-## Quick Stats
+## Current Repository State
 
-- **13 authors**: Austen, Burney, Radcliffe, Smith, Haywood, Reeve, Edgeworth, Richardson, Fielding, Smollett, Walpole, Lewis, Beckford
-- **28+ texts**: ~4M words total
-- **8 anonymous test cases**: Works originally published anonymously
-- **99.8% accuracy**: BERT correctly identifies authors from anonymous works
+- Root literary holdings: 16 author directories, 56 `.txt` files, and one
+  `.docx` duplicate (`FrancesBurney/CeciliaVol1.docx`).
+- Supplemental material: `nonfiction/FrancesBurney/` contains three diary and
+  letters volumes not currently wired into the modeling pipeline.
+- Canonical modeling corpus: `burney-attribution/data/metadata_v2.csv`
+  defines 14 authors, 34 works, and 53 source files.
+- Gazetteer inputs: `gazetteer/venues.csv` currently lists 99 venues.
+- Checked-in gazetteer database: `gazetteer/sensory.db` currently contains
+  11,831 evidence rows across 458 source IDs, with 20 recurring events and
+  8 dated event instances.
+
+## Canonical Vs. Supplemental Data
+
+The repo contains more text files than the current modeling pipeline uses.
+When accuracy matters, use these rules:
+
+- Treat the root author directories as the raw literary holdings.
+- Treat `burney-attribution/data/metadata_v2.csv` as the source of truth for
+  which fiction texts are currently wired into the attribution and gazetteer
+  fiction pipelines.
+- Treat `burney-attribution/data/metadata.csv`,
+  `burney-attribution/scripts/train_bert.py`, and
+  `burney-attribution/results/test_results.txt` plus
+  `burney-attribution/results/anonymous_attribution_test.json` as legacy v1
+  artifacts from the earlier 7-author experiment.
+- Treat `FrancesSheridan/`, `HenryMackenzie/`,
+  `SamuelRichardson/SirCharlesGrandison_Vol4.txt`, and
+  `nonfiction/FrancesBurney/` as supplemental holdings until they are ingested
+  into `metadata_v2.csv` or another explicit dataset.
 
 ## Repository Structure
 
-```
+```text
 DigHums/
-├── [Author Directories]/     # 13 author folders with texts
-│   ├── JaneAusten/
-│   ├── FrancesBurney/
+├── [Author Directories]/          # Raw literary texts at corpus root
 │   ├── AnnRadcliffe/
-│   └── ... (10 more)
-│
-├── burney-attribution/        # ML authorship attribution project
-│   ├── scripts/               # Training and testing scripts
-│   ├── results/               # Test results (99.9% accuracy)
-│   ├── README.md              # Detailed project documentation
-│   └── ROADMAP.md             # Research phases and future work
-│
-├── gazetteer/                 # Urban geography of 18c fiction
-│   ├── venues.csv             # 95 venues (London + Bath) with coordinates
-│   ├── validate_venues.py     # Corpus scanner and mention extractor
-│   ├── mentions.json          # Aggregate venue data (50 venues, 637 mentions)
-│   ├── narrative_mentions.json # Per-text position-ordered events (24 texts)
-│   ├── build_map.py           # Folium aggregate map builder
-│   ├── map.html               # Interactive aggregate map (open in browser)
-│   ├── build_narrative_map.py # Leaflet narrative path map builder
-│   ├── narrative_map.html     # Interactive narrative path map
-│   └── evelina_narrative.gif  # Animated walkthrough of Evelina's London circuit
-│
-├── CORPUS_CATALOG.md          # Complete text catalog with attribution details
-├── CORPUS_EXPANSION_REPORT.md # Corpus expansion documentation
-└── CLAUDE.md                  # Repository guide for AI assistants
+│   ├── FrancesBurney/
+│   ├── JaneAusten/
+│   └── ... (12 more)
+├── nonfiction/                    # Supplemental non-fiction holdings
+│   └── FrancesBurney/
+├── burney-attribution/            # Authorship attribution project
+│   ├── data/
+│   ├── scripts/
+│   ├── results/
+│   ├── models/
+│   └── README.md
+├── gazetteer/                     # Historical geography + sensory maps
+│   ├── sources/
+│   ├── tests/
+│   ├── venues.csv
+│   ├── sensory.db
+│   └── *.html
+├── docs/plans/                    # Design and implementation plans
+├── CORPUS_CATALOG.md              # Corpus inventory and status notes
+└── CLAUDE.md                      # Repository guide for coding agents
 ```
 
-## Key Features
+## Projects
 
-### 1. Urban Gazetteer & Interactive Maps
+### 1. Root Corpus
 
-A hand-curated gazetteer of 95 venues in London and Bath — pleasure gardens, theatres, assembly rooms, coffee houses, clubs, streets, prisons, markets, rookeries, and execution sites — with mention counts extracted from every text in the corpus.
+The root of the repository holds the source texts: mostly Project Gutenberg
+novels, organized by author. Multi-volume works remain split by volume.
 
-**Aggregate map** (`gazetteer/map.html`): all venues sized by √(mention count), coloured by type, with historical tile layers (Rocque 1746, Horwood 1792–99). Click any marker for a per-text breakdown.
+The corpus now has two practical layers:
 
-**Narrative path map** (`gazetteer/narrative_map.html`): trace how any novel moves through urban space in reading order. A timeline slider steps through the text; a colour gradient (blue → orange) encodes narrative position; marker size encodes cumulative mention count.
+- A broader holdings layer at the repository root.
+- A narrower, structured layer in `burney-attribution/data/metadata_v2.csv`
+  that powers the current code.
 
-![Evelina narrative path map](gazetteer/evelina_narrative.gif)
+See `CORPUS_CATALOG.md` for a breakdown of modeled and supplemental texts.
 
-*Frances Burney, Evelina (1778) — 97 location mentions across 16 venues. Vauxhall Gardens dominates the opening movement; the West End polite circuit fills in at the centre; plebeian counter-venues (White-Conduit House, Bagnigge Wells) cluster north and east as the Branghton subplot develops.*
+### 2. Burney Attribution
 
-### Venue Explorer (`gazetteer/venue_explorer.html`)
+`burney-attribution/` contains the authorship-attribution pipeline: corpus
+ingest, preprocessing, metadata, chunking, model training, and evaluation.
 
-Interactive map of the sensory evidence store. Click any venue to browse assembled
-passages filtered by modality (auditory, olfactory, visual, thermal, crowd), source
-type (fiction, diary, topography, poetry, letters, **legal**), and date range (1660–1820).
+Important evaluation note:
 
-Built from `sensory.db` — 8,515 deduplicated passages across 37+ sources, 981 passages
-geocoded to 57 venues (565 from literary/diary sources via geocoder; 416 from Old Bailey
-Proceedings assigned directly to 19 legal venues). Each passage carries a valence tag
-(`pleasant` / `neutral` / `unpleasant`). Top venues by passage count: City of London (89),
-King's Theatre (74), Ranelagh (43), Vauxhall (34), Bridewell Prison (75), Smithfield (76).
+- Legacy v1 results: the original 7-author experiment used overlapping chunk
+  splits within the same works and achieved 99.9% chunk-level accuracy
+  (`results/test_results.txt`), plus near-perfect anonymous attribution on the
+  checked-in v1 model (`results/anonymous_attribution_test.json`).
+- Current v2 results: `scripts/train_bert_v2.py` switches to work-level splits
+  and non-overlapping chunks. The checked-in work-level holdout result is
+  61.4% chunk accuracy on the subset of authors with multiple works
+  (`results/bert_v2_holdout.json`).
 
-**Phase 2 (Old Bailey)** adds 22 new venue types absent from the literary corpus — prisons,
-courts, markets, rookeries, and execution grounds — sourced from nuisance prosecutions and
-trial transcripts (1660–1820). Legal passages default to `valence=unpleasant` on the
-rationale that prosecution implies a sensory threshold crossed.
+In other words: the repository preserves the striking early result, but the
+more conservative v2 evaluation is the one to cite when discussing
+generalization across works.
 
-To regenerate after updating `sensory.db`:
+### 3. Gazetteer
+
+`gazetteer/` is a separate but related project for mapping urban space,
+sensory evidence, and event intensity across London and Bath.
+
+The pipeline is:
+
+1. Curate venues and sources in CSV.
+2. Extract passages into `sensory.db`.
+3. Attach venues, events, valence, and related metadata.
+4. Render self-contained HTML outputs such as:
+   - `map.html`
+   - `narrative_map.html`
+   - `venue_explorer.html`
+   - `sensory_time_map.html`
+   - `comparison.html`
+   - `gordon_riots.html`
+
+The checked-in HTML files and SQLite database are useful deliverables, but the
+authoritative structured inputs are the Python scripts plus the CSV catalogs.
+
+## Quick Start
+
+### Browse the modeled corpus
+
 ```bash
+python3 - <<'PY'
+import csv
+from collections import defaultdict
+
+works = defaultdict(set)
+with open("burney-attribution/data/metadata_v2.csv", newline="", encoding="utf-8") as f:
+    for row in csv.DictReader(f):
+        works[row["author"]].add(row["title"])
+
+for author in sorted(works):
+    print(author, len(works[author]))
+PY
+```
+
+### Run the current attribution pipeline
+
+```bash
+cd burney-attribution
+python3 scripts/ingest_corpus.py
+python3 scripts/preprocess.py
+python3 scripts/train_bert_v2.py
+```
+
+### Rebuild the gazetteer outputs
+
+```bash
+python3 gazetteer/extract_sensory.py --write
+python3 gazetteer/extract_fiction.py --write
+python3 gazetteer/extract_events.py --write
 python3 gazetteer/build_venue_explorer.py
+python3 gazetteer/build_sensory_time_map.py
 ```
 
-**Selected findings:**
-- Vauxhall Gardens: 53 mentions across 9 texts — the single most-referenced venue in the corpus
-- Harley Street: 25 mentions, Burney and Austen only — same address, same social coding (cold professional ambition) in *Cecilia* and *Sense and Sensibility*
-- Named coffee houses (Will's, Button's, Lloyd's, etc.): zero mentions after 1778 — the coffee house disappears from the novel as a social institution
-- Plebeian venues in *Evelina* cluster as a counter-geography to the polite circuit, encoding class anxiety spatially
+## Key Files
 
-### Sensory Time Map (`gazetteer/sensory_time_map.html`)
+- `CORPUS_CATALOG.md`: corpus inventory, modeled texts, and supplemental texts.
+- `CLAUDE.md`: practical guidance for coding agents working in this repo.
+- `burney-attribution/README.md`: current and legacy attribution workflows.
+- `burney-attribution/ROADMAP.md`: research roadmap for the attribution work.
+- `gazetteer/venues.csv`: curated venue gazetteer.
+- `gazetteer/sources_catalog.csv`: non-fiction source catalog.
+- `gazetteer/correspondence_enrichment_acquisition_matrix.csv`: staged
+  external data matrix for correspondence, person and address enrichment, and
+  economic or social context.
+- `gazetteer/correspondence_enrichment/README.md`: optional workspace for
+  authority IDs, relationships, and address assertions that can enrich the
+  correspondence graph without becoming a build dependency.
+- `gazetteer/events.csv`: recurring event definitions for the time map.
+- `docs/plans/2026-03-23-correspondence-enrichment-acquisition-plan.md`:
+  rights-aware acquisition plan for the correspondence enrichment layer.
 
-Time-parameterised companion to the venue explorer. Set a year (1660–1820),
-month, day-of-week, and time band (Dawn / Morning / Midday / Afternoon /
-Evening / Night); venues respond in real time with intensity overlays drawn
-from a curated dataset of 19+ recurring events — weekly markets, annual fairs,
-execution days, civic processions, and seasonal venue operations.
+## Caveats
 
-Toggle the **literary layer** to overlay textual evidence from `sensory.db`
-at the selected venue for comparison: what the institutional record predicts
-vs. what novelists, diarists, and trial transcripts actually say.
-
-To regenerate:
-
-    python3 gazetteer/extract_events.py --write   # load/refresh events
-    python3 gazetteer/build_sensory_time_map.py   # rebuild HTML
-
-### 2. Comprehensive Corpus
-
-- Balanced representation of **women authors** (7 of 13)
-- Multiple genres: Gothic, Domestic, Epistolary, Picaresque, Amatory
-- Spans formative period of English novel (1719-1814)
-
-### 3. Anonymous Attribution Research
-Many texts were originally published anonymously:
-- Frances Burney - *Evelina* (1778): "By a Lady"
-- Ann Radcliffe - *Castles of Athlin and Dunbayne* (1789): Anonymous
-- Maria Edgeworth - *Castle Rackrent* (1800): Anonymous
-- Horace Walpole - *Castle of Otranto* (1764): "By Onuphrio Muralto"
-
-Our BERT model achieves **99.8% accuracy** identifying these authors from their anonymous works.
-
-### 4. State-of-the-Art ML System
-- Fine-tuned BERT (bert-base-uncased)
-- 99.9% test accuracy on 7-author corpus
-- Stratified train/val/test splitting
-- Robustness testing on out-of-sample authors
-
-## Research Highlights
-
-**Key Finding**: BERT learns authorial style that transcends publication attribution:
-- ✅ Identifies Burney from "By a Lady" publication (100% accuracy)
-- ✅ Identifies Radcliffe from anonymous debut (88% accuracy)
-- ✅ Distinguishes authors within genres (Burney vs Austen)
-
-**Current Limitation**: Model shows genre/author correlation (Gothic → Radcliffe, Domestic → Burney), suggesting it learns both individual style and genre conventions.
-
-## Getting Started
-
-### Using the Corpus
-
-All texts are in UTF-8 plain text format (.txt) from Project Gutenberg:
-
-```bash
-# Example: Read Pride and Prejudice
-cat JaneAusten/PrideAndPrejudice.txt
-
-# List all texts by author
-ls -lh [Author]/*.txt
-```
-
-See `CORPUS_CATALOG.md` for complete text listings with publication dates and attribution status.
-
-### Running the Attribution Model
-
-See `burney-attribution/README.md` for detailed instructions on:
-- Training the BERT model
-- Testing on anonymous works
-- Expanding to 13 authors
-- Reproducing results
-
-## Use Cases
-
-This corpus is suitable for:
-- **Authorship attribution** research
-- **Stylometric analysis**
-- Gender and authorship studies
-- Historical text analysis
-- NLP/ML training datasets
-- Digital humanities pedagogy
-- Comparative literary studies
-
-## Documentation
-
-- `CORPUS_CATALOG.md` - Complete text inventory with attribution details
-- `CORPUS_EXPANSION_REPORT.md` - Details on recent corpus expansion
-- `burney-attribution/README.md` - ML system documentation
-- `burney-attribution/ROADMAP.md` - Research phases and future work
-- `gazetteer/venues.csv` - Hand-curated venue list with coordinates, dates, and notes
-- `CLAUDE.md` - Repository guide and coding conventions
-
-## Citation
-
-If you use this corpus or attribution system in your research, please cite:
-
-```
-Waterfield, D. (2025). 18th-Century English Novel Corpus with BERT Authorship Attribution.
-GitHub repository. https://github.com/[username]/DigHums
-```
+- Counts in older markdown files may reflect the earlier 7-author or 13-author
+  expansion stages rather than the current checked-in repository.
+- Some generated artifacts and local research outputs are committed alongside
+  source files; prefer the structured CSV/Python inputs when deciding what is
+  canonical.
+- `FrancesBurney/CeciliaVol1.docx` is a duplicate format artifact. The `.txt`
+  files remain the corpus standard.
 
 ## License
 
-- **Code**: MIT License (see LICENSE)
-- **Texts**: Public domain via Project Gutenberg
+- Code: MIT (see `burney-attribution/LICENSE`)
+- Literary texts: public domain via Project Gutenberg and other public sources
 
-All literary texts are sourced from Project Gutenberg and are in the public domain. See https://www.gutenberg.org/policy/license.html
+## Citation
+
+If you cite this repository, name the specific layer you used:
+
+- the root corpus,
+- `burney-attribution/`, or
+- `gazetteer/`
+
+and record the commit or snapshot date, since the holdings and checked-in
+artifacts now evolve independently.
 
 ## Author
 
-**Daniel Waterfield**
-- PhD Candidate, History, University of Cambridge
-- Research: 18th-century literature, digital humanities, computational text analysis
-
-## Acknowledgments
-
-- Project Gutenberg for providing public domain texts
-- Anthropic Claude for development assistance
-- Cambridge University History Faculty
-
----
-
-**Status**: Active research project | Phase 3 Complete | 99.8% anonymous attribution accuracy | Urban gazetteer: 95 venues, 637 mentions, 8,515 sensory passages (416 legal), interactive narrative maps, sensory time map with 19+ recurring events
+Daniel Waterfield

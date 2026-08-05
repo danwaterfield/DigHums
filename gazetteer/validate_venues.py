@@ -21,6 +21,7 @@ from collections import defaultdict
 
 
 CORPUS_ROOT = Path(__file__).parent.parent
+ALIAS_SUPPLEMENT_PATH = Path(__file__).with_name("venue_aliases_supplement.csv")
 
 
 def load_venues(path: Path) -> list[dict]:
@@ -384,6 +385,49 @@ VENUE_ALIASES = {
         ("outside Newgate", None),
     ],
 }
+
+
+def _load_alias_supplement(path: Path) -> dict[str, list[tuple[str, str | None]]]:
+    """Load optional venue aliases from a CSV supplement file."""
+    extra_aliases: dict[str, list[tuple[str, str | None]]] = defaultdict(list)
+    if not path.exists():
+        return extra_aliases
+
+    with open(path, newline="", encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            venue_id = (row.get("venue_id") or "").strip()
+            pattern = (row.get("pattern") or "").strip()
+            if not venue_id or not pattern:
+                continue
+            city_filter = (row.get("city_filter") or "").strip() or None
+            extra_aliases[venue_id].append((pattern, city_filter))
+    return extra_aliases
+
+
+def _merge_alias_supplement(
+    base_aliases: dict[str, list[tuple[str, str | None]]],
+    path: Path,
+) -> dict[str, list[tuple[str, str | None]]]:
+    """Append deduplicated supplement aliases to the base alias map."""
+    merged = {venue_id: list(aliases) for venue_id, aliases in base_aliases.items()}
+    seen = {
+        (venue_id, pattern, (city_filter or "").casefold())
+        for venue_id, aliases in merged.items()
+        for pattern, city_filter in aliases
+    }
+
+    for venue_id, aliases in _load_alias_supplement(path).items():
+        dest = merged.setdefault(venue_id, [])
+        for pattern, city_filter in aliases:
+            key = (venue_id, pattern, (city_filter or "").casefold())
+            if key in seen:
+                continue
+            dest.append((pattern, city_filter))
+            seen.add(key)
+    return merged
+
+
+VENUE_ALIASES = _merge_alias_supplement(VENUE_ALIASES, ALIAS_SUPPLEMENT_PATH)
 
 
 def find_mentions(text: str, aliases: list[tuple[str, str | None]],

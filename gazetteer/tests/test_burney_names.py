@@ -244,3 +244,40 @@ def test_amelia_angerstein():
 
 def test_ann_agnew():
     assert normalise("Ann (Astley) Agnew") == "Ann Agnew"
+
+
+def test_uncertainty_marker_cleanup():
+    assert normalise("William Cutler [?]") == "William Cutler"
+    assert normalise("[George Henry Law?]") == "George Henry Law"
+
+
+def test_trailing_note_cleanup():
+    assert normalise("Samuel Crisp (with PS by CB)") == "Samuel Crisp"
+    assert normalise("George Hay (on verso of NYPL(B))") == "George Hay"
+
+
+def test_title_and_suffix_cleanup():
+    assert normalise("Mr. George Crabbe") == "George Crabbe"
+    assert normalise("James Boswell, Esq") == "James Boswell"
+
+
+def test_parenthetical_and_married_name_cleanup():
+    assert normalise("Elizabeth (Allen) Meeke") == "Elizabeth Meeke"
+    assert normalise("Esther (Sleepe) Burney") == "Esther Burney"
+
+
+def test_caroline_princess_variant_cleanup():
+    assert normalise("Caroline, Princess of Wales") == "Princess Caroline"
+    assert (
+        normalise("Caroline, Princess of Wales (per Lady Charlotte Campbell)")
+        == "Princess Caroline"
+    )
+
+
+def test_chapter_prefix_cleanup():
+    assert normalise("ch 22. Rev. Dr. Leland") == "Rev. Dr. Leland"
+
+
+def test_final_ocr_cleanup_labels():
+    assert normalise("('ait.  James Ceib") == "Capt. James Keir"
+    assert normalise("Brigit[a] Piez[e] [Frontoni]") == "Brigita Piez Frontoni"

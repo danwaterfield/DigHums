@@ -1,28 +1,38 @@
-source_id,source_type,author,title,pub_year,date_min,date_max,file_path,notes
-fiction_corpus,fiction,various,18c Novel Corpus,,,,,Existing corpus — scanned via corpus.py
-gay_trivia,poetry,JohnGay,Trivia or the Art of Walking the Streets of London,1716,1716,1716,poetry/Gay_Trivia.txt,Sensory poem about London streets
-defoe_tour,topography,DanielDefoe,Tour Through Great Britain Vol 1,1724,1720,1730,topography/Defoe_TourVol1.txt,Urban survey
-evelyn_fumifugium,topography,JohnEvelyn,Fumifugium,1661,1660,1700,topography/Evelyn_Fumifugium.txt,Pre-period; coal smoke baseline
-pennant_london,topography,ThomasPennant,Of London,1790,1785,1800,topography/Pennant_OfLondon.txt,Late-century survey
-anstey_bath,poetry,ChristopherAnstey,New Bath Guide,1766,1760,1775,poetry/Anstey_NewBathGuide.txt,Bath satire
-burney_diary1,diary,FrancesBurney,Early Diary Vol 1,1889,1768,1778,diary/Burney_DiaryVol1.txt,Published posthumously
-burney_diary2,diary,FrancesBurney,Early Diary Vol 2,1889,1778,1800,diary/Burney_DiaryVol2.txt,Published posthumously
-boswell_life_johnson,diary,JamesBoswell,Life of Johnson,1791,1763,1784,diary/Boswell_LifeOfJohnson.txt,Osgood abridgement; London taverns Fleet St Covent Garden 1760s-80s
-boswell_loj_v1,diary,JamesBoswell,Life of Johnson Vol 1 (Hill ed.),1791,1709,1765,diary/Boswell_LoJ_Vol1.txt,Full Hill scholarly edition; London 1709-1765
-boswell_loj_v2,diary,JamesBoswell,Life of Johnson Vol 2 (Hill ed.),1791,1765,1776,diary/Boswell_LoJ_Vol2.txt,Full Hill scholarly edition; London 1765-1776
-boswell_loj_v3,diary,JamesBoswell,Life of Johnson Vol 3 (Hill ed.),1791,1776,1780,diary/Boswell_LoJ_Vol3.txt,Full Hill scholarly edition; London 1776-1780
-boswell_loj_v4,diary,JamesBoswell,Life of Johnson Vol 4 (Hill ed.),1791,1780,1784,diary/Boswell_LoJ_Vol4.txt,Full Hill scholarly edition; London 1780-1784
-piozzi_anecdotes,diary,HesterPiozzi,Anecdotes of the late Samuel Johnson,1786,1764,1784,diary/Piozzi_AnecdotesOfJohnson.txt,Johnson circle; Streatham Fleet St 1764-84
-piozzi_autobiography,diary,HesterPiozzi,Autobiography Letters and Literary Remains,1861,1741,1821,diary/Piozzi_Autobiography.txt,2-vol memoir covering Thrale circle London Bath
-walpole_letters1,letters,HoraceWalpole,Letters Vol 1,1840,1732,1755,letters/Walpole_LettersVol1.txt,
-walpole_eo_v2,letters,HoraceWalpole,Letters Earl of Orford Vol 2,1857,1749,1759,letters/Walpole_LettersEO_Vol2.txt,Strawberry Hill Arlington Street 1749-59
-walpole_eo_v3,letters,HoraceWalpole,Letters Earl of Orford Vol 3,1857,1760,1769,letters/Walpole_LettersEO_Vol3.txt,Arlington Street 1760-69; Gordon Riots era
-walpole_eo_v4,letters,HoraceWalpole,Letters Earl of Orford Vol 4,1857,1770,1797,letters/Walpole_LettersEO_Vol4.txt,1770-1797; late London scenes
-walpole_yonge_v1,letters,HoraceWalpole,Letters Yonge Selection Vol 1,1890,1736,1764,letters/Walpole_LettersYonge_Vol1.txt,Selected letters 1736-1764
-walpole_yonge_v2,letters,HoraceWalpole,Letters Yonge Selection Vol 2,1890,1764,1795,letters/Walpole_LettersYonge_Vol2.txt,Selected letters 1764-1795
-moritz_travels,topography,CarlMoritz,Travels in England in 1782,1783,1782,1782,topography/Moritz_TravelsInEngland.txt,German visitor; Vauxhall theatres streets on foot
-tatler_v1,topography,RichardSteele,The Tatler Vol 1,1710,1709,1710,poetry/Tatler_Vol1.txt,Coffee-houses streets fashionable life 1709-10
-tatler_v2,topography,RichardSteele,The Tatler Vol 2,1710,1709,1710,poetry/Tatler_Vol2.txt,Coffee-houses streets fashionable life 1709-10
-tatler_v3,topography,RichardSteele,The Tatler Vol 3,1710,1710,1711,poetry/Tatler_Vol3.txt,Coffee-houses streets fashionable life 1710-11
-tatler_v4,topography,RichardSteele,The Tatler Vol 4,1711,1710,1711,poetry/Tatler_Vol4.txt,Coffee-houses streets fashionable life 1710-11
-spectator_v123,topography,JosephAddison,The Spectator Vols 1-3,1711,1711,1712,poetry/Spectator_Vols123.txt,London social observation coffee-houses 1711-12
+source_id,source_type,author,title,pub_year,date_min,date_max,primary_cities,file_path,notes
+fiction_corpus,fiction,various,18c Novel Corpus,,,,,,Existing corpus — scanned via corpus.py
+gay_trivia,poetry,JohnGay,Trivia or the Art of Walking the Streets of London,1716,1716,1716,London,poetry/Gay_Trivia.txt,Sensory poem about London streets
+defoe_tour,topography,DanielDefoe,Tour Through Great Britain Vol 1,1724,1720,1730,London,topography/Defoe_TourVol1.txt,Urban survey
+evelyn_fumifugium,topography,JohnEvelyn,Fumifugium,1661,1660,1700,London,topography/Evelyn_Fumifugium.txt,Pre-period; coal smoke baseline
+pennant_london,topography,ThomasPennant,Of London,1790,1785,1800,London,topography/Pennant_OfLondon.txt,Late-century survey
+anstey_bath,poetry,ChristopherAnstey,New Bath Guide,1766,1760,1775,Bath,poetry/Anstey_NewBathGuide.txt,Bath satire
+burney_diary1,diary,FrancesBurney,Early Diary Vol 1,1889,1768,1778,London;Bath,diary/Burney_DiaryVol1.txt,Published posthumously
+burney_diary2,diary,FrancesBurney,Early Diary Vol 2,1889,1778,1800,London;Bath,diary/Burney_DiaryVol2.txt,Published posthumously
+boswell_life_johnson,diary,JamesBoswell,Life of Johnson,1791,1763,1784,London,diary/Boswell_LifeOfJohnson.txt,Osgood abridgement; London taverns Fleet St Covent Garden 1760s-80s
+boswell_loj_v1,diary,JamesBoswell,Life of Johnson Vol 1 (Hill ed.),1791,1709,1765,London,diary/Boswell_LoJ_Vol1.txt,Full Hill scholarly edition; London 1709-1765
+boswell_loj_v2,diary,JamesBoswell,Life of Johnson Vol 2 (Hill ed.),1791,1765,1776,London,diary/Boswell_LoJ_Vol2.txt,Full Hill scholarly edition; London 1765-1776
+boswell_loj_v3,diary,JamesBoswell,Life of Johnson Vol 3 (Hill ed.),1791,1776,1780,London,diary/Boswell_LoJ_Vol3.txt,Johnson circle London 1776-1780
+boswell_loj_v4,diary,JamesBoswell,Life of Johnson Vol 4 (Hill ed.),1791,1780,1784,London,diary/Boswell_LoJ_Vol4.txt,Johnson circle London 1780-1784
+piozzi_anecdotes,diary,HesterPiozzi,Anecdotes of the late Samuel Johnson,1786,1764,1784,London,diary/Piozzi_AnecdotesOfJohnson.txt,Johnson circle; Streatham Fleet St 1764-84
+piozzi_autobiography,diary,HesterPiozzi,Autobiography Letters and Literary Remains,1861,1741,1821,London;Bath,diary/Piozzi_Autobiography.txt,2-vol memoir covering Thrale circle London Bath
+walpole_letters1,letters,HoraceWalpole,Letters Vol 1,1840,1732,1755,London,letters/Walpole_LettersVol1.txt,
+walpole_eo_v2,letters,HoraceWalpole,Letters Earl of Orford Vol 2,1857,1749,1759,London,letters/Walpole_LettersEO_Vol2.txt,Strawberry Hill Arlington Street 1749-59
+walpole_eo_v3,letters,HoraceWalpole,Letters Earl of Orford Vol 3,1857,1760,1769,London,letters/Walpole_LettersEO_Vol3.txt,Arlington Street 1760-69; Gordon Riots era
+walpole_eo_v4,letters,HoraceWalpole,Letters Earl of Orford Vol 4,1857,1770,1797,London,letters/Walpole_LettersEO_Vol4.txt,1770-1797; late London scenes
+walpole_yonge_v1,letters,HoraceWalpole,Letters Yonge Selection Vol 1,1890,1736,1764,London,letters/Walpole_LettersYonge_Vol1.txt,Selected letters 1736-1764
+walpole_yonge_v2,letters,HoraceWalpole,Letters Yonge Selection Vol 2,1890,1764,1795,London,letters/Walpole_LettersYonge_Vol2.txt,Selected letters 1764-1795
+moritz_travels,topography,CarlMoritz,Travels in England in 1782,1783,1782,1782,London,topography/Moritz_TravelsInEngland.txt,German visitor; Vauxhall theatres streets on foot
+tatler_v1,topography,RichardSteele,The Tatler Vol 1,1710,1709,1710,London,poetry/Tatler_Vol1.txt,Coffee-houses streets fashionable life 1709-10
+tatler_v2,topography,RichardSteele,The Tatler Vol 2,1710,1709,1710,London,poetry/Tatler_Vol2.txt,Coffee-houses streets fashionable life 1709-10
+tatler_v3,topography,RichardSteele,The Tatler Vol 3,1710,1710,1711,London,poetry/Tatler_Vol3.txt,Coffee-houses streets fashionable life 1710-11
+tatler_v4,topography,RichardSteele,The Tatler Vol 4,1711,1710,1711,London,poetry/Tatler_Vol4.txt,Coffee-houses streets fashionable life 1710-11
+spectator_v123,topography,JosephAddison,The Spectator Vols 1-3,1711,1711,1712,London,poetry/Spectator_Vols123.txt,London social observation coffee-houses 1711-12
+hatton_newview_v1,topography,EdwardHatton,A New View of London Vol 1,1708,1708,1708,London,topography/Hatton_NewViewOfLondonVol1.txt,Internet Archive OCR from the 1708 edition
+hatton_newview_v2,topography,EdwardHatton,A New View of London Vol 2,1708,1708,1708,London,topography/Hatton_NewViewOfLondonVol2.txt,Internet Archive OCR from the 1708 edition
+strype_survey_v1,topography,JohnStrype,A Survey of London and Westminster Vol 1,1720,1720,1720,London,topography/Strype_SurveyOfLondonVol1.txt,Internet Archive OCR from the 1720 edition
+strype_survey_v2,topography,JohnStrype,A Survey of London and Westminster Vol 2,1720,1720,1720,London,topography/Strype_SurveyOfLondonVol2.txt,Internet Archive OCR from the 1720 edition
+picture_london_1810,topography,JohnFeltham,The Picture of London for 1810,1810,1810,1810,London,topography/PictureOfLondon_1810.txt,Internet Archive OCR from the eleventh edition
+colquhoun_police,institutional,PatrickColquhoun,A Treatise on the Police of the Metropolis,1800,1796,1800,London,institutional/Colquhoun_PoliceOfTheMetropolis.txt,Project Gutenberg text of the 1800 edition
+bath_bristol_guide,topography,Anonymous,The Bath and Bristol Guide,1765,1765,1765,Bath,topography/BathAndBristolGuide_1765.txt,Internet Archive OCR from the fourth edition
+wood_bath_v1,topography,JohnWood,A Description of Bath Vol 1,1765,1765,1765,Bath,topography/Wood_DescriptionOfBathVol1.txt,Internet Archive OCR from the 1765 edition
+wood_bath_v2,topography,JohnWood,A Description of Bath Vol 2,1765,1765,1765,Bath,topography/Wood_DescriptionOfBathVol2.txt,Internet Archive OCR from the 1765 edition
+howard_prisons_1792,institutional,JohnHoward,The State of the Prisons in England and Wales,1792,1777,1792,London,institutional/Howard_StateOfPrisons1792.txt,Internet Archive OCR from the 1792 edition

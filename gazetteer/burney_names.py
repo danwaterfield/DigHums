@@ -60,7 +60,8 @@ CANONICAL_NAMES: dict[str, str] = {
     "Dr Charles Burney":    "Dr Charles Burney",
     "Hester Lynch Thrale":  "Hester Thrale Piozzi",
     "Hester Lynch Piozzi":  "Hester Thrale Piozzi",
-    "Hester Maria Thrale":  "Hester Thrale Piozzi",
+    "Hester Maria Thrale":  "Viscountess Keith",
+    "Hester Maria Thrale (Lady Keith)": "Viscountess Keith",
     "Charlotte Cambridge":  "Charlotte Broome",
     "Charlotte Francis":    "Charlotte Broome",
     "Charlotte Broome":     "Charlotte Broome",
@@ -205,6 +206,236 @@ CANONICAL_NAMES: dict[str, str] = {
     "Princess [Elizabeth]":                 "Princess Elizabeth",
     "Princess [Elizabeth?]":               "Princess Elizabeth",
     "Princess [Knowles]":                  "Princess Knowles",
+
+    # ── Duplicate fixes (2026-03-20) ────────────────────────────────
+    "Charles Burney Sr":                  "Charles Burney",
+    "Giovanni Battista Martini":          "Padre Martini",
+    "Sophia Thrale Hoare":               "Sophia Hoare",
+    "Dr. Brocklesby":                     "Richard Brocklesby",
+    "Frances Crewe":                      "Mrs Crewe",
+    "William Locke Sr":                   "William Locke",
+    "William Locke [?]":                  "William Locke",
+    "CB [?]":                             "Charles Burney",
+    "(CB) [?]":                           "Charles Burney",
+    "10th Duke of Norfolk":               "Duke of Norfolk",
+    "1 . Duke of Portland":               "Duke of Portland",
+    "9. Lord North":                      "Lord North",
+    "27. Mr. George Crabbe":              "George Crabbe",
+    "AA [postscript only]":               "Alexander d'Arblay",
+    "Joseph Warton":                      "Joseph Warton",
+    "Amédée duc de Duras":                "Duc de Duras",
+    "Amédée":                             "Duc de Duras",
+    "Andre Gretry":                       "André Grétry",
+    "Peter Paul Dobree":                  "Peter Paul Dobrée",
+    "Henry Fuseli":                       "Henry Fuseli",
+    # ── Bracketed/inferred names (2026-03-21) ───────────────────────
+    "[CB Jr]":                            "Charles Burney Jr",
+    "[CB Jr?]":                           "Charles Burney Jr",
+    "[CB Jr or CPB?]":                    "Charles Burney Jr",
+    "[CB Jr? or CPB?]":                   "Charles Burney Jr",
+    "[to CB Jr or CBP]":                  "Charles Burney Jr",
+    "CB Jr?":                             "Charles Burney Jr",
+    "CB Jr ":                             "Charles Burney Jr",
+    "[CPB]":                              "Charles Parr Burney",
+    "[CPB?]":                             "Charles Parr Burney",
+    "[Edmund Malone?]":                   "Edmond Malone",
+    "[James Fordyce]":                    "James Fordyce",
+    "[John Young]":                       "John Young",
+    "[John?] Aiken":                      "John Aiken",
+    "[John?] Aitkin":                     "John Aiken",
+    "[John?] Pridden":                    "John Pridden",
+    "[Joseph?] White":                    "Joseph White",
+    "[Lady Crewe]":                       "Mrs Crewe",
+    "[Patrick Kelly]":                    "Patrick Kelly",
+    "[Ralph Griffiths]":                  "Ralph Griffiths",
+    "[Reginald?] Heber":                  "Reginald Heber",
+    "[Richard?] Heber":                   "Richard Heber",
+    "[Robert Harding?] Evans":            "Robert Evans",
+    "[Rosette (Rose) Burney":             "Rosette Burney",
+    "[Samuel Butler]":                    "Samuel Butler",
+    "[Sir Thomas?] Lawrence":             "Thomas Lawrence",
+    "[Spencer] Percival":                 "Spencer Percival",
+    "[Thomas Cadell]":                    "Thomas Cadell",
+    "[Thomas?] King":                     "Thomas King",
+    "[William Howley]":                   "William Howley",
+    "[William Parsons]":                  "William Parsons",
+    "[William Windham]":                  "William Windham",
+    "[William] Davies":                   "William Davies",
+    "[Wrangham]":                         "Francis Wrangham",
+    "[the President of the Royal Academy]": "Benjamin West",
+    "ERB [?]":                            "Edward Richard Burney",
+    "SBP [?]":                            "Susanna Burney Phillips",
+    "B[asil] Montagu":                    "Basil Montagu",
+    "R[ichard?] Heber":                   "Richard Heber",
+    "Richard [?] Heber":                  "Richard Heber",
+    "S[amuel] Butler":                    "Samuel Butler",
+    "J[ames?] Young":                     "James Young",
+    "James [Young]":                      "James Young",
+    "G.E.G[riffiths]":                    "G E Griffiths",
+    "Franz [Franz Josef] Haydn":          "Joseph Haydn",
+    "Dr F[rancis[ Riollay":               "Francis Riollay",
+    "Harriett [Hester] Burney":           "Hester Burney",
+    "Martin[?] Burney":                   "Martin Charles Burney",
+    "John Young [?]":                     "John Young",
+    "John Philip Kemble [?]":             "John Philip Kemble",
+    "George Colman [?]":                  "George Colman",
+    "Richard Twining [?]":                "Richard Twining",
+    "Denise-Victoire [?]":                "Denise-Victoire",
+    "Lady Hales [?]":                     "Lady Hales",
+    "Sarah (Payne) [?]":                  "Sarah Payne",
+    "Warren Hastings [to CB]":            "Warren Hastings",
+    "William Heberden [to CB Jr or CPB?]": "William Heberden",
+    "William, 2nd Earl Spencer [?]":      "Earl Spencer",
+    "Andrew Spottiswoode [= ALS CB]":     "Andrew Spottiswoode",
+    "C J Hatcher [to CB Jr?]":            "C J Hatcher",
+    "G Woodfall [to CB Jr?]":             "George Woodfall",
+    "FBA; CB; CBFB":                      "Frances Burney",
+    "CBFB [with FBA EBB]":               "Charlotte Broome",
+    "CB (composite of extracts of partly [?] copy in CB [?] 5 May-5 Oct 1806)": "Charles Burney",
+    "Princess Charlotte [post of Udney]": "Princess Charlotte",
+    "Elizabeth Juliana Schwellenberg (per E Lattikens[?])": "Elizabeth Juliana Schwellenberg",
+    "Comtesse Adrienne (de Noailles) de la Tour [?]": "Adrienne de Noailles",
+    "Marquis de Lafayette [?] de Gorion-Saint-Cyr": "Marquis de Lafayette",
+    "Marquis [?] Bourdois":               "Marianne Bourdois",
+    "Louis Bonne [?]":                    "Louis Bonne",
+    "Louis Bonne[?]":                     "Louis Bonne",
+    "Miss Drysdale [?]":                  "Miss Drysdale",
+    "Miss Drysdale[?]":                   "Miss Drysdale",
+    # ── Walpole OCR fixes ───────────────────────────────────────────
+    "Hon. H. S. CONV^^AY":                "Henry Seymour Conway",
+    "Hon. H. S. €0NWAT":                  "Henry Seymour Conway",
+    "DAVID HUME, Esq":                    "David Hume",
+    "DAVID HUME, Esq,":                   "David Hume",
+    "Hon. GEORGE HARDINGB":               "George Hardinge",
+    "Hon. George Hardinge":               "George Hardinge",
+    "JOHN CHUTH, Esq":                    "John Chute",
+    "THOMAS BARRETT, Esq":                "Thomas Barrett",
+    "THOMAS BRAND, Esq":                  "Thomas Brand",
+    "COUNTESS of * * * ♦":                "Countess of Ailesbury",
+    # ── Burke name fixes ────────────────────────────────────────────
+    "Edm. Burke, Esq":                    "Edmund Burke",
+    "Edm, Burke, Esq -> Rev. John Erskine": "Edmund Burke",
+    "Edm. Malone, Esq":                  "Edmond Malone",
+    "Edmund Malone, Esq":                "Edmond Malone",
+    "David Garrick, Esq":                "David Garrick",
+    "Earl Fitzwilliam":                  "Earl Fitzwilliam",
+    "Eari Fitzwilliam":                  "Earl Fitzwilliam",
+    "Earl FitzwiUiam":                   "Earl Fitzwilliam",
+    "Dr. French Laurence":               "French Laurence",
+    "Dr. Laurence":                       "French Laurence",
+    "Dr. Benj. Franklin":                "Benjamin Franklin",
+    "Alexander Wedderburne, Esq":        "Alexander Wedderburne",
+    "Arthur Lee, Esq":                   "Arthur Lee",
+    "Arthur Pigot, Esq":                "Arthur Pigot",
+    "Charles Townshend, Esq":            "Charles Townshend",
+    "Gen. Oglethorpe":                   "James Oglethorpe",
+    "Dr. Robertson":                     "William Robertson",
+    "Chev. de la Bintinnaye":            "Chevalier de la Bintinaye",
+    "Abbe de la Biritinnaye":            "Chevalier de la Bintinaye",
+    "Chev. de Rivarol":                  "Antoine de Rivarol",
+    "Chev. de Grave":                    "Chevalier de Grave",
+    "Charlotte Beckedorff":               "Charlotte Beckerdorff",
+    "Edm. Malone":                        "Edmond Malone",
+    "Edmund Malone":                      "Edmond Malone",
+    "Lally-Tollendal":                    "Marquis de Lally-Tollendal",
+    "Marquise de Lally-Tollendal":        "Marquis de Lally-Tollendal",
+    "G I Huntingford":                    "George Huntingford",
+    "George I Huntingford":               "George Huntingford",
+    "Sophy Streatfeild":                  "Sophia Streatfield",
+    "Sophy Streatfield":                  "Sophia Streatfield",
+    "Sophy Streatfield [?]":              "Sophia Streatfield",
+    "Sophia Streatfield":                 "Sophia Streatfield",
+    "Caroline, Princess of Wales":        "Princess Caroline",
+    "Caroline, Princess of Wales (per Lady Charlotte Campbell)": "Princess Caroline",
+    "Elizabeth (Allen) Meeke":            "Elizabeth Meeke",
+    "Esther (Sleepe) Burney":             "Esther Burney",
+    "George Hay (on verso of NYPL(B))":   "George Hay",
+    "('ait. James Ceib":                  "Capt. James Keir",
+    "('ait.  James Ceib":                 "Capt. James Keir",
+    "Brigit[a] Piez[e] [Frontoni]":       "Brigita Piez Frontoni",
+    "James Boswell, Esq":                 "James Boswell",
+    "Mr. George Crabbe":                  "George Crabbe",
+    "Rev. George Crabbe":                 "George Crabbe",
+    "Mr. James Barry":                    "James Barry",
+    "Samuel Crisp (with PS by CB)":       "Samuel Crisp",
+    "Sir George Beaumont":                "George Beaumont",
+    "Sir William Parsons":                "William Parsons",
+    "Sir William Scott":                  "William Scott",
+    "Dr. Birch":                          "Rev. Dr. Birch",
+    "Dr. John Douglas":                   "John Douglas",
+    "Dr. Leland":                         "Rev. Dr. Leland",
+    "Rev Dr. Leland":                     "Rev. Dr. Leland",
+    "Chief Justice Aston":                "Chief Justice Aston",
+    "Mr. Secretary Hamilton":             "William Gerard Hamilton",
+    "Rich. Champion":                     "Richard Champion",
+    "Rich. Champion, Esq":                "Richard Champion",
+    "Rich. Burke, Esq":                   "Richard Burke Sr",
+    "Rich. Burke, Sen.":                  "Richard Burke Sr",
+    "Rich. Burke, Sen., Esq":             "Richard Burke Sr",
+    "Richard Burke, Esq":                 "Richard Burke Sr",
+    "Rich. Burke, Jun.":                  "Richard Burke Jr",
+    "Rich. Burke, Jun":                   "Richard Burke Jr",
+    "Rich. Burke, Jan.":                  "Richard Burke Jr",
+    "Rich. Burke, Jun., Esq":             "Richard Burke Jr",
+    "Mr. Rich. Burke, Jun.":              "Richard Burke Jr",
+    "Wm. Burke":                          "William Burke",
+    "Wm. Burke, Esq":                     "William Burke",
+    "Wm. Smith":                          "Wm. Smith",
+    "Wm. Smith, Esq":                     "Wm. Smith",
+    "Rt. Hon. Edrn. Burke":               "Edmund Burke",
+    "Rt. Hon. Henry Dundas":              "Henry Dundas",
+    "Rt. Hon. Henry Grattan":             "Henry Grattan",
+    "Rt. Hon. HenryGrattan":              "Henry Grattan",
+    "of Rockingham":                      "Marquis of Rockingham",
+    "Mr. T. King":                        "Mr. T. King",
+    "T. King":                            "Mr. T. King",
+    "Mrs. Chapone":                       "Hester Chapone",
+
+    # ── Duplicates found in 2026-03-31 audit ─────────────────────
+    # Punctuation / spacing
+    "E H Barker":                         "E H. Barker",
+    "L M Barral":                         "L M. Barral",
+    'Rev. Dr. "Wilson':                   "Rev. Dr. Wilson",
+    "Sarah (Payne)":                      "Sarah Payne",
+    "T J Mathias":                        "TJ Mathias",
+    "G E Griffiths":                      "G.E Griffiths",
+
+    # Articles / OCR artefacts
+    "the Abbe de la Bintinnaye":          "Abbe de la Bintinnaye",
+    "the Comte d'Artois":                 "Comte d'Artois",
+    "the King of Poland":                 "King of Poland",
+    "s. Duke of Richmond":                "Duke of Richmond",
+    "Su- A I. Elton, Town Clerk of Bristol": "Sir A I. Elton, Town Clerk of Bristol",
+
+    # Spelling / typo variants
+    "Frances North, 4th Earl of Guilford": "Francis North, 4th Earl of Guilford",
+    "Frederic North, 5th Earl of Guilford": "Frederick North, 5th Earl of Guilford",
+    "Harriett Wilson":                    "Harriet Wilson",
+    "Nevile Maskelyne":                   "Nevil Maskelyne",
+    "Marie-Alexendre Lenoir":             "Marie-Alexandre Lenoir",
+    "Lawrence, Parsons, 2nd Earl of Rosse": "Laurence Parsons, 2nd Earl of Rosse",
+    "Francesco Sastres":                  "Francois Sastres",
+
+    # Title / name variants
+    "Charles Maurice de Talleyrand-Perigord": "Charles-Maurice de Talleyrand-Perigord",
+    "Rev. Mr. Mason":                     "Mr Mason",
+    "Sir William Weller Pepys":           "William Weller Pepys",
+    "Rev. Walker King":                   "Walker King",
+    "Payne Knight":                       "Richard Payne Knight",
+    "C W LeBas":                          "W LeBas",
+    "Marie-Elisabeth (Bouée) de La Fite": "Marie-Elisabethe de La Fite",
+    "Dame-Adelaide (de Damas d'Antigny) comtesse de Simiane": "Comtesse de Simiane",
+    "Georgiana Countess Spencer":         "Countess Spencer",
+    "George 2nd Earl Spencer":            "Earl Spencer",
+    "William Lowther later Lord Lonsdale": "Lord Lonsdale",
+    "Baron Crewe":                        "John, 1st Baron Crewe",
+
+    # Person_info alignment
+    "R B. Sheridan":                      "R.B. Sheridan",
+    "Louis DeVisme":                      "Louis Devisme",
+    "Rousseau, Jean-Jacques":             "Jean-Jacques Rousseau",
+    "Lord Viscount Stormont":             "Lord Stormont",
+    "Regina (Valentini) Mingotti":        "Regina Mingotti",
 }
 
 
@@ -214,7 +445,8 @@ _ARTEFACTS = frozenset({
     "[?]", "to", "from", "", "copy", "draft", "NYPL(B)", "BM(Bar)",
     "PML", "Comyn", "Osb", "Hyde", "London", "4 p 12mo",
     "Transcript copy", "[?] transcript copy", "?", "[illegible]",
-    "SE 1835", "London (Harvey)",
+    "SE 1835", "London (Harvey)", '"',
+    "^uly 1. Rt. Hon. Edm. Sexton Pery",  # OCR artefact from burke_1844
 })
 
 _ARTEFACT_RE = re.compile(
@@ -243,6 +475,22 @@ def is_artefact(name: str) -> bool:
     if _ARTEFACT_RE.match(s):
         return True
     return False
+
+
+_CHAPTER_PREFIX_RE = re.compile(r"^ch\s+\d+\.\s*", re.IGNORECASE)
+_TRAILING_NOTE_PAREN_RE = re.compile(
+    r"\s+\((?:"
+    r"per\b|with\b|wife\b|on\s+verso\b|former\b|formerly\b|"
+    r"postscript\b|[12]\d{3}\s*[-–]\s*[12]\d{3}"
+    r")[^)]*\)$",
+    re.IGNORECASE,
+)
+_DOTTED_INITIALS_RE = re.compile(r"\b([A-Z])\.\s*(?=[A-Z]\.)")
+_HONORIFIC_PREFIX_RE = re.compile(
+    r"^(?:(?:Rt\.?\s+Hon\.?|Rev\.?\s+Dr\.?|Rev\.?|Dr\.?|Mr\.?|Mrs\.?|Miss\.?|Sir)\s+)+"
+)
+_SUFFIX_RE = re.compile(r",?\s+(?:Esq|Bart|M\.D\.|LL\.D\.)(?:,|\.)?$", re.IGNORECASE)
+_MULTISPACE_RE = re.compile(r"\s+")
 
 
 # ── Community assignments ─────────────────────────────────────────
@@ -317,7 +565,6 @@ COMMUNITIES: dict[str, str] = {
     "Charles Babbage":             "Literary",
     "Robert Southey":              "Literary",
     "Sophia Streatfield":          "Literary",
-    "Sophy Streatfield":           "Literary",
     "Hector Chapone":              "Literary",
 
     # ── Court ─────────────────────────────────────────────────────
@@ -423,8 +670,7 @@ COMMUNITIES: dict[str, str] = {
 
     # ── Scholarly/Church ──────────────────────────────────────────
     "Samuel Parr":                 "Scholarly/Church",
-    "G I Huntingford":             "Scholarly/Church",
-    "George I Huntingford":        "Scholarly/Church",
+    "George Huntingford":          "Scholarly/Church",
     "John Kaye":                   "Scholarly/Church",
     "Peter Paul Dobree":           "Scholarly/Church",
     "Richard Payne Knight":        "Scholarly/Church",
@@ -504,6 +750,7 @@ COMMUNITIES: dict[str, str] = {
     "George Dyer":                 "Literary",
     "Percival Stockdale":          "Literary",
     "Elizabeth Lamb":               "Intimate circle",
+    "Elizabeth Meeke":              "Family",
     "John Graham":                 "Scholarly/Church",
     "Edward Mangin":               "Literary",
     "Eleanore princess d'Henin":   "French circle",
@@ -517,16 +764,126 @@ COMMUNITIES: dict[str, str] = {
     "Lady Bute":                   "Intimate circle",
     "Lady Rothes":                 "Intimate circle",
     "Stephen Allen":               "Intimate circle",
+    "Lady Clifford":               "Intimate circle",
+    "Madame Saintmard":            "French circle",
+    "Choderlos de Laclos":          "French circle",
+    "Louis de Narbonne":           "French circle",
+    "Clement Francis":             "Family",
+    "Ralph Broome":                "Family",
+    "Molesworth Phillips":         "Family",
+    "Samuel Meeke":                "Family",
+    "Madame Campan":               "French circle",
+    "Jacques-Louis David":         "French circle",
+    "Joseph Priestley":            "Scholarly/Church",
+    "Carl Philipp Emanuel Bach":   "Musical circle",
+    "Wolfgang Amadeus Mozart":     "Musical circle",
+    "Leopold Mozart":              "Musical circle",
+    "Johann Christian Bach":       "Musical circle",
+    "Georg Philipp Telemann":      "Musical circle",
+    "André Grétry":                "Musical circle",
+    "Richard Brocklesby":          "Literary",
+    "George Crabbe":               "Literary",
+    "Duke of Norfolk":             "Intimate circle",
+    "Duke of Portland":            "Literary",
+    "Lord North":                  "Literary",
+    "Joseph Warton":               "Literary",
+    "William Locke":               "Intimate circle",
+    "Duc de Duras":                "French circle",
+    "Mary Hamilton":               "Intimate circle",
+    "Anna Ord":                    "Intimate circle",
+    "Thomas Gray":                 "Literary",
+    "Oliver Goldsmith":            "Literary",
+    "Adam Smith":                  "Literary",
+    "Henry Seymour Conway":        "Literary",
+    "George Montagu":              "Literary",
+    "William Cole":                "Scholarly/Church",
+    "John Chute":                  "Literary",
+    "George Hardinge":             "Literary",
+    "Richard West":                "Literary",
+    "Lady Hervey":                 "Literary",
+    "Charles James Fox":           "Literary",
+    "Earl Fitzwilliam":            "Literary",
+    "French Laurence":             "Scholarly/Church",
+    "Benjamin Franklin":           "Scholarly/Church",
+    "Duke of Richmond":            "Literary",
+    "Duke of Newcastle":           "Literary",
+    "Duke of Dorset":              "Literary",
+    "Alexander Wedderburne":       "Literary",
+    "James Oglethorpe":            "Literary",
+    "William Robertson":           "Scholarly/Church",
+    "Antoine de Rivarol":          "French circle",
+    "Comte d'Artois":              "French circle",
+    "Penelope Pennington":         "Literary",
+    "Elizabeth Carter":             "Literary",
+    "Elizabeth Vesey":              "Literary",
+    "Sarah Scott":                 "Literary",
+    "Frances Reynolds":            "Literary",
+    "Charles Arne":                "Musical circle",
+    "Robert Strange":              "Literary",
+    "Isabella Strange":            "Literary",
+    "Charles Walmesley":           "Scholarly/Church",
+    "Dr Thomas Bever":             "Scholarly/Church",
+    "Robert Hudson":               "Musical circle",
+    "Mr Drummond":                 "Intimate circle",
+    "Dr Seward":                   "Literary",
 }
 
 
 # ── Public API ────────────────────────────────────────────────────
+
+def _is_known_name(name: str) -> bool:
+    return (
+        name in CANONICAL_NAMES
+        or name in CANONICAL_NAMES.values()
+        or name in COMMUNITIES
+    )
+
+
+def _clean_candidate(name: str) -> str:
+    s = name.strip()
+    s = s.replace("\u2018", "'").replace("\u2019", "'")
+    s = s.replace("\u201c", '"').replace("\u201d", '"')
+    s = s.replace("\u2013", "-").replace("\u2014", "-")
+    s = _CHAPTER_PREFIX_RE.sub("", s)
+    s = _DOTTED_INITIALS_RE.sub(r"\1 ", s)
+    s = s.strip().strip('"').strip()
+    s = re.sub(r"\[\?\]", "", s)
+    s = re.sub(r"\[([^\]]+?)\?\]", r"\1", s)
+    s = s.replace("?", "")
+    if s.startswith("[") and s.endswith("]"):
+        s = s[1:-1].strip()
+    while True:
+        stripped = _TRAILING_NOTE_PAREN_RE.sub("", s).strip()
+        if stripped == s:
+            break
+        s = stripped
+    s = _SUFFIX_RE.sub("", s).strip()
+    s = _MULTISPACE_RE.sub(" ", s)
+    return s.strip(" ,;:")
 
 def normalise(name: str) -> str:
     """Map *name* to its canonical form, or return it unchanged."""
     s = name.strip()
     if s in CANONICAL_NAMES:
         return CANONICAL_NAMES[s]
+
+    cleaned = _clean_candidate(s)
+    if cleaned in CANONICAL_NAMES:
+        return CANONICAL_NAMES[cleaned]
+
+    for candidate in (
+        cleaned,
+        _HONORIFIC_PREFIX_RE.sub("", cleaned).strip(),
+        _SUFFIX_RE.sub("", cleaned).strip(),
+        _SUFFIX_RE.sub("", _HONORIFIC_PREFIX_RE.sub("", cleaned)).strip(),
+    ):
+        if candidate in CANONICAL_NAMES:
+            return CANONICAL_NAMES[candidate]
+        if candidate and candidate != cleaned and _is_known_name(candidate):
+            return candidate
+
+    if cleaned and cleaned != s:
+        return cleaned
     return s
 
 

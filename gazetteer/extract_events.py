@@ -52,9 +52,13 @@ def run(db_path=DB_PATH_DEFAULT, write: bool = False) -> None:
         event_instances = [_coerce(r) for r in csv.DictReader(f)]
 
     if write:
+        conn.execute("DELETE FROM event_instances")
+        conn.execute("DELETE FROM event_venues")
+        conn.execute("DELETE FROM events")
+
         for row in events:
             conn.execute("""
-                INSERT OR IGNORE INTO events
+                INSERT INTO events
                 (event_id, name, category, month_start, month_end, day_of_week,
                  time_bands, year_start, year_end, recurrence,
                  smell_load, noise_load, crowd_load, visual_load,
@@ -68,13 +72,13 @@ def run(db_path=DB_PATH_DEFAULT, write: bool = False) -> None:
 
         for row in event_venues:
             conn.execute("""
-                INSERT OR IGNORE INTO event_venues (event_id, venue_id)
+                INSERT INTO event_venues (event_id, venue_id)
                 VALUES (:event_id, :venue_id)
             """, row)
 
         for row in event_instances:
             conn.execute("""
-                INSERT OR IGNORE INTO event_instances
+                INSERT INTO event_instances
                 (instance_id, event_id, year, month, day, source_id, notes)
                 VALUES
                 (:instance_id, :event_id, :year, :month, :day, :source_id, :notes)

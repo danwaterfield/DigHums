@@ -27,8 +27,11 @@ HoraceWalpole,The Castle of Otranto,HoraceWalpole/CastleOfOtranto.txt,1764,,,Ita
 MGLewis,The Monk,MGLewis/TheMonk.txt,1796,,,Spain (Madrid),horwood_1799,"No English urban setting."
 WilliamBeckford,Vathek,WilliamBeckford/Vathek.txt,1786,,,Arabia (fantasy),horwood_1799,"No English setting."
 ElizaHaywood,Love in Excess,ElizaHaywood/LoveInExcess.txt,1719,1715,1720,"London;France",rocque_1746,"Pre-Rocque period. Use Rocque as nearest available."
+ElizaHaywood,The History of Miss Betsy Thoughtless,ElizaHaywood/MissBetsyThoughtless.txt,1751,,,London,rocque_1746,"Urban courtship and marriage-market novel. Setting dates left broad pending a fuller chronology pass."
 ClaraReeve,The Old English Baron,ClaraReeve/TheOldEnglishBaron.txt,1778,,,England (medieval),rocque_1746,"No contemporary urban setting."
+CharlotteLennox,The Female Quixote,CharlotteLennox/TheFemaleQuixote.txt,1752,,,London,rocque_1746,"London society is central. Setting dates left broad pending a fuller chronology pass."
 CharlotteSmith,Emmeline,CharlotteSmith/Emmeline.txt,1788,1786,1788,"London;Wales;France",horwood_1799,
+CharlotteSmith,The Old Manor House,CharlotteSmith/TheOldManorHouseVol1.txt,1793,,,"Sussex;London",horwood_1799,"Mixed rural and London setting. Setting dates left broad pending a fuller chronology pass."
 HenryMackenzie,The Man of Feeling,HenryMackenzie/TheManOfFeeling.txt,1771,1769,1771,London,rocque_1746,"London scenes key. Edinburgh peripheral."
 FrancesSheridan,Memoirs of Miss Sidney Bidulph,FrancesSheridan/MemoirsOfMissSidneyBidulph.txt,1761,1740,1761,"London;Ireland",rocque_1746,"London setting. Vauxhall valid. Ranelagh valid post-1742."
 SamuelRichardson,Sir Charles Grandison Vol 4,SamuelRichardson/SirCharlesGrandison_Vol4.txt,1753,1751,1753,"London;Italy",rocque_1746,"London scenes key to the politeness argument."
