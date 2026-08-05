@@ -336,7 +336,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     const H = 320;
     const ctx = setupCanvas(scatter, W, H);
 
-    const PAD = { t: 20, r: 20, b: 40, l: 50 };
+    const PAD = { t: 24, r: 24, b: 56, l: 70 };
     const CW = W - PAD.l - PAD.r;
     const CH = H - PAD.t - PAD.b;
 
@@ -380,6 +380,20 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     for (let yr = Math.ceil(minX / 10) * 10; yr <= maxX; yr += 10) {
       ctx.fillText(yr, px(yr), PAD.t + CH + 18);
     }
+
+    // Axis labels and sample note
+    ctx.fillStyle = "#5c5850";
+    ctx.font = "11px Inter, system-ui, sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("Publication year", PAD.l + CW / 2, H - 10);
+    ctx.save();
+    ctx.translate(14, PAD.t + CH / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText("Filler % (iterative + description + FID)", 0, 0);
+    ctx.restore();
+    ctx.textAlign = "right";
+    ctx.fillStyle = "#9c9890";
+    ctx.fillText("n=" + pts.length + " novels", PAD.l + CW, PAD.t - 8);
 
     // Regression line
     const reg = linReg(pts);

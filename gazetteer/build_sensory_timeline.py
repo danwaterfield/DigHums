@@ -496,6 +496,7 @@ body {{ font-family: 'Inter', system-ui, sans-serif; background: #fff; color: #1
     <!-- top bar -->
     <div class="top-bar">
       <div class="view-nav">
+        <a href="../index.html" title="All projects">&#8592; Projects</a>
         <a href="sensory_time_map.html">Sensory Map</a>
         <a href="venue_explorer.html">Evidence</a>
         <a href="comparison.html">Comparison</a>

@@ -847,6 +847,13 @@ svg {{ display: block; width: 100%; height: 100%; }}
 <body>
 
 <div class="header">
+  <div style="font-size:11px;margin-bottom:8px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+    <a href="../index.html" style="color:#9a6f2a;text-decoration:none;">&#8592; Projects</a>
+    <span style="color:#ccc;">|</span>
+    <a href="full_network.html" style="color:#666;text-decoration:none;">Full Network</a>
+    <span style="color:#1a1816;font-weight:600;">Burney Family</span>
+    <a href="tour_map.html" style="color:#666;text-decoration:none;">Tours</a>
+  </div>
   <h1>Burney Family</h1>
   <span class="subtitle">Correspondent Networks</span>
   <div class="tab-bar" id="tab-bar"></div>

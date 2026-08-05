@@ -3,7 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Research &amp; Visualisation</title>
+<title>Eighteenth-Century Fiction, Space &amp; Correspondence — Dan Waterfield</title>
+<meta name="description" content="Interactive tools for exploring eighteenth-century literary and historical corpora: a sensory gazetteer of London, Bath and Edinburgh, narrative paths through the city, and the correspondence networks of the Burney circle.">
+<link rel="canonical" href="https://danwaterfield.github.io/DigHums/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Eighteenth-Century Fiction, Space &amp; Correspondence">
+<meta property="og:description" content="Interactive tools for exploring eighteenth-century literary and historical corpora.">
+<meta property="og:url" content="https://danwaterfield.github.io/DigHums/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%233d2e1e'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23f9f7f4' text-anchor='middle'%3EW%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -196,6 +203,24 @@ nav {
 }
 .tool-link:hover .tl-arrow { transform: translateX(3px); color: var(--gold); }
 
+/* ── method prose ── */
+.prose { max-width: 620px; }
+.prose h3 {
+  font-family: var(--ff-ui);
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--accent); margin: 26px 0 8px;
+}
+.prose h3:first-child { margin-top: 0; }
+.prose p {
+  font-family: var(--ff-body);
+  font-size: 15px; font-weight: 300;
+  color: var(--mid); line-height: 1.7;
+  margin-bottom: 10px;
+}
+.prose a { color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--gold-bg); }
+.prose a:hover { border-bottom-color: var(--gold); }
+
 /* ── footer ── */
 footer {
   border-top: 1px solid var(--border);
@@ -230,10 +255,11 @@ footer {
 
 <nav>
   <div class="nav-inner">
-    <a class="nav-brand" href="/">Dan Waterfield</a>
+    <a class="nav-brand" href="./">Dan Waterfield</a>
     <ul class="nav-links">
       <li><a href="#projects">Projects</a></li>
-      <li><a href="https://github.com/danwaterfield" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="#method">Method</a></li>
+      <li><a href="https://github.com/danwaterfield/DigHums" target="_blank" rel="noopener">GitHub</a></li>
     </ul>
   </div>
 </nav>
@@ -245,7 +271,9 @@ footer {
     <h1>Data, text,<br><em>and interpretation</em></h1>
     <p class="hero-sub">
       Interactive tools for exploring literary and historical corpora.
-      357&nbsp;texts, 261&nbsp;MB, 1586&ndash;1818.
+      <span data-stat="corpus.texts">329</span>&nbsp;published texts,
+      <span data-stat="corpus.size_mb">262</span>&nbsp;MB, with dated evidence spanning
+      <span data-stat="fiction.span_min">1660</span>&ndash;<span data-stat="fiction.span_max">1821</span>.
     </p>
   </section>
 
@@ -260,19 +288,28 @@ footer {
             <span class="project-tag">Digital Humanities</span>
             <div class="project-title">18th-Century Fiction &amp; Urban Space</div>
             <p class="project-desc">
-              Mapping place, movement, and sensory experience across 69&nbsp;novels
-              by 21&nbsp;authors, 1719&ndash;1818. Evidence assembled from fiction, diary,
-              topography, poetry, and letters against a gazetteer of 167&nbsp;London,
-              Bath, Edinburgh, and European venues.
+              Mapping place, movement, and sensory experience across
+              <span data-stat="fiction.novels">34</span>&nbsp;novels by
+              <span data-stat="fiction.authors">14</span>&nbsp;authors,
+              <span data-stat="fiction.novel_year_min">1719</span>&ndash;<span data-stat="fiction.novel_year_max">1817</span>.
+              Evidence assembled from fiction, diary, topography, poetry, and letters
+              against a gazetteer of <span data-stat="fiction.venues">167</span>&nbsp;London,
+              Bath, Edinburgh, and European venues, of which
+              <span data-stat="fiction.venues_with_evidence">89</span>&nbsp;currently carry
+              evidence. The venue explorer also layers in
+              <span data-stat="correspondence.booksellers">1,056</span>&nbsp;booksellers from
+              Plomer&rsquo;s trade directories,
+              <span data-stat="correspondence.bookseller_locations">648</span>&nbsp;of them
+              with located addresses.
             </p>
           </div>
           <div class="project-stats">
             <div class="pstat">
-              <span class="pstat-n">69</span>
-              <span class="pstat-l">Texts</span>
+              <span class="pstat-n" data-stat="fiction.novels">34</span>
+              <span class="pstat-l">Novels</span>
             </div>
             <div class="pstat">
-              <span class="pstat-n">13,669</span>
+              <span class="pstat-n" data-stat="fiction.passages">5,766</span>
               <span class="pstat-l">Passages</span>
             </div>
           </div>
@@ -288,7 +325,7 @@ footer {
           <a class="tool-link" href="gazetteer/narrative_map.html">
             <div class="tl-left">
               <div class="tl-tag">Narrative Map</div>
-              <div class="tl-name">Character Paths Through the City</div>
+              <div class="tl-name">Character Paths &mdash; <span data-stat="fiction.novels_with_paths">18</span> Novels</div>
             </div>
             <span class="tl-arrow">→</span>
           </a>
@@ -306,6 +343,13 @@ footer {
             </div>
             <span class="tl-arrow">→</span>
           </a>
+          <a class="tool-link" href="gazetteer/sensory_timeline.html">
+            <div class="tl-left">
+              <div class="tl-tag">Timeline</div>
+              <div class="tl-name">Evidence by Decade</div>
+            </div>
+            <span class="tl-arrow">→</span>
+          </a>
         </div>
       </div>
 
@@ -316,21 +360,22 @@ footer {
             <span class="project-tag">Network Analysis</span>
             <div class="project-title">18th-Century Correspondence Networks</div>
             <p class="project-desc">
-              Mapping who wrote to whom across 10,000+&nbsp;letters from the Burney family,
-              Samuel Johnson, Hester Thrale Piozzi, Edmund Burke, Horace Walpole,
-              and Joseph Priestley. Integrated with 1,056&nbsp;booksellers across
-              648&nbsp;London locations. Built from the Hemlow Catalogue, published
-              editions, Plomer&rsquo;s trade directories, and the correspSearch API.
+              Mapping who wrote to whom across
+              <span data-stat="correspondence.letters">13,678</span>&nbsp;letters between
+              <span data-stat="correspondence.people">1,227</span>&nbsp;correspondents:
+              the Burney family, Samuel Johnson, Hester Thrale Piozzi, Edmund Burke,
+              Horace Walpole, and Joseph Priestley. Built from the Hemlow Catalogue,
+              published editions, and the correspSearch API.
             </p>
           </div>
           <div class="project-stats">
             <div class="pstat">
-              <span class="pstat-n">1,354</span>
+              <span class="pstat-n" data-stat="correspondence.connections">1,468</span>
               <span class="pstat-l">Connections</span>
             </div>
             <div class="pstat">
-              <span class="pstat-n">1,056</span>
-              <span class="pstat-l">Booksellers</span>
+              <span class="pstat-n" data-stat="correspondence.people">1,227</span>
+              <span class="pstat-l">People</span>
             </div>
           </div>
         </div>
@@ -364,11 +409,64 @@ footer {
     </div>
   </section>
 
+  <section class="section" id="method">
+    <p class="section-label">Method &amp; Sources</p>
+    <div class="prose">
+
+      <h3>What the figures count</h3>
+      <p>
+        Every number on this page is generated from the underlying CSVs and SQLite
+        database at build time, not typed by hand, so the copy cannot drift ahead of
+        the tools. &ldquo;Novels&rdquo; means texts that have been read into the evidence
+        database &mdash; a subset of the wider plain-text corpus in the repository.
+        &ldquo;Passages&rdquo; means evidence attached to a located venue; the database
+        holds <span data-stat="fiction.passages_total">13,669</span> passages in total,
+        of which <span data-stat="fiction.passages">5,766</span> are currently
+        venue-linked and therefore mappable.
+      </p>
+
+      <h3>Limitations</h3>
+      <p>
+        Coverage is uneven. Of <span data-stat="fiction.venues">167</span> gazetteer
+        venues, <span data-stat="fiction.venues_with_evidence">89</span> carry evidence;
+        the rest are located but not yet documented. Narrative paths are only plotted for
+        novels with at least five geolocated mentions, and thinly-attested novels produce
+        correspondingly thin paths. Passage extraction is automated, so some quoted
+        passages begin mid-sentence, and overlapping windows of the same sentence can
+        appear as separate entries. Correspondence dates follow the source edition where a
+        letter is undated, which pushes a small number of records outside the period.
+      </p>
+
+      <h3>Sources</h3>
+      <p>
+        Fiction from Project Gutenberg. Topography and diary evidence from British History
+        Online (Survey of London; Old and New London), Strype&rsquo;s Survey of London
+        (1720), and published editions. Correspondence from the Hemlow
+        <em>Catalogue of the Burney Family Correspondence</em>, published letter editions,
+        and the <a href="https://correspsearch.net" target="_blank" rel="noopener">correspSearch</a>
+        API. Bookseller data from Plomer&rsquo;s trade directories. Historic map layers from
+        Rocque (1746) and Horwood (1792&ndash;99) via Museum of London Archaeology / DHI;
+        modern base map &copy; OpenStreetMap contributors.
+      </p>
+
+      <h3>Reuse</h3>
+      <p>
+        Code is MIT-licensed; the literary texts are public domain. Full method notes,
+        canonical data files, and the distinction between the legacy and current
+        attribution experiments are documented in the
+        <a href="https://github.com/danwaterfield/DigHums#readme" target="_blank" rel="noopener">repository README</a>.
+        If you cite this work, please name the specific layer you used and record the
+        build date below, since the holdings evolve.
+      </p>
+
+    </div>
+  </section>
+
 </div>
 
 <footer>
   <div class="footer-inner">
-    <span class="footer-text">Dan Waterfield</span>
+    <span class="footer-text">Dan Waterfield &middot; built <span data-stat="build.date">2026-08-05</span></span>
     <a class="footer-link" href="https://github.com/danwaterfield/DigHums" target="_blank" rel="noopener">github.com/danwaterfield/DigHums</a>
   </div>
 </footer>

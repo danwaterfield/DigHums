@@ -13,7 +13,15 @@ Usage:
 
 import csv
 import json
+import re
 from pathlib import Path
+
+try:
+    from burney_names import is_artefact, normalise
+    from correspondence_enrichment import load_optional_enrichment
+except ModuleNotFoundError:
+    from gazetteer.burney_names import is_artefact, normalise
+    from gazetteer.correspondence_enrichment import load_optional_enrichment
 
 BASE = Path(__file__).resolve().parent
 GRAPH_CSV = BASE / "unified_correspondence_graph.csv"
@@ -45,6 +53,29 @@ SOURCE_LABELS = {
 }
 
 
+CORRESPONDENCE_SOURCES = frozenset({
+    "hemlow_catalogue", "coulombeau_waterfield", "johnson_hill",
+    "burke_1844", "walpole_1820", "walpole_last_journals",
+    "piozzi_thraliana", "piozzi", "priestley", "berry_lewis",
+    "correspsearch", "garrick_boaden_1831", "burney_letter_2022",
+    "correspsearch_european",
+})
+
+
+def _split_source_ids(value: str) -> list[str]:
+    return [part for part in re.split(r"\s*[;,|]\s*", value.strip()) if part]
+
+
+def _classify_edge(src: str) -> str:
+    """Classify an edge source as 'correspondence' or 'connection'."""
+    parts = _split_source_ids(src)
+    if not parts:
+        return "connection"
+    if any(p in CORRESPONDENCE_SOURCES for p in parts):
+        return "correspondence"
+    return "connection"
+
+
 def _get_d3_source() -> str:
     """Return D3 v7 minified JS, fetching and caching if needed."""
     if D3_CACHE.exists():
@@ -61,35 +92,52 @@ def _get_d3_source() -> str:
 
 def load_graph() -> dict:
     """Load the unified graph CSV and build JSON-ready data structure."""
-    edges = []
+    edge_map = {}
     node_weight = {}   # name -> total weight
     node_sources = {}  # name -> set of sources
 
     with open(GRAPH_CSV, newline="", encoding="utf-8") as f:
         for row in csv.DictReader(f):
-            a = row["person_a"].strip()
-            b = row["person_b"].strip()
+            a = normalise(row["person_a"].strip())
+            b = normalise(row["person_b"].strip())
+            if not a or not b or is_artefact(a) or is_artefact(b) or a == b:
+                continue
+            a, b = sorted((a, b))
             w = int(row["weight"])
             y0_raw = row["year_min"].strip()
             y1_raw = row["year_max"].strip()
             y0 = int(y0_raw) if y0_raw else 0
             y1 = int(y1_raw) if y1_raw else 0
             src = row["sources"].strip()
-
-            edges.append({
-                "source": a,
-                "target": b,
-                "weight": w,
-                "year_min": y0,
-                "year_max": y1,
-                "src": src,
-            })
+            key = (a, b, src)
+            edge = edge_map.setdefault(
+                key,
+                {
+                    "source": a,
+                    "target": b,
+                    "weight": 0,
+                    "year_min": y0,
+                    "year_max": y1,
+                    "src": src,
+                    "edge_type": _classify_edge(src),
+                },
+            )
+            edge["weight"] += w
+            if y0:
+                edge["year_min"] = min(edge["year_min"], y0) if edge["year_min"] else y0
+            if y1:
+                edge["year_max"] = max(edge["year_max"], y1)
 
             for name in (a, b):
                 node_weight[name] = node_weight.get(name, 0) + w
                 if name not in node_sources:
                     node_sources[name] = set()
-                node_sources[name].add(src)
+                node_sources[name].update(_split_source_ids(src) or [src])
+
+    edges = sorted(
+        edge_map.values(),
+        key=lambda e: (e["source"], e["target"], e["src"], e["year_min"], e["year_max"]),
+    )
 
     # Build nodes
     nodes = []
@@ -101,8 +149,8 @@ def load_graph() -> dict:
         for e in edges:
             for side in ("source", "target"):
                 if e[side] == name:
-                    s = e["src"]
-                    src_weights[s] = src_weights.get(s, 0) + e["weight"]
+                    for s in _split_source_ids(e["src"]) or [e["src"]]:
+                        src_weights[s] = src_weights.get(s, 0) + e["weight"]
         primary = max(src_weights, key=src_weights.get) if src_weights else srcs[0]
 
         nodes.append({
@@ -117,7 +165,9 @@ def load_graph() -> dict:
     locations = {}
     with open(LOCATIONS_CSV, newline="", encoding="utf-8") as f:
         for row in csv.DictReader(f):
-            name = row["name"].strip()
+            name = normalise(row["name"].strip())
+            if not name or is_artefact(name):
+                continue
             lat = float(row["lat"])
             lon = float(row["lon"])
             # Just keep first entry (they're typically ordered by importance)
@@ -154,7 +204,8 @@ def load_graph() -> dict:
 
 # ── HTML template ─────────────────────────────────────────────────
 # Convention: ALL JS braces are doubled.  Only {D3_SOURCE},
-# {GRAPH_JSON}, and {PERSON_INFO_JSON} use single braces (Python .replace() targets).
+# {GRAPH_JSON}, {PERSON_INFO_JSON}, and {ENRICHMENT_JSON} use single braces
+# (Python .replace() targets).
 
 HTML_TEMPLATE = r"""<!DOCTYPE html>
 <html lang="en">
@@ -205,17 +256,80 @@ body {{
 }}
 .stats span {{ font-variant-numeric: tabular-nums; }}
 
-/* ── Controls bar ──────────────────────────────── */
-.controls {{
-  padding: 8px 24px;
+/* ── Navbar ───────────────────────────────────── */
+.navbar {{
+  padding: 6px 24px;
   background: #fff;
   border-bottom: 1px solid #e8e8e8;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
   flex-shrink: 0;
-  flex-wrap: wrap;
+  font-size: 12px;
 }}
+.nav-dropdown {{
+  position: relative;
+}}
+.nav-btn {{
+  font-size: 11px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}}
+.nav-btn:hover {{ background: #f5f5f5; }}
+.nav-btn.open {{ background: #f0f0f0; border-color: #aaa; }}
+.nav-btn .caret {{ font-size: 8px; color: #999; }}
+.nav-panel {{
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 240px;
+  max-height: 360px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  z-index: 200;
+  padding: 10px 14px;
+}}
+.nav-panel.open {{ display: block; }}
+.nav-panel h4 {{
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #999;
+  margin: 0 0 6px 0;
+  font-weight: 600;
+}}
+.nav-panel .btn-row {{
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}}
+.nav-panel .pill {{
+  font-size: 10px;
+  padding: 2px 10px;
+  border: 1px solid #d0d0d0;
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  color: #555;
+}}
+.nav-panel .pill:hover {{ background: #f5f5f5; }}
+.nav-panel .pill.active {{ background: #2d3436; color: #fff; border-color: #2d3436; }}
+.nav-sep {{ border-top: 1px solid #eee; margin: 8px 0; }}
+
+/* ── Compat: control-group used by weight slider in navbar ── */
 .control-group {{
   display: flex;
   align-items: center;
@@ -229,7 +343,7 @@ body {{
   color: #555;
 }}
 .control-group input[type="range"] {{
-  width: 120px;
+  width: 100px;
   -webkit-appearance: none;
   appearance: none;
   height: 4px;
@@ -320,16 +434,17 @@ body {{
 /* ── Source checkboxes ─────────────────────────── */
 .source-checks {{
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 4px;
 }}
 .source-check {{
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   font-size: 11px;
   cursor: pointer;
   white-space: nowrap;
+  padding: 2px 0;
 }}
 .source-check input {{
   margin: 0;
@@ -496,6 +611,45 @@ svg {{ display: block; width: 100%; height: 100%; }}
   line-height: 1.8;
 }}
 .dp-stats strong {{ color: #1a1a1a; font-weight: 600; }}
+.dp-enrichment {{
+  display: none;
+  padding: 0 20px 12px;
+  border-bottom: 1px solid #eee;
+}}
+.dp-section {{
+  padding-top: 12px;
+}}
+.dp-section h3 {{
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #999;
+  margin-bottom: 8px;
+}}
+.dp-list {{
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}}
+.dp-list li {{
+  font-size: 12px;
+  color: #444;
+  line-height: 1.4;
+}}
+.dp-submeta {{
+  display: block;
+  font-size: 11px;
+  color: #888;
+  margin-top: 2px;
+}}
+.dp-link {{
+  color: #4a6fa5;
+  text-decoration: none;
+}}
+.dp-link:hover {{
+  text-decoration: underline;
+}}
 .dp-correspondents {{
   padding: 12px 20px;
 }}
@@ -620,8 +774,15 @@ svg {{ display: block; width: 100%; height: 100%; }}
 <body>
 
 <div class="header">
-  <h1>18th-Century Correspondence Network</h1>
-  <span class="subtitle">Who wrote to whom, 1731&ndash;1839 &middot; Click a node to explore their connections &middot; Use filters below to focus by collection or time period</span>
+  <div style="font-size:11px;margin-bottom:8px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+    <a href="../index.html" style="color:#9a6f2a;text-decoration:none;">&#8592; Projects</a>
+    <span style="color:#ccc;">|</span>
+    <span style="color:#1a1816;font-weight:600;">Full Network</span>
+    <a href="correspondent_network.html" style="color:#666;text-decoration:none;">Burney Family</a>
+    <a href="tour_map.html" style="color:#666;text-decoration:none;">Tours</a>
+  </div>
+  <h1>18th-Century Correspondence &amp; Connections</h1>
+  <span class="subtitle">Letters, meetings, and relationships &middot; Click a node to explore &middot; Use filters below to focus by collection or time period</span>
   <div class="stats">
     <span id="stat-nodes"></span>
     <span id="stat-edges"></span>
@@ -630,23 +791,42 @@ svg {{ display: block; width: 100%; height: 100%; }}
   <button class="reset-btn" id="reset-view" style="display:none;">Reset View</button>
 </div>
 
-<div class="controls">
+<div class="navbar">
   <div class="search-wrap">
     <span class="search-icon">&#x1F50D;</span>
     <input type="text" id="search-input" placeholder="Search names...">
     <div class="search-results" id="search-results"></div>
   </div>
 
+  <div class="nav-dropdown" id="dd-sources">
+    <button class="nav-btn" id="btn-sources">Sources <span class="caret">&#9662;</span></button>
+    <div class="nav-panel" id="panel-sources">
+      <h4>Source collections</h4>
+      <input type="text" id="source-filter" placeholder="Filter sources..." style="width:100%;font-size:11px;padding:4px 8px;border:1px solid #d0d0d0;border-radius:3px;margin-bottom:6px;outline:none;box-sizing:border-box;">
+      <div class="btn-row">
+        <button class="pill" id="select-all-src">All</button>
+        <button class="pill" id="clear-all-src">None</button>
+      </div>
+      <div class="source-checks" id="source-checks"></div>
+    </div>
+  </div>
+
+  <div class="nav-dropdown" id="dd-type">
+    <button class="nav-btn" id="btn-type">Edge type <span class="caret">&#9662;</span></button>
+    <div class="nav-panel" id="panel-type">
+      <h4>Show</h4>
+      <div class="btn-row">
+        <button class="pill active" id="show-all">All</button>
+        <button class="pill" id="show-corr">Correspondence</button>
+        <button class="pill" id="show-conn">Connections</button>
+      </div>
+    </div>
+  </div>
+
   <div class="control-group">
     <label>Min. letters:</label>
     <input type="range" id="weight-slider" min="1" max="50" value="2">
     <span class="val" id="weight-val">2</span>
-  </div>
-
-  <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-    <div class="source-checks" id="source-checks"></div>
-    <button class="phase-pill" id="select-all-src" style="font-size:9px;padding:2px 8px;">All</button>
-    <button class="phase-pill" id="clear-all-src" style="font-size:9px;padding:2px 8px;">None</button>
   </div>
 </div>
 
@@ -665,10 +845,11 @@ svg {{ display: block; width: 100%; height: 100%; }}
       <div class="dp-sources" id="dp-sources"></div>
     </div>
     <div class="dp-stats" id="dp-stats"></div>
+    <div class="dp-enrichment" id="dp-enrichment"></div>
     <div class="dp-correspondents">
-      <h3>Correspondents</h3>
+      <h3 id="dp-table-title">Correspondents</h3>
       <table class="dp-table">
-        <thead><tr><th>Name</th><th>Letters</th><th>Dates</th><th>Source</th></tr></thead>
+        <thead><tr><th>Name</th><th id="dp-col-weight">Letters</th><th>Dates</th><th>Source</th></tr></thead>
         <tbody id="dp-tbody"></tbody>
       </table>
     </div>
@@ -696,6 +877,7 @@ svg {{ display: block; width: 100%; height: 100%; }}
 
 var DATA = {GRAPH_JSON};
 var PERSON_INFO = {PERSON_INFO_JSON};
+var ENRICHMENT = {ENRICHMENT_JSON};
 
 var SOURCE_COLOURS = DATA.source_colours;
 var SOURCE_LABELS = DATA.source_labels;
@@ -707,7 +889,14 @@ var YEAR_MAX = DATA.year_max;
 /* ── State ───────────────────────────────────────── */
 var rangeLo = YEAR_MIN, rangeHi = YEAR_MAX;
 var minWeight = 2;
-var activeSources = new Set(Object.keys(SOURCE_COLOURS));
+/* Collect all source keys present in the data */
+var ALL_SOURCE_KEYS = (function() {{
+  var s = new Set();
+  ALL_EDGES.forEach(function(e) {{ s.add(e.src); }});
+  return Array.from(s).sort();
+}})();
+var activeSources = new Set(ALL_SOURCE_KEYS);
+var activeEdgeType = "all"; /* "all", "correspondence", "connection" */
 var selectedNodeId = null;
 var simulation = null;
 var highlightedNodeId = null;
@@ -732,8 +921,7 @@ var tooltip = document.getElementById("tooltip");
 /* ── Build source checkboxes ─────────────────────── */
 (function() {{
   var container = document.getElementById("source-checks");
-  var keys = Object.keys(SOURCE_LABELS);
-  keys.forEach(function(key) {{
+  ALL_SOURCE_KEYS.forEach(function(key) {{
     var lbl = document.createElement("label");
     lbl.className = "source-check";
     var cb = document.createElement("input");
@@ -747,13 +935,22 @@ var tooltip = document.getElementById("tooltip");
     }});
     var sw = document.createElement("span");
     sw.className = "source-swatch";
-    sw.style.background = SOURCE_COLOURS[key];
+    sw.style.background = SOURCE_COLOURS[key] || "#999";
     lbl.appendChild(cb);
     lbl.appendChild(sw);
-    lbl.appendChild(document.createTextNode(" " + SOURCE_LABELS[key]));
+    lbl.appendChild(document.createTextNode(" " + (SOURCE_LABELS[key] || key)));
     container.appendChild(lbl);
   }});
 }})();
+
+/* Source filter search */
+document.getElementById("source-filter").addEventListener("input", function() {{
+  var q = this.value.toLowerCase();
+  document.querySelectorAll("#source-checks .source-check").forEach(function(lbl) {{
+    var text = lbl.textContent.toLowerCase();
+    lbl.style.display = (!q || text.indexOf(q) !== -1) ? "" : "none";
+  }});
+}});
 
 /* Select All / Clear All buttons */
 document.getElementById("select-all-src").addEventListener("click", function() {{
@@ -769,6 +966,47 @@ document.getElementById("clear-all-src").addEventListener("click", function() {{
     activeSources.delete(cb.dataset.src);
   }});
   rebuildGraph();
+}});
+
+/* ── Edge type toggle ────────────────────────────── */
+["show-all", "show-corr", "show-conn"].forEach(function(btnId) {{
+  document.getElementById(btnId).addEventListener("click", function() {{
+    document.querySelectorAll("#show-all,#show-corr,#show-conn").forEach(function(b) {{
+      b.classList.remove("active");
+    }});
+    this.classList.add("active");
+    if (btnId === "show-all") activeEdgeType = "all";
+    else if (btnId === "show-corr") activeEdgeType = "correspondence";
+    else activeEdgeType = "connection";
+    rebuildGraph();
+  }});
+}});
+
+/* ── Dropdown toggle logic ───────────────────────── */
+document.querySelectorAll(".nav-btn").forEach(function(btn) {{
+  btn.addEventListener("click", function(evt) {{
+    evt.stopPropagation();
+    var panel = btn.nextElementSibling;
+    var wasOpen = panel.classList.contains("open");
+    /* Close all panels first */
+    document.querySelectorAll(".nav-panel").forEach(function(p) {{ p.classList.remove("open"); }});
+    document.querySelectorAll(".nav-btn").forEach(function(b) {{ b.classList.remove("open"); }});
+    if (!wasOpen) {{
+      panel.classList.add("open");
+      btn.classList.add("open");
+    }}
+  }});
+}});
+/* Close dropdowns when clicking elsewhere */
+document.addEventListener("click", function(evt) {{
+  if (!evt.target.closest(".nav-dropdown")) {{
+    document.querySelectorAll(".nav-panel").forEach(function(p) {{ p.classList.remove("open"); }});
+    document.querySelectorAll(".nav-btn").forEach(function(b) {{ b.classList.remove("open"); }});
+  }}
+}});
+/* Keep panels open when clicking inside them */
+document.querySelectorAll(".nav-panel").forEach(function(p) {{
+  p.addEventListener("click", function(evt) {{ evt.stopPropagation(); }});
 }});
 
 /* ── Timeline setup ──────────────────────────────── */
@@ -893,15 +1131,126 @@ function updateHighlight() {{
 
 /* ── Node adjacency lookup ───────────────────────── */
 function getNeighbours(nodeId, edges) {{
-  var neighbours = [];
+  var byPerson = {{}};
   edges.forEach(function(e) {{
     var sid = typeof e.source === "object" ? e.source.id : e.source;
     var tid = typeof e.target === "object" ? e.target.id : e.target;
-    if (sid === nodeId) neighbours.push({{ id: tid, weight: e.weight, year_min: e.year_min, year_max: e.year_max, src: e.src }});
-    if (tid === nodeId) neighbours.push({{ id: sid, weight: e.weight, year_min: e.year_min, year_max: e.year_max, src: e.src }});
+    var other = null;
+    if (sid === nodeId) other = tid;
+    else if (tid === nodeId) other = sid;
+    if (!other) return;
+    if (!byPerson[other]) {{
+      byPerson[other] = {{ id: other, weight: 0, year_min: 9999, year_max: 0, sources: [] }};
+    }}
+    var rec = byPerson[other];
+    rec.weight += e.weight;
+    if (e.year_min && e.year_min < rec.year_min) rec.year_min = e.year_min;
+    if (e.year_max && e.year_max > rec.year_max) rec.year_max = e.year_max;
+    var lbl = SOURCE_LABELS[e.src] || e.src;
+    if (rec.sources.indexOf(lbl) === -1) rec.sources.push(lbl);
+  }});
+  var neighbours = Object.values(byPerson);
+  neighbours.forEach(function(nb) {{
+    if (nb.year_min === 9999) nb.year_min = "";
+    if (nb.year_max === 0) nb.year_max = "";
+    nb.src = nb.sources.join(", ");
   }});
   neighbours.sort(function(a, b) {{ return b.weight - a.weight; }});
   return neighbours;
+}}
+
+function clearChildren(el) {{
+  while (el.firstChild) el.removeChild(el.firstChild);
+}}
+
+function formatDateSpan(dateFrom, dateTo) {{
+  if (dateFrom && dateTo) return dateFrom + " – " + dateTo;
+  return dateFrom || dateTo || "";
+}}
+
+function appendSubmeta(parent, bits) {{
+  var text = bits.filter(Boolean).join(" · ");
+  if (!text) return;
+  var meta = document.createElement("span");
+  meta.className = "dp-submeta";
+  meta.textContent = text;
+  parent.appendChild(meta);
+}}
+
+function renderEnrichmentSection(container, title, items, renderItem) {{
+  if (!items || items.length === 0) return;
+  var section = document.createElement("div");
+  section.className = "dp-section";
+  var heading = document.createElement("h3");
+  heading.textContent = title;
+  section.appendChild(heading);
+  var list = document.createElement("ul");
+  list.className = "dp-list";
+  items.forEach(function(item) {{
+    var li = document.createElement("li");
+    renderItem(li, item);
+    list.appendChild(li);
+  }});
+  section.appendChild(list);
+  container.appendChild(section);
+}}
+
+function renderEnrichment(nodeId) {{
+  var enrichEl = document.getElementById("dp-enrichment");
+  clearChildren(enrichEl);
+
+  var enrich = ENRICHMENT[nodeId];
+  if (!enrich) {{
+    enrichEl.style.display = "none";
+    return;
+  }}
+
+  renderEnrichmentSection(enrichEl, "External IDs", enrich.external_ids, function(li, item) {{
+    var label = (item.authority || "id") + ": " + item.identifier;
+    if (item.url) {{
+      var link = document.createElement("a");
+      link.className = "dp-link";
+      link.href = item.url;
+      link.target = "_blank";
+      link.rel = "noreferrer noopener";
+      link.textContent = label;
+      li.appendChild(link);
+    }} else {{
+      li.textContent = label;
+    }}
+    appendSubmeta(li, [item.label, item.source_label, item.confidence, item.notes]);
+  }});
+
+  renderEnrichmentSection(enrichEl, "Relationships", enrich.relationships, function(li, item) {{
+    li.textContent = item.relationship_type + ": ";
+    var related = document.createElement("span");
+    related.textContent = item.related_person;
+    var target = ALL_NODES.find(function(n) {{ return n.id === item.related_person; }});
+    if (target) {{
+      related.className = "clickable";
+      related.addEventListener("click", function() {{ showDetail(target); }});
+    }}
+    li.appendChild(related);
+    appendSubmeta(
+      li,
+      [formatDateSpan(item.date_from, item.date_to), item.source_label, item.confidence, item.notes]
+    );
+  }});
+
+  renderEnrichmentSection(enrichEl, "Addresses", enrich.addresses, function(li, item) {{
+    var label = item.label || item.street || item.place_name || "Address assertion";
+    li.textContent = label;
+    var placeBits = [];
+    if (item.street && item.label !== item.street) placeBits.push(item.street);
+    if (item.place_name) placeBits.push(item.place_name);
+    if (item.lat && item.lon) placeBits.push(item.lat + ", " + item.lon);
+    appendSubmeta(
+      li,
+      [placeBits.join(", "), formatDateSpan(item.date_from, item.date_to), item.source_label, item.confidence, item.notes]
+    );
+  }});
+
+  enrichEl.style.display = enrichEl.childNodes.length ? "block" : "none";
 }}
 
 /* ── Build graph ─────────────────────────────────── */
@@ -910,6 +1259,7 @@ function rebuildGraph() {{
   var filteredEdges = ALL_EDGES.filter(function(e) {{
     if (!activeSources.has(e.src)) return false;
     if (e.weight < minWeight) return false;
+    if (activeEdgeType !== "all" && e.edge_type !== activeEdgeType) return false;
     /* Edge overlaps timeline window */
     if (e.year_max < rangeLo || e.year_min > rangeHi) return false;
     return true;
@@ -944,7 +1294,8 @@ function rebuildGraph() {{
       weight: e.weight,
       year_min: e.year_min,
       year_max: e.year_max,
-      src: e.src
+      src: e.src,
+      edge_type: e.edge_type
     }};
   }});
 
@@ -1014,9 +1365,10 @@ function rebuildGraph() {{
     .data(simEdges)
     .join("line")
     .attr("class", "edge-line")
-    .attr("stroke", function(d) {{ return SOURCE_COLOURS[d.src] || "#ccc"; }})
-    .attr("stroke-opacity", 0.15)
-    .attr("stroke-width", function(d) {{ return wScale(d.weight); }});
+    .attr("stroke", function(d) {{ return SOURCE_COLOURS[d.src] || (d.edge_type === "connection" ? "#888" : "#bbb"); }})
+    .attr("stroke-opacity", function(d) {{ return d.edge_type === "connection" ? 0.35 : 0.15; }})
+    .attr("stroke-width", function(d) {{ return wScale(d.weight); }})
+    .attr("stroke-dasharray", function(d) {{ return d.edge_type === "connection" ? "4,3" : null; }});
 
   /* Nodes */
   var nodeG = g.append("g").attr("class", "nodes");
@@ -1235,7 +1587,7 @@ function showDetail(d) {{
 
   /* Source chips */
   var sourcesEl = document.getElementById("dp-sources");
-  while (sourcesEl.firstChild) sourcesEl.removeChild(sourcesEl.firstChild);
+  clearChildren(sourcesEl);
   d.sources.forEach(function(s) {{
     var chip = document.createElement("span");
     chip.className = "dp-source-chip";
@@ -1249,22 +1601,36 @@ function showDetail(d) {{
 
   /* Stats */
   var statsEl = document.getElementById("dp-stats");
-  while (statsEl.firstChild) statsEl.removeChild(statsEl.firstChild);
+  clearChildren(statsEl);
 
-  var neighbours = getNeighbours(d.id, ALL_EDGES);
+  /* Filter neighbours by active edge type */
+  var allNeighbours = getNeighbours(d.id, ALL_EDGES);
+  var neighbours;
+  if (activeEdgeType === "all") {{
+    neighbours = allNeighbours;
+  }} else {{
+    neighbours = getNeighbours(d.id, ALL_EDGES.filter(function(e) {{ return e.edge_type === activeEdgeType; }}));
+  }}
+
+  var isConn = activeEdgeType === "connection";
+  var edgeNoun = isConn ? "connections" : "letters";
+  var peerNoun = isConn ? "connections" : "correspondents";
+
+  var totalW = 0;
+  neighbours.forEach(function(nb) {{ totalW += nb.weight; }});
 
   var countLine = document.createElement("div");
   var b1 = document.createElement("strong");
-  b1.textContent = d.weight;
+  b1.textContent = totalW;
   countLine.appendChild(b1);
-  countLine.appendChild(document.createTextNode(" total letters across all collections"));
+  countLine.appendChild(document.createTextNode(" total " + edgeNoun + " across all collections"));
   statsEl.appendChild(countLine);
 
   var corrLine = document.createElement("div");
   var b2 = document.createElement("strong");
   b2.textContent = neighbours.length;
   corrLine.appendChild(b2);
-  corrLine.appendChild(document.createTextNode(" correspondents"));
+  corrLine.appendChild(document.createTextNode(" " + peerNoun));
   statsEl.appendChild(corrLine);
 
   /* Date range */
@@ -1287,9 +1653,13 @@ function showDetail(d) {{
     statsEl.appendChild(placeLine);
   }}
 
+  renderEnrichment(d.id);
+
   /* Correspondents table */
+  document.getElementById("dp-table-title").textContent = isConn ? "Connections" : "Correspondents";
+  document.getElementById("dp-col-weight").textContent = isConn ? "Weight" : "Letters";
   var tbody = document.getElementById("dp-tbody");
-  while (tbody.firstChild) tbody.removeChild(tbody.firstChild);
+  clearChildren(tbody);
   neighbours.forEach(function(nb) {{
     var tr = document.createElement("tr");
     var tdName = document.createElement("td");
@@ -1306,9 +1676,9 @@ function showDetail(d) {{
     tdDates.textContent = nb.year_min + "\u2013" + nb.year_max;
     tdDates.style.fontSize = "10px";
     var tdSrc = document.createElement("td");
-    tdSrc.textContent = SOURCE_LABELS[nb.src] || nb.src;
+    tdSrc.textContent = nb.src;
     tdSrc.style.fontSize = "10px";
-    tdSrc.style.color = SOURCE_COLOURS[nb.src] || "#999";
+    tdSrc.style.color = "#999";
     tr.appendChild(tdName);
     tr.appendChild(tdW);
     tr.appendChild(tdDates);
@@ -1357,10 +1727,27 @@ def build() -> None:
 
     # Load biographical notes
     if PERSON_INFO.exists():
-        person_info = json.loads(PERSON_INFO.read_text(encoding="utf-8"))
+        raw_person_info = json.loads(PERSON_INFO.read_text(encoding="utf-8"))
+        person_info = {}
+        for raw_name, info in raw_person_info.items():
+            canon = normalise(raw_name)
+            if not canon or is_artefact(canon):
+                continue
+            current = person_info.get(canon)
+            if current is None:
+                person_info[canon] = info
+                continue
+            if len((info.get("bio") or "")) > len((current.get("bio") or "")):
+                person_info[canon] = info
     else:
         person_info = {}
     person_info_json = json.dumps(person_info, ensure_ascii=False, separators=(",", ":"))
+    enrichment = load_optional_enrichment()
+    enrichment_json = json.dumps(
+        enrichment.get("people", {}),
+        ensure_ascii=False,
+        separators=(",", ":"),
+    )
 
     d3_src = _get_d3_source()
 
@@ -1369,12 +1756,21 @@ def build() -> None:
     html = html.replace("{D3_SOURCE}", d3_src, 1)
     html = html.replace("{GRAPH_JSON}", graph_json, 1)
     html = html.replace("{PERSON_INFO_JSON}", person_info_json, 1)
+    html = html.replace("{ENRICHMENT_JSON}", enrichment_json, 1)
 
     OUT_PATH.write_text(html, encoding="utf-8")
     print(f"Full network -> {OUT_PATH}")
     print(f"  {len(data['nodes'])} nodes, {len(data['edges'])} edges")
     print(f"  Year range: {data['year_min']}-{data['year_max']}")
     print(f"  Sources: {', '.join(sorted(data['source_labels'].values()))}")
+    if enrichment["stats"]["people"]:
+        print(
+            "  Optional enrichment: "
+            f"{enrichment['stats']['people']} people, "
+            f"{enrichment['stats']['external_ids']} external ids, "
+            f"{enrichment['stats']['relationships']} relationships, "
+            f"{enrichment['stats']['addresses']} addresses"
+        )
 
 
 if __name__ == "__main__":

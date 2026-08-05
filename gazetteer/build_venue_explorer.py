@@ -166,6 +166,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Venue Explorer · 18c London &amp; Bath</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -188,6 +189,8 @@ body { font-family: 'Inter', system-ui, sans-serif; background: #f4f1eb;
 .view-tab { background: #f4f1eb; border: 1px solid #d8d4cc; color: #5c5850; padding: 2px 10px; border-radius: 3px; font-size: 11px; font-weight: 500; text-decoration: none; display: inline-block; white-space: nowrap; }
 .view-tab:hover { background: #ece8e0; color: #1a1816; }
 .view-tab.active { background: #1e3c6e; border-color: #1e3c6e; color: #fff; font-weight: 600; cursor: default; }
+.home-link { color: #9c9890; text-decoration: none; font-size: 15px; line-height: 1; padding: 0 4px; flex-shrink: 0; }
+.home-link:hover { color: #1a1816; }
 .filter-group { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
 .filter-label { font-size: 11px; color: #9c9890; white-space: nowrap; font-weight: 500; }
 .pill {
@@ -210,6 +213,15 @@ body { font-family: 'Inter', system-ui, sans-serif; background: #f4f1eb;
   border-left: 1px solid #ddd;
   background: #faf9f7;
   overflow-y: auto;
+}
+
+@media (max-width: 720px) {
+  body { height: 100dvh; }
+  #topbar { max-height: 36vh; overflow-y: auto; padding: 6px 8px; gap: 6px; }
+  #main { flex-direction: column; min-height: 0; }
+  #map { flex: 1 1 56vh; min-height: 45vh; }
+  #panel { flex: 1 1 44vh; border-left: 0; border-top: 1px solid #ddd; }
+  .date-group input[type=range] { width: 70px; }
 }
 
 /* ── panel header ── */
@@ -291,6 +303,7 @@ body { font-family: 'Inter', system-ui, sans-serif; background: #f4f1eb;
 <body>
 
 <div id="topbar">
+  <a href="../index.html" class="home-link" title="All projects">&#8592;</a>
   <span class="title">Venue Explorer</span>
   <span style="display:flex;gap:4px;align-items:center;">
     <span style="font-size:11px;color:#9c9890;font-weight:500;margin-right:2px;">City</span>
@@ -511,8 +524,9 @@ function matchesGlobal(ev) {
       && (ev.date_min === null || ev.date_min <= state.dateTo);
 }
 
-function markerRadius(total) {
-  return 6 + Math.log1p(total) * 3;
+function markerRadius(count) {
+  if (count <= 0) return 4;
+  return 5 + Math.log1p(count) * 3;
 }
 
 // ── markers ───────────────────────────────────────────────────────────────
@@ -542,14 +556,14 @@ function renderMarkers() {
     const total  = v.evidence.length;
     const active = count > 0;
     const sel    = state.selectedId === v.id;
-    const r      = markerRadius(total || 1);
+    const r      = markerRadius(count);
 
     const btColor = BT_COLORS[v.building_type] || '#8b6914';
     const opts = {
       radius:      r,
       color:       sel ? '#2c3e50' : btColor,
       fillColor:   btColor,
-      fillOpacity: sel ? 0.85 : (active ? 0.50 : 0.20),
+      fillOpacity: sel ? 0.85 : (active ? 0.50 : 0.12),
       weight:      sel ? 2.5 : 1.5,
     };
 
@@ -558,9 +572,14 @@ function renderMarkers() {
       markers[v.id].setRadius(r);
     } else {
       const m = L.circleMarker([v.lat, v.lon], opts).addTo(map);
-      m.bindTooltip(v.name + (total ? ' (' + total + ')' : ''), { sticky: true });
+      const tooltip = v.name + (total ? ' (' + count + ' matching / ' + total + ' total)' : '');
+      m.bindTooltip(tooltip, { sticky: true });
       m.on('click', function() { openPanel(v.id); });
       markers[v.id] = m;
+    }
+    if (markers[v.id]) {
+      const tooltip = v.name + (total ? ' (' + count + ' matching / ' + total + ' total)' : '');
+      markers[v.id].setTooltipContent(tooltip);
     }
   });
 }

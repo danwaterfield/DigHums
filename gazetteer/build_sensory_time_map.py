@@ -682,6 +682,17 @@ body {{ font-family: var(--font-sans); background: var(--bg-page); color: var(--
 .filter-section .filter-body {{ padding: var(--space-1) 0 0; }}
 /* -- Environment bar compact -- */
 #env-bar {{ border-top: 1px solid var(--border-subtle); margin-top: var(--space-1); }}
+@media (max-width: 720px) {{
+  body {{ height: 100dvh; }}
+  #controls {{ max-height: 42vh; overflow-y: auto; }}
+  #header-row, #year-control {{ gap: var(--space-2); }}
+  #year-control {{ flex-wrap: wrap; }}
+  #year-slider {{ width: min(170px, 44vw); }}
+  #main {{ flex-direction: column; min-height: 0; }}
+  #map {{ flex: 1 1 50vh; min-height: 44vh; }}
+  #panel {{ width: 100%; flex: 0 0 34vh; border-left: 0; border-top: 1px solid var(--border-default); }}
+  #map-legend {{ left: 8px; bottom: 8px; font-size: var(--text-xs); }}
+}}
 /* -- Tier marker colours (used in tier-view mode) -- */
 </style>
 </head>
@@ -713,6 +724,7 @@ body {{ font-family: var(--font-sans); background: var(--bg-page); color: var(--
   </div>
   <div class="pill-row">
     <span class="pill-label">View</span>
+    <a href="../index.html" class="view-tab" title="All projects">&#8592; Projects</a>
     <span class="view-tab active">Sensory Map</span>
     <a href="venue_explorer.html" class="view-tab">Evidence</a>
     <a href="narrative_map.html" class="view-tab">Narrative</a>
@@ -2753,7 +2765,7 @@ function updateMapLegend() {{
     const el = document.getElementById('map-legend');
     if (!el) return;
     const senseNames  = {{ smell: 'Smell', noise: 'Noise', crowd: 'Crowd', visual: 'Visual' }};
-    const activeLabel = state.modality ? (senseNames[state.modality] || 'Sensory') : 'Sensory intensity';
+    const activeLabel = state.modality ? (senseNames[state.modality] || 'Sensory') + ' load' : 'Composite sensory load';
     const isNight = (state.band === 'night');
     el.style.background  = isNight ? 'rgba(10,18,32,0.92)' : 'rgba(255,255,255,0.93)';
     el.style.borderColor = isNight ? '#1a2a3a' : '#d8d4cc';
@@ -2767,10 +2779,10 @@ function updateMapLegend() {{
     el.appendChild(title);
 
     [
-        {{ sz: 14, col: '#dc2626', lbl: 'High' }},
-        {{ sz: 11, col: '#f97316', lbl: 'Moderate' }},
-        {{ sz: 8,  col: '#f59e0b', lbl: 'Low' }},
-        {{ sz: 6,  col: '#aaa',    lbl: 'Inactive' }},
+        {{ sz: 14, col: '#dc2626', lbl: 'High \u226560%' }},
+        {{ sz: 11, col: '#f97316', lbl: 'Moderate 30-59%' }},
+        {{ sz: 8,  col: '#f59e0b', lbl: 'Low 1-29%' }},
+        {{ sz: 6,  col: '#aaa',    lbl: 'Inactive <1%' }},
     ].forEach(item => {{
         const row = document.createElement('div');
         row.className = 'leg-row';
@@ -2789,9 +2801,13 @@ function updateMapLegend() {{
     if (state.tierView) {{
         const note = document.createElement('div');
         note.style.cssText = 'margin-top:4px;font-size:0.85em;opacity:0.6;font-style:italic';
-        note.textContent = 'Tier view';
+        note.textContent = 'Stroke colour = social tier';
         el.appendChild(note);
     }}
+    const scaleNote = document.createElement('div');
+    scaleNote.style.cssText = 'margin-top:4px;font-size:0.78em;opacity:0.58;line-height:1.25';
+    scaleNote.textContent = 'Circle radius follows the weighted load.';
+    el.appendChild(scaleNote);
 }}
 
 updateMap();
