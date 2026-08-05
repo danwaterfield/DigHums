@@ -361,8 +361,8 @@ footer {
             <div class="project-title">18th-Century Correspondence Networks</div>
             <p class="project-desc">
               Mapping who wrote to whom across
-              <span data-stat="correspondence.letters">13,678</span>&nbsp;letters between
-              <span data-stat="correspondence.people">1,227</span>&nbsp;correspondents:
+              <span data-stat="correspondence.letters">13,275</span>&nbsp;letters between
+              <span data-stat="correspondence.people">1,046</span>&nbsp;correspondents:
               the Burney family, Samuel Johnson, Hester Thrale Piozzi, Edmund Burke,
               Horace Walpole, and Joseph Priestley. Built from the Hemlow Catalogue,
               published editions, and the correspSearch API.
@@ -370,11 +370,11 @@ footer {
           </div>
           <div class="project-stats">
             <div class="pstat">
-              <span class="pstat-n" data-stat="correspondence.connections">1,468</span>
+              <span class="pstat-n" data-stat="correspondence.connections">1,254</span>
               <span class="pstat-l">Connections</span>
             </div>
             <div class="pstat">
-              <span class="pstat-n" data-stat="correspondence.people">1,227</span>
+              <span class="pstat-n" data-stat="correspondence.people">1,046</span>
               <span class="pstat-l">People</span>
             </div>
           </div>
@@ -433,8 +433,14 @@ footer {
         novels with at least five geolocated mentions, and thinly-attested novels produce
         correspondingly thin paths. Passage extraction is automated, so some quoted
         passages begin mid-sentence, and overlapping windows of the same sentence can
-        appear as separate entries. Correspondence dates follow the source edition where a
-        letter is undated, which pushes a small number of records outside the period.
+        appear as separate entries. In the correspondence network,
+        <span data-stat="correspondence.undated_connections">214</span> of
+        <span data-stat="correspondence.connections_total">1,468</span> links carry no
+        usable date and are therefore filtered out by the timeline, so the graph draws
+        <span data-stat="correspondence.connections">1,254</span> connections between
+        <span data-stat="correspondence.people">1,046</span> people; the figures quoted
+        above are the drawn ones. Where a letter is undated, the date follows the source
+        edition, which pushes a small number of records outside the period.
       </p>
 
       <h3>Sources</h3>

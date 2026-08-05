@@ -116,29 +116,41 @@ def fiction_stats() -> dict:
 
 
 def correspondence_stats() -> dict:
-    """Network and bookseller counts behind the correspondence tools."""
-    edges = _rows(GRAPH_PATH)
-    people: set[str] = set()
-    letters = 0
-    for row in edges:
-        people.add(row["person_a"])
-        people.add(row["person_b"])
-        if row.get("weight"):
-            letters += int(float(row["weight"]))
+    """Network and bookseller counts behind the correspondence tools.
 
-    years = [int(r[k]) for r in edges for k in ("year_min", "year_max")
-             if r.get(k) and r[k].isdigit()]
+    Counts come from the builder's own load_graph(), not from a raw read of
+    the CSV. The builder drops unresolvable names and catalogue artefacts, so
+    the CSV holds more edges than the page ever renders — quoting the CSV is
+    how the landing page came to advertise 1,468 connections for a graph that
+    draws 1,254.
+    """
+    from build_full_network import load_graph
+
+    graph = load_graph()
+    lo, hi = graph["year_min"], graph["year_max"]
+
+    # The network view filters every edge against the timeline window, so an
+    # edge with no usable year is invisible at any slider position. Headline
+    # figures report what the page can actually draw; the *_total keys keep
+    # the dataset size available for the method note.
+    renderable = [e for e in graph["edges"]
+                  if not (e["year_max"] < lo or e["year_min"] > hi)]
+    renderable_ids = ({e["source"] for e in renderable}
+                      | {e["target"] for e in renderable})
 
     booksellers = _rows(BOOKSELLERS_PATH)
     locations   = _rows(BOOKSELLER_LOCS_PATH)
     located_venues = {r["venue_id"] for r in locations if r.get("venue_id")}
 
     return {
-        "connections": len(edges),
-        "people": len(people),
-        "letters": letters,
-        "year_min": min(years) if years else None,
-        "year_max": max(years) if years else None,
+        "connections": len(renderable),
+        "people": len(renderable_ids),
+        "letters": sum(int(e.get("weight") or 0) for e in renderable),
+        "connections_total": len(graph["edges"]),
+        "people_total": len(graph["nodes"]),
+        "undated_connections": len(graph["edges"]) - len(renderable),
+        "year_min": lo,
+        "year_max": hi,
         "booksellers": len(booksellers),
         "bookseller_locations": len(locations),
         "bookseller_venues": len(located_venues),
